@@ -1,9 +1,7 @@
 # Number Theory Utils (NUT)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/0uctn18i9nl5pmuj?svg=true)](https://ci.appveyor.com/project/hacatu/number-theory-utils)
-
 [![Documentation](https://img.shields.io/badge/-documentation-gray)](docs/index.html)
-
 [![Coverage](build/debug/coverage.svg)](build/debug/cov/index.html)
 
 A collection of functions for working modular arithmetic, polynomials over finite fields, and related things.
