@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Number Theory Utils: Related Pages</title>
+<title>Number Theory Utils: factors_t Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Number Theory Utils
-   &#160;<span id="projectnumber">0.1.0</span>
+   &#160;<span id="projectnumber">0.2.0</span>
    </div>
   </td>
  </tr>
@@ -46,7 +46,6 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
-</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -61,16 +60,44 @@ $(function() {
 </iframe>
 </div>
 
+</div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">Related Pages</div>  </div>
+<div class="title">factors_t Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all related documentation pages:</div><div class="directory">
-<table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_README.html" target="_self">Number Theory Utils (NUT)</a></td><td class="desc"></td></tr>
+
+<p>A prime factorization.  
+ <a href="structfactors__t.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="factorization_8h_source.html">factorization.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a66a2353753f6ff82f473c1774966f0fd"><td class="memItemLeft" align="right" valign="top"><a id="a66a2353753f6ff82f473c1774966f0fd"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>num_primes</b></td></tr>
+<tr class="separator:a66a2353753f6ff82f473c1774966f0fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebfd75dd72ecb5db7aec3801e9d452dc"><td class="memItemLeft" ><a id="aebfd75dd72ecb5db7aec3801e9d452dc"></a>
+struct {</td></tr>
+<tr class="memitem:adc6a7c1f13a18698d6b8797d8fc1212a"><td class="memItemLeft" >
+&#160;&#160;&#160;uint64_t&#160;&#160;&#160;<b>prime</b></td></tr>
+<tr class="separator:adc6a7c1f13a18698d6b8797d8fc1212a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f3ba2e439be048efe9800d2e43cc767"><td class="memItemLeft" >
+&#160;&#160;&#160;uint64_t&#160;&#160;&#160;<b>power</b></td></tr>
+<tr class="separator:a4f3ba2e439be048efe9800d2e43cc767"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebfd75dd72ecb5db7aec3801e9d452dc"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>factors</b> []</td></tr>
+<tr class="separator:aebfd75dd72ecb5db7aec3801e9d452dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- directory -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A prime factorization. </p>
+<p>Stores a list of prime, power pairs in a flexible length array, along with the number of primes in the factorization. Not intended to be reallocated, hence the absence of a cap field. </p>
+
+<p class="definition">Definition at line <a class="el" href="factorization_8h_source.html#l00044">44</a> of file <a class="el" href="factorization_8h_source.html">factorization.h</a>.</p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/<a class="el" href="factorization_8h_source.html">factorization.h</a></li>
+</ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
