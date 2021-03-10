@@ -28,5 +28,5 @@ build_script:
   - make
 test_script:
   - make coverage
-  - grep -qF `printf "\e[1;31m"` build/debug/log/test*.log && false
+  - if [ $(grep -cF `printf "\e[1;31m"` build/debug/log/test*.log) != 0 ]; then false; fi
 
