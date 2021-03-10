@@ -1,0 +1,8 @@
+-I../../include
+-Wextra
+-std=c99
+-ggdb3
+-fno-eliminate-unused-debug-types
+--coverage
+-fsanitize=address
+

@@ -1,0 +1,8 @@
+-Llib
+-lnut
+-fuse-ld=lld
+-ggdb3
+-fno-eliminate-unused-debug-types
+--coverage
+-fsanitize=address
+

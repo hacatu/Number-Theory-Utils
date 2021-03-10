@@ -1,7 +1,8 @@
-#include "factorization.h"
 #include <stddef.h>
 #include <sys/random.h>
 #include <string.h>
+
+#include "factorization.h"
 
 factors_t *init_factors_t_w(uint64_t max_primes){
 	static const factors_t dummy;

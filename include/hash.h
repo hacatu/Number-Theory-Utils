@@ -205,5 +205,3 @@ inline static void *hash_next(hashtbl_t *self, const hashtbl_ft *ft, void *cur){
 	return NULL;
 }
 
-#endif
-

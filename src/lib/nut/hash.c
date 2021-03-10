@@ -2,7 +2,8 @@
 #include <string.h>
 #include <inttypes.h>
 #include <math.h>
-#include "hash.h"
+
+#include <hash.h>
 
 //these are the prime infimums of powers of two in the uint64_t range so which one to use can be calculated by a bit scan (__builtin_clzll() aka bsfq)
 uint64_t exp_primes[64] = {0UL, 3UL, 7UL, 13UL, 31UL, 61UL, 127UL, 251UL, 509UL, 1021UL, 2039UL, 4093UL, 8191UL, 16381UL, 32749UL, 65537UL, 131071UL, 262139UL, 524287UL, 1048573UL,
