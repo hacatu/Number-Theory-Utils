@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2021-03-10 17:41:04</td>
+            <td class="headerValue">2021-03-10 18:02:01</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -65,12 +65,12 @@
 <a name="3"><span class="lineNum">       3 </span>            : #include &quot;polynomial.h&quot;</a>
 <a name="4"><span class="lineNum">       4 </span>            : #include &quot;factorization.h&quot;</a>
 <a name="5"><span class="lineNum">       5 </span>            : </a>
-<a name="6"><span class="lineNum">       6 </span><span class="lineCov">      17772 : int cmp_i64(const void *_a, const void *_b){</span></a>
-<a name="7"><span class="lineNum">       7 </span><span class="lineCov">      17772 :         int64_t a = *(const int64_t*)_a, b = *(const int64_t*)_b;</span></a>
-<a name="8"><span class="lineNum">       8 </span><span class="lineCov">      17772 :         if(a &lt; b){</span></a>
-<a name="9"><span class="lineNum">       9 </span><span class="lineCov">       8768 :                 return -1;</span></a>
-<a name="10"><span class="lineNum">      10 </span><span class="lineCov">       9004 :         }else if(a &gt; b){</span></a>
-<a name="11"><span class="lineNum">      11 </span><span class="lineCov">       9004 :                 return 1;</span></a>
+<a name="6"><span class="lineNum">       6 </span><span class="lineCov">      16448 : int cmp_i64(const void *_a, const void *_b){</span></a>
+<a name="7"><span class="lineNum">       7 </span><span class="lineCov">      16448 :         int64_t a = *(const int64_t*)_a, b = *(const int64_t*)_b;</span></a>
+<a name="8"><span class="lineNum">       8 </span><span class="lineCov">      16448 :         if(a &lt; b){</span></a>
+<a name="9"><span class="lineNum">       9 </span><span class="lineCov">       8230 :                 return -1;</span></a>
+<a name="10"><span class="lineNum">      10 </span><span class="lineCov">       8218 :         }else if(a &gt; b){</span></a>
+<a name="11"><span class="lineNum">      11 </span><span class="lineCov">       8218 :                 return 1;</span></a>
 <a name="12"><span class="lineNum">      12 </span>            :         }</a>
 <a name="13"><span class="lineNum">      13 </span><span class="lineNoCov">          0 :         return 0;</span></a>
 <a name="14"><span class="lineNum">      14 </span>            : }</a>
@@ -122,19 +122,19 @@
 <a name="60"><span class="lineNum">      60 </span><span class="lineCov">          2 :         uint64_t passed = 0;</span></a>
 <a name="61"><span class="lineNum">      61 </span><span class="lineCov">      10002 :         for(uint64_t i = 0; i &lt; trials; ++i){</span></a>
 <a name="62"><span class="lineNum">      62 </span><span class="lineCov">      10000 :                 int64_t p = rand_u64(2, 10224);</span></a>
-<a name="63"><span class="lineNum">      63 </span><span class="lineCov">      66758 :                 while(!is_prime_dmr(p)){</span></a>
-<a name="64"><span class="lineNum">      64 </span><span class="lineCov">      56758 :                         ++p;</span></a>
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">      67896 :                 while(!is_prime_dmr(p)){</span></a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">      57896 :                         ++p;</span></a>
 <a name="65"><span class="lineNum">      65 </span>            :                 }</a>
 <a name="66"><span class="lineNum">      66 </span>            :                 //fprintf(stderr, &quot;\e[1;34mp=%&quot;PRId64&quot;\e[0m\n&quot;, p);</a>
 <a name="67"><span class="lineNum">      67 </span><span class="lineCov">      10000 :                 int64_t brute_roots[8];</span></a>
 <a name="68"><span class="lineNum">      68 </span><span class="lineCov">      10000 :                 uint64_t brute_roots_len = 0;</span></a>
-<a name="69"><span class="lineNum">      69 </span><span class="lineCov">   51388320 :                 for(int64_t r = 0; r &lt; p; ++r){</span></a>
-<a name="70"><span class="lineNum">      70 </span><span class="lineCov">   51378320 :                         int64_t y = eval_poly_modn(f, r, p);</span></a>
-<a name="71"><span class="lineNum">      71 </span><span class="lineCov">   51378320 :                         if(!y){</span></a>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">       9032 :                                 if(brute_roots_len &gt;= 8){</span></a>
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">   51389076 :                 for(int64_t r = 0; r &lt; p; ++r){</span></a>
+<a name="70"><span class="lineNum">      70 </span><span class="lineCov">   51379076 :                         int64_t y = eval_poly_modn(f, r, p);</span></a>
+<a name="71"><span class="lineNum">      71 </span><span class="lineCov">   51379076 :                         if(!y){</span></a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">       8328 :                                 if(brute_roots_len &gt;= 8){</span></a>
 <a name="73"><span class="lineNum">      73 </span><span class="lineNoCov">          0 :                                         abort();</span></a>
 <a name="74"><span class="lineNum">      74 </span>            :                                 }</a>
-<a name="75"><span class="lineNum">      75 </span><span class="lineCov">       9032 :                                 brute_roots[brute_roots_len++] = r;</span></a>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">       8328 :                                 brute_roots[brute_roots_len++] = r;</span></a>
 <a name="76"><span class="lineNum">      76 </span>            :                         }</a>
 <a name="77"><span class="lineNum">      77 </span>            :                 }</a>
 <a name="78"><span class="lineNum">      78 </span><span class="lineCov">      10000 :                 if(!roots_poly_modn_tmptmp(f, p, roots)){</span></a>
