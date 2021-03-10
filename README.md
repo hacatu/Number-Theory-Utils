@@ -94,11 +94,12 @@ linked with simply `-lnut`.
 			case 0://-3 is a multiple of p, ie p == 3 so we only have 1 solution
 				printf("n**2 - n + 1 has a root at %"PRId64" mod %"PRId64"\n", (p + 1)/2, p);
 				break;
-			default:
+			default: {
 				//WARNING: here we know p - 3 is a quadratic residue, but sqrt_mod does not check this and thus if a nonresidue is given and
 				//Tonelli-Shanks is selected as the optimal algorithm for this p, this would be an infinite loop
 				int64_t r = sqrt_mod(p - 3, p);
 				printf("n**2 - n + 1 has roots at %"PRId64" and %"PRId64" mod %"PRId64"\n", mod((p + 1)/2*(1 + r), p), mod((p + 1)/2*(1 - r), p), p);
+			}
 		}
 	}
 ```
