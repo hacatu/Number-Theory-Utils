@@ -29,4 +29,7 @@ build_script:
 test_script:
   - make coverage
   - if [ $(grep -cF `printf "\e[1;31m"` build/debug/log/test*.log) != 0 ]; then false; fi
+artifacts:
+  - path: build/debug/coverage.svg
+    name: coverage_shield
 

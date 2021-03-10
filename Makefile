@@ -31,7 +31,6 @@ clean:
 
 docs: doxygen.conf $(SOURCES) $(HEADERS)
 	doxygen $<
-	mv html $@
 
 .PHONY: debug_makefile
 debug_makefile:

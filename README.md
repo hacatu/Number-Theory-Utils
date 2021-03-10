@@ -2,6 +2,10 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/0uctn18i9nl5pmuj?svg=true)](https://ci.appveyor.com/project/hacatu/number-theory-utils)
 
+[![Documentation](https://img.shields.io/badge/-documentation-gray)](docs/index.html)
+
+[![Coverage](https://img.shields.io/badge/coverage-n%2Fa-inactive)](build/debug/cov/index.html)
+
 A collection of functions for working modular arithmetic, polynomials over finite fields, and related things.
 
 Implements factorization of 64 bit numbers using trial division, Pollard's Rho algorithm with Brent or Floyd
