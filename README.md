@@ -1,4 +1,4 @@
-#Number Theory Utils (NUT)
+# Number Theory Utils (NUT)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/0uctn18i9nl5pmuj?svg=true)](https://ci.appveyor.com/project/hacatu/number-theory-utils)
 
@@ -22,7 +22,7 @@ of a polynomial over a prime field, but if a full factorization is desired the s
 Like the factorization part of the library, polynomials use 64 bit integers, so computations involving numbers larger than
 about 2<sup>30</sup> potentially can fail due to overflow.
 
-##Building
+## Building
 
 This library uses variant makefiles for each build type.  To build the debug variant, simply run `make`
 in the project root directory.  The resulting files will be in `build/debug/lib` and `build/debug/bin`.
@@ -63,16 +63,16 @@ and `doxygen` are required for coverage and documentation, and `lld` is specifie
 If you do not have `lld`, you can switch the line `-fuse-ld=lld` to `-fuse-ld=gold` or remove it in
 `$(BUILD_ROOT)/ldflags.txt`.
 
-##Linking
+## Linking
 Once the library has been built, it can be linked with C programs by adding the flags `-Lbuild/debug -lnut`
 or `-L$(BUILD_ROOT) -lnut` to use a different variant build.  If you're feeling dangerous, you can install
 it to your system libraries by doing `sudo cp build/debug/lib/libnut.a /usr/lib/` or
 `sudo cp $(BUILD_ROOT)/lib/libnut.a /usr/lib`.  Then the `-L` flag can be omitted and the library can be
 linked with simply `-lnut`.
 
-##Examples
+## Examples
 
-###Solve a quadratic equation mod some primes
+### Solve a quadratic equation mod some primes
 ```C
 	for(uint64_t i = 0; i < 100; ++i){
 		int64_t p = rand_u64(2, 1ull << 30);
@@ -99,7 +99,7 @@ linked with simply `-lnut`.
 	}
 ```
 
-###Factor some numbers
+### Factor some numbers
 ```C
 	factor_conf_t factor_conf = {
 		.pollard_max= 100000,    //maximum number to use Pollard's Rho algorithm for
@@ -126,7 +126,7 @@ linked with simply `-lnut`.
 	free(factors);
 ```
 
-###Factor a polynomial mod some primes
+### Factor a polynomial mod some primes
 ```C
 	poly_t f[1];
 	init_poly(f, 9);
