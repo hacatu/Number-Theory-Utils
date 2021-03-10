@@ -1,0 +1,15 @@
+build/*
+src/
+include/
+test.sh
+appveyor.yml
+Makefile
+doxygen.conf
+!build/debug/
+build/debug/*
+!build/debug/cov/
+!build/debug/cov/include/
+!build/debug/cov/src/
+coverage.svg
+cov_shield.py
+
