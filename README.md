@@ -4,7 +4,7 @@
 
 [![Documentation](https://img.shields.io/badge/-documentation-gray)](docs/index.html)
 
-[![Coverage](https://img.shields.io/badge/coverage-n%2Fa-inactive)](build/debug/cov/index.html)
+[![Coverage](build/debug/coverage.svg)](build/debug/cov/index.html)
 
 A collection of functions for working modular arithmetic, polynomials over finite fields, and related things.
 
