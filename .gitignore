@@ -10,6 +10,7 @@
 *.a
 *.so
 docs/
+stash/
 build/*/*/
 *.svg
 # Packages #
