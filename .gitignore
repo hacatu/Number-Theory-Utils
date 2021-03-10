@@ -9,8 +9,7 @@
 *.hi
 *.a
 *.so
-html/
-cov_html/
+docs/
 build/*/*/
 # Packages #
 ############

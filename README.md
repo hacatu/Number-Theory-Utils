@@ -1,5 +1,7 @@
 #Number Theory Utils (NUT)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/0uctn18i9nl5pmuj?svg=true)](https://ci.appveyor.com/project/hacatu/number-theory-utils)
+
 A collection of functions for working modular arithmetic, polynomials over finite fields, and related things.
 
 Implements factorization of 64 bit numbers using trial division, Pollard's Rho algorithm with Brent or Floyd
@@ -55,6 +57,11 @@ Finally, `make docs` generates the documentation in the `docs` directory.  Like 
 tied to a build variant and even if you specify one the same thing will happen.
 
 `make debug_makefile` simply exists to facillitate printing make variables, don't worry about it.
+
+Only Linux is properly supported.  To build, only `gcc`, `ar`, and `make` are strictly required, but `lcov`
+and `doxygen` are required for coverage and documentation, and `lld` is specified as the linker by default.
+If you do not have `lld`, you can switch the line `-fuse-ld=lld` to `-fuse-ld=gold` or remove it in
+`$(BUILD_ROOT)/ldflags.txt`.
 
 ##Linking
 Once the library has been built, it can be linked with C programs by adding the flags `-Lbuild/debug -lnut`

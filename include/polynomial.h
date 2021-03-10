@@ -2,7 +2,7 @@
 
 /// @file
 /// @author hacatu
-/// @version 0.1.0
+/// @version 0.2.0
 /// @section LICENSE
 /// This Source Code Form is subject to the terms of the Mozilla Public
 /// License, v. 2.0. If a copy of the MPL was not distributed with this
