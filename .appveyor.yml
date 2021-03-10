@@ -24,8 +24,10 @@ for:
     install:
       - sudo apt update -qq
       - sudo apt install -y lld lcov
+    build: Script
     build_script:
       - make
+    test: Script
     test_script:
       - make coverage
       - grep -qF `printf "\e[1;31m"` build/debug/log/test*.log && false
