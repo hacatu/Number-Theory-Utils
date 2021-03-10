@@ -6,7 +6,8 @@ image:
 - Ubuntu
 
 branches:
-  - master
+  only:
+    - master
 
 platform:
   - x64
