@@ -5,7 +5,7 @@
 
 int main(){
 	uint64_t l = 10;
-	uint64_t p = 1048573;
+	int64_t p = 1048573;
 	uint64_t trials = 1000;
 	uint64_t approx_eq_pts = 5;
 	poly_t f[1], g[1], h[1], q[1], r[1];
@@ -144,7 +144,7 @@ int main(){
 	trials = 3;
 	passed = 0;
 	fprintf(stderr, "\e[1;34mTesting \"const_poly\"/\"eval_poly_modn\" for 0, 1, and 2 mod 3...\e[0m\n");
-	for(uint64_t i = 0; i < trials; ++i){
+	for(int64_t i = 0; i < (int64_t)trials; ++i){
 		const_poly(f, i);
 		if(eval_poly_modn(f, i, 3) == i){
 			++passed;
