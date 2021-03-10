@@ -6,7 +6,7 @@
 
 factors_t *init_factors_t_w(uint64_t max_primes){
 	static const factors_t dummy;
-	return calloc(1, offsetof(factors_t, factors) + sizeof(*dummy.factors)*max_primes);
+	return calloc(1, sizeof(factors_t) + sizeof(dummy.factors[0])*max_primes);
 }
 
 factors_t *init_factors_t_ub(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes]){
@@ -52,7 +52,7 @@ void factors_append(factors_t *factors, uint64_t m, uint64_t k){
 void factors_combine(factors_t *factors, const factors_t *factors2, uint64_t k){
 	factors_t *factors3 = init_factors_t_w(factors->num_primes + factors2->num_primes);
 	uint64_t i = 0, i2 = 0, i3 = 0;
-	while(i < factors->num_primes && i2 < factors->num_primes){
+	while(i < factors->num_primes && i2 < factors2->num_primes){
 		if(factors->factors[i].prime < factors2->factors[i2].prime){
 			factors3->factors[i3++] = factors->factors[i++];
 		}else if(factors->factors[i].prime > factors2->factors[i2].prime){
@@ -226,7 +226,9 @@ uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes
 	uint64_t m;
 	while(1){
 		if(n <= conf->pollard_max){//TODO: allow iteration count based stopping of pollard-rho brent so we can get small factors of big numbers that way?
-			do{
+			if(n == 25){
+				m = 5;
+			}else do{
 				uint64_t x = prand_u64(0, n);
 				m = factor1_pollard_rho(n, x);
 			}while(m == n);
