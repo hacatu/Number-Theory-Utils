@@ -49,6 +49,16 @@ typedef struct{
 	} factors[];
 } factors_t;
 
+/// A fixed capacity array.
+/// The capacity is fixed and the length in use is stored before the array proper.
+/// Not intended to be reallocated, hence the absence of a cap field.  Instead intended for an array of these to be returned,
+/// for instance from a sieve that finds all distinct prime factors of all numbers in a range.  Such an array is variable
+/// pitch and so must be handled as a void pointer with accessor functions for convenience, see {@link sieves.h}.
+typedef struct{
+	uint64_t len;
+	uint64_t elems[];
+} fw_u64arr_t;
+
 /// Configuration/tuning for heuristic factorization.
 typedef struct{
 	/// Use Pollard-Rho-Brent when factoring numbers at most this large.
@@ -87,6 +97,11 @@ factors_t *init_factors_t_w(uint64_t max_primes);
 /// @return pointer to factors structure that can hold enough distinct primes to factor any number up through n.  pointer needs to be free'd
 factors_t *init_factors_t_ub(uint64_t n, uint64_t num_primes, const uint64_t *primes);
 
+/// Allocate a copy of a factors struct, but with only enough memory to store its current factors and not its max capacity if higher
+/// @param [in] factors: the struct to copy
+/// @return a copy of the input or NULL on allocation failure
+factors_t *copy_factors_t(const factors_t *factors);
+
 /// Compute nonnegative integral power of integer using binary exponentiation.
 /// @param [in] b, e: base and exponent
 /// @return b^e, not checked for overflow
@@ -107,6 +122,43 @@ static inline uint64_t pow_u64(uint64_t b, uint64_t e){
 /// @param [in] factors: pointer to factors struct, as obtained from { @link factor_trial_div}
 /// @return product of prime powers described by factors
 uint64_t factors_product(const factors_t *factors) __attribute__((pure));
+
+/// Find the number of divisors of a number given its prime factorization, including itself and 1.
+/// Works by multiplying power + 1 for all prime factors
+/// @param [in] factors: pointer to factors struct, as obtained from { @link factor_trial_div}
+/// @return number of divisors
+uint64_t divisor_count(const factors_t *factors) __attribute__((pure));
+
+/// Find the sum of divisors of a number given its prime factorization, including itself and 1.
+/// Works by multiplying (prime**(power+1)-1)/(prime-1) for all prime factors
+/// @param [in] factors: pointer to factors struct, as obtained from { @link factor_trial_div}
+/// @return sum of divisors
+uint64_t divisor_sum(const factors_t *factors) __attribute__((pure));
+
+/// Find the sum of powers of divisors of a number given its prime factorization, including itself and 1.
+/// Note this is NOT the same as the sum of divisors of a number.
+/// Works by multiplying (prime**((power+1)*e)-1)/(prime**e-1) for all prime factors, where power is the
+/// power of each prime and e is the power of divisors to sum
+/// @param [in] factors: pointer to factors struct, as obtained from { @link factor_trial_div}
+/// @param [in] power: power of divisors to sum
+/// @return sum of divisor powers
+uint64_t divisor_power_sum(const factors_t *factors, uint64_t power) __attribute__((pure));
+
+/// Raise a factorization to a power, ie multiply all exponents by a constant.
+/// @param [in,out] factors: factorization to raise to a power
+/// @param [in] power: power to raise the factorization to
+void factors_power(factors_t *factors, uint64_t power);
+
+/// Find Euler's Phi function, the number of coprime numbers less than n.
+/// @param [in] factors: the factorization of n for which to compute phi
+/// @return phi(n)
+uint64_t euler_phi(const factors_t *factors) __attribute__((pure));
+
+/// Find Carmichael's Lambda function, the smallest exponent m so a^m = 1 for all 0 < a < n.
+/// Always divides phi(n).
+/// @param [in] factors: the factorization of n for which to compute the carmichael function
+/// @return lambda(n)
+uint64_t carmichael_lambda(const factors_t *factors) __attribute__((pure));
 
 /// Print a factorization of a number.
 /// @param [in,out] file: pointer to file to print to
@@ -162,12 +214,18 @@ uint64_t prand_u64(uint64_t a, uint64_t b);
 /// @return (strong) random integer uniformly chosen from [a, b)
 uint64_t rand_u64(uint64_t a, uint64_t b);
 
+/// An array containing the primes 2 and 5.
+/// {@link factor1_pollard_rho} and {@link factor1_pollard_rho_brent} can't find factors of 4 or 25 using
+/// the default polynomial, so if using {@link factor_heuristic} at least
+/// these primes should be used for trial division if the configuration allows pollard rho to be called.
+extern const uint64_t primes_2_5[2];
+
 /// Factor out all powers of a given array of primes.
 ///
 /// Primesieve is a good general source for primes, but the api for this function is designed
 /// to allow giving a specialized list of primes like only primes equal to 1 mod 6 if it is
 /// known that all factors have some form, or to provide an empty list when this function is
-/// used in a more generic context like { @link factor_heuristic}.
+/// used in a more generic context like {@link factor_heuristic}.
 /// @param [in] n: the number to factor
 /// @param [in] num_primes: the number of primes in the array
 /// @param [in] primes: the array of primes
@@ -177,6 +235,8 @@ uint64_t factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes
 
 /// Factor a number using a variety of approaches based on its size.
 ///
+/// If conf->pollard_max is greater than 3, the primes array should include at least 2 and 5 ({@link primes_2_5} could be used) to
+/// avoid an infinite loop since {@link factor1_pollard_rho} can't factor 4 or 25.
 /// Currently a configuration struct must be passed.  Kraitcheck methods (quadratic sieve and number field sieve) are not implemented
 /// because they are useless on 64 bit integers.  Parameters to Pollard-Rho-Brent with gcd aggregation and Lenstra ecf are not tuned
 /// by this function.
@@ -189,13 +249,14 @@ uint64_t factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes
 uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], const factor_conf_t *conf, factors_t *factors);
 
 /// Try to find a factor of a number using Pollard's Rho algorithm with Floyd cycle finding.
+/// Note that this will not find factors of 4 or 25 no matter what x is.
 /// @param [in] n: number to find a factor of
 /// @param [in] x: random value mod n
 /// @return a nontrivial factor of n if found, 1 or n otherwise
 uint64_t factor1_pollard_rho(uint64_t n, uint64_t x) __attribute__((const));
 
 /// Try to find a factor of a number using Pollard's Rho algorithm with Brent cycle finding and gcd coalescing.
-///
+/// Note that his will not find factors of 4 or 25 no matter what x is.
 /// m does not affect whether x will lead to a factor of n, it just means each iteration will be
 /// cheaper but up to 2m extraneous iterations could be performed.
 /// @param [in] n: number to find a factor of
@@ -259,6 +320,14 @@ static inline int64_t lift_crt(int64_t a, int64_t p, int64_t b, int64_t q){
 	int64_t x, y;
 	egcd(p, q, &x, &y);
 	return mod(b*p%(p*q)*x + a*q%(p*q)*y, p*q);
+}
+
+/// Compute the least common multiple of a and b
+/// Divides the product by the gcd so can overflow for large arguments
+/// @param [in] a, b: numbers to find lcm of
+/// @return lcm(a, b)
+static inline int64_t lcm(int64_t a, int64_t b){
+	return a*b/egcd(a, b, NULL, NULL);
 }
 
 /// Try to find a factor of a number using Lenstra ecf.

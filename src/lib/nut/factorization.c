@@ -21,12 +21,94 @@ factors_t *init_factors_t_ub(uint64_t n, uint64_t num_primes, const uint64_t pri
 	return NULL;
 }
 
+factors_t *copy_factors_t(const factors_t *factors){
+	factors_t *ret = init_factors_t_w(factors->num_primes);
+	if(ret){
+		memcpy(ret, factors, offsetof(factors_t, factors) + factors->num_primes*sizeof(factors->factors[0]));
+	}
+	return ret;
+}
+
 uint64_t factors_product(const factors_t *factors){
 	uint64_t r = 1;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		r *= pow_u64(factors->factors[i].prime, factors->factors[i].power);
 	}
 	return r;
+}
+
+uint64_t divisor_count(const factors_t *factors){
+	uint64_t s = 1;
+	for(uint64_t i = 0; i < factors->num_primes; ++i){
+		s *= factors->factors[i].power + 1;
+	}
+	return s;
+}
+
+uint64_t divisor_sum(const factors_t *factors){
+	uint64_t s = 1;
+	for(uint64_t i = 0; i < factors->num_primes; ++i){
+		uint64_t p = factors->factors[i].prime;
+		uint64_t a = factors->factors[i].power;
+		s *= (pow_u64(p, a + 1) - 1)/(p - 1);
+	}
+	return s;
+}
+
+uint64_t divisor_power_sum(const factors_t *factors, uint64_t power){
+	if(power == 0){
+		return divisor_count(factors);
+	}else if(power == 1){
+		return divisor_sum(factors);
+	}
+	uint64_t s = 1;
+	for(uint64_t i = 0; i < factors->num_primes; ++i){
+		uint64_t p = factors->factors[i].prime;
+		uint64_t a = factors->factors[i].power;
+		s *= (pow_u64(p, (a + 1)*power) - 1)/(pow_u64(p, power) - 1);
+	}
+	return s;
+}
+
+void factors_power(factors_t *factors, uint64_t power){
+	for(uint64_t i = 0; i < factors->num_primes; ++i){
+		factors->factors[i].power *= power;
+	}
+}
+
+uint64_t euler_phi(const factors_t *factors){
+	uint64_t s = 1;
+	for(uint64_t i = 0; i < factors->num_primes; ++i){
+		uint64_t p = factors->factors[i].prime;
+		uint64_t a = factors->factors[i].power;
+		s *= (pow_u64(p, a - 1))*(p - 1);
+	}
+	return s;
+}
+
+uint64_t carmichael_lambda(const factors_t *factors){
+	uint64_t s = 1;
+	if(!factors->num_primes){
+		return s;
+	}
+	uint64_t p = factors->factors[0].prime;
+	uint64_t a = factors->factors[0].power;
+	if(p == 2){
+		if(a >= 3){
+			s = 1ull << (a - 2);
+		}else{
+			s = 1ull << (a - 1);
+		}
+	}else{
+		s = pow_u64(p, a - 1)*(p - 1);
+	}
+	for(uint64_t i = 1; i < factors->num_primes; ++i){
+		p = factors->factors[i].prime;
+		a = factors->factors[i].power;
+		uint64_t phi_pk = (pow_u64(p, a - 1))*(p - 1);
+		s = lcm(s, phi_pk);
+	}
+	return s;
 }
 
 void factors_append(factors_t *factors, uint64_t m, uint64_t k){
@@ -186,6 +268,8 @@ uint64_t prand_u64(uint64_t a, uint64_t b){
 	return rand_u64(a, b);//TODO: test if this is a bottleneck, we don't need calls to this function to be secure
 }
 
+const uint64_t primes_2_5[2] = {2, 5};
+
 uint64_t factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], factors_t *factors){
 	factors->num_primes = 0;
 	for(uint64_t i = 0; i < num_primes; ++i){
@@ -226,9 +310,7 @@ uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes
 	uint64_t m;
 	while(1){
 		if(n <= conf->pollard_max){//TODO: allow iteration count based stopping of pollard-rho brent so we can get small factors of big numbers that way?
-			if(n == 25){
-				m = 5;
-			}else do{
+			do{
 				uint64_t x = prand_u64(0, n);
 				m = factor1_pollard_rho(n, x);
 			}while(m == n);

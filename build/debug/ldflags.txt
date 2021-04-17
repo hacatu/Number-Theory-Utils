@@ -1,5 +1,6 @@
 -Llib
 -lnut
+-lm
 -fuse-ld=gold
 -ggdb3
 -fno-eliminate-unused-debug-types

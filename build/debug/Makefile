@@ -92,7 +92,7 @@ test: all $(SIMPLE_TEST_BINS) $(COMPOUND_TEST_BINS) log
 .PHONY: coverage
 coverage: test | cov
 	geninfo notes
-	find notes -name "*.info" | xargs genhtml -o cov | grep -oP "(?<=lines\\.{6,6}: )\\d+\\.\d+" | xargs ../../cov_shield.py | xargs curl -o coverage.svg
+	find notes/lib -name "*.info" | xargs genhtml -o cov | grep -oP "(?<=lines\\.{6,6}: )\\d+\\.\d+" | xargs ../../cov_shield.py | xargs curl -o coverage.svg
 
 .PHONY: clean
 clean:
