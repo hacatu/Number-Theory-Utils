@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <inttypes.h>
 
-#include "factorization.h"
+#include <nut/factorization.h>
 
 int main(){
 	uint64_t trials = 1000, passed = 0;

@@ -1,7 +1,7 @@
 #include <string.h>
 
-#include "polynomial.h"
-#include "factorization.h"
+#include <nut/polynomial.h>
+#include <nut/factorization.h>
 
 int main(){
 	uint64_t l = 10;

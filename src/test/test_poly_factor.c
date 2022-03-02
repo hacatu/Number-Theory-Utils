@@ -1,7 +1,7 @@
 #include <string.h>
 
-#include "polynomial.h"
-#include "factorization.h"
+#include <nut/polynomial.h>
+#include <nut/factorization.h>
 
 int cmp_i64(const void *_a, const void *_b){
 	int64_t a = *(const int64_t*)_a, b = *(const int64_t*)_b;

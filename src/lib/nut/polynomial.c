@@ -1,7 +1,7 @@
 #include <string.h>
 
-#include "factorization.h"
-#include "polynomial.h"
+#include <nut/factorization.h>
+#include <nut/polynomial.h>
 
 int init_poly(poly_t *f, uint64_t reserve){
 	reserve = reserve ?: 4;
