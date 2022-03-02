@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['cap_161',['cap',['../structhashtbl__t.html#aa1eb4020c5b68133a06f7c1a7161ce63',1,'hashtbl_t::cap()'],['../structpoly__t.html#ab7657ccfe02164b996b4c59470581a5d',1,'poly_t::cap()'],['../structpoly__roots__t.html#af1270bbe7a127572a5c0d7ee64f990cb',1,'poly_roots_t::cap()']]],
-  ['cmp_162',['cmp',['../structhashtbl__ft.html#aa723c8eee6439e415059859df7822141',1,'hashtbl_ft']]],
-  ['coeffs_163',['coeffs',['../structpoly__t.html#a13ed413ba90d81e19c4705647e1d96c5',1,'poly_t']]]
+  ['len_165',['len',['../structpoly__t.html#acce4302d85b92216f4b02110a2ef4cd4',1,'poly_t::len()'],['../structpoly__roots__t.html#a314418c6c1b92f3023a6e7145ee3a765',1,'poly_roots_t::len()']]],
+  ['lenstra_5fbfac_166',['lenstra_bfac',['../structfactor__conf__t.html#a89c4084f7e9459f6eace98685209b553',1,'factor_conf_t']]],
+  ['lenstra_5fmax_167',['lenstra_max',['../structfactor__conf__t.html#a07052875c84b8be1fc60677c4f9dfaf5',1,'factor_conf_t']]]
 ];

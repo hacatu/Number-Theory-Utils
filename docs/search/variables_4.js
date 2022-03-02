@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hash_168',['hash',['../structhashtbl__ft.html#a1332cfc8f1e7e896338b36e53e046d19',1,'hashtbl_ft']]]
+  ['roots_172',['roots',['../structpoly__roots__t.html#a0bf0b9fc079ec3d1316b1712ab82137c',1,'poly_roots_t']]]
 ];

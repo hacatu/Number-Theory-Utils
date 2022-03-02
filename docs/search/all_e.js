@@ -1,10 +1,17 @@
 var searchData=
 [
-  ['r_79',['r',['../structhashtbl__t.html#af22fdc014e67d3b1fa122581fe9c0c40',1,'hashtbl_t']]],
-  ['rand_5fnr_5fu64_80',['rand_nr_u64',['../factorization_8h.html#a680572674cab27e7ae541fe1fe663042',1,'factorization.h']]],
-  ['rand_5fpoly_5fmodn_81',['rand_poly_modn',['../polynomial_8h.html#ab430241bd078f4ab28f06e64dd935526',1,'polynomial.h']]],
-  ['rand_5fu64_82',['rand_u64',['../factorization_8h.html#ae2abe4608c6ea4d6d292d776ce29cbfb',1,'factorization.h']]],
-  ['roots_83',['roots',['../structpoly__roots__t.html#a0bf0b9fc079ec3d1316b1712ab82137c',1,'poly_roots_t']]],
-  ['roots_5fpoly_5fmodn_84',['roots_poly_modn',['../polynomial_8h.html#a054b72254844b9bada1169f504cd290f',1,'polynomial.h']]],
-  ['roots_5fpoly_5fmodn_5ftmptmp_85',['roots_poly_modn_tmptmp',['../polynomial_8h.html#a4447d3bca8cc270b9ceba25708b347ba',1,'polynomial.h']]]
+  ['scale_5fpoly_5fmodn_75',['scale_poly_modn',['../polynomial_8h.html#a9c199565663ad2afe5545af89862a20e',1,'polynomial.h']]],
+  ['sieve_5fcarmichael_76',['sieve_carmichael',['../sieves_8h.html#ae19a3c1887d6cdc9375c32f0abfd2ab3',1,'sieves.h']]],
+  ['sieve_5ffactorizations_77',['sieve_factorizations',['../sieves_8h.html#a55b7ec1e3f2ac442b0f098861f758cff',1,'sieves.h']]],
+  ['sieve_5ffactors_78',['sieve_factors',['../sieves_8h.html#a1bca79bd17302449e4a95f833e2990c8',1,'sieves.h']]],
+  ['sieve_5fphi_79',['sieve_phi',['../sieves_8h.html#a0fd78cb343ce5afd768c28aacde7b99d',1,'sieves.h']]],
+  ['sieve_5fprimes_80',['sieve_primes',['../sieves_8h.html#ae6a8da8730b149433ac438cb106479e4',1,'sieves.h']]],
+  ['sieve_5fsigma_5f0_81',['sieve_sigma_0',['../sieves_8h.html#a4d2b3d5f592ca1a883b1f5d6292bfea6',1,'sieves.h']]],
+  ['sieve_5fsigma_5f1_82',['sieve_sigma_1',['../sieves_8h.html#a1e5e2e2afaef3dd04fa1721a4543c3bf',1,'sieves.h']]],
+  ['sieve_5fsigma_5fe_83',['sieve_sigma_e',['../sieves_8h.html#a47cf98fd1eedb76b4c337a0b6d5cb88c',1,'sieves.h']]],
+  ['sieves_2eh_84',['sieves.h',['../sieves_8h.html',1,'']]],
+  ['sqrt_5fcipolla_85',['sqrt_cipolla',['../modular__math_8h.html#a4871f3a8602cb31a0963dbeeacb86faf',1,'modular_math.h']]],
+  ['sqrt_5fmod_86',['sqrt_mod',['../modular__math_8h.html#a90556023960bf8187aaafd25f9aa536d',1,'modular_math.h']]],
+  ['sqrt_5fshanks_87',['sqrt_shanks',['../modular__math_8h.html#a3971aec9be84e37469c2953fe0a7bbc0',1,'modular_math.h']]],
+  ['sub_5fpoly_5fmodn_88',['sub_poly_modn',['../polynomial_8h.html#ac2f5f895e0fabfc02f670aebd38fe9c1',1,'polynomial.h']]]
 ];

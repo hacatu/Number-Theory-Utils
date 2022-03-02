@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['del_164',['del',['../structhashtbl__ft.html#a3e699c1199aab919272d6a4da41c32cd',1,'hashtbl_ft']]]
+  ['pollard_5fmax_168',['pollard_max',['../structfactor__conf__t.html#a8a6bc6a2a28fb40a6ebb1a4fafc888b9',1,'factor_conf_t']]],
+  ['pollard_5fstride_169',['pollard_stride',['../structfactor__conf__t.html#ac76f7b974f6d1309e72f2f981b320d03',1,'factor_conf_t']]],
+  ['primes_5f2_5f5_170',['primes_2_5',['../factorization_8h.html#a833e5eb4b48e7f9aff8b1202ef5c86f9',1,'factorization.h']]]
 ];
