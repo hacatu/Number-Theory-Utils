@@ -50,7 +50,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-03-02 03:12:43</td>
+            <td class="headerValue">2022-03-02 03:18:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -112,16 +112,16 @@
 <a name="37"><span class="lineNum">      37 </span>            : /// @param [in] b, e: base and exponent</a>
 <a name="38"><span class="lineNum">      38 </span>            : /// @return b^e, not checked for overflow</a>
 <a name="39"><span class="lineNum">      39 </span>            : static inline uint64_t pow_u64(uint64_t b, uint64_t e) __attribute__((const));</a>
-<a name="40"><span class="lineNum">      40 </span><span class="lineCov">    2864508 : static inline uint64_t pow_u64(uint64_t b, uint64_t e){</span></a>
-<a name="41"><span class="lineNum">      41 </span><span class="lineCov">    2864508 :     uint64_t r = 1;</span></a>
-<a name="42"><span class="lineNum">      42 </span><span class="lineCov">    6262636 :     while(e){</span></a>
-<a name="43"><span class="lineNum">      43 </span><span class="lineCov">    3398118 :         if(e&amp;1){</span></a>
-<a name="44"><span class="lineNum">      44 </span><span class="lineCov">    3000678 :             r = r*b;</span></a>
+<a name="40"><span class="lineNum">      40 </span><span class="lineCov">    2864405 : static inline uint64_t pow_u64(uint64_t b, uint64_t e){</span></a>
+<a name="41"><span class="lineNum">      41 </span><span class="lineCov">    2864405 :     uint64_t r = 1;</span></a>
+<a name="42"><span class="lineNum">      42 </span><span class="lineCov">    6262470 :     while(e){</span></a>
+<a name="43"><span class="lineNum">      43 </span><span class="lineCov">    3398065 :         if(e&amp;1){</span></a>
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">    3000575 :             r = r*b;</span></a>
 <a name="45"><span class="lineNum">      45 </span>            :         }</a>
-<a name="46"><span class="lineNum">      46 </span><span class="lineCov">    3398118 :         e &gt;&gt;= 1;</span></a>
-<a name="47"><span class="lineNum">      47 </span><span class="lineCov">    3398118 :         b *= b;</span></a>
+<a name="46"><span class="lineNum">      46 </span><span class="lineCov">    3398065 :         e &gt;&gt;= 1;</span></a>
+<a name="47"><span class="lineNum">      47 </span><span class="lineCov">    3398065 :         b *= b;</span></a>
 <a name="48"><span class="lineNum">      48 </span>            :     }</a>
-<a name="49"><span class="lineNum">      49 </span><span class="lineCov">    2864508 :     return r;</span></a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">    2864405 :     return r;</span></a>
 <a name="50"><span class="lineNum">      50 </span>            : }</a>
 <a name="51"><span class="lineNum">      51 </span>            : </a>
 <a name="52"><span class="lineNum">      52 </span>            : /// Compute nonnegative integral power of a number modulo another using binary exponentiation.</a>
@@ -154,41 +154,41 @@
 <a name="79"><span class="lineNum">      79 </span>            : __attribute__((access (write_only, 3), access (write_only, 4)))</a>
 <a name="80"><span class="lineNum">      80 </span>            : #endif</a>
 <a name="81"><span class="lineNum">      81 </span>            : ;</a>
-<a name="82"><span class="lineNum">      82 </span><span class="lineCov">     329620 : static inline int64_t egcd(int64_t a, int64_t b, int64_t *_t, int64_t *_s){</span></a>
-<a name="83"><span class="lineNum">      83 </span><span class="lineCov">     329620 :     int64_t r0 = b, r1 = a;</span></a>
-<a name="84"><span class="lineNum">      84 </span><span class="lineCov">     329620 :     int64_t s0 = 1, s1 = 0;</span></a>
-<a name="85"><span class="lineNum">      85 </span><span class="lineCov">     329620 :     int64_t t0 = 0, t1 = 1;</span></a>
-<a name="86"><span class="lineNum">      86 </span><span class="lineCov">    2975607 :     while(r1){</span></a>
-<a name="87"><span class="lineNum">      87 </span><span class="lineCov">    2645988 :         int64_t q = r0/r1, t;</span></a>
-<a name="88"><span class="lineNum">      88 </span><span class="lineCov">    2645988 :         t = r1;</span></a>
-<a name="89"><span class="lineNum">      89 </span><span class="lineCov">    2645988 :         r1 = r0 - q*r1;</span></a>
-<a name="90"><span class="lineNum">      90 </span><span class="lineCov">    2645988 :         r0 = t;</span></a>
-<a name="91"><span class="lineNum">      91 </span><span class="lineCov">    2645988 :         t = s1;</span></a>
-<a name="92"><span class="lineNum">      92 </span><span class="lineCov">    2645988 :         s1 = s0 - q*s1;</span></a>
-<a name="93"><span class="lineNum">      93 </span><span class="lineCov">    2645988 :         s0 = t;</span></a>
-<a name="94"><span class="lineNum">      94 </span><span class="lineCov">    2645988 :         t = t1;</span></a>
-<a name="95"><span class="lineNum">      95 </span><span class="lineCov">    2645988 :         t1 = t0 - q*t1;</span></a>
-<a name="96"><span class="lineNum">      96 </span><span class="lineCov">    2645988 :         t0 = t;</span></a>
+<a name="82"><span class="lineNum">      82 </span><span class="lineCov">     324077 : static inline int64_t egcd(int64_t a, int64_t b, int64_t *_t, int64_t *_s){</span></a>
+<a name="83"><span class="lineNum">      83 </span><span class="lineCov">     324077 :     int64_t r0 = b, r1 = a;</span></a>
+<a name="84"><span class="lineNum">      84 </span><span class="lineCov">     324077 :     int64_t s0 = 1, s1 = 0;</span></a>
+<a name="85"><span class="lineNum">      85 </span><span class="lineCov">     324077 :     int64_t t0 = 0, t1 = 1;</span></a>
+<a name="86"><span class="lineNum">      86 </span><span class="lineCov">    2926470 :     while(r1){</span></a>
+<a name="87"><span class="lineNum">      87 </span><span class="lineCov">    2602388 :         int64_t q = r0/r1, t;</span></a>
+<a name="88"><span class="lineNum">      88 </span><span class="lineCov">    2602388 :         t = r1;</span></a>
+<a name="89"><span class="lineNum">      89 </span><span class="lineCov">    2602388 :         r1 = r0 - q*r1;</span></a>
+<a name="90"><span class="lineNum">      90 </span><span class="lineCov">    2602388 :         r0 = t;</span></a>
+<a name="91"><span class="lineNum">      91 </span><span class="lineCov">    2602388 :         t = s1;</span></a>
+<a name="92"><span class="lineNum">      92 </span><span class="lineCov">    2602388 :         s1 = s0 - q*s1;</span></a>
+<a name="93"><span class="lineNum">      93 </span><span class="lineCov">    2602388 :         s0 = t;</span></a>
+<a name="94"><span class="lineNum">      94 </span><span class="lineCov">    2602388 :         t = t1;</span></a>
+<a name="95"><span class="lineNum">      95 </span><span class="lineCov">    2602388 :         t1 = t0 - q*t1;</span></a>
+<a name="96"><span class="lineNum">      96 </span><span class="lineCov">    2602388 :         t0 = t;</span></a>
 <a name="97"><span class="lineNum">      97 </span>            :     }</a>
-<a name="98"><span class="lineNum">      98 </span><span class="lineCov">     329620 :     if(_t){</span></a>
-<a name="99"><span class="lineNum">      99 </span><span class="lineCov">     310185 :         *_t = t0;</span></a>
+<a name="98"><span class="lineNum">      98 </span><span class="lineCov">     324077 :     if(_t){</span></a>
+<a name="99"><span class="lineNum">      99 </span><span class="lineCov">     304785 :         *_t = t0;</span></a>
 <a name="100"><span class="lineNum">     100 </span>            :     }</a>
-<a name="101"><span class="lineNum">     101 </span><span class="lineCov">     329620 :     if(_s){</span></a>
+<a name="101"><span class="lineNum">     101 </span><span class="lineCov">     324077 :     if(_s){</span></a>
 <a name="102"><span class="lineNum">     102 </span><span class="lineNoCov">          0 :         *_s = s0;</span></a>
 <a name="103"><span class="lineNum">     103 </span>            :     }</a>
-<a name="104"><span class="lineNum">     104 </span><span class="lineCov">     329620 :     return r0;</span></a>
+<a name="104"><span class="lineNum">     104 </span><span class="lineCov">     324077 :     return r0;</span></a>
 <a name="105"><span class="lineNum">     105 </span>            : }</a>
 <a name="106"><span class="lineNum">     106 </span>            : </a>
 <a name="107"><span class="lineNum">     107 </span>            : /// Compute the Euclidean remainder r = a mod n for positive n so that 0 &lt;= r &lt; n.</a>
 <a name="108"><span class="lineNum">     108 </span>            : /// @param [in] a, n: dividend and divisor</a>
 <a name="109"><span class="lineNum">     109 </span>            : /// @return a mod n</a>
 <a name="110"><span class="lineNum">     110 </span>            : static inline int64_t mod(int64_t a, int64_t n) __attribute__((const));</a>
-<a name="111"><span class="lineNum">     111 </span><span class="lineCov">  236976662 : static inline int64_t mod(int64_t a, int64_t n){</span></a>
-<a name="112"><span class="lineNum">     112 </span><span class="lineCov">  236976662 :     int64_t r = a%n;</span></a>
-<a name="113"><span class="lineNum">     113 </span><span class="lineCov">  236976662 :     if(r &lt; 0){</span></a>
-<a name="114"><span class="lineNum">     114 </span><span class="lineCov">    1056940 :         r += n;</span></a>
+<a name="111"><span class="lineNum">     111 </span><span class="lineCov">  244110480 : static inline int64_t mod(int64_t a, int64_t n){</span></a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineCov">  244110480 :     int64_t r = a%n;</span></a>
+<a name="113"><span class="lineNum">     113 </span><span class="lineCov">  244110480 :     if(r &lt; 0){</span></a>
+<a name="114"><span class="lineNum">     114 </span><span class="lineCov">    1026291 :         r += n;</span></a>
 <a name="115"><span class="lineNum">     115 </span>            :     }</a>
-<a name="116"><span class="lineNum">     116 </span><span class="lineCov">  236976662 :     return r;</span></a>
+<a name="116"><span class="lineNum">     116 </span><span class="lineCov">  244110480 :     return r;</span></a>
 <a name="117"><span class="lineNum">     117 </span>            : }</a>
 <a name="118"><span class="lineNum">     118 </span>            : </a>
 <a name="119"><span class="lineNum">     119 </span>            : /// Compute n mod pq st n = a mod p and n = b mod q, where p and q are coprime.</a>
