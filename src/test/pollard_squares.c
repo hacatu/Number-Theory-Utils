@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
-#include "factorization.h"
+#include <nut/factorization.h>
 
 int main(){
 	uint64_t num_primes = 0;

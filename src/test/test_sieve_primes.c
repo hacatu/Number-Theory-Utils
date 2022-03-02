@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-#include "sieves.h"
+#include <nut/sieves.h>
 
 int main(){
 	uint64_t sieve_max = 1000000;

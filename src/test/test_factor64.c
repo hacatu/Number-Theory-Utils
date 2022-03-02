@@ -2,7 +2,7 @@
 #include <inttypes.h>
 #include <stdlib.h>
 
-#include "factorization.h"
+#include <nut/factorization.h>
 
 int main(){
 	factor_conf_t factor_conf = {

@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "factorization.h"
+#include <nut/factorization.h>
 
 /// Compute the maximum number of unique prime divisors a number can have.
 /// This has nothing to do with factoring the number and is just a simple binary

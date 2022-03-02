@@ -3,8 +3,8 @@
 #include <inttypes.h>
 #include <math.h>
 
-#include "factorization.h"
-#include "sieves.h"
+#include <nut/factorization.h>
+#include <nut/sieves.h>
 
 uint64_t max_prime_divs(uint64_t max){
 	//2*3*5*7*11*13*17*19*23*29*31*37*41*43*47
