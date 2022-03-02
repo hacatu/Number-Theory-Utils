@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Crater Container Library</title>
+	<link rel="stylesheet" type="text/css" href="main.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="pygments_xcode.css" media="screen"/>
+	<!-->Credit for image: Mozilla's emoji set</-->
+	<link rel="icon" type="image/x-icon" href="fortune.png"/>
+</head>
+<body>
+	<div id="float_hdr">
+		<table>
+			<tbody>
+				<tr>
+					<td class="cur_subpage_link">🥠 Number Theory Utils</td>
+					<td class="cur_subpage_link">About</td>
+					<td><a class="subpage_link" href="docs/index.html">Docs</a></td>
+					<td><a class="subpage_link" href="cov/index.html">Coverage</a></td>
+					<td><a class="subpage_link" href="https://github.com/hacatu/Number-Theory-Utils">Source</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="hidden_hdr"></div>
+	<div class="subpage" id="about_page">
+		<div class="tsect">
+			<h1>About Crater</h1>
+			<div class="tsect_body">
+				<table><colgroup>
+					<col span="1" style="width: 40%;">
+					<col span="1" style="width: 60%;">
+					</colgroup>
+					<tbody><tr>
+				<td>
+					<div class="highlight"><pre>
+<span class="k">for</span><span class="p">(</span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">){</span><span class="w"></span>
+<span class="w">	</span><span class="kt">int64_t</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand_u64</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1ull</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">is_prime_dmr</span><span class="p">(</span><span class="n">p</span><span class="p">)){</span><span class="w"></span>
+<span class="w">		</span><span class="o">++</span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="c1">//Want to solve n**2 - n + 1 == 0 mod p</span>
+<span class="w">	</span><span class="c1">//&lt;=&gt; 4*n**2 - 4*n + 4 == 0 mod p</span>
+<span class="w">	</span><span class="c1">//&lt;=&gt; (2*n - 1)**2 == -3 mod p</span>
+<span class="w">	</span><span class="c1">//&lt;=&gt; n == 2**-1*(1 +- sqrt(-3)) mod p</span>
+<span class="w">	</span><span class="k">switch</span><span class="p">(</span><span class="n">jacobi</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)){</span><span class="w"></span>
+<span class="w">		</span><span class="k">case</span><span class="w"> </span><span class="mi">-1</span><span class="o">:</span><span class="w"></span>
+<span class="w">			</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;n**2 - n + 1 has no roots mod %&quot;</span><span class="n">PRId64</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="k">case</span><span class="w"> </span><span class="mi">0</span><span class="o">:</span><span class="c1">//-3 is a multiple of p, ie p == 3 so we only have 1 solution</span>
+<span class="w">			</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;n**2 - n + 1 has a root at %&quot;</span><span class="n">PRId64</span><span class="s">&quot; mod %&quot;</span><span class="n">PRId64</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="c1">//WARNING: here we know p - 3 is a quadratic residue, but sqrt_mod does not check this and thus if a nonresidue is given and</span>
+<span class="w">			</span><span class="c1">//Tonelli-Shanks is selected as the optimal algorithm for this p, this would be an infinite loop</span>
+<span class="w">			</span><span class="kt">int64_t</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt_mod</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;n**2 - n + 1 has roots at %&quot;</span><span class="n">PRId64</span><span class="s">&quot; and %&quot;</span><span class="n">PRId64</span><span class="s">&quot; mod %&quot;</span><span class="n">PRId64</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mod</span><span class="p">((</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r</span><span class="p">),</span><span class="w"> </span><span class="n">p</span><span class="p">),</span><span class="w"> </span><span class="n">mod</span><span class="p">((</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r</span><span class="p">),</span><span class="w"> </span><span class="n">p</span><span class="p">),</span><span class="w"> </span><span class="n">p</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+					</pre></div>
+				</td>
+				<td><div>
+					A collection of functions for working modular arithmetic, polynomials over finite fields, and related things.
+					<p>
+					Implements factorization of 64 bit numbers using trial division, Pollard's Rho algorithm with Brent or Floyd
+					cycle finding, and Lenstra's Elliptic Curve algorithm with Wierstrass or Montgomery curves.  Planned support
+					for arbitrary precision integers and Kraitcheck style methods (ie quadratic sieve and number field sieve),
+					although Flint and its extension library Arb may be more suited for your needs.
+					</p>
+					<p>
+					For polynomials, implements finding roots of a polynomial over a prime field using the Cantor-Zassenhaus algorithm.
+					</p>
+					<p>
+					Also includes general purpose modular arithmetic routines, including powers, Miller-Rabin prime checking,
+					random numbers, random quadratic nonresidues, Jacobi symbols, modular square root including Tonelli-Shanks
+					and Cippola, extended gcd, Chinese remainder theorem, and Euclidean remainder.
+					</p>
+					<p>
+					For polynomials, also includes arithmetic (addition, subtraction, scalar multiplication, coefficientwise multiplication,
+					multiplication, quotient and remainder, Horner evaluation, gcd, and powers), printing/normalization,
+					and distinct degree factorization.  Currently there is a simple driver function that will find all roots
+					of a polynomial over a prime field, but if a full factorization is desired the squarefree step must still be done manually.
+					Like the factorization part of the library, polynomials use 64 bit integers, so computations involving numbers larger than
+					about 2<sup>30</sup> potentially can fail due to overflow.
+					</p>
+				</p>
+				</div></td>
+				</tr></tbody></table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+

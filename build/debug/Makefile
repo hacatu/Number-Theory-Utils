@@ -73,11 +73,12 @@ $(SIMPLE_TEST_BINS): bin/test/%: obj/test/%.o | $(SIMPLE_LIB_ARCS) $(COMPOUND_LI
 $(COMPOUND_TEST_BINS): bin/test/%: obj/test/%.compound | $(SIMPLE_LIB_ARCS) $(COMPOUND_LIB_ARCS) bin/test
 	$(LD) -o $@ $(filter obj/test/$*/%.o,$(TEST_OBJS)) $(TEST_LDFLAGS)
 
-obj/%.compound: $(@D)
-	@touch $@
+#obj/%.compound: $(@D)
+#	@touch $@
 
 define make-compound
 obj/$(1)/$(2).compound: $(filter obj/$(1)/$(2)/%.o,$(3))
+	touch obj/$(1)/$(2).compound
 endef
 
 $(foreach c,$(patsubst lib/lib%.a,%,$(COMPOUND_LIB_ARCS)),$(eval $(call make-compound,lib,$c,$(LIB_OBJS))))
@@ -86,13 +87,12 @@ $(foreach c,$(patsubst bin/%,%,$(COMPOUND_BINARIES)),$(eval $(call make-compound
 
 .PHONY: test
 test: all $(SIMPLE_TEST_BINS) $(COMPOUND_TEST_BINS) log
-	#-./test.sh &> log/test`date -u +%s`.log
-	../../test.sh `pwd` 2>&1 | tee log/test`date +%m-%d-%y-%R:%S`.log
+	../../test/test.py ../../test `pwd`/bin/test 2>&1 | tee log/test`date +%m-%d-%y-%R:%S`.log
 
 .PHONY: coverage
 coverage: test | cov
 	geninfo notes
-	find notes/lib -name "*.info" | xargs genhtml -o cov | grep -oP "(?<=lines\\.{6,6}: )\\d+\\.\d+" | xargs ../../cov_shield.py | xargs curl -o coverage.svg
+	find notes/lib -name "*.info" | xargs genhtml --num-spaces 4 --css-file ../../resources/lcov.css --html-prolog ../../resources/lcov_prolog.html -o cov | grep -oP "(?<=lines\\.{6,6}: )\\d+\\.\d+" | xargs ../../cov_shield.py | xargs curl -o coverage.svg
 
 .PHONY: clean
 clean:

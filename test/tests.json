@@ -1,0 +1,21 @@
+{
+	"pollard_squares": {
+		"no_red_tests": [[]]
+	},
+	"test_factor64": {
+		"no_red_tests": [[]]
+	},
+	"test_polynomial": {
+		"no_red_tests": [[]]
+	},
+	"test_poly_factor": {
+		"no_red_tests": [[]]
+	},
+	"test_sieve_primes": {
+		"no_red_tests": [[]]
+	},
+	"test_sqrt_mod": {
+		"no_red_tests": [[]]
+	}
+}
+
