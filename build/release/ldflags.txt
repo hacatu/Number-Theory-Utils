@@ -1,0 +1,11 @@
+-Llib
+-lnut
+-lm
+-lSDL2
+-fuse-ld=mold
+-O3
+-flto
+-std=c2x
+-fno-strict-aliasing
+-pthread
+
