@@ -162,7 +162,7 @@ Factor some numbers</h2>
 <div class="line">    .lenstra_max= UINT64_MAX,<span class="comment">//maximum number to use Lenstra&#39;s Elliptic Curve algorithm for</span></div>
 <div class="line">    .lenstra_bfac= 10        <span class="comment">//roughly speaking, the number of iterations to try before picking a new random point and curve</span></div>
 <div class="line">};</div>
-<div class="line"><a class="code" href="structfactors__t.html">factors_t</a> *factors = <a class="code" href="factorization_8h.html#a487385b324e0d39124f186234ec9aec3">init_factors_t_w</a>(<a class="code" href="factorization_8h.html#a9f29234154854a63ff0f50e0259c1cd6">MAX_PRIMES_64</a>);</div>
+<div class="line"><a class="code" href="structfactors__t.html">factors_t</a> *factors = <a class="code" href="factorization_8h.html#ae82106291453a286003dcd7117253f63">init_factors_t_w</a>(<a class="code" href="factorization_8h.html#a9f29234154854a63ff0f50e0259c1cd6">MAX_PRIMES_64</a>);</div>
 <div class="line"><span class="keywordflow">for</span>(uint64_t i = 0; i &lt; 100; ++i){</div>
 <div class="line">    uint64_t n = <a class="code" href="modular__math_8h.html#ae2abe4608c6ea4d6d292d776ce29cbfb">rand_u64</a>(2, 1ull &lt;&lt; 30);</div>
 <div class="line">    <span class="comment">//factor_heuristic will check if the input and intermediate factors are prime</span></div>
@@ -239,10 +239,10 @@ Factor a polynomial mod some primes</h2>
 <div class="ttc" id="apolynomial_8h_html_a608927f8b707837b8fcd315bcea00341"><div class="ttname"><a href="polynomial_8h.html#a608927f8b707837b8fcd315bcea00341">init_poly</a></div><div class="ttdeci">int init_poly(poly_t *f, uint64_t reserve)</div><div class="ttdoc">Initialize a polynomial with at least a given capacity.</div></div>
 <div class="ttc" id="apolynomial_8h_html_ae501a32ed22a602c6da05679442e9ab6"><div class="ttname"><a href="polynomial_8h.html#ae501a32ed22a602c6da05679442e9ab6">destroy_poly_roots</a></div><div class="ttdeci">void destroy_poly_roots(poly_roots_t *roots)</div><div class="ttdoc">Free resources held by a root buffer.</div></div>
 <div class="ttc" id="amodular__math_8h_html_ae2abe4608c6ea4d6d292d776ce29cbfb"><div class="ttname"><a href="modular__math_8h.html#ae2abe4608c6ea4d6d292d776ce29cbfb">rand_u64</a></div><div class="ttdeci">uint64_t rand_u64(uint64_t a, uint64_t b)</div><div class="ttdoc">Generate a (strong) random integer uniformly from [a, b).</div></div>
-<div class="ttc" id="afactorization_8h_html_a487385b324e0d39124f186234ec9aec3"><div class="ttname"><a href="factorization_8h.html#a487385b324e0d39124f186234ec9aec3">init_factors_t_w</a></div><div class="ttdeci">factors_t * init_factors_t_w(uint64_t max_primes)</div><div class="ttdoc">Allocate a factors structure that can hold a given number of distinct primes.</div></div>
 <div class="ttc" id="astructfactors__t_html"><div class="ttname"><a href="structfactors__t.html">factors_t</a></div><div class="ttdoc">A prime factorization.</div><div class="ttdef"><b>Definition:</b> <a href="factorization_8h_source.html#l00039">factorization.h:39</a></div></div>
 <div class="ttc" id="apolynomial_8h_html_af76265f19adf322b7cd06e174ef490fd"><div class="ttname"><a href="polynomial_8h.html#af76265f19adf322b7cd06e174ef490fd">fprint_poly</a></div><div class="ttdeci">int fprint_poly(FILE *file, const poly_t *f, const char *vname, const char *add, const char *sub, const char *pow, int descending)</div><div class="ttdoc">Print a polynomial to a file.</div></div>
 <div class="ttc" id="astructfactor__conf__t_html"><div class="ttname"><a href="structfactor__conf__t.html">factor_conf_t</a></div><div class="ttdoc">Configuration/tuning for heuristic factorization.</div><div class="ttdef"><b>Definition:</b> <a href="factorization_8h_source.html#l00048">factorization.h:48</a></div></div>
+<div class="ttc" id="afactorization_8h_html_ae82106291453a286003dcd7117253f63"><div class="ttname"><a href="factorization_8h.html#ae82106291453a286003dcd7117253f63">init_factors_t_w</a></div><div class="ttdeci">factors_t * init_factors_t_w(uint64_t max_primes) __attribute__((malloc))</div><div class="ttdoc">Allocate a factors structure that can hold a given number of distinct primes.</div></div>
 <div class="ttc" id="astructpoly__roots__t_html"><div class="ttname"><a href="structpoly__roots__t.html">poly_roots_t</a></div><div class="ttdoc">The roots of a polynomial over a finite field, ignoring multiplicity.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8h_source.html#l00038">polynomial.h:38</a></div></div>
 <div class="ttc" id="astructpoly__roots__t_html_a314418c6c1b92f3023a6e7145ee3a765"><div class="ttname"><a href="structpoly__roots__t.html#a314418c6c1b92f3023a6e7145ee3a765">poly_roots_t::len</a></div><div class="ttdeci">uint64_t len</div><div class="ttdoc">Number of roots, can be 0 if there are none.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8h_source.html#l00040">polynomial.h:40</a></div></div>
 <div class="ttc" id="astructfactor__conf__t_html_a8a6bc6a2a28fb40a6ebb1a4fafc888b9"><div class="ttname"><a href="structfactor__conf__t.html#a8a6bc6a2a28fb40a6ebb1a4fafc888b9">factor_conf_t::pollard_max</a></div><div class="ttdeci">uint64_t pollard_max</div><div class="ttdoc">Use Pollard-Rho-Brent when factoring numbers at most this large.</div><div class="ttdef"><b>Definition:</b> <a href="factorization_8h_source.html#l00052">factorization.h:52</a></div></div>
@@ -261,7 +261,7 @@ Factor a polynomial mod some primes</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Mar 2 2022 03:18:48 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.8.17 </li>
+    <li class="footer">Generated on Thu Mar 3 2022 04:58:05 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.8.17 </li>
   </ul>
 </div>
 </body>

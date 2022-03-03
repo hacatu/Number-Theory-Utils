@@ -153,15 +153,15 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a487385b324e0d39124f186234ec9aec3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfactors__t.html">factors_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a487385b324e0d39124f186234ec9aec3">init_factors_t_w</a> (uint64_t max_primes)</td></tr>
-<tr class="memdesc:a487385b324e0d39124f186234ec9aec3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a factors structure that can hold a given number of distinct primes.  <a href="factorization_8h.html#a487385b324e0d39124f186234ec9aec3">More...</a><br /></td></tr>
-<tr class="separator:a487385b324e0d39124f186234ec9aec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad74c0b074b6830e1ad08f51d1c166583"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfactors__t.html">factors_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#ad74c0b074b6830e1ad08f51d1c166583">init_factors_t_ub</a> (uint64_t n, uint64_t num_primes, const uint64_t *primes)</td></tr>
-<tr class="memdesc:ad74c0b074b6830e1ad08f51d1c166583"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a factors structure that can hold all factors of n, even if it has as many prime factors as possible.  <a href="factorization_8h.html#ad74c0b074b6830e1ad08f51d1c166583">More...</a><br /></td></tr>
-<tr class="separator:ad74c0b074b6830e1ad08f51d1c166583"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35507cdbb4f4954481459716648c74cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfactors__t.html">factors_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a35507cdbb4f4954481459716648c74cd">copy_factors_t</a> (const <a class="el" href="structfactors__t.html">factors_t</a> *factors)</td></tr>
-<tr class="memdesc:a35507cdbb4f4954481459716648c74cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a copy of a factors struct, but with only enough memory to store its current factors and not its max capacity if higher.  <a href="factorization_8h.html#a35507cdbb4f4954481459716648c74cd">More...</a><br /></td></tr>
-<tr class="separator:a35507cdbb4f4954481459716648c74cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae82106291453a286003dcd7117253f63"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfactors__t.html">factors_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#ae82106291453a286003dcd7117253f63">init_factors_t_w</a> (uint64_t max_primes) __attribute__((malloc))</td></tr>
+<tr class="memdesc:ae82106291453a286003dcd7117253f63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a factors structure that can hold a given number of distinct primes.  <a href="factorization_8h.html#ae82106291453a286003dcd7117253f63">More...</a><br /></td></tr>
+<tr class="separator:ae82106291453a286003dcd7117253f63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a945694d2072205fb97e92a362f82b2cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfactors__t.html">factors_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a945694d2072205fb97e92a362f82b2cb">init_factors_t_ub</a> (uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes]) __attribute__((malloc))</td></tr>
+<tr class="memdesc:a945694d2072205fb97e92a362f82b2cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a factors structure that can hold all factors of n, even if it has as many prime factors as possible.  <a href="factorization_8h.html#a945694d2072205fb97e92a362f82b2cb">More...</a><br /></td></tr>
+<tr class="separator:a945694d2072205fb97e92a362f82b2cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fa683dfe3c9f34f98d0e5b5cd66cff9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfactors__t.html">factors_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a2fa683dfe3c9f34f98d0e5b5cd66cff9">copy_factors_t</a> (const <a class="el" href="structfactors__t.html">factors_t</a> *factors) __attribute__((malloc))</td></tr>
+<tr class="memdesc:a2fa683dfe3c9f34f98d0e5b5cd66cff9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a copy of a factors struct, but with only enough memory to store its current factors and not its max capacity if higher.  <a href="factorization_8h.html#a2fa683dfe3c9f34f98d0e5b5cd66cff9">More...</a><br /></td></tr>
+<tr class="separator:a2fa683dfe3c9f34f98d0e5b5cd66cff9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78dc8ed9447f6b0039ce7a002608b57b"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a78dc8ed9447f6b0039ce7a002608b57b">factors_product</a> (const <a class="el" href="structfactors__t.html">factors_t</a> *factors) __attribute__((pure))</td></tr>
 <tr class="memdesc:a78dc8ed9447f6b0039ce7a002608b57b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply a factorization into a number.  <a href="factorization_8h.html#a78dc8ed9447f6b0039ce7a002608b57b">More...</a><br /></td></tr>
 <tr class="separator:a78dc8ed9447f6b0039ce7a002608b57b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,6 +183,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a25a68da474286694c8abd6c37e26425f"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a25a68da474286694c8abd6c37e26425f">carmichael_lambda</a> (const <a class="el" href="structfactors__t.html">factors_t</a> *factors) __attribute__((pure))</td></tr>
 <tr class="memdesc:a25a68da474286694c8abd6c37e26425f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find Carmichael's Lambda function, the smallest exponent m so a^m = 1 for all 0 &lt; a &lt; n.  <a href="factorization_8h.html#a25a68da474286694c8abd6c37e26425f">More...</a><br /></td></tr>
 <tr class="separator:a25a68da474286694c8abd6c37e26425f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae73e41390934c94a796ce031c5bab69b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#ae73e41390934c94a796ce031c5bab69b">forall_divisors</a> (const <a class="el" href="structfactors__t.html">factors_t</a> *factors, int(*f)(const <a class="el" href="structfactors__t.html">factors_t</a> *, uint64_t, void *), void *data)</td></tr>
+<tr class="memdesc:ae73e41390934c94a796ce031c5bab69b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call a given function on each divisor of a number, given its factorization.  <a href="factorization_8h.html#ae73e41390934c94a796ce031c5bab69b">More...</a><br /></td></tr>
+<tr class="separator:ae73e41390934c94a796ce031c5bab69b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5aa9870e338e6294a78fcf2b4b4d319"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#aa5aa9870e338e6294a78fcf2b4b4d319">factors_fprint</a> (FILE *file, const <a class="el" href="structfactors__t.html">factors_t</a> *factors)</td></tr>
 <tr class="memdesc:aa5aa9870e338e6294a78fcf2b4b4d319"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print a factorization of a number.  <a href="factorization_8h.html#aa5aa9870e338e6294a78fcf2b4b4d319">More...</a><br /></td></tr>
 <tr class="separator:aa5aa9870e338e6294a78fcf2b4b4d319"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -241,8 +244,8 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a487385b324e0d39124f186234ec9aec3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a487385b324e0d39124f186234ec9aec3">&#9670;&nbsp;</a></span>init_factors_t_w()</h2>
+<a id="ae82106291453a286003dcd7117253f63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae82106291453a286003dcd7117253f63">&#9670;&nbsp;</a></span>init_factors_t_w()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -268,8 +271,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ad74c0b074b6830e1ad08f51d1c166583"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad74c0b074b6830e1ad08f51d1c166583">&#9670;&nbsp;</a></span>init_factors_t_ub()</h2>
+<a id="a945694d2072205fb97e92a362f82b2cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a945694d2072205fb97e92a362f82b2cb">&#9670;&nbsp;</a></span>init_factors_t_ub()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -289,8 +292,8 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint64_t *&#160;</td>
-          <td class="paramname"><em>primes</em>&#160;</td>
+          <td class="paramtype">const uint64_t&#160;</td>
+          <td class="paramname"><em>primes</em>[static num_primes]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -313,8 +316,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a35507cdbb4f4954481459716648c74cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35507cdbb4f4954481459716648c74cd">&#9670;&nbsp;</a></span>copy_factors_t()</h2>
+<a id="a2fa683dfe3c9f34f98d0e5b5cd66cff9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fa683dfe3c9f34f98d0e5b5cd66cff9">&#9670;&nbsp;</a></span>copy_factors_t()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -547,6 +550,51 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>lambda(n) </dd></dl>
+
+</div>
+</div>
+<a id="ae73e41390934c94a796ce031c5bab69b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae73e41390934c94a796ce031c5bab69b">&#9670;&nbsp;</a></span>forall_divisors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int forall_divisors </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfactors__t.html">factors_t</a> *&#160;</td>
+          <td class="paramname"><em>factors</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int(*)(const <a class="el" href="structfactors__t.html">factors_t</a> *, uint64_t, void *)&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Call a given function on each divisor of a number, given its factorization. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>the factorization of n for which to compute all divisors </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>callback function. Arguments are factorization of divisor, divisor, user data (respectively). Should return 0 to continue, or 1 to break. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">data</td><td>user data (allows arbitrary data to be passed in and out of the callback) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if the callback never returned 1 and all divisors were visited, or 1 if the callback ever returned nonzero. </dd></dl>
 
 </div>
 </div>
@@ -1036,7 +1084,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="factorization_8h.html">factorization.h</a></li>
-    <li class="footer">Generated on Wed Mar 2 2022 03:18:48 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.8.17 </li>
+    <li class="footer">Generated on Thu Mar 3 2022 04:58:05 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.8.17 </li>
   </ul>
 </div>
 </body>
