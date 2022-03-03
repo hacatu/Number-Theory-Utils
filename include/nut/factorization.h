@@ -71,7 +71,7 @@ typedef struct{
 /// Allocate a factors structure that can hold a given number of distinct primes.
 /// @param [in] max_primes: the number of distinct primes that should be storable
 /// @return pointer to factors structure that can hold max_primes.  pointer needs to be free'd
-factors_t *init_factors_t_w(uint64_t max_primes);
+factors_t *init_factors_t_w(uint64_t max_primes) __attribute__((malloc));
 
 /// Allocate a factors structure that can hold all factors of n, even if it has as many prime factors as possible.
 /// 
@@ -80,12 +80,12 @@ factors_t *init_factors_t_w(uint64_t max_primes);
 /// @param [in] num_primes: number of primes in array
 /// @param [in] primes: array of primes
 /// @return pointer to factors structure that can hold enough distinct primes to factor any number up through n.  pointer needs to be free'd
-factors_t *init_factors_t_ub(uint64_t n, uint64_t num_primes, const uint64_t *primes);
+factors_t *init_factors_t_ub(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes]) __attribute__((malloc));
 
 /// Allocate a copy of a factors struct, but with only enough memory to store its current factors and not its max capacity if higher
 /// @param [in] factors: the struct to copy
 /// @return a copy of the input or NULL on allocation failure
-factors_t *copy_factors_t(const factors_t *factors);
+factors_t *copy_factors_t(const factors_t *factors) __attribute__((malloc));
 
 /// Multiply a factorization into a number.
 /// @param [in] factors: pointer to factors struct, as obtained from { @link factor_trial_div}
@@ -128,6 +128,14 @@ uint64_t euler_phi(const factors_t *factors) __attribute__((pure));
 /// @param [in] factors: the factorization of n for which to compute the carmichael function
 /// @return lambda(n)
 uint64_t carmichael_lambda(const factors_t *factors) __attribute__((pure));
+
+/// Call a given function on each divisor of a number, given its factorization.
+/// @param [in] factors: the factorization of n for which to compute all divisors
+/// @param [in] f: callback function.  Arguments are factorization of divisor, divisor, user data (respectively).
+/// Should return 0 to continue, or 1 to break.
+/// @param [in,out] data: user data (allows arbitrary data to be passed in and out of the callback)
+/// @return 0 if the callback never returned 1 and all divisors were visited, or 1 if the callback ever returned nonzero.
+int forall_divisors(const factors_t *factors, int (*f)(const factors_t*, uint64_t, void*), void *data);
 
 /// Print a factorization of a number.
 /// @param [in,out] file: pointer to file to print to

@@ -111,6 +111,36 @@ uint64_t carmichael_lambda(const factors_t *factors){
 	return s;
 }
 
+int forall_divisors(const factors_t *factors, int (*f)(const factors_t*, uint64_t, void*), void *data){
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wfree-nonheap-object"
+	factors_t *dfactors __attribute__((cleanup(free))) = copy_factors_t(factors);
+	factors_t *pfactors __attribute__((cleanup(free))) = copy_factors_t(factors);
+#pragma GCC diagnostic pop
+	for(uint64_t i = 0; i < factors->num_primes; ++i){
+		dfactors->factors[i].power = 0;
+		pfactors->factors[i].prime = 1;
+	}
+	uint64_t d = 1;
+	while(memcmp(factors->factors, dfactors->factors, factors->num_primes*sizeof(*factors->factors))){
+		if(f(dfactors, d, data)){
+			return 1;
+		}
+		for(uint64_t i = 0; i < factors->num_primes; ++i){
+			if(dfactors->factors[i].power < factors->factors[i].power){
+				++dfactors->factors[i].power;
+				pfactors->factors[i].prime *= dfactors->factors[i].prime;
+				d *= dfactors->factors[i].prime;
+				break;
+			}
+			dfactors->factors[i].power = 0;
+			d /= pfactors->factors[i].prime;
+			pfactors->factors[i].prime = 1;
+		}
+	}
+	return f(dfactors, d, data);
+}
+
 void factors_append(factors_t *factors, uint64_t m, uint64_t k){
 	for(uint64_t i = 0;; ++i){
 		if(i == factors->num_primes){
@@ -324,7 +354,10 @@ uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes
 				factors_append(factors, m, k);
 			}else{
 				factors2->num_primes = 0;
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wnonnull"
 				m = factor_heuristic(m, 0, NULL, conf, factors2);
+#pragma GCC diagnostic pop
 				if(m != 1){
 					free(factors2);
 					return m;//TODO: abort
@@ -357,7 +390,10 @@ uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes
 				factors_append(factors, m, k);
 			}else{
 				factors2->num_primes = 0;
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wnonnull"
 				m = factor_heuristic(m, 0, NULL, conf, factors2);
+#pragma GCC diagnostic pop
 				if(m != 1){
 					free(factors2);
 					return m;//TODO: abort
