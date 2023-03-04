@@ -22,7 +22,7 @@ jobs:
         mv build/debug/coverage.svg website/
         mv docs website/
     - name: Deploy Coverage and Docs to Pages
-      uses: JamesIves/github-pages-deploy-action@4.4.1
+      uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
         branch: gh-pages
         folder: website
