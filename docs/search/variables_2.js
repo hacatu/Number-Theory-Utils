@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['pollard_5fmax_170',['pollard_max',['../structfactor__conf__t.html#a8a6bc6a2a28fb40a6ebb1a4fafc888b9',1,'factor_conf_t']]],
-  ['pollard_5fstride_171',['pollard_stride',['../structfactor__conf__t.html#ac76f7b974f6d1309e72f2f981b320d03',1,'factor_conf_t']]],
-  ['primes_5f2_5f5_172',['primes_2_5',['../factorization_8h.html#a833e5eb4b48e7f9aff8b1202ef5c86f9',1,'factorization.h']]]
+  ['len_211',['len',['../structpoly__t.html#acce4302d85b92216f4b02110a2ef4cd4',1,'poly_t::len()'],['../structpoly__roots__t.html#a314418c6c1b92f3023a6e7145ee3a765',1,'poly_roots_t::len()']]],
+  ['lenstra_5fbfac_212',['lenstra_bfac',['../structfactor__conf__t.html#a89c4084f7e9459f6eace98685209b553',1,'factor_conf_t']]],
+  ['lenstra_5fmax_213',['lenstra_max',['../structfactor__conf__t.html#a07052875c84b8be1fc60677c4f9dfaf5',1,'factor_conf_t']]]
 ];

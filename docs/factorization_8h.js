@@ -23,9 +23,12 @@ var factorization_8h =
     [ "is_prime_dmr", "factorization_8h.html#a8507a5fce6ddc90582e7072c9830bd24", null ],
     [ "factor_trial_div", "factorization_8h.html#a3f9199063b7563cfe3731689da1ff48b", null ],
     [ "factor_heuristic", "factorization_8h.html#afc0429f4ae877e6068f0cb728ded0576", null ],
+    [ "u64_nth_root", "factorization_8h.html#a5a6151c7f878975cfde3c3950f2f87f1", null ],
+    [ "is_perfect_power", "factorization_8h.html#acb68f5e2a2a2d9d7fa36d32ef8a1ff16", null ],
     [ "factor1_pollard_rho", "factorization_8h.html#af372c8a01b9d6b52314e0291e8082775", null ],
     [ "factor1_pollard_rho_brent", "factorization_8h.html#a2c27a9bb8e04dc1ee7762d80609bd397", null ],
     [ "factor1_lenstra", "factorization_8h.html#a579ecfd7ea5828099ccca38d8544c5a9", null ],
     [ "factor1_lenstra_montgomery", "factorization_8h.html#a060384c42a77493f90148d011ad42a29", null ],
-    [ "primes_2_5", "factorization_8h.html#a833e5eb4b48e7f9aff8b1202ef5c86f9", null ]
+    [ "small_primes", "factorization_8h.html#a0b0d40c587b0eed4c8b21d206009d4f5", null ],
+    [ "default_factor_conf", "factorization_8h.html#a401ed81d2bb12d1accea148f09298e94", null ]
 ];
