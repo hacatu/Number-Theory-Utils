@@ -1,8 +1,15 @@
+#include "nut/modular_math.h"
 #include <stddef.h>
 #include <sys/random.h>
 #include <string.h>
 
 #include <nut/factorization.h>
+
+static inline void cleanup_free(void *_p){
+	void **p = p;
+	free(*p);
+	*p = NULL;
+}
 
 factors_t *init_factors_t_w(uint64_t max_primes){
 	static const factors_t dummy;
@@ -112,11 +119,11 @@ uint64_t carmichael_lambda(const factors_t *factors){
 }
 
 int forall_divisors(const factors_t *factors, int (*f)(const factors_t*, uint64_t, void*), void *data){
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wfree-nonheap-object"
-	factors_t *dfactors __attribute__((cleanup(free))) = copy_factors_t(factors);
-	factors_t *pfactors __attribute__((cleanup(free))) = copy_factors_t(factors);
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic push
+//#pragma GCC diagnostic ignored "-Wincompatible-pointer-types"
+	factors_t *dfactors __attribute__((cleanup(cleanup_free))) = copy_factors_t(factors);
+	factors_t *pfactors __attribute__((cleanup(cleanup_free))) = copy_factors_t(factors);
+//#pragma GCC pop
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		dfactors->factors[i].power = 0;
 		pfactors->factors[i].prime = 1;
@@ -298,7 +305,14 @@ uint64_t prand_u64(uint64_t a, uint64_t b){
 	return rand_u64(a, b);//TODO: test if this is a bottleneck, we don't need calls to this function to be secure
 }
 
-const uint64_t primes_2_5[2] = {2, 5};
+const uint64_t small_primes[25] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
+
+const factor_conf_t default_factor_conf = {
+	.pollard_max= 100000,    //maximum number to use Pollard's Rho algorithm for
+	.pollard_stride= 10,     //number of gcd operations to coalesce, decreases time for a single iteration at the cost of potentially doing twice this many extra iterations
+	.lenstra_max= UINT64_MAX,//maximum number to use Lenstra's Elliptic Curve algorithm for
+	.lenstra_bfac= 10        //roughly speaking, the number of iterations to try before picking a new random point and curve
+};
 
 uint64_t factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], factors_t *factors){
 	factors->num_primes = 0;
@@ -331,18 +345,20 @@ uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes
 	if(n == 1){
 		return 1;
 	}
+	uint64_t exponent = 1;
+	is_perfect_power(n, 9, &n, &exponent);
 	if(is_prime_dmr(n)){//TODO: get a better primality test and possibly run it later (ie after some pollard-rho)
-		factors_append(factors, n, 1);
+		factors_append(factors, n, exponent);
 		return 1;
 	}
-	uint64_t smoothness = num_primes ? primes[num_primes - 1]*primes[num_primes - 1] : 1;
+	uint64_t smoothness = 101*101;
 	factors_t *factors2 = init_factors_t_w(MAX_PRIMES_64);
 	uint64_t m;
 	while(1){
 		if(n <= conf->pollard_max){//TODO: allow iteration count based stopping of pollard-rho brent so we can get small factors of big numbers that way?
 			do{
 				uint64_t x = prand_u64(0, n);
-				m = factor1_pollard_rho(n, x);
+				m = factor1_pollard_rho_brent(n, x, conf->pollard_stride);
 			}while(m == n);
 			uint64_t k = 1;
 			n /= m;
@@ -351,7 +367,7 @@ uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes
 				n /= m;
 			}
 			if(m < smoothness || is_prime_dmr(m)){
-				factors_append(factors, m, k);
+				factors_append(factors, m, k*exponent);
 			}else{
 				factors2->num_primes = 0;
 #pragma GCC diagnostic push
@@ -362,14 +378,14 @@ uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes
 					free(factors2);
 					return m;//TODO: abort
 				}
-				factors_combine(factors, factors2, k);
+				factors_combine(factors, factors2, k*exponent);
 			}
 			if(n == 1){
 				free(factors2);
 				return 1;
 			}
 			if(n < smoothness || is_prime_dmr(n)){
-				factors_append(factors, n, 1);
+				factors_append(factors, n, exponent);
 				free(factors2);
 				return 1;
 			}
@@ -387,7 +403,7 @@ uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes
 				n /= m;
 			}
 			if(m < smoothness || is_prime_dmr(m)){
-				factors_append(factors, m, k);
+				factors_append(factors, m, k*exponent);
 			}else{
 				factors2->num_primes = 0;
 #pragma GCC diagnostic push
@@ -398,14 +414,14 @@ uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes
 					free(factors2);
 					return m;//TODO: abort
 				}
-				factors_combine(factors, factors2, k);
+				factors_combine(factors, factors2, k*exponent);
 			}
 			if(n == 1){
 				free(factors2);
 				return 1;
 			}
 			if(n < smoothness || is_prime_dmr(n)){
-				factors_append(factors, n, 1);
+				factors_append(factors, n, exponent);
 				free(factors2);
 				return 1;
 			}
@@ -414,6 +430,67 @@ uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes
 			return n;
 		}
 	}
+}
+
+uint64_t u64_nth_root(uint64_t a, uint64_t n){
+	if(a < 2){
+		return a;
+	}
+	uint64_t x;
+	if(n < 13){
+		uint64_t floor_log_2_a = 63 - __builtin_clzll(a);
+		x = 1ull << (floor_log_2_a/n);
+		if(x == 1){
+			return 1;
+		}
+	}else for(x = 1;; ++x){
+		uint128_t x_pow = pow_u128(x + 1, n);
+		if(x_pow > a){
+			return x;
+		}
+	}
+	for(uint64_t i = 0;; ++i){
+		uint128_t x_pow = pow_u128(x, n - 1);
+		uint64_t x_next = ((n - 1)*x_pow*x + a)/(n*x_pow);
+		if(i > 1 && x_next >= x){
+			return x;
+		}
+		x = x_next;
+	}
+}
+
+bool is_perfect_power(uint64_t a, uint64_t max, uint64_t *_base, uint64_t *_exp){
+	if(a < 2){
+		return false;
+	}
+	/// the maximum exponent ever for a uint64 is 63, but if the exponent is composite we can find it in stages,
+	/// so the maximum exponent we will ever have to take is 61.
+	uint64_t x = 1;
+	for(uint64_t i = 0; i < 18; ++i){
+		uint64_t p = small_primes[i];
+		if(p > max){
+			break;
+		}
+		while(1){
+			uint64_t r = u64_nth_root(a, p);
+			if(pow_u64(r, p) != a){
+				break;
+			}
+			x *= p;
+			a = r;
+			max /= p;
+			if(p > max){
+				goto OUTPUT_RESULT;
+			}
+		}
+	}
+	OUTPUT_RESULT:;
+	if(x != 1){
+		*_base = a;
+		*_exp = x;
+		return true;
+	}
+	return false;
 }
 
 uint64_t factor1_pollard_rho(uint64_t n, uint64_t x){

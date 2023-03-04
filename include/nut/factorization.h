@@ -15,6 +15,7 @@
 #include <inttypes.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #include <nut/modular_math.h>
 
@@ -170,12 +171,6 @@ void factors_combine(factors_t *factors, const factors_t *factors2, uint64_t k);
 /// @return true if n is prime, false otherwise
 int is_prime_dmr(uint64_t n) __attribute__((const));
 
-/// An array containing the primes 2 and 5.
-/// {@link factor1_pollard_rho} and {@link factor1_pollard_rho_brent} can't find factors of 4 or 25 using
-/// the default polynomial, so if using {@link factor_heuristic} at least
-/// these primes should be used for trial division if the configuration allows pollard rho to be called.
-extern const uint64_t primes_2_5[2];
-
 /// Factor out all powers of a given array of primes.
 ///
 /// Primesieve is a good general source for primes, but the api for this function is designed
@@ -191,18 +186,66 @@ uint64_t factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes
 
 /// Factor a number using a variety of approaches based on its size.
 ///
-/// If conf->pollard_max is greater than 3, the primes array should include at least 2 and 5 ({@link primes_2_5} could be used) to
+/// If conf->pollard_max is greater than 3, the primes array should include at least 2 and 5 to
 /// avoid an infinite loop since {@link factor1_pollard_rho} can't factor 4 or 25.
 /// Currently a configuration struct must be passed.  Kraitcheck methods (quadratic sieve and number field sieve) are not implemented
 /// because they are useless on 64 bit integers.  Parameters to Pollard-Rho-Brent with gcd aggregation and Lenstra ecf are not tuned
 /// by this function.
 /// @param [in] n: the number to factor
-/// @param [in] num_primes: the number of primes in the array to try trial division on
-/// @param [in] primes: array of primes
-/// @param [in] conf: limits for different algorithms
+/// @param [in] num_primes: the number of primes in the array to try trial division on (use 25 if using {@link small_primes})
+/// @param [in] primes: array of primes (can use {@link small_primes})
+/// @param [in] conf: limits for different algorithms (can use {@link default_factor_conf})
 /// @param [out] factors: output
 /// @return n with all factors found and stored in factors divided out.  Thus if n factors completely, 1 is returned.
 uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], const factor_conf_t *conf, factors_t *factors);
+
+/// Get the floor of the nth root of a
+///
+/// Uses bitscan to estimate the base 2 log and in turn nth root of a, then uses Newton's method
+/// @param [in] a: the number to take the nth root of
+/// @param [in] n: root to take
+/// @return floor(a**(1/n)), ie the largest integer x such that x**n <= a
+uint64_t u64_nth_root(uint64_t a, uint64_t n) __attribute__((const));
+
+/// Check if a is a perfect power of some integer.
+///
+/// Used in {@link factor_heuristic}.
+/// max is the max exponent a could possibly be, which is limited because it is a uint64_t.
+/// If nothing is known about a, then the max exponent it could be is 63, if it were 2**63.
+/// However, if we know that the base of a must be larger than some minimum,
+/// such as if we know a is not divisible by any primes up to some point,
+/// then we can set a lower limit on the max exponent.
+/// For example, if a is 2-rough (not divisible by any primes <= 2), then the minimum possible base is 3, so the maximal exponent is 40 instead.
+/// For all primes in the small_primes array, the max exponents are as follows:
+/// 2-rough -> min base 3 -> max exponent 40
+/// 3 -> 5 -> 27
+/// 5 -> 7 -> 22
+/// 7 -> 11 -> 18
+/// 11 -> 13 -> 17
+/// 13 -> 17 -> 15
+/// 19 -> 23 -> 14
+/// 23 -> 29 -> 13
+/// 29 -> 31 -> 12
+/// 37 -> 41 -> 11
+/// 57 -> 59 -> 10
+/// 83 -> 89 -> 9
+/// and going over 100:
+/// 137 -> 139 -> 8
+/// 251 -> 257 -> 7
+/// 563 -> 569 -> 6
+/// 1621 -> 1627 -> 5
+/// 7129 -> 7151 -> 4
+/// 65521 -> 65537 -> 3
+/// 2642239 -> 2642257 -> 2
+/// 4294967291 -> 4294967311 -> 1
+/// The max exponent can also be brought down if a is known to be small, but depending on context it may or may not be worth computing
+/// log(a)/log(p) where p is the largest prime not known to not divide a.
+/// @param [in] a: the number to check for being a perfect power
+/// @param [in] max: the max exponent a could possibly be.  Use eg 63 if unknown, 11 if a has had all factors of primes up to 47 removed.
+/// @param [out] _base: if a is found to be a perfect power, store the base here
+/// @param [out] _exp: if a is found to be a perfect power, store the exponent here
+/// @return true if a is a perfect power (with exponent max or lower), false otherwise (could mean a is not a perfect power, or could mean a is a perfect power with exponent max + 1 to 61)
+bool is_perfect_power(uint64_t a, uint64_t max, uint64_t *_base, uint64_t *_exp);
 
 /// Try to find a factor of a number using Pollard's Rho algorithm with Floyd cycle finding.
 /// Note that this will not find factors of 4 or 25 no matter what x is.
@@ -240,4 +283,16 @@ int64_t factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B) _
 /// @param [in] B: number of trials before giving up (we compute kP for k from 2 to B)
 /// @return a nontrivial factor of n if found, 1 or n otherwise
 int64_t factor1_lenstra_montgomery(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B) __attribute__((const));
+
+
+
+/// An array containing the 25 primes up to 100.
+/// {@link factor1_pollard_rho} and {@link factor1_pollard_rho_brent} can't find factors of 4 or 25 using
+/// the default polynomial, so if using {@link factor_heuristic} at least
+/// these primes should be used for trial division if the configuration allows pollard rho to be called.
+extern const uint64_t small_primes[25];
+
+/// Default value for {@link factor_heuristic}
+/// Use if you don't want to tune the parameters or don't care
+extern const factor_conf_t default_factor_conf;
 

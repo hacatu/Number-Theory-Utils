@@ -5,12 +5,6 @@
 #include <nut/factorization.h>
 
 int main(){
-	factor_conf_t factor_conf = {
-		.pollard_max= 100000,    //maximum number to use Pollard's Rho algorithm for
-		.pollard_stride= 10,     //number of gcd operations to coalesce, decreases time for a single iteration at the cost of potentially doing twice this many extra iterations
-		.lenstra_max= UINT64_MAX,//maximum number to use Lenstra's Elliptic Curve algorithm for
-		.lenstra_bfac= 10        //roughly speaking, the number of iterations to try before picking a new random point and curve
-	};
 	factors_t *factors = init_factors_t_w(MAX_PRIMES_64);
 	uint64_t trials = 1000, passed = 0;
 	fprintf(stderr, "\e[1;34mFactoring %"PRIu64" random numbers...\e[0m\n", trials);
@@ -22,7 +16,7 @@ int main(){
 		//the primes and num_primes arguments here are primes_2_5 and 2 respectively.  this is required if
 		//n could be a multiple of 4 or 25 and pollard_max > 3, since otherwise pollard rho will never find a factor
 		//and factor_heuristic will loop indefinitely
-		if(factor_heuristic(n, 2, primes_2_5, &factor_conf, factors) != 1){
+		if(factor_heuristic(n, 25, small_primes, &default_factor_conf, factors) != 1){
 			fprintf(stderr, "\e[1;31mFailed to factor %"PRIu64"!\e[0m\n", n);
 			continue;
 		}else if(factors_product(factors) != n){
@@ -36,10 +30,14 @@ int main(){
 				break;
 			}
 		}
-		passed += !!all_factors_prime;
+		if(!all_factors_prime){
+			fprintf(stderr, "\e[1;31mNot all factors are prime for %"PRIu64"\e[0m\n", n);
+			continue;
+		}
+		++passed;
 	}
 	free(factors);
 	fprintf(stderr, "%s (%"PRIu64"/%"PRIu64" trials passed)\e[0m\n", passed == trials ? "\e[1;32mPASSED" : "\e[1;31mFAILED", passed, trials);
-	//TODO: add tests for Pollard Rho Brent, Montgomery ECF, and trial division
+	//TODO: add tests for Pollard Rho, Montgomery ECF, and trial division
 }
 
