@@ -1,7 +1,7 @@
 -Llib
 -lnut
 -lm
--fuse-ld=mold
+-fuse-ld=gold
 -ggdb3
 -pg
 -fno-eliminate-unused-debug-types
