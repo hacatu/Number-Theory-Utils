@@ -1,8 +1,9 @@
 -Llib
 -lnut
 -lm
--fuse-ld=gold
+-fuse-ld=mold
 -ggdb3
+-pg
 -fno-eliminate-unused-debug-types
 --coverage
 -fsanitize=address

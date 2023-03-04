@@ -2,6 +2,7 @@
 -Wextra
 -std=c99
 -ggdb3
+-pg
 -fno-eliminate-unused-debug-types
 --coverage
 -fsanitize=address

@@ -13,7 +13,7 @@ BINARY_OBJS := $(patsubst ../../src/bin/%.c,obj/bin/%.o,$(BINARY_SOURCES))
 
 LIB_CFLAGS := @cflags.txt
 TEST_CFLAGS := @cflags.txt
-BINRARY_CFLAGS := @cflags.txt
+BINARY_CFLAGS := @cflags.txt
 
 TEST_LDFLAGS := @ldflags.txt
 BINARY_LDFLAGS := @ldflags.txt
