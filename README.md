@@ -65,6 +65,9 @@ and `doxygen` are required for coverage and documentation, and `lld` is specifie
 If you do not have `lld`, you can switch the line `-fuse-ld=lld` to `-fuse-ld=gold` or remove it in
 `$(BUILD_ROOT)/ldflags.txt`.
 
+If running as root in an automated environment, you will need to either pass `ALLOW_ROOT=1` as an option to
+`make`, or pipe `yes` into `make` to auto accept the safety prompt for running as root.
+
 ## Linking
 Once the library has been built, it can be linked with C programs by adding the flags `-Lbuild/debug -lnut`
 or `-L$(BUILD_ROOT) -lnut` to use a different variant build.  If you're feeling dangerous, you can install
