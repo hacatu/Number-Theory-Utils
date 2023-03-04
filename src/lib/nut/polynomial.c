@@ -1,4 +1,5 @@
 #include <string.h>
+#include <ctype.h>
 
 #include <nut/factorization.h>
 #include <nut/polynomial.h>
@@ -18,6 +19,41 @@ int init_poly(poly_t *f, uint64_t reserve){
 void destroy_poly(poly_t *f){
 	free(f->coeffs);
 	*f = (poly_t){};
+}
+
+int cmp_polys(const poly_t *a, const poly_t *b){
+	uint64_t min_len;
+	if(a->len < b->len){
+		for(uint64_t i = b->len - 1; i >= a->len; --i){
+			if(b->coeffs[i] > 0){
+				return -1;
+			}else if(b->coeffs[i] < 0){
+				return 1;
+			}else if(!i){
+				return 0;
+			}
+		}
+		min_len = a->len;
+	}else if(a->len > b->len){
+		for(uint64_t i = a->len - 1; i >= b->len; --i){
+			if(a->coeffs[i] > 0){
+				return 1;
+			}else if(a->coeffs[i] < 0){
+				return -1;
+			}else if(!i){
+				return 0;
+			}
+		}
+		min_len = b->len;
+	}
+	for(uint64_t i = min_len; i-- > 0;){
+		if(a->coeffs[i] < b->coeffs[i]){
+			return -1;
+		}else if(a->coeffs[i] < b->coeffs[i]){
+			return 1;
+		}
+	}
+	return 0;
 }
 
 int init_poly_roots(poly_roots_t *roots, uint64_t reserve){
@@ -55,6 +91,19 @@ int ensure_poly_cap(poly_t *f, uint64_t cap){
 		}
 		f->coeffs = tmp;
 		f->cap = cap;
+	}
+	return 1;
+}
+
+int zero_extend_poly(poly_t *f, uint64_t len){
+	if(!ensure_poly_cap(f, len)){
+		return 0;
+	}
+	for(uint64_t i = f->len; i < len; ++i){
+		f->coeffs[i] = 0;
+	}
+	if(len > f->len){
+		f->len = len;
 	}
 	return 1;
 }
@@ -181,6 +230,125 @@ int mul_poly_modn(poly_t *restrict h, const poly_t *f, const poly_t *g, int64_t 
 	return 1;
 }
 
+int pow_poly_modn(poly_t *restrict g, const poly_t *f, uint64_t e, int64_t n, uint64_t cn, poly_t tmps[static 2]){
+	//tmps: st, rt
+	if(f->len > cn + 1){
+		return 0;
+	}else if(!e){
+		return const_poly(g, 1); // TODO: deal with 0**0 case
+	}else if(e == 1){
+		return copy_poly(g, f);
+	}
+	e = 1 + (e - 1)%cn;
+	if(f->len == 1){
+		return const_poly(g, pow_u64(f->coeffs[0], e));
+	}else if(!copy_poly(tmps + 0, f) || !ensure_poly_cap(tmps + 0, 2*cn + 1) || !ensure_poly_cap(tmps + 1, 2*cn + 1)){
+		return 0;
+	}
+	poly_t *t = g, *s = tmps + 0, *r = tmps + 1;
+	while(e%2 == 0){
+		mul_poly_modn(t, s, s, n);
+		normalize_exponents_modn(t, cn);
+		{
+			void *tmp = t;
+			t = s;
+			s = tmp;
+		}//s = s*s
+		e >>= 1;
+	}
+	copy_poly(r, s);
+	while((e >>= 1)){
+		mul_poly_modn(t, s, s, n);
+		normalize_exponents_modn(t, cn);
+		{
+			void *tmp = t;
+			t = s;
+			s = tmp;
+		}//s = s*s
+		if(e%2){
+			mul_poly_modn(t, r, s, n);
+			normalize_exponents_modn(t, cn);
+			{
+				void *tmp = t;
+				t = r;
+				r = tmp;
+			}//r = r*s
+		}
+	}
+	if(r != g){
+		if(!copy_poly(g, r)){
+			return 0;
+		}
+	}
+	return 1;
+}
+
+int pow_poly_modn_tmptmp(poly_t *restrict g, const poly_t *f, uint64_t e, int64_t n, uint64_t cn){
+	poly_t tmps[2] = {};
+	int status = 1;
+	for(uint64_t i = 0; status && i < 2; ++i){
+		status = init_poly(tmps + i, 2*cn + 1);
+	}
+	if(status){
+		status = pow_poly_modn(g, f, e, n, cn, tmps);
+	}
+	for(uint64_t i = 0; i < 2; ++i){
+		if(tmps[i].cap){
+			destroy_poly(tmps + i);
+		}
+	}
+	return status;
+}
+
+int compose_poly_modn(poly_t *restrict h, const poly_t *f, const poly_t *g, int64_t n, uint64_t cn, poly_t tmps[static 2]){
+	if(f->len == 1){
+		return const_poly(h, f->coeffs[0]);
+	}else if(g->len == 1){
+		return const_poly(h, eval_poly_modn(f, g->coeffs[0], n));
+	}
+	uint64_t h_len = (f->len - 1)*(g->len - 1) + 1;
+	if(h_len > cn + 1){
+		h_len = cn + 1;
+	}
+	if(!ensure_poly_cap(h, h_len) || !const_poly(h, f->coeffs[0])){
+		return 0;
+	}
+	poly_t *t = tmps + 0, *p = tmps + 1;
+	if(!copy_poly(p, g) || !scale_poly_modn(t, g, f->coeffs[1], n) || !add_poly_modn(h, h, t, n)){
+		return 0;
+	}
+	for(uint64_t e = 2; e <= cn && e < f->len; ++e){
+		if(!mul_poly_modn(t, p, g, n)){
+			return 0;
+		}
+		normalize_exponents_modn(t, cn);
+		void *tmp = t;
+		t = p;
+		p = tmp;
+		if(!scale_poly_modn(t, p, f->coeffs[e], n) || !add_poly_modn(h, h, t, n)){
+			return 0;
+		}
+	}
+	return 1;
+}
+
+int compose_poly_modn_tmptmp(poly_t *restrict h, const poly_t *f, const poly_t *g, int64_t n, uint64_t cn){
+	poly_t tmps[2] = {};
+	int status = 1;
+	for(uint64_t i = 0; status && i < 2; ++i){
+		status = init_poly(tmps + i, 2*cn + 1);
+	}
+	if(status){
+		status = compose_poly_modn(h, f, g, n, cn, tmps);
+	}
+	for(uint64_t i = 0; i < 2; ++i){
+		if(tmps[i].cap){
+			destroy_poly(tmps + i);
+		}
+	}
+	return status;
+}
+
 int quotrem_poly_modn(poly_t *restrict q, poly_t *restrict r, const poly_t *restrict f, const poly_t *restrict g, int64_t n){
 	int64_t a, d = egcd(g->coeffs[g->len - 1], n, &a, NULL);
 	if(d != 1){
@@ -255,6 +423,17 @@ void normalize_poly_modn(poly_t *f, int64_t n, int use_negatives){
 	normalize_poly(f);
 }
 
+void normalize_exponents_modn(poly_t *f, uint64_t cn){
+	for(uint64_t i = f->len - 1; i > cn; --i){
+		uint64_t j = 1 + (i - 1)%cn;
+		f->coeffs[j] += f->coeffs[i];
+	}
+	if(f->len > cn + 1){
+		f->len = cn + 1;
+	}
+	normalize_poly(f);
+}
+
 int fprint_poly(FILE *file, const poly_t *f, const char *vname, const char *add, const char *sub, const char *pow, int descending){
 	int res = 0;
 	for(uint64_t i = 0; i < f->len; ++i){
@@ -286,6 +465,124 @@ int fprint_poly(FILE *file, const poly_t *f, const char *vname, const char *add,
 		}
 	}
 	return res;
+}
+
+static void skip_whitespace(const char **_str){
+	while(isspace(**_str)){
+		++*_str;
+	}
+}
+
+static int parse_monomial(poly_t *f, const char **_str){
+	const char *str = *_str;
+	int64_t sign = 1, coeff = 0;
+	uint64_t x = 0;
+	while(*str == '+' || *str == '-' || isspace(*str)){
+		if(*str == '-'){
+			sign = -sign;
+		}
+		++str;
+	}
+	bool need_vpow = true;
+	while(isdigit(*str)){
+		coeff = 10*coeff + *str - '0';
+		need_vpow = false;
+		++str;
+	}
+	skip_whitespace(&str);
+	if(need_vpow){
+		coeff = 1;
+	}
+	if(!need_vpow && *str == '*'){
+		++str;
+		need_vpow = true;
+		skip_whitespace(&str);
+	}
+	bool have_vpow = false;
+	if(strncmp(str, "mod", 3) || !isspace(str[3])){
+		while(isalpha(*str)){
+			have_vpow = true;
+			++str;
+		}
+	}
+	if(have_vpow){
+		skip_whitespace(&str);
+		if(
+			(*str == '^', ++str) ||
+			(!strncmp(str, "**", 2), str += 2)
+		){
+			skip_whitespace(&str);
+			bool have_pow = false;
+			while(isdigit(*str)){
+				x = 10*x + *str - '0';
+				have_pow = true;
+				++str;
+			}
+			if(!have_pow){
+				return 0;
+			}
+		}else{
+			x = 1;
+		}
+	}
+	skip_whitespace(&str);
+	if(!coeff){
+		*_str = str;
+		return 1;
+	}
+	if(!zero_extend_poly(f, x + 1)){
+		return 0;
+	}
+	f->coeffs[x] += sign*coeff;
+	*_str = str;
+	return 1;
+}
+
+int str_to_poly(poly_t *f, int64_t *n, const char *str, const char **end){
+	if(!f || !n){
+		return 0;
+	}
+	if(!const_poly(f, 0) || !parse_monomial(f, &str)){
+		return 0;
+	}
+	while(*str == '+' || *str == '-'){
+		if(!parse_monomial(f, &str)){
+			if(end){
+				skip_whitespace(&str);
+				*end = str;
+			}
+			normalize_poly(f);
+			return 1;
+		}
+	}
+	if(!strncmp(str, "mod", 3) && isspace(str[3])){
+		str += 4;
+		skip_whitespace(&str);
+		int64_t _n = 0;
+		bool have_mod = false;
+		while(isdigit(*str)){
+			_n = 10*_n + *str - '0';
+			have_mod = true;
+			++str;
+		}
+		if(have_mod){
+			*n = _n;
+			if(end){
+				skip_whitespace(&str);
+				*end = str;
+			}
+			normalize_poly_modn(f, *n, 0);
+			return 2;
+		}else{
+			str -= 4;
+		}
+	}
+	if(end){
+		skip_whitespace(&str);
+		*end = str;
+	}
+	normalize_poly(f);
+	return 1;
 }
 
 int rand_poly_modn(poly_t *f, uint64_t max_len, int64_t n){

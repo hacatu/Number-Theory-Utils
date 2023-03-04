@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include <nut/polynomial.h>
@@ -13,11 +15,7 @@ int main(){
 		fprintf(stderr, "\e[1;31mERROR: Could not allocate polynomials.\e[0m\n");
 		exit(EXIT_FAILURE);
 	}
-	uint64_t
-	
-	
-	
-	passed = 0;
+	uint64_t passed = 0;
 	fprintf(stderr,
 		"\e[1;34mTesting %s of degree <=%"PRIu64" polynomials mod %"PRIu64" for %"PRIu64" pairs of random polynomials...\e[0m\n",
 		"addition",

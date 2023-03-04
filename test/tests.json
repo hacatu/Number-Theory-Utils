@@ -1,4 +1,7 @@
 {
+	"test_symbolic_pollard": {
+		"no_red_tests": [[]]
+	},
 	"pollard_squares": {
 		"no_red_tests": [[]]
 	},
@@ -15,6 +18,15 @@
 		"no_red_tests": [[]]
 	},
 	"test_sqrt_mod": {
+		"no_red_tests": [[]]
+	},
+	"test_mobius": {
+		"no_red_tests": [[]]
+	},
+	"test_factor_sieves": {
+		"no_red_tests": [[]]
+	},
+	"test_perfect_powers": {
 		"no_red_tests": [[]]
 	}
 }

@@ -59,6 +59,14 @@ int init_poly(poly_t *f, uint64_t reserve);
 /// @param [in,out] f: polynomial to destroy
 void destroy_poly(poly_t *f);
 
+/// Asymptotically compare polynomials.
+///
+/// Does not assume the inputs are normalized.
+/// Finds the highest degree term without matching coefficients.
+/// @param [in] a, b: polynomials to compare
+/// @return -1 if a < b, 1 if a > b, 0 if a == b
+int cmp_polys(const poly_t *a, const poly_t *b);
+
 /// Initialize a root buffer with at least a given capacity.
 ///
 /// If the given capacity is 0, it defaults to 4.  The list will be empty (len=0).
@@ -81,6 +89,13 @@ void destroy_poly_roots(poly_roots_t *roots);
 /// @return 1 on success, 0 on failure
 int ensure_poly_cap(poly_t *f, uint64_t cap);
 
+/// Extend the capacity of a polynomial struct if needed and set any new terms to 0.
+///
+/// @param [in,out] f: polynomial to extend
+/// @param [in] len: length to extend poly to
+/// @return 1 on success, 0 on failure
+int zero_extend_poly(poly_t *f, uint64_t len);
+
 /// Extend the capacity of a root buffer if needed.
 ///
 /// Called by { @link roots_poly_modn} and { @link roots_poly_modn_tmptmp}.
@@ -100,6 +115,12 @@ void normalize_poly(poly_t *f);
 /// @param [in] n: modulus to reduce coefficients by
 /// @param [in] use_negatives: if false, coefficients will be in the range [0,n), otherwise [(1-n)/2,n/2)
 void normalize_poly_modn(poly_t *f, int64_t n, int use_negatives);
+
+/// Reduce any exponents over cn
+///
+/// Generally called by functions that take a cn (carmichael lambda function of n) argument
+/// Remove any term x**(k*cn + a) where 0 < a <= cn and add its coefficient to term x**a
+void normalize_exponents_modn(poly_t *f, uint64_t cn);
 
 
 
@@ -141,6 +162,21 @@ int64_t eval_poly_modn(const poly_t *f, int64_t x, int64_t n);
 /// @param [in] descending: if true, print higher terms down to lower terms, otherwise print lower terms up to higher terms (Taylor Series order)
 /// @return the total number of characters printed
 int fprint_poly(FILE *file, const poly_t *f, const char *vname, const char *add, const char *sub, const char *pow, int descending);
+
+/// Convert a string to a polynomial (and possibly modulus)
+///
+/// Ignores whitespace, ignores variable names, allows multiplication signs, duplicate terms, and duplicate minus signs.
+/// The format is
+///     poly = monomial (+|- monomial)* ("mod" \d+)?
+///     monomial = -* ((coeff \*? vpow) | coeff | vpow)
+///     coeff = \d+
+///     vpow = \w (("**"|"^") \d+)?
+/// @param [out] f: polynomial to store output in
+/// @param [out] n: pointer to store modulus n in if found
+/// @param [in] str: string to parse
+/// @param [out] end: pointer to store end of parsed content (first unparsed character, ie typically '\0')
+/// @return 0 on failure, 1 if polynomial was parsed without modulus, 2 if both polynomial and modulus were parsed
+int str_to_poly(poly_t *f, int64_t *n, const char *str, const char **end);
 
 /// Generate a random polynomial.
 ///
@@ -194,6 +230,52 @@ int scale_poly_modn(poly_t *g, const poly_t *f, int64_t a, int64_t n);
 /// @return 1 on success, 0 on failure
 int mul_poly_modn(poly_t *restrict h, const poly_t *f, const poly_t *g, int64_t n);
 
+/// Raise f**x mod n and store the result in g
+///
+/// @param [out] g: polynomial in which to store f**x
+/// @param [in] f: polynomial to find a power of
+/// @param [in] e: exponent to raise f to
+/// @param [in] n: modulus to reduce result by
+/// @param [in] cn: carmichael lambda function of n, basically modulus for exponents, see {@link carmichael_lambda} and {@link sieve_carmichael}
+/// @param [in] tmps: polynomial for scratch work, must have 1 initialized (or at least zeroed out) polynomial ({@link pow_poly_modn_tmptmp})
+/// @return 1 on success, 0 on failure
+int pow_poly_modn(poly_t *restrict g, const poly_t *f, uint64_t e, int64_t n, uint64_t cn, poly_t tmps[static 2]);
+
+/// Raise f**x mod n and store the result in g
+///
+/// Like {@link pow_poly_modn} except temporary polynomials are allocated and freed internally instead of using
+/// supplied temporaries.
+/// @param [out] g: polynomial in which to store f**x
+/// @param [in] f: polynomial to find a power of
+/// @param [in] e: exponent to raise f to
+/// @param [in] n: modulus to reduce result by
+/// @param [in] cn: carmichael lambda function of n, basically modulus for exponents, see {@link carmichael_lambda} and {@link sieve_carmichael}
+/// @return 1 on success, 0 on failure
+int pow_poly_modn_tmptmp(poly_t *restrict g, const poly_t *f, uint64_t e, int64_t n, uint64_t cn);
+
+
+
+/// Compose polynomial f(g(x)) mod n and store the result in h.
+///
+/// @param [out] h: polynomial in which to store f(g(x)) mod n
+/// @param [in] f, g: polynomials to compose
+/// @param [in] n: modulus to reduce result by
+/// @param [in] cn: carmichael lambda function of n, basically modulus for exponents, see {@link carmichael_lambda} and {@link sieve_carmichael}
+/// @param [in] tmps: polynomial for scratch work, must have 1 initialized (or at least zeroed out) polynomial ({@link compose_poly_modn_tmptmp})
+/// @return 1 on success, 0 on failure
+int compose_poly_modn(poly_t *restrict h, const poly_t *f, const poly_t *g, int64_t n, uint64_t cn, poly_t tmps[static 2]);
+
+/// Compose polynomial f(g(x)) mod n and store the result in h.
+///
+/// Like {@link compose_poly_modn} except temporary polynomials are allocated and freed internally instead of using
+/// supplied temporaries.
+/// @param [out] h: polynomial in which to store f(g(x)) mod n
+/// @param [in] f, g: polynomials to compose
+/// @param [in] n: modulus to reduce result by
+/// @param [in] cn: carmichael lambda function of n, basically modulus for exponents, see {@link carmichael_lambda} and {@link sieve_carmichael}
+/// @return 1 on success, 0 on failure
+int compose_poly_modn_tmptmp(poly_t *restrict h, const poly_t *f, const poly_t *g, int64_t n, uint64_t cn);
+
 
 
 /// Divide two polynomials to get a quotient and remainder.
@@ -229,13 +311,13 @@ int quotrem_poly_modn(poly_t *restrict q, poly_t *restrict r, const poly_t *rest
 /// @param [out] d: polynomial in which to store the monic gcd, or store 0 if both f and n are 0
 /// @param [in] f, g: polynomials to take the gcd of
 /// @param [in] n: modulus for the coefficient ring
-/// @param [in] qt, r0t, r1t: polynomials for scratch work, cannot be NULL ({ @link gcd_poly_modn_tmptmp})
+/// @param [in] tmps: polynomials for scratch work, cannot be NULL ({ @link gcd_poly_modn_tmptmp})
 /// @return 1 on success, 0 on failure.  Can fail if a non-invertable leading coefficient is encountered, as well as on allocation failure.
 int gcd_poly_modn(poly_t *d, const poly_t *restrict f, const poly_t *restrict g, int64_t n, poly_t tmps[static 3]);
 
 /// Find the gcd of two polynomials.
 ///
-/// Like { @link gcd_poly_modn} except temporary polynomials are allocated and freed internally instead of using
+/// Like {@link gcd_poly_modn} except temporary polynomials are allocated and freed internally instead of using
 /// supplied temporaries.  Less efficient because early checking is not done.
 /// @param [out] d: polynomial in which to store the monic gcd, or store 0 if both f and n are 0
 /// @param [in] f, g: polynomials to take the gcd of
@@ -253,13 +335,13 @@ int gcd_poly_modn_tmptmp(poly_t *d, const poly_t *restrict f, const poly_t *rest
 /// @param [in] e: exponent
 /// @param [in] g: modulus
 /// @param [in] n: coefficient modulus
-/// @param [in] tmps: polynomials for scratch work, must have 4 initialized (or at least zeroed out) polynomials ({ @link powmod_poly_modn_tmptmp})
+/// @param [in] tmps: polynomials for scratch work, must have 3 initialized (or at least zeroed out) polynomials ({@link powmod_poly_modn_tmptmp})
 /// @return 1 on success, 0 on failure.  Can fail if a non-invertable leading coefficient is encountered, as well as on allocation failure.
 int powmod_poly_modn(poly_t *h, const poly_t *restrict f, uint64_t e, const poly_t *restrict g, int64_t n, poly_t tmps[static 3]);
 
 /// Compute the power of a polynomial mod another polynomial.
 ///
-/// Like { @link powmod_poly_modn} except temporary polynomials are allocated and freed internally instead of using
+/// Like {@link powmod_poly_modn} except temporary polynomials are allocated and freed internally instead of using
 /// supplied temporaries.  Less efficient because early checking is not done.
 /// @param [out] h: polynomial in which to store the result
 /// @param [in] f: base
@@ -313,19 +395,19 @@ int factor1_poly_modn(poly_t *g, const poly_t *f, uint64_t d, int64_t n, poly_t 
 /// Find all roots of a polynomial in an odd prime field.
 ///
 /// Uses the Cantor-Zassenhaus algorithm, specialized for linear factors (so we can skip squarefree factorization).
-/// This is implemented in the functions { @link factors_d_poly_modn} and { @link factor1_poly_modn}.
+/// This is implemented in the functions {@link factors_d_poly_modn} and {@link factor1_poly_modn}.
 /// After the first function, we know how many roots there are and allocate a buffer.  The second function is called
 /// as many times as needed to find all the roots.  TODO: optimize factoring quadratics using quadratic formula.
 /// @param [in] f: polynomial to find roots of
 /// @param [in] n: modulus of the coefficient field.  MUST be prime.
 /// @param [out] roots: store roots here.
-/// @param [in] tmps: polynomials for scratch work, must have 4 initialized (or at least zeroed out) polynomials ({ @link roots_poly_modn_tmptmp})
+/// @param [in] tmps: polynomials for scratch work, must have 6 initialized (or at least zeroed out) polynomials ({@link roots_poly_modn_tmptmp})
 /// @return 1 on success (including if the polynomial has 0 roots), 0 on failure.
 int roots_poly_modn(const poly_t *f, int64_t n, poly_roots_t *roots, poly_t tmps[static 6]);
 
 /// Find all roots of a polynomial in an odd prime field.
 ///
-/// Like { @link roots_poly_modn} except temporary polynomials are allocated and freed internally instead of using
+/// Like {@link roots_poly_modn} except temporary polynomials are allocated and freed internally instead of using
 /// supplied temporaries.
 /// @param [in] f: polynomial to find roots of
 /// @param [in] n: modulus of the coefficient field.  MUST be prime.
