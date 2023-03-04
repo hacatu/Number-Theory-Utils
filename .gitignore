@@ -48,4 +48,6 @@ __pycache__/
 *.gcno
 *.info
 *.skip
+.vscode/
+gmon.out
 
