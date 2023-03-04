@@ -49,6 +49,19 @@ static inline uint64_t pow_u64(uint64_t b, uint64_t e){
 	return r;
 }
 
+static inline uint128_t pow_u128(uint128_t b, uint64_t e) __attribute__((const));
+static inline uint128_t pow_u128(uint128_t b, uint64_t e){
+	uint128_t r = 1;
+	while(e){
+		if(e&1){
+			r = r*b;
+		}
+		e >>= 1;
+		b *= b;
+	}
+	return r;
+}
+
 /// Compute nonnegative integral power of a number modulo another using binary exponentiation.
 /// @param [in] b, e, n: base, exponent, and modulus
 /// @return b^e mod n, computed via binary exponentiation
