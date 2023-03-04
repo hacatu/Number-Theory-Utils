@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3.3.0
     - name: Run Coverage and Doxygen
       run: |
         sudo apt-get update
@@ -22,7 +22,7 @@ jobs:
         mv build/debug/coverage.svg website/
         mv docs website/
     - name: Deploy Coverage and Docs to Pages
-      uses: JamesIves/github-pages-deploy-action@4.1.1
+      uses: JamesIves/github-pages-deploy-action@4.4.1
       with:
         branch: gh-pages
         folder: website
