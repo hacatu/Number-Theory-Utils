@@ -2,7 +2,7 @@
 
 [![GitHub CI](https://github.com/hacatu/Number-Theory-Utils/actions/workflows/cov_and_docs.yml/badge.svg)](https://github.com/hacatu/Number-Theory-Utils/actions/workflows/cov_and_docs.yml)
 [![Documentation](https://img.shields.io/badge/-documentation-gray)](https://hacatu.github.io/Number-Theory-Utils/docs)
-[![Coverage](https://hacatu.github.io/Number-Theory-Utils/build/debug/coverage.svg)](https://hacatu.github.io/Number-Theory-Utils/cov)
+[![Coverage](https://hacatu.github.io/Number-Theory-Utils/coverage.svg)](https://hacatu.github.io/Number-Theory-Utils/cov)
 
 A collection of functions for working modular arithmetic, polynomials over finite fields, and related things.
 
