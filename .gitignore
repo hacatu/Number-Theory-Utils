@@ -50,4 +50,5 @@ __pycache__/
 *.skip
 .vscode/
 gmon.out
+gprof.txt
 
