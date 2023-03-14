@@ -194,13 +194,13 @@ int64_t *compute_mertens_range(uint64_t max, const uint64_t mobius[static max/32
 /// @param [in] max: inclusive upper bound of sieving range in which to check compositeness for all numbers
 /// @param [out] _num_primes: the number of primes in the range will be stored here.  May be NULL.
 /// @return a bitarray of whether or not each number in the range is composite, or NULL on allocation failure
-uint64_t *sieve_is_composite(uint64_t max);
+uint8_t *sieve_is_composite(uint64_t max);
 
 /// Check if a number is composite using a packed bitarray from {@link sieve_is_composite}
 /// @param [in] n: the number to check if composite
 /// @param [in] buf: packed bitarray from {@link sieve_is_composite}
 /// @return true if n is composite, false if n is prime
-bool is_composite(uint64_t n, const uint64_t buf[static n/(16*15) + 1]);
+bool is_composite(uint64_t n, const uint8_t buf[static n/30 + 1]);
 
 /// Compute the pi (prime counting) function for every number from 0 to max.
 /// The result should be used with {@link compute_pi_from_tables} since pi is only actually calculated at every 240th number
@@ -208,14 +208,14 @@ bool is_composite(uint64_t n, const uint64_t buf[static n/(16*15) + 1]);
 /// @param [in] max: inclusive upper bound of range to compute pi function
 /// @param [in] buf: packed bitarray from {@link sieve_is_composite}
 /// @return an array of pi values at every 240th number (use {@link compute_pi_from_tables})
-uint64_t *compute_pi_range(uint64_t max, const uint64_t buf[static max/(16*15) + 1]);
+uint64_t *compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1]);
 
 /// Get the value for the pi (prime counting) function for a particular number using precomputed tables.
 /// @param [in] n: the number to calculate pi for
 /// @param [in] pi_table: array of partial pi values from {@link compute_pi_range}
 /// @param [in] buf: packed bitarray from {@link sieve_is_composite}
 /// @return the number of primes <= n
-uint64_t compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static n/(16*15) + 1], const uint64_t buf[static n/(16*15) + 1]);
+uint64_t compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static n/(16*15) + 1], const uint8_t buf[static n/30 + 1]);
 
 /// Compute an array of all primes from 0 to max.
 /// @param [in] max: inclusive upper bound of sieving range

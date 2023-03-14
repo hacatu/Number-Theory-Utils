@@ -385,47 +385,300 @@ static const int64_t wheel_30_lb_offsets[30] = {
 	[23 ... 28] = 6,
 	[29] = 7
 };
+static void mark_is_composite(uint8_t *is_composite, uint64_t q, uint64_t r, uint64_t q_ub){
+	/* We need to find the first multiple of the prime 30*q + r which could possibly be prime and is at least the prime squared.
+	 * Since the prime squared is still coprime to the wheel size, we start at the prime squared.
+	 * (30*q + r)**2 = 30*30*q**2 + 30*2*q*r + r**2 = 30*(30*q**2 + 2*q*r) + r**2
+	 */
+	uint64_t mq;
+	switch(r){
+		case 1:
+			mq = q*(30*q + 2) + 0;// mr = 1
+			for(; mq + 28*q + 0 < q_ub; mq += 30*q + 1){
+				is_composite[mq] |= 0x1;// mr = 1
+				is_composite[mq + 6*q + 0] |= 0x2;// mr = 7
+				is_composite[mq + 10*q + 0] |= 0x4;// mr = 11
+				is_composite[mq + 12*q + 0] |= 0x8;// mr = 13
+				is_composite[mq + 16*q + 0] |= 0x10;// mr = 17
+				is_composite[mq + 18*q + 0] |= 0x20;// mr = 19
+				is_composite[mq + 22*q + 0] |= 0x40;// mr = 23
+				is_composite[mq + 28*q + 0] |= 0x80;// mr = 29
+			}
+			if(mq >= q_ub){break;}
+			is_composite[mq] |= 0x1;// mr = 1
+			if((mq += 6*q + 0) >= q_ub){break;}
+			is_composite[mq] |= 0x2;// mr = 7
+			if((mq += 4*q + 0) >= q_ub){break;}
+			is_composite[mq] |= 0x4;// mr = 11
+			if((mq += 2*q + 0) >= q_ub){break;}
+			is_composite[mq] |= 0x8;// mr = 13
+			if((mq += 4*q + 0) >= q_ub){break;}
+			is_composite[mq] |= 0x10;// mr = 17
+			if((mq += 2*q + 0) >= q_ub){break;}
+			is_composite[mq] |= 0x20;// mr = 19
+			if((mq += 4*q + 0) >= q_ub){break;}
+			is_composite[mq] |= 0x40;// mr = 23
+			mq += 6*q + 0; break; // If we get here, we have mq >= q_ub by the fact that we made it out of the for loop
+		case 7:
+			mq = q*(30*q + 14) + 1;// mr = 19
+			for(; mq + 24*q + 6 < q_ub; mq += 30*q + 7){
+				is_composite[mq] |= 0x20;// mr = 19
+				is_composite[mq + 4*q + 1] |= 0x10;// mr = 17
+				is_composite[mq + 6*q + 2] |= 0x1;// mr = 1
+				is_composite[mq + 10*q + 2] |= 0x80;// mr = 29
+				is_composite[mq + 12*q + 3] |= 0x8;// mr = 13
+				is_composite[mq + 16*q + 4] |= 0x4;// mr = 11
+				is_composite[mq + 22*q + 5] |= 0x40;// mr = 23
+				is_composite[mq + 24*q + 6] |= 0x2;// mr = 7
+			}
+			if(mq >= q_ub){break;}
+			is_composite[mq] |= 0x20;// mr = 19
+			if((mq += 4*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x10;// mr = 17
+			if((mq += 2*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x1;// mr = 1
+			if((mq += 4*q + 0) >= q_ub){break;}
+			is_composite[mq] |= 0x80;// mr = 29
+			if((mq += 2*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x8;// mr = 13
+			if((mq += 4*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x4;// mr = 11
+			if((mq += 6*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x40;// mr = 23
+			mq += 2*q + 1; break; // If we get here, we have mq >= q_ub by the fact that we made it out of the for loop
+		case 11:
+			mq = q*(30*q + 22) + 4;// mr = 1
+			for(; mq + 26*q + 9 < q_ub; mq += 30*q + 11){
+				is_composite[mq] |= 0x1;// mr = 1
+				is_composite[mq + 2*q + 0] |= 0x40;// mr = 23
+				is_composite[mq + 6*q + 2] |= 0x2;// mr = 7
+				is_composite[mq + 8*q + 2] |= 0x80;// mr = 29
+				is_composite[mq + 12*q + 4] |= 0x8;// mr = 13
+				is_composite[mq + 18*q + 6] |= 0x20;// mr = 19
+				is_composite[mq + 20*q + 7] |= 0x4;// mr = 11
+				is_composite[mq + 26*q + 9] |= 0x10;// mr = 17
+			}
+			if(mq >= q_ub){break;}
+			is_composite[mq] |= 0x1;// mr = 1
+			if((mq += 2*q + 0) >= q_ub){break;}
+			is_composite[mq] |= 0x40;// mr = 23
+			if((mq += 4*q + 2) >= q_ub){break;}
+			is_composite[mq] |= 0x2;// mr = 7
+			if((mq += 2*q + 0) >= q_ub){break;}
+			is_composite[mq] |= 0x80;// mr = 29
+			if((mq += 4*q + 2) >= q_ub){break;}
+			is_composite[mq] |= 0x8;// mr = 13
+			if((mq += 6*q + 2) >= q_ub){break;}
+			is_composite[mq] |= 0x20;// mr = 19
+			if((mq += 2*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x4;// mr = 11
+			mq += 6*q + 2; break; // If we get here, we have mq >= q_ub by the fact that we made it out of the for loop
+		case 13:
+			mq = q*(30*q + 26) + 5;// mr = 19
+			for(; mq + 28*q + 12 < q_ub; mq += 30*q + 13){
+				is_composite[mq] |= 0x20;// mr = 19
+				is_composite[mq + 4*q + 2] |= 0x4;// mr = 11
+				is_composite[mq + 6*q + 3] |= 0x2;// mr = 7
+				is_composite[mq + 10*q + 4] |= 0x80;// mr = 29
+				is_composite[mq + 16*q + 7] |= 0x10;// mr = 17
+				is_composite[mq + 18*q + 8] |= 0x8;// mr = 13
+				is_composite[mq + 24*q + 11] |= 0x1;// mr = 1
+				is_composite[mq + 28*q + 12] |= 0x40;// mr = 23
+			}
+			if(mq >= q_ub){break;}
+			is_composite[mq] |= 0x20;// mr = 19
+			if((mq += 4*q + 2) >= q_ub){break;}
+			is_composite[mq] |= 0x4;// mr = 11
+			if((mq += 2*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x2;// mr = 7
+			if((mq += 4*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x80;// mr = 29
+			if((mq += 6*q + 3) >= q_ub){break;}
+			is_composite[mq] |= 0x10;// mr = 17
+			if((mq += 2*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x8;// mr = 13
+			if((mq += 6*q + 3) >= q_ub){break;}
+			is_composite[mq] |= 0x1;// mr = 1
+			mq += 4*q + 1; break; // If we get here, we have mq >= q_ub by the fact that we made it out of the for loop
+		case 17:
+			mq = q*(30*q + 34) + 9;// mr = 19
+			for(; mq + 26*q + 15 < q_ub; mq += 30*q + 17){
+				is_composite[mq] |= 0x20;// mr = 19
+				is_composite[mq + 2*q + 1] |= 0x40;// mr = 23
+				is_composite[mq + 6*q + 4] |= 0x1;// mr = 1
+				is_composite[mq + 12*q + 7] |= 0x8;// mr = 13
+				is_composite[mq + 14*q + 8] |= 0x10;// mr = 17
+				is_composite[mq + 20*q + 11] |= 0x80;// mr = 29
+				is_composite[mq + 24*q + 14] |= 0x2;// mr = 7
+				is_composite[mq + 26*q + 15] |= 0x4;// mr = 11
+			}
+			if(mq >= q_ub){break;}
+			is_composite[mq] |= 0x20;// mr = 19
+			if((mq += 2*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x40;// mr = 23
+			if((mq += 4*q + 3) >= q_ub){break;}
+			is_composite[mq] |= 0x1;// mr = 1
+			if((mq += 6*q + 3) >= q_ub){break;}
+			is_composite[mq] |= 0x8;// mr = 13
+			if((mq += 2*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x10;// mr = 17
+			if((mq += 6*q + 3) >= q_ub){break;}
+			is_composite[mq] |= 0x80;// mr = 29
+			if((mq += 4*q + 3) >= q_ub){break;}
+			is_composite[mq] |= 0x2;// mr = 7
+			mq += 2*q + 1; break; // If we get here, we have mq >= q_ub by the fact that we made it out of the for loop
+		case 19:
+			mq = q*(30*q + 38) + 12;// mr = 1
+			for(; mq + 28*q + 17 < q_ub; mq += 30*q + 19){
+				is_composite[mq] |= 0x1;// mr = 1
+				is_composite[mq + 4*q + 2] |= 0x10;// mr = 17
+				is_composite[mq + 10*q + 6] |= 0x4;// mr = 11
+				is_composite[mq + 12*q + 7] |= 0x20;// mr = 19
+				is_composite[mq + 18*q + 11] |= 0x8;// mr = 13
+				is_composite[mq + 22*q + 13] |= 0x80;// mr = 29
+				is_composite[mq + 24*q + 15] |= 0x2;// mr = 7
+				is_composite[mq + 28*q + 17] |= 0x40;// mr = 23
+			}
+			if(mq >= q_ub){break;}
+			is_composite[mq] |= 0x1;// mr = 1
+			if((mq += 4*q + 2) >= q_ub){break;}
+			is_composite[mq] |= 0x10;// mr = 17
+			if((mq += 6*q + 4) >= q_ub){break;}
+			is_composite[mq] |= 0x4;// mr = 11
+			if((mq += 2*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x20;// mr = 19
+			if((mq += 6*q + 4) >= q_ub){break;}
+			is_composite[mq] |= 0x8;// mr = 13
+			if((mq += 4*q + 2) >= q_ub){break;}
+			is_composite[mq] |= 0x80;// mr = 29
+			if((mq += 2*q + 2) >= q_ub){break;}
+			is_composite[mq] |= 0x2;// mr = 7
+			mq += 4*q + 2; break; // If we get here, we have mq >= q_ub by the fact that we made it out of the for loop
+		case 23:
+			mq = q*(30*q + 46) + 17;// mr = 19
+			for(; mq + 26*q + 20 < q_ub; mq += 30*q + 23){
+				is_composite[mq] |= 0x20;// mr = 19
+				is_composite[mq + 6*q + 5] |= 0x2;// mr = 7
+				is_composite[mq + 8*q + 6] |= 0x40;// mr = 23
+				is_composite[mq + 14*q + 11] |= 0x4;// mr = 11
+				is_composite[mq + 18*q + 14] |= 0x8;// mr = 13
+				is_composite[mq + 20*q + 15] |= 0x80;// mr = 29
+				is_composite[mq + 24*q + 19] |= 0x1;// mr = 1
+				is_composite[mq + 26*q + 20] |= 0x10;// mr = 17
+			}
+			if(mq >= q_ub){break;}
+			is_composite[mq] |= 0x20;// mr = 19
+			if((mq += 6*q + 5) >= q_ub){break;}
+			is_composite[mq] |= 0x2;// mr = 7
+			if((mq += 2*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x40;// mr = 23
+			if((mq += 6*q + 5) >= q_ub){break;}
+			is_composite[mq] |= 0x4;// mr = 11
+			if((mq += 4*q + 3) >= q_ub){break;}
+			is_composite[mq] |= 0x8;// mr = 13
+			if((mq += 2*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x80;// mr = 29
+			if((mq += 4*q + 4) >= q_ub){break;}
+			is_composite[mq] |= 0x1;// mr = 1
+			mq += 2*q + 1; break; // If we get here, we have mq >= q_ub by the fact that we made it out of the for loop
+		case 29:
+			mq = q*(30*q + 58) + 28;// mr = 1
+			for(; mq + 24*q + 23 < q_ub; mq += 30*q + 29){
+				is_composite[mq] |= 0x1;// mr = 1
+				is_composite[mq + 2*q + 1] |= 0x80;// mr = 29
+				is_composite[mq + 8*q + 7] |= 0x40;// mr = 23
+				is_composite[mq + 12*q + 11] |= 0x20;// mr = 19
+				is_composite[mq + 14*q + 13] |= 0x10;// mr = 17
+				is_composite[mq + 18*q + 17] |= 0x8;// mr = 13
+				is_composite[mq + 20*q + 19] |= 0x4;// mr = 11
+				is_composite[mq + 24*q + 23] |= 0x2;// mr = 7
+			}
+			if(mq >= q_ub){break;}
+			is_composite[mq] |= 0x1;// mr = 1
+			if((mq += 2*q + 1) >= q_ub){break;}
+			is_composite[mq] |= 0x80;// mr = 29
+			if((mq += 6*q + 6) >= q_ub){break;}
+			is_composite[mq] |= 0x40;// mr = 23
+			if((mq += 4*q + 4) >= q_ub){break;}
+			is_composite[mq] |= 0x20;// mr = 19
+			if((mq += 2*q + 2) >= q_ub){break;}
+			is_composite[mq] |= 0x10;// mr = 17
+			if((mq += 4*q + 4) >= q_ub){break;}
+			is_composite[mq] |= 0x8;// mr = 13
+			if((mq += 2*q + 2) >= q_ub){break;}
+			is_composite[mq] |= 0x4;// mr = 11
+			mq += 4*q + 4; break; // If we get here, we have mq >= q_ub by the fact that we made it out of the for loop
+		default:
+			__builtin_unreachable();
+	}
+}
 
-uint64_t *sieve_is_composite(uint64_t max){
-	uint64_t is_composite_len = max/(16*15) + 1;
-	uint64_t *is_composite = calloc(is_composite_len, sizeof(uint64_t));
+uint8_t *sieve_is_composite(uint64_t max){
+	uint64_t is_composite_len = max/30 + 1;
+	uint8_t *is_composite = calloc(is_composite_len, sizeof(uint64_t));
 	if(!is_composite){
 		return NULL;
 	}
-	uint64_t num_primes = 0;
-	uint64_t n = 7;
-	for(uint64_t n_max = u64_nth_root(max, 2); n <= n_max; ++n){
-		uint64_t i = n/30 + wheel_30_offsets[n%30];
-		if(is_composite[i >> 6] & (1ull << (i&0x7F))){
-			continue;
-		}
-		for(uint64_t m = n*n; m <= max;){
-			uint64_t j = m/30 + wheel_30_offsets[m%30]; // TODO: try looping over residues mod 30 in outer loop and other things.
-			is_composite[j >> 6] |= 1ull << (j&0x7F);
-			if(__builtin_add_overflow(m, n, &m)){
+	uint64_t q_ub = is_composite_len;
+	uint64_t p_max = u64_nth_root(max, 2);
+	uint64_t q_max = (p_max - 1)/30;
+	uint64_t q = 0, r = 7;
+	while(q <= q_max){
+		uint8_t flags = is_composite[q];
+		switch(r){
+			case 1:
+				if(!(flags & 0x1)){mark_is_composite(is_composite, q, r, q_ub);}
+				r = 7; [[fallthrough]];
+			case 7:
+				if(!(flags & 0x2)){mark_is_composite(is_composite, q, r, q_ub);}
+				r = 11; [[fallthrough]];
+			case 11:
+				if(!(flags & 0x4)){mark_is_composite(is_composite, q, r, q_ub);}
+				r = 13; [[fallthrough]];
+			case 13:
+				if(!(flags & 0x8)){mark_is_composite(is_composite, q, r, q_ub);}
+				r = 17; [[fallthrough]];
+			case 17:
+				if(!(flags & 0x10)){mark_is_composite(is_composite, q, r, q_ub);}
+				r = 19; [[fallthrough]];
+			case 19:
+				if(!(flags & 0x20)){mark_is_composite(is_composite, q, r, q_ub);}
+				r = 23; [[fallthrough]];
+			case 23:
+				if(!(flags & 0x40)){mark_is_composite(is_composite, q, r, q_ub);}
+				r = 29; [[fallthrough]];
+			case 29:
+				if(!(flags & 0x80)){mark_is_composite(is_composite, q, r, q_ub);}
+				r = 1;
+				++q;
 				break;
-			}
+			default:
+				__builtin_unreachable();
 		}
 	}
 	return is_composite;
 }
 
-bool is_composite(uint64_t n, const uint64_t buf[static n/(16*15) + 1]){
-	uint64_t offset = wheel_30_offsets[n%30];
-	if(offset == 8){
-		switch(n){
-			case 2:
-			case 3:
-			case 5:
-			return false;
-		}
-		return true;
+bool is_composite(uint64_t n, const uint8_t buf[static n/30 + 1]){
+	if(n < 6){
+		return n == 2 || n == 3 || n == 5;
 	}
-	uint64_t i = n/30 + offset;
-	return buf[i >> 6] & (1ull << (i&0x7F));
+	uint64_t r = n%30;
+	uint64_t q = n/30;
+	switch(r){
+		case 1: return buf[q] & 0x1;
+		case 7: return buf[q] & 0x2;
+		case 11: return buf[q] & 0x4;
+		case 13: return buf[q] & 0x8;
+		case 17: return buf[q] & 0x10;
+		case 19: return buf[q] & 0x20;
+		case 23: return buf[q] & 0x40;
+		case 29: return buf[q] & 0x80;
+		default: return false;
+	}
 }
 
-uint64_t *compute_pi_range(uint64_t max, const uint64_t buf[static max/(16*15) + 1]){
+uint64_t *compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1]){
 	uint64_t res_len = max/(16*15) + 1;
 	uint64_t *res = calloc(res_len, sizeof(uint64_t));
 	if(!res){
@@ -437,7 +690,7 @@ uint64_t *compute_pi_range(uint64_t max, const uint64_t buf[static max/(16*15) +
 	return res;
 }
 
-uint64_t compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static n/(16*15) + 1], const uint64_t buf[static n/(16*15) + 1]){
+uint64_t compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static n/(16*15) + 1], const uint8_t buf[static n/30 + 1]){
 	int64_t i = (int64_t)(n/30) + wheel_30_lb_offsets[n%30];
 	if(i < 64){
 		
@@ -447,36 +700,89 @@ uint64_t compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static n/(16
 	return pi_table[i >> 6] + __builtin_popcountll(mask);
 }
 
-uint64_t *sieve_primes(uint64_t max, uint64_t *_num_primes){
-	uint64_t is_composite_len = max/64 + 1;
-	uint64_t *is_composite = calloc(is_composite_len, sizeof(uint64_t));
-	if(!is_composite){
+static uint64_t *copy_small_primes(uint64_t max, uint64_t *_num_primes){
+	uint64_t n = 0;
+	while(n < 25 && small_primes[n] <= max){
+		++n;
+	}
+	uint64_t *primes = malloc(n*sizeof(uint64_t));
+	if(!primes){
 		return NULL;
+	}
+	memcpy(primes, small_primes, n*sizeof(uint64_t));
+	*_num_primes = n;
+	return primes;
+}
+
+uint64_t *sieve_primes(uint64_t max, uint64_t *_num_primes){
+	if(max < 7){
+		return copy_small_primes(max, _num_primes);
 	}
 	uint64_t *primes = malloc((size_t)max_primes_le(max)*sizeof(uint64_t));
 	if(!primes){
-		free(is_composite);
 		return NULL;
 	}
-	uint64_t num_primes = 0;
-	uint64_t n = 2;
-	for(uint64_t n2; !__builtin_mul_overflow(n, n, &n2) && n2 <= max; ++n){
-		if(is_composite[n/64] & (1ull << (n%64))){
-			continue;
-		}
-		primes[num_primes++] = n;
-		for(uint64_t m = n2; m <= max;){
-			is_composite[m/64] |= 1ull << (m%64);
-			if(__builtin_add_overflow(m, n, &m)){
+	uint8_t *is_composite = sieve_is_composite(max);
+	if(!is_composite){
+		free(primes);
+		return NULL;
+	}
+	memcpy(primes, small_primes, 3*sizeof(uint64_t));
+	uint64_t num_primes = 3;
+	uint64_t q = 0;
+	uint64_t r = 7;
+	while(30*q + 29 <= max){
+		uint8_t flags = is_composite[q];
+		switch(r){
+			case 1:
+				if(!(flags & 0x1)){primes[num_primes++] = 30*q + r;}
+				r = 7; [[fallthrough]];
+			case 7:
+				if(!(flags & 0x2)){primes[num_primes++] = 30*q + r;}
+				r = 11; [[fallthrough]];
+			case 11:
+				if(!(flags & 0x4)){primes[num_primes++] = 30*q + r;}
+				r = 13; [[fallthrough]];
+			case 13:
+				if(!(flags & 0x8)){primes[num_primes++] = 30*q + r;}
+				r = 17; [[fallthrough]];
+			case 17:
+				if(!(flags & 0x10)){primes[num_primes++] = 30*q + r;}
+				r = 19; [[fallthrough]];
+			case 19:
+				if(!(flags & 0x20)){primes[num_primes++] = 30*q + r;}
+				r = 23; [[fallthrough]];
+			case 23:
+				if(!(flags & 0x40)){primes[num_primes++] = 30*q + r;}
+				r = 29; [[fallthrough]];
+			case 29:
+				if(!(flags & 0x80)){primes[num_primes++] = 30*q + r;}
+				r = 1;
+				++q;
 				break;
-			}
+			default:
+				__builtin_unreachable();
 		}
 	}
-	for(; n <= max; ++n){
-		if(!(is_composite[n/64] & (1ull << (n%64)))){
-			primes[num_primes++] = n;
-		}
-	}
+	do{
+		if(30*q + 1 > max){break;}
+		uint8_t flags = is_composite[q];
+		if(!(flags & 0x1)){primes[num_primes++] = 30*q + 1;}
+		if(30*q + 7 > max){break;}
+		if(!(flags & 0x2)){primes[num_primes++] = 30*q + 7;}
+		if(30*q + 11 > max){break;}
+		if(!(flags & 0x4)){primes[num_primes++] = 30*q + 11;}
+		if(30*q + 13 > max){break;}
+		if(!(flags & 0x8)){primes[num_primes++] = 30*q + 13;}
+		if(30*q + 17 > max){break;}
+		if(!(flags & 0x10)){primes[num_primes++] = 30*q + 17;}
+		if(30*q + 19 > max){break;}
+		if(!(flags & 0x20)){primes[num_primes++] = 30*q + 19;}
+		if(30*q + 23 > max){break;}
+		if(!(flags & 0x40)){primes[num_primes++] = 30*q + 23;}
+		if(30*q + 29 > max){break;}
+		if(!(flags & 0x80)){primes[num_primes++] = 30*q + 29;}
+	}while(0);
 	*_num_primes = num_primes;
 	free(is_composite);
 	return realloc(primes, num_primes*sizeof(uint64_t)) ?: primes;
