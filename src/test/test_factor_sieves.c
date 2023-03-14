@@ -1,4 +1,3 @@
-#include "nut/factorization.h"
 #include <stdio.h>
 #include <inttypes.h>
 #include <stdlib.h>
