@@ -7,8 +7,8 @@ var searchData=
   ['compose_5fpoly_5fmodn_5',['compose_poly_modn',['../polynomial_8h.html#a1d088d0460ff8af443f3dd367a767563',1,'polynomial.h']]],
   ['compose_5fpoly_5fmodn_5ftmptmp_6',['compose_poly_modn_tmptmp',['../polynomial_8h.html#a91028700dde9e550210e3cf02b5a8422',1,'polynomial.h']]],
   ['compute_5fmertens_5frange_7',['compute_mertens_range',['../sieves_8h.html#a30bfef1504f10261d7bbb2b343477d09',1,'sieves.h']]],
-  ['compute_5fpi_5ffrom_5ftables_8',['compute_pi_from_tables',['../sieves_8h.html#a7406fbf1df13447ba056d4805e5636a5',1,'sieves.h']]],
-  ['compute_5fpi_5frange_9',['compute_pi_range',['../sieves_8h.html#adf3b0c26e46ca8d5d3cfdea5f24f3758',1,'sieves.h']]],
+  ['compute_5fpi_5ffrom_5ftables_8',['compute_pi_from_tables',['../sieves_8h.html#a6336c217fed87c24e43a5e1582c5865d',1,'sieves.h']]],
+  ['compute_5fpi_5frange_9',['compute_pi_range',['../sieves_8h.html#a3a885035538c90202cc90bf1283ae0f1',1,'sieves.h']]],
   ['const_5fpoly_10',['const_poly',['../polynomial_8h.html#a388a67e34664ce74e3890bec295e907d',1,'polynomial.h']]],
   ['copy_5ffactors_5ft_11',['copy_factors_t',['../factorization_8h.html#a2fa683dfe3c9f34f98d0e5b5cd66cff9',1,'factorization.h']]],
   ['copy_5fpoly_12',['copy_poly',['../polynomial_8h.html#a4e779775e04d83955296bdda258fc44a',1,'polynomial.h']]]

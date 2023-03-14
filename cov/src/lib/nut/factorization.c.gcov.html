@@ -44,18 +44,18 @@
             <td class="headerValue">unnamed</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">388</td>
+            <td class="headerCovTableEntry">406</td>
             <td class="headerCovTableEntry">565</td>
-            <td class="headerCovTableEntryLo">68.7 %</td>
+            <td class="headerCovTableEntryLo">71.9 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-03-04 20:46:53</td>
+            <td class="headerValue">2023-03-14 21:33:11</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">28</td>
+            <td class="headerCovTableEntry">29</td>
             <td class="headerCovTableEntry">35</td>
-            <td class="headerCovTableEntryMed">80.0 %</td>
+            <td class="headerCovTableEntryMed">82.9 %</td>
           </tr>
           <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -86,9 +86,9 @@
 <a name="11"><span class="lineNum">      11 </span><span class="lineNoCov">          0 :     *p = NULL;</span></a>
 <a name="12"><span class="lineNum">      12 </span><span class="lineNoCov">          0 : }</span></a>
 <a name="13"><span class="lineNum">      13 </span>            : </a>
-<a name="14"><span class="lineNum">      14 </span><span class="lineCov">        456 : factors_t *init_factors_t_w(uint64_t max_primes){</span></a>
+<a name="14"><span class="lineNum">      14 </span><span class="lineCov">        478 : factors_t *init_factors_t_w(uint64_t max_primes){</span></a>
 <a name="15"><span class="lineNum">      15 </span>            :     static const factors_t dummy;</a>
-<a name="16"><span class="lineNum">      16 </span><span class="lineCov">        456 :     return calloc(1, sizeof(factors_t) + sizeof(dummy.factors[0])*max_primes);</span></a>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">        478 :     return calloc(1, sizeof(factors_t) + sizeof(dummy.factors[0])*max_primes);</span></a>
 <a name="17"><span class="lineNum">      17 </span>            : }</a>
 <a name="18"><span class="lineNum">      18 </span>            : </a>
 <a name="19"><span class="lineNum">      19 </span><span class="lineCov">          2 : factors_t *init_factors_t_ub(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes]){</span></a>
@@ -113,8 +113,8 @@
 <a name="38"><span class="lineNum">      38 </span>            : </a>
 <a name="39"><span class="lineNum">      39 </span><span class="lineCov">    2001999 : uint64_t factors_product(const factors_t *factors){</span></a>
 <a name="40"><span class="lineNum">      40 </span><span class="lineCov">    2001999 :     uint64_t r = 1;</span></a>
-<a name="41"><span class="lineNum">      41 </span><span class="lineCov">    7714794 :     for(uint64_t i = 0; i &lt; factors-&gt;num_primes; ++i){</span></a>
-<a name="42"><span class="lineNum">      42 </span><span class="lineCov">    5712795 :         r *= pow_u64(factors-&gt;factors[i].prime, factors-&gt;factors[i].power);</span></a>
+<a name="41"><span class="lineNum">      41 </span><span class="lineCov">    7714842 :     for(uint64_t i = 0; i &lt; factors-&gt;num_primes; ++i){</span></a>
+<a name="42"><span class="lineNum">      42 </span><span class="lineCov">    5712843 :         r *= pow_u64(factors-&gt;factors[i].prime, factors-&gt;factors[i].power);</span></a>
 <a name="43"><span class="lineNum">      43 </span>            :     }</a>
 <a name="44"><span class="lineNum">      44 </span><span class="lineCov">    2001999 :     return r;</span></a>
 <a name="45"><span class="lineNum">      45 </span>            : }</a>
@@ -223,32 +223,32 @@
 <a name="148"><span class="lineNum">     148 </span><span class="lineNoCov">          0 :     return f(dfactors, d, data);</span></a>
 <a name="149"><span class="lineNum">     149 </span>            : }</a>
 <a name="150"><span class="lineNum">     150 </span>            : </a>
-<a name="151"><span class="lineNum">     151 </span><span class="lineCov">    2857268 : void factors_append(factors_t *factors, uint64_t m, uint64_t k){</span></a>
-<a name="152"><span class="lineNum">     152 </span><span class="lineCov">    2859983 :     for(uint64_t i = 0;; ++i){</span></a>
-<a name="153"><span class="lineNum">     153 </span><span class="lineCov">    2859983 :         if(i == factors-&gt;num_primes){</span></a>
-<a name="154"><span class="lineNum">     154 </span><span class="lineCov">    1002355 :             factors-&gt;factors[i].prime = m;</span></a>
-<a name="155"><span class="lineNum">     155 </span><span class="lineCov">    1002355 :             factors-&gt;factors[i].power = k;</span></a>
-<a name="156"><span class="lineNum">     156 </span><span class="lineCov">    1002355 :             ++factors-&gt;num_primes;</span></a>
-<a name="157"><span class="lineNum">     157 </span><span class="lineCov">    1002355 :             break;</span></a>
-<a name="158"><span class="lineNum">     158 </span><span class="lineCov">    1857628 :         }else if(factors-&gt;factors[i].prime == m){</span></a>
+<a name="151"><span class="lineNum">     151 </span><span class="lineCov">    2857287 : void factors_append(factors_t *factors, uint64_t m, uint64_t k){</span></a>
+<a name="152"><span class="lineNum">     152 </span><span class="lineCov">    2860099 :     for(uint64_t i = 0;; ++i){</span></a>
+<a name="153"><span class="lineNum">     153 </span><span class="lineCov">    2860099 :         if(i == factors-&gt;num_primes){</span></a>
+<a name="154"><span class="lineNum">     154 </span><span class="lineCov">    1002372 :             factors-&gt;factors[i].prime = m;</span></a>
+<a name="155"><span class="lineNum">     155 </span><span class="lineCov">    1002372 :             factors-&gt;factors[i].power = k;</span></a>
+<a name="156"><span class="lineNum">     156 </span><span class="lineCov">    1002372 :             ++factors-&gt;num_primes;</span></a>
+<a name="157"><span class="lineNum">     157 </span><span class="lineCov">    1002372 :             break;</span></a>
+<a name="158"><span class="lineNum">     158 </span><span class="lineCov">    1857727 :         }else if(factors-&gt;factors[i].prime == m){</span></a>
 <a name="159"><span class="lineNum">     159 </span><span class="lineNoCov">          0 :             factors-&gt;factors[i].power += k;</span></a>
 <a name="160"><span class="lineNum">     160 </span><span class="lineNoCov">          0 :             break;</span></a>
-<a name="161"><span class="lineNum">     161 </span><span class="lineCov">    1857628 :         }else if(factors-&gt;factors[i].prime &gt; m){</span></a>
-<a name="162"><span class="lineNum">     162 </span><span class="lineCov">    1854913 :             memmove(factors-&gt;factors + i + 1, factors-&gt;factors + i, (factors-&gt;num_primes - i)*sizeof(*factors-&gt;factors));</span></a>
-<a name="163"><span class="lineNum">     163 </span><span class="lineCov">    1854913 :             ++factors-&gt;num_primes;</span></a>
-<a name="164"><span class="lineNum">     164 </span><span class="lineCov">    1854913 :             factors-&gt;factors[i].prime = m;</span></a>
-<a name="165"><span class="lineNum">     165 </span><span class="lineCov">    1854913 :             factors-&gt;factors[i].power = k;</span></a>
-<a name="166"><span class="lineNum">     166 </span><span class="lineCov">    1854913 :             break;</span></a>
+<a name="161"><span class="lineNum">     161 </span><span class="lineCov">    1857727 :         }else if(factors-&gt;factors[i].prime &gt; m){</span></a>
+<a name="162"><span class="lineNum">     162 </span><span class="lineCov">    1854915 :             memmove(factors-&gt;factors + i + 1, factors-&gt;factors + i, (factors-&gt;num_primes - i)*sizeof(*factors-&gt;factors));</span></a>
+<a name="163"><span class="lineNum">     163 </span><span class="lineCov">    1854915 :             ++factors-&gt;num_primes;</span></a>
+<a name="164"><span class="lineNum">     164 </span><span class="lineCov">    1854915 :             factors-&gt;factors[i].prime = m;</span></a>
+<a name="165"><span class="lineNum">     165 </span><span class="lineCov">    1854915 :             factors-&gt;factors[i].power = k;</span></a>
+<a name="166"><span class="lineNum">     166 </span><span class="lineCov">    1854915 :             break;</span></a>
 <a name="167"><span class="lineNum">     167 </span>            :         }</a>
 <a name="168"><span class="lineNum">     168 </span>            :     }</a>
-<a name="169"><span class="lineNum">     169 </span><span class="lineCov">    2857268 : }</span></a>
+<a name="169"><span class="lineNum">     169 </span><span class="lineCov">    2857287 : }</span></a>
 <a name="170"><span class="lineNum">     170 </span>            : </a>
-<a name="171"><span class="lineNum">     171 </span><span class="lineCov">          1 : void factors_combine(factors_t *factors, const factors_t *factors2, uint64_t k){</span></a>
-<a name="172"><span class="lineNum">     172 </span><span class="lineCov">          1 :     factors_t *factors3 = init_factors_t_w(factors-&gt;num_primes + factors2-&gt;num_primes);</span></a>
-<a name="173"><span class="lineNum">     173 </span><span class="lineCov">          1 :     uint64_t i = 0, i2 = 0, i3 = 0;</span></a>
-<a name="174"><span class="lineNum">     174 </span><span class="lineCov">          2 :     while(i &lt; factors-&gt;num_primes &amp;&amp; i2 &lt; factors2-&gt;num_primes){</span></a>
-<a name="175"><span class="lineNum">     175 </span><span class="lineCov">          1 :         if(factors-&gt;factors[i].prime &lt; factors2-&gt;factors[i2].prime){</span></a>
-<a name="176"><span class="lineNum">     176 </span><span class="lineCov">          1 :             factors3-&gt;factors[i3++] = factors-&gt;factors[i++];</span></a>
+<a name="171"><span class="lineNum">     171 </span><span class="lineCov">          2 : void factors_combine(factors_t *factors, const factors_t *factors2, uint64_t k){</span></a>
+<a name="172"><span class="lineNum">     172 </span><span class="lineCov">          2 :     factors_t *factors3 = init_factors_t_w(factors-&gt;num_primes + factors2-&gt;num_primes);</span></a>
+<a name="173"><span class="lineNum">     173 </span><span class="lineCov">          2 :     uint64_t i = 0, i2 = 0, i3 = 0;</span></a>
+<a name="174"><span class="lineNum">     174 </span><span class="lineCov">          4 :     while(i &lt; factors-&gt;num_primes &amp;&amp; i2 &lt; factors2-&gt;num_primes){</span></a>
+<a name="175"><span class="lineNum">     175 </span><span class="lineCov">          2 :         if(factors-&gt;factors[i].prime &lt; factors2-&gt;factors[i2].prime){</span></a>
+<a name="176"><span class="lineNum">     176 </span><span class="lineCov">          2 :             factors3-&gt;factors[i3++] = factors-&gt;factors[i++];</span></a>
 <a name="177"><span class="lineNum">     177 </span><span class="lineNoCov">          0 :         }else if(factors-&gt;factors[i].prime &gt; factors2-&gt;factors[i2].prime){</span></a>
 <a name="178"><span class="lineNum">     178 </span><span class="lineNoCov">          0 :             factors3-&gt;factors[i3].prime = factors2-&gt;factors[i2].prime;</span></a>
 <a name="179"><span class="lineNum">     179 </span><span class="lineNoCov">          0 :             factors3-&gt;factors[i3++].power = factors2-&gt;factors[i2++].power*k;</span></a>
@@ -257,18 +257,18 @@
 <a name="182"><span class="lineNum">     182 </span><span class="lineNoCov">          0 :             factors3-&gt;factors[i3++].power = factors-&gt;factors[i++].power + factors2-&gt;factors[i2++].power*k;</span></a>
 <a name="183"><span class="lineNum">     183 </span>            :         }</a>
 <a name="184"><span class="lineNum">     184 </span>            :     }</a>
-<a name="185"><span class="lineNum">     185 </span><span class="lineCov">          1 :     while(i &lt; factors-&gt;num_primes){</span></a>
+<a name="185"><span class="lineNum">     185 </span><span class="lineCov">          2 :     while(i &lt; factors-&gt;num_primes){</span></a>
 <a name="186"><span class="lineNum">     186 </span><span class="lineNoCov">          0 :         factors3-&gt;factors[i3++] = factors-&gt;factors[i++];</span></a>
 <a name="187"><span class="lineNum">     187 </span>            :     }</a>
-<a name="188"><span class="lineNum">     188 </span><span class="lineCov">          3 :     while(i2 &lt; factors2-&gt;num_primes){</span></a>
-<a name="189"><span class="lineNum">     189 </span><span class="lineCov">          2 :         factors3-&gt;factors[i3].prime = factors2-&gt;factors[i2].prime;</span></a>
-<a name="190"><span class="lineNum">     190 </span><span class="lineCov">          2 :         factors3-&gt;factors[i3++].power = factors2-&gt;factors[i2++].power*k;</span></a>
+<a name="188"><span class="lineNum">     188 </span><span class="lineCov">          6 :     while(i2 &lt; factors2-&gt;num_primes){</span></a>
+<a name="189"><span class="lineNum">     189 </span><span class="lineCov">          4 :         factors3-&gt;factors[i3].prime = factors2-&gt;factors[i2].prime;</span></a>
+<a name="190"><span class="lineNum">     190 </span><span class="lineCov">          4 :         factors3-&gt;factors[i3++].power = factors2-&gt;factors[i2++].power*k;</span></a>
 <a name="191"><span class="lineNum">     191 </span>            :     }</a>
 <a name="192"><span class="lineNum">     192 </span>            :     //TODO: elide copying initial factors from factors to factors3 and back to factors</a>
-<a name="193"><span class="lineNum">     193 </span><span class="lineCov">          1 :     memcpy(factors-&gt;factors, factors3-&gt;factors, i3*sizeof(*factors-&gt;factors));</span></a>
-<a name="194"><span class="lineNum">     194 </span><span class="lineCov">          1 :     factors-&gt;num_primes = i3;</span></a>
-<a name="195"><span class="lineNum">     195 </span><span class="lineCov">          1 :     free(factors3);</span></a>
-<a name="196"><span class="lineNum">     196 </span><span class="lineCov">          1 : }</span></a>
+<a name="193"><span class="lineNum">     193 </span><span class="lineCov">          2 :     memcpy(factors-&gt;factors, factors3-&gt;factors, i3*sizeof(*factors-&gt;factors));</span></a>
+<a name="194"><span class="lineNum">     194 </span><span class="lineCov">          2 :     factors-&gt;num_primes = i3;</span></a>
+<a name="195"><span class="lineNum">     195 </span><span class="lineCov">          2 :     free(factors3);</span></a>
+<a name="196"><span class="lineNum">     196 </span><span class="lineCov">          2 : }</span></a>
 <a name="197"><span class="lineNum">     197 </span>            : </a>
 <a name="198"><span class="lineNum">     198 </span><span class="lineNoCov">          0 : int factors_fprint(FILE *file, const factors_t *factors){</span></a>
 <a name="199"><span class="lineNum">     199 </span><span class="lineNoCov">          0 :     int res = 0;</span></a>
@@ -284,55 +284,55 @@
 <a name="209"><span class="lineNum">     209 </span><span class="lineNoCov">          0 :     return res;</span></a>
 <a name="210"><span class="lineNum">     210 </span>            : }</a>
 <a name="211"><span class="lineNum">     211 </span>            : </a>
-<a name="212"><span class="lineNum">     212 </span><span class="lineCov">   64049798 : uint64_t powmod(uint64_t b, uint64_t e, uint64_t n){</span></a>
-<a name="213"><span class="lineNum">     213 </span><span class="lineCov">   64049798 :     uint64_t r = 1;</span></a>
-<a name="214"><span class="lineNum">     214 </span><span class="lineCov">   64049798 :     b %= n;</span></a>
-<a name="215"><span class="lineNum">     215 </span><span class="lineCov">  444971670 :     while(e){</span></a>
-<a name="216"><span class="lineNum">     216 </span><span class="lineCov">  380921872 :         if(e&amp;1){</span></a>
-<a name="217"><span class="lineNum">     217 </span><span class="lineCov">  222269408 :             r = (uint128_t)r*b%n;</span></a>
+<a name="212"><span class="lineNum">     212 </span><span class="lineCov">  101033269 : uint64_t powmod(uint64_t b, uint64_t e, uint64_t n){</span></a>
+<a name="213"><span class="lineNum">     213 </span><span class="lineCov">  101033269 :     uint64_t r = 1;</span></a>
+<a name="214"><span class="lineNum">     214 </span><span class="lineCov">  101033269 :     b %= n;</span></a>
+<a name="215"><span class="lineNum">     215 </span><span class="lineCov"> 1078906833 :     while(e){</span></a>
+<a name="216"><span class="lineNum">     216 </span><span class="lineCov">  977873564 :         if(e&amp;1){</span></a>
+<a name="217"><span class="lineNum">     217 </span><span class="lineCov">  541419898 :             r = (uint128_t)r*b%n;</span></a>
 <a name="218"><span class="lineNum">     218 </span>            :         }</a>
-<a name="219"><span class="lineNum">     219 </span><span class="lineCov">  380921872 :         e &gt;&gt;= 1;</span></a>
-<a name="220"><span class="lineNum">     220 </span><span class="lineCov">  380921872 :         b = (uint128_t)b*b%n;</span></a>
+<a name="219"><span class="lineNum">     219 </span><span class="lineCov">  977873564 :         e &gt;&gt;= 1;</span></a>
+<a name="220"><span class="lineNum">     220 </span><span class="lineCov">  977873564 :         b = (uint128_t)b*b%n;</span></a>
 <a name="221"><span class="lineNum">     221 </span>            :     }</a>
-<a name="222"><span class="lineNum">     222 </span><span class="lineCov">   64049798 :     return (uint64_t)r;</span></a>
+<a name="222"><span class="lineNum">     222 </span><span class="lineCov">  101033269 :     return (uint64_t)r;</span></a>
 <a name="223"><span class="lineNum">     223 </span>            : }</a>
 <a name="224"><span class="lineNum">     224 </span>            : </a>
-<a name="225"><span class="lineNum">     225 </span><span class="lineCov">    6764419 : int is_prime_dmr(uint64_t n){</span></a>
+<a name="225"><span class="lineNum">     225 </span><span class="lineCov">   24560912 : int is_prime_dmr(uint64_t n){</span></a>
 <a name="226"><span class="lineNum">     226 </span>            :     //static const uint64_t DMR_PRIMES[7] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};//sufficient for 64 bit numbers</a>
 <a name="227"><span class="lineNum">     227 </span>            :     //had to disable 7 base check because the last base is too large to be squared under 64 bit multiplication</a>
 <a name="228"><span class="lineNum">     228 </span>            :     static const uint64_t DMR_PRIMES[12] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};//sufficient for 64 bit numbers</a>
 <a name="229"><span class="lineNum">     229 </span>            :     //static const uint64_t DMR_PRIMES_C = 7;</a>
 <a name="230"><span class="lineNum">     230 </span>            :     static const uint64_t DMR_PRIMES_C = 12;</a>
 <a name="231"><span class="lineNum">     231 </span>            :     uint64_t s, d;//s, d | 2^s*d = n - 1</a>
-<a name="232"><span class="lineNum">     232 </span><span class="lineCov">    6764419 :     if(n%2 == 0){</span></a>
-<a name="233"><span class="lineNum">     233 </span><span class="lineCov">    1525214 :         return n == 2;</span></a>
+<a name="232"><span class="lineNum">     232 </span><span class="lineCov">   24560912 :     if(n%2 == 0){</span></a>
+<a name="233"><span class="lineNum">     233 </span><span class="lineCov">   10173874 :         return n == 2;</span></a>
 <a name="234"><span class="lineNum">     234 </span>            :     }</a>
-<a name="235"><span class="lineNum">     235 </span><span class="lineCov">    5239205 :     --n;</span></a>
-<a name="236"><span class="lineNum">     236 </span><span class="lineCov">    5239205 :     s = __builtin_ctz(n);</span></a>
-<a name="237"><span class="lineNum">     237 </span><span class="lineCov">    5239205 :     d = n&gt;&gt;s;</span></a>
-<a name="238"><span class="lineNum">     238 </span><span class="lineCov">    5239205 :     ++n;</span></a>
-<a name="239"><span class="lineNum">     239 </span><span class="lineCov">   44371278 :     for(uint64_t i = 0, a, x; i &lt; DMR_PRIMES_C; ++i){</span></a>
-<a name="240"><span class="lineNum">     240 </span><span class="lineCov">   41762209 :         a = DMR_PRIMES[i];</span></a>
-<a name="241"><span class="lineNum">     241 </span><span class="lineCov">   41762209 :         if(a &gt;= n){</span></a>
-<a name="242"><span class="lineNum">     242 </span><span class="lineCov">    2186571 :             break;</span></a>
+<a name="235"><span class="lineNum">     235 </span><span class="lineCov">   14387038 :     --n;</span></a>
+<a name="236"><span class="lineNum">     236 </span><span class="lineCov">   14387038 :     s = __builtin_ctz(n);</span></a>
+<a name="237"><span class="lineNum">     237 </span><span class="lineCov">   14387038 :     d = n&gt;&gt;s;</span></a>
+<a name="238"><span class="lineNum">     238 </span><span class="lineCov">   14387038 :     ++n;</span></a>
+<a name="239"><span class="lineNum">     239 </span><span class="lineCov">   65507910 :     for(uint64_t i = 0, a, x; i &lt; DMR_PRIMES_C; ++i){</span></a>
+<a name="240"><span class="lineNum">     240 </span><span class="lineCov">   61899805 :         a = DMR_PRIMES[i];</span></a>
+<a name="241"><span class="lineNum">     241 </span><span class="lineCov">   61899805 :         if(a &gt;= n){</span></a>
+<a name="242"><span class="lineNum">     242 </span><span class="lineCov">    2186605 :             break;</span></a>
 <a name="243"><span class="lineNum">     243 </span>            :         }</a>
-<a name="244"><span class="lineNum">     244 </span><span class="lineCov">   39575638 :         x = powmod(a, d, n);</span></a>
-<a name="245"><span class="lineNum">     245 </span><span class="lineCov">   39575638 :         if(x == 1 || x == n - 1){</span></a>
-<a name="246"><span class="lineNum">     246 </span><span class="lineCov">   25764092 :             goto CONTINUE_WITNESSLOOP;</span></a>
+<a name="244"><span class="lineNum">     244 </span><span class="lineCov">   59713200 :         x = powmod(a, d, n);</span></a>
+<a name="245"><span class="lineNum">     245 </span><span class="lineCov">   59713200 :         if(x == 1 || x == n - 1){</span></a>
+<a name="246"><span class="lineNum">     246 </span><span class="lineCov">   33673357 :             goto CONTINUE_WITNESSLOOP;</span></a>
 <a name="247"><span class="lineNum">     247 </span>            :         }</a>
-<a name="248"><span class="lineNum">     248 </span><span class="lineCov">   24914207 :         for(a = 0; a &lt; s - 1; ++a){</span></a>
-<a name="249"><span class="lineNum">     249 </span><span class="lineCov">   24470765 :             x = powmod(x, 2, n);</span></a>
-<a name="250"><span class="lineNum">     250 </span><span class="lineCov">   24470765 :             if(x == 1){</span></a>
-<a name="251"><span class="lineNum">     251 </span><span class="lineCov">        123 :                 return 0;</span></a>
+<a name="248"><span class="lineNum">     248 </span><span class="lineCov">   49115191 :         for(a = 0; a &lt; s - 1; ++a){</span></a>
+<a name="249"><span class="lineNum">     249 </span><span class="lineCov">   40523022 :             x = powmod(x, 2, n);</span></a>
+<a name="250"><span class="lineNum">     250 </span><span class="lineCov">   40523022 :             if(x == 1){</span></a>
+<a name="251"><span class="lineNum">     251 </span><span class="lineCov">        159 :                 return 0;</span></a>
 <a name="252"><span class="lineNum">     252 </span>            :             }</a>
-<a name="253"><span class="lineNum">     253 </span><span class="lineCov">   24470642 :             if(x == n - 1){</span></a>
-<a name="254"><span class="lineNum">     254 </span><span class="lineCov">   13367981 :                 goto CONTINUE_WITNESSLOOP;</span></a>
+<a name="253"><span class="lineNum">     253 </span><span class="lineCov">   40522863 :             if(x == n - 1){</span></a>
+<a name="254"><span class="lineNum">     254 </span><span class="lineCov">   17447515 :                 goto CONTINUE_WITNESSLOOP;</span></a>
 <a name="255"><span class="lineNum">     255 </span>            :             }</a>
 <a name="256"><span class="lineNum">     256 </span>            :         }</a>
-<a name="257"><span class="lineNum">     257 </span><span class="lineCov">     443442 :         return 0;</span></a>
-<a name="258"><span class="lineNum">     258 </span><span class="lineCov">   39132073 :         CONTINUE_WITNESSLOOP:;</span></a>
+<a name="257"><span class="lineNum">     257 </span><span class="lineCov">    8592169 :         return 0;</span></a>
+<a name="258"><span class="lineNum">     258 </span><span class="lineCov">   51120872 :         CONTINUE_WITNESSLOOP:;</span></a>
 <a name="259"><span class="lineNum">     259 </span>            :     }</a>
-<a name="260"><span class="lineNum">     260 </span><span class="lineCov">    4795640 :     return 1;</span></a>
+<a name="260"><span class="lineNum">     260 </span><span class="lineCov">    5794710 :     return 1;</span></a>
 <a name="261"><span class="lineNum">     261 </span>            : }</a>
 <a name="262"><span class="lineNum">     262 </span>            : </a>
 <a name="263"><span class="lineNum">     263 </span>            : /*</a>
@@ -361,23 +361,23 @@
 <a name="286"><span class="lineNum">     286 </span>            : }</a>
 <a name="287"><span class="lineNum">     287 </span>            : */</a>
 <a name="288"><span class="lineNum">     288 </span>            : </a>
-<a name="289"><span class="lineNum">     289 </span><span class="lineCov">     217533 : uint64_t rand_u64(uint64_t a, uint64_t b){</span></a>
-<a name="290"><span class="lineNum">     290 </span><span class="lineCov">     217533 :     uint64_t l = b - a, r = 0, bytes = (71 - __builtin_clzll(l))/8;</span></a>
+<a name="289"><span class="lineNum">     289 </span><span class="lineCov">    1460788 : uint64_t rand_u64(uint64_t a, uint64_t b){</span></a>
+<a name="290"><span class="lineNum">     290 </span><span class="lineCov">    1460788 :     uint64_t l = b - a, r = 0, bytes = (71 - __builtin_clzll(l))/8;</span></a>
 <a name="291"><span class="lineNum">     291 </span>            :     uint64_t ub;</a>
-<a name="292"><span class="lineNum">     292 </span><span class="lineCov">     217533 :     if(bytes == 8){</span></a>
+<a name="292"><span class="lineNum">     292 </span><span class="lineCov">    1460788 :     if(bytes == 8){</span></a>
 <a name="293"><span class="lineNum">     293 </span><span class="lineNoCov">          0 :         ub = 0x7FFFFFFFFFFFFFFFull%l*-2;</span></a>
 <a name="294"><span class="lineNum">     294 </span>            :     }else{</a>
-<a name="295"><span class="lineNum">     295 </span><span class="lineCov">     217533 :         ub = 1ull &lt;&lt; (bytes*8);</span></a>
-<a name="296"><span class="lineNum">     296 </span><span class="lineCov">     217533 :         ub -= ub%l;</span></a>
+<a name="295"><span class="lineNum">     295 </span><span class="lineCov">    1460788 :         ub = 1ull &lt;&lt; (bytes*8);</span></a>
+<a name="296"><span class="lineNum">     296 </span><span class="lineCov">    1460788 :         ub -= ub%l;</span></a>
 <a name="297"><span class="lineNum">     297 </span>            :     }</a>
 <a name="298"><span class="lineNum">     298 </span>            :     do{</a>
-<a name="299"><span class="lineNum">     299 </span><span class="lineCov">     220058 :         getrandom(&amp;r, bytes, 0);</span></a>
-<a name="300"><span class="lineNum">     300 </span><span class="lineCov">     220058 :     }while(r &gt;= ub);</span></a>
-<a name="301"><span class="lineNum">     301 </span><span class="lineCov">     217533 :     return r%l + a;</span></a>
+<a name="299"><span class="lineNum">     299 </span><span class="lineCov">    1479941 :         getrandom(&amp;r, bytes, 0);</span></a>
+<a name="300"><span class="lineNum">     300 </span><span class="lineCov">    1479941 :     }while(r &gt;= ub);</span></a>
+<a name="301"><span class="lineNum">     301 </span><span class="lineCov">    1460788 :     return r%l + a;</span></a>
 <a name="302"><span class="lineNum">     302 </span>            : }</a>
 <a name="303"><span class="lineNum">     303 </span>            : </a>
-<a name="304"><span class="lineNum">     304 </span><span class="lineCov">      57939 : uint64_t prand_u64(uint64_t a, uint64_t b){</span></a>
-<a name="305"><span class="lineNum">     305 </span><span class="lineCov">      57939 :     return rand_u64(a, b);//TODO: test if this is a bottleneck, we don't need calls to this function to be secure</span></a>
+<a name="304"><span class="lineNum">     304 </span><span class="lineCov">      58522 : uint64_t prand_u64(uint64_t a, uint64_t b){</span></a>
+<a name="305"><span class="lineNum">     305 </span><span class="lineCov">      58522 :     return rand_u64(a, b);//TODO: test if this is a bottleneck, we don't need calls to this function to be secure</span></a>
 <a name="306"><span class="lineNum">     306 </span>            : }</a>
 <a name="307"><span class="lineNum">     307 </span>            : </a>
 <a name="308"><span class="lineNum">     308 </span>            : const uint64_t small_primes[25] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};</a>
@@ -389,60 +389,60 @@
 <a name="314"><span class="lineNum">     314 </span>            :     .lenstra_bfac= 10        //roughly speaking, the number of iterations to try before picking a new random point and curve</a>
 <a name="315"><span class="lineNum">     315 </span>            : };</a>
 <a name="316"><span class="lineNum">     316 </span>            : </a>
-<a name="317"><span class="lineNum">     317 </span><span class="lineCov">       1002 : uint64_t factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], factors_t *factors){</span></a>
-<a name="318"><span class="lineNum">     318 </span><span class="lineCov">       1002 :     factors-&gt;num_primes = 0;</span></a>
-<a name="319"><span class="lineNum">     319 </span><span class="lineCov">      25601 :     for(uint64_t i = 0; i &lt; num_primes; ++i){</span></a>
-<a name="320"><span class="lineNum">     320 </span><span class="lineCov">      24650 :         uint64_t p = primes[i];</span></a>
-<a name="321"><span class="lineNum">     321 </span><span class="lineCov">      24650 :         if(n%p == 0){</span></a>
-<a name="322"><span class="lineNum">     322 </span><span class="lineCov">       1771 :             uint64_t j = factors-&gt;num_primes++;</span></a>
-<a name="323"><span class="lineNum">     323 </span><span class="lineCov">       1771 :             factors-&gt;factors[j].prime = p;</span></a>
-<a name="324"><span class="lineNum">     324 </span><span class="lineCov">       1771 :             factors-&gt;factors[j].power = 1;</span></a>
-<a name="325"><span class="lineNum">     325 </span><span class="lineCov">       1771 :             n /= p;</span></a>
-<a name="326"><span class="lineNum">     326 </span><span class="lineCov">       2619 :             while(n%p == 0){</span></a>
-<a name="327"><span class="lineNum">     327 </span><span class="lineCov">        848 :                 ++factors-&gt;factors[j].power;</span></a>
-<a name="328"><span class="lineNum">     328 </span><span class="lineCov">        848 :                 n /= p;</span></a>
+<a name="317"><span class="lineNum">     317 </span><span class="lineCov">       1003 : uint64_t factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], factors_t *factors){</span></a>
+<a name="318"><span class="lineNum">     318 </span><span class="lineCov">       1003 :     factors-&gt;num_primes = 0;</span></a>
+<a name="319"><span class="lineNum">     319 </span><span class="lineCov">      25665 :     for(uint64_t i = 0; i &lt; num_primes; ++i){</span></a>
+<a name="320"><span class="lineNum">     320 </span><span class="lineCov">      24712 :         uint64_t p = primes[i];</span></a>
+<a name="321"><span class="lineNum">     321 </span><span class="lineCov">      24712 :         if(n%p == 0){</span></a>
+<a name="322"><span class="lineNum">     322 </span><span class="lineCov">       1800 :             uint64_t j = factors-&gt;num_primes++;</span></a>
+<a name="323"><span class="lineNum">     323 </span><span class="lineCov">       1800 :             factors-&gt;factors[j].prime = p;</span></a>
+<a name="324"><span class="lineNum">     324 </span><span class="lineCov">       1800 :             factors-&gt;factors[j].power = 1;</span></a>
+<a name="325"><span class="lineNum">     325 </span><span class="lineCov">       1800 :             n /= p;</span></a>
+<a name="326"><span class="lineNum">     326 </span><span class="lineCov">       2510 :             while(n%p == 0){</span></a>
+<a name="327"><span class="lineNum">     327 </span><span class="lineCov">        710 :                 ++factors-&gt;factors[j].power;</span></a>
+<a name="328"><span class="lineNum">     328 </span><span class="lineCov">        710 :                 n /= p;</span></a>
 <a name="329"><span class="lineNum">     329 </span>            :             }</a>
 <a name="330"><span class="lineNum">     330 </span>            :         }</a>
-<a name="331"><span class="lineNum">     331 </span><span class="lineCov">      24650 :         if(p*p &gt; n){</span></a>
-<a name="332"><span class="lineNum">     332 </span><span class="lineCov">         51 :             if(n &gt; 1){</span></a>
+<a name="331"><span class="lineNum">     331 </span><span class="lineCov">      24712 :         if(p*p &gt; n){</span></a>
+<a name="332"><span class="lineNum">     332 </span><span class="lineCov">         50 :             if(n &gt; 1){</span></a>
 <a name="333"><span class="lineNum">     333 </span><span class="lineCov">         49 :                 uint64_t j = factors-&gt;num_primes++;</span></a>
 <a name="334"><span class="lineNum">     334 </span><span class="lineCov">         49 :                 factors-&gt;factors[j].prime = n;</span></a>
 <a name="335"><span class="lineNum">     335 </span><span class="lineCov">         49 :                 factors-&gt;factors[j].power = 1;</span></a>
 <a name="336"><span class="lineNum">     336 </span>            :             }</a>
-<a name="337"><span class="lineNum">     337 </span><span class="lineCov">         51 :             return 1;</span></a>
+<a name="337"><span class="lineNum">     337 </span><span class="lineCov">         50 :             return 1;</span></a>
 <a name="338"><span class="lineNum">     338 </span>            :         }</a>
 <a name="339"><span class="lineNum">     339 </span>            :     }</a>
-<a name="340"><span class="lineNum">     340 </span><span class="lineCov">        951 :     return n;</span></a>
+<a name="340"><span class="lineNum">     340 </span><span class="lineCov">        953 :     return n;</span></a>
 <a name="341"><span class="lineNum">     341 </span>            : }</a>
 <a name="342"><span class="lineNum">     342 </span>            : </a>
-<a name="343"><span class="lineNum">     343 </span><span class="lineCov">       1002 : uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], const factor_conf_t *conf, factors_t *factors){</span></a>
-<a name="344"><span class="lineNum">     344 </span><span class="lineCov">       1002 :     n = factor_trial_div(n, num_primes, primes, factors);</span></a>
-<a name="345"><span class="lineNum">     345 </span><span class="lineCov">       1002 :     if(n == 1){</span></a>
-<a name="346"><span class="lineNum">     346 </span><span class="lineCov">         51 :         return 1;</span></a>
+<a name="343"><span class="lineNum">     343 </span><span class="lineCov">       1003 : uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], const factor_conf_t *conf, factors_t *factors){</span></a>
+<a name="344"><span class="lineNum">     344 </span><span class="lineCov">       1003 :     n = factor_trial_div(n, num_primes, primes, factors);</span></a>
+<a name="345"><span class="lineNum">     345 </span><span class="lineCov">       1003 :     if(n == 1){</span></a>
+<a name="346"><span class="lineNum">     346 </span><span class="lineCov">         50 :         return 1;</span></a>
 <a name="347"><span class="lineNum">     347 </span>            :     }</a>
-<a name="348"><span class="lineNum">     348 </span><span class="lineCov">        951 :     uint64_t exponent = 1;</span></a>
-<a name="349"><span class="lineNum">     349 </span><span class="lineCov">        951 :     is_perfect_power(n, 9, &amp;n, &amp;exponent);</span></a>
-<a name="350"><span class="lineNum">     350 </span><span class="lineCov">        951 :     if(is_prime_dmr(n)){//TODO: get a better primality test and possibly run it later (ie after some pollard-rho)</span></a>
-<a name="351"><span class="lineNum">     351 </span><span class="lineCov">        500 :         factors_append(factors, n, exponent);</span></a>
-<a name="352"><span class="lineNum">     352 </span><span class="lineCov">        500 :         return 1;</span></a>
+<a name="348"><span class="lineNum">     348 </span><span class="lineCov">        953 :     uint64_t exponent = 1;</span></a>
+<a name="349"><span class="lineNum">     349 </span><span class="lineCov">        953 :     is_perfect_power(n, 9, &amp;n, &amp;exponent);</span></a>
+<a name="350"><span class="lineNum">     350 </span><span class="lineCov">        953 :     if(is_prime_dmr(n)){//TODO: get a better primality test and possibly run it later (ie after some pollard-rho)</span></a>
+<a name="351"><span class="lineNum">     351 </span><span class="lineCov">        481 :         factors_append(factors, n, exponent);</span></a>
+<a name="352"><span class="lineNum">     352 </span><span class="lineCov">        481 :         return 1;</span></a>
 <a name="353"><span class="lineNum">     353 </span>            :     }</a>
-<a name="354"><span class="lineNum">     354 </span><span class="lineCov">        451 :     uint64_t smoothness = 101*101;</span></a>
-<a name="355"><span class="lineNum">     355 </span><span class="lineCov">        451 :     factors_t *factors2 = init_factors_t_w(MAX_PRIMES_64);</span></a>
+<a name="354"><span class="lineNum">     354 </span><span class="lineCov">        472 :     uint64_t smoothness = 101*101;</span></a>
+<a name="355"><span class="lineNum">     355 </span><span class="lineCov">        472 :     factors_t *factors2 = init_factors_t_w(MAX_PRIMES_64);</span></a>
 <a name="356"><span class="lineNum">     356 </span>            :     uint64_t m;</a>
 <a name="357"><span class="lineNum">     357 </span>            :     while(1){</a>
-<a name="358"><span class="lineNum">     358 </span><span class="lineCov">        484 :         if(n &lt;= conf-&gt;pollard_max){//TODO: allow iteration count based stopping of pollard-rho brent so we can get small factors of big numbers that way?</span></a>
+<a name="358"><span class="lineNum">     358 </span><span class="lineCov">        502 :         if(n &lt;= conf-&gt;pollard_max){//TODO: allow iteration count based stopping of pollard-rho brent so we can get small factors of big numbers that way?</span></a>
 <a name="359"><span class="lineNum">     359 </span>            :             do{</a>
-<a name="360"><span class="lineNum">     360 </span><span class="lineCov">         19 :                 uint64_t x = prand_u64(0, n);</span></a>
-<a name="361"><span class="lineNum">     361 </span><span class="lineCov">         19 :                 m = factor1_pollard_rho_brent(n, x, conf-&gt;pollard_stride);</span></a>
-<a name="362"><span class="lineNum">     362 </span><span class="lineCov">         19 :             }while(m == n);</span></a>
-<a name="363"><span class="lineNum">     363 </span><span class="lineCov">         18 :             uint64_t k = 1;</span></a>
-<a name="364"><span class="lineNum">     364 </span><span class="lineCov">         18 :             n /= m;</span></a>
-<a name="365"><span class="lineNum">     365 </span><span class="lineCov">         18 :             while(n%m == 0){</span></a>
+<a name="360"><span class="lineNum">     360 </span><span class="lineCov">         14 :                 uint64_t x = prand_u64(0, n);</span></a>
+<a name="361"><span class="lineNum">     361 </span><span class="lineCov">         14 :                 m = factor1_pollard_rho_brent(n, x, conf-&gt;pollard_stride);</span></a>
+<a name="362"><span class="lineNum">     362 </span><span class="lineCov">         14 :             }while(m == n);</span></a>
+<a name="363"><span class="lineNum">     363 </span><span class="lineCov">         14 :             uint64_t k = 1;</span></a>
+<a name="364"><span class="lineNum">     364 </span><span class="lineCov">         14 :             n /= m;</span></a>
+<a name="365"><span class="lineNum">     365 </span><span class="lineCov">         14 :             while(n%m == 0){</span></a>
 <a name="366"><span class="lineNum">     366 </span><span class="lineNoCov">          0 :                 k += 1;</span></a>
 <a name="367"><span class="lineNum">     367 </span><span class="lineNoCov">          0 :                 n /= m;</span></a>
 <a name="368"><span class="lineNum">     368 </span>            :             }</a>
-<a name="369"><span class="lineNum">     369 </span><span class="lineCov">         18 :             if(m &lt; smoothness || is_prime_dmr(m)){</span></a>
-<a name="370"><span class="lineNum">     370 </span><span class="lineCov">         18 :                 factors_append(factors, m, k*exponent);</span></a>
+<a name="369"><span class="lineNum">     369 </span><span class="lineCov">         14 :             if(m &lt; smoothness || is_prime_dmr(m)){</span></a>
+<a name="370"><span class="lineNum">     370 </span><span class="lineCov">         14 :                 factors_append(factors, m, k*exponent);</span></a>
 <a name="371"><span class="lineNum">     371 </span>            :             }else{</a>
 <a name="372"><span class="lineNum">     372 </span><span class="lineNoCov">          0 :                 factors2-&gt;num_primes = 0;</span></a>
 <a name="373"><span class="lineNum">     373 </span>            : #pragma GCC diagnostic push</a>
@@ -455,50 +455,50 @@
 <a name="380"><span class="lineNum">     380 </span>            :                 }</a>
 <a name="381"><span class="lineNum">     381 </span><span class="lineNoCov">          0 :                 factors_combine(factors, factors2, k*exponent);</span></a>
 <a name="382"><span class="lineNum">     382 </span>            :             }</a>
-<a name="383"><span class="lineNum">     383 </span><span class="lineCov">         18 :             if(n == 1){</span></a>
+<a name="383"><span class="lineNum">     383 </span><span class="lineCov">         14 :             if(n == 1){</span></a>
 <a name="384"><span class="lineNum">     384 </span><span class="lineNoCov">          0 :                 free(factors2);</span></a>
 <a name="385"><span class="lineNum">     385 </span><span class="lineNoCov">          0 :                 return 1;</span></a>
 <a name="386"><span class="lineNum">     386 </span>            :             }</a>
-<a name="387"><span class="lineNum">     387 </span><span class="lineCov">         18 :             if(n &lt; smoothness || is_prime_dmr(n)){</span></a>
-<a name="388"><span class="lineNum">     388 </span><span class="lineCov">         18 :                 factors_append(factors, n, exponent);</span></a>
-<a name="389"><span class="lineNum">     389 </span><span class="lineCov">         18 :                 free(factors2);</span></a>
-<a name="390"><span class="lineNum">     390 </span><span class="lineCov">         18 :                 return 1;</span></a>
+<a name="387"><span class="lineNum">     387 </span><span class="lineCov">         14 :             if(n &lt; smoothness || is_prime_dmr(n)){</span></a>
+<a name="388"><span class="lineNum">     388 </span><span class="lineCov">         14 :                 factors_append(factors, n, exponent);</span></a>
+<a name="389"><span class="lineNum">     389 </span><span class="lineCov">         14 :                 free(factors2);</span></a>
+<a name="390"><span class="lineNum">     390 </span><span class="lineCov">         14 :                 return 1;</span></a>
 <a name="391"><span class="lineNum">     391 </span>            :             }</a>
-<a name="392"><span class="lineNum">     392 </span><span class="lineCov">        466 :         }else if(n &lt;= conf-&gt;lenstra_max){</span></a>
+<a name="392"><span class="lineNum">     392 </span><span class="lineCov">        488 :         }else if(n &lt;= conf-&gt;lenstra_max){</span></a>
 <a name="393"><span class="lineNum">     393 </span>            :             do{</a>
-<a name="394"><span class="lineNum">     394 </span><span class="lineCov">       5640 :                 uint64_t x = prand_u64(0, n);</span></a>
-<a name="395"><span class="lineNum">     395 </span><span class="lineCov">       5640 :                 uint64_t y = prand_u64(0, n);</span></a>
-<a name="396"><span class="lineNum">     396 </span><span class="lineCov">       5640 :                 uint64_t a = prand_u64(0, n);</span></a>
-<a name="397"><span class="lineNum">     397 </span><span class="lineCov">       5640 :                 m = factor1_lenstra(n, x, y, a, conf-&gt;lenstra_bfac);</span></a>
-<a name="398"><span class="lineNum">     398 </span><span class="lineCov">       5640 :             }while(m == n);</span></a>
-<a name="399"><span class="lineNum">     399 </span><span class="lineCov">        466 :             uint64_t k = 1;</span></a>
-<a name="400"><span class="lineNum">     400 </span><span class="lineCov">        466 :             n /= m;</span></a>
-<a name="401"><span class="lineNum">     401 </span><span class="lineCov">        467 :             while(n%m == 0){</span></a>
+<a name="394"><span class="lineNum">     394 </span><span class="lineCov">       5836 :                 uint64_t x = prand_u64(0, n);</span></a>
+<a name="395"><span class="lineNum">     395 </span><span class="lineCov">       5836 :                 uint64_t y = prand_u64(0, n);</span></a>
+<a name="396"><span class="lineNum">     396 </span><span class="lineCov">       5836 :                 uint64_t a = prand_u64(0, n);</span></a>
+<a name="397"><span class="lineNum">     397 </span><span class="lineCov">       5836 :                 m = factor1_lenstra(n, x, y, a, conf-&gt;lenstra_bfac);</span></a>
+<a name="398"><span class="lineNum">     398 </span><span class="lineCov">       5836 :             }while(m == n);</span></a>
+<a name="399"><span class="lineNum">     399 </span><span class="lineCov">        488 :             uint64_t k = 1;</span></a>
+<a name="400"><span class="lineNum">     400 </span><span class="lineCov">        488 :             n /= m;</span></a>
+<a name="401"><span class="lineNum">     401 </span><span class="lineCov">        489 :             while(n%m == 0){</span></a>
 <a name="402"><span class="lineNum">     402 </span><span class="lineCov">          1 :                 k += 1;</span></a>
 <a name="403"><span class="lineNum">     403 </span><span class="lineCov">          1 :                 n /= m;</span></a>
 <a name="404"><span class="lineNum">     404 </span>            :             }</a>
-<a name="405"><span class="lineNum">     405 </span><span class="lineCov">        466 :             if(m &lt; smoothness || is_prime_dmr(m)){</span></a>
-<a name="406"><span class="lineNum">     406 </span><span class="lineCov">        465 :                 factors_append(factors, m, k*exponent);</span></a>
+<a name="405"><span class="lineNum">     405 </span><span class="lineCov">        488 :             if(m &lt; smoothness || is_prime_dmr(m)){</span></a>
+<a name="406"><span class="lineNum">     406 </span><span class="lineCov">        486 :                 factors_append(factors, m, k*exponent);</span></a>
 <a name="407"><span class="lineNum">     407 </span>            :             }else{</a>
-<a name="408"><span class="lineNum">     408 </span><span class="lineCov">          1 :                 factors2-&gt;num_primes = 0;</span></a>
+<a name="408"><span class="lineNum">     408 </span><span class="lineCov">          2 :                 factors2-&gt;num_primes = 0;</span></a>
 <a name="409"><span class="lineNum">     409 </span>            : #pragma GCC diagnostic push</a>
 <a name="410"><span class="lineNum">     410 </span>            : #pragma GCC diagnostic ignored &quot;-Wnonnull&quot;</a>
-<a name="411"><span class="lineNum">     411 </span><span class="lineCov">          1 :                 m = factor_heuristic(m, 0, NULL, conf, factors2);</span></a>
+<a name="411"><span class="lineNum">     411 </span><span class="lineCov">          2 :                 m = factor_heuristic(m, 0, NULL, conf, factors2);</span></a>
 <a name="412"><span class="lineNum">     412 </span>            : #pragma GCC diagnostic pop</a>
-<a name="413"><span class="lineNum">     413 </span><span class="lineCov">          1 :                 if(m != 1){</span></a>
+<a name="413"><span class="lineNum">     413 </span><span class="lineCov">          2 :                 if(m != 1){</span></a>
 <a name="414"><span class="lineNum">     414 </span><span class="lineNoCov">          0 :                     free(factors2);</span></a>
 <a name="415"><span class="lineNum">     415 </span><span class="lineNoCov">          0 :                     return m;//TODO: abort</span></a>
 <a name="416"><span class="lineNum">     416 </span>            :                 }</a>
-<a name="417"><span class="lineNum">     417 </span><span class="lineCov">          1 :                 factors_combine(factors, factors2, k*exponent);</span></a>
+<a name="417"><span class="lineNum">     417 </span><span class="lineCov">          2 :                 factors_combine(factors, factors2, k*exponent);</span></a>
 <a name="418"><span class="lineNum">     418 </span>            :             }</a>
-<a name="419"><span class="lineNum">     419 </span><span class="lineCov">        466 :             if(n == 1){</span></a>
+<a name="419"><span class="lineNum">     419 </span><span class="lineCov">        488 :             if(n == 1){</span></a>
 <a name="420"><span class="lineNum">     420 </span><span class="lineNoCov">          0 :                 free(factors2);</span></a>
 <a name="421"><span class="lineNum">     421 </span><span class="lineNoCov">          0 :                 return 1;</span></a>
 <a name="422"><span class="lineNum">     422 </span>            :             }</a>
-<a name="423"><span class="lineNum">     423 </span><span class="lineCov">        466 :             if(n &lt; smoothness || is_prime_dmr(n)){</span></a>
-<a name="424"><span class="lineNum">     424 </span><span class="lineCov">        433 :                 factors_append(factors, n, exponent);</span></a>
-<a name="425"><span class="lineNum">     425 </span><span class="lineCov">        433 :                 free(factors2);</span></a>
-<a name="426"><span class="lineNum">     426 </span><span class="lineCov">        433 :                 return 1;</span></a>
+<a name="423"><span class="lineNum">     423 </span><span class="lineCov">        488 :             if(n &lt; smoothness || is_prime_dmr(n)){</span></a>
+<a name="424"><span class="lineNum">     424 </span><span class="lineCov">        458 :                 factors_append(factors, n, exponent);</span></a>
+<a name="425"><span class="lineNum">     425 </span><span class="lineCov">        458 :                 free(factors2);</span></a>
+<a name="426"><span class="lineNum">     426 </span><span class="lineCov">        458 :                 return 1;</span></a>
 <a name="427"><span class="lineNum">     427 </span>            :             }</a>
 <a name="428"><span class="lineNum">     428 </span>            :         }else{//TODO: implement quadratic sieve and number field sieve</a>
 <a name="429"><span class="lineNum">     429 </span><span class="lineNoCov">          0 :             free(factors2);</span></a>
@@ -507,15 +507,15 @@
 <a name="432"><span class="lineNum">     432 </span>            :     }</a>
 <a name="433"><span class="lineNum">     433 </span>            : }</a>
 <a name="434"><span class="lineNum">     434 </span>            : </a>
-<a name="435"><span class="lineNum">     435 </span><span class="lineCov">  100239515 : uint64_t u64_nth_root(uint64_t a, uint64_t n){</span></a>
-<a name="436"><span class="lineNum">     436 </span><span class="lineCov">  100239515 :     if(a &lt; 2){</span></a>
+<a name="435"><span class="lineNum">     435 </span><span class="lineCov">  100239524 : uint64_t u64_nth_root(uint64_t a, uint64_t n){</span></a>
+<a name="436"><span class="lineNum">     436 </span><span class="lineCov">  100239524 :     if(a &lt; 2){</span></a>
 <a name="437"><span class="lineNum">     437 </span><span class="lineNoCov">          0 :         return a;</span></a>
 <a name="438"><span class="lineNum">     438 </span>            :     }</a>
 <a name="439"><span class="lineNum">     439 </span>            :     uint64_t x;</a>
-<a name="440"><span class="lineNum">     440 </span><span class="lineCov">  100239515 :     if(n &lt; 13){</span></a>
-<a name="441"><span class="lineNum">     441 </span><span class="lineCov">   51968977 :         uint64_t floor_log_2_a = 63 - __builtin_clzll(a);</span></a>
-<a name="442"><span class="lineNum">     442 </span><span class="lineCov">   51968977 :         x = 1ull &lt;&lt; (floor_log_2_a/n);</span></a>
-<a name="443"><span class="lineNum">     443 </span><span class="lineCov">   51968977 :         if(x == 1){</span></a>
+<a name="440"><span class="lineNum">     440 </span><span class="lineCov">  100239524 :     if(n &lt; 13){</span></a>
+<a name="441"><span class="lineNum">     441 </span><span class="lineCov">   51968986 :         uint64_t floor_log_2_a = 63 - __builtin_clzll(a);</span></a>
+<a name="442"><span class="lineNum">     442 </span><span class="lineCov">   51968986 :         x = 1ull &lt;&lt; (floor_log_2_a/n);</span></a>
+<a name="443"><span class="lineNum">     443 </span><span class="lineCov">   51968986 :         if(x == 1){</span></a>
 <a name="444"><span class="lineNum">     444 </span><span class="lineCov">      28249 :             return 1;</span></a>
 <a name="445"><span class="lineNum">     445 </span>            :         }</a>
 <a name="446"><span class="lineNum">     446 </span><span class="lineCov">   91668577 :     }else for(x = 1;; ++x){</span></a>
@@ -524,32 +524,32 @@
 <a name="449"><span class="lineNum">     449 </span><span class="lineCov">   48270538 :             return x;</span></a>
 <a name="450"><span class="lineNum">     450 </span>            :         }</a>
 <a name="451"><span class="lineNum">     451 </span>            :     }</a>
-<a name="452"><span class="lineNum">     452 </span><span class="lineCov">   51940728 :     for(uint64_t i = 0;; ++i){</span></a>
-<a name="453"><span class="lineNum">     453 </span><span class="lineCov">  500511484 :         uint128_t x_pow = pow_u128(x, n - 1);</span></a>
-<a name="454"><span class="lineNum">     454 </span><span class="lineCov">  500511484 :         uint64_t x_next = ((n - 1)*x_pow*x + a)/(n*x_pow);</span></a>
-<a name="455"><span class="lineNum">     455 </span><span class="lineCov">  500511484 :         if(i &gt; 1 &amp;&amp; x_next &gt;= x){</span></a>
-<a name="456"><span class="lineNum">     456 </span><span class="lineCov">   51940728 :             return x;</span></a>
+<a name="452"><span class="lineNum">     452 </span><span class="lineCov">   51940737 :     for(uint64_t i = 0;; ++i){</span></a>
+<a name="453"><span class="lineNum">     453 </span><span class="lineCov">  500511528 :         uint128_t x_pow = pow_u128(x, n - 1);</span></a>
+<a name="454"><span class="lineNum">     454 </span><span class="lineCov">  500511528 :         uint64_t x_next = ((n - 1)*x_pow*x + a)/(n*x_pow);</span></a>
+<a name="455"><span class="lineNum">     455 </span><span class="lineCov">  500511528 :         if(i &gt; 1 &amp;&amp; x_next &gt;= x){</span></a>
+<a name="456"><span class="lineNum">     456 </span><span class="lineCov">   51940737 :             return x;</span></a>
 <a name="457"><span class="lineNum">     457 </span>            :         }</a>
-<a name="458"><span class="lineNum">     458 </span><span class="lineCov">  448570756 :         x = x_next;</span></a>
+<a name="458"><span class="lineNum">     458 </span><span class="lineCov">  448570791 :         x = x_next;</span></a>
 <a name="459"><span class="lineNum">     459 </span>            :     }</a>
 <a name="460"><span class="lineNum">     460 </span>            : }</a>
 <a name="461"><span class="lineNum">     461 </span>            : </a>
-<a name="462"><span class="lineNum">     462 </span><span class="lineCov">    9436697 : bool is_perfect_power(uint64_t a, uint64_t max, uint64_t *_base, uint64_t *_exp){</span></a>
-<a name="463"><span class="lineNum">     463 </span><span class="lineCov">    9436697 :     if(a &lt; 2){</span></a>
+<a name="462"><span class="lineNum">     462 </span><span class="lineCov">    9436699 : bool is_perfect_power(uint64_t a, uint64_t max, uint64_t *_base, uint64_t *_exp){</span></a>
+<a name="463"><span class="lineNum">     463 </span><span class="lineCov">    9436699 :     if(a &lt; 2){</span></a>
 <a name="464"><span class="lineNum">     464 </span><span class="lineNoCov">          0 :         return false;</span></a>
 <a name="465"><span class="lineNum">     465 </span>            :     }</a>
 <a name="466"><span class="lineNum">     466 </span>            :     /// the maximum exponent ever for a uint64 is 63, but if the exponent is composite we can find it in stages,</a>
 <a name="467"><span class="lineNum">     467 </span>            :     /// so the maximum exponent we will ever have to take is 61.</a>
-<a name="468"><span class="lineNum">     468 </span><span class="lineCov">    9436697 :     uint64_t x = 1;</span></a>
-<a name="469"><span class="lineNum">     469 </span><span class="lineCov">  104882740 :     for(uint64_t i = 0; i &lt; 18; ++i){</span></a>
-<a name="470"><span class="lineNum">     470 </span><span class="lineCov">  104882740 :         uint64_t p = small_primes[i];</span></a>
-<a name="471"><span class="lineNum">     471 </span><span class="lineCov">  104882740 :         if(p &gt; max){</span></a>
-<a name="472"><span class="lineNum">     472 </span><span class="lineCov">    9436198 :             break;</span></a>
+<a name="468"><span class="lineNum">     468 </span><span class="lineCov">    9436699 :     uint64_t x = 1;</span></a>
+<a name="469"><span class="lineNum">     469 </span><span class="lineCov">  104882750 :     for(uint64_t i = 0; i &lt; 18; ++i){</span></a>
+<a name="470"><span class="lineNum">     470 </span><span class="lineCov">  104882750 :         uint64_t p = small_primes[i];</span></a>
+<a name="471"><span class="lineNum">     471 </span><span class="lineCov">  104882750 :         if(p &gt; max){</span></a>
+<a name="472"><span class="lineNum">     472 </span><span class="lineCov">    9436200 :             break;</span></a>
 <a name="473"><span class="lineNum">     473 </span>            :         }</a>
 <a name="474"><span class="lineNum">     474 </span><span class="lineCov">    4792911 :         while(1){</span></a>
-<a name="475"><span class="lineNum">     475 </span><span class="lineCov">  100239453 :             uint64_t r = u64_nth_root(a, p);</span></a>
-<a name="476"><span class="lineNum">     476 </span><span class="lineCov">  100239453 :             if(pow_u64(r, p) != a){</span></a>
-<a name="477"><span class="lineNum">     477 </span><span class="lineCov">   95446043 :                 break;</span></a>
+<a name="475"><span class="lineNum">     475 </span><span class="lineCov">  100239461 :             uint64_t r = u64_nth_root(a, p);</span></a>
+<a name="476"><span class="lineNum">     476 </span><span class="lineCov">  100239461 :             if(pow_u64(r, p) != a){</span></a>
+<a name="477"><span class="lineNum">     477 </span><span class="lineCov">   95446051 :                 break;</span></a>
 <a name="478"><span class="lineNum">     478 </span>            :             }</a>
 <a name="479"><span class="lineNum">     479 </span><span class="lineCov">    4793410 :             x *= p;</span></a>
 <a name="480"><span class="lineNum">     480 </span><span class="lineCov">    4793410 :             a = r;</span></a>
@@ -560,12 +560,12 @@
 <a name="485"><span class="lineNum">     485 </span>            :         }</a>
 <a name="486"><span class="lineNum">     486 </span>            :     }</a>
 <a name="487"><span class="lineNum">     487 </span><span class="lineNoCov">          0 :     OUTPUT_RESULT:;</span></a>
-<a name="488"><span class="lineNum">     488 </span><span class="lineCov">    9436697 :     if(x != 1){</span></a>
+<a name="488"><span class="lineNum">     488 </span><span class="lineCov">    9436699 :     if(x != 1){</span></a>
 <a name="489"><span class="lineNum">     489 </span><span class="lineCov">    4721354 :         *_base = a;</span></a>
 <a name="490"><span class="lineNum">     490 </span><span class="lineCov">    4721354 :         *_exp = x;</span></a>
 <a name="491"><span class="lineNum">     491 </span><span class="lineCov">    4721354 :         return true;</span></a>
 <a name="492"><span class="lineNum">     492 </span>            :     }</a>
-<a name="493"><span class="lineNum">     493 </span><span class="lineCov">    4715343 :     return false;</span></a>
+<a name="493"><span class="lineNum">     493 </span><span class="lineCov">    4715345 :     return false;</span></a>
 <a name="494"><span class="lineNum">     494 </span>            : }</a>
 <a name="495"><span class="lineNum">     495 </span>            : </a>
 <a name="496"><span class="lineNum">     496 </span><span class="lineCov">        267 : uint64_t factor1_pollard_rho(uint64_t n, uint64_t x){</span></a>
@@ -579,124 +579,124 @@
 <a name="504"><span class="lineNum">     504 </span><span class="lineCov">        267 :     return d;</span></a>
 <a name="505"><span class="lineNum">     505 </span>            : }</a>
 <a name="506"><span class="lineNum">     506 </span>            : </a>
-<a name="507"><span class="lineNum">     507 </span><span class="lineCov">         19 : uint64_t factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m){</span></a>
-<a name="508"><span class="lineNum">     508 </span><span class="lineCov">         19 :     uint64_t y = x, ys = x;</span></a>
-<a name="509"><span class="lineNum">     509 </span><span class="lineCov">         19 :     uint64_t d = 1;//gcd of n and the difference of the terms in the sequence</span></a>
-<a name="510"><span class="lineNum">     510 </span><span class="lineCov">         19 :     uint64_t r = 1;//power of two in brent's algorithm</span></a>
-<a name="511"><span class="lineNum">     511 </span><span class="lineCov">         19 :     uint64_t q = 1;//product of all differences so far, allowing us to process m at a time when checking for a nontrival factor d</span></a>
-<a name="512"><span class="lineNum">     512 </span><span class="lineCov">         96 :     while(d == 1){</span></a>
-<a name="513"><span class="lineNum">     513 </span><span class="lineCov">         77 :         x = y;</span></a>
-<a name="514"><span class="lineNum">     514 </span><span class="lineCov">        418 :         for(uint64_t i = 0; i &lt; r; ++i){</span></a>
-<a name="515"><span class="lineNum">     515 </span><span class="lineCov">        341 :             y = (y*y + 1)%n;</span></a>
+<a name="507"><span class="lineNum">     507 </span><span class="lineCov">         14 : uint64_t factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m){</span></a>
+<a name="508"><span class="lineNum">     508 </span><span class="lineCov">         14 :     uint64_t y = x, ys = x;</span></a>
+<a name="509"><span class="lineNum">     509 </span><span class="lineCov">         14 :     uint64_t d = 1;//gcd of n and the difference of the terms in the sequence</span></a>
+<a name="510"><span class="lineNum">     510 </span><span class="lineCov">         14 :     uint64_t r = 1;//power of two in brent's algorithm</span></a>
+<a name="511"><span class="lineNum">     511 </span><span class="lineCov">         14 :     uint64_t q = 1;//product of all differences so far, allowing us to process m at a time when checking for a nontrival factor d</span></a>
+<a name="512"><span class="lineNum">     512 </span><span class="lineCov">         63 :     while(d == 1){</span></a>
+<a name="513"><span class="lineNum">     513 </span><span class="lineCov">         49 :         x = y;</span></a>
+<a name="514"><span class="lineNum">     514 </span><span class="lineCov">        233 :         for(uint64_t i = 0; i &lt; r; ++i){</span></a>
+<a name="515"><span class="lineNum">     515 </span><span class="lineCov">        184 :             y = (y*y + 1)%n;</span></a>
 <a name="516"><span class="lineNum">     516 </span>            :         }</a>
-<a name="517"><span class="lineNum">     517 </span><span class="lineCov">        154 :         for(uint64_t k = 0; k &lt; r &amp;&amp; d == 1; k += m){</span></a>
-<a name="518"><span class="lineNum">     518 </span><span class="lineCov">         77 :             ys = y;</span></a>
-<a name="519"><span class="lineNum">     519 </span><span class="lineCov">        382 :             for(uint64_t i = 0; i &lt; m &amp;&amp; i &lt; r - k; ++i){</span></a>
-<a name="520"><span class="lineNum">     520 </span><span class="lineCov">        305 :                 y = (y*y + 1)%n;</span></a>
-<a name="521"><span class="lineNum">     521 </span><span class="lineCov">        305 :                 q = q*(x &gt; y ? x - y : y - x)%n;</span></a>
+<a name="517"><span class="lineNum">     517 </span><span class="lineCov">         98 :         for(uint64_t k = 0; k &lt; r &amp;&amp; d == 1; k += m){</span></a>
+<a name="518"><span class="lineNum">     518 </span><span class="lineCov">         49 :             ys = y;</span></a>
+<a name="519"><span class="lineNum">     519 </span><span class="lineCov">        221 :             for(uint64_t i = 0; i &lt; m &amp;&amp; i &lt; r - k; ++i){</span></a>
+<a name="520"><span class="lineNum">     520 </span><span class="lineCov">        172 :                 y = (y*y + 1)%n;</span></a>
+<a name="521"><span class="lineNum">     521 </span><span class="lineCov">        172 :                 q = q*(x &gt; y ? x - y : y - x)%n;</span></a>
 <a name="522"><span class="lineNum">     522 </span>            :             }</a>
-<a name="523"><span class="lineNum">     523 </span><span class="lineCov">         77 :             d = egcd(q, n, NULL, NULL);</span></a>
+<a name="523"><span class="lineNum">     523 </span><span class="lineCov">         49 :             d = egcd(q, n, NULL, NULL);</span></a>
 <a name="524"><span class="lineNum">     524 </span>            :         }</a>
-<a name="525"><span class="lineNum">     525 </span><span class="lineCov">         77 :         r *= 2;</span></a>
+<a name="525"><span class="lineNum">     525 </span><span class="lineCov">         49 :         r *= 2;</span></a>
 <a name="526"><span class="lineNum">     526 </span>            :     }</a>
-<a name="527"><span class="lineNum">     527 </span><span class="lineCov">         19 :     if(d == n){</span></a>
+<a name="527"><span class="lineNum">     527 </span><span class="lineCov">         14 :     if(d == n){</span></a>
 <a name="528"><span class="lineNum">     528 </span>            :         do{</a>
-<a name="529"><span class="lineNum">     529 </span><span class="lineCov">         19 :             ys = (ys*ys + 1)%n;</span></a>
-<a name="530"><span class="lineNum">     530 </span><span class="lineCov">         19 :             d = egcd(x &gt; ys ? x - ys : ys - x, n, NULL, NULL);</span></a>
-<a name="531"><span class="lineNum">     531 </span><span class="lineCov">         19 :         }while(d == 1);</span></a>
+<a name="529"><span class="lineNum">     529 </span><span class="lineCov">          5 :             ys = (ys*ys + 1)%n;</span></a>
+<a name="530"><span class="lineNum">     530 </span><span class="lineCov">          5 :             d = egcd(x &gt; ys ? x - ys : ys - x, n, NULL, NULL);</span></a>
+<a name="531"><span class="lineNum">     531 </span><span class="lineCov">          5 :         }while(d == 1);</span></a>
 <a name="532"><span class="lineNum">     532 </span>            :     }</a>
-<a name="533"><span class="lineNum">     533 </span><span class="lineCov">         19 :     return d;</span></a>
+<a name="533"><span class="lineNum">     533 </span><span class="lineCov">         14 :     return d;</span></a>
 <a name="534"><span class="lineNum">     534 </span>            : }</a>
 <a name="535"><span class="lineNum">     535 </span>            : </a>
 <a name="536"><span class="lineNum">     536 </span>            : //convenience function to double a point on an elliptic curve.  _xr and _yr are out params</a>
 <a name="537"><span class="lineNum">     537 </span>            : //returns 0 for an ordinary point, 1 for identity, and -1 if a nontrivial factor was found and placed in _xr</a>
-<a name="538"><span class="lineNum">     538 </span><span class="lineCov">     104022 : static inline int ecg_double(int64_t n, int64_t a, int64_t x, int64_t y, int is_id, int64_t *_xr, int64_t *_yr){</span></a>
-<a name="539"><span class="lineNum">     539 </span><span class="lineCov">     104022 :     if(is_id || y == 0){</span></a>
+<a name="538"><span class="lineNum">     538 </span><span class="lineCov">     107518 : static inline int ecg_double(int64_t n, int64_t a, int64_t x, int64_t y, int is_id, int64_t *_xr, int64_t *_yr){</span></a>
+<a name="539"><span class="lineNum">     539 </span><span class="lineCov">     107518 :     if(is_id || y == 0){</span></a>
 <a name="540"><span class="lineNum">     540 </span><span class="lineNoCov">          0 :         return 1;</span></a>
 <a name="541"><span class="lineNum">     541 </span>            :     }</a>
-<a name="542"><span class="lineNum">     542 </span><span class="lineCov">     104022 :     int64_t s, dy, dx;</span></a>
-<a name="543"><span class="lineNum">     543 </span><span class="lineCov">     104022 :     dy = mod(3*x*x + a, n);</span></a>
-<a name="544"><span class="lineNum">     544 </span><span class="lineCov">     104022 :     dx = mod(2*y, n);</span></a>
-<a name="545"><span class="lineNum">     545 </span><span class="lineCov">     104022 :     int64_t d = egcd(dx, n, &amp;s, NULL);</span></a>
-<a name="546"><span class="lineNum">     546 </span><span class="lineCov">     104022 :     if(d != 1){</span></a>
-<a name="547"><span class="lineNum">     547 </span><span class="lineCov">         77 :         *_xr = d;</span></a>
-<a name="548"><span class="lineNum">     548 </span><span class="lineCov">         77 :         return -1;</span></a>
+<a name="542"><span class="lineNum">     542 </span><span class="lineCov">     107518 :     int64_t s, dy, dx;</span></a>
+<a name="543"><span class="lineNum">     543 </span><span class="lineCov">     107518 :     dy = mod(3*x*x + a, n);</span></a>
+<a name="544"><span class="lineNum">     544 </span><span class="lineCov">     107518 :     dx = mod(2*y, n);</span></a>
+<a name="545"><span class="lineNum">     545 </span><span class="lineCov">     107518 :     int64_t d = egcd(dx, n, &amp;s, NULL);</span></a>
+<a name="546"><span class="lineNum">     546 </span><span class="lineCov">     107518 :     if(d != 1){</span></a>
+<a name="547"><span class="lineNum">     547 </span><span class="lineCov">         74 :         *_xr = d;</span></a>
+<a name="548"><span class="lineNum">     548 </span><span class="lineCov">         74 :         return -1;</span></a>
 <a name="549"><span class="lineNum">     549 </span>            :     }</a>
-<a name="550"><span class="lineNum">     550 </span><span class="lineCov">     103945 :     s = s*dy%n;</span></a>
-<a name="551"><span class="lineNum">     551 </span><span class="lineCov">     103945 :     *_xr = mod(s*s - 2*x, n);</span></a>
-<a name="552"><span class="lineNum">     552 </span><span class="lineCov">     103945 :     *_yr = mod(y + s*(*_xr - x), n);</span></a>
-<a name="553"><span class="lineNum">     553 </span><span class="lineCov">     103945 :     return 0;</span></a>
+<a name="550"><span class="lineNum">     550 </span><span class="lineCov">     107444 :     s = s*dy%n;</span></a>
+<a name="551"><span class="lineNum">     551 </span><span class="lineCov">     107444 :     *_xr = mod(s*s - 2*x, n);</span></a>
+<a name="552"><span class="lineNum">     552 </span><span class="lineCov">     107444 :     *_yr = mod(y + s*(*_xr - x), n);</span></a>
+<a name="553"><span class="lineNum">     553 </span><span class="lineCov">     107444 :     return 0;</span></a>
 <a name="554"><span class="lineNum">     554 </span>            : }</a>
 <a name="555"><span class="lineNum">     555 </span>            : </a>
 <a name="556"><span class="lineNum">     556 </span>            : //convenience function to add two points on an elliptic curve.  _xr and _yr are out params</a>
 <a name="557"><span class="lineNum">     557 </span>            : //returns 0 for an ordinary point, 1 for identity, and -1 if a nontrivial factor was found and placed in _xr</a>
-<a name="558"><span class="lineNum">     558 </span><span class="lineCov">      38335 : static inline int ecg_add(int64_t n, int64_t a, int64_t xp, int64_t yp, int is_id_p, int64_t xq, int64_t yq, int is_id_q, int64_t *_xr, int64_t *_yr){</span></a>
-<a name="559"><span class="lineNum">     559 </span><span class="lineCov">      38335 :     if(is_id_p){</span></a>
+<a name="558"><span class="lineNum">     558 </span><span class="lineCov">      39636 : static inline int ecg_add(int64_t n, int64_t a, int64_t xp, int64_t yp, int is_id_p, int64_t xq, int64_t yq, int is_id_q, int64_t *_xr, int64_t *_yr){</span></a>
+<a name="559"><span class="lineNum">     559 </span><span class="lineCov">      39636 :     if(is_id_p){</span></a>
 <a name="560"><span class="lineNum">     560 </span><span class="lineNoCov">          0 :         if(is_id_q){</span></a>
 <a name="561"><span class="lineNum">     561 </span><span class="lineNoCov">          0 :             return 1;</span></a>
 <a name="562"><span class="lineNum">     562 </span>            :         }</a>
 <a name="563"><span class="lineNum">     563 </span><span class="lineNoCov">          0 :         *_xr = xq, *_yr = yq;</span></a>
 <a name="564"><span class="lineNum">     564 </span><span class="lineNoCov">          0 :         return 0;</span></a>
-<a name="565"><span class="lineNum">     565 </span><span class="lineCov">      38335 :     }else if(is_id_q){</span></a>
+<a name="565"><span class="lineNum">     565 </span><span class="lineCov">      39636 :     }else if(is_id_q){</span></a>
 <a name="566"><span class="lineNum">     566 </span><span class="lineNoCov">          0 :         *_xr = xp, *_yr = yp;</span></a>
 <a name="567"><span class="lineNum">     567 </span><span class="lineNoCov">          0 :         return 0;</span></a>
 <a name="568"><span class="lineNum">     568 </span>            :     }</a>
-<a name="569"><span class="lineNum">     569 </span><span class="lineCov">      38335 :     int64_t s, dy, dx;</span></a>
-<a name="570"><span class="lineNum">     570 </span><span class="lineCov">      38335 :     if(xp != xq){</span></a>
-<a name="571"><span class="lineNum">     571 </span><span class="lineCov">      38333 :         dy = mod(yp - yq, n);</span></a>
-<a name="572"><span class="lineNum">     572 </span><span class="lineCov">      38333 :         dx = mod(xp - xq, n);</span></a>
-<a name="573"><span class="lineNum">     573 </span><span class="lineCov">          2 :     }else if(yp != yq || yp == 0){</span></a>
-<a name="574"><span class="lineNum">     574 </span><span class="lineCov">          1 :         return 1;</span></a>
+<a name="569"><span class="lineNum">     569 </span><span class="lineCov">      39636 :     int64_t s, dy, dx;</span></a>
+<a name="570"><span class="lineNum">     570 </span><span class="lineCov">      39636 :     if(xp != xq){</span></a>
+<a name="571"><span class="lineNum">     571 </span><span class="lineCov">      39636 :         dy = mod(yp - yq, n);</span></a>
+<a name="572"><span class="lineNum">     572 </span><span class="lineCov">      39636 :         dx = mod(xp - xq, n);</span></a>
+<a name="573"><span class="lineNum">     573 </span><span class="lineNoCov">          0 :     }else if(yp != yq || yp == 0){</span></a>
+<a name="574"><span class="lineNum">     574 </span><span class="lineNoCov">          0 :         return 1;</span></a>
 <a name="575"><span class="lineNum">     575 </span>            :     }else{</a>
-<a name="576"><span class="lineNum">     576 </span><span class="lineCov">          1 :         dy = mod(3*xp*xp + a, n);</span></a>
-<a name="577"><span class="lineNum">     577 </span><span class="lineCov">          1 :         dx = mod(2*yp, n);</span></a>
+<a name="576"><span class="lineNum">     576 </span><span class="lineNoCov">          0 :         dy = mod(3*xp*xp + a, n);</span></a>
+<a name="577"><span class="lineNum">     577 </span><span class="lineNoCov">          0 :         dx = mod(2*yp, n);</span></a>
 <a name="578"><span class="lineNum">     578 </span>            :     }</a>
-<a name="579"><span class="lineNum">     579 </span><span class="lineCov">      38334 :     int64_t d = egcd(dx, n, &amp;s, NULL);</span></a>
-<a name="580"><span class="lineNum">     580 </span><span class="lineCov">      38334 :     if(d != 1){</span></a>
-<a name="581"><span class="lineNum">     581 </span><span class="lineCov">        384 :         *_xr = d;</span></a>
-<a name="582"><span class="lineNum">     582 </span><span class="lineCov">        384 :         return -1;</span></a>
+<a name="579"><span class="lineNum">     579 </span><span class="lineCov">      39636 :     int64_t d = egcd(dx, n, &amp;s, NULL);</span></a>
+<a name="580"><span class="lineNum">     580 </span><span class="lineCov">      39636 :     if(d != 1){</span></a>
+<a name="581"><span class="lineNum">     581 </span><span class="lineCov">        410 :         *_xr = d;</span></a>
+<a name="582"><span class="lineNum">     582 </span><span class="lineCov">        410 :         return -1;</span></a>
 <a name="583"><span class="lineNum">     583 </span>            :     }</a>
-<a name="584"><span class="lineNum">     584 </span><span class="lineCov">      37950 :     s = s*dy%n;</span></a>
-<a name="585"><span class="lineNum">     585 </span><span class="lineCov">      37950 :     *_xr = mod(s*s - xp - xq, n);</span></a>
-<a name="586"><span class="lineNum">     586 </span><span class="lineCov">      37950 :     *_yr = mod(yp + s*(*_xr - xp), n);</span></a>
-<a name="587"><span class="lineNum">     587 </span><span class="lineCov">      37950 :     return 0;</span></a>
+<a name="584"><span class="lineNum">     584 </span><span class="lineCov">      39226 :     s = s*dy%n;</span></a>
+<a name="585"><span class="lineNum">     585 </span><span class="lineCov">      39226 :     *_xr = mod(s*s - xp - xq, n);</span></a>
+<a name="586"><span class="lineNum">     586 </span><span class="lineCov">      39226 :     *_yr = mod(yp + s*(*_xr - xp), n);</span></a>
+<a name="587"><span class="lineNum">     587 </span><span class="lineCov">      39226 :     return 0;</span></a>
 <a name="588"><span class="lineNum">     588 </span>            : }</a>
 <a name="589"><span class="lineNum">     589 </span>            : </a>
 <a name="590"><span class="lineNum">     590 </span>            : //convenience function to add k copies of a point on an elliptic curve together.  _xr and _yr are out params</a>
 <a name="591"><span class="lineNum">     591 </span>            : //returns 0 for an ordinary point, 1 for identity, and -1 if a nontrivial factor was found and placed in _xr</a>
-<a name="592"><span class="lineNum">     592 </span><span class="lineCov">      49593 : static inline int ecg_scale(int64_t n, int64_t a, int64_t x, int64_t y, int is_id, int64_t k, int64_t *_xr, int64_t *_yr){</span></a>
-<a name="593"><span class="lineNum">     593 </span><span class="lineCov">      49593 :     if(is_id || !k){</span></a>
+<a name="592"><span class="lineNum">     592 </span><span class="lineCov">      51270 : static inline int ecg_scale(int64_t n, int64_t a, int64_t x, int64_t y, int is_id, int64_t k, int64_t *_xr, int64_t *_yr){</span></a>
+<a name="593"><span class="lineNum">     593 </span><span class="lineCov">      51270 :     if(is_id || !k){</span></a>
 <a name="594"><span class="lineNum">     594 </span><span class="lineNoCov">          0 :         return 1;</span></a>
 <a name="595"><span class="lineNum">     595 </span>            :     }</a>
-<a name="596"><span class="lineNum">     596 </span><span class="lineCov">      49593 :     int is_id_r = 0, is_id_s = 0;</span></a>
-<a name="597"><span class="lineNum">     597 </span><span class="lineCov">      49593 :     int64_t xs = x, ys = y;</span></a>
-<a name="598"><span class="lineNum">     598 </span><span class="lineCov">      93512 :     while(!(k&amp;1)){</span></a>
-<a name="599"><span class="lineNum">     599 </span><span class="lineCov">      43956 :         is_id_s = ecg_double(n, a, xs, ys, is_id_s, &amp;xs, &amp;ys);</span></a>
-<a name="600"><span class="lineNum">     600 </span><span class="lineCov">      43956 :         if(is_id_s == -1){</span></a>
+<a name="596"><span class="lineNum">     596 </span><span class="lineCov">      51270 :     int is_id_r = 0, is_id_s = 0;</span></a>
+<a name="597"><span class="lineNum">     597 </span><span class="lineCov">      51270 :     int64_t xs = x, ys = y;</span></a>
+<a name="598"><span class="lineNum">     598 </span><span class="lineCov">      96656 :     while(!(k&amp;1)){</span></a>
+<a name="599"><span class="lineNum">     599 </span><span class="lineCov">      45423 :         is_id_s = ecg_double(n, a, xs, ys, is_id_s, &amp;xs, &amp;ys);</span></a>
+<a name="600"><span class="lineNum">     600 </span><span class="lineCov">      45423 :         if(is_id_s == -1){</span></a>
 <a name="601"><span class="lineNum">     601 </span><span class="lineCov">         37 :             *_xr = xs;</span></a>
 <a name="602"><span class="lineNum">     602 </span><span class="lineCov">         37 :             return -1;</span></a>
-<a name="603"><span class="lineNum">     603 </span><span class="lineCov">      43919 :         }else if(is_id_s == 1){</span></a>
+<a name="603"><span class="lineNum">     603 </span><span class="lineCov">      45386 :         }else if(is_id_s == 1){</span></a>
 <a name="604"><span class="lineNum">     604 </span><span class="lineNoCov">          0 :             return 1;</span></a>
 <a name="605"><span class="lineNum">     605 </span>            :         }</a>
-<a name="606"><span class="lineNum">     606 </span><span class="lineCov">      43919 :         k &gt;&gt;= 1;</span></a>
+<a name="606"><span class="lineNum">     606 </span><span class="lineCov">      45386 :         k &gt;&gt;= 1;</span></a>
 <a name="607"><span class="lineNum">     607 </span>            :     }</a>
-<a name="608"><span class="lineNum">     608 </span><span class="lineCov">      49556 :     *_xr = xs, *_yr = ys;</span></a>
-<a name="609"><span class="lineNum">     609 </span><span class="lineCov">      49556 :     is_id_r = is_id_s;</span></a>
+<a name="608"><span class="lineNum">     608 </span><span class="lineCov">      51233 :     *_xr = xs, *_yr = ys;</span></a>
+<a name="609"><span class="lineNum">     609 </span><span class="lineCov">      51233 :     is_id_r = is_id_s;</span></a>
 <a name="610"><span class="lineNum">     610 </span>            :     while(1){</a>
-<a name="611"><span class="lineNum">     611 </span><span class="lineCov">     109198 :         k &gt;&gt;= 1;</span></a>
-<a name="612"><span class="lineNum">     612 </span><span class="lineCov">     109198 :         if(!k){</span></a>
-<a name="613"><span class="lineNum">     613 </span><span class="lineCov">      49132 :             return is_id_r;</span></a>
+<a name="611"><span class="lineNum">     611 </span><span class="lineCov">     112881 :         k &gt;&gt;= 1;</span></a>
+<a name="612"><span class="lineNum">     612 </span><span class="lineCov">     112881 :         if(!k){</span></a>
+<a name="613"><span class="lineNum">     613 </span><span class="lineCov">      50786 :             return is_id_r;</span></a>
 <a name="614"><span class="lineNum">     614 </span>            :         }</a>
-<a name="615"><span class="lineNum">     615 </span><span class="lineCov">      60066 :         is_id_s = ecg_double(n, a, xs, ys, is_id_s, &amp;xs, &amp;ys);</span></a>
-<a name="616"><span class="lineNum">     616 </span><span class="lineCov">      60066 :         if(is_id_s == -1){</span></a>
-<a name="617"><span class="lineNum">     617 </span><span class="lineCov">         40 :             *_xr = xs;</span></a>
-<a name="618"><span class="lineNum">     618 </span><span class="lineCov">         40 :             return -1;</span></a>
-<a name="619"><span class="lineNum">     619 </span><span class="lineCov">      60026 :         }else if(is_id_s == 1){</span></a>
+<a name="615"><span class="lineNum">     615 </span><span class="lineCov">      62095 :         is_id_s = ecg_double(n, a, xs, ys, is_id_s, &amp;xs, &amp;ys);</span></a>
+<a name="616"><span class="lineNum">     616 </span><span class="lineCov">      62095 :         if(is_id_s == -1){</span></a>
+<a name="617"><span class="lineNum">     617 </span><span class="lineCov">         37 :             *_xr = xs;</span></a>
+<a name="618"><span class="lineNum">     618 </span><span class="lineCov">         37 :             return -1;</span></a>
+<a name="619"><span class="lineNum">     619 </span><span class="lineCov">      62058 :         }else if(is_id_s == 1){</span></a>
 <a name="620"><span class="lineNum">     620 </span><span class="lineNoCov">          0 :             return is_id_r;</span></a>
-<a name="621"><span class="lineNum">     621 </span><span class="lineCov">      60026 :         }else if(k&amp;1){</span></a>
-<a name="622"><span class="lineNum">     622 </span><span class="lineCov">      38335 :             is_id_r = ecg_add(n, a, xs, ys, is_id_s, *_xr, *_yr, is_id_r, _xr, _yr);</span></a>
-<a name="623"><span class="lineNum">     623 </span><span class="lineCov">      38335 :             if(is_id_r == -1){</span></a>
-<a name="624"><span class="lineNum">     624 </span><span class="lineCov">        384 :                 return -1;</span></a>
+<a name="621"><span class="lineNum">     621 </span><span class="lineCov">      62058 :         }else if(k&amp;1){</span></a>
+<a name="622"><span class="lineNum">     622 </span><span class="lineCov">      39636 :             is_id_r = ecg_add(n, a, xs, ys, is_id_s, *_xr, *_yr, is_id_r, _xr, _yr);</span></a>
+<a name="623"><span class="lineNum">     623 </span><span class="lineCov">      39636 :             if(is_id_r == -1){</span></a>
+<a name="624"><span class="lineNum">     624 </span><span class="lineCov">        410 :                 return -1;</span></a>
 <a name="625"><span class="lineNum">     625 </span>            :             }</a>
 <a name="626"><span class="lineNum">     626 </span>            :         }</a>
 <a name="627"><span class="lineNum">     627 </span>            :     }</a>
@@ -704,29 +704,29 @@
 <a name="629"><span class="lineNum">     629 </span>            : </a>
 <a name="630"><span class="lineNum">     630 </span>            : //TODO: this whole function needs to be rewritten to use projective montgomery curves instead of affine wierstrass curves</a>
 <a name="631"><span class="lineNum">     631 </span>            : //TODO: consider adding brent's second stage for fun</a>
-<a name="632"><span class="lineNum">     632 </span><span class="lineCov">       5640 : int64_t factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B){</span></a>
-<a name="633"><span class="lineNum">     633 </span><span class="lineCov">       5640 :     int64_t d = egcd(n, 6, NULL, NULL);//ensure Z/nZ doesn't have a field of characteristic 2 or 3 as a subgroup</span></a>
-<a name="634"><span class="lineNum">     634 </span><span class="lineCov">       5640 :     if(d != 1){</span></a>
+<a name="632"><span class="lineNum">     632 </span><span class="lineCov">       5836 : int64_t factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B){</span></a>
+<a name="633"><span class="lineNum">     633 </span><span class="lineCov">       5836 :     int64_t d = egcd(n, 6, NULL, NULL);//ensure Z/nZ doesn't have a field of characteristic 2 or 3 as a subgroup</span></a>
+<a name="634"><span class="lineNum">     634 </span><span class="lineCov">       5836 :     if(d != 1){</span></a>
 <a name="635"><span class="lineNum">     635 </span><span class="lineNoCov">          0 :         return d;</span></a>
 <a name="636"><span class="lineNum">     636 </span>            :     }</a>
-<a name="637"><span class="lineNum">     637 </span><span class="lineCov">       5640 :     int64_t b = (x*x + a)%n;</span></a>
-<a name="638"><span class="lineNum">     638 </span><span class="lineCov">       5640 :     b = mod(y*y - x*b, n);</span></a>
-<a name="639"><span class="lineNum">     639 </span><span class="lineCov">       5640 :     d = a*a%n;</span></a>
-<a name="640"><span class="lineNum">     640 </span><span class="lineCov">       5640 :     d = 4*a*d%n;</span></a>
-<a name="641"><span class="lineNum">     641 </span><span class="lineCov">       5640 :     d = egcd(d + 27*(b*b%n), n, NULL, NULL);//ensure the rhs of the elliptic curve does not have a repeated zero, leading to a cusp</span></a>
-<a name="642"><span class="lineNum">     642 </span><span class="lineCov">       5640 :     if(d != 1){</span></a>
-<a name="643"><span class="lineNum">     643 </span><span class="lineCov">          5 :         return d;</span></a>
+<a name="637"><span class="lineNum">     637 </span><span class="lineCov">       5836 :     int64_t b = (x*x + a)%n;</span></a>
+<a name="638"><span class="lineNum">     638 </span><span class="lineCov">       5836 :     b = mod(y*y - x*b, n);</span></a>
+<a name="639"><span class="lineNum">     639 </span><span class="lineCov">       5836 :     d = a*a%n;</span></a>
+<a name="640"><span class="lineNum">     640 </span><span class="lineCov">       5836 :     d = 4*a*d%n;</span></a>
+<a name="641"><span class="lineNum">     641 </span><span class="lineCov">       5836 :     d = egcd(d + 27*(b*b%n), n, NULL, NULL);//ensure the rhs of the elliptic curve does not have a repeated zero, leading to a cusp</span></a>
+<a name="642"><span class="lineNum">     642 </span><span class="lineCov">       5836 :     if(d != 1){</span></a>
+<a name="643"><span class="lineNum">     643 </span><span class="lineCov">          4 :         return d;</span></a>
 <a name="644"><span class="lineNum">     644 </span>            :     }</a>
-<a name="645"><span class="lineNum">     645 </span><span class="lineCov">       5635 :     int is_id = 0;</span></a>
-<a name="646"><span class="lineNum">     646 </span><span class="lineCov">      54766 :     for(int64_t k = 2; k &lt;= B; ++k){</span></a>
-<a name="647"><span class="lineNum">     647 </span><span class="lineCov">      49593 :         is_id = ecg_scale(n, a, x, y, is_id, k, &amp;x, &amp;y);</span></a>
-<a name="648"><span class="lineNum">     648 </span><span class="lineCov">      49593 :         if(is_id == -1){</span></a>
-<a name="649"><span class="lineNum">     649 </span><span class="lineCov">        461 :             return x;</span></a>
-<a name="650"><span class="lineNum">     650 </span><span class="lineCov">      49132 :         }else if(is_id == 1){</span></a>
-<a name="651"><span class="lineNum">     651 </span><span class="lineCov">          1 :             return n;</span></a>
+<a name="645"><span class="lineNum">     645 </span><span class="lineCov">       5832 :     int is_id = 0;</span></a>
+<a name="646"><span class="lineNum">     646 </span><span class="lineCov">      56618 :     for(int64_t k = 2; k &lt;= B; ++k){</span></a>
+<a name="647"><span class="lineNum">     647 </span><span class="lineCov">      51270 :         is_id = ecg_scale(n, a, x, y, is_id, k, &amp;x, &amp;y);</span></a>
+<a name="648"><span class="lineNum">     648 </span><span class="lineCov">      51270 :         if(is_id == -1){</span></a>
+<a name="649"><span class="lineNum">     649 </span><span class="lineCov">        484 :             return x;</span></a>
+<a name="650"><span class="lineNum">     650 </span><span class="lineCov">      50786 :         }else if(is_id == 1){</span></a>
+<a name="651"><span class="lineNum">     651 </span><span class="lineNoCov">          0 :             return n;</span></a>
 <a name="652"><span class="lineNum">     652 </span>            :         }</a>
 <a name="653"><span class="lineNum">     653 </span>            :     }</a>
-<a name="654"><span class="lineNum">     654 </span><span class="lineCov">       5173 :     return n;</span></a>
+<a name="654"><span class="lineNum">     654 </span><span class="lineCov">       5348 :     return n;</span></a>
 <a name="655"><span class="lineNum">     655 </span>            : }</a>
 <a name="656"><span class="lineNum">     656 </span>            : </a>
 <a name="657"><span class="lineNum">     657 </span>            : /* There are many possible forms for elliptic curves, similar to how there are many possible forms for parabolas (y=ax^2+bx+c, y=a(x-l)(x-m), etc).</a>
@@ -859,106 +859,106 @@
 <a name="784"><span class="lineNum">     784 </span><span class="lineNoCov">          0 :     return n;</span></a>
 <a name="785"><span class="lineNum">     785 </span>            : }</a>
 <a name="786"><span class="lineNum">     786 </span>            : </a>
-<a name="787"><span class="lineNum">     787 </span><span class="lineCov">       1941 : int64_t jacobi(int64_t n, int64_t k){</span></a>
-<a name="788"><span class="lineNum">     788 </span><span class="lineCov">       1941 :     int64_t j = 1;</span></a>
-<a name="789"><span class="lineNum">     789 </span><span class="lineCov">       7232 :     while(1){</span></a>
-<a name="790"><span class="lineNum">     790 </span><span class="lineCov">       9173 :         int64_t s = __builtin_ctzll(n);</span></a>
-<a name="791"><span class="lineNum">     791 </span><span class="lineCov">       9173 :         int64_t q = n &gt;&gt; s;</span></a>
-<a name="792"><span class="lineNum">     792 </span><span class="lineCov">       9173 :         if((s&amp;1) &amp;&amp; ((k&amp;7) == 3 || ((k&amp;7) == 5))){</span></a>
-<a name="793"><span class="lineNum">     793 </span><span class="lineCov">       2014 :             j = -j;</span></a>
+<a name="787"><span class="lineNum">     787 </span><span class="lineCov">    1244430 : int64_t jacobi(int64_t n, int64_t k){</span></a>
+<a name="788"><span class="lineNum">     788 </span><span class="lineCov">    1244430 :     int64_t j = 1;</span></a>
+<a name="789"><span class="lineNum">     789 </span><span class="lineCov">    4387854 :     while(1){</span></a>
+<a name="790"><span class="lineNum">     790 </span><span class="lineCov">    5632284 :         int64_t s = __builtin_ctzll(n);</span></a>
+<a name="791"><span class="lineNum">     791 </span><span class="lineCov">    5632284 :         int64_t q = n &gt;&gt; s;</span></a>
+<a name="792"><span class="lineNum">     792 </span><span class="lineCov">    5632284 :         if((s&amp;1) &amp;&amp; ((k&amp;7) == 3 || ((k&amp;7) == 5))){</span></a>
+<a name="793"><span class="lineNum">     793 </span><span class="lineCov">    1371529 :             j = -j;</span></a>
 <a name="794"><span class="lineNum">     794 </span>            :         }</a>
-<a name="795"><span class="lineNum">     795 </span><span class="lineCov">       9173 :         if(q == 1){</span></a>
-<a name="796"><span class="lineNum">     796 </span><span class="lineCov">       1941 :             return j;</span></a>
-<a name="797"><span class="lineNum">     797 </span><span class="lineCov">       7232 :         }else if(q == k - 1){</span></a>
+<a name="795"><span class="lineNum">     795 </span><span class="lineCov">    5632284 :         if(q == 1){</span></a>
+<a name="796"><span class="lineNum">     796 </span><span class="lineCov">    1244430 :             return j;</span></a>
+<a name="797"><span class="lineNum">     797 </span><span class="lineCov">    4387854 :         }else if(q == k - 1){</span></a>
 <a name="798"><span class="lineNum">     798 </span><span class="lineNoCov">          0 :             return (k&amp;3)==1 ? j : -j;</span></a>
-<a name="799"><span class="lineNum">     799 </span><span class="lineCov">       7232 :         }else if((q&amp;2) &amp;&amp; (k&amp;2)){</span></a>
-<a name="800"><span class="lineNum">     800 </span><span class="lineCov">       1895 :             j = -j;</span></a>
+<a name="799"><span class="lineNum">     799 </span><span class="lineCov">    4387854 :         }else if((q&amp;2) &amp;&amp; (k&amp;2)){</span></a>
+<a name="800"><span class="lineNum">     800 </span><span class="lineCov">    1305309 :             j = -j;</span></a>
 <a name="801"><span class="lineNum">     801 </span>            :         }</a>
-<a name="802"><span class="lineNum">     802 </span><span class="lineCov">       7232 :         n = k%q;</span></a>
-<a name="803"><span class="lineNum">     803 </span><span class="lineCov">       7232 :         k = q;</span></a>
+<a name="802"><span class="lineNum">     802 </span><span class="lineCov">    4387854 :         n = k%q;</span></a>
+<a name="803"><span class="lineNum">     803 </span><span class="lineCov">    4387854 :         k = q;</span></a>
 <a name="804"><span class="lineNum">     804 </span>            :     }</a>
 <a name="805"><span class="lineNum">     805 </span>            : }</a>
 <a name="806"><span class="lineNum">     806 </span>            : </a>
-<a name="807"><span class="lineNum">     807 </span><span class="lineCov">        941 : int64_t rand_nr_i64(int64_t p){</span></a>
-<a name="808"><span class="lineNum">     808 </span><span class="lineCov">        486 :     while(1){</span></a>
-<a name="809"><span class="lineNum">     809 </span><span class="lineCov">        941 :         int64_t z = rand_u64(2, p);</span></a>
-<a name="810"><span class="lineNum">     810 </span><span class="lineCov">        941 :         if(jacobi(z, p) == -1){</span></a>
-<a name="811"><span class="lineNum">     811 </span><span class="lineCov">        455 :             return z;</span></a>
+<a name="807"><span class="lineNum">     807 </span><span class="lineCov">     244410 : int64_t rand_nr_i64(int64_t p){</span></a>
+<a name="808"><span class="lineNum">     808 </span><span class="lineCov">     122053 :     while(1){</span></a>
+<a name="809"><span class="lineNum">     809 </span><span class="lineCov">     244410 :         int64_t z = rand_u64(2, p);</span></a>
+<a name="810"><span class="lineNum">     810 </span><span class="lineCov">     244410 :         if(jacobi(z, p) == -1){</span></a>
+<a name="811"><span class="lineNum">     811 </span><span class="lineCov">     122357 :             return z;</span></a>
 <a name="812"><span class="lineNum">     812 </span>            :         }</a>
 <a name="813"><span class="lineNum">     813 </span>            :     }</a>
 <a name="814"><span class="lineNum">     814 </span>            : }</a>
 <a name="815"><span class="lineNum">     815 </span>            : </a>
-<a name="816"><span class="lineNum">     816 </span><span class="lineCov">        455 : int64_t sqrt_shanks(int64_t n, int64_t p){</span></a>
-<a name="817"><span class="lineNum">     817 </span><span class="lineCov">        455 :     int64_t s = __builtin_ctzll(p-1);</span></a>
-<a name="818"><span class="lineNum">     818 </span><span class="lineCov">        455 :     int64_t q = p &gt;&gt; s;//p-1 = q*2^s</span></a>
-<a name="819"><span class="lineNum">     819 </span><span class="lineCov">        455 :     int64_t z = rand_nr_i64(p);</span></a>
+<a name="816"><span class="lineNum">     816 </span><span class="lineCov">     122357 : int64_t sqrt_shanks(int64_t n, int64_t p){</span></a>
+<a name="817"><span class="lineNum">     817 </span><span class="lineCov">     122357 :     int64_t s = __builtin_ctzll(p-1);</span></a>
+<a name="818"><span class="lineNum">     818 </span><span class="lineCov">     122357 :     int64_t q = p &gt;&gt; s;//p-1 = q*2^s</span></a>
+<a name="819"><span class="lineNum">     819 </span><span class="lineCov">     122357 :     int64_t z = rand_nr_i64(p);</span></a>
 <a name="820"><span class="lineNum">     820 </span>            :     //printf(&quot;trying \&quot;nonresidue\&quot; %&quot;PRIu64&quot;\n&quot;, z);</a>
-<a name="821"><span class="lineNum">     821 </span><span class="lineCov">        455 :     int64_t m = s;</span></a>
-<a name="822"><span class="lineNum">     822 </span><span class="lineCov">        455 :     int64_t c = powmod(z, q, p);</span></a>
-<a name="823"><span class="lineNum">     823 </span><span class="lineCov">        455 :     int64_t t = powmod(n, q, p);</span></a>
-<a name="824"><span class="lineNum">     824 </span><span class="lineCov">        455 :     int64_t r = powmod(n, (q + 1) &gt;&gt; 1, p);</span></a>
-<a name="825"><span class="lineNum">     825 </span><span class="lineCov">       1119 :     while(t != 1){</span></a>
-<a name="826"><span class="lineNum">     826 </span><span class="lineCov">        664 :         int64_t i = 1;</span></a>
-<a name="827"><span class="lineNum">     827 </span><span class="lineCov">       1543 :         for(int64_t s = (int128_t)t*t%p; s != 1; s = (int128_t)s*s%p, ++i);</span></a>
-<a name="828"><span class="lineNum">     828 </span><span class="lineCov">        664 :         int64_t b = c;</span></a>
-<a name="829"><span class="lineNum">     829 </span><span class="lineCov">        924 :         for(int64_t j = 0; j &lt; m - i - 1; ++j){</span></a>
-<a name="830"><span class="lineNum">     830 </span><span class="lineCov">        260 :             b = (int128_t)b*b%p;</span></a>
+<a name="821"><span class="lineNum">     821 </span><span class="lineCov">     122357 :     int64_t m = s;</span></a>
+<a name="822"><span class="lineNum">     822 </span><span class="lineCov">     122357 :     int64_t c = powmod(z, q, p);</span></a>
+<a name="823"><span class="lineNum">     823 </span><span class="lineCov">     122357 :     int64_t t = powmod(n, q, p);</span></a>
+<a name="824"><span class="lineNum">     824 </span><span class="lineCov">     122357 :     int64_t r = powmod(n, (q + 1) &gt;&gt; 1, p);</span></a>
+<a name="825"><span class="lineNum">     825 </span><span class="lineCov">     305930 :     while(t != 1){</span></a>
+<a name="826"><span class="lineNum">     826 </span><span class="lineCov">     183573 :         int64_t i = 1;</span></a>
+<a name="827"><span class="lineNum">     827 </span><span class="lineCov">     427651 :         for(int64_t s = (int128_t)t*t%p; s != 1; s = (int128_t)s*s%p, ++i);</span></a>
+<a name="828"><span class="lineNum">     828 </span><span class="lineCov">     183573 :         int64_t b = c;</span></a>
+<a name="829"><span class="lineNum">     829 </span><span class="lineCov">     265445 :         for(int64_t j = 0; j &lt; m - i - 1; ++j){</span></a>
+<a name="830"><span class="lineNum">     830 </span><span class="lineCov">      81872 :             b = (int128_t)b*b%p;</span></a>
 <a name="831"><span class="lineNum">     831 </span>            :         }</a>
-<a name="832"><span class="lineNum">     832 </span><span class="lineCov">        664 :         m = i;</span></a>
-<a name="833"><span class="lineNum">     833 </span><span class="lineCov">        664 :         c = (int128_t)b*b%p;</span></a>
-<a name="834"><span class="lineNum">     834 </span><span class="lineCov">        664 :         t = (int128_t)t*c%p;</span></a>
-<a name="835"><span class="lineNum">     835 </span><span class="lineCov">        664 :         r = (int128_t)r*b%p;</span></a>
+<a name="832"><span class="lineNum">     832 </span><span class="lineCov">     183573 :         m = i;</span></a>
+<a name="833"><span class="lineNum">     833 </span><span class="lineCov">     183573 :         c = (int128_t)b*b%p;</span></a>
+<a name="834"><span class="lineNum">     834 </span><span class="lineCov">     183573 :         t = (int128_t)t*c%p;</span></a>
+<a name="835"><span class="lineNum">     835 </span><span class="lineCov">     183573 :         r = (int128_t)r*b%p;</span></a>
 <a name="836"><span class="lineNum">     836 </span>            :     }</a>
-<a name="837"><span class="lineNum">     837 </span><span class="lineCov">        455 :     return r;</span></a>
+<a name="837"><span class="lineNum">     837 </span><span class="lineCov">     122357 :     return r;</span></a>
 <a name="838"><span class="lineNum">     838 </span>            : }</a>
 <a name="839"><span class="lineNum">     839 </span>            : </a>
-<a name="840"><span class="lineNum">     840 </span><span class="lineNoCov">          0 : int64_t sqrt_cipolla(int64_t n, int64_t p){</span></a>
+<a name="840"><span class="lineNum">     840 </span><span class="lineCov">         20 : int64_t sqrt_cipolla(int64_t n, int64_t p){</span></a>
 <a name="841"><span class="lineNum">     841 </span>            :     int64_t a, w;</a>
 <a name="842"><span class="lineNum">     842 </span>            :     do{</a>
-<a name="843"><span class="lineNum">     843 </span><span class="lineNoCov">          0 :         a = rand_u64(2, p);</span></a>
-<a name="844"><span class="lineNum">     844 </span><span class="lineNoCov">          0 :         w = mod((int128_t)a*a%p - n, p);</span></a>
-<a name="845"><span class="lineNum">     845 </span><span class="lineNoCov">          0 :     }while(jacobi(w, p) != -1);</span></a>
-<a name="846"><span class="lineNum">     846 </span><span class="lineNoCov">          0 :     int64_t u_s = a, w_s = 1;</span></a>
-<a name="847"><span class="lineNum">     847 </span><span class="lineNoCov">          0 :     int64_t u_r = 1, w_r = 0;</span></a>
-<a name="848"><span class="lineNum">     848 </span><span class="lineNoCov">          0 :     for(int64_t k = (p + 1) &gt;&gt; 1; k; k &gt;&gt;= 1){</span></a>
-<a name="849"><span class="lineNum">     849 </span><span class="lineNoCov">          0 :         if(k&amp;1){</span></a>
-<a name="850"><span class="lineNum">     850 </span><span class="lineNoCov">          0 :             int64_t _w_r = (int128_t)u_r*w_s%p;</span></a>
-<a name="851"><span class="lineNum">     851 </span><span class="lineNoCov">          0 :             _w_r = (_w_r + (int128_t)w_r*u_s)%p;</span></a>
-<a name="852"><span class="lineNum">     852 </span><span class="lineNoCov">          0 :             u_r = (int128_t)u_r*u_s%p;</span></a>
-<a name="853"><span class="lineNum">     853 </span><span class="lineNoCov">          0 :             w_r = (int128_t)w_r*w_s%p;</span></a>
-<a name="854"><span class="lineNum">     854 </span><span class="lineNoCov">          0 :             w_r = (int128_t)w_r*w%p;</span></a>
-<a name="855"><span class="lineNum">     855 </span><span class="lineNoCov">          0 :             u_r = ((int128_t)u_r + w_r)%p;</span></a>
-<a name="856"><span class="lineNum">     856 </span><span class="lineNoCov">          0 :             w_r = _w_r;</span></a>
+<a name="843"><span class="lineNum">     843 </span><span class="lineCov">         20 :         a = rand_u64(2, p);</span></a>
+<a name="844"><span class="lineNum">     844 </span><span class="lineCov">         20 :         w = mod((int128_t)a*a%p - n, p);</span></a>
+<a name="845"><span class="lineNum">     845 </span><span class="lineCov">         20 :     }while(jacobi(w, p) != -1);</span></a>
+<a name="846"><span class="lineNum">     846 </span><span class="lineCov">         10 :     int64_t u_s = a, w_s = 1;</span></a>
+<a name="847"><span class="lineNum">     847 </span><span class="lineCov">         10 :     int64_t u_r = 1, w_r = 0;</span></a>
+<a name="848"><span class="lineNum">     848 </span><span class="lineCov">        297 :     for(int64_t k = (p + 1) &gt;&gt; 1; k; k &gt;&gt;= 1){</span></a>
+<a name="849"><span class="lineNum">     849 </span><span class="lineCov">        287 :         if(k&amp;1){</span></a>
+<a name="850"><span class="lineNum">     850 </span><span class="lineCov">         80 :             int64_t _w_r = (int128_t)u_r*w_s%p;</span></a>
+<a name="851"><span class="lineNum">     851 </span><span class="lineCov">         80 :             _w_r = (_w_r + (int128_t)w_r*u_s)%p;</span></a>
+<a name="852"><span class="lineNum">     852 </span><span class="lineCov">         80 :             u_r = (int128_t)u_r*u_s%p;</span></a>
+<a name="853"><span class="lineNum">     853 </span><span class="lineCov">         80 :             w_r = (int128_t)w_r*w_s%p;</span></a>
+<a name="854"><span class="lineNum">     854 </span><span class="lineCov">         80 :             w_r = (int128_t)w_r*w%p;</span></a>
+<a name="855"><span class="lineNum">     855 </span><span class="lineCov">         80 :             u_r = ((int128_t)u_r + w_r)%p;</span></a>
+<a name="856"><span class="lineNum">     856 </span><span class="lineCov">         80 :             w_r = _w_r;</span></a>
 <a name="857"><span class="lineNum">     857 </span>            :         }</a>
-<a name="858"><span class="lineNum">     858 </span><span class="lineNoCov">          0 :         int64_t _w_s = (int128_t)2*u_s*w_s%p;</span></a>
-<a name="859"><span class="lineNum">     859 </span><span class="lineNoCov">          0 :         u_s = (int128_t)u_s*u_s%p;</span></a>
-<a name="860"><span class="lineNum">     860 </span><span class="lineNoCov">          0 :         w_s = (int128_t)w_s*w_s%p;</span></a>
-<a name="861"><span class="lineNum">     861 </span><span class="lineNoCov">          0 :         w_s = (int128_t)w*w_s%p;</span></a>
-<a name="862"><span class="lineNum">     862 </span><span class="lineNoCov">          0 :         u_s = ((int128_t)u_s + w_s)%p;</span></a>
-<a name="863"><span class="lineNum">     863 </span><span class="lineNoCov">          0 :         w_s = _w_s;</span></a>
+<a name="858"><span class="lineNum">     858 </span><span class="lineCov">        287 :         int64_t _w_s = (int128_t)2*u_s*w_s%p;</span></a>
+<a name="859"><span class="lineNum">     859 </span><span class="lineCov">        287 :         u_s = (int128_t)u_s*u_s%p;</span></a>
+<a name="860"><span class="lineNum">     860 </span><span class="lineCov">        287 :         w_s = (int128_t)w_s*w_s%p;</span></a>
+<a name="861"><span class="lineNum">     861 </span><span class="lineCov">        287 :         w_s = (int128_t)w*w_s%p;</span></a>
+<a name="862"><span class="lineNum">     862 </span><span class="lineCov">        287 :         u_s = ((int128_t)u_s + w_s)%p;</span></a>
+<a name="863"><span class="lineNum">     863 </span><span class="lineCov">        287 :         w_s = _w_s;</span></a>
 <a name="864"><span class="lineNum">     864 </span>            :     }</a>
-<a name="865"><span class="lineNum">     865 </span><span class="lineNoCov">          0 :     return u_r;</span></a>
+<a name="865"><span class="lineNum">     865 </span><span class="lineCov">         10 :     return u_r;</span></a>
 <a name="866"><span class="lineNum">     866 </span>            : }</a>
 <a name="867"><span class="lineNum">     867 </span>            : </a>
-<a name="868"><span class="lineNum">     868 </span><span class="lineCov">       2126 : int64_t sqrt_mod(int64_t n, int64_t p){</span></a>
+<a name="868"><span class="lineNum">     868 </span><span class="lineCov">     491184 : int64_t sqrt_mod(int64_t n, int64_t p){</span></a>
 <a name="869"><span class="lineNum">     869 </span>            :     int64_t r;</a>
-<a name="870"><span class="lineNum">     870 </span><span class="lineCov">       2126 :     if((p&amp;3) == 3){</span></a>
-<a name="871"><span class="lineNum">     871 </span><span class="lineCov">       1003 :         r = powmod(n, (p + 1) &gt;&gt; 2, p);</span></a>
-<a name="872"><span class="lineNum">     872 </span><span class="lineCov">       1123 :     }else if((p&amp;7) == 5){</span></a>
-<a name="873"><span class="lineNum">     873 </span><span class="lineCov">        668 :         r = powmod(n, (p + 3) &gt;&gt; 3, p);</span></a>
-<a name="874"><span class="lineNum">     874 </span><span class="lineCov">        668 :         if(r*r%p != n){</span></a>
-<a name="875"><span class="lineNum">     875 </span><span class="lineCov">        359 :             r = (int128_t)r*powmod(2, (p - 1) &gt;&gt; 2, p)%p;</span></a>
+<a name="870"><span class="lineNum">     870 </span><span class="lineCov">     491184 :     if((p&amp;3) == 3){</span></a>
+<a name="871"><span class="lineNum">     871 </span><span class="lineCov">     246035 :         r = powmod(n, (p + 1) &gt;&gt; 2, p);</span></a>
+<a name="872"><span class="lineNum">     872 </span><span class="lineCov">     245149 :     }else if((p&amp;7) == 5){</span></a>
+<a name="873"><span class="lineNum">     873 </span><span class="lineCov">     122782 :         r = powmod(n, (p + 3) &gt;&gt; 3, p);</span></a>
+<a name="874"><span class="lineNum">     874 </span><span class="lineCov">     122782 :         if(r*r%p != n){</span></a>
+<a name="875"><span class="lineNum">     875 </span><span class="lineCov">      61159 :             r = (int128_t)r*powmod(2, (p - 1) &gt;&gt; 2, p)%p;</span></a>
 <a name="876"><span class="lineNum">     876 </span>            :         }//can add 9 mod 16 case</a>
 <a name="877"><span class="lineNum">     877 </span>            :     }else{</a>
-<a name="878"><span class="lineNum">     878 </span><span class="lineCov">        455 :         int64_t m = 64 - __builtin_clzll(p);</span></a>
-<a name="879"><span class="lineNum">     879 </span><span class="lineCov">        455 :         int64_t s = __builtin_ctzll(p - 1);</span></a>
-<a name="880"><span class="lineNum">     880 </span><span class="lineCov">        455 :         if(8*m + 20 &gt;= s*(s - 1)){</span></a>
-<a name="881"><span class="lineNum">     881 </span><span class="lineCov">        455 :             r = sqrt_shanks(n, p);</span></a>
+<a name="878"><span class="lineNum">     878 </span><span class="lineCov">     122367 :         int64_t m = 64 - __builtin_clzll(p);</span></a>
+<a name="879"><span class="lineNum">     879 </span><span class="lineCov">     122367 :         int64_t s = __builtin_ctzll(p - 1);</span></a>
+<a name="880"><span class="lineNum">     880 </span><span class="lineCov">     122367 :         if(8*m + 20 &gt;= s*(s - 1)){</span></a>
+<a name="881"><span class="lineNum">     881 </span><span class="lineCov">     122357 :             r = sqrt_shanks(n, p);</span></a>
 <a name="882"><span class="lineNum">     882 </span>            :         }else{</a>
-<a name="883"><span class="lineNum">     883 </span><span class="lineNoCov">          0 :             r = sqrt_cipolla(n, p);</span></a>
+<a name="883"><span class="lineNum">     883 </span><span class="lineCov">         10 :             r = sqrt_cipolla(n, p);</span></a>
 <a name="884"><span class="lineNum">     884 </span>            :         }</a>
 <a name="885"><span class="lineNum">     885 </span>            :     }</a>
-<a name="886"><span class="lineNum">     886 </span><span class="lineCov">       2126 :     return r;</span></a>
+<a name="886"><span class="lineNum">     886 </span><span class="lineCov">     491184 :     return r;</span></a>
 <a name="887"><span class="lineNum">     887 </span>            : }</a>
 <a name="888"><span class="lineNum">     888 </span>            : </a>
 </pre>

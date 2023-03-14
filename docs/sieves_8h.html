@@ -168,18 +168,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a30bfef1504f10261d7bbb2b343477d09"><td class="memItemLeft" align="right" valign="top">int64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a30bfef1504f10261d7bbb2b343477d09">compute_mertens_range</a> (uint64_t max, const uint64_t mobius[static max/32+1])</td></tr>
 <tr class="memdesc:a30bfef1504f10261d7bbb2b343477d09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Mertens function (sum of Mobius function) for every number from 0 to max.  <a href="sieves_8h.html#a30bfef1504f10261d7bbb2b343477d09">More...</a><br /></td></tr>
 <tr class="separator:a30bfef1504f10261d7bbb2b343477d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1eb91967c4ebe43565f2621f939db61"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#aa1eb91967c4ebe43565f2621f939db61">sieve_is_composite</a> (uint64_t max)</td></tr>
-<tr class="memdesc:aa1eb91967c4ebe43565f2621f939db61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a bitarray of whether or not each number from 0 to max is composite.  <a href="sieves_8h.html#aa1eb91967c4ebe43565f2621f939db61">More...</a><br /></td></tr>
-<tr class="separator:aa1eb91967c4ebe43565f2621f939db61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae25cdf44f57f252d4147c5f3f3fe605b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#ae25cdf44f57f252d4147c5f3f3fe605b">is_composite</a> (uint64_t n, const uint64_t buf[static n/(16 *15)+1])</td></tr>
-<tr class="memdesc:ae25cdf44f57f252d4147c5f3f3fe605b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a number is composite using a packed bitarray from <a class="el" href="sieves_8h.html#aa1eb91967c4ebe43565f2621f939db61">sieve_is_composite</a>.  <a href="sieves_8h.html#ae25cdf44f57f252d4147c5f3f3fe605b">More...</a><br /></td></tr>
-<tr class="separator:ae25cdf44f57f252d4147c5f3f3fe605b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf3b0c26e46ca8d5d3cfdea5f24f3758"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#adf3b0c26e46ca8d5d3cfdea5f24f3758">compute_pi_range</a> (uint64_t max, const uint64_t buf[static max/(16 *15)+1])</td></tr>
-<tr class="memdesc:adf3b0c26e46ca8d5d3cfdea5f24f3758"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the pi (prime counting) function for every number from 0 to max.  <a href="sieves_8h.html#adf3b0c26e46ca8d5d3cfdea5f24f3758">More...</a><br /></td></tr>
-<tr class="separator:adf3b0c26e46ca8d5d3cfdea5f24f3758"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7406fbf1df13447ba056d4805e5636a5"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a7406fbf1df13447ba056d4805e5636a5">compute_pi_from_tables</a> (uint64_t n, const uint64_t pi_table[static n/(16 *15)+1], const uint64_t buf[static n/(16 *15)+1])</td></tr>
-<tr class="memdesc:a7406fbf1df13447ba056d4805e5636a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value for the pi (prime counting) function for a particular number using precomputed tables.  <a href="sieves_8h.html#a7406fbf1df13447ba056d4805e5636a5">More...</a><br /></td></tr>
-<tr class="separator:a7406fbf1df13447ba056d4805e5636a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff23d64417b86ac7b22c7ccbbc54e820"><td class="memItemLeft" align="right" valign="top">uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820">sieve_is_composite</a> (uint64_t max)</td></tr>
+<tr class="memdesc:aff23d64417b86ac7b22c7ccbbc54e820"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a bitarray of whether or not each number from 0 to max is composite.  <a href="sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820">More...</a><br /></td></tr>
+<tr class="separator:aff23d64417b86ac7b22c7ccbbc54e820"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65e3f8fe2bf00fa39f40fb7468a134e3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a65e3f8fe2bf00fa39f40fb7468a134e3">is_composite</a> (uint64_t n, const uint8_t buf[static n/30+1])</td></tr>
+<tr class="memdesc:a65e3f8fe2bf00fa39f40fb7468a134e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a number is composite using a packed bitarray from <a class="el" href="sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820">sieve_is_composite</a>.  <a href="sieves_8h.html#a65e3f8fe2bf00fa39f40fb7468a134e3">More...</a><br /></td></tr>
+<tr class="separator:a65e3f8fe2bf00fa39f40fb7468a134e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a885035538c90202cc90bf1283ae0f1"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a3a885035538c90202cc90bf1283ae0f1">compute_pi_range</a> (uint64_t max, const uint8_t buf[static max/30+1])</td></tr>
+<tr class="memdesc:a3a885035538c90202cc90bf1283ae0f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the pi (prime counting) function for every number from 0 to max.  <a href="sieves_8h.html#a3a885035538c90202cc90bf1283ae0f1">More...</a><br /></td></tr>
+<tr class="separator:a3a885035538c90202cc90bf1283ae0f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6336c217fed87c24e43a5e1582c5865d"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a6336c217fed87c24e43a5e1582c5865d">compute_pi_from_tables</a> (uint64_t n, const uint64_t pi_table[static n/(16 *15)+1], const uint8_t buf[static n/30+1])</td></tr>
+<tr class="memdesc:a6336c217fed87c24e43a5e1582c5865d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value for the pi (prime counting) function for a particular number using precomputed tables.  <a href="sieves_8h.html#a6336c217fed87c24e43a5e1582c5865d">More...</a><br /></td></tr>
+<tr class="separator:a6336c217fed87c24e43a5e1582c5865d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6a8da8730b149433ac438cb106479e4"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#ae6a8da8730b149433ac438cb106479e4">sieve_primes</a> (uint64_t max, uint64_t *_num_primes)</td></tr>
 <tr class="memdesc:ae6a8da8730b149433ac438cb106479e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute an array of all primes from 0 to max.  <a href="sieves_8h.html#ae6a8da8730b149433ac438cb106479e4">More...</a><br /></td></tr>
 <tr class="separator:ae6a8da8730b149433ac438cb106479e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -654,14 +654,14 @@ uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sieve_primes_wh
 
 </div>
 </div>
-<a id="aa1eb91967c4ebe43565f2621f939db61"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1eb91967c4ebe43565f2621f939db61">&#9670;&nbsp;</a></span>sieve_is_composite()</h2>
+<a id="aff23d64417b86ac7b22c7ccbbc54e820"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff23d64417b86ac7b22c7ccbbc54e820">&#9670;&nbsp;</a></span>sieve_is_composite()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t* sieve_is_composite </td>
+          <td class="memname">uint8_t* sieve_is_composite </td>
           <td>(</td>
           <td class="paramtype">uint64_t&#160;</td>
           <td class="paramname"><em>max</em></td><td>)</td>
@@ -671,7 +671,7 @@ uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sieve_primes_wh
 </div><div class="memdoc">
 
 <p>Compute a bitarray of whether or not each number from 0 to max is composite. </p>
-<p>1 is composite, and 0 is considered composite here. The result should be used with <a class="el" href="sieves_8h.html#ae25cdf44f57f252d4147c5f3f3fe605b">is_composite</a> since it is packed (only stores bitflags for numbers coprime to 30). </p><dl class="params"><dt>Parameters</dt><dd>
+<p>1 is composite, and 0 is considered composite here. The result should be used with <a class="el" href="sieves_8h.html#a65e3f8fe2bf00fa39f40fb7468a134e3">is_composite</a> since it is packed (only stores bitflags for numbers coprime to 30). </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of sieving range in which to check compositeness for all numbers </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">_num_primes</td><td>the number of primes in the range will be stored here. May be NULL. </td></tr>
@@ -682,8 +682,8 @@ uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sieve_primes_wh
 
 </div>
 </div>
-<a id="ae25cdf44f57f252d4147c5f3f3fe605b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae25cdf44f57f252d4147c5f3f3fe605b">&#9670;&nbsp;</a></span>is_composite()</h2>
+<a id="a65e3f8fe2bf00fa39f40fb7468a134e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65e3f8fe2bf00fa39f40fb7468a134e3">&#9670;&nbsp;</a></span>is_composite()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -697,8 +697,8 @@ uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sieve_primes_wh
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint64_t&#160;</td>
-          <td class="paramname"><em>buf</em>[static n/(16 *15)+1]&#160;</td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>buf</em>[static n/30+1]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -708,11 +708,11 @@ uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sieve_primes_wh
       </table>
 </div><div class="memdoc">
 
-<p>Check if a number is composite using a packed bitarray from <a class="el" href="sieves_8h.html#aa1eb91967c4ebe43565f2621f939db61">sieve_is_composite</a>. </p>
+<p>Check if a number is composite using a packed bitarray from <a class="el" href="sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820">sieve_is_composite</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>the number to check if composite </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>packed bitarray from <a class="el" href="sieves_8h.html#aa1eb91967c4ebe43565f2621f939db61">sieve_is_composite</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>packed bitarray from <a class="el" href="sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820">sieve_is_composite</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -720,8 +720,8 @@ uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sieve_primes_wh
 
 </div>
 </div>
-<a id="adf3b0c26e46ca8d5d3cfdea5f24f3758"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf3b0c26e46ca8d5d3cfdea5f24f3758">&#9670;&nbsp;</a></span>compute_pi_range()</h2>
+<a id="a3a885035538c90202cc90bf1283ae0f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a885035538c90202cc90bf1283ae0f1">&#9670;&nbsp;</a></span>compute_pi_range()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -735,8 +735,8 @@ uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sieve_primes_wh
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint64_t&#160;</td>
-          <td class="paramname"><em>buf</em>[static max/(16 *15)+1]&#160;</td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>buf</em>[static max/30+1]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -747,19 +747,19 @@ uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sieve_primes_wh
 </div><div class="memdoc">
 
 <p>Compute the pi (prime counting) function for every number from 0 to max. </p>
-<p>The result should be used with <a class="el" href="sieves_8h.html#a7406fbf1df13447ba056d4805e5636a5">compute_pi_from_tables</a> since pi is only actually calculated at every 240th number since intermediate results can be computed with a single popcount on the packed buf bitarray. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The result should be used with <a class="el" href="sieves_8h.html#a6336c217fed87c24e43a5e1582c5865d">compute_pi_from_tables</a> since pi is only actually calculated at every 240th number since intermediate results can be computed with a single popcount on the packed buf bitarray. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of range to compute pi function </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>packed bitarray from <a class="el" href="sieves_8h.html#aa1eb91967c4ebe43565f2621f939db61">sieve_is_composite</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>packed bitarray from <a class="el" href="sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820">sieve_is_composite</a> </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>an array of pi values at every 240th number (use <a class="el" href="sieves_8h.html#a7406fbf1df13447ba056d4805e5636a5">compute_pi_from_tables</a>) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>an array of pi values at every 240th number (use <a class="el" href="sieves_8h.html#a6336c217fed87c24e43a5e1582c5865d">compute_pi_from_tables</a>) </dd></dl>
 
 </div>
 </div>
-<a id="a7406fbf1df13447ba056d4805e5636a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7406fbf1df13447ba056d4805e5636a5">&#9670;&nbsp;</a></span>compute_pi_from_tables()</h2>
+<a id="a6336c217fed87c24e43a5e1582c5865d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6336c217fed87c24e43a5e1582c5865d">&#9670;&nbsp;</a></span>compute_pi_from_tables()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -779,8 +779,8 @@ uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sieve_primes_wh
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint64_t&#160;</td>
-          <td class="paramname"><em>buf</em>[static n/(16 *15)+1]&#160;</td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>buf</em>[static n/30+1]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -794,8 +794,8 @@ uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sieve_primes_wh
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>the number to calculate pi for </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pi_table</td><td>array of partial pi values from <a class="el" href="sieves_8h.html#adf3b0c26e46ca8d5d3cfdea5f24f3758">compute_pi_range</a> </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>packed bitarray from <a class="el" href="sieves_8h.html#aa1eb91967c4ebe43565f2621f939db61">sieve_is_composite</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pi_table</td><td>array of partial pi values from <a class="el" href="sieves_8h.html#a3a885035538c90202cc90bf1283ae0f1">compute_pi_range</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>packed bitarray from <a class="el" href="sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820">sieve_is_composite</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -848,7 +848,7 @@ uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sieve_primes_wh
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="sieves_8h.html">sieves.h</a></li>
-    <li class="footer">Generated on Sat Mar 4 2023 20:46:53 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Mar 14 2023 21:33:12 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

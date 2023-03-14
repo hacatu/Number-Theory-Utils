@@ -4,7 +4,7 @@ var searchData=
   ['sieve_5fcarmichael_190',['sieve_carmichael',['../sieves_8h.html#ae19a3c1887d6cdc9375c32f0abfd2ab3',1,'sieves.h']]],
   ['sieve_5ffactorizations_191',['sieve_factorizations',['../sieves_8h.html#a55b7ec1e3f2ac442b0f098861f758cff',1,'sieves.h']]],
   ['sieve_5ffactors_192',['sieve_factors',['../sieves_8h.html#a1bca79bd17302449e4a95f833e2990c8',1,'sieves.h']]],
-  ['sieve_5fis_5fcomposite_193',['sieve_is_composite',['../sieves_8h.html#aa1eb91967c4ebe43565f2621f939db61',1,'sieves.h']]],
+  ['sieve_5fis_5fcomposite_193',['sieve_is_composite',['../sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820',1,'sieves.h']]],
   ['sieve_5flargest_5ffactors_194',['sieve_largest_factors',['../sieves_8h.html#a576d8ab23202853f3542828de64cdf90',1,'sieves.h']]],
   ['sieve_5fmobius_195',['sieve_mobius',['../sieves_8h.html#abdc6cda6e2a6ad9fa55e34267560af3a',1,'sieves.h']]],
   ['sieve_5fphi_196',['sieve_phi',['../sieves_8h.html#a0fd78cb343ce5afd768c28aacde7b99d',1,'sieves.h']]],
