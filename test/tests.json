@@ -1,4 +1,7 @@
 {
+	"test_sieve_primes": {
+		"no_red_tests": [[]]
+	},
 	"test_symbolic_pollard": {
 		"no_red_tests": [[]]
 	},
@@ -12,9 +15,6 @@
 		"no_red_tests": [[]]
 	},
 	"test_poly_factor": {
-		"no_red_tests": [[]]
-	},
-	"test_sieve_primes": {
 		"no_red_tests": [[]]
 	},
 	"test_sqrt_mod": {

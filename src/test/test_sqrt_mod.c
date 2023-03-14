@@ -4,7 +4,7 @@
 #include <nut/factorization.h>
 
 int main(){
-	uint64_t trials = 1000, passed = 0;
+	uint64_t trials = 1000000, passed = 0;
 	fprintf(stderr, "\e[1;34mFinding roots of n**2 - n + 1 mod p for %"PRIu64" random primes...\e[0m\n", trials);
 	for(uint64_t i = 0; i < trials; ++i){
 		int64_t p = rand_u64(2, 1ull << 30);
