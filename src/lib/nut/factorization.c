@@ -2,13 +2,13 @@
 #include <stddef.h>
 #include <sys/random.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include <nut/factorization.h>
 
 static inline void cleanup_free(void *_p){
-	void **p = p;
-	free(*p);
-	*p = NULL;
+	free(*(void**)_p);
+	*(void**)_p = NULL;
 }
 
 factors_t *init_factors_t_w(uint64_t max_primes){
@@ -118,22 +118,29 @@ uint64_t carmichael_lambda(const factors_t *factors){
 	return s;
 }
 
-int forall_divisors(const factors_t *factors, int (*f)(const factors_t*, uint64_t, void*), void *data){
+int forall_divisors_tmptmp(const factors_t *factors, int (*f)(const factors_t*, uint64_t, void*), void *data){
 //#pragma GCC diagnostic push
 //#pragma GCC diagnostic ignored "-Wincompatible-pointer-types"
 	factors_t *dfactors __attribute__((cleanup(cleanup_free))) = copy_factors_t(factors);
 	factors_t *pfactors __attribute__((cleanup(cleanup_free))) = copy_factors_t(factors);
 //#pragma GCC pop
+	return forall_divisors(factors, f, data, dfactors, pfactors);
+}
+
+int forall_divisors(const factors_t *factors, int (*f)(const factors_t*, uint64_t, void*), void *data, factors_t *dfactors, factors_t *pfactors){
+	dfactors->num_primes = factors->num_primes;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
+		dfactors->factors[i].prime = factors->factors[i].prime;
 		dfactors->factors[i].power = 0;
 		pfactors->factors[i].prime = 1;
 	}
 	uint64_t d = 1;
-	while(memcmp(factors->factors, dfactors->factors, factors->num_primes*sizeof(*factors->factors))){
+	while(1){
 		if(f(dfactors, d, data)){
 			return 1;
 		}
-		for(uint64_t i = 0; i < factors->num_primes; ++i){
+		uint64_t i;
+		for(i = 0; i < factors->num_primes; ++i){
 			if(dfactors->factors[i].power < factors->factors[i].power){
 				++dfactors->factors[i].power;
 				pfactors->factors[i].prime *= dfactors->factors[i].prime;
@@ -144,8 +151,54 @@ int forall_divisors(const factors_t *factors, int (*f)(const factors_t*, uint64_
 			d /= pfactors->factors[i].prime;
 			pfactors->factors[i].prime = 1;
 		}
+		if(i == factors->num_primes){
+			return 0;
+		}
 	}
-	return f(dfactors, d, data);
+}
+
+int forall_divisors_le_tmptmp(const factors_t *factors, uint64_t d_max, int (*f)(const factors_t*, uint64_t, void*), void *data){
+//#pragma GCC diagnostic push
+//#pragma GCC diagnostic ignored "-Wincompatible-pointer-types"
+	factors_t *dfactors __attribute__((cleanup(cleanup_free))) = copy_factors_t(factors);
+	factors_t *pfactors __attribute__((cleanup(cleanup_free))) = copy_factors_t(factors);
+//#pragma GCC pop
+	return forall_divisors_le(factors, d_max, f, data, dfactors, pfactors);
+}
+
+int forall_divisors_le(const factors_t *factors, uint64_t d_max, int (*f)(const factors_t*, uint64_t, void*), void *data, factors_t *dfactors, factors_t *pfactors){
+	dfactors->num_primes = factors->num_primes;
+	for(uint64_t i = 0; i < factors->num_primes; ++i){
+		dfactors->factors[i].prime = factors->factors[i].prime;
+		dfactors->factors[i].power = 0;
+		pfactors->factors[i].prime = 1;
+	}
+	uint64_t d = 1;
+	if(d_max <= 1){
+		return d_max && f(dfactors, d, data);
+	}
+	while(1){
+		if(f(dfactors, d, data)){
+			return 1;
+		}
+		uint64_t i;
+		for(i = 0; i < factors->num_primes; ++i){
+			if(dfactors->factors[i].power < factors->factors[i].power){
+				++dfactors->factors[i].power;
+				pfactors->factors[i].prime *= dfactors->factors[i].prime;
+				d *= dfactors->factors[i].prime;
+				if(d <= d_max){
+					break;
+				}
+			}
+			dfactors->factors[i].power = 0;
+			d /= pfactors->factors[i].prime;
+			pfactors->factors[i].prime = 1;
+		}
+		if(i == factors->num_primes){
+			return 0;
+		}
+	}
 }
 
 void factors_append(factors_t *factors, uint64_t m, uint64_t k){
@@ -198,13 +251,20 @@ void factors_combine(factors_t *factors, const factors_t *factors2, uint64_t k){
 int factors_fprint(FILE *file, const factors_t *factors){
 	int res = 0;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
-		res += fprintf(file, "%"PRIu64, factors->factors[i].prime);
-		if(factors->factors[i].power != 1){
-			res += fprintf(file, "^%"PRIu64, factors->factors[i].power);
+		uint64_t power = factors->factors[i].power;
+		if(!power){
+			continue;
 		}
-		if(i + 1 < factors->num_primes){
+		if(res){
 			res += fprintf(file, "*");
 		}
+		res += fprintf(file, "%"PRIu64, factors->factors[i].prime);
+		if(power != 1){
+			res += fprintf(file, "^%"PRIu64, power);
+		}
+	}
+	if(!res){
+		res += fprintf(file, "1");
 	}
 	return res;
 }

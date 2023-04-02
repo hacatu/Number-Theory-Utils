@@ -130,13 +130,32 @@ uint64_t euler_phi(const factors_t *factors) __attribute__((pure));
 /// @return lambda(n)
 uint64_t carmichael_lambda(const factors_t *factors) __attribute__((pure));
 
+/// Call { @link forall_divisors} with temporarily allocated dfactors and pfactors structs.
+int forall_divisors_tmptmp(const factors_t *factors, int (*f)(const factors_t*, uint64_t, void*), void *data);
+
 /// Call a given function on each divisor of a number, given its factorization.
 /// @param [in] factors: the factorization of n for which to compute all divisors
 /// @param [in] f: callback function.  Arguments are factorization of divisor, divisor, user data (respectively).
 /// Should return 0 to continue, or 1 to break.
 /// @param [in,out] data: user data (allows arbitrary data to be passed in and out of the callback)
+/// @param [in] dfactors: buffer to store internal work.  Should be allocated to hold at least factors->num_primes
+/// @param [in] pfactors: buffer to store internal work.  Should be allocated to hlod at least factors->num_primes
 /// @return 0 if the callback never returned 1 and all divisors were visited, or 1 if the callback ever returned nonzero.
-int forall_divisors(const factors_t *factors, int (*f)(const factors_t*, uint64_t, void*), void *data);
+int forall_divisors(const factors_t *factors, int (*f)(const factors_t*, uint64_t, void*), void *data, factors_t *dfactors, factors_t *pfactors);
+
+/// Call { @link forall_divisors_le} with temporarily allocated dfactors and pfactors structs.
+int forall_divisors_le_tmptmp(const factors_t *factors, uint64_t d_max, int (*f)(const factors_t*, uint64_t, void*), void *data);
+
+/// Call a given function on each divisor of a number, given its factorization, skipping divisors over a given bound.
+/// @param [in] factors: the factorization of n for which to compute all divisors
+/// @param [in] d_max: max divisor to visit.  This should be less than the product of factors, otherwise just use forall_divisors
+/// @param [in] f: callback function.  Arguments are factorization of divisor, divisor, user data (respectively).
+/// Should return 0 to continue, or 1 to break.
+/// @param [in,out] data: user data (allows arbitrary data to be passed in and out of the callback)
+/// @param [in] dfactors: buffer to store internal work.  Should be allocated to hold at least factors->num_primes
+/// @param [in] pfactors: buffer to store internal work.  Should be allocated to hlod at least factors->num_primes
+/// @return 0 if the callback never returned 1 and all divisors were visited, or 1 if the callback ever returned nonzero.
+int forall_divisors_le(const factors_t *factors, uint64_t d_max, int (*f)(const factors_t*, uint64_t, void*), void *data, factors_t *dfactors, factors_t *pfactors);
 
 /// Print a factorization of a number.
 /// @param [in,out] file: pointer to file to print to
