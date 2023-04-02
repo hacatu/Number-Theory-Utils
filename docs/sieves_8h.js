@@ -17,8 +17,5 @@ var sieves_8h =
     [ "compute_mertens_range", "sieves_8h.html#a30bfef1504f10261d7bbb2b343477d09", null ],
     [ "sieve_is_composite", "sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820", null ],
     [ "is_composite", "sieves_8h.html#a65e3f8fe2bf00fa39f40fb7468a134e3", null ],
-    [ "compute_pi_range", "sieves_8h.html#a3a885035538c90202cc90bf1283ae0f1", null ],
-    [ "compute_pi_from_tables", "sieves_8h.html#a6336c217fed87c24e43a5e1582c5865d", null ],
-    [ "sieve_primes", "sieves_8h.html#ae6a8da8730b149433ac438cb106479e4", null ],
-    [ "sieve_primes_wheel", "sieves_8h.html#a70fccebd5926478326fe21730a2e2f25", null ]
+    [ "sieve_primes", "sieves_8h.html#ae6a8da8730b149433ac438cb106479e4", null ]
 ];

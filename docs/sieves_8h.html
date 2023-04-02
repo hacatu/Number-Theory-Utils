@@ -174,18 +174,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a65e3f8fe2bf00fa39f40fb7468a134e3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a65e3f8fe2bf00fa39f40fb7468a134e3">is_composite</a> (uint64_t n, const uint8_t buf[static n/30+1])</td></tr>
 <tr class="memdesc:a65e3f8fe2bf00fa39f40fb7468a134e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a number is composite using a packed bitarray from <a class="el" href="sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820">sieve_is_composite</a>.  <a href="sieves_8h.html#a65e3f8fe2bf00fa39f40fb7468a134e3">More...</a><br /></td></tr>
 <tr class="separator:a65e3f8fe2bf00fa39f40fb7468a134e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a885035538c90202cc90bf1283ae0f1"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a3a885035538c90202cc90bf1283ae0f1">compute_pi_range</a> (uint64_t max, const uint8_t buf[static max/30+1])</td></tr>
-<tr class="memdesc:a3a885035538c90202cc90bf1283ae0f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the pi (prime counting) function for every number from 0 to max.  <a href="sieves_8h.html#a3a885035538c90202cc90bf1283ae0f1">More...</a><br /></td></tr>
-<tr class="separator:a3a885035538c90202cc90bf1283ae0f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6336c217fed87c24e43a5e1582c5865d"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a6336c217fed87c24e43a5e1582c5865d">compute_pi_from_tables</a> (uint64_t n, const uint64_t pi_table[static n/(16 *15)+1], const uint8_t buf[static n/30+1])</td></tr>
-<tr class="memdesc:a6336c217fed87c24e43a5e1582c5865d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value for the pi (prime counting) function for a particular number using precomputed tables.  <a href="sieves_8h.html#a6336c217fed87c24e43a5e1582c5865d">More...</a><br /></td></tr>
-<tr class="separator:a6336c217fed87c24e43a5e1582c5865d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6a8da8730b149433ac438cb106479e4"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#ae6a8da8730b149433ac438cb106479e4">sieve_primes</a> (uint64_t max, uint64_t *_num_primes)</td></tr>
 <tr class="memdesc:ae6a8da8730b149433ac438cb106479e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute an array of all primes from 0 to max.  <a href="sieves_8h.html#ae6a8da8730b149433ac438cb106479e4">More...</a><br /></td></tr>
 <tr class="separator:ae6a8da8730b149433ac438cb106479e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70fccebd5926478326fe21730a2e2f25"><td class="memItemLeft" align="right" valign="top"><a id="a70fccebd5926478326fe21730a2e2f25"></a>
-uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sieve_primes_wheel</b> (uint64_t max, uint64_t *_num_primes)</td></tr>
-<tr class="separator:a70fccebd5926478326fe21730a2e2f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="aaa5df5504d790281d05a032095e002a0"></a>
@@ -720,89 +711,6 @@ uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sieve_primes_wh
 
 </div>
 </div>
-<a id="a3a885035538c90202cc90bf1283ae0f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a885035538c90202cc90bf1283ae0f1">&#9670;&nbsp;</a></span>compute_pi_range()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint64_t* compute_pi_range </td>
-          <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>max</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t&#160;</td>
-          <td class="paramname"><em>buf</em>[static max/30+1]&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Compute the pi (prime counting) function for every number from 0 to max. </p>
-<p>The result should be used with <a class="el" href="sieves_8h.html#a6336c217fed87c24e43a5e1582c5865d">compute_pi_from_tables</a> since pi is only actually calculated at every 240th number since intermediate results can be computed with a single popcount on the packed buf bitarray. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of range to compute pi function </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>packed bitarray from <a class="el" href="sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820">sieve_is_composite</a> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>an array of pi values at every 240th number (use <a class="el" href="sieves_8h.html#a6336c217fed87c24e43a5e1582c5865d">compute_pi_from_tables</a>) </dd></dl>
-
-</div>
-</div>
-<a id="a6336c217fed87c24e43a5e1582c5865d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6336c217fed87c24e43a5e1582c5865d">&#9670;&nbsp;</a></span>compute_pi_from_tables()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint64_t compute_pi_from_tables </td>
-          <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint64_t&#160;</td>
-          <td class="paramname"><em>pi_table</em>[static n/(16 *15)+1], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t&#160;</td>
-          <td class="paramname"><em>buf</em>[static n/30+1]&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the value for the pi (prime counting) function for a particular number using precomputed tables. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>the number to calculate pi for </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pi_table</td><td>array of partial pi values from <a class="el" href="sieves_8h.html#a3a885035538c90202cc90bf1283ae0f1">compute_pi_range</a> </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>packed bitarray from <a class="el" href="sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820">sieve_is_composite</a> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>the number of primes &lt;= n </dd></dl>
-
-</div>
-</div>
 <a id="ae6a8da8730b149433ac438cb106479e4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae6a8da8730b149433ac438cb106479e4">&#9670;&nbsp;</a></span>sieve_primes()</h2>
 
@@ -848,7 +756,7 @@ uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sieve_primes_wh
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="sieves_8h.html">sieves.h</a></li>
-    <li class="footer">Generated on Tue Mar 14 2023 21:33:12 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Sun Apr 2 2023 09:04:16 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>
