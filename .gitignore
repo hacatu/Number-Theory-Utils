@@ -51,4 +51,5 @@ __pycache__/
 .vscode/
 gmon.out
 gprof.txt
+!test/*.log
 

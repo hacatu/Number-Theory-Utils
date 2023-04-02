@@ -11,7 +11,7 @@ HEADERS := $(shell find include -name '*.h')
 
 .PHONY: root_check
 root_check:
-	@if [ $$EUID -e 0 -a $(ALLOW_ROOT) -e 0 ]; then \
+	@if [[ $$EUID == 0 && $(ALLOW_ROOT) == 0 ]]; then \
 		@read -p "WARNING: building as root, continue anyway [y/n]?" -n 1 r; \
 		@echo; \
 		if [[ $$REPLY =~ ^[Yy]$$ ]]; then \
