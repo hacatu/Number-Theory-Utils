@@ -11,11 +11,23 @@
 	"test_factor64": {
 		"no_red_tests": [[]]
 	},
+	"test_forall_factors": {
+		"log_diff_tests": [[]]
+	},
+	"test_forall_factors_le": {
+		"no_red_tests": [[]]
+	},
+	"test_combine_factors": {
+		"no_red_tests": [[]]
+	},
 	"test_polynomial": {
 		"no_red_tests": [[]]
 	},
 	"test_poly_factor": {
 		"no_red_tests": [[]]
+	},
+	"test_poly_powmod": {
+		"log_diff_tests": [[]]
 	},
 	"test_sqrt_mod": {
 		"no_red_tests": [[]]
