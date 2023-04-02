@@ -22,7 +22,7 @@ int main(int argc, char **argv){
 	struct timespec start_time, end_time;
 	uint64_t num_primes;
 	clock_gettime(CLOCK_MONOTONIC_RAW, &start_time);
-	uint64_t *primes = sieve_primes_wheel(sieve_max, &num_primes);
+	uint64_t *primes = sieve_primes(sieve_max, &num_primes);
 	clock_gettime(CLOCK_MONOTONIC_RAW, &end_time);
 	if(!primes){
 		fprintf(stderr, "\e[1;31mCould not allocate memory!\e[0m\n");
