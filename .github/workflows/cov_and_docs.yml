@@ -4,6 +4,10 @@ on:
   push:
     branches: [ master ]
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   build:
 
