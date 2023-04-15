@@ -45,6 +45,8 @@ int cmp_polys(const poly_t *a, const poly_t *b){
 			}
 		}
 		min_len = b->len;
+	}else{
+		min_len = a->len;
 	}
 	for(uint64_t i = min_len; i-- > 0;){
 		if(a->coeffs[i] < b->coeffs[i]){
@@ -507,10 +509,8 @@ static int parse_monomial(poly_t *f, const char **_str){
 	}
 	if(have_vpow){
 		skip_whitespace(&str);
-		if(
-			(*str == '^', ++str) ||
-			(!strncmp(str, "**", 2), str += 2)
-		){
+		if(*str == '^' || !strncmp(str, "**", 2)){
+			str += *str == '^' ? 1 : 2;
 			skip_whitespace(&str);
 			bool have_pow = false;
 			while(isdigit(*str)){

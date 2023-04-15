@@ -53,7 +53,6 @@ static void test_prime_sieve(){
 		if(i == num_primes){
 			break;
 		}else if(primes[i] <= primes[i - 1]){
-			uint64_t j = i - 1;
 			succeeded = false;
 			do{
 				fprintf(stderr, "\e[1;31mSieve output is not strictly increasing (i=%"PRIu64"-%"PRIu64")\e[0m\n", i - 1, i);
