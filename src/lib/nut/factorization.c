@@ -356,7 +356,10 @@ uint64_t rand_u64(uint64_t a, uint64_t b){
 		ub -= ub%l;
 	}
 	do{
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-result"
 		getrandom(&r, bytes, 0);
+#pragma GCC diagnostic pop
 	}while(r >= ub);
 	return r%l + a;
 }
