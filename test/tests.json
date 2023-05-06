@@ -1,4 +1,10 @@
 {
+	"test_pi_sieve": {
+		"no_red_tests": [[]]
+	},
+	"test_dirichlet": {
+		"no_red_tests": [[]]
+	},
 	"test_sieve_primes": {
 		"no_red_tests": [[]]
 	},
