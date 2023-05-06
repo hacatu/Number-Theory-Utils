@@ -202,7 +202,6 @@ uint8_t *sieve_is_composite(uint64_t max);
 /// @return true if n is composite, false if n is prime
 bool is_composite(uint64_t n, const uint8_t buf[static n/30 + 1]);
 
-/*
 /// Compute the pi (prime counting) function for every number from 0 to max.
 /// The result should be used with {@link compute_pi_from_tables} since pi is only actually calculated at every 240th number
 /// since intermediate results can be computed with a single popcount on the packed buf bitarray.
@@ -217,7 +216,6 @@ uint64_t *compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1]);
 /// @param [in] buf: packed bitarray from {@link sieve_is_composite}
 /// @return the number of primes <= n
 uint64_t compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static (n + 30)/240], const uint8_t buf[static n/30 + 1]);
-*/
 
 /// Compute an array of all primes from 0 to max.
 /// @param [in] max: inclusive upper bound of sieving range

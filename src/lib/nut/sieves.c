@@ -635,7 +635,7 @@ uint8_t *sieve_is_composite(uint64_t max){
 
 bool is_composite(uint64_t n, const uint8_t buf[static n/30 + 1]){
 	if(n < 6){
-		return n == 2 || n == 3 || n == 5;
+		return n != 2 && n != 3 && n != 5;
 	}
 	uint64_t r = n%30;
 	uint64_t q = n/30;
@@ -648,74 +648,51 @@ bool is_composite(uint64_t n, const uint8_t buf[static n/30 + 1]){
 		case 19: return buf[q] & 0x20;
 		case 23: return buf[q] & 0x40;
 		case 29: return buf[q] & 0x80;
-		default: return false;
+		default: return true;
 	}
 }
 
-/*
 uint64_t *compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1]){
-*/
-	/* We want to build a table of pi evaluated at some landmark numbers
-	 * so that every number n is within 64 wheel steps of a landmark number.
-	 * Each byte in buf stores prime flags for 8 wheel steps.
-	 * So for n, i = n//(30*8) is the index in the pi table that is at most 64 steps before n.
+	/* buf[i] tells us the primality of 30*i + 1, 30*i + 7, 30*i + 11, ..., 30*i + 29.
+	 * Thus, we want res[i] to tell us the number of prime numbers from 1 up to 30*(i + 1)
+	 * and so in general res[i] = popcount(buf[i]) + res[i - 1].
+	 * However, res[0], the number of primes up to 30, is instead 10.
+	 * Finally, since max is inclusive, we must have res[max/30 - 1].
+	 * The -1 is because since res[0] is the number of primes up to 30, for arguments i < 30 we have to
+	 * special case their lookup, so the domain essentially starts at 30.
 	 */
-/*
-	uint64_t res_len = (max + 30)/240;
+	uint64_t res_len = max/30;
 	uint64_t *res = calloc(res_len, sizeof(uint64_t));
 	if(!res){
 		return NULL;
 	}
-	for(uint64_t i = 0, acc = 0; i + 1 < res_len; ++i){
-		uint64_t mask = buf[8*i]
-			| (uint64_t)buf[8*i + 1] << 8
-			| (uint64_t)buf[8*i + 2] << 16
-			| (uint64_t)buf[8*i + 3] << 24
-			| (uint64_t)buf[8*i + 4] << 32
-			| (uint64_t)buf[8*i + 5] << 40
-			| (uint64_t)buf[8*i + 6] << 48
-			| (uint64_t)buf[8*i + 7] << 56;
-		res[i + 1] = acc += __builtin_popcountll(~mask);
+	res[0] = 10;
+	for(uint64_t i = 1, acc = 10; i < res_len; ++i){
+		res[i] = acc += __builtin_popcount(0xFF&~buf[i]);
 	}
 	return res;
 }
 
-uint64_t compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static (n + 30)/240], const uint8_t buf[static n/30 + 1]){
-	if(n < 2){
-		return 0;
+uint64_t compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static n/30], const uint8_t buf[static n/30 + 1]){
+	if(n < 30){
+		uint64_t res;
+		for(res = 0; small_primes[res] <= n; ++res);
+		return res;
 	}
-	uint64_t q = n/30, r = n%30;
-	uint64_t i = q >> 3;
-	uint64_t res = pi_table[i];
-	if(r >= 29){r = 7;}
-	else if(r >= 23){r = 6;}
-	else if(r >= 19){r = 5;}
-	else if(r >= 17){r = 4;}
-	else if(r >= 13){r = 3;}
-	else if(r >= 11){r = 2;}
-	else if(r >= 7){r = 1;}
-	else if(r >= 1){r = 0;}
-	else{r = 8;}
-	uint64_t mask = 0;
-	switch(q&0x7){
-		case 7: mask |= (uint64_t)buf[8*i + 7] << 56; [[fallthrough]];
-		case 6: mask |= (uint64_t)buf[8*i + 6] << 48; [[fallthrough]];
-		case 5: mask |= (uint64_t)buf[8*i + 5] << 40; [[fallthrough]];
-		case 4: mask |= (uint64_t)buf[8*i + 4] << 32; [[fallthrough]];
-		case 3: mask |= (uint64_t)buf[8*i + 3] << 24; [[fallthrough]];
-		case 2: mask |= (uint64_t)buf[8*i + 2] << 16; [[fallthrough]];
-		case 1: mask |= (uint64_t)buf[8*i + 1] << 8; [[fallthrough]];
-		case 0: mask |= (uint64_t)buf[8*i]; break;
-	}
-	if(r == 8){
-		return res + __builtin_popcountll(mask);
-	}
-	uint64_t n_bits = 8*(q&0x7) + r;
-	if(n_b)
-	mask &= ~(~0ull << (8*(q&0x7) + ));
-	return res + __builtin_popcountll(mask);
+	uint64_t q = n/30;
+	uint64_t r = n%30;
+	uint64_t mask;
+	if(!r){mask = 0x00;}
+	else if(r < 7){mask = 0x01;}
+	else if(r < 11){mask = 0x03;}
+	else if(r < 13){mask = 0x07;}
+	else if(r < 17){mask = 0x0f;}
+	else if(r < 19){mask = 0x1f;}
+	else if(r < 23){mask = 0x3f;}
+	else if(r < 29){mask = 0x7f;}
+	else{mask = 0xff;}
+	return pi_table[q-1] + __builtin_popcount(mask&~buf[q]);
 }
-*/
 
 static uint64_t *copy_small_primes(uint64_t max, uint64_t *_num_primes){
 	uint64_t n = 0;
