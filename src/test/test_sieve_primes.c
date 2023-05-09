@@ -198,6 +198,7 @@ int main(){
 	test_function_sieve(sieve_sigma_0, divisor_count, "sieve_sigma_0", "divisor count", "divisor counts");
 	test_function_sieve(sieve_sigma_1, divisor_sum, "sieve_sigma_1", "divisor sum", "divisor sums");
 	test_function1_sieve(sieve_sigma_e, divisor_power_sum, 2, "sieve_sigma_e(2)", "divisor square sum", "divisor square sums");
+	test_function1_sieve(sieve_dk, divisor_tuple_count, 3, "sieve_dk(3)", "divisor triple counts", "divisor square sums");
 	test_function_sieve(sieve_phi, euler_phi, "sieve_phi", "euler phi", "euler phi");
 	test_function_sieve(sieve_carmichael, carmichael_lambda, "sieve_carmichael", "carmichael lambda", "carmichael lambda");
 	free(fzn_buf);

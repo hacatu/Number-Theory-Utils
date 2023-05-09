@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <pthread.h>
 
+#include <nut/modular_math.h>
 #include <nut/factorization.h>
 #include <nut/sieves.h>
 
@@ -227,6 +228,33 @@ uint64_t *sieve_sigma_e(uint64_t max, uint64_t e){
 				a *= n;
 			}
 			buf[m] *= (pow_u64(a, e) - 1)/(pow_u64(n, e) - 1);
+			if(__builtin_add_overflow(m, n, &m)){
+				break;
+			}
+		}
+	}
+	return buf;
+}
+
+uint64_t *sieve_dk(uint64_t max, uint64_t k){
+	uint64_t *buf = malloc((max + 1)*sizeof(uint64_t));
+	if(!buf){
+		return NULL;
+	}
+	for(uint64_t i = 1; i <= max && i; ++i){
+		buf[i] = 1;
+	}
+	for(uint64_t n = 2; n <= max && n; ++n){//TODO: optimize loop
+		if(buf[n] != 1){
+			continue;
+		}
+		for(uint64_t m = n; m <= max;){
+			uint64_t m1 = m, a = 0;
+			while(m1%n == 0){
+				m1 /= n;
+				++a;
+			}
+			buf[m] *= binom_u64(a + k - 1, k - 1);
 			if(__builtin_add_overflow(m, n, &m)){
 				break;
 			}

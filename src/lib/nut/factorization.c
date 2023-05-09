@@ -77,6 +77,21 @@ uint64_t divisor_power_sum(const factors_t *factors, uint64_t power){
 	return s;
 }
 
+uint64_t divisor_tuple_count(const factors_t *factors, uint64_t k){
+	if(k == 0){
+		return !factors->num_primes;
+	}else if(k == 1){
+		return 1;
+	}else if(k == 2){
+		return divisor_count(factors);
+	}
+	uint64_t s = 1;
+	for(uint64_t i = 0; i < factors->num_primes; ++i){
+		s *= binom_u64(factors->factors[i].power + k - 1, k - 1);
+	}
+	return s;
+}
+
 void factors_power(factors_t *factors, uint64_t power){
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		factors->factors[i].power *= power;
