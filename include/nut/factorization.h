@@ -72,7 +72,7 @@ typedef struct{
 /// Allocate a factors structure that can hold a given number of distinct primes.
 /// @param [in] max_primes: the number of distinct primes that should be storable
 /// @return pointer to factors structure that can hold max_primes.  pointer needs to be free'd
-factors_t *init_factors_t_w(uint64_t max_primes) __attribute__((malloc));
+__attribute__((malloc)) factors_t *init_factors_t_w(uint64_t max_primes);
 
 /// Allocate a factors structure that can hold all factors of n, even if it has as many prime factors as possible.
 /// 
@@ -81,29 +81,29 @@ factors_t *init_factors_t_w(uint64_t max_primes) __attribute__((malloc));
 /// @param [in] num_primes: number of primes in array
 /// @param [in] primes: array of primes
 /// @return pointer to factors structure that can hold enough distinct primes to factor any number up through n.  pointer needs to be free'd
-factors_t *init_factors_t_ub(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes]) __attribute__((malloc));
+__attribute__((malloc)) factors_t *init_factors_t_ub(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes]);
 
 /// Allocate a copy of a factors struct, but with only enough memory to store its current factors and not its max capacity if higher
 /// @param [in] factors: the struct to copy
 /// @return a copy of the input or NULL on allocation failure
-factors_t *copy_factors_t(const factors_t *factors) __attribute__((malloc));
+__attribute__((malloc)) factors_t *copy_factors_t(const factors_t *factors);
 
 /// Multiply a factorization into a number.
 /// @param [in] factors: pointer to factors struct, as obtained from { @link factor_trial_div}
 /// @return product of prime powers described by factors
-uint64_t factors_product(const factors_t *factors) __attribute__((pure));
+__attribute__((pure)) uint64_t factors_product(const factors_t *factors);
 
 /// Find the number of divisors of a number given its prime factorization, including itself and 1.
 /// Works by multiplying power + 1 for all prime factors
 /// @param [in] factors: pointer to factors struct, as obtained from { @link factor_trial_div}
 /// @return number of divisors
-uint64_t divisor_count(const factors_t *factors) __attribute__((pure));
+__attribute__((pure)) uint64_t divisor_count(const factors_t *factors);
 
 /// Find the sum of divisors of a number given its prime factorization, including itself and 1.
 /// Works by multiplying (prime**(power+1)-1)/(prime-1) for all prime factors
 /// @param [in] factors: pointer to factors struct, as obtained from { @link factor_trial_div}
 /// @return sum of divisors
-uint64_t divisor_sum(const factors_t *factors) __attribute__((pure));
+__attribute__((pure)) uint64_t divisor_sum(const factors_t *factors);
 
 /// Find the sum of powers of divisors of a number given its prime factorization, including itself and 1.
 /// Note this is NOT the same as the sum of divisors of a number.
@@ -112,7 +112,14 @@ uint64_t divisor_sum(const factors_t *factors) __attribute__((pure));
 /// @param [in] factors: pointer to factors struct, as obtained from { @link factor_trial_div}
 /// @param [in] power: power of divisors to sum
 /// @return sum of divisor powers
-uint64_t divisor_power_sum(const factors_t *factors, uint64_t power) __attribute__((pure));
+__attribute__((pure)) uint64_t divisor_power_sum(const factors_t *factors, uint64_t power);
+
+/// Find the number of k-tuples with product n. given the factorization of n.
+/// Works by multiplying binom(power + k, k) for all prime factors, where power is the power of eaach prime
+/// @param [in] factors: pointer to factors struct, as obtained from { @link factor_trial_div}
+/// @param [in] k: tuple length
+/// @return number of factorizations into k numbers, allowing repeats and considering order
+__attribute__((pure)) uint64_t divisor_tuple_count(const factors_t *factors, uint64_t k);
 
 /// Raise a factorization to a power, ie multiply all exponents by a constant.
 /// @param [in,out] factors: factorization to raise to a power
@@ -122,13 +129,13 @@ void factors_power(factors_t *factors, uint64_t power);
 /// Find Euler's Phi function, the number of coprime numbers less than n.
 /// @param [in] factors: the factorization of n for which to compute phi
 /// @return phi(n)
-uint64_t euler_phi(const factors_t *factors) __attribute__((pure));
+__attribute__((pure)) uint64_t euler_phi(const factors_t *factors);
 
 /// Find Carmichael's Lambda function, the smallest exponent m so a^m = 1 for all 0 < a < n.
 /// Always divides phi(n).
 /// @param [in] factors: the factorization of n for which to compute the carmichael function
 /// @return lambda(n)
-uint64_t carmichael_lambda(const factors_t *factors) __attribute__((pure));
+__attribute__((pure)) uint64_t carmichael_lambda(const factors_t *factors);
 
 /// Call { @link forall_divisors} with temporarily allocated dfactors and pfactors structs.
 int forall_divisors_tmptmp(const factors_t *factors, int (*f)(const factors_t*, uint64_t, void*), void *data);
@@ -188,7 +195,7 @@ void factors_combine(factors_t *factors, const factors_t *factors2, uint64_t k);
 /// 7 partictular bases are used so that no composite number will falsely be reported as prime for the entire 64-bit range
 /// @param [in] n: number to check for primality
 /// @return true if n is prime, false otherwise
-int is_prime_dmr(uint64_t n) __attribute__((const));
+__attribute__((const)) int is_prime_dmr(uint64_t n);
 
 /// Factor out all powers of a given array of primes.
 ///
@@ -201,7 +208,7 @@ int is_prime_dmr(uint64_t n) __attribute__((const));
 /// @param [in] primes: the array of primes
 /// @param [out] factors: pointer to struct where factors will be stored
 /// @return n with all factors found and stored in factors divided out.  Thus if n factors completely over the given primes, 1 is returned.
-uint64_t factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], factors_t *factors) __attribute__((pure));
+__attribute__((pure)) uint64_t factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], factors_t *factors);
 
 /// Factor a number using a variety of approaches based on its size.
 ///
@@ -224,7 +231,7 @@ uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes
 /// @param [in] a: the number to take the nth root of
 /// @param [in] n: root to take
 /// @return floor(a**(1/n)), ie the largest integer x such that x**n <= a
-uint64_t u64_nth_root(uint64_t a, uint64_t n) __attribute__((const));
+__attribute__((const)) uint64_t u64_nth_root(uint64_t a, uint64_t n);
 
 /// Check if a is a perfect power of some integer.
 ///
@@ -264,14 +271,14 @@ uint64_t u64_nth_root(uint64_t a, uint64_t n) __attribute__((const));
 /// @param [out] _base: if a is found to be a perfect power, store the base here
 /// @param [out] _exp: if a is found to be a perfect power, store the exponent here
 /// @return true if a is a perfect power (with exponent max or lower), false otherwise (could mean a is not a perfect power, or could mean a is a perfect power with exponent max + 1 to 61)
-bool is_perfect_power(uint64_t a, uint64_t max, uint64_t *_base, uint64_t *_exp);
+__attribute__((access(write_only, 3), access(write_only, 4))) bool is_perfect_power(uint64_t a, uint64_t max, uint64_t *_base, uint64_t *_exp);
 
 /// Try to find a factor of a number using Pollard's Rho algorithm with Floyd cycle finding.
 /// Note that this will not find factors of 4 or 25 no matter what x is.
 /// @param [in] n: number to find a factor of
 /// @param [in] x: random value mod n
 /// @return a nontrivial factor of n if found, 1 or n otherwise
-uint64_t factor1_pollard_rho(uint64_t n, uint64_t x) __attribute__((const));
+__attribute__((const)) uint64_t factor1_pollard_rho(uint64_t n, uint64_t x);
 
 /// Try to find a factor of a number using Pollard's Rho algorithm with Brent cycle finding and gcd coalescing.
 /// Note that his will not find factors of 4 or 25 no matter what x is.
@@ -281,7 +288,7 @@ uint64_t factor1_pollard_rho(uint64_t n, uint64_t x) __attribute__((const));
 /// @param [in] x: random value mod n
 /// @param [in] m: number of iterations per gcd check
 /// @return a nontrivial factor of n if found, 1 or n otherwise
-uint64_t factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m) __attribute__((const));
+__attribute__((const)) uint64_t factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m);
 
 /// Try to find a factor of a number using Lenstra ecf.
 ///
@@ -291,7 +298,7 @@ uint64_t factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m) __attribu
 /// @param [in] x, y, a: random values mod n
 /// @param [in] B: number of trials before giving up (we compute kP for k from 2 to B)
 /// @return a nontrivial factor of n if found, 1 or n otherwise
-int64_t factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B) __attribute__((const));
+__attribute__((const)) int64_t factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B);
 
 /// Same as { @link factor1_lenstra} but using a projective Montgomery curve and Montgomery ladder.
 ///
@@ -301,7 +308,7 @@ int64_t factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B) _
 /// @param [in] x, y, a: random numbers mod n
 /// @param [in] B: number of trials before giving up (we compute kP for k from 2 to B)
 /// @return a nontrivial factor of n if found, 1 or n otherwise
-int64_t factor1_lenstra_montgomery(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B) __attribute__((const));
+__attribute__((const)) int64_t factor1_lenstra_montgomery(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B);
 
 
 

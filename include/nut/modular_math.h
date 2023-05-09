@@ -36,8 +36,7 @@ typedef struct{
 /// Compute nonnegative integral power of integer using binary exponentiation.
 /// @param [in] b, e: base and exponent
 /// @return b^e, not checked for overflow
-static inline uint64_t pow_u64(uint64_t b, uint64_t e) __attribute__((const));
-static inline uint64_t pow_u64(uint64_t b, uint64_t e){
+__attribute__((const)) static inline uint64_t pow_u64(uint64_t b, uint64_t e){
 	uint64_t r = 1;
 	while(e){
 		if(e&1){
@@ -49,8 +48,7 @@ static inline uint64_t pow_u64(uint64_t b, uint64_t e){
 	return r;
 }
 
-static inline uint128_t pow_u128(uint128_t b, uint64_t e) __attribute__((const));
-static inline uint128_t pow_u128(uint128_t b, uint64_t e){
+__attribute__((const)) static inline uint128_t pow_u128(uint128_t b, uint64_t e){
 	uint128_t r = 1;
 	while(e){
 		if(e&1){
@@ -65,7 +63,18 @@ static inline uint128_t pow_u128(uint128_t b, uint64_t e){
 /// Compute nonnegative integral power of a number modulo another using binary exponentiation.
 /// @param [in] b, e, n: base, exponent, and modulus
 /// @return b^e mod n, computed via binary exponentiation
-uint64_t powmod(uint64_t b, uint64_t e, uint64_t n) __attribute__((const));
+__attribute__((const)) uint64_t powmod(uint64_t b, uint64_t e, uint64_t n);
+
+__attribute__((const)) static inline uint64_t binom_u64(uint64_t n, uint64_t k){
+	uint64_t res = 1;
+	if(n - k < k){
+		k = n - k;
+	}
+	for(uint64_t i = 0; i < k; ++i){
+		res = res*(n - i)/(1 + i);
+	}
+	return res;
+}
 
 /// Generate a (pseudo)random integer uniformly from [a, b).
 ///
@@ -87,12 +96,7 @@ uint64_t rand_u64(uint64_t a, uint64_t b);
 /// @param [in] a, b: numbers to find gcd of
 /// @param [out] _t, _s: pointers to output x and y to respectively (ignored if NULL)
 /// @return d
-static inline int64_t egcd(int64_t a, int64_t b, int64_t *_t, int64_t *_s)
-#ifndef DOXYGEN
-__attribute__((access (write_only, 3), access (write_only, 4)))
-#endif
-;
-static inline int64_t egcd(int64_t a, int64_t b, int64_t *_t, int64_t *_s){
+__attribute__((access(write_only, 3), access(write_only, 4))) static inline int64_t egcd(int64_t a, int64_t b, int64_t *_t, int64_t *_s){
 	int64_t r0 = b, r1 = a;
 	int64_t s0 = 1, s1 = 0;
 	int64_t t0 = 0, t1 = 1;
@@ -120,8 +124,7 @@ static inline int64_t egcd(int64_t a, int64_t b, int64_t *_t, int64_t *_s){
 /// Compute the Euclidean remainder r = a mod n for positive n so that 0 <= r < n.
 /// @param [in] a, n: dividend and divisor
 /// @return a mod n
-static inline int64_t mod(int64_t a, int64_t n) __attribute__((const));
-static inline int64_t mod(int64_t a, int64_t n){
+__attribute__((const)) static inline int64_t mod(int64_t a, int64_t n){
 	int64_t r = a%n;
 	if(r < 0){
 		r += n;
@@ -133,8 +136,7 @@ static inline int64_t mod(int64_t a, int64_t n){
 /// @param [in] a, p, b, q: Chinese Remainder Theorem parameters.  The residues a and b should not be negative.
 /// The moduli p and q should be coprime.
 /// @return 0 <= 0 < pq so that n = a mod p and n = b mod q
-static inline int64_t lift_crt(int64_t a, int64_t p, int64_t b, int64_t q) __attribute__((const));
-static inline int64_t lift_crt(int64_t a, int64_t p, int64_t b, int64_t q){
+__attribute__((const)) static inline int64_t lift_crt(int64_t a, int64_t p, int64_t b, int64_t q){
 	int64_t x, y;
 	egcd(p, q, &x, &y);
 	return mod(b*p%(p*q)*x + a*q%(p*q)*y, p*q);
@@ -144,7 +146,7 @@ static inline int64_t lift_crt(int64_t a, int64_t p, int64_t b, int64_t q){
 /// Divides the product by the gcd so can overflow for large arguments
 /// @param [in] a, b: numbers to find lcm of
 /// @return lcm(a, b)
-static inline int64_t lcm(int64_t a, int64_t b){
+__attribute__((const)) static inline int64_t lcm(int64_t a, int64_t b){
 	return a*b/egcd(a, b, NULL, NULL);
 }
 
@@ -153,7 +155,7 @@ static inline int64_t lcm(int64_t a, int64_t b){
 /// Uses modified euclidean algorithm.
 /// @param [in] n, k: Jacobi symbol parameters
 /// @return Jacobi symbol (0 if k | n, +1 if n is a quadratic residue mod an odd number of prime divisors of k (with multiplicity), -1 otherwise)
-int64_t jacobi(int64_t n, int64_t k) __attribute__((const));
+__attribute__((const)) int64_t jacobi(int64_t n, int64_t k);
 
 /// Compute a random number mod a prime that is not a quadratic residue.
 ///
@@ -179,7 +181,7 @@ int64_t sqrt_shanks(int64_t n, int64_t p);
 /// @param [in] n: a quadratic residue mod p
 /// @param [in] p: a prime
 /// @return r so that r^2 = n mod p
-int64_t sqrt_cipolla(int64_t n, int64_t p);
+__attribute__((const)) int64_t sqrt_cipolla(int64_t n, int64_t p);
 
 /// Compute the square root of a quadratic residue mod a prime.
 ///

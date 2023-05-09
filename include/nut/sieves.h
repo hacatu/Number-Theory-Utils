@@ -25,14 +25,14 @@
 /// decision diagram based on comparing the number to 2, 2*3, 2*3*5, etc.
 /// @param [in] max: number to find max unique prime divisors of
 /// @return the largest number of unique prime divisors any number not exceeding max can possibly have
-uint64_t max_prime_divs(uint64_t max) __attribute__((const));
+__attribute__((const)) uint64_t max_prime_divs(uint64_t max);
 
 /// Compute an upper bound on the number of primes up to max.
 /// This uses an inequality involving log derived from the prime number theorem to always get an
 /// upper bound.
 /// @param [in] max: number to find the number of primes up to
 /// @param an upper bound on the number of primes up to max
-uint64_t max_primes_le(uint64_t max) __attribute__((const));
+__attribute__((const)) uint64_t max_primes_le(uint64_t max);
 
 /// Get an entry from a variable pitch array.
 /// In a normal array, the element type is a complete type with size known at compile time, or even a variably
@@ -48,8 +48,7 @@ uint64_t max_primes_le(uint64_t max) __attribute__((const));
 /// offsetof(type, fla_member) + w*fla_element_size, but a more complex computation should be used if alignment is critically important)
 /// @param [in] i: index of element to get
 /// @return pointer to the i-th member of an array with given base and pitch
-static inline void *pitch_arr_get(void *buf, size_t pitch, uint64_t i) __attribute__((pure));
-static inline void *pitch_arr_get(void *buf, size_t pitch, uint64_t i){
+__attribute__((pure)) static inline void *pitch_arr_get(void *buf, size_t pitch, uint64_t i){
 	return buf + i*pitch;
 }
 
@@ -59,8 +58,7 @@ static inline void *pitch_arr_get(void *buf, size_t pitch, uint64_t i){
 /// @param [in] buf: pointer to bitarray
 /// @param [in] i: index of element to get
 /// @return 0 if i-th element is false, nonzero otherwise
-static inline uint64_t bitarray_get(const uint64_t *buf, uint64_t i) __attribute__((pure));
-static inline uint64_t bitarray_get(const uint64_t *buf, uint64_t i){
+__attribute__((pure)) static inline uint64_t bitarray_get(const uint64_t *buf, uint64_t i){
 	return buf[i/64] & (1ull << (i%64));
 }
 
@@ -70,8 +68,7 @@ static inline uint64_t bitarray_get(const uint64_t *buf, uint64_t i){
 /// @param [in] buf: pointer to array of bitfields
 /// @param [in] i: index of element to get
 /// @return i-th element (0, 1, 2, or 3)
-static inline uint8_t bitfield2_arr_get(const uint64_t *buf, uint64_t i) __attribute__((pure));
-static inline uint8_t bitfield2_arr_get(const uint64_t *buf, uint64_t i){
+__attribute__((pure)) static inline uint8_t bitfield2_arr_get(const uint64_t *buf, uint64_t i){
 	return (buf[i/32] >> (i%32)*2) & 3;
 }
 
@@ -96,7 +93,7 @@ void *sieve_factorizations(uint64_t max, uint64_t *_w);
 /// Should be obtained from {@link sieve_factorizations}, {@link max_prime_divisors}, etc.
 /// @return The pitch of a pitched array of factorization structs whose flexible length members all have w
 /// elements.
-uint64_t get_factorizations_pitch(uint64_t w) __attribute__((const));
+__attribute__((const)) uint64_t get_factorizations_pitch(uint64_t w);
 
 /// Compute the unique prime factors of every number in the range from 0 to max.
 /// The factors for 0 and 1 are not actually computed.  The result is stored in
@@ -134,7 +131,7 @@ void fill_factors_from_largest(factors_t *out, uint64_t n, const uint64_t larges
 /// Should be obtained from {@link sieve_factors}, {@link max_prime_divisors}, etc.
 /// @return The pitch of a pitched array of factor list structs whose flexible length members all have w
 /// elements.
-uint64_t get_factors_pitch(uint64_t w) __attribute__((const));
+__attribute__((const)) uint64_t get_factors_pitch(uint64_t w);
 
 /// Compute the number of divisors (including 1 and n) for every number n from 0 to max.
 /// The results for 0 and 1 are not actually computed.  This effectively computes {@link divisor_count} for
@@ -157,6 +154,16 @@ uint64_t *sieve_sigma_1(uint64_t max);
 /// @param [in] e: power of divisors for summing, eg 0 would produce divisor counts, 1 divisor sums, 2 sums of squares of divisors, etc
 /// @return an array of divisor power sums for all numbers in the range, or NULL on allocation failure
 uint64_t *sieve_sigma_e(uint64_t max, uint64_t e);
+
+/// Compute the generalized divisor function dk(n) (number of k-tuples with product n) for every number n from 0 to max.
+/// The results for 0 and 1 are not actually computed.  This effectively computes {@link divisor_tuple_count}
+/// for all numbers in the range, but without needing to compute or store the factorizations intermediately.
+/// Note that dk is multiplicative so dk(mn) = dk(m)dk(n) when m and n are coprime, and dk(p^a) = binom(a + k, k) for prime powers.
+/// In other words, dk is exponential in k and this function will overflow if max^k is too large.
+/// @param [in] max: inclusive upper bound of sieving range in which to compute generalized divisor function
+/// @param [in] k: number of factors per factorization, eg for a prime power p^a we get binom(a + k, k).
+/// @return an array of dk results, or NULL on allocation failure
+uint64_t *sieve_dk(uint64_t max, uint64_t k);
 
 /// Compute Euler's totient function for every number from 0 to max.
 /// The results for 0 and 1 are not actually computed.  This effectively computes {@link euler_phi} for
