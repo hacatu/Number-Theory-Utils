@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['u64_5fnth_5froot_218',['u64_nth_root',['../factorization_8h.html#a5a6151c7f878975cfde3c3950f2f87f1',1,'factorization.h']]]
+  ['zero_5fextend_5fpoly_191',['zero_extend_poly',['../polynomial_8h.html#a6dbd98a9607a1cbcddfe4d812550121b',1,'polynomial.h']]]
 ];

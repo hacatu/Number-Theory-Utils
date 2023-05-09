@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Number Theory Utils: poly_t Struct Reference</title>
+<title>Number Theory Utils: diri_table Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -82,7 +82,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('structpoly__t.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structdiri__table.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -104,74 +104,37 @@ $(document).ready(function(){initNavTree('structpoly__t.html',''); initResizable
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">poly_t Struct Reference</div>  </div>
+<div class="title">diri_table Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>A polynomial with signed integer coefficients.  
- <a href="structpoly__t.html#details">More...</a></p>
+<p>Wrapper to hold values of some multiplicative function.  
+ <a href="structdiri__table.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="polynomial_8h_source.html">polynomial.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="dirichlet_8h_source.html">dirichlet.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:acce4302d85b92216f4b02110a2ef4cd4"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpoly__t.html#acce4302d85b92216f4b02110a2ef4cd4">len</a></td></tr>
-<tr class="memdesc:acce4302d85b92216f4b02110a2ef4cd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of the polynomial.  <a href="structpoly__t.html#acce4302d85b92216f4b02110a2ef4cd4">More...</a><br /></td></tr>
-<tr class="separator:acce4302d85b92216f4b02110a2ef4cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7657ccfe02164b996b4c59470581a5d"><td class="memItemLeft" align="right" valign="top"><a id="ab7657ccfe02164b996b4c59470581a5d"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpoly__t.html#ab7657ccfe02164b996b4c59470581a5d">cap</a></td></tr>
-<tr class="memdesc:ab7657ccfe02164b996b4c59470581a5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum length polynomial the coeffs buffer can currently store. <br /></td></tr>
-<tr class="separator:ab7657ccfe02164b996b4c59470581a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13ed413ba90d81e19c4705647e1d96c5"><td class="memItemLeft" align="right" valign="top">int64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpoly__t.html#a13ed413ba90d81e19c4705647e1d96c5">coeffs</a></td></tr>
-<tr class="memdesc:a13ed413ba90d81e19c4705647e1d96c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of coefficients.  <a href="structpoly__t.html#a13ed413ba90d81e19c4705647e1d96c5">More...</a><br /></td></tr>
-<tr class="separator:a13ed413ba90d81e19c4705647e1d96c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c9e25408e20e6b21e7e3b8ea7c3a91b"><td class="memItemLeft" align="right" valign="top"><a id="a4c9e25408e20e6b21e7e3b8ea7c3a91b"></a>
+int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>x</b></td></tr>
+<tr class="separator:a4c9e25408e20e6b21e7e3b8ea7c3a91b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3cedd53ee063f7a8233f072780cb157"><td class="memItemLeft" align="right" valign="top"><a id="ac3cedd53ee063f7a8233f072780cb157"></a>
+int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>y</b></td></tr>
+<tr class="separator:ac3cedd53ee063f7a8233f072780cb157"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a017a49375134fd385609928c9edcacb2"><td class="memItemLeft" align="right" valign="top"><a id="a017a49375134fd385609928c9edcacb2"></a>
+int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>yinv</b></td></tr>
+<tr class="separator:a017a49375134fd385609928c9edcacb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a993a080bb79306e2e0d1dd1f4f96dd78"><td class="memItemLeft" align="right" valign="top"><a id="a993a080bb79306e2e0d1dd1f4f96dd78"></a>
+int64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>buf</b></td></tr>
+<tr class="separator:a993a080bb79306e2e0d1dd1f4f96dd78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A polynomial with signed integer coefficients. </p>
-<p>Uses a dense representation, ideal for low degree polynomials and polynomials with almost no zero coefficients. The coefficient array goes from lowest power to highest power (constant term up). For the zero polynomial, len should be 1 and the constant coefficient should be 0. For all other polynomials, len should be 1 greater than the degree of the polynomial. In particular, the coefficient on the highest term should not be 0 (<a class="el" href="polynomial_8h.html#ace328b1c13ce42b4407116b48db24876">normalize_poly</a>). </p>
+<div class="textblock"><p>Wrapper to hold values of some multiplicative function. </p>
+<p>Stores all values f(n) for n up to (and including) y, then stores values f(x/n) for n less than x/y </p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial_8h_source.html#l00026">26</a> of file <a class="el" href="polynomial_8h_source.html">polynomial.h</a>.</p>
-</div><h2 class="groupheader">Field Documentation</h2>
-<a id="acce4302d85b92216f4b02110a2ef4cd4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acce4302d85b92216f4b02110a2ef4cd4">&#9670;&nbsp;</a></span>len</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint64_t poly_t::len</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Length of the polynomial. </p>
-<p>1 greater than the degree for nonzero polynomials, 1 for the zero polynomial. </p>
-
-<p class="definition">Definition at line <a class="el" href="polynomial_8h_source.html#l00029">29</a> of file <a class="el" href="polynomial_8h_source.html">polynomial.h</a>.</p>
-
-</div>
-</div>
-<a id="a13ed413ba90d81e19c4705647e1d96c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13ed413ba90d81e19c4705647e1d96c5">&#9670;&nbsp;</a></span>coeffs</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int64_t* poly_t::coeffs</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Array of coefficients. </p>
-<p>Should be managed by <a class="el" href="polynomial_8h.html#a608927f8b707837b8fcd315bcea00341">init_poly</a>, <a class="el" href="polynomial_8h.html#a8b9bf7cc123816ef3e68640e17ca6f81">destroy_poly</a>, and <a class="el" href="polynomial_8h.html#a5f47d92ef4f1a07f4ddf3d99f244abc1">ensure_poly_cap</a>. </p>
-
-<p class="definition">Definition at line <a class="el" href="polynomial_8h_source.html#l00034">34</a> of file <a class="el" href="polynomial_8h_source.html">polynomial.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>include/nut/<a class="el" href="polynomial_8h_source.html">polynomial.h</a></li>
+<p class="definition">Definition at line <a class="el" href="dirichlet_8h_source.html#l00021">21</a> of file <a class="el" href="dirichlet_8h_source.html">dirichlet.h</a>.</p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/nut/<a class="el" href="dirichlet_8h_source.html">dirichlet.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -179,7 +142,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="structpoly__t.html">poly_t</a></li>
+    <li class="navelem"><a class="el" href="structdiri__table.html">diri_table</a></li>
     <li class="footer">Generated on Tue May 9 2023 08:06:58 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>

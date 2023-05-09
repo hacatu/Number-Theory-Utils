@@ -1,8 +1,13 @@
 var searchData=
 [
-  ['ensure_5fpoly_5fcap_23',['ensure_poly_cap',['../polynomial_8h.html#a5f47d92ef4f1a07f4ddf3d99f244abc1',1,'polynomial.h']]],
-  ['ensure_5fpoly_5froots_5fcap_24',['ensure_poly_roots_cap',['../polynomial_8h.html#a57a86948d29f075bdb00c6a2d3870b09',1,'polynomial.h']]],
-  ['euler_5fphi_25',['euler_phi',['../factorization_8h.html#af21b39861e3bd04966862277f45dbb8e',1,'factorization.h']]],
-  ['euler_5fsieve_5fconv_5fu_26',['euler_sieve_conv_u',['../dirichlet_8h.html#acd4b6fb3a8c9320cb22d0246957b80b9',1,'dirichlet.h']]],
-  ['eval_5fpoly_5fmodn_27',['eval_poly_modn',['../polynomial_8h.html#ad67e8b256693afb95134c8bdcea71f89',1,'polynomial.h']]]
+  ['default_5ffactor_5fconf_17',['default_factor_conf',['../factorization_8h.html#a401ed81d2bb12d1accea148f09298e94',1,'factorization.h']]],
+  ['destroy_5fpoly_18',['destroy_poly',['../polynomial_8h.html#a8b9bf7cc123816ef3e68640e17ca6f81',1,'polynomial.h']]],
+  ['destroy_5fpoly_5froots_19',['destroy_poly_roots',['../polynomial_8h.html#ae501a32ed22a602c6da05679442e9ab6',1,'polynomial.h']]],
+  ['diri_5ftable_20',['diri_table',['../structdiri__table.html',1,'']]],
+  ['diri_5ftable_5fdestroy_21',['diri_table_destroy',['../dirichlet_8h.html#aebccd9f03f948282a520544a080c10e4',1,'dirichlet.h']]],
+  ['diri_5ftable_5finit_22',['diri_table_init',['../dirichlet_8h.html#abe7d7cd2da8f487677565933da2a1305',1,'dirichlet.h']]],
+  ['dirichlet_2eh_23',['dirichlet.h',['../dirichlet_8h.html',1,'']]],
+  ['dirichlet_5fd_24',['dirichlet_D',['../dirichlet_8h.html#aa3d32a5036556fb3cf77c7c486ef92ec',1,'dirichlet.h']]],
+  ['divs_5fbefore_5fprime_5fcheck_25',['DIVS_BEFORE_PRIME_CHECK',['../factorization_8h.html#a9641e499ad990b5eb66cda6400f55e5b',1,'factorization.h']]],
+  ['dot_5fpoly_5fmodn_26',['dot_poly_modn',['../polynomial_8h.html#acdf6feb8398004536da3a7798cfc38a2',1,'polynomial.h']]]
 ];

@@ -104,7 +104,8 @@ $(document).ready(function(){initNavTree('modular__math_8h.html',''); initResiza
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">modular_math.h File Reference</div>  </div>
 </div><!--header-->
@@ -140,30 +141,93 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7f80cb613e766907b6072fb751ff114c"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a7f80cb613e766907b6072fb751ff114c">powmod</a> (uint64_t b, uint64_t e, uint64_t n) __attribute__((const))</td></tr>
-<tr class="memdesc:a7f80cb613e766907b6072fb751ff114c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute nonnegative integral power of a number modulo another using binary exponentiation.  <a href="modular__math_8h.html#a7f80cb613e766907b6072fb751ff114c">More...</a><br /></td></tr>
-<tr class="separator:a7f80cb613e766907b6072fb751ff114c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36739507edc108bfa381b7c129a26c80"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a36739507edc108bfa381b7c129a26c80">__attribute__</a> ((const)) static inline uint64_t pow_u64(uint64_t b</td></tr>
+<tr class="memdesc:a36739507edc108bfa381b7c129a26c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute nonnegative integral power of integer using binary exponentiation.  <a href="modular__math_8h.html#a36739507edc108bfa381b7c129a26c80">More...</a><br /></td></tr>
+<tr class="separator:a36739507edc108bfa381b7c129a26c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82a7123acdf663bf9f2e79a882108fa1"><td class="memItemLeft" align="right" valign="top"><a id="a82a7123acdf663bf9f2e79a882108fa1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>while</b> (e)</td></tr>
+<tr class="separator:a82a7123acdf663bf9f2e79a882108fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3c937df726483e1226e0cf439cc0e91"><td class="memItemLeft" align="right" valign="top"><a id="ad3c937df726483e1226e0cf439cc0e91"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>if</b> (n - k&lt; k)</td></tr>
+<tr class="separator:ad3c937df726483e1226e0cf439cc0e91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d10416d80f153c03498a54ce782feae"><td class="memItemLeft" align="right" valign="top"><a id="a5d10416d80f153c03498a54ce782feae"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>for</b> (uint64_t i=0;i&lt; k;++i)</td></tr>
+<tr class="separator:a5d10416d80f153c03498a54ce782feae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addd9a1d3ee84a620aa47ce552002c1bb"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#addd9a1d3ee84a620aa47ce552002c1bb">prand_u64</a> (uint64_t a, uint64_t b)</td></tr>
 <tr class="memdesc:addd9a1d3ee84a620aa47ce552002c1bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a (pseudo)random integer uniformly from [a, b).  <a href="modular__math_8h.html#addd9a1d3ee84a620aa47ce552002c1bb">More...</a><br /></td></tr>
 <tr class="separator:addd9a1d3ee84a620aa47ce552002c1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2abe4608c6ea4d6d292d776ce29cbfb"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#ae2abe4608c6ea4d6d292d776ce29cbfb">rand_u64</a> (uint64_t a, uint64_t b)</td></tr>
 <tr class="memdesc:ae2abe4608c6ea4d6d292d776ce29cbfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a (strong) random integer uniformly from [a, b).  <a href="modular__math_8h.html#ae2abe4608c6ea4d6d292d776ce29cbfb">More...</a><br /></td></tr>
 <tr class="separator:ae2abe4608c6ea4d6d292d776ce29cbfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9e0aa84d98c5b9a6e6dfe7a84e90a9a"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#ae9e0aa84d98c5b9a6e6dfe7a84e90a9a">jacobi</a> (int64_t n, int64_t k) __attribute__((const))</td></tr>
-<tr class="memdesc:ae9e0aa84d98c5b9a6e6dfe7a84e90a9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobi symbol of n mod k.  <a href="modular__math_8h.html#ae9e0aa84d98c5b9a6e6dfe7a84e90a9a">More...</a><br /></td></tr>
-<tr class="separator:ae9e0aa84d98c5b9a6e6dfe7a84e90a9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a076bbb85b546d659cf0f4283ad7464b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a076bbb85b546d659cf0f4283ad7464b7">__attribute__</a> ((access(write_only, 3), access(write_only, 4))) static inline int64_t egcd(int64_t a</td></tr>
+<tr class="memdesc:a076bbb85b546d659cf0f4283ad7464b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute d = gcd(a, b) and x, y st.  <a href="modular__math_8h.html#a076bbb85b546d659cf0f4283ad7464b7">More...</a><br /></td></tr>
+<tr class="separator:a076bbb85b546d659cf0f4283ad7464b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4786c5f7402c0bd41f7a289cc059186b"><td class="memItemLeft" align="right" valign="top"><a id="a4786c5f7402c0bd41f7a289cc059186b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>while</b> (r1)</td></tr>
+<tr class="separator:a4786c5f7402c0bd41f7a289cc059186b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab17b6e049750ca07285bc333b9b1299a"><td class="memItemLeft" align="right" valign="top"><a id="ab17b6e049750ca07285bc333b9b1299a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>if</b> (_t)</td></tr>
+<tr class="separator:ab17b6e049750ca07285bc333b9b1299a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a594c9268bd6c0c8ec7581e7540544c74"><td class="memItemLeft" align="right" valign="top"><a id="a594c9268bd6c0c8ec7581e7540544c74"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>if</b> (_s)</td></tr>
+<tr class="separator:a594c9268bd6c0c8ec7581e7540544c74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1812c5d902138901fa044eda16e673f"><td class="memItemLeft" align="right" valign="top"><a id="af1812c5d902138901fa044eda16e673f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>egcd</b> (p, q, &amp;x, &amp;y)</td></tr>
+<tr class="separator:af1812c5d902138901fa044eda16e673f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad345a21420ea65dbc45364f63ada0ea2"><td class="memItemLeft" align="right" valign="top"><a id="ad345a21420ea65dbc45364f63ada0ea2"></a>
+return&#160;</td><td class="memItemRight" valign="bottom"><b>mod</b> (b *p%(p *q) *x+a *q%(p *q) *y, p *q)</td></tr>
+<tr class="separator:ad345a21420ea65dbc45364f63ada0ea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a680572674cab27e7ae541fe1fe663042"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a680572674cab27e7ae541fe1fe663042">rand_nr_u64</a> (int64_t p)</td></tr>
 <tr class="memdesc:a680572674cab27e7ae541fe1fe663042"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a random number mod a prime that is not a quadratic residue.  <a href="modular__math_8h.html#a680572674cab27e7ae541fe1fe663042">More...</a><br /></td></tr>
 <tr class="separator:a680572674cab27e7ae541fe1fe663042"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3971aec9be84e37469c2953fe0a7bbc0"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a3971aec9be84e37469c2953fe0a7bbc0">sqrt_shanks</a> (int64_t n, int64_t p)</td></tr>
 <tr class="memdesc:a3971aec9be84e37469c2953fe0a7bbc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the square root of a quadratic residue mod a prime.  <a href="modular__math_8h.html#a3971aec9be84e37469c2953fe0a7bbc0">More...</a><br /></td></tr>
 <tr class="separator:a3971aec9be84e37469c2953fe0a7bbc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4871f3a8602cb31a0963dbeeacb86faf"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a4871f3a8602cb31a0963dbeeacb86faf">sqrt_cipolla</a> (int64_t n, int64_t p)</td></tr>
-<tr class="memdesc:a4871f3a8602cb31a0963dbeeacb86faf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the square root of a quadratic residue mod a prime.  <a href="modular__math_8h.html#a4871f3a8602cb31a0963dbeeacb86faf">More...</a><br /></td></tr>
-<tr class="separator:a4871f3a8602cb31a0963dbeeacb86faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90556023960bf8187aaafd25f9aa536d"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a90556023960bf8187aaafd25f9aa536d">sqrt_mod</a> (int64_t n, int64_t p)</td></tr>
 <tr class="memdesc:a90556023960bf8187aaafd25f9aa536d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the square root of a quadratic residue mod a prime.  <a href="modular__math_8h.html#a90556023960bf8187aaafd25f9aa536d">More...</a><br /></td></tr>
 <tr class="separator:a90556023960bf8187aaafd25f9aa536d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a39cf67e979a40bde8b8604d0663b978e"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>e</b></td></tr>
+<tr class="separator:a39cf67e979a40bde8b8604d0663b978e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abebbd563889e01487720e640c3568788"><td class="memItemLeft" align="right" valign="top"><a id="abebbd563889e01487720e640c3568788"></a>
+return&#160;</td><td class="memItemRight" valign="bottom"><b>r</b></td></tr>
+<tr class="separator:abebbd563889e01487720e640c3568788"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6ce16c7b23bc969f2ee17afc4348f8f"><td class="memItemLeft" align="right" valign="top">uint64_t uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>n</b></td></tr>
+<tr class="separator:ac6ce16c7b23bc969f2ee17afc4348f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b2c4853383224350c6bbb9a163b8941"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>k</b></td></tr>
+<tr class="separator:a0b2c4853383224350c6bbb9a163b8941"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e111f6687f261e4e28bd6528e7f5b48"><td class="memItemLeft" align="right" valign="top"><a id="a5e111f6687f261e4e28bd6528e7f5b48"></a>
+return&#160;</td><td class="memItemRight" valign="bottom"><b>res</b></td></tr>
+<tr class="separator:a5e111f6687f261e4e28bd6528e7f5b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9293e4d29cac928301645070dd307683"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>b</b></td></tr>
+<tr class="separator:a9293e4d29cac928301645070dd307683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a845d1f3ffc6db63bac3b8a2135f4c2e9"><td class="memItemLeft" align="right" valign="top"><a id="a845d1f3ffc6db63bac3b8a2135f4c2e9"></a>
+int64_t int64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>_t</b></td></tr>
+<tr class="separator:a845d1f3ffc6db63bac3b8a2135f4c2e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abda6400c3d35d3b816e96b5687bd87e2"><td class="memItemLeft" align="right" valign="top">int64_t int64_t int64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>_s</b></td></tr>
+<tr class="separator:abda6400c3d35d3b816e96b5687bd87e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac48691dbf0d60d88a6d5eb6e6620dfbb"><td class="memItemLeft" align="right" valign="top"><a id="ac48691dbf0d60d88a6d5eb6e6620dfbb"></a>
+int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>s0</b> = 1</td></tr>
+<tr class="separator:ac48691dbf0d60d88a6d5eb6e6620dfbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8775056879e9f51ba36bd622164825e"><td class="memItemLeft" align="right" valign="top"><a id="ac8775056879e9f51ba36bd622164825e"></a>
+int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>s1</b> = 0</td></tr>
+<tr class="separator:ac8775056879e9f51ba36bd622164825e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af15144329fba8bf17c2422d06bc073e6"><td class="memItemLeft" align="right" valign="top"><a id="af15144329fba8bf17c2422d06bc073e6"></a>
+int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>t0</b> = 0</td></tr>
+<tr class="separator:af15144329fba8bf17c2422d06bc073e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0333896aca25a29176059c5dca3b7e8"><td class="memItemLeft" align="right" valign="top"><a id="ae0333896aca25a29176059c5dca3b7e8"></a>
+int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1</b> = 1</td></tr>
+<tr class="separator:ae0333896aca25a29176059c5dca3b7e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63880cd9a75effba1ba6e5236f7d3157"><td class="memItemLeft" align="right" valign="top"><a id="a63880cd9a75effba1ba6e5236f7d3157"></a>
+return&#160;</td><td class="memItemRight" valign="bottom"><b>r0</b></td></tr>
+<tr class="separator:a63880cd9a75effba1ba6e5236f7d3157"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb1a874e747ba7b1fb41feb02e4d888b"><td class="memItemLeft" align="right" valign="top"><a id="adb1a874e747ba7b1fb41feb02e4d888b"></a>
+int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>p</b></td></tr>
+<tr class="separator:adb1a874e747ba7b1fb41feb02e4d888b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80dcc3595c01ae957c0dc3daae9f870c"><td class="memItemLeft" align="right" valign="top">int64_t int64_t int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>q</b></td></tr>
+<tr class="separator:a80dcc3595c01ae957c0dc3daae9f870c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="a46c4371d5a6429f33f04d01da5b166ec"></a>
@@ -205,46 +269,80 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a7f80cb613e766907b6072fb751ff114c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f80cb613e766907b6072fb751ff114c">&#9670;&nbsp;</a></span>powmod()</h2>
+<a id="a36739507edc108bfa381b7c129a26c80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36739507edc108bfa381b7c129a26c80">&#9670;&nbsp;</a></span>__attribute__() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t powmod </td>
+          <td class="memname">__attribute__ </td>
           <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>b</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">(const)&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>e</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>n</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Compute nonnegative integral power of a number modulo another using binary exponentiation. </p>
+<p>Compute nonnegative integral power of integer using binary exponentiation. </p>
+<p>Compute the maximum number of unique prime divisors a number can have.</p>
+<p>Compute the square root of a quadratic residue mod a prime.</p>
+<p>Compute the Jacobi symbol of n mod k.</p>
+<p>Compute the least common multiple of a and b Divides the product by the gcd so can overflow for large arguments.</p>
+<p>Compute n mod pq st n = a mod p and n = b mod q, where p and q are coprime.</p>
+<p>Compute the Euclidean remainder r = a mod n for positive n so that 0 &lt;= r &lt; n.</p>
+<p>Compute nonnegative integral power of a number modulo another using binary exponentiation.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">b,e</td><td>base and exponent </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>b^e, not checked for overflow</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">b,e,n</td><td>base, exponent, and modulus </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>b^e mod n, computed via binary exponentiation </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>b^e mod n, computed via binary exponentiation</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a,n</td><td>dividend and divisor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a mod n</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a,p,b,q</td><td>Chinese Remainder Theorem parameters. The residues a and b should not be negative. The moduli p and q should be coprime. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 &lt;= 0 &lt; pq so that n = a mod p and n = b mod q</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a,b</td><td>numbers to find lcm of </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>lcm(a, b)</dd></dl>
+<p>Uses modified euclidean algorithm. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n,k</td><td>Jacobi symbol parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Jacobi symbol (0 if k | n, +1 if n is a quadratic residue mod an odd number of prime divisors of k (with multiplicity), -1 otherwise)</dd></dl>
+<p>If n is not a residue or p is not a prime, the value returned may not be useful but the function will terminate. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>a quadratic residue mod p </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>a prime </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>r so that r^2 = n mod p </dd></dl>
 
 </div>
 </div>
@@ -322,40 +420,31 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae9e0aa84d98c5b9a6e6dfe7a84e90a9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae9e0aa84d98c5b9a6e6dfe7a84e90a9a">&#9670;&nbsp;</a></span>jacobi()</h2>
+<a id="a076bbb85b546d659cf0f4283ad7464b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a076bbb85b546d659cf0f4283ad7464b7">&#9670;&nbsp;</a></span>__attribute__() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int64_t jacobi </td>
+          <td class="memname">__attribute__ </td>
           <td>(</td>
-          <td class="paramtype">int64_t&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">(access(write_only, 3), access(write_only, 4))&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">int64_t&#160;</td>
-          <td class="paramname"><em>k</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Compute the Jacobi symbol of n mod k. </p>
-<p>Uses modified euclidean algorithm. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Compute d = gcd(a, b) and x, y st. </p>
+<p>xa + by = d. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">n,k</td><td>Jacobi symbol parameters </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">a,b</td><td>numbers to find gcd of </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">_t,_s</td><td>pointers to output x and y to respectively (ignored if NULL) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Jacobi symbol (0 if k | n, +1 if n is a quadratic residue mod an odd number of prime divisors of k (with multiplicity), -1 otherwise) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>d </dd></dl>
 
 </div>
 </div>
@@ -424,44 +513,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4871f3a8602cb31a0963dbeeacb86faf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4871f3a8602cb31a0963dbeeacb86faf">&#9670;&nbsp;</a></span>sqrt_cipolla()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int64_t sqrt_cipolla </td>
-          <td>(</td>
-          <td class="paramtype">int64_t&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int64_t&#160;</td>
-          <td class="paramname"><em>p</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Compute the square root of a quadratic residue mod a prime. </p>
-<p>If n is not a residue or p is not a prime, the value returned may not be useful but the function will terminate. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>a quadratic residue mod p </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>a prime </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>r so that r^2 = n mod p </dd></dl>
-
-</div>
-</div>
 <a id="a90556023960bf8187aaafd25f9aa536d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a90556023960bf8187aaafd25f9aa536d">&#9670;&nbsp;</a></span>sqrt_mod()</h2>
 
@@ -489,7 +540,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compute the square root of a quadratic residue mod a prime. </p>
-<p>If n is not a residue or p is not a prime, this function is not guaranteed to terminate. If your use case does not guarantee this, call <a class="el" href="factorization_8h.html#a8507a5fce6ddc90582e7072c9830bd24">is_prime_dmr</a> and <a class="el" href="modular__math_8h.html#ae9e0aa84d98c5b9a6e6dfe7a84e90a9a">jacobi</a> beforehand. uses shortcuts for primes that are 3, 5, or 7 mod 8, otherwise uses Shanks's algorithm unless p-1 is divisible by a sufficiently high power of 2 so Cipolla's algorithm will be faster, in which case it is used. Only the Shank's branch can fail to terminate, although other branches give useless results if the preconditions are not met. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>If n is not a residue or p is not a prime, this function is not guaranteed to terminate. If your use case does not guarantee this, call <a class="el" href="">is_prime_dmr</a> and <a class="el" href="">jacobi</a> beforehand. uses shortcuts for primes that are 3, 5, or 7 mod 8, otherwise uses Shanks's algorithm unless p-1 is divisible by a sufficiently high power of 2 so Cipolla's algorithm will be faster, in which case it is used. Only the Shank's branch can fail to terminate, although other branches give useless results if the preconditions are not met. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>a quadratic residue mod p </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>a prime </td></tr>
@@ -500,6 +551,115 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a39cf67e979a40bde8b8604d0663b978e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39cf67e979a40bde8b8604d0663b978e">&#9670;&nbsp;</a></span>e</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t e</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">    uint64_t r = 1</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="modular__math_8h_source.html#l00039">39</a> of file <a class="el" href="modular__math_8h_source.html">modular_math.h</a>.</p>
+
+</div>
+</div>
+<a id="ac6ce16c7b23bc969f2ee17afc4348f8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6ce16c7b23bc969f2ee17afc4348f8f">&#9670;&nbsp;</a></span>n</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t n</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">    int64_t r = a%n</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="modular__math_8h_source.html#l00066">66</a> of file <a class="el" href="modular__math_8h_source.html">modular_math.h</a>.</p>
+
+</div>
+</div>
+<a id="a0b2c4853383224350c6bbb9a163b8941"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b2c4853383224350c6bbb9a163b8941">&#9670;&nbsp;</a></span>k</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t k</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">    uint64_t res = 1</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="modular__math_8h_source.html#l00068">68</a> of file <a class="el" href="modular__math_8h_source.html">modular_math.h</a>.</p>
+
+</div>
+</div>
+<a id="a9293e4d29cac928301645070dd307683"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9293e4d29cac928301645070dd307683">&#9670;&nbsp;</a></span>b</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t b</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">    <span class="keywordflow">return</span> a*b/egcd(a, b, NULL, NULL)</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="modular__math_8h_source.html#l00099">99</a> of file <a class="el" href="modular__math_8h_source.html">modular_math.h</a>.</p>
+
+</div>
+</div>
+<a id="abda6400c3d35d3b816e96b5687bd87e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abda6400c3d35d3b816e96b5687bd87e2">&#9670;&nbsp;</a></span>_s</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t int64_t int64_t* _s</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">    int64_t r0 = b, r1 = a</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="modular__math_8h_source.html#l00099">99</a> of file <a class="el" href="modular__math_8h_source.html">modular_math.h</a>.</p>
+
+</div>
+</div>
+<a id="a80dcc3595c01ae957c0dc3daae9f870c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80dcc3595c01ae957c0dc3daae9f870c">&#9670;&nbsp;</a></span>q</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t int64_t int64_t q</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">    int64_t x, y</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="modular__math_8h_source.html#l00139">139</a> of file <a class="el" href="modular__math_8h_source.html">modular_math.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
@@ -507,7 +667,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="modular__math_8h.html">modular_math.h</a></li>
-    <li class="footer">Generated on Sat May 6 2023 08:10:01 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Tue May 9 2023 08:06:58 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

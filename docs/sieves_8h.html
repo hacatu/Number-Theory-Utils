@@ -102,7 +102,8 @@ $(document).ready(function(){initNavTree('sieves_8h.html',''); initResizable(); 
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">sieves.h File Reference</div>  </div>
 </div><!--header-->
@@ -123,18 +124,15 @@ DESCRIPTION</h1>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aaa5df5504d790281d05a032095e002a0"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#aaa5df5504d790281d05a032095e002a0">max_prime_divs</a> (uint64_t max) __attribute__((const))</td></tr>
-<tr class="memdesc:aaa5df5504d790281d05a032095e002a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the maximum number of unique prime divisors a number can have.  <a href="sieves_8h.html#aaa5df5504d790281d05a032095e002a0">More...</a><br /></td></tr>
-<tr class="separator:aaa5df5504d790281d05a032095e002a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8902a25584ef66364b5d24193a08923a"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a8902a25584ef66364b5d24193a08923a">max_primes_le</a> (uint64_t max) __attribute__((const))</td></tr>
-<tr class="memdesc:a8902a25584ef66364b5d24193a08923a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute an upper bound on the number of primes up to max.  <a href="sieves_8h.html#a8902a25584ef66364b5d24193a08923a">More...</a><br /></td></tr>
-<tr class="separator:a8902a25584ef66364b5d24193a08923a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa15dcb7788004e5e535f13abeefd29c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#afa15dcb7788004e5e535f13abeefd29c">__attribute__</a> ((const)) uint64_t max_prime_divs(uint64_t max)</td></tr>
+<tr class="memdesc:afa15dcb7788004e5e535f13abeefd29c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the maximum number of unique prime divisors a number can have.  <a href="sieves_8h.html#afa15dcb7788004e5e535f13abeefd29c">More...</a><br /></td></tr>
+<tr class="separator:afa15dcb7788004e5e535f13abeefd29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05c6fdffba3e00f27b3e16f544272a64"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a05c6fdffba3e00f27b3e16f544272a64">__attribute__</a> ((pure)) static inline void *pitch_arr_get(void *buf</td></tr>
+<tr class="memdesc:a05c6fdffba3e00f27b3e16f544272a64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an entry from a variable pitch array.  <a href="sieves_8h.html#a05c6fdffba3e00f27b3e16f544272a64">More...</a><br /></td></tr>
+<tr class="separator:a05c6fdffba3e00f27b3e16f544272a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55b7ec1e3f2ac442b0f098861f758cff"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a55b7ec1e3f2ac442b0f098861f758cff">sieve_factorizations</a> (uint64_t max, uint64_t *_w)</td></tr>
 <tr class="memdesc:a55b7ec1e3f2ac442b0f098861f758cff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the factorization for every number in the range from 0 to max.  <a href="sieves_8h.html#a55b7ec1e3f2ac442b0f098861f758cff">More...</a><br /></td></tr>
 <tr class="separator:a55b7ec1e3f2ac442b0f098861f758cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a725ae2ebd048749b792cd92c23e815e8"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a725ae2ebd048749b792cd92c23e815e8">get_factorizations_pitch</a> (uint64_t w) __attribute__((const))</td></tr>
-<tr class="memdesc:a725ae2ebd048749b792cd92c23e815e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pitch for a pitched array of factorization structs with w unique prime divisors.  <a href="sieves_8h.html#a725ae2ebd048749b792cd92c23e815e8">More...</a><br /></td></tr>
-<tr class="separator:a725ae2ebd048749b792cd92c23e815e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bca79bd17302449e4a95f833e2990c8"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a1bca79bd17302449e4a95f833e2990c8">sieve_factors</a> (uint64_t max, uint64_t *_w)</td></tr>
 <tr class="memdesc:a1bca79bd17302449e4a95f833e2990c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the unique prime factors of every number in the range from 0 to max.  <a href="sieves_8h.html#a1bca79bd17302449e4a95f833e2990c8">More...</a><br /></td></tr>
 <tr class="separator:a1bca79bd17302449e4a95f833e2990c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,9 +142,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a819489e812b58ce7b80fd2fea3e76c70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a819489e812b58ce7b80fd2fea3e76c70">fill_factors_from_largest</a> (<a class="el" href="structfactors__t.html">factors_t</a> *out, uint64_t n, const uint64_t largest_factors[static n+1])</td></tr>
 <tr class="memdesc:a819489e812b58ce7b80fd2fea3e76c70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use a table of largest prime factors to get the factorization of a number.  <a href="sieves_8h.html#a819489e812b58ce7b80fd2fea3e76c70">More...</a><br /></td></tr>
 <tr class="separator:a819489e812b58ce7b80fd2fea3e76c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd7907ef204356e0be1a802cf5167992"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#acd7907ef204356e0be1a802cf5167992">get_factors_pitch</a> (uint64_t w) __attribute__((const))</td></tr>
-<tr class="memdesc:acd7907ef204356e0be1a802cf5167992"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pitch for a pitched array of <a class="el" href="structfw__u64arr__t.html">fw_u64arr_t</a> factor lists.  <a href="sieves_8h.html#acd7907ef204356e0be1a802cf5167992">More...</a><br /></td></tr>
-<tr class="separator:acd7907ef204356e0be1a802cf5167992"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d2b3d5f592ca1a883b1f5d6292bfea6"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a4d2b3d5f592ca1a883b1f5d6292bfea6">sieve_sigma_0</a> (uint64_t max)</td></tr>
 <tr class="memdesc:a4d2b3d5f592ca1a883b1f5d6292bfea6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the number of divisors (including 1 and n) for every number n from 0 to max.  <a href="sieves_8h.html#a4d2b3d5f592ca1a883b1f5d6292bfea6">More...</a><br /></td></tr>
 <tr class="separator:a4d2b3d5f592ca1a883b1f5d6292bfea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,6 +151,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a47cf98fd1eedb76b4c337a0b6d5cb88c"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a47cf98fd1eedb76b4c337a0b6d5cb88c">sieve_sigma_e</a> (uint64_t max, uint64_t e)</td></tr>
 <tr class="memdesc:a47cf98fd1eedb76b4c337a0b6d5cb88c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the sum of some power of divisors (including 1 and n) for every number n from 0 to max.  <a href="sieves_8h.html#a47cf98fd1eedb76b4c337a0b6d5cb88c">More...</a><br /></td></tr>
 <tr class="separator:a47cf98fd1eedb76b4c337a0b6d5cb88c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ed770659cc6a2bf375294b20efefd4a"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a0ed770659cc6a2bf375294b20efefd4a">sieve_dk</a> (uint64_t max, uint64_t k)</td></tr>
+<tr class="memdesc:a0ed770659cc6a2bf375294b20efefd4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the generalized divisor function dk(n) (number of k-tuples with product n) for every number n from 0 to max.  <a href="sieves_8h.html#a0ed770659cc6a2bf375294b20efefd4a">More...</a><br /></td></tr>
+<tr class="separator:a0ed770659cc6a2bf375294b20efefd4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fd78cb343ce5afd768c28aacde7b99d"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a0fd78cb343ce5afd768c28aacde7b99d">sieve_phi</a> (uint64_t max)</td></tr>
 <tr class="memdesc:a0fd78cb343ce5afd768c28aacde7b99d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute Euler's totient function for every number from 0 to max.  <a href="sieves_8h.html#a0fd78cb343ce5afd768c28aacde7b99d">More...</a><br /></td></tr>
 <tr class="separator:a0fd78cb343ce5afd768c28aacde7b99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,59 +181,297 @@ Functions</h2></td></tr>
 <tr class="memitem:ae6a8da8730b149433ac438cb106479e4"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#ae6a8da8730b149433ac438cb106479e4">sieve_primes</a> (uint64_t max, uint64_t *_num_primes)</td></tr>
 <tr class="memdesc:ae6a8da8730b149433ac438cb106479e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute an array of all primes from 0 to max.  <a href="sieves_8h.html#ae6a8da8730b149433ac438cb106479e4">More...</a><br /></td></tr>
 <tr class="separator:ae6a8da8730b149433ac438cb106479e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:afd6e633d4e5b0b4e8ce8b5054cc50d71"><td class="memItemLeft" align="right" valign="top"><a id="afd6e633d4e5b0b4e8ce8b5054cc50d71"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pitch</b></td></tr>
+<tr class="separator:afd6e633d4e5b0b4e8ce8b5054cc50d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a717c50cfde3924051c279a89096afd3d"><td class="memItemLeft" align="right" valign="top">size_t uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>i</b></td></tr>
+<tr class="separator:a717c50cfde3924051c279a89096afd3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="aaa5df5504d790281d05a032095e002a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa5df5504d790281d05a032095e002a0">&#9670;&nbsp;</a></span>max_prime_divs()</h2>
+<a id="afa15dcb7788004e5e535f13abeefd29c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa15dcb7788004e5e535f13abeefd29c">&#9670;&nbsp;</a></span>__attribute__() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t max_prime_divs </td>
+          <td class="memname">__attribute__ </td>
           <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>max</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">(const)&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Compute the maximum number of unique prime divisors a number can have. </p>
+<p>Get the pitch for a pitched array of <a class="el" href="structfw__u64arr__t.html">fw_u64arr_t</a> factor lists.</p>
+<p>Get the pitch for a pitched array of factorization structs with w unique prime divisors.</p>
+<p>Compute an upper bound on the number of primes up to max.</p>
 <p>This has nothing to do with factoring the number and is just a simple binary decision diagram based on comparing the number to 2, 2*3, 2*3*5, etc. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>number to find max unique prime divisors of </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the largest number of unique prime divisors any number not exceeding max can possibly have </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the largest number of unique prime divisors any number not exceeding max can possibly have</dd></dl>
+<p>This uses an inequality involving log derived from the prime number theorem to always get an upper bound. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>number to find the number of primes up to </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">an</td><td>upper bound on the number of primes up to max</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This is simply offsetof(factors_t, factors) + w*sizeof(dummy-&gt;factors[0]), where dummy is an expression with type <a class="el" href="structfactors__t.html" title="A prime factorization.">factors_t</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">w</td><td>The maximal number of unique prime divisors of any potential index of the pitched array. Should be obtained from <a class="el" href="sieves_8h.html#a55b7ec1e3f2ac442b0f098861f758cff">sieve_factorizations</a>, <a class="el" href="">max_prime_divisors</a>, etc. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The pitch of a pitched array of factorization structs whose flexible length members all have w elements.</dd></dl>
+<p>This is simply offsetof(fw_u64arr_t, elems) + *_w*sizeof(uint64_t). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">w</td><td>The maximal number of unique prime divisors of any potential index of the pitched array. Should be obtained from <a class="el" href="sieves_8h.html#a1bca79bd17302449e4a95f833e2990c8">sieve_factors</a>, <a class="el" href="">max_prime_divisors</a>, etc. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The pitch of a pitched array of factor list structs whose flexible length members all have w elements.</dd></dl>
+<p>Compute the maximum number of unique prime divisors a number can have.</p>
+<p>Get the pitch for a pitched array of <a class="el" href="structfw__u64arr__t.html">fw_u64arr_t</a> factor lists.</p>
+<p>Get the pitch for a pitched array of factorization structs with w unique prime divisors.</p>
+<p>Compute an upper bound on the number of primes up to max.</p>
+<p>Compute the square root of a quadratic residue mod a prime.</p>
+<p>Compute the Jacobi symbol of n mod k.</p>
+<p>Compute the least common multiple of a and b Divides the product by the gcd so can overflow for large arguments.</p>
+<p>Compute n mod pq st n = a mod p and n = b mod q, where p and q are coprime.</p>
+<p>Compute the Euclidean remainder r = a mod n for positive n so that 0 &lt;= r &lt; n.</p>
+<p>Compute nonnegative integral power of a number modulo another using binary exponentiation.</p>
+<p>Same as <a class="el" href="">factor1_lenstra</a> but using a projective Montgomery curve and Montgomery ladder.</p>
+<p>Try to find a factor of a number using Lenstra ecf.</p>
+<p>Try to find a factor of a number using Pollard's Rho algorithm with Brent cycle finding and gcd coalescing.</p>
+<p>Try to find a factor of a number using Pollard's Rho algorithm with Floyd cycle finding.</p>
+<p>Get the floor of the nth root of a.</p>
+<p>7 partictular bases are used so that no composite number will falsely be reported as prime for the entire 64-bit range </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>number to check for primality </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if n is prime, false otherwise</dd></dl>
+<p>Uses bitscan to estimate the base 2 log and in turn nth root of a, then uses Newton's method </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>the number to take the nth root of </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>root to take </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>floor(a**(1/n)), ie the largest integer x such that x**n &lt;= a</dd></dl>
+<p>Note that this will not find factors of 4 or 25 no matter what x is. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>number to find a factor of </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>random value mod n </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a nontrivial factor of n if found, 1 or n otherwise</dd></dl>
+<p>Note that his will not find factors of 4 or 25 no matter what x is. m does not affect whether x will lead to a factor of n, it just means each iteration will be cheaper but up to 2m extraneous iterations could be performed. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>number to find a factor of </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>random value mod n </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>number of iterations per gcd check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a nontrivial factor of n if found, 1 or n otherwise</dd></dl>
+<p>In particular, an affine wierstrass representation is used internally and scalar multiplication is done using a binary "double and add" algorithm. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>number to find a factor of </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x,y,a</td><td>random values mod n </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">B</td><td>number of trials before giving up (we compute kP for k from 2 to B) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a nontrivial factor of n if found, 1 or n otherwise</dd></dl>
+<p>Instead of an affine Wierstrass curve and binary multiplication. This is supposed to be faster but seems to be about the same. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>number to find a factor of </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x,y,a</td><td>random numbers mod n </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">B</td><td>number of trials before giving up (we compute kP for k from 2 to B) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a nontrivial factor of n if found, 1 or n otherwise</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">b,e,n</td><td>base, exponent, and modulus </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>b^e mod n, computed via binary exponentiation</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a,n</td><td>dividend and divisor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a mod n</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a,p,b,q</td><td>Chinese Remainder Theorem parameters. The residues a and b should not be negative. The moduli p and q should be coprime. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 &lt;= 0 &lt; pq so that n = a mod p and n = b mod q</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a,b</td><td>numbers to find lcm of </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>lcm(a, b)</dd></dl>
+<p>Uses modified euclidean algorithm. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n,k</td><td>Jacobi symbol parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Jacobi symbol (0 if k | n, +1 if n is a quadratic residue mod an odd number of prime divisors of k (with multiplicity), -1 otherwise)</dd></dl>
+<p>If n is not a residue or p is not a prime, the value returned may not be useful but the function will terminate. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>a quadratic residue mod p </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>a prime </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>r so that r^2 = n mod p</dd></dl>
+<p>This uses an inequality involving log derived from the prime number theorem to always get an upper bound. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>number to find the number of primes up to </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">an</td><td>upper bound on the number of primes up to max</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This is simply offsetof(factors_t, factors) + w*sizeof(dummy-&gt;factors[0]), where dummy is an expression with type <a class="el" href="structfactors__t.html" title="A prime factorization.">factors_t</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">w</td><td>The maximal number of unique prime divisors of any potential index of the pitched array. Should be obtained from <a class="el" href="sieves_8h.html#a55b7ec1e3f2ac442b0f098861f758cff">sieve_factorizations</a>, <a class="el" href="">max_prime_divisors</a>, etc. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The pitch of a pitched array of factorization structs whose flexible length members all have w elements.</dd></dl>
+<p>This is simply offsetof(fw_u64arr_t, elems) + *_w*sizeof(uint64_t). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">w</td><td>The maximal number of unique prime divisors of any potential index of the pitched array. Should be obtained from <a class="el" href="sieves_8h.html#a1bca79bd17302449e4a95f833e2990c8">sieve_factors</a>, <a class="el" href="">max_prime_divisors</a>, etc. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The pitch of a pitched array of factor list structs whose flexible length members all have w elements.</dd></dl>
+<p>Compute the maximum number of unique prime divisors a number can have.</p>
+<p>Compute the square root of a quadratic residue mod a prime.</p>
+<p>Compute the Jacobi symbol of n mod k.</p>
+<p>Compute the least common multiple of a and b Divides the product by the gcd so can overflow for large arguments.</p>
+<p>Compute n mod pq st n = a mod p and n = b mod q, where p and q are coprime.</p>
+<p>Compute the Euclidean remainder r = a mod n for positive n so that 0 &lt;= r &lt; n.</p>
+<p>Compute nonnegative integral power of a number modulo another using binary exponentiation.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">b,e</td><td>base and exponent </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>b^e, not checked for overflow</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">b,e,n</td><td>base, exponent, and modulus </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>b^e mod n, computed via binary exponentiation</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a,n</td><td>dividend and divisor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a mod n</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a,p,b,q</td><td>Chinese Remainder Theorem parameters. The residues a and b should not be negative. The moduli p and q should be coprime. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 &lt;= 0 &lt; pq so that n = a mod p and n = b mod q</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a,b</td><td>numbers to find lcm of </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>lcm(a, b)</dd></dl>
+<p>Uses modified euclidean algorithm. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n,k</td><td>Jacobi symbol parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Jacobi symbol (0 if k | n, +1 if n is a quadratic residue mod an odd number of prime divisors of k (with multiplicity), -1 otherwise)</dd></dl>
+<p>If n is not a residue or p is not a prime, the value returned may not be useful but the function will terminate. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>a quadratic residue mod p </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>a prime </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>r so that r^2 = n mod p </dd></dl>
 
 </div>
 </div>
-<a id="a8902a25584ef66364b5d24193a08923a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8902a25584ef66364b5d24193a08923a">&#9670;&nbsp;</a></span>max_primes_le()</h2>
+<a id="a05c6fdffba3e00f27b3e16f544272a64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05c6fdffba3e00f27b3e16f544272a64">&#9670;&nbsp;</a></span>__attribute__() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t max_primes_le </td>
+          <td class="memname">__attribute__ </td>
           <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>max</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">(pure)&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Compute an upper bound on the number of primes up to max. </p>
-<p>This uses an inequality involving log derived from the prime number theorem to always get an upper bound. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Get an entry from a variable pitch array. </p>
+<p>Get an element from an array of bitfields of length 2, aka uint2's.</p>
+<p>Get a bit from a bitarray.</p>
+<p>In a normal array, the element type is a complete type with size known at compile time, or even a variably modified type for which sizeof and ordinary array operations will work as desired. However, it is sometimes useful to have arrays whose elements are structs with flexible length array members, and because flexible length arrays do not have their lengths automatically tracked like static or variable length arrays, we can't use sizeof or ordinary array operations. In particular, sizeof returns the padded size assuming the flexible length array has zero length, and array operations work as if we had an array of structs where the flexible length array has zero length. This function instead takes the base pointer of the array, the pitch, and the index, and returns a pointer to a member without bounds checking. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>number to find the number of primes up to </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">an</td><td>upper bound on the number of primes up to max </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>pointer to the start of the array </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pitch</td><td>offset from start of one element to start of next element (currently should be computed as offsetof(type, fla_member) + w*fla_element_size, but a more complex computation should be used if alignment is critically important) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">i</td><td>index of element to get </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to the i-th member of an array with given base and pitch</dd></dl>
+<p>Simply does buf[i/64] &amp; (1ull &lt;&lt; (i%64)). Only the truthiness of the result should be considered, all nonzero values should be treated as equivalent </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>pointer to bitarray </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">i</td><td>index of element to get </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if i-th element is false, nonzero otherwise</dd></dl>
+<p>The result will be shifted to the least significant position, that is, only 0, 1, 2, and 3 are possible results. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>pointer to array of bitfields </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">i</td><td>index of element to get </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>i-th element (0, 1, 2, or 3) </dd></dl>
 
 </div>
 </div>
@@ -266,7 +502,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compute the factorization for every number in the range from 0 to max. </p>
-<p>The factorizations for 0 and 1 are not actually computed. The factorizations are stored in an array of <a class="el" href="structfactors__t.html" title="A prime factorization.">factors_t</a> structs with capacity w, where w is the maximum number of unique prime divisors of a number not exceeding max. The result is a pitched array. <a class="el" href="">pitch_arr_get</a> should be used to handle the returned value. <a class="el" href="sieves_8h.html#a725ae2ebd048749b792cd92c23e815e8">get_factorizations_pitch</a> should be used to get the pitch from the output parameter w. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The factorizations for 0 and 1 are not actually computed. The factorizations are stored in an array of <a class="el" href="structfactors__t.html" title="A prime factorization.">factors_t</a> structs with capacity w, where w is the maximum number of unique prime divisors of a number not exceeding max. The result is a pitched array. <a class="el" href="">pitch_arr_get</a> should be used to handle the returned value. <a class="el" href="">get_factorizations_pitch</a> should be used to get the pitch from the output parameter w. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of sieving range in which to factor all numbers </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">_w</td><td>store w, the maximum number of unique prime divisors of a number not exceeding max </td></tr>
@@ -274,33 +510,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a pointer to an array of <a class="el" href="structfactors__t.html" title="A prime factorization.">factors_t</a> structs containing the factorization of all numbers not exceeding max, or NULL on allocation failure </dd></dl>
-
-</div>
-</div>
-<a id="a725ae2ebd048749b792cd92c23e815e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a725ae2ebd048749b792cd92c23e815e8">&#9670;&nbsp;</a></span>get_factorizations_pitch()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint64_t get_factorizations_pitch </td>
-          <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>w</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the pitch for a pitched array of factorization structs with w unique prime divisors. </p>
-<p>This is simply offsetof(factors_t, factors) + w*sizeof(dummy-&gt;factors[0]), where dummy is an expression with type <a class="el" href="structfactors__t.html" title="A prime factorization.">factors_t</a>. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">w</td><td>The maximal number of unique prime divisors of any potential index of the pitched array. Should be obtained from <a class="el" href="sieves_8h.html#a55b7ec1e3f2ac442b0f098861f758cff">sieve_factorizations</a>, <a class="el" href="">max_prime_divisors</a>, etc. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The pitch of a pitched array of factorization structs whose flexible length members all have w elements. </dd></dl>
 
 </div>
 </div>
@@ -331,7 +540,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compute the unique prime factors of every number in the range from 0 to max. </p>
-<p>The factors for 0 and 1 are not actually computed. The result is stored in an array of <a class="el" href="structfw__u64arr__t.html" title="A fixed capacity array.">fw_u64arr_t</a> structs with capacity w, where w is the maximum number of unique prime divisors of a number not exceeding max. The pitch of the result may be obtained with <a class="el" href="sieves_8h.html#acd7907ef204356e0be1a802cf5167992">get_factors_pitch</a>. <a class="el" href="">pitch_arr_get</a> should be used to handle the returned value. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The factors for 0 and 1 are not actually computed. The result is stored in an array of <a class="el" href="structfw__u64arr__t.html" title="A fixed capacity array.">fw_u64arr_t</a> structs with capacity w, where w is the maximum number of unique prime divisors of a number not exceeding max. The pitch of the result may be obtained with <a class="el" href="">get_factors_pitch</a>. <a class="el" href="">pitch_arr_get</a> should be used to handle the returned value. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of sieving range in which to find unique prime factors of all numbers </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">_w</td><td>maximum numer of unique prime divisors of a number not exceeding max </td></tr>
@@ -404,39 +613,12 @@ Functions</h2></td></tr>
 <p>Use a table of largest prime factors to get the factorization of a number. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">out</td><td>Factors struct to store result in. MUST be allocated already, use <a class="el" href="factorization_8h.html#a945694d2072205fb97e92a362f82b2cb">init_factors_t_ub</a> or <a class="el" href="sieves_8h.html#aaa5df5504d790281d05a032095e002a0">max_prime_divs</a> and <a class="el" href="factorization_8h.html#ae82106291453a286003dcd7117253f63">init_factors_t_w</a> if needed. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out</td><td>Factors struct to store result in. MUST be allocated already, use <a class="el" href="">init_factors_t_ub</a> or <a class="el" href="">max_prime_divs</a> and <a class="el" href="">init_factors_t_w</a> if needed. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>the number to get the factorization of </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">largest_factors</td><td>table of largest factors, from <a class="el" href="sieves_8h.html#a576d8ab23202853f3542828de64cdf90">sieve_largest_factors</a> </td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="acd7907ef204356e0be1a802cf5167992"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd7907ef204356e0be1a802cf5167992">&#9670;&nbsp;</a></span>get_factors_pitch()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint64_t get_factors_pitch </td>
-          <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>w</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the pitch for a pitched array of <a class="el" href="structfw__u64arr__t.html">fw_u64arr_t</a> factor lists. </p>
-<p>This is simply offsetof(fw_u64arr_t, elems) + *_w*sizeof(uint64_t). </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">w</td><td>The maximal number of unique prime divisors of any potential index of the pitched array. Should be obtained from <a class="el" href="sieves_8h.html#a1bca79bd17302449e4a95f833e2990c8">sieve_factors</a>, <a class="el" href="">max_prime_divisors</a>, etc. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The pitch of a pitched array of factor list structs whose flexible length members all have w elements. </dd></dl>
 
 </div>
 </div>
@@ -457,7 +639,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compute the number of divisors (including 1 and n) for every number n from 0 to max. </p>
-<p>The results for 0 and 1 are not actually computed. This effectively computes <a class="el" href="factorization_8h.html#a4659632fb46916482ba089ea5eb215b6">divisor_count</a> for all numbers in the range, but without needing to compute or store the factorizations intermediately </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The results for 0 and 1 are not actually computed. This effectively computes <a class="el" href="">divisor_count</a> for all numbers in the range, but without needing to compute or store the factorizations intermediately </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of sieving range in which to find divisor counts for all numbers </td></tr>
   </table>
@@ -484,7 +666,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compute the sum of divisors (including 1 and n) for every number n from 0 to max. </p>
-<p>The results for 0 and 1 are not actually computed. This effectively computes <a class="el" href="factorization_8h.html#a22edae250ec16a4ae6936969335029e8">divisor_sum</a> for all numbers in the range, but without needing to compute or store the factorizations intermediately </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The results for 0 and 1 are not actually computed. This effectively computes <a class="el" href="">divisor_sum</a> for all numbers in the range, but without needing to compute or store the factorizations intermediately </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of sieving range in which to find divisor sums for all numbers </td></tr>
   </table>
@@ -521,7 +703,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compute the sum of some power of divisors (including 1 and n) for every number n from 0 to max. </p>
-<p>The results for 0 and 1 are not actually computed. This effectively computes <a class="el" href="factorization_8h.html#a0cdf3ad88357fd8c9995bb110cb6d808">divisor_power_sum</a> for all numbers in the range, but without needing to compute or store the factorizations intermediately </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The results for 0 and 1 are not actually computed. This effectively computes <a class="el" href="">divisor_power_sum</a> for all numbers in the range, but without needing to compute or store the factorizations intermediately </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of sieving range in which to find divisor power sums for all numbers </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">e</td><td>power of divisors for summing, eg 0 would produce divisor counts, 1 divisor sums, 2 sums of squares of divisors, etc </td></tr>
@@ -529,6 +711,44 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>an array of divisor power sums for all numbers in the range, or NULL on allocation failure </dd></dl>
+
+</div>
+</div>
+<a id="a0ed770659cc6a2bf375294b20efefd4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ed770659cc6a2bf375294b20efefd4a">&#9670;&nbsp;</a></span>sieve_dk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t* sieve_dk </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>k</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the generalized divisor function dk(n) (number of k-tuples with product n) for every number n from 0 to max. </p>
+<p>The results for 0 and 1 are not actually computed. This effectively computes <a class="el" href="">divisor_tuple_count</a> for all numbers in the range, but without needing to compute or store the factorizations intermediately. Note that dk is multiplicative so dk(mn) = dk(m)dk(n) when m and n are coprime, and dk(p^a) = binom(a + k, k) for prime powers. In other words, dk is exponential in k and this function will overflow if max^k is too large. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of sieving range in which to compute generalized divisor function </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">k</td><td>number of factors per factorization, eg for a prime power p^a we get binom(a + k, k). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an array of dk results, or NULL on allocation failure </dd></dl>
 
 </div>
 </div>
@@ -549,7 +769,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compute Euler's totient function for every number from 0 to max. </p>
-<p>The results for 0 and 1 are not actually computed. This effectively computes <a class="el" href="factorization_8h.html#af21b39861e3bd04966862277f45dbb8e">euler_phi</a> for all numbers in the range, but without needing to compute or store the factorizations intermediately </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The results for 0 and 1 are not actually computed. This effectively computes <a class="el" href="">euler_phi</a> for all numbers in the range, but without needing to compute or store the factorizations intermediately </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of sieving range in which to find totients for all numbers </td></tr>
   </table>
@@ -576,7 +796,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compute the Carmichael function for every number from 0 to max. </p>
-<p>The results for 0 and 1 are not actually computed. This effectively computes <a class="el" href="factorization_8h.html#a25a68da474286694c8abd6c37e26425f">carmichael_lambda</a> for all numbers in the range, but without needing to compute or store the factorizations intermediately </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The results for 0 and 1 are not actually computed. This effectively computes <a class="el" href="">carmichael_lambda</a> for all numbers in the range, but without needing to compute or store the factorizations intermediately </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of sieving range in which to compute Carmichael for all numbers </td></tr>
   </table>
@@ -838,6 +1058,25 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a717c50cfde3924051c279a89096afd3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a717c50cfde3924051c279a89096afd3d">&#9670;&nbsp;</a></span>i</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t i</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">    <span class="keywordflow">return</span> buf + i*pitch</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="sieves_8h_source.html#l00051">51</a> of file <a class="el" href="sieves_8h_source.html">sieves.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
@@ -845,7 +1084,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="sieves_8h.html">sieves.h</a></li>
-    <li class="footer">Generated on Sat May 6 2023 08:10:01 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Tue May 9 2023 08:06:58 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>
