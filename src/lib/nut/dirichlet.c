@@ -91,3 +91,77 @@ bool euler_sieve_conv_u(int64_t n, const int64_t f_vals[static n+1], int64_t f_c
 	return true;
 }
 
+bool diri_table_init(diri_table *self, int64_t x, int64_t y){
+	int64_t ymin = u64_nth_root(x, 2);
+	if(y < ymin){
+		y = ymin;
+	}
+	int64_t yinv = x/y;
+	if(!(self->buf = malloc((y + 1 + yinv)*sizeof(int64_t)))){
+		return false;
+	}
+	self->x = x;
+	self->y = y;
+	self->yinv = yinv;
+	return true;
+}
+
+void diri_table_destroy(diri_table *self){
+	free(self->buf);
+	*self = (diri_table){};
+}
+
+void compute_I_diri_table(diri_table *self){
+	memset(self->buf, 0, (self->y + 1)*sizeof(int64_t));
+	self->buf[1] = 1;
+	for(int64_t i = 1; i < self->yinv; ++i){
+		self->buf[self->y + i] = 1;
+	}
+}
+
+void compute_u_diri_table(diri_table *self){
+	for(int64_t i = 0; i <= self->y; ++i){
+		self->buf[i] = 1;
+	}
+	for(int64_t i = 1; i < self->yinv; ++i){
+		self->buf[self->y + i] = self->x/i;
+	}
+}
+
+void compute_N_diri_table(diri_table *self){
+	for(int64_t i = 0; i <= self->y; ++i){
+		self->buf[i] = i;
+	}
+	for(int64_t i = 1; i < self->yinv; ++i){
+		int64_t v = self->x/i;
+		self->buf[self->y + i] = v*(v + 1)/2;
+	}
+}
+
+bool compute_conv_u_diri_table(diri_table *self, const diri_table *f_tbl){
+	if(self->y != f_tbl->y || self->x != f_tbl->x){
+		return false;
+	}
+	// use the dense part of self to temporarily store the sums of f for small n up to y
+	self->buf[0] = 0;
+	for(int64_t i = 1; i <= self->y; ++i){
+		self->buf[i] = self->buf[i-1] + f_tbl->buf[i];
+	}
+	for(int64_t i = 1; i < self->yinv; ++i){
+		int64_t v = self->x/i;
+		int64_t vr = u64_nth_root(v, 2);// TODO: v is close to the previous v, so only one newton step should be needed here
+		int64_t h = 0;
+		for(int64_t n = 1; n <= vr; ++n){
+			if(v/n <= self->y){
+				h += diri_table_get_dense(self, v/n);
+			}else{
+				h += diri_table_get_sparse(f_tbl, i*n);
+			}
+			h += diri_table_get_dense(f_tbl, n)*(v/n);
+		}
+		h -= diri_table_get_dense(self, vr)*vr;
+		diri_table_set_sparse(self, i, h);
+	}
+	return euler_sieve_conv_u(self->y, f_tbl->buf, self->buf);
+}
+
