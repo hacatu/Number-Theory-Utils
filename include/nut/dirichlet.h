@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <assert.h>
 
 /// Wrapper to hold values of some multiplicative function.
 /// Stores all values f(n) for n up to (and including) y, then
@@ -53,18 +54,22 @@ bool diri_table_init(diri_table *self, int64_t x, int64_t y);
 void diri_table_destroy(diri_table *self);
 
 static inline int64_t diri_table_get_dense(const diri_table *self, int64_t k){
+	assert(k >= 0 && k <= self->y);
 	return self->buf[k];
 }
 
 static inline void diri_table_set_dense(diri_table *self, int64_t k, int64_t v){
+	assert(k >= 0 && k <= self->y);
 	self->buf[k] = v;
 }
 
 static inline int64_t diri_table_get_sparse(const diri_table *self, int64_t k){
+	assert(k > 0 && k <= self->yinv);
 	return self->buf[self->y + k];
 }
 
 static inline void diri_table_set_sparse(diri_table *self, int64_t k, int64_t v){
+	assert(k > 0 && k <= self->yinv);
 	self->buf[self->y + k] = v;
 }
 
@@ -83,12 +88,20 @@ void compute_u_diri_table(diri_table *self);
 /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
 void compute_N_diri_table(diri_table *self);
 
+/// Compute the value table for the mobius function mu(n) (whose sum is called the Mertens function)
+/// Requires both an initialized diri_table from {@link diri_table_init} and a packed table of mobius values from {@link sieve_mobius}.
+/// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
+/// @param [in] mobius: packed table of mobius values, from {@link sieve_mobius} (with upper bound self->y).
+void compute_mertens_diri_table(diri_table *self, const uint8_t mobius[self->y/4 + 1]);
+
 /// Compute the value table for h = f <*> u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f
 /// See { @link compute_conv_diri_table } for details, this is just that function but with several specializations due to u being very simple.
 /// @param [in, out] self: the table to store the result in, initialized by { @link diri_table_init}.
 /// self->y, self->x, and self->yinv must be set and consistend with the inputs
 /// @param [in] f_tbl: table for the first operand
 bool compute_conv_u_diri_table(diri_table *self, const diri_table *f_tbl);
+
+bool compute_conv_N_diri_table(diri_table *self, const diri_table *f_tbl);
 
 /// Compute the value table for h = f <*> g, the dirichlet convolution of f and g, given value tables for the operands
 /// self must have been initialized using { @link diri_table_init}, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl

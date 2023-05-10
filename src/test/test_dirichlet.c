@@ -1,8 +1,12 @@
+#define _POSIX_C_SOURCE 202305L
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
+#include <time.h>
 
+#include <nut/modular_math.h>
 #include <nut/dirichlet.h>
 #include <nut/sieves.h>
 #include <nut/factorization.h>
@@ -92,6 +96,31 @@ static void test_compute_conv_u_diri(){
 	diri_table_destroy(&dk_table);
 }
 
+// oeis.org/A084237
+static const int64_t M10[] = {1, -1, 1, 2, -23, -48, 212, 1037, 1928, -222, -33722, -87856, 62366, 599582, -875575, -3216373, -3195437, -21830254, -46758740, 899990187, 461113106, -3395895277, -2061910120, 62467771689};
+
+static void test_mertens(uint64_t t){
+	uint64_t x = pow_u64(10, t);
+	uint64_t y = 0.25*pow(x, 2./3);
+	struct timespec start, sieve_done, end;
+	diri_table mertens_table = {};
+	diri_table_init(&mertens_table, x, y);
+	check_alloc("Mertens table", mertens_table.buf);
+	y = mertens_table.y;
+	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start);
+	uint8_t *mobius = sieve_mobius(y);
+	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &sieve_done);
+	check_alloc("Mobius sieve", mobius);
+	compute_mertens_diri_table(&mertens_table, mobius);
+	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end);
+	double sieve_secs = sieve_done.tv_sec - start.tv_sec + (sieve_done.tv_nsec - start.tv_nsec)*1e-9;
+	double diri_secs = end.tv_sec - sieve_done.tv_sec + (end.tv_nsec - sieve_done.tv_nsec)*1e-9;
+	int64_t M10_12 = diri_table_get_sparse(&mertens_table, 1);
+	diri_table_destroy(&mertens_table);
+	free(mobius);
+	fprintf(stderr, "%s: sieved up to %"PRIu64" in %.3fs; got Mertens(10^%"PRIu64") = %"PRIi64" in %.3fs\e[0m\n", M10_12 == M10[t] ? "\e[1;32mSUCCESS" : "\e[1;31mERROR", y, sieve_secs, t, M10_12, diri_secs);
+}
+
 int main(){
 	fprintf(stderr, "\e[1;34mTesting dirichlet functions...\e[0m\n");
 	sigma_vals = sieve_sigma_0(sieve_max);
@@ -103,6 +132,7 @@ int main(){
 	test_dirichlet_D();
 	test_euler_sieve_conv_u();
 	test_compute_conv_u_diri();
+	test_mertens(12);
 	free(f_vals);
 	free(h_vals);
 }

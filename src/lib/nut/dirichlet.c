@@ -97,7 +97,7 @@ bool diri_table_init(diri_table *self, int64_t x, int64_t y){
 		y = ymin;
 	}
 	int64_t yinv = x/y;
-	if(!(self->buf = malloc((y + 1 + yinv)*sizeof(int64_t)))){
+	if(!(self->buf = malloc((y + yinv + 2)*sizeof(int64_t)))){
 		return false;
 	}
 	self->x = x;
@@ -114,7 +114,7 @@ void diri_table_destroy(diri_table *self){
 void compute_I_diri_table(diri_table *self){
 	memset(self->buf, 0, (self->y + 1)*sizeof(int64_t));
 	self->buf[1] = 1;
-	for(int64_t i = 1; i < self->yinv; ++i){
+	for(int64_t i = 1; i <= self->yinv; ++i){
 		self->buf[self->y + i] = 1;
 	}
 }
@@ -123,7 +123,7 @@ void compute_u_diri_table(diri_table *self){
 	for(int64_t i = 0; i <= self->y; ++i){
 		self->buf[i] = 1;
 	}
-	for(int64_t i = 1; i < self->yinv; ++i){
+	for(int64_t i = 1; i <= self->yinv; ++i){
 		self->buf[self->y + i] = self->x/i;
 	}
 }
@@ -132,9 +132,47 @@ void compute_N_diri_table(diri_table *self){
 	for(int64_t i = 0; i <= self->y; ++i){
 		self->buf[i] = i;
 	}
-	for(int64_t i = 1; i < self->yinv; ++i){
+	for(int64_t i = 1; i <= self->yinv; ++i){
 		int64_t v = self->x/i;
 		self->buf[self->y + i] = v*(v + 1)/2;
+	}
+}
+
+void compute_mertens_diri_table(diri_table *self, const uint8_t mobius[self->y/4 + 1]){
+	diri_table_set_dense(self, 0, 0);
+	diri_table_set_dense(self, 1, 1);
+	for(int64_t i = 2, acc = 1, v; i <= self->y; ++i){
+		if((v = bitfield2_arr_get(mobius, i)) == 3){
+			v = -1;
+		}
+		diri_table_set_dense(self, i, acc += v);
+	}
+	for(int64_t i = self->yinv; i; --i){
+		int64_t v = self->x/i;
+		int64_t M = 1;
+		int64_t vr = u64_nth_root(v, 2);
+		for(int64_t j = 1; j <= vr; ++j){
+			M -= (diri_table_get_dense(self, j) - diri_table_get_dense(self, j - 1))*(v/j);
+		}
+		for(int64_t j = 2; j <= vr; ++j){
+			if(i*j > self->yinv){
+				M -= diri_table_get_dense(self, v/j);
+			}else{
+				M -= diri_table_get_sparse(self, i*j);
+			}
+		}
+		if(vr <= self->y){
+			M += diri_table_get_dense(self, vr)*vr;
+		}else{
+			M += diri_table_get_sparse(self, self->x/vr)*vr;
+		}
+		diri_table_set_sparse(self, i, M);
+	}
+	for(int64_t i = 2, v; i <= self->y; ++i){
+		if((v = bitfield2_arr_get(mobius, i)) == 3){
+			v = -1;
+		}
+		diri_table_set_dense(self, i, v);
 	}
 }
 
@@ -147,7 +185,7 @@ bool compute_conv_u_diri_table(diri_table *self, const diri_table *f_tbl){
 	for(int64_t i = 1; i <= self->y; ++i){
 		self->buf[i] = self->buf[i-1] + f_tbl->buf[i];
 	}
-	for(int64_t i = 1; i < self->yinv; ++i){
+	for(int64_t i = 1; i <= self->yinv; ++i){
 		int64_t v = self->x/i;
 		int64_t vr = u64_nth_root(v, 2);// TODO: v is close to the previous v, so only one newton step should be needed here
 		int64_t h = 0;
