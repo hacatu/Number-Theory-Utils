@@ -5,7 +5,7 @@ def runNoRedTest(test_path, test_argv, log_name):
 	global vg_iota
 	pipe_out, pipe_in = os.pipe()
 	if args.valgrind:
-		popen_args = ["valgrind", "--leak-check=full", "--track-origins=yes", "--read-inline-info=yes", "--read-var-info=yes", f"--log-file={valgrind_log_name}", test_path] + test_argv
+		popen_args = ["valgrind", "--leak-check=full", "--track-origins=yes", f"--log-file={valgrind_log_name}", test_path] + test_argv
 	else:
 		popen_args = [test_path] + test_argv
 	child = subprocess.Popen(popen_args, stdout=pipe_in, stderr=pipe_in)
@@ -37,7 +37,7 @@ def runLogDiffTests(test_path, i, test_argv, log_name):
 	global vg_iota
 	pipe_out, pipe_in = os.pipe()
 	if args.valgrind:
-		popen_args = ["valgrind", "--leak-check=full", "--track-origins=yes", "--read-inline-info=yes", "--read-var-info=yes", f"--log-file={valgrind_log_name}", test_path] + test_argv
+		popen_args = ["valgrind", "--leak-check=full", "--track-origins=yes", f"--log-file={valgrind_log_name}", test_path] + test_argv
 	else:
 		popen_args = [test_path] + test_argv
 	child = subprocess.Popen(popen_args, stdout=pipe_in, stderr=pipe_in)

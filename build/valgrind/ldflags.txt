@@ -1,6 +1,6 @@
 -Llib
 -lnut
 -lm
--ggdb3
+-g3
 -fno-eliminate-unused-debug-types
 
