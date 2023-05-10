@@ -31,6 +31,10 @@ jobs:
         mv build/coverage/cov website/
         mv build/coverage/coverage.svg website/
         mv docs website/
+    - uses: actions/upload-artifact@v3
+      with:
+        name: vg_logs
+        path: "test/*.valgrind.log"
     - name: Deploy Coverage and Docs to Pages
       uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:

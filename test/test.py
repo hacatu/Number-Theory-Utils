@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os, subprocess, sys, json, argparse
+import os, subprocess, sys, json, argparse, shutil
 
 def runNoRedTest(test_path, test_argv, log_name):
 	pipe_out, pipe_in = os.pipe()
@@ -24,6 +24,8 @@ def runNoRedTest(test_path, test_argv, log_name):
 		if subprocess.call(["grep", "-qF",  "== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: ", valgrind_log_name]) != 0:
 			print("\033[1;31mtest.py: valgrind reported error in test\033[0m", file=sys.stderr)
 			status = False
+			shutil.copy(valgrind_log_name, os.path.join(args.cfg_dir, f"{vg_iota}.valgrind.log"))
+			vg_iota += 1
 		os.remove(valgrind_log_name)
 	os.remove(log_name)
 	if status:
@@ -68,6 +70,7 @@ if __name__ == "__main__":
 	args = arg_parser.parse_args()
 	log_name = os.path.join(args.cfg_dir, "tmp.log")
 	valgrind_log_name = os.path.join(args.cfg_dir, "tmp.valgrind.log")
+	vg_iota = 0
 
 	with open(os.path.join(args.cfg_dir, "tests.json"), "r") as test_json:
 		test_cfg = json.load(test_json)
