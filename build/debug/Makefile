@@ -1,5 +1,5 @@
-CC := gcc
-LD := gcc
+CC := clang
+LD := clang
 AR := ar
 PROJECT_ROOT := $(shell pwd)
 

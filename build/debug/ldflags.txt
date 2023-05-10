@@ -1,10 +1,9 @@
 -Llib
 -lnut
 -lm
--fuse-ld=gold
 -ggdb3
 -pg
 -fno-eliminate-unused-debug-types
 --coverage
--fsanitize=address
+-fsanitize=address,bool,builtin,bounds,enum,function,nonnull-attribute,nullability,pointer-overflow,returns-nonnull-attribute,shift,unsigned-shift-base,unreachable,vla-bound
 
