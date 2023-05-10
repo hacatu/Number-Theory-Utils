@@ -32,6 +32,7 @@ jobs:
         mv build/coverage/coverage.svg website/
         mv docs website/
     - uses: actions/upload-artifact@v3
+      if: failure()
       with:
         name: vg_logs
         path: "test/*.valgrind.log"
