@@ -2,6 +2,9 @@
 	"test_pi_sieve": {
 		"no_red_tests": [[]]
 	},
+	"test_mobius": {
+		"no_red_tests": [[]]
+	},
 	"test_dirichlet": {
 		"no_red_tests": [[]]
 	},
@@ -36,9 +39,6 @@
 		"log_diff_tests": [[]]
 	},
 	"test_sqrt_mod": {
-		"no_red_tests": [[]]
-	},
-	"test_mobius": {
 		"no_red_tests": [[]]
 	},
 	"test_factor_sieves": {
