@@ -271,7 +271,12 @@ __attribute__((const)) uint64_t u64_nth_root(uint64_t a, uint64_t n);
 /// @param [out] _base: if a is found to be a perfect power, store the base here
 /// @param [out] _exp: if a is found to be a perfect power, store the exponent here
 /// @return true if a is a perfect power (with exponent max or lower), false otherwise (could mean a is not a perfect power, or could mean a is a perfect power with exponent max + 1 to 61)
+#pragma GCC diagnostic push
+#ifdef __clang__
+#pragma GCC diagnostic ignored "-Wunknown-attributes"
+#endif
 __attribute__((access(write_only, 3), access(write_only, 4))) bool is_perfect_power(uint64_t a, uint64_t max, uint64_t *_base, uint64_t *_exp);
+#pragma GCC diagnostic pop
 
 /// Try to find a factor of a number using Pollard's Rho algorithm with Floyd cycle finding.
 /// Note that this will not find factors of 4 or 25 no matter what x is.

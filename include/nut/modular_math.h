@@ -96,7 +96,12 @@ uint64_t rand_u64(uint64_t a, uint64_t b);
 /// @param [in] a, b: numbers to find gcd of
 /// @param [out] _t, _s: pointers to output x and y to respectively (ignored if NULL)
 /// @return d
+#pragma GCC diagnostic push
+#ifdef __clang__
+#pragma GCC diagnostic ignored "-Wunknown-attributes"
+#endif
 __attribute__((access(write_only, 3), access(write_only, 4))) static inline int64_t egcd(int64_t a, int64_t b, int64_t *_t, int64_t *_s){
+#pragma GCC diagnostic pop
 	int64_t r0 = b, r1 = a;
 	int64_t s0 = 1, s1 = 0;
 	int64_t t0 = 0, t1 = 1;
