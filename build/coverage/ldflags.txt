@@ -1,0 +1,9 @@
+-Llib
+-lnut
+-lm
+-ggdb3
+-pg
+-fno-eliminate-unused-debug-types
+--coverage
+-fsanitize=address,object-size,vla-bound
+
