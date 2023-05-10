@@ -19,7 +19,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y lcov doxygen libsdl2-dev valgrind clang
-        make BUILD_ROOT=build/valgrind
+        make BUILD_ROOT=build/valgrind CC=gcc LD=gcc
         grep -qF "$(printf '\e[1;32mtest.py suite passed all tests!\e[0m')" build/valgrind/log/test*.log
         make docs
         mv build/coverage/cov website/
