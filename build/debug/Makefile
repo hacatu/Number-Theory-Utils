@@ -28,31 +28,28 @@ COMPOUND_LIB_ARCS := $(patsubst ../../src/lib/%,lib/lib%.a,$(shell find ../../sr
 COMPOUND_TEST_BINS := $(patsubst ../../src/test/%,bin/test/%,$(shell find ../../src/test -mindepth 1 -maxdepth 1 -type d))
 COMPOUND_BINARIES := $(patsubst ../../src/bin/%,bin/%,$(shell find ../../src/bin -mindepth 1 -maxdepth 1 -type d))
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := test
 
 .PHONY: all
 all: $(SIMPLE_LIB_ARCS) $(COMPOUND_LIB_ARCS) $(SIMPLE_BINARIES) $(COMPOUND_BINARIES)
 
 .SECONDARY:
-bin bin/test lib notes notes/lib notes/bin notes/test cov obj obj/lib obj/bin obj/test log:
+bin bin/test lib obj obj/lib obj/bin obj/test log:
 	@mkdir -p $@
 
-obj/lib/%.o: ../../src/lib/%.c | obj/lib notes/lib
-	@mkdir -p $(@D) notes/lib/$(*D)
-	$(CC) $(LIB_CFLAGS) -c -o notes/lib/$*.o $<
-	@mv notes/lib/$*.o $@
+obj/lib/%.o: ../../src/lib/%.c | obj/lib
+	@mkdir -p $(@D)
+	$(CC) $(LIB_CFLAGS) -c -o $@ $<
 	@$(CC) $(MAKEDEPS_CFLAGS) obj/lib/$*.d $^
 
-obj/bin/%.o: ../../src/bin/%.c | obj/bin notes/bin
-	@mkdir -p $(@D) notes/bin/$(*D)
-	$(CC) $(BINARY_CFLAGS) -c -o notes/bin/$*.o $<
-	@mv notes/bin/$*.o $@
+obj/bin/%.o: ../../src/bin/%.c | obj/bin
+	@mkdir -p $(@D)
+	$(CC) $(BINARY_CFLAGS) -c -o $@ $<
 	@$(CC) $(MAKEDEPS_CFLAGS) obj/bin/$*.d $<
 
-obj/test/%.o: ../../src/test/%.c | obj/test notes/test
-	@mkdir -p $(@D) notes/test/$(*D)
-	$(CC) $(TEST_CFLAGS) -c -o notes/test/$*.o $<
-	@mv notes/test/$*.o $@
+obj/test/%.o: ../../src/test/%.c | obj/test
+	@mkdir -p $(@D)
+	$(CC) $(TEST_CFLAGS) -c -o $@ $<
 	@$(CC) $(MAKEDEPS_CFLAGS) obj/test/$*.d $<
 
 $(SIMPLE_LIB_ARCS): lib/lib%.a: obj/lib/%.o | lib
@@ -88,11 +85,6 @@ $(foreach c,$(patsubst bin/%,%,$(COMPOUND_BINARIES)),$(eval $(call make-compound
 .PHONY: test
 test: all $(SIMPLE_TEST_BINS) $(COMPOUND_TEST_BINS) log
 	../../test/test.py ../../test `pwd`/bin/test 2>&1 | tee log/test`date +%m-%d-%y-%R:%S`.log
-
-.PHONY: coverage
-coverage: test | cov
-	geninfo notes
-	find notes/lib -name "*.info" | xargs genhtml --num-spaces 4 --css-file ../../resources/lcov.css --html-prolog ../../resources/lcov_prolog.html -o cov | grep -oP "(?<=lines\\.{6,6}: )\\d+\\.\d+" | xargs ../../cov_shield.py | xargs curl -o coverage.svg
 
 .PHONY: clean
 clean:

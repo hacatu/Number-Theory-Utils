@@ -52,4 +52,6 @@ __pycache__/
 gmon.out
 gprof.txt
 !test/*.log
+test/tmp.log
+test/tmp.valgrind.log
 

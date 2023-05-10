@@ -6,9 +6,6 @@
 -Wno-unused-parameter
 -Wno-unused-function
 -std=c2x
--ggdb3
 -DDEBUG
 -fno-strict-aliasing
 -fno-eliminate-unused-debug-types
---coverage
--fsanitize=address

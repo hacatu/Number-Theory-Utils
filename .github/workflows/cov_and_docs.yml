@@ -18,12 +18,15 @@ jobs:
     - name: Run Coverage and Doxygen
       run: |
         sudo apt-get update
-        sudo apt-get install -y lcov doxygen libsdl2-dev
-        make coverage
-        grep -qF "$(printf '\e[1;32mtest.py suite passed all tests!\e[0m')" build/debug/log/test*.log
+        sudo apt-get install -y lcov doxygen libsdl2-dev valgrind clang
+        make BUILD_ROOT=build/debug
+        make BUILD_ROOT=build/valgrind
+        make BUILD_ROOT=build/coverage
+        make BUILD_ROOT=build/release
+        grep -qF "$(printf '\e[1;32mtest.py suite passed all tests!\e[0m')" build/coverage/log/test*.log
         make docs
-        mv build/debug/cov website/
-        mv build/debug/coverage.svg website/
+        mv build/coverage/cov website/
+        mv build/coverage/coverage.svg website/
         mv docs website/
     - name: Deploy Coverage and Docs to Pages
       uses: JamesIves/github-pages-deploy-action@v4.4.1

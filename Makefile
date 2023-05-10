@@ -3,7 +3,7 @@ SHELL = bash
 CC := gcc
 LD := gcc
 AR := ar
-BUILD_ROOT := build/debug
+BUILD_ROOT := build/release
 ALLOW_ROOT := 0
 
 SOURCES := $(shell find src -name '*.c')

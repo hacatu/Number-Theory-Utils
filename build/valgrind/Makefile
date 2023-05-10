@@ -28,7 +28,7 @@ COMPOUND_LIB_ARCS := $(patsubst ../../src/lib/%,lib/lib%.a,$(shell find ../../sr
 COMPOUND_TEST_BINS := $(patsubst ../../src/test/%,bin/test/%,$(shell find ../../src/test -mindepth 1 -maxdepth 1 -type d))
 COMPOUND_BINARIES := $(patsubst ../../src/bin/%,bin/%,$(shell find ../../src/bin -mindepth 1 -maxdepth 1 -type d))
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := test
 
 .PHONY: all
 all: $(SIMPLE_LIB_ARCS) $(COMPOUND_LIB_ARCS) $(SIMPLE_BINARIES) $(COMPOUND_BINARIES)
@@ -85,11 +85,6 @@ $(foreach c,$(patsubst bin/%,%,$(COMPOUND_BINARIES)),$(eval $(call make-compound
 .PHONY: test
 test: all $(SIMPLE_TEST_BINS) $(COMPOUND_TEST_BINS) log
 	../../test/test.py -g ../../test `pwd`/bin/test 2>&1 | tee log/test`date +%m-%d-%y-%R:%S`.log
-
-.PHONY: coverage
-coverage: test | cov
-	geninfo notes
-	find notes/lib -name "*.info" | xargs genhtml --num-spaces 4 --css-file ../../resources/lcov.css --html-prolog ../../resources/lcov_prolog.html -o cov | grep -oP "(?<=lines\\.{6,6}: )\\d+\\.\d+" | xargs ../../cov_shield.py | xargs curl -o coverage.svg
 
 .PHONY: clean
 clean:

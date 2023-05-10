@@ -26,12 +26,19 @@ about 2<sup>30</sup> potentially can fail due to overflow.
 
 ## Building
 
-This library uses variant makefiles for each build type.  To build the debug variant, simply run `make`
-in the project root directory.  The resulting files will be in `build/debug/lib` and `build/debug/bin`.
+This library uses variant makefiles for each build type.  To build the release variant, simply run `make`
+in the project root directory.  The resulting files will be in `build/release/lib` and `build/release/bin`,
+or you can run `sudo make install` after `make` finishes.
 
-To build a different variant, change the `$(BUILD_ROOT)` variable from `build/debug` to `build/release`
-or some other value, for instance `make BUILD_ROOT="build/release"`.  You can check what variants exist
+To build a different variant, change the `$(BUILD_ROOT)` variable from `build/release` to `build/debug`
+or some other value, for instance `make BUILD_ROOT=build/release`.  You can check what variants exist
 by looking at the subdirectories of `build`, and you can create your own by copying and modifying `build/debug`.
+
+The currently extant variants are
+- `build/coverage`: debug variant, includes address sanitizer and some ub sanitizers.  builds using `gcc`.  default `make` target: `coverage`
+- `build/debug`: debug variant, includes memory sanitizer and most ub sanitizers.  builds using `clang`.  default `make` target: `test`
+- `build/release`: release variant, no sanitizers.  builds using `gcc` with `-O3`.  default `make` target: `all`
+- `build/valgrind`: debug variant, no sanitizers.  builds using `clang` with `-O1`.  default `make` target: `test`.  passes `-g` to `test.py` to invoke the valgrind wrapper
 
 The files in a variant build directory are arranged as follows: `Makefile` is the makefile, variants
 probably won't have to modify this much aside from removing coverage information; `cflags.txt`,
@@ -49,9 +56,6 @@ every C file or directory in `src/bin` is turned into its own executable in `$(B
 or directory in `src/lib` is turned into its own static library in `$(BUILD_ROOT)/lib`, and every C file or
 directory in `src/test` is turned into its own test executable in `$(BUILD_ROOT)/bin/test`.
 
-To run tests, simply run `make test` (or `make BUILD_ROOT=build/release test`).  For build variants where
-coverage testing should be done, `make coverage` is better since both will re-run all tests every time.
-
 `make clean` should remove all output files in all variant build directories, as well as all generated
 documentation.
 
@@ -61,9 +65,8 @@ tied to a build variant and even if you specify one the same thing will happen.
 `make debug_makefile` simply exists to facillitate printing make variables, don't worry about it.
 
 Only Linux is properly supported.  To build, only `gcc`, `ar`, and `make` are strictly required, but `lcov`
-and `doxygen` are required for coverage and documentation, and `lld` is specified as the linker by default.
-If you do not have `lld`, you can switch the line `-fuse-ld=lld` to `-fuse-ld=gold` or remove it in
-`$(BUILD_ROOT)/ldflags.txt`.
+and `doxygen` are required for coverage and documentation, and `python`, `clang`, and `valgrind` are required
+for testing.
 
 If running as root in an automated environment, you will need to either pass `ALLOW_ROOT=1` as an option to
 `make`, or pipe `yes` into `make` to auto accept the safety prompt for running as root.

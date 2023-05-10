@@ -6,8 +6,9 @@
 -Wno-unused-parameter
 -std=c2x
 -ggdb3
--pg
 -fno-eliminate-unused-debug-types
---coverage
--fsanitize=address,bool,builtin,bounds,enum,function,nonnull-attribute,nullability,pointer-overflow,returns-nonnull-attribute,shift,unsigned-shift-base,unreachable,vla-bound
+-fno-omit-frame-pointer
+-fno-optimize-sibling-calls
+-fsanitize=memory,bool,builtin,bounds,enum,function,nonnull-attribute,nullability,pointer-overflow,returns-nonnull-attribute,shift,unsigned-shift-base,unreachable,vla-bound
+-DDEBUG
 

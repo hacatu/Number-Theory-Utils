@@ -8,4 +8,5 @@
 -ggdb3
 -fno-eliminate-unused-debug-types
 -O1
+-DDEBUG
 
