@@ -2,7 +2,6 @@
 -lnut
 -lm
 -lSDL2
--fuse-ld=gold
 -O3
 -flto
 -std=c2x

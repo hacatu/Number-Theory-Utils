@@ -7,4 +7,5 @@
 -std=c2x
 -O3
 -fno-strict-aliasing
+-DNDEBUG
 
