@@ -12,13 +12,15 @@ var sieves_8h =
     [ "sieve_dk", "sieves_8h.html#a0ed770659cc6a2bf375294b20efefd4a", null ],
     [ "sieve_phi", "sieves_8h.html#a0fd78cb343ce5afd768c28aacde7b99d", null ],
     [ "sieve_carmichael", "sieves_8h.html#ae19a3c1887d6cdc9375c32f0abfd2ab3", null ],
-    [ "sieve_mobius", "sieves_8h.html#abdc6cda6e2a6ad9fa55e34267560af3a", null ],
-    [ "compute_mertens_range", "sieves_8h.html#a30bfef1504f10261d7bbb2b343477d09", null ],
+    [ "sieve_mobius", "sieves_8h.html#a18155611a81e12f7f810d4cdf6bccb36", null ],
+    [ "compute_mertens_range", "sieves_8h.html#a1c821be2ce97e14345bbf6430b76fc5c", null ],
     [ "sieve_is_composite", "sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820", null ],
     [ "is_composite", "sieves_8h.html#a65e3f8fe2bf00fa39f40fb7468a134e3", null ],
     [ "compute_pi_range", "sieves_8h.html#a3a885035538c90202cc90bf1283ae0f1", null ],
-    [ "compute_pi_from_tables", "sieves_8h.html#a99e138e164c8cb9716c3885afade475e", null ],
+    [ "__attribute__", "sieves_8h.html#af4e642f16b95823b059f52132a7dffa6", null ],
     [ "sieve_primes", "sieves_8h.html#ae6a8da8730b149433ac438cb106479e4", null ],
     [ "pitch", "sieves_8h.html#afd6e633d4e5b0b4e8ce8b5054cc50d71", null ],
-    [ "i", "sieves_8h.html#a717c50cfde3924051c279a89096afd3d", null ]
+    [ "i", "sieves_8h.html#a717c50cfde3924051c279a89096afd3d", null ],
+    [ "pi_table", "sieves_8h.html#ae4f84db08c85d7a78c13217dbdee3cd3", null ],
+    [ "buf", "sieves_8h.html#a086e270b5e2620ab49f50bdd9eb88364", null ]
 ];

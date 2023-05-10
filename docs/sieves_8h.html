@@ -160,12 +160,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ae19a3c1887d6cdc9375c32f0abfd2ab3"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#ae19a3c1887d6cdc9375c32f0abfd2ab3">sieve_carmichael</a> (uint64_t max)</td></tr>
 <tr class="memdesc:ae19a3c1887d6cdc9375c32f0abfd2ab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Carmichael function for every number from 0 to max.  <a href="sieves_8h.html#ae19a3c1887d6cdc9375c32f0abfd2ab3">More...</a><br /></td></tr>
 <tr class="separator:ae19a3c1887d6cdc9375c32f0abfd2ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abdc6cda6e2a6ad9fa55e34267560af3a"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#abdc6cda6e2a6ad9fa55e34267560af3a">sieve_mobius</a> (uint64_t max)</td></tr>
-<tr class="memdesc:abdc6cda6e2a6ad9fa55e34267560af3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Mobius function for every number from 0 to max.  <a href="sieves_8h.html#abdc6cda6e2a6ad9fa55e34267560af3a">More...</a><br /></td></tr>
-<tr class="separator:abdc6cda6e2a6ad9fa55e34267560af3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30bfef1504f10261d7bbb2b343477d09"><td class="memItemLeft" align="right" valign="top">int64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a30bfef1504f10261d7bbb2b343477d09">compute_mertens_range</a> (uint64_t max, const uint64_t mobius[static max/32+1])</td></tr>
-<tr class="memdesc:a30bfef1504f10261d7bbb2b343477d09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Mertens function (sum of Mobius function) for every number from 0 to max.  <a href="sieves_8h.html#a30bfef1504f10261d7bbb2b343477d09">More...</a><br /></td></tr>
-<tr class="separator:a30bfef1504f10261d7bbb2b343477d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18155611a81e12f7f810d4cdf6bccb36"><td class="memItemLeft" align="right" valign="top">uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a18155611a81e12f7f810d4cdf6bccb36">sieve_mobius</a> (uint64_t max)</td></tr>
+<tr class="memdesc:a18155611a81e12f7f810d4cdf6bccb36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Mobius function for every number from 0 to max.  <a href="sieves_8h.html#a18155611a81e12f7f810d4cdf6bccb36">More...</a><br /></td></tr>
+<tr class="separator:a18155611a81e12f7f810d4cdf6bccb36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c821be2ce97e14345bbf6430b76fc5c"><td class="memItemLeft" align="right" valign="top">int64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a1c821be2ce97e14345bbf6430b76fc5c">compute_mertens_range</a> (uint64_t max, const uint8_t mobius[static max/4+1])</td></tr>
+<tr class="memdesc:a1c821be2ce97e14345bbf6430b76fc5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Mertens function (sum of Mobius function) for every number from 0 to max.  <a href="sieves_8h.html#a1c821be2ce97e14345bbf6430b76fc5c">More...</a><br /></td></tr>
+<tr class="separator:a1c821be2ce97e14345bbf6430b76fc5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff23d64417b86ac7b22c7ccbbc54e820"><td class="memItemLeft" align="right" valign="top">uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820">sieve_is_composite</a> (uint64_t max)</td></tr>
 <tr class="memdesc:aff23d64417b86ac7b22c7ccbbc54e820"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a bitarray of whether or not each number from 0 to max is composite.  <a href="sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820">More...</a><br /></td></tr>
 <tr class="separator:aff23d64417b86ac7b22c7ccbbc54e820"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,9 +175,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a3a885035538c90202cc90bf1283ae0f1"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a3a885035538c90202cc90bf1283ae0f1">compute_pi_range</a> (uint64_t max, const uint8_t buf[static max/30+1])</td></tr>
 <tr class="memdesc:a3a885035538c90202cc90bf1283ae0f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the pi (prime counting) function for every number from 0 to max.  <a href="sieves_8h.html#a3a885035538c90202cc90bf1283ae0f1">More...</a><br /></td></tr>
 <tr class="separator:a3a885035538c90202cc90bf1283ae0f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99e138e164c8cb9716c3885afade475e"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a99e138e164c8cb9716c3885afade475e">compute_pi_from_tables</a> (uint64_t n, const uint64_t pi_table[static(n+30)/240], const uint8_t buf[static n/30+1])</td></tr>
-<tr class="memdesc:a99e138e164c8cb9716c3885afade475e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value for the pi (prime counting) function for a particular number using precomputed tables.  <a href="sieves_8h.html#a99e138e164c8cb9716c3885afade475e">More...</a><br /></td></tr>
-<tr class="separator:a99e138e164c8cb9716c3885afade475e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4e642f16b95823b059f52132a7dffa6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#af4e642f16b95823b059f52132a7dffa6">__attribute__</a> ((no_sanitize(&quot;vla-bound&quot;))) uint64_t compute_pi_from_tables(uint64_t n</td></tr>
+<tr class="memdesc:af4e642f16b95823b059f52132a7dffa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value for the pi (prime counting) function for a particular number using precomputed tables.  <a href="sieves_8h.html#af4e642f16b95823b059f52132a7dffa6">More...</a><br /></td></tr>
+<tr class="separator:af4e642f16b95823b059f52132a7dffa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6a8da8730b149433ac438cb106479e4"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#ae6a8da8730b149433ac438cb106479e4">sieve_primes</a> (uint64_t max, uint64_t *_num_primes)</td></tr>
 <tr class="memdesc:ae6a8da8730b149433ac438cb106479e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute an array of all primes from 0 to max.  <a href="sieves_8h.html#ae6a8da8730b149433ac438cb106479e4">More...</a><br /></td></tr>
 <tr class="separator:ae6a8da8730b149433ac438cb106479e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -189,10 +189,16 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pitch</b></td></tr>
 <tr class="separator:afd6e633d4e5b0b4e8ce8b5054cc50d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a717c50cfde3924051c279a89096afd3d"><td class="memItemLeft" align="right" valign="top">size_t uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>i</b></td></tr>
 <tr class="separator:a717c50cfde3924051c279a89096afd3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4f84db08c85d7a78c13217dbdee3cd3"><td class="memItemLeft" align="right" valign="top"><a id="ae4f84db08c85d7a78c13217dbdee3cd3"></a>
+const uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>pi_table</b> [static n/30]</td></tr>
+<tr class="separator:ae4f84db08c85d7a78c13217dbdee3cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a086e270b5e2620ab49f50bdd9eb88364"><td class="memItemLeft" align="right" valign="top"><a id="a086e270b5e2620ab49f50bdd9eb88364"></a>
+const uint64_t const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>buf</b> [static n/30+1]</td></tr>
+<tr class="separator:a086e270b5e2620ab49f50bdd9eb88364"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="afa15dcb7788004e5e535f13abeefd29c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa15dcb7788004e5e535f13abeefd29c">&#9670;&nbsp;</a></span>__attribute__() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afa15dcb7788004e5e535f13abeefd29c">&#9670;&nbsp;</a></span>__attribute__() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -429,7 +435,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pitch</b></td></tr>
 </div>
 </div>
 <a id="a05c6fdffba3e00f27b3e16f544272a64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05c6fdffba3e00f27b3e16f544272a64">&#9670;&nbsp;</a></span>__attribute__() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a05c6fdffba3e00f27b3e16f544272a64">&#9670;&nbsp;</a></span>__attribute__() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -806,14 +812,14 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pitch</b></td></tr>
 
 </div>
 </div>
-<a id="abdc6cda6e2a6ad9fa55e34267560af3a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abdc6cda6e2a6ad9fa55e34267560af3a">&#9670;&nbsp;</a></span>sieve_mobius()</h2>
+<a id="a18155611a81e12f7f810d4cdf6bccb36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18155611a81e12f7f810d4cdf6bccb36">&#9670;&nbsp;</a></span>sieve_mobius()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t* sieve_mobius </td>
+          <td class="memname">uint8_t* sieve_mobius </td>
           <td>(</td>
           <td class="paramtype">uint64_t&#160;</td>
           <td class="paramname"><em>max</em></td><td>)</td>
@@ -833,8 +839,8 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pitch</b></td></tr>
 
 </div>
 </div>
-<a id="a30bfef1504f10261d7bbb2b343477d09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30bfef1504f10261d7bbb2b343477d09">&#9670;&nbsp;</a></span>compute_mertens_range()</h2>
+<a id="a1c821be2ce97e14345bbf6430b76fc5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c821be2ce97e14345bbf6430b76fc5c">&#9670;&nbsp;</a></span>compute_mertens_range()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -848,8 +854,8 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pitch</b></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint64_t&#160;</td>
-          <td class="paramname"><em>mobius</em>[static max/32+1]&#160;</td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>mobius</em>[static max/4+1]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -863,7 +869,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pitch</b></td></tr>
 <p>Note that this function is signed. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of range in which to compute Mertens for all numbers </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mobius</td><td>bitfield array of Mobius function outputs (from <a class="el" href="sieves_8h.html#abdc6cda6e2a6ad9fa55e34267560af3a">sieve_mobius</a>). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mobius</td><td>bitfield array of Mobius function outputs (from <a class="el" href="sieves_8h.html#a18155611a81e12f7f810d4cdf6bccb36">sieve_mobius</a>). </td></tr>
   </table>
   </dd>
 </dl>
@@ -964,45 +970,29 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pitch</b></td></tr>
 </div><div class="memdoc">
 
 <p>Compute the pi (prime counting) function for every number from 0 to max. </p>
-<p>The result should be used with <a class="el" href="sieves_8h.html#a99e138e164c8cb9716c3885afade475e">compute_pi_from_tables</a> since pi is only actually calculated at every 240th number since intermediate results can be computed with a single popcount on the packed buf bitarray. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The result should be used with <a class="el" href="">compute_pi_from_tables</a> since pi is only actually calculated at every 240th number since intermediate results can be computed with a single popcount on the packed buf bitarray. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of range to compute pi function </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>packed bitarray from <a class="el" href="sieves_8h.html#aff23d64417b86ac7b22c7ccbbc54e820">sieve_is_composite</a> </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>an array of pi values at every 240th number (use <a class="el" href="sieves_8h.html#a99e138e164c8cb9716c3885afade475e">compute_pi_from_tables</a>) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>an array of pi values at every 240th number (use <a class="el" href="">compute_pi_from_tables</a>) </dd></dl>
 
 </div>
 </div>
-<a id="a99e138e164c8cb9716c3885afade475e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99e138e164c8cb9716c3885afade475e">&#9670;&nbsp;</a></span>compute_pi_from_tables()</h2>
+<a id="af4e642f16b95823b059f52132a7dffa6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4e642f16b95823b059f52132a7dffa6">&#9670;&nbsp;</a></span>__attribute__() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t compute_pi_from_tables </td>
+          <td class="memname">__attribute__ </td>
           <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">(no_sanitize(&quot;vla-bound&quot;))&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">const uint64_t&#160;</td>
-          <td class="paramname"><em>pi_table</em>[static(n+30)/240], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t&#160;</td>
-          <td class="paramname"><em>buf</em>[static n/30+1]&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1084,7 +1074,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pitch</b></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="sieves_8h.html">sieves.h</a></li>
-    <li class="footer">Generated on Tue May 9 2023 08:06:58 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Wed May 10 2023 07:30:35 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

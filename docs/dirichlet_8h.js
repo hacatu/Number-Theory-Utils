@@ -8,6 +8,8 @@ var dirichlet_8h =
     [ "compute_I_diri_table", "dirichlet_8h.html#a3601caf56001387588ef3f07a1a30a9e", null ],
     [ "compute_u_diri_table", "dirichlet_8h.html#a0d31da7cd9e490926fa111e96705baa6", null ],
     [ "compute_N_diri_table", "dirichlet_8h.html#a672d9d1f95b6bab3e47f098bc54947fe", null ],
+    [ "compute_mertens_diri_table", "dirichlet_8h.html#a173aecab4a5263848f4c5b9acdf4c68d", null ],
     [ "compute_conv_u_diri_table", "dirichlet_8h.html#a212cb5be17e8def841034e9644442f72", null ],
+    [ "compute_conv_N_diri_table", "dirichlet_8h.html#a0c163df14bb9afde0f509608705b7004", null ],
     [ "compute_conv_diri_table", "dirichlet_8h.html#aa6dc1b1c7e758b2ef113bc6e63ccbc75", null ]
 ];

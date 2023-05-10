@@ -181,22 +181,27 @@ $(document).ready(function(){initNavTree('factorization_8h_source.html',''); ini
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<a class="code" href="factorization_8h.html#adbaa273b8beccd77d082b8af9cef9b8f">__attribute__</a>((const)) uint64_t u64_nth_root(uint64_t a, uint64_t n);</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
-<div class="line"><a name="l00274"></a><span class="lineno"><a class="line" href="factorization_8h.html#a461682a31c02f03c4bcdc8f4decc781f">  274</a></span>&#160;<a class="code" href="factorization_8h.html#adbaa273b8beccd77d082b8af9cef9b8f">__attribute__</a>((access(write_only, 3), access(write_only, 4))) <span class="keywordtype">bool</span> is_perfect_power(uint64_t a, uint64_t max, uint64_t *_base, uint64_t *_exp);</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<a class="code" href="factorization_8h.html#adbaa273b8beccd77d082b8af9cef9b8f">__attribute__</a>((const)) uint64_t factor1_pollard_rho(uint64_t n, uint64_t x);</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<a class="code" href="factorization_8h.html#adbaa273b8beccd77d082b8af9cef9b8f">__attribute__</a>((const)) uint64_t factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m);</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<a class="code" href="factorization_8h.html#adbaa273b8beccd77d082b8af9cef9b8f">__attribute__</a>((const)) int64_t factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B);</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<a class="code" href="factorization_8h.html#adbaa273b8beccd77d082b8af9cef9b8f">__attribute__</a>((const)) int64_t factor1_lenstra_montgomery(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B);</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;extern const uint64_t <a class="code" href="factorization_8h.html#a0b0d40c587b0eed4c8b21d206009d4f5">small_primes</a>[25];</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;extern const <a class="code" href="structfactor__conf__t.html">factor_conf_t</a> <a class="code" href="factorization_8h.html#a401ed81d2bb12d1accea148f09298e94">default_factor_conf</a>;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="preprocessor">#pragma GCC diagnostic push</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="preprocessor">#ifdef __clang__</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wunknown-attributes&quot;</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno"><a class="line" href="factorization_8h.html#a461682a31c02f03c4bcdc8f4decc781f">  278</a></span>&#160;<a class="code" href="factorization_8h.html#adbaa273b8beccd77d082b8af9cef9b8f">__attribute__</a>((access(write_only, 3), access(write_only, 4))) bool is_perfect_power(uint64_t a, uint64_t max, uint64_t *_base, uint64_t *_exp);</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="preprocessor">#pragma GCC diagnostic pop</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<a class="code" href="factorization_8h.html#adbaa273b8beccd77d082b8af9cef9b8f">__attribute__</a>((<span class="keyword">const</span>)) uint64_t factor1_pollard_rho(uint64_t n, uint64_t x);</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<a class="code" href="factorization_8h.html#adbaa273b8beccd77d082b8af9cef9b8f">__attribute__</a>((const)) uint64_t factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m);</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<a class="code" href="factorization_8h.html#adbaa273b8beccd77d082b8af9cef9b8f">__attribute__</a>((const)) int64_t factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B);</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<a class="code" href="factorization_8h.html#adbaa273b8beccd77d082b8af9cef9b8f">__attribute__</a>((const)) int64_t factor1_lenstra_montgomery(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B);</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;extern const uint64_t <a class="code" href="factorization_8h.html#a0b0d40c587b0eed4c8b21d206009d4f5">small_primes</a>[25];</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;extern const <a class="code" href="structfactor__conf__t.html">factor_conf_t</a> <a class="code" href="factorization_8h.html#a401ed81d2bb12d1accea148f09298e94">default_factor_conf</a>;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
 <div class="ttc" id="afactorization_8h_html_a0b0d40c587b0eed4c8b21d206009d4f5"><div class="ttname"><a href="factorization_8h.html#a0b0d40c587b0eed4c8b21d206009d4f5">small_primes</a></div><div class="ttdeci">const uint64_t small_primes[25]</div><div class="ttdoc">An array containing the 25 primes up to 100.</div></div>
 <div class="ttc" id="afactorization_8h_html_a1e279e13d6d717a98b44ba82a7d6ef66"><div class="ttname"><a href="factorization_8h.html#a1e279e13d6d717a98b44ba82a7d6ef66">forall_divisors_le_tmptmp</a></div><div class="ttdeci">int forall_divisors_le_tmptmp(const factors_t *factors, uint64_t d_max, int(*f)(const factors_t *, uint64_t, void *), void *data)</div><div class="ttdoc">Call forall_divisors_le with temporarily allocated dfactors and pfactors structs.</div></div>
 <div class="ttc" id="afactorization_8h_html_a384cb020a39cf0ccb2d59b659faeff2a"><div class="ttname"><a href="factorization_8h.html#a384cb020a39cf0ccb2d59b659faeff2a">forall_divisors_le</a></div><div class="ttdeci">int forall_divisors_le(const factors_t *factors, uint64_t d_max, int(*f)(const factors_t *, uint64_t, void *), void *data, factors_t *dfactors, factors_t *pfactors)</div><div class="ttdoc">Call a given function on each divisor of a number, given its factorization, skipping divisors over a ...</div></div>
@@ -224,7 +229,7 @@ $(document).ready(function(){initNavTree('factorization_8h_source.html',''); ini
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="factorization_8h.html">factorization.h</a></li>
-    <li class="footer">Generated on Tue May 9 2023 08:06:58 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Wed May 10 2023 07:30:35 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

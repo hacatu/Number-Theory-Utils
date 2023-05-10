@@ -50,12 +50,12 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-05-09 08:06:57</td>
+            <td class="headerValue">2023-05-10 07:30:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntryHi">100.0 %</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryHi">-</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -143,8 +143,8 @@
 <a name="68"><span class="lineNum">      68 </span>            : /// @param [in] buf: pointer to array of bitfields</a>
 <a name="69"><span class="lineNum">      69 </span>            : /// @param [in] i: index of element to get</a>
 <a name="70"><span class="lineNum">      70 </span>            : /// @return i-th element (0, 1, 2, or 3)</a>
-<a name="71"><span class="lineNum">      71 </span><span class="lineCov">    1000000 : __attribute__((pure)) static inline uint8_t bitfield2_arr_get(const uint64_t *buf, uint64_t i){</span></a>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">    1000000 :     return (buf[i/32] &gt;&gt; (i%32)*2) &amp; 3;</span></a>
+<a name="71"><span class="lineNum">      71 </span><span class="lineCov">   50999996 : __attribute__((pure)) static inline uint8_t bitfield2_arr_get(const uint8_t *buf, uint64_t i){</span></a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">   50999996 :     return (buf[i/4] &gt;&gt; (i%4*2)) &amp; 3;</span></a>
 <a name="73"><span class="lineNum">      73 </span>            : }</a>
 <a name="74"><span class="lineNum">      74 </span>            : </a>
 <a name="75"><span class="lineNum">      75 </span>            : /// Compute the factorization for every number in the range from 0 to max.</a>
@@ -261,14 +261,14 @@
 <a name="186"><span class="lineNum">     186 </span>            : /// @param [in] max: inclusive upper bound of sieving range in which to compute Mobius for all numbers</a>
 <a name="187"><span class="lineNum">     187 </span>            : /// @return a bitfield array of Mobius function outputs for all numbers in the range, with 3 instead of -1,</a>
 <a name="188"><span class="lineNum">     188 </span>            : /// or NULL on allocation failure</a>
-<a name="189"><span class="lineNum">     189 </span>            : uint64_t *sieve_mobius(uint64_t max);</a>
+<a name="189"><span class="lineNum">     189 </span>            : uint8_t *sieve_mobius(uint64_t max);</a>
 <a name="190"><span class="lineNum">     190 </span>            : </a>
 <a name="191"><span class="lineNum">     191 </span>            : /// Compute the Mertens function (sum of Mobius function) for every number from 0 to max.</a>
 <a name="192"><span class="lineNum">     192 </span>            : /// Note that this function is signed.</a>
 <a name="193"><span class="lineNum">     193 </span>            : /// @param [in] max: inclusive upper bound of range in which to compute Mertens for all numbers</a>
 <a name="194"><span class="lineNum">     194 </span>            : /// @param [in] mobius: bitfield array of Mobius function outputs (from {@link sieve_mobius}).</a>
 <a name="195"><span class="lineNum">     195 </span>            : /// @return an array of Mertens function outputs for all numbers in the range, or NULL on allocation failure</a>
-<a name="196"><span class="lineNum">     196 </span>            : int64_t *compute_mertens_range(uint64_t max, const uint64_t mobius[static max/32 + 1]);</a>
+<a name="196"><span class="lineNum">     196 </span>            : int64_t *compute_mertens_range(uint64_t max, const uint8_t mobius[static max/4 + 1]);</a>
 <a name="197"><span class="lineNum">     197 </span>            : </a>
 <a name="198"><span class="lineNum">     198 </span>            : /// Compute a bitarray of whether or not each number from 0 to max is composite.</a>
 <a name="199"><span class="lineNum">     199 </span>            : /// 1 is composite, and 0 is considered composite here.</a>
@@ -297,7 +297,7 @@
 <a name="222"><span class="lineNum">     222 </span>            : /// @param [in] pi_table: array of partial pi values from {@link compute_pi_range}</a>
 <a name="223"><span class="lineNum">     223 </span>            : /// @param [in] buf: packed bitarray from {@link sieve_is_composite}</a>
 <a name="224"><span class="lineNum">     224 </span>            : /// @return the number of primes &lt;= n</a>
-<a name="225"><span class="lineNum">     225 </span>            : uint64_t compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static (n + 30)/240], const uint8_t buf[static n/30 + 1]);</a>
+<a name="225"><span class="lineNum">     225 </span>            : __attribute__((no_sanitize(&quot;vla-bound&quot;))) uint64_t compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static n/30], const uint8_t buf[static n/30 + 1]);</a>
 <a name="226"><span class="lineNum">     226 </span>            : </a>
 <a name="227"><span class="lineNum">     227 </span>            : /// Compute an array of all primes from 0 to max.</a>
 <a name="228"><span class="lineNum">     228 </span>            : /// @param [in] max: inclusive upper bound of sieving range</a>

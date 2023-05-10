@@ -44,17 +44,17 @@
             <td class="headerValue">unnamed</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">7</td>
-            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntry">14</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-05-09 08:06:57</td>
+            <td class="headerValue">2023-05-10 07:30:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -89,94 +89,107 @@
 <a name="14"><span class="lineNum">      14 </span>            : #include &lt;stdlib.h&gt;</a>
 <a name="15"><span class="lineNum">      15 </span>            : #include &lt;stdio.h&gt;</a>
 <a name="16"><span class="lineNum">      16 </span>            : #include &lt;stdbool.h&gt;</a>
-<a name="17"><span class="lineNum">      17 </span>            : </a>
-<a name="18"><span class="lineNum">      18 </span>            : /// Wrapper to hold values of some multiplicative function.</a>
-<a name="19"><span class="lineNum">      19 </span>            : /// Stores all values f(n) for n up to (and including) y, then</a>
-<a name="20"><span class="lineNum">      20 </span>            : /// stores values f(x/n) for n less than x/y</a>
-<a name="21"><span class="lineNum">      21 </span>            : typedef struct{</a>
-<a name="22"><span class="lineNum">      22 </span>            :     int64_t x;</a>
-<a name="23"><span class="lineNum">      23 </span>            :     int64_t y, yinv;</a>
-<a name="24"><span class="lineNum">      24 </span>            :     int64_t *buf;</a>
-<a name="25"><span class="lineNum">      25 </span>            : } diri_table;</a>
-<a name="26"><span class="lineNum">      26 </span>            : </a>
-<a name="27"><span class="lineNum">      27 </span>            : /// Compute the sum of the divisor count function d from 1 to max.</a>
-<a name="28"><span class="lineNum">      28 </span>            : /// @param [in] max: inclusive upper bound of range to compute sum for</a>
-<a name="29"><span class="lineNum">      29 </span>            : /// @return the sum d(1) + ... + d(max)</a>
-<a name="30"><span class="lineNum">      30 </span>            : uint64_t dirichlet_D(uint64_t max);</a>
-<a name="31"><span class="lineNum">      31 </span>            : </a>
-<a name="32"><span class="lineNum">      32 </span>            : /// Given a table of values of a multiplicative function f, compute (f &lt;*&gt; u)(x) for all x from 1 to n</a>
-<a name="33"><span class="lineNum">      33 </span>            : /// Currently this uses Euler's sieve, sometimes called a linear sieve, but this is almost certainly slower than</a>
-<a name="34"><span class="lineNum">      34 </span>            : /// a sieve of Eratosthenes in practice</a>
-<a name="35"><span class="lineNum">      35 </span>            : /// @param [in] n: inclusive upper bound of range to compute f &lt;*&gt; u over</a>
-<a name="36"><span class="lineNum">      36 </span>            : /// @param [in] f_vals: table of values for f</a>
-<a name="37"><span class="lineNum">      37 </span>            : /// @param [out] f_conv_u_vals: table to store values of f &lt;*&gt; u in</a>
-<a name="38"><span class="lineNum">      38 </span>            : /// @return true on success, false on allocation failure</a>
-<a name="39"><span class="lineNum">      39 </span>            : bool euler_sieve_conv_u(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1]);</a>
-<a name="40"><span class="lineNum">      40 </span>            : </a>
-<a name="41"><span class="lineNum">      41 </span>            : /// Allocate internal buffers for a diri table</a>
-<a name="42"><span class="lineNum">      42 </span>            : /// self-&gt;buf will have f(0) through f(y) at indicies 0 through y,</a>
-<a name="43"><span class="lineNum">      43 </span>            : /// and then f(x/1) through f(x/(yinv - 1)) at indicies y + 1 through y + yinv - 1.</a>
-<a name="44"><span class="lineNum">      44 </span>            : /// The first two indicies, f(0) and f(1), are basically dummies though: f(0) should</a>
-<a name="45"><span class="lineNum">      45 </span>            : /// never be relied on, and f(1) should always be 1</a>
-<a name="46"><span class="lineNum">      46 </span>            : /// @param [in] x: inclusive upper bound of the domain of interest</a>
-<a name="47"><span class="lineNum">      47 </span>            : /// @param [in] y: inclusive upper bound of the dense portion of the domain of interest.</a>
-<a name="48"><span class="lineNum">      48 </span>            : /// Will be increased to sqrt(x) if needed, so 0 can be used to explicitly signal you want that behavior</a>
-<a name="49"><span class="lineNum">      49 </span>            : /// @return true on success, false on allocation failure</a>
-<a name="50"><span class="lineNum">      50 </span>            : bool diri_table_init(diri_table *self, int64_t x, int64_t y);</a>
-<a name="51"><span class="lineNum">      51 </span>            : </a>
-<a name="52"><span class="lineNum">      52 </span>            : /// Deallocate internal buffers for a diri table</a>
-<a name="53"><span class="lineNum">      53 </span>            : void diri_table_destroy(diri_table *self);</a>
-<a name="54"><span class="lineNum">      54 </span>            : </a>
-<a name="55"><span class="lineNum">      55 </span><span class="lineCov">       2520 : static inline int64_t diri_table_get_dense(const diri_table *self, int64_t k){</span></a>
-<a name="56"><span class="lineNum">      56 </span><span class="lineCov">       2520 :     return self-&gt;buf[k];</span></a>
-<a name="57"><span class="lineNum">      57 </span>            : }</a>
-<a name="58"><span class="lineNum">      58 </span>            : </a>
-<a name="59"><span class="lineNum">      59 </span>            : static inline void diri_table_set_dense(diri_table *self, int64_t k, int64_t v){</a>
-<a name="60"><span class="lineNum">      60 </span>            :     self-&gt;buf[k] = v;</a>
-<a name="61"><span class="lineNum">      61 </span>            : }</a>
-<a name="62"><span class="lineNum">      62 </span>            : </a>
-<a name="63"><span class="lineNum">      63 </span><span class="lineCov">        565 : static inline int64_t diri_table_get_sparse(const diri_table *self, int64_t k){</span></a>
-<a name="64"><span class="lineNum">      64 </span><span class="lineCov">        565 :     return self-&gt;buf[self-&gt;y + k];</span></a>
-<a name="65"><span class="lineNum">      65 </span>            : }</a>
-<a name="66"><span class="lineNum">      66 </span>            : </a>
-<a name="67"><span class="lineNum">      67 </span><span class="lineCov">        155 : static inline void diri_table_set_sparse(diri_table *self, int64_t k, int64_t v){</span></a>
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">        155 :     self-&gt;buf[self-&gt;y + k] = v;</span></a>
-<a name="69"><span class="lineNum">      69 </span><span class="lineCov">        155 : }</span></a>
+<a name="17"><span class="lineNum">      17 </span>            : #include &lt;assert.h&gt;</a>
+<a name="18"><span class="lineNum">      18 </span>            : </a>
+<a name="19"><span class="lineNum">      19 </span>            : /// Wrapper to hold values of some multiplicative function.</a>
+<a name="20"><span class="lineNum">      20 </span>            : /// Stores all values f(n) for n up to (and including) y, then</a>
+<a name="21"><span class="lineNum">      21 </span>            : /// stores values f(x/n) for n less than x/y</a>
+<a name="22"><span class="lineNum">      22 </span>            : typedef struct{</a>
+<a name="23"><span class="lineNum">      23 </span>            :     int64_t x;</a>
+<a name="24"><span class="lineNum">      24 </span>            :     int64_t y, yinv;</a>
+<a name="25"><span class="lineNum">      25 </span>            :     int64_t *buf;</a>
+<a name="26"><span class="lineNum">      26 </span>            : } diri_table;</a>
+<a name="27"><span class="lineNum">      27 </span>            : </a>
+<a name="28"><span class="lineNum">      28 </span>            : /// Compute the sum of the divisor count function d from 1 to max.</a>
+<a name="29"><span class="lineNum">      29 </span>            : /// @param [in] max: inclusive upper bound of range to compute sum for</a>
+<a name="30"><span class="lineNum">      30 </span>            : /// @return the sum d(1) + ... + d(max)</a>
+<a name="31"><span class="lineNum">      31 </span>            : uint64_t dirichlet_D(uint64_t max);</a>
+<a name="32"><span class="lineNum">      32 </span>            : </a>
+<a name="33"><span class="lineNum">      33 </span>            : /// Given a table of values of a multiplicative function f, compute (f &lt;*&gt; u)(x) for all x from 1 to n</a>
+<a name="34"><span class="lineNum">      34 </span>            : /// Currently this uses Euler's sieve, sometimes called a linear sieve, but this is almost certainly slower than</a>
+<a name="35"><span class="lineNum">      35 </span>            : /// a sieve of Eratosthenes in practice</a>
+<a name="36"><span class="lineNum">      36 </span>            : /// @param [in] n: inclusive upper bound of range to compute f &lt;*&gt; u over</a>
+<a name="37"><span class="lineNum">      37 </span>            : /// @param [in] f_vals: table of values for f</a>
+<a name="38"><span class="lineNum">      38 </span>            : /// @param [out] f_conv_u_vals: table to store values of f &lt;*&gt; u in</a>
+<a name="39"><span class="lineNum">      39 </span>            : /// @return true on success, false on allocation failure</a>
+<a name="40"><span class="lineNum">      40 </span>            : bool euler_sieve_conv_u(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1]);</a>
+<a name="41"><span class="lineNum">      41 </span>            : </a>
+<a name="42"><span class="lineNum">      42 </span>            : /// Allocate internal buffers for a diri table</a>
+<a name="43"><span class="lineNum">      43 </span>            : /// self-&gt;buf will have f(0) through f(y) at indicies 0 through y,</a>
+<a name="44"><span class="lineNum">      44 </span>            : /// and then f(x/1) through f(x/(yinv - 1)) at indicies y + 1 through y + yinv - 1.</a>
+<a name="45"><span class="lineNum">      45 </span>            : /// The first two indicies, f(0) and f(1), are basically dummies though: f(0) should</a>
+<a name="46"><span class="lineNum">      46 </span>            : /// never be relied on, and f(1) should always be 1</a>
+<a name="47"><span class="lineNum">      47 </span>            : /// @param [in] x: inclusive upper bound of the domain of interest</a>
+<a name="48"><span class="lineNum">      48 </span>            : /// @param [in] y: inclusive upper bound of the dense portion of the domain of interest.</a>
+<a name="49"><span class="lineNum">      49 </span>            : /// Will be increased to sqrt(x) if needed, so 0 can be used to explicitly signal you want that behavior</a>
+<a name="50"><span class="lineNum">      50 </span>            : /// @return true on success, false on allocation failure</a>
+<a name="51"><span class="lineNum">      51 </span>            : bool diri_table_init(diri_table *self, int64_t x, int64_t y);</a>
+<a name="52"><span class="lineNum">      52 </span>            : </a>
+<a name="53"><span class="lineNum">      53 </span>            : /// Deallocate internal buffers for a diri table</a>
+<a name="54"><span class="lineNum">      54 </span>            : void diri_table_destroy(diri_table *self);</a>
+<a name="55"><span class="lineNum">      55 </span>            : </a>
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov"> 1195179185 : static inline int64_t diri_table_get_dense(const diri_table *self, int64_t k){</span></a>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov"> 1195179185 :     assert(k &gt;= 0 &amp;&amp; k &lt;= self-&gt;y);</span></a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov"> 1195179185 :     return self-&gt;buf[k];</span></a>
+<a name="59"><span class="lineNum">      59 </span>            : }</a>
+<a name="60"><span class="lineNum">      60 </span>            : </a>
+<a name="61"><span class="lineNum">      61 </span><span class="lineCov">   49999998 : static inline void diri_table_set_dense(diri_table *self, int64_t k, int64_t v){</span></a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">   49999998 :     assert(k &gt;= 0 &amp;&amp; k &lt;= self-&gt;y);</span></a>
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">   49999998 :     self-&gt;buf[k] = v;</span></a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">   49999998 : }</span></a>
+<a name="65"><span class="lineNum">      65 </span>            : </a>
+<a name="66"><span class="lineNum">      66 </span><span class="lineCov">     390627 : static inline int64_t diri_table_get_sparse(const diri_table *self, int64_t k){</span></a>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">     390627 :     assert(k &gt; 0 &amp;&amp; k &lt;= self-&gt;yinv);</span></a>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">     390627 :     return self-&gt;buf[self-&gt;y + k];</span></a>
+<a name="69"><span class="lineNum">      69 </span>            : }</a>
 <a name="70"><span class="lineNum">      70 </span>            : </a>
-<a name="71"><span class="lineNum">      71 </span>            : /// Compute the value table for the dirichlet convolution identity I(n) = \{1 if n == 0, 0 otherwise\}</a>
-<a name="72"><span class="lineNum">      72 </span>            : /// Just memset's the dense part, then sets index 1 and y + 1 through y + yinv - 1 to 1 (remember the sparse indicies are sums)</a>
-<a name="73"><span class="lineNum">      73 </span>            : /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized</a>
-<a name="74"><span class="lineNum">      74 </span>            : void compute_I_diri_table(diri_table *self);</a>
+<a name="71"><span class="lineNum">      71 </span><span class="lineCov">      40160 : static inline void diri_table_set_sparse(diri_table *self, int64_t k, int64_t v){</span></a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">      40160 :     assert(k &gt; 0 &amp;&amp; k &lt;= self-&gt;yinv);</span></a>
+<a name="73"><span class="lineNum">      73 </span><span class="lineCov">      40160 :     self-&gt;buf[self-&gt;y + k] = v;</span></a>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">      40160 : }</span></a>
 <a name="75"><span class="lineNum">      75 </span>            : </a>
-<a name="76"><span class="lineNum">      76 </span>            : /// Compute the value table for the unit function u(n) = 1</a>
-<a name="77"><span class="lineNum">      77 </span>            : /// Fills the dense part of the table with 1s, and computes the sparse entries with table[y + k] = U(x/k) = x/k</a>
+<a name="76"><span class="lineNum">      76 </span>            : /// Compute the value table for the dirichlet convolution identity I(n) = \{1 if n == 0, 0 otherwise\}</a>
+<a name="77"><span class="lineNum">      77 </span>            : /// Just memset's the dense part, then sets index 1 and y + 1 through y + yinv - 1 to 1 (remember the sparse indicies are sums)</a>
 <a name="78"><span class="lineNum">      78 </span>            : /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized</a>
-<a name="79"><span class="lineNum">      79 </span>            : void compute_u_diri_table(diri_table *self);</a>
+<a name="79"><span class="lineNum">      79 </span>            : void compute_I_diri_table(diri_table *self);</a>
 <a name="80"><span class="lineNum">      80 </span>            : </a>
-<a name="81"><span class="lineNum">      81 </span>            : /// Compute the value table for the identity function N(n) = n</a>
-<a name="82"><span class="lineNum">      82 </span>            : /// Fills the dense part of the table with increasing numbers, and computes the sparse entries with table[y + k] = sum_N(v = x/k) = v*(v+1)/2</a>
+<a name="81"><span class="lineNum">      81 </span>            : /// Compute the value table for the unit function u(n) = 1</a>
+<a name="82"><span class="lineNum">      82 </span>            : /// Fills the dense part of the table with 1s, and computes the sparse entries with table[y + k] = U(x/k) = x/k</a>
 <a name="83"><span class="lineNum">      83 </span>            : /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized</a>
-<a name="84"><span class="lineNum">      84 </span>            : void compute_N_diri_table(diri_table *self);</a>
+<a name="84"><span class="lineNum">      84 </span>            : void compute_u_diri_table(diri_table *self);</a>
 <a name="85"><span class="lineNum">      85 </span>            : </a>
-<a name="86"><span class="lineNum">      86 </span>            : /// Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f</a>
-<a name="87"><span class="lineNum">      87 </span>            : /// See { @link compute_conv_diri_table } for details, this is just that function but with several specializations due to u being very simple.</a>
-<a name="88"><span class="lineNum">      88 </span>            : /// @param [in, out] self: the table to store the result in, initialized by { @link diri_table_init}.</a>
-<a name="89"><span class="lineNum">      89 </span>            : /// self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistend with the inputs</a>
-<a name="90"><span class="lineNum">      90 </span>            : /// @param [in] f_tbl: table for the first operand</a>
-<a name="91"><span class="lineNum">      91 </span>            : bool compute_conv_u_diri_table(diri_table *self, const diri_table *f_tbl);</a>
-<a name="92"><span class="lineNum">      92 </span>            : </a>
-<a name="93"><span class="lineNum">      93 </span>            : /// Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands</a>
-<a name="94"><span class="lineNum">      94 </span>            : /// self must have been initialized using { @link diri_table_init}, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl</a>
-<a name="95"><span class="lineNum">      95 </span>            : /// must be set and match</a>
-<a name="96"><span class="lineNum">      96 </span>            : /// This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1))</a>
-<a name="97"><span class="lineNum">      97 </span>            : /// If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then</a>
-<a name="98"><span class="lineNum">      98 </span>            : /// try to use a specialized function from this library and use that instead.</a>
+<a name="86"><span class="lineNum">      86 </span>            : /// Compute the value table for the identity function N(n) = n</a>
+<a name="87"><span class="lineNum">      87 </span>            : /// Fills the dense part of the table with increasing numbers, and computes the sparse entries with table[y + k] = sum_N(v = x/k) = v*(v+1)/2</a>
+<a name="88"><span class="lineNum">      88 </span>            : /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized</a>
+<a name="89"><span class="lineNum">      89 </span>            : void compute_N_diri_table(diri_table *self);</a>
+<a name="90"><span class="lineNum">      90 </span>            : </a>
+<a name="91"><span class="lineNum">      91 </span>            : /// Compute the value table for the mobius function mu(n) (whose sum is called the Mertens function)</a>
+<a name="92"><span class="lineNum">      92 </span>            : /// Requires both an initialized diri_table from {@link diri_table_init} and a packed table of mobius values from {@link sieve_mobius}.</a>
+<a name="93"><span class="lineNum">      93 </span>            : /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized</a>
+<a name="94"><span class="lineNum">      94 </span>            : /// @param [in] mobius: packed table of mobius values, from {@link sieve_mobius} (with upper bound self-&gt;y).</a>
+<a name="95"><span class="lineNum">      95 </span>            : void compute_mertens_diri_table(diri_table *self, const uint8_t mobius[self-&gt;y/4 + 1]);</a>
+<a name="96"><span class="lineNum">      96 </span>            : </a>
+<a name="97"><span class="lineNum">      97 </span>            : /// Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f</a>
+<a name="98"><span class="lineNum">      98 </span>            : /// See { @link compute_conv_diri_table } for details, this is just that function but with several specializations due to u being very simple.</a>
 <a name="99"><span class="lineNum">      99 </span>            : /// @param [in, out] self: the table to store the result in, initialized by { @link diri_table_init}.</a>
 <a name="100"><span class="lineNum">     100 </span>            : /// self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistend with the inputs</a>
-<a name="101"><span class="lineNum">     101 </span>            : /// @param [in] f_tbl: table for the first operand (dirichlet convolution is commutative, so order doesn't matter)</a>
-<a name="102"><span class="lineNum">     102 </span>            : /// @param [in] g_tbl: table for the second operand</a>
-<a name="103"><span class="lineNum">     103 </span>            : bool compute_conv_diri_table(diri_table *self, const diri_table *f_tbl, const diri_table *g_tbl);</a>
-<a name="104"><span class="lineNum">     104 </span>            : </a>
+<a name="101"><span class="lineNum">     101 </span>            : /// @param [in] f_tbl: table for the first operand</a>
+<a name="102"><span class="lineNum">     102 </span>            : bool compute_conv_u_diri_table(diri_table *self, const diri_table *f_tbl);</a>
+<a name="103"><span class="lineNum">     103 </span>            : </a>
+<a name="104"><span class="lineNum">     104 </span>            : bool compute_conv_N_diri_table(diri_table *self, const diri_table *f_tbl);</a>
+<a name="105"><span class="lineNum">     105 </span>            : </a>
+<a name="106"><span class="lineNum">     106 </span>            : /// Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands</a>
+<a name="107"><span class="lineNum">     107 </span>            : /// self must have been initialized using { @link diri_table_init}, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl</a>
+<a name="108"><span class="lineNum">     108 </span>            : /// must be set and match</a>
+<a name="109"><span class="lineNum">     109 </span>            : /// This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1))</a>
+<a name="110"><span class="lineNum">     110 </span>            : /// If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then</a>
+<a name="111"><span class="lineNum">     111 </span>            : /// try to use a specialized function from this library and use that instead.</a>
+<a name="112"><span class="lineNum">     112 </span>            : /// @param [in, out] self: the table to store the result in, initialized by { @link diri_table_init}.</a>
+<a name="113"><span class="lineNum">     113 </span>            : /// self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistend with the inputs</a>
+<a name="114"><span class="lineNum">     114 </span>            : /// @param [in] f_tbl: table for the first operand (dirichlet convolution is commutative, so order doesn't matter)</a>
+<a name="115"><span class="lineNum">     115 </span>            : /// @param [in] g_tbl: table for the second operand</a>
+<a name="116"><span class="lineNum">     116 </span>            : bool compute_conv_diri_table(diri_table *self, const diri_table *f_tbl, const diri_table *g_tbl);</a>
+<a name="117"><span class="lineNum">     117 </span>            : </a>
 </pre>
       </td>
     </tr>

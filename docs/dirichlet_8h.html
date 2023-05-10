@@ -152,9 +152,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 <tr class="memitem:a672d9d1f95b6bab3e47f098bc54947fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a672d9d1f95b6bab3e47f098bc54947fe">compute_N_diri_table</a> (<a class="el" href="structdiri__table.html">diri_table</a> *self)</td></tr>
 <tr class="memdesc:a672d9d1f95b6bab3e47f098bc54947fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the identity function N(n) = n Fills the dense part of the table with increasing numbers, and computes the sparse entries with table[y + k] = sum_N(v = x/k) = v*(v+1)/2.  <a href="dirichlet_8h.html#a672d9d1f95b6bab3e47f098bc54947fe">More...</a><br /></td></tr>
 <tr class="separator:a672d9d1f95b6bab3e47f098bc54947fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a173aecab4a5263848f4c5b9acdf4c68d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a173aecab4a5263848f4c5b9acdf4c68d">compute_mertens_diri_table</a> (<a class="el" href="structdiri__table.html">diri_table</a> *self, const uint8_t mobius[self-&gt;y/4+1])</td></tr>
+<tr class="memdesc:a173aecab4a5263848f4c5b9acdf4c68d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the mobius function mu(n) (whose sum is called the Mertens function) Requires both an initialized <a class="el" href="structdiri__table.html" title="Wrapper to hold values of some multiplicative function.">diri_table</a> from <a class="el" href="dirichlet_8h.html#abe7d7cd2da8f487677565933da2a1305">diri_table_init</a> and a packed table of mobius values from <a class="el" href="sieves_8h.html#a18155611a81e12f7f810d4cdf6bccb36">sieve_mobius</a>.  <a href="dirichlet_8h.html#a173aecab4a5263848f4c5b9acdf4c68d">More...</a><br /></td></tr>
+<tr class="separator:a173aecab4a5263848f4c5b9acdf4c68d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a212cb5be17e8def841034e9644442f72"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a212cb5be17e8def841034e9644442f72">compute_conv_u_diri_table</a> (<a class="el" href="structdiri__table.html">diri_table</a> *self, const <a class="el" href="structdiri__table.html">diri_table</a> *f_tbl)</td></tr>
 <tr class="memdesc:a212cb5be17e8def841034e9644442f72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f See <a class="el" href="dirichlet_8h.html#aa6dc1b1c7e758b2ef113bc6e63ccbc75">compute_conv_diri_table</a> for details, this is just that function but with several specializations due to u being very simple.  <a href="dirichlet_8h.html#a212cb5be17e8def841034e9644442f72">More...</a><br /></td></tr>
 <tr class="separator:a212cb5be17e8def841034e9644442f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c163df14bb9afde0f509608705b7004"><td class="memItemLeft" align="right" valign="top"><a id="a0c163df14bb9afde0f509608705b7004"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>compute_conv_N_diri_table</b> (<a class="el" href="structdiri__table.html">diri_table</a> *self, const <a class="el" href="structdiri__table.html">diri_table</a> *f_tbl)</td></tr>
+<tr class="separator:a0c163df14bb9afde0f509608705b7004"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6dc1b1c7e758b2ef113bc6e63ccbc75"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#aa6dc1b1c7e758b2ef113bc6e63ccbc75">compute_conv_diri_table</a> (<a class="el" href="structdiri__table.html">diri_table</a> *self, const <a class="el" href="structdiri__table.html">diri_table</a> *f_tbl, const <a class="el" href="structdiri__table.html">diri_table</a> *g_tbl)</td></tr>
 <tr class="memdesc:aa6dc1b1c7e758b2ef113bc6e63ccbc75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands self must have been initialized using <a class="el" href="dirichlet_8h.html#abe7d7cd2da8f487677565933da2a1305">diri_table_init</a>, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl must be set and match This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1)) If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then try to use a specialized function from this library and use that instead.  <a href="dirichlet_8h.html#aa6dc1b1c7e758b2ef113bc6e63ccbc75">More...</a><br /></td></tr>
 <tr class="separator:aa6dc1b1c7e758b2ef113bc6e63ccbc75"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -354,6 +360,43 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 
 </div>
 </div>
+<a id="a173aecab4a5263848f4c5b9acdf4c68d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a173aecab4a5263848f4c5b9acdf4c68d">&#9670;&nbsp;</a></span>compute_mertens_diri_table()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void compute_mertens_diri_table </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structdiri__table.html">diri_table</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>mobius</em>[self-&gt;y/4+1]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the value table for the mobius function mu(n) (whose sum is called the Mertens function) Requires both an initialized <a class="el" href="structdiri__table.html" title="Wrapper to hold values of some multiplicative function.">diri_table</a> from <a class="el" href="dirichlet_8h.html#abe7d7cd2da8f487677565933da2a1305">diri_table_init</a> and a packed table of mobius values from <a class="el" href="sieves_8h.html#a18155611a81e12f7f810d4cdf6bccb36">sieve_mobius</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, and take the bounds from. Must be initialized </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mobius</td><td>packed table of mobius values, from <a class="el" href="sieves_8h.html#a18155611a81e12f7f810d4cdf6bccb36">sieve_mobius</a> (with upper bound self-&gt;y). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a212cb5be17e8def841034e9644442f72"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a212cb5be17e8def841034e9644442f72">&#9670;&nbsp;</a></span>compute_conv_u_diri_table()</h2>
 
@@ -442,7 +485,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="dirichlet_8h.html">dirichlet.h</a></li>
-    <li class="footer">Generated on Tue May 9 2023 08:06:58 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Wed May 10 2023 07:30:35 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>
