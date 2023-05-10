@@ -68,8 +68,8 @@ __attribute__((pure)) static inline uint64_t bitarray_get(const uint64_t *buf, u
 /// @param [in] buf: pointer to array of bitfields
 /// @param [in] i: index of element to get
 /// @return i-th element (0, 1, 2, or 3)
-__attribute__((pure)) static inline uint8_t bitfield2_arr_get(const uint64_t *buf, uint64_t i){
-	return (buf[i/32] >> (i%32)*2) & 3;
+__attribute__((pure)) static inline uint8_t bitfield2_arr_get(const uint8_t *buf, uint64_t i){
+	return (buf[i/4] >> (i%4*2)) & 3;
 }
 
 /// Compute the factorization for every number in the range from 0 to max.
@@ -186,14 +186,14 @@ uint64_t *sieve_carmichael(uint64_t max);
 /// @param [in] max: inclusive upper bound of sieving range in which to compute Mobius for all numbers
 /// @return a bitfield array of Mobius function outputs for all numbers in the range, with 3 instead of -1,
 /// or NULL on allocation failure
-uint64_t *sieve_mobius(uint64_t max);
+uint8_t *sieve_mobius(uint64_t max);
 
 /// Compute the Mertens function (sum of Mobius function) for every number from 0 to max.
 /// Note that this function is signed.
 /// @param [in] max: inclusive upper bound of range in which to compute Mertens for all numbers
 /// @param [in] mobius: bitfield array of Mobius function outputs (from {@link sieve_mobius}).
 /// @return an array of Mertens function outputs for all numbers in the range, or NULL on allocation failure
-int64_t *compute_mertens_range(uint64_t max, const uint64_t mobius[static max/32 + 1]);
+int64_t *compute_mertens_range(uint64_t max, const uint8_t mobius[static max/4 + 1]);
 
 /// Compute a bitarray of whether or not each number from 0 to max is composite.
 /// 1 is composite, and 0 is considered composite here.
@@ -222,7 +222,7 @@ uint64_t *compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1]);
 /// @param [in] pi_table: array of partial pi values from {@link compute_pi_range}
 /// @param [in] buf: packed bitarray from {@link sieve_is_composite}
 /// @return the number of primes <= n
-uint64_t compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static (n + 30)/240], const uint8_t buf[static n/30 + 1]);
+__attribute__((no_sanitize("vla-bound"))) uint64_t compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static n/30], const uint8_t buf[static n/30 + 1]);
 
 /// Compute an array of all primes from 0 to max.
 /// @param [in] max: inclusive upper bound of sieving range

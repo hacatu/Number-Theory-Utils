@@ -323,22 +323,22 @@ uint64_t *sieve_carmichael(uint64_t max){
 	return buf;
 }
 
-uint64_t *sieve_mobius(uint64_t max){
-	uint64_t buf_len = max/32 + 1;
-	uint64_t *buf = malloc(buf_len*sizeof(uint64_t));
+uint8_t *sieve_mobius(uint64_t max){
+	uint64_t buf_len = max/4 + 1;
+	uint8_t *buf = malloc(buf_len*sizeof(uint64_t));
 	if(!buf){
 		return NULL;
 	}
 	// Initialize buf to be 0 for 0, 1 for 1, and 2 for every other n <= max.
 	// 2 is not a valid output value, so we use it here to mark a number as prime
 	// until they are marked off by being the factor of some other number.
-	buf[0] = 0xAAAAAAAAAAAAAAA4ull;
-	memset(buf + 1, 0xAA, (buf_len - 1)*sizeof(uint64_t));
+	buf[0] = 0xA4u;
+	memset(buf + 1, 0xAA, (buf_len - 1)*sizeof(uint8_t));
 	for(uint64_t n = 2; n <= max && n; ++n){
-		if(((buf[n/32] >> (n%32*2)) & 3) != 2){
+		if(((buf[n/4] >> (n%4*2)) & 3) != 2){
 			continue;
 		}
-		buf[n/32] ^= 1ull << (n%32*2);
+		buf[n/4] ^= 1ull << (n%4*2);
 		uint64_t m;
 		if(__builtin_mul_overflow(n, 2, &m)){
 			continue;
@@ -348,10 +348,9 @@ uint64_t *sieve_mobius(uint64_t max){
 		// We can do this by using an xor mask so we only have to
 		// get x from the array and then xor the array with this mask.
 		while(m <= max){
-			// fprintf(stderr, "[%"PRIu64"]: %"PRIu64, );
-			uint64_t x = (buf[m/32] >> (m%32*2)) & 3;
-			x = (0x98 >> (x*2)) & 3;// this constant acts as a packed lookup table for the xor mask for x
-			buf[m/32] ^= x << (m%32*2);
+			uint8_t x = (buf[m/4] >> (m%4*2)) & 3;
+			x = (0x98u >> (x*2)) & 3;// this constant acts as a packed lookup table for the xor mask for x
+			buf[m/4] ^= x << (m%4*2);
 			if(__builtin_add_overflow(m, n, &m)){
 				break;
 			}
@@ -361,7 +360,7 @@ uint64_t *sieve_mobius(uint64_t max){
 		// since they are not square free.
 		if(!__builtin_mul_overflow(n, n, &n2)){
 			for(uint64_t m = n2; m <= max;){
-				buf[m/32] &= ~(3ull << (m%32*2));
+				buf[m/4] &= ~(3u << (m%4*2));
 				if(__builtin_add_overflow(m, n2, &m)){
 					break;
 				}
@@ -371,18 +370,18 @@ uint64_t *sieve_mobius(uint64_t max){
 	return buf;
 }
 
-int64_t *compute_mertens_range(uint64_t max, const uint64_t mobius[static max/32 + 1]){
+int64_t *compute_mertens_range(uint64_t max, const uint8_t mobius[static max/4 + 1]){
 	int64_t *buf = malloc((max + 1)*sizeof(int64_t));
 	if(!buf){
 		return NULL;
 	}
 	buf[0] = 0;
-	typedef struct{
-		int64_t x:2;
-	} int2_t;// used to signed extend 2 bit integers to 64 bit
 	for(uint64_t n = 1; n <= max; ++n){
-		int2_t mu = {bitfield2_arr_get(mobius, n)};
-		buf[n] = buf[n - 1] + mu.x;
+		int64_t v = bitfield2_arr_get(mobius, n);
+		if(v == 3){
+			v = -1;
+		}
+		buf[n] = buf[n - 1] + v;
 	}
 	return buf;
 }
