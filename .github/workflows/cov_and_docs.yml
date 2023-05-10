@@ -19,8 +19,14 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y lcov doxygen libsdl2-dev valgrind clang
+        make BUILD_ROOT=build/debug
         make BUILD_ROOT=build/valgrind CC=gcc LD=gcc
+        make BUILD_ROOT=build/coverage
+        make BUILD_ROOT=build/release test
+        grep -qF "$(printf '\e[1;32mtest.py suite passed all tests!\e[0m')" build/debug/log/test*.log
         grep -qF "$(printf '\e[1;32mtest.py suite passed all tests!\e[0m')" build/valgrind/log/test*.log
+        grep -qF "$(printf '\e[1;32mtest.py suite passed all tests!\e[0m')" build/coverage/log/test*.log
+        grep -qF "$(printf '\e[1;32mtest.py suite passed all tests!\e[0m')" build/release/log/test*.log
         make docs
         mv build/coverage/cov website/
         mv build/coverage/coverage.svg website/
