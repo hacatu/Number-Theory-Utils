@@ -2,6 +2,7 @@
 import os, subprocess, sys, json, argparse, shutil
 
 def runNoRedTest(test_path, test_argv, log_name):
+	global vg_iota
 	pipe_out, pipe_in = os.pipe()
 	if args.valgrind:
 		popen_args = ["valgrind", "--leak-check=full", "--track-origins=yes", "--read-inline-info=yes", "--read-var-info=yes", f"--log-file={valgrind_log_name}", test_path] + test_argv
@@ -33,6 +34,7 @@ def runNoRedTest(test_path, test_argv, log_name):
 	return status
 
 def runLogDiffTests(test_path, i, test_argv, log_name):
+	global vg_iota
 	pipe_out, pipe_in = os.pipe()
 	if args.valgrind:
 		popen_args = ["valgrind", "--leak-check=full", "--track-origins=yes", "--read-inline-info=yes", "--read-var-info=yes", f"--log-file={valgrind_log_name}", test_path] + test_argv
