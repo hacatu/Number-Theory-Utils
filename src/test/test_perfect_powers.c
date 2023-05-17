@@ -66,7 +66,7 @@ int main(){
 				++correct;
 			}
 		}
-		fprintf(stderr, "%s (%"PRIu64"/%"PRIu64" roots correct for %"PRIu64" powers)\e[0m\n", correct == tested ? "\e[1;32mPASSED" : "\e[1;31mFAILED", correct, tested, x);
+		fprintf(stderr, "%s (%"PRIu64"/%"PRIu64" roots correct for %"PRIu64"-%s powers)\e[0m\n", correct == tested ? "\e[1;32mPASSED" : "\e[1;31mFAILED", correct, tested, x, get_ord_suffix(x));
 	}
 	correct = 0, tested = 0;
 	for(uint64_t b = 2; b <= 1000000; ++b){
