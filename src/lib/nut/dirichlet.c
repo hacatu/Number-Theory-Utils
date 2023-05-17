@@ -9,8 +9,8 @@
 #include <nut/dirichlet.h>
 #include <nut/sieves.h>
 
-uint64_t dirichlet_D(uint64_t max){
-	uint64_t y = u64_nth_root(max, 2);
+uint64_t nut_dirichlet_D(uint64_t max){
+	uint64_t y = nut_u64_nth_root(max, 2);
 	uint64_t res = 0;
 	for(uint64_t n = 1; n <= y; ++n){
 		res += max/n;
@@ -40,11 +40,11 @@ static inline void mark_composite_unpacked(uint64_t n, uint8_t buf[static n/8 + 
 // apply a quick modification to all the multiples of p**2 that just sits on top of the one we applied for multiples
 // of p.  But in general, we need to make sure that we only apply the value to each output entry for the maximal
 // power of each prime.
-bool euler_sieve_conv_u(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1]){
+bool nut_euler_sieve_conv_u(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1]){
 	int64_t *smallest_ppow = malloc((n+1)*sizeof(int64_t));
 	uint8_t *is_c_buf = calloc(n/8 + 1, sizeof(uint8_t));
 	uint64_t num_primes = 0;
-	int64_t *primes = malloc(max_primes_le(n)*sizeof(int64_t));
+	int64_t *primes = malloc(nut_max_primes_le(n)*sizeof(int64_t));
 	if(!smallest_ppow || !is_c_buf || !primes){
 		free(smallest_ppow);
 		free(is_c_buf);
@@ -91,8 +91,8 @@ bool euler_sieve_conv_u(int64_t n, const int64_t f_vals[static n+1], int64_t f_c
 	return true;
 }
 
-bool diri_table_init(diri_table *self, int64_t x, int64_t y){
-	int64_t ymin = u64_nth_root(x, 2);
+bool nut_Diri_init(nut_Diri *self, int64_t x, int64_t y){
+	int64_t ymin = nut_u64_nth_root(x, 2);
 	if(y < ymin){
 		y = ymin;
 	}
@@ -106,12 +106,12 @@ bool diri_table_init(diri_table *self, int64_t x, int64_t y){
 	return true;
 }
 
-void diri_table_destroy(diri_table *self){
+void nut_Diri_destroy(nut_Diri *self){
 	free(self->buf);
-	*self = (diri_table){};
+	*self = (nut_Diri){};
 }
 
-void compute_I_diri_table(diri_table *self){
+void nut_Diri_compute_I(nut_Diri *self){
 	memset(self->buf, 0, (self->y + 1)*sizeof(int64_t));
 	self->buf[1] = 1;
 	for(int64_t i = 1; i <= self->yinv; ++i){
@@ -119,7 +119,7 @@ void compute_I_diri_table(diri_table *self){
 	}
 }
 
-void compute_u_diri_table(diri_table *self){
+void nut_Diri_compute_u(nut_Diri *self){
 	for(int64_t i = 0; i <= self->y; ++i){
 		self->buf[i] = 1;
 	}
@@ -128,7 +128,7 @@ void compute_u_diri_table(diri_table *self){
 	}
 }
 
-void compute_N_diri_table(diri_table *self){
+void nut_Diri_compute_N(nut_Diri *self){
 	for(int64_t i = 0; i <= self->y; ++i){
 		self->buf[i] = i;
 	}
@@ -138,45 +138,45 @@ void compute_N_diri_table(diri_table *self){
 	}
 }
 
-void compute_mertens_diri_table(diri_table *self, const uint8_t mobius[self->y/4 + 1]){
-	diri_table_set_dense(self, 0, 0);
-	diri_table_set_dense(self, 1, 1);
+void nut_Diri_compute_mertens(nut_Diri *self, const uint8_t mobius[self->y/4 + 1]){
+	nut_Diri_set_dense(self, 0, 0);
+	nut_Diri_set_dense(self, 1, 1);
 	for(int64_t i = 2, acc = 1, v; i <= self->y; ++i){
-		if((v = bitfield2_arr_get(mobius, i)) == 3){
+		if((v = nut_Bitfield2_arr_get(mobius, i)) == 3){
 			v = -1;
 		}
-		diri_table_set_dense(self, i, acc += v);
+		nut_Diri_set_dense(self, i, acc += v);
 	}
 	for(int64_t i = self->yinv; i; --i){
 		int64_t v = self->x/i;
 		int64_t M = 1;
-		int64_t vr = u64_nth_root(v, 2);
+		int64_t vr = nut_u64_nth_root(v, 2);
 		for(int64_t j = 1; j <= vr; ++j){
-			M -= (diri_table_get_dense(self, j) - diri_table_get_dense(self, j - 1))*(v/j);
+			M -= (nut_Diri_get_dense(self, j) - nut_Diri_get_dense(self, j - 1))*(v/j);
 		}
 		for(int64_t j = 2; j <= vr; ++j){
 			if(i*j > self->yinv){
-				M -= diri_table_get_dense(self, v/j);
+				M -= nut_Diri_get_dense(self, v/j);
 			}else{
-				M -= diri_table_get_sparse(self, i*j);
+				M -= nut_Diri_get_sparse(self, i*j);
 			}
 		}
 		if(vr <= self->y){
-			M += diri_table_get_dense(self, vr)*vr;
+			M += nut_Diri_get_dense(self, vr)*vr;
 		}else{
-			M += diri_table_get_sparse(self, self->x/vr)*vr;
+			M += nut_Diri_get_sparse(self, self->x/vr)*vr;
 		}
-		diri_table_set_sparse(self, i, M);
+		nut_Diri_set_sparse(self, i, M);
 	}
 	for(int64_t i = 2, v; i <= self->y; ++i){
-		if((v = bitfield2_arr_get(mobius, i)) == 3){
+		if((v = nut_Bitfield2_arr_get(mobius, i)) == 3){
 			v = -1;
 		}
-		diri_table_set_dense(self, i, v);
+		nut_Diri_set_dense(self, i, v);
 	}
 }
 
-bool compute_conv_u_diri_table(diri_table *self, const diri_table *f_tbl){
+bool nut_Diri_compute_conv_u(nut_Diri *self, const nut_Diri *f_tbl){
 	if(self->y != f_tbl->y || self->x != f_tbl->x){
 		return false;
 	}
@@ -187,19 +187,19 @@ bool compute_conv_u_diri_table(diri_table *self, const diri_table *f_tbl){
 	}
 	for(int64_t i = 1; i <= self->yinv; ++i){
 		int64_t v = self->x/i;
-		int64_t vr = u64_nth_root(v, 2);// TODO: v is close to the previous v, so only one newton step should be needed here
+		int64_t vr = nut_u64_nth_root(v, 2);// TODO: v is close to the previous v, so only one newton step should be needed here
 		int64_t h = 0;
 		for(int64_t n = 1; n <= vr; ++n){
 			if(v/n <= self->y){
-				h += diri_table_get_dense(self, v/n);
+				h += nut_Diri_get_dense(self, v/n);
 			}else{
-				h += diri_table_get_sparse(f_tbl, i*n);
+				h += nut_Diri_get_sparse(f_tbl, i*n);
 			}
-			h += diri_table_get_dense(f_tbl, n)*(v/n);
+			h += nut_Diri_get_dense(f_tbl, n)*(v/n);
 		}
-		h -= diri_table_get_dense(self, vr)*vr;
-		diri_table_set_sparse(self, i, h);
+		h -= nut_Diri_get_dense(self, vr)*vr;
+		nut_Diri_set_sparse(self, i, h);
 	}
-	return euler_sieve_conv_u(self->y, f_tbl->buf, self->buf);
+	return nut_euler_sieve_conv_u(self->y, f_tbl->buf, self->buf);
 }
 

@@ -6,9 +6,9 @@
 
 int main(){
 	fprintf(stderr, "\e[1;34mSieving Mobius function up to 1000000...\e[0m\n");
-	uint8_t *mobius = sieve_mobius(1000000);
+	uint8_t *mobius = nut_sieve_mobius(1000000);
 	fprintf(stderr, "\e[1;34mAccumulating Mertens function up to 1000000...\e[0m\n");
-	int64_t *mertens = compute_mertens_range(1000000, mobius);
+	int64_t *mertens = nut_compute_mertens_range(1000000, mobius);
 	free(mobius);
 	if(mertens[1000000] == 212){
 		fprintf(stderr, "\e[1;32mPASSED\e[0m\n");

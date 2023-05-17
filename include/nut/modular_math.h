@@ -31,12 +31,12 @@ typedef unsigned __int128 uint128_t;
 typedef struct{
 	uint64_t len;
 	uint64_t elems[];
-} fw_u64arr_t;
+} nut_u64_Pitcharr;
 
 /// Compute nonnegative integral power of integer using binary exponentiation.
 /// @param [in] b, e: base and exponent
 /// @return b^e, not checked for overflow
-__attribute__((const)) static inline uint64_t pow_u64(uint64_t b, uint64_t e){
+__attribute__((const)) static inline uint64_t nut_u64_pow(uint64_t b, uint64_t e){
 	uint64_t r = 1;
 	while(e){
 		if(e&1){
@@ -48,7 +48,10 @@ __attribute__((const)) static inline uint64_t pow_u64(uint64_t b, uint64_t e){
 	return r;
 }
 
-__attribute__((const)) static inline uint128_t pow_u128(uint128_t b, uint64_t e){
+/// Compute nonnegative integral power of integer using binary exponentiation.
+/// @param [in] b, e: base and exponent
+/// @return b^e, not checked for overflow
+__attribute__((const)) static inline uint128_t nut_u128_pow(uint128_t b, uint64_t e){
 	uint128_t r = 1;
 	while(e){
 		if(e&1){
@@ -63,9 +66,13 @@ __attribute__((const)) static inline uint128_t pow_u128(uint128_t b, uint64_t e)
 /// Compute nonnegative integral power of a number modulo another using binary exponentiation.
 /// @param [in] b, e, n: base, exponent, and modulus
 /// @return b^e mod n, computed via binary exponentiation
-__attribute__((const)) uint64_t powmod(uint64_t b, uint64_t e, uint64_t n);
+__attribute__((const)) uint64_t nut_u64_powmod(uint64_t b, uint64_t e, uint64_t n);
 
-__attribute__((const)) static inline uint64_t binom_u64(uint64_t n, uint64_t k){
+/// Compute single binomial coefficient semi-naively.
+/// Repeatedly does multiplications by n, n-1, n-2, ..., n-k+1 interleaved with divisions by 1, 2, 3, ..., k.
+/// There are better ways to do this if we need to know huge binomial coefficients mod some number, or find many
+/// binomial coefficients with the same n or k, but this function is sufficient a lot of the time
+__attribute__((const)) static inline uint64_t nut_u64_binom(uint64_t n, uint64_t k){
 	uint64_t res = 1;
 	if(n - k < k){
 		k = n - k;
@@ -78,19 +85,19 @@ __attribute__((const)) static inline uint64_t binom_u64(uint64_t n, uint64_t k){
 
 /// Generate a (pseudo)random integer uniformly from [a, b).
 ///
-/// Currently calls { @link rand_u64} so this number is generated from /dev/random
+/// Currently calls { @link nut_u64_rand} so this number is generated from /dev/random
 /// but this function exists to provide a weaker, pseudorandom number source
 /// if this turns out to be a bottleneck.
 /// @param [in] a, b: bounds of the interval [a, b)
 /// @return (pseudo)random integer uniformly chosen from [a, b)
-uint64_t prand_u64(uint64_t a, uint64_t b);
+uint64_t nut_u64_prand(uint64_t a, uint64_t b);
 
 /// Generate a (strong) random integer uniformly from [a, b).
 ///
 /// Currently uses /dev/random via the getrandom function, but this is a Linux api.
 /// @param [in] a, b: bounds of the interval [a, b)
 /// @return (strong) random integer uniformly chosen from [a, b)
-uint64_t rand_u64(uint64_t a, uint64_t b);
+uint64_t nut_u64_rand(uint64_t a, uint64_t b);
 
 /// Compute d = gcd(a, b) and x, y st. xa + by = d.
 /// @param [in] a, b: numbers to find gcd of
@@ -100,7 +107,7 @@ uint64_t rand_u64(uint64_t a, uint64_t b);
 #ifdef __clang__
 #pragma GCC diagnostic ignored "-Wunknown-attributes"
 #endif
-__attribute__((access(write_only, 3), access(write_only, 4))) static inline int64_t egcd(int64_t a, int64_t b, int64_t *_t, int64_t *_s){
+__attribute__((access(write_only, 3), access(write_only, 4))) static inline int64_t nut_i64_egcd(int64_t a, int64_t b, int64_t *_t, int64_t *_s){
 #pragma GCC diagnostic pop
 	int64_t r0 = b, r1 = a;
 	int64_t s0 = 1, s1 = 0;
@@ -129,7 +136,7 @@ __attribute__((access(write_only, 3), access(write_only, 4))) static inline int6
 /// Compute the Euclidean remainder r = a mod n for positive n so that 0 <= r < n.
 /// @param [in] a, n: dividend and divisor
 /// @return a mod n
-__attribute__((const)) static inline int64_t mod(int64_t a, int64_t n){
+__attribute__((const)) static inline int64_t nut_i64_mod(int64_t a, int64_t n){
 	int64_t r = a%n;
 	if(r < 0){
 		r += n;
@@ -141,18 +148,18 @@ __attribute__((const)) static inline int64_t mod(int64_t a, int64_t n){
 /// @param [in] a, p, b, q: Chinese Remainder Theorem parameters.  The residues a and b should not be negative.
 /// The moduli p and q should be coprime.
 /// @return 0 <= 0 < pq so that n = a mod p and n = b mod q
-__attribute__((const)) static inline int64_t lift_crt(int64_t a, int64_t p, int64_t b, int64_t q){
+__attribute__((const)) static inline int64_t nut_i64_crt(int64_t a, int64_t p, int64_t b, int64_t q){
 	int64_t x, y;
-	egcd(p, q, &x, &y);
-	return mod(b*p%(p*q)*x + a*q%(p*q)*y, p*q);
+	nut_i64_egcd(p, q, &x, &y);
+	return nut_i64_mod(b*p%(p*q)*x + a*q%(p*q)*y, p*q);
 }
 
 /// Compute the least common multiple of a and b
 /// Divides the product by the gcd so can overflow for large arguments
-/// @param [in] a, b: numbers to find lcm of
-/// @return lcm(a, b)
-__attribute__((const)) static inline int64_t lcm(int64_t a, int64_t b){
-	return a*b/egcd(a, b, NULL, NULL);
+/// @param [in] a, b: numbers to find nut_i64_lcm of
+/// @return nut_i64_lcm(a, b)
+__attribute__((const)) static inline int64_t nut_i64_lcm(int64_t a, int64_t b){
+	return a*b/nut_i64_egcd(a, b, NULL, NULL);
 }
 
 /// Compute the Jacobi symbol of n mod k.
@@ -160,7 +167,7 @@ __attribute__((const)) static inline int64_t lcm(int64_t a, int64_t b){
 /// Uses modified euclidean algorithm.
 /// @param [in] n, k: Jacobi symbol parameters
 /// @return Jacobi symbol (0 if k | n, +1 if n is a quadratic residue mod an odd number of prime divisors of k (with multiplicity), -1 otherwise)
-__attribute__((const)) int64_t jacobi(int64_t n, int64_t k);
+__attribute__((const)) int64_t nut_i64_jacobi(int64_t n, int64_t k);
 
 /// Compute a random number mod a prime that is not a quadratic residue.
 ///
@@ -169,7 +176,7 @@ __attribute__((const)) int64_t jacobi(int64_t n, int64_t k);
 /// so not all nonresidues are possible, and the number of trials on average could be larger than the prime p case.
 /// @param [in] p: the modulus for which to generate a nonresidue.  Should be prime.
 /// @return a quadratic nonresidue mod p
-int64_t rand_nr_u64(int64_t p);
+int64_t nut_i64_rand_nr_mod(int64_t p);
 
 /// Compute the square root of a quadratic residue mod a prime.
 ///
@@ -177,7 +184,7 @@ int64_t rand_nr_u64(int64_t p);
 /// @param [in] n: a quadratic residue mod p
 /// @param [in] p: a prime
 /// @return r so that r^2 = n mod p
-int64_t sqrt_shanks(int64_t n, int64_t p);
+int64_t nut_i64_sqrt_shanks(int64_t n, int64_t p);
 
 /// Compute the square root of a quadratic residue mod a prime.
 ///
@@ -186,12 +193,12 @@ int64_t sqrt_shanks(int64_t n, int64_t p);
 /// @param [in] n: a quadratic residue mod p
 /// @param [in] p: a prime
 /// @return r so that r^2 = n mod p
-__attribute__((const)) int64_t sqrt_cipolla(int64_t n, int64_t p);
+__attribute__((const)) int64_t nut_i64_sqrt_cipolla(int64_t n, int64_t p);
 
 /// Compute the square root of a quadratic residue mod a prime.
 ///
 /// If n is not a residue or p is not a prime, this function is not guaranteed to terminate.
-/// If your use case does not guarantee this, call { @link is_prime_dmr} and { @link jacobi} beforehand.
+/// If your use case does not guarantee this, call { @link nut_u64_is_prime_dmr} and { @link nut_i64_jacobi} beforehand.
 /// uses shortcuts for primes that are 3, 5, or 7 mod 8, otherwise uses Shanks's algorithm
 /// unless p-1 is divisible by a sufficiently high power of 2 so Cipolla's algorithm will be
 /// faster, in which case it is used.  Only the Shank's branch can fail to terminate,
@@ -199,5 +206,5 @@ __attribute__((const)) int64_t sqrt_cipolla(int64_t n, int64_t p);
 /// @param [in] n: a quadratic residue mod p
 /// @param [in] p: a prime
 /// @return r so that r^2 = n mod p
-int64_t sqrt_mod(int64_t n, int64_t p);
+int64_t nut_i64_sqrt_mod(int64_t n, int64_t p);
 

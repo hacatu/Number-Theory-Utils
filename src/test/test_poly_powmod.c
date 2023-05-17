@@ -10,8 +10,8 @@ const int64_t K = 1000000000000000000ull;
 const int64_t N = 2000ull;
 
 int main(){
-	poly_t f[1], a[1], x[1];
-	if(!init_poly(f, N + 1) || !init_poly(a, N) || !init_poly(x, 2)){
+	nut_Poly f[1], a[1], x[1];
+	if(!nut_Poly_init(f, N + 1) || !nut_Poly_init(a, N) || !nut_Poly_init(x, 2)){
 		fprintf(stderr, "\e[1;31mERROR: Could not allocate polynomials.\e[0m\n");
 		exit(EXIT_FAILURE);
 	}
@@ -25,17 +25,17 @@ int main(){
 	x->coeffs[1] = 1;
 	x->len = 2;
 	
-	powmod_poly_modn_tmptmp(a, x, K - N + 1, f, M);
+	nut_Poly_powmod_modn_tmptmp(a, x, K - N + 1, f, M);
 	
 	uint64_t s = a->coeffs[0];
 	for(uint64_t j = 1; j < (uint64_t)N; ++j){
-		s = mod(s + a->coeffs[j]*2, M);
+		s = nut_i64_mod(s + a->coeffs[j]*2, M);
 	}
 	
 	printf("%"PRIu64"\n", s);
 	
-	destroy_poly(f);
-	destroy_poly(x);
-	destroy_poly(a);
+	nut_Poly_destroy(f);
+	nut_Poly_destroy(x);
+	nut_Poly_destroy(a);
 }
 

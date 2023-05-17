@@ -12,7 +12,7 @@
 #include <nut/factorization.h>
 #include <nut/sieves.h>
 
-uint64_t max_prime_divs(uint64_t max){
+uint64_t nut_max_prime_divs(uint64_t max){
 	//2*3*5*7*11*13*17*19*23*29*31*37*41*43*47
 	if(max < 2ull*3){//the compiler can optimize this to a binary search if it is faster
 		return 1;
@@ -46,26 +46,26 @@ uint64_t max_prime_divs(uint64_t max){
 	return 15;
 }
 
-uint64_t max_primes_le(uint64_t max){
+uint64_t nut_max_primes_le(uint64_t max){
 	return 1.25506*max/log(max);
 }
 
-void *sieve_factorizations(uint64_t max, uint64_t *_w){
-	uint64_t w = max_prime_divs(max);
-	size_t pitch = get_factorizations_pitch(w);
+void *nut_sieve_factorizations(uint64_t max, uint64_t *_w){
+	uint64_t w = nut_max_prime_divs(max);
+	size_t pitch = nut_get_factorizations_pitch(w);
 	void *buf = calloc(pitch, max + 1);
 	if(!buf){
 		return NULL;
 	}
 	*_w = w;
 	for(uint64_t n = 2; n <= max && n; ++n){//TODO: optimize loop
-		factors_t *factors = pitch_arr_get(buf, pitch, n);
+		nut_Factors *factors = nut_Pitcharr_get(buf, pitch, n);
 		if(factors->num_primes){
 			continue;
 		}
 		for(uint64_t p = n, e = 1; p <= max; ++e){
 			for(uint64_t m = p; m <= max;){
-				factors_t *factors = pitch_arr_get(buf, pitch, m);
+				nut_Factors *factors = nut_Pitcharr_get(buf, pitch, m);
 				uint64_t i = factors->num_primes;
 				if(e == 1){
 					++factors->num_primes;
@@ -86,26 +86,26 @@ void *sieve_factorizations(uint64_t max, uint64_t *_w){
 	return buf;
 }
 
-uint64_t get_factorizations_pitch(uint64_t w){
-	static const factors_t dummy;
-	return offsetof(factors_t, factors) + w*sizeof(dummy.factors[0]);
+uint64_t nut_get_factorizations_pitch(uint64_t w){
+	static const nut_Factors dummy;
+	return offsetof(nut_Factors, factors) + w*sizeof(dummy.factors[0]);
 }
 
-void *sieve_factors(uint64_t max, uint64_t *_w){
-	uint64_t w = max_prime_divs(max);
-	size_t pitch = get_factors_pitch(w);
+void *nut_sieve_factors(uint64_t max, uint64_t *_w){
+	uint64_t w = nut_max_prime_divs(max);
+	size_t pitch = nut_get_factors_pitch(w);
 	void *buf = calloc(max + 1, pitch);
 	if(!buf){
 		return NULL;
 	}
 	*_w = w;
 	for(uint64_t n = 2; n <= max && n; ++n){//TODO: optimize loop
-		fw_u64arr_t *factors = pitch_arr_get(buf, pitch, n);
+		nut_u64_Pitcharr *factors = nut_Pitcharr_get(buf, pitch, n);
 		if(factors->len){
 			continue;
 		}
 		for(uint64_t m = n; m <= max;){
-			fw_u64arr_t *factors = pitch_arr_get(buf, pitch, m);
+			nut_u64_Pitcharr *factors = nut_Pitcharr_get(buf, pitch, m);
 			factors->elems[factors->len++] = n;
 			if(__builtin_add_overflow(m, n, &m)){
 				break;
@@ -115,7 +115,7 @@ void *sieve_factors(uint64_t max, uint64_t *_w){
 	return buf;
 }
 
-uint64_t *sieve_largest_factors(uint64_t max){
+uint64_t *nut_sieve_largest_factors(uint64_t max){
 	uint64_t *buf = calloc(max + 1, sizeof(uint64_t));
 	if(!buf){
 		return NULL;
@@ -134,7 +134,7 @@ uint64_t *sieve_largest_factors(uint64_t max){
 	return buf;
 }
 
-void fill_factors_from_largest(factors_t *out, uint64_t n, const uint64_t largest_factors[static n + 1]){
+void nut_fill_factors_from_largest(nut_Factors *out, uint64_t n, const uint64_t largest_factors[static n + 1]){
 	out->num_primes = 0;
 	for(uint64_t p = largest_factors[n], k = 1; p;){
 		n /= p;
@@ -142,19 +142,19 @@ void fill_factors_from_largest(factors_t *out, uint64_t n, const uint64_t larges
 		if(p == q){
 			++k;
 		}else{
-			factors_append(out, p, k);
+			nut_Factor_append(out, p, k);
 			p = q;
 			k = 1;
 		}
 	}
 }
 
-uint64_t get_factors_pitch(uint64_t w){
-	return offsetof(fw_u64arr_t, elems) + w*sizeof(uint64_t);
+uint64_t nut_get_factors_pitch(uint64_t w){
+	return offsetof(nut_u64_Pitcharr, elems) + w*sizeof(uint64_t);
 }
 
 // Works by multiplying power + 1 for all prime factors
-uint64_t *sieve_sigma_0(uint64_t max){
+uint64_t *nut_sieve_sigma_0(uint64_t max){
 	uint64_t *buf = malloc((max + 1)*sizeof(uint64_t));
 	if(!buf){
 		return NULL;
@@ -182,7 +182,7 @@ uint64_t *sieve_sigma_0(uint64_t max){
 }
 
 // Works by multiplying (prime**(power+1)-1)/(prime-1) for all prime factors
-uint64_t *sieve_sigma_1(uint64_t max){
+uint64_t *nut_sieve_sigma_1(uint64_t max){
 	uint64_t *buf = malloc((max + 1)*sizeof(uint64_t));
 	if(!buf){
 		return NULL;
@@ -210,7 +210,7 @@ uint64_t *sieve_sigma_1(uint64_t max){
 
 // Works by multiplying (prime**((power+1)*e)-1)/(prime**e-1) for all prime factors, where power is the
 // power of each prime and e is the power of divisors to sum
-uint64_t *sieve_sigma_e(uint64_t max, uint64_t e){
+uint64_t *nut_sieve_sigma_e(uint64_t max, uint64_t e){
 	uint64_t *buf = malloc((max + 1)*sizeof(uint64_t));
 	if(!buf){
 		return NULL;
@@ -227,7 +227,7 @@ uint64_t *sieve_sigma_e(uint64_t max, uint64_t e){
 			while(m%a == 0){
 				a *= n;
 			}
-			buf[m] *= (pow_u64(a, e) - 1)/(pow_u64(n, e) - 1);
+			buf[m] *= (nut_u64_pow(a, e) - 1)/(nut_u64_pow(n, e) - 1);
 			if(__builtin_add_overflow(m, n, &m)){
 				break;
 			}
@@ -236,7 +236,7 @@ uint64_t *sieve_sigma_e(uint64_t max, uint64_t e){
 	return buf;
 }
 
-uint64_t *sieve_dk(uint64_t max, uint64_t k){
+uint64_t *nut_sieve_dk(uint64_t max, uint64_t k){
 	uint64_t *buf = malloc((max + 1)*sizeof(uint64_t));
 	if(!buf){
 		return NULL;
@@ -254,7 +254,7 @@ uint64_t *sieve_dk(uint64_t max, uint64_t k){
 				m1 /= n;
 				++a;
 			}
-			buf[m] *= binom_u64(a + k - 1, k - 1);
+			buf[m] *= nut_u64_binom(a + k - 1, k - 1);
 			if(__builtin_add_overflow(m, n, &m)){
 				break;
 			}
@@ -263,7 +263,7 @@ uint64_t *sieve_dk(uint64_t max, uint64_t k){
 	return buf;
 }
 
-uint64_t *sieve_phi(uint64_t max){
+uint64_t *nut_sieve_phi(uint64_t max){
 	uint64_t *buf = malloc((max + 1)*sizeof(uint64_t));
 	if(!buf){
 		return NULL;
@@ -289,7 +289,7 @@ uint64_t *sieve_phi(uint64_t max){
 	return buf;
 }
 
-uint64_t *sieve_carmichael(uint64_t max){
+uint64_t *nut_sieve_carmichael(uint64_t max){
 	uint64_t *buf = malloc((max + 1)*sizeof(uint64_t));
 	if(!buf){
 		return NULL;
@@ -313,7 +313,7 @@ uint64_t *sieve_carmichael(uint64_t max){
 					buf[m] = a >> 2;
 				}
 			}else{
-				buf[m] = lcm(buf[m], a/n - a/n/n);
+				buf[m] = nut_i64_lcm(buf[m], a/n - a/n/n);
 			}
 			if(__builtin_add_overflow(m, n, &m)){
 				break;
@@ -323,7 +323,7 @@ uint64_t *sieve_carmichael(uint64_t max){
 	return buf;
 }
 
-uint8_t *sieve_mobius(uint64_t max){
+uint8_t *nut_sieve_mobius(uint64_t max){
 	uint64_t buf_len = max/4 + 1;
 	uint8_t *buf = malloc(buf_len*sizeof(uint64_t));
 	if(!buf){
@@ -370,14 +370,14 @@ uint8_t *sieve_mobius(uint64_t max){
 	return buf;
 }
 
-int64_t *compute_mertens_range(uint64_t max, const uint8_t mobius[static max/4 + 1]){
+int64_t *nut_compute_mertens_range(uint64_t max, const uint8_t mobius[static max/4 + 1]){
 	int64_t *buf = malloc((max + 1)*sizeof(int64_t));
 	if(!buf){
 		return NULL;
 	}
 	buf[0] = 0;
 	for(uint64_t n = 1; n <= max; ++n){
-		int64_t v = bitfield2_arr_get(mobius, n);
+		int64_t v = nut_Bitfield2_arr_get(mobius, n);
 		if(v == 3){
 			v = -1;
 		}
@@ -614,14 +614,14 @@ static void mark_is_composite(uint8_t *is_composite, uint64_t q, uint64_t r, uin
 	}
 }
 
-uint8_t *sieve_is_composite(uint64_t max){
+uint8_t *nut_sieve_is_composite(uint64_t max){
 	uint64_t is_composite_len = max/30 + 1;
 	uint8_t *is_composite = calloc(is_composite_len, sizeof(uint64_t));
 	if(!is_composite){
 		return NULL;
 	}
 	uint64_t q_ub = is_composite_len;
-	uint64_t p_max = u64_nth_root(max, 2);
+	uint64_t p_max = nut_u64_nth_root(max, 2);
 	uint64_t q_max = (p_max - 1)/30;
 	uint64_t q = 0, r = 7;
 	while(q <= q_max){
@@ -660,7 +660,7 @@ uint8_t *sieve_is_composite(uint64_t max){
 	return is_composite;
 }
 
-bool is_composite(uint64_t n, const uint8_t buf[static n/30 + 1]){
+bool nut_is_composite(uint64_t n, const uint8_t buf[static n/30 + 1]){
 	if(n < 6){
 		return n != 2 && n != 3 && n != 5;
 	}
@@ -679,7 +679,7 @@ bool is_composite(uint64_t n, const uint8_t buf[static n/30 + 1]){
 	}
 }
 
-uint64_t *compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1]){
+uint64_t *nut_compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1]){
 	/* buf[i] tells us the primality of 30*i + 1, 30*i + 7, 30*i + 11, ..., 30*i + 29.
 	 * Thus, we want res[i] to tell us the number of prime numbers from 1 up to 30*(i + 1)
 	 * and so in general res[i] = popcount(buf[i]) + res[i - 1].
@@ -700,10 +700,10 @@ uint64_t *compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1]){
 	return res;
 }
 
-uint64_t compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static n/30], const uint8_t buf[static n/30 + 1]){
+uint64_t nut_compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static n/30], const uint8_t buf[static n/30 + 1]){
 	if(n < 30){
 		uint64_t res;
-		for(res = 0; small_primes[res] <= n; ++res);
+		for(res = 0; nut_small_primes[res] <= n; ++res);
 		return res;
 	}
 	uint64_t q = n/30;
@@ -723,32 +723,32 @@ uint64_t compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static n/30]
 
 static uint64_t *copy_small_primes(uint64_t max, uint64_t *_num_primes){
 	uint64_t n = 0;
-	while(n < 25 && small_primes[n] <= max){
+	while(n < 25 && nut_small_primes[n] <= max){
 		++n;
 	}
 	uint64_t *primes = malloc(n*sizeof(uint64_t));
 	if(!primes){
 		return NULL;
 	}
-	memcpy(primes, small_primes, n*sizeof(uint64_t));
+	memcpy(primes, nut_small_primes, n*sizeof(uint64_t));
 	*_num_primes = n;
 	return primes;
 }
 
-uint64_t *sieve_primes(uint64_t max, uint64_t *_num_primes){
+uint64_t *nut_sieve_primes(uint64_t max, uint64_t *_num_primes){
 	if(max < 7){
 		return copy_small_primes(max, _num_primes);
 	}
-	uint64_t *primes = malloc((size_t)max_primes_le(max)*sizeof(uint64_t));
+	uint64_t *primes = malloc((size_t)nut_max_primes_le(max)*sizeof(uint64_t));
 	if(!primes){
 		return NULL;
 	}
-	uint8_t *is_composite = sieve_is_composite(max);
+	uint8_t *is_composite = nut_sieve_is_composite(max);
 	if(!is_composite){
 		free(primes);
 		return NULL;
 	}
-	memcpy(primes, small_primes, 3*sizeof(uint64_t));
+	memcpy(primes, nut_small_primes, 3*sizeof(uint64_t));
 	uint64_t num_primes = 3;
 	uint64_t q = 0;
 	uint64_t r = 7;

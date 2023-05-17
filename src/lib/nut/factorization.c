@@ -1,9 +1,9 @@
-#include "nut/modular_math.h"
 #include <stddef.h>
 #include <sys/random.h>
 #include <string.h>
 #include <stdbool.h>
 
+#include <nut/modular_math.h>
 #include <nut/factorization.h>
 
 static inline void cleanup_free(void *_p){
@@ -11,40 +11,40 @@ static inline void cleanup_free(void *_p){
 	*(void**)_p = NULL;
 }
 
-factors_t *init_factors_t_w(uint64_t max_primes){
-	static const factors_t dummy;
-	return calloc(1, sizeof(factors_t) + sizeof(dummy.factors[0])*max_primes);
+nut_Factors *nut_make_Factors_w(uint64_t max_primes){
+	static const nut_Factors dummy;
+	return calloc(1, sizeof(nut_Factors) + sizeof(dummy.factors[0])*max_primes);
 }
 
-factors_t *init_factors_t_ub(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes]){
+nut_Factors *nut_make_Factors_ub(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes]){
 	uint64_t p = 1, w = 0;
 	for(uint64_t i = 0; i < num_primes; ++i){
 		p *= primes[i];
 		if(p > n){
-			return init_factors_t_w(w);
+			return nut_make_Factors_w(w);
 		}
 		++w;
 	}
 	return NULL;
 }
 
-factors_t *copy_factors_t(const factors_t *factors){
-	factors_t *ret = init_factors_t_w(factors->num_primes);
+nut_Factors *nut_Factors_copy(const nut_Factors *factors){
+	nut_Factors *ret = nut_make_Factors_w(factors->num_primes);
 	if(ret){
-		memcpy(ret, factors, offsetof(factors_t, factors) + factors->num_primes*sizeof(factors->factors[0]));
+		memcpy(ret, factors, offsetof(nut_Factors, factors) + factors->num_primes*sizeof(factors->factors[0]));
 	}
 	return ret;
 }
 
-uint64_t factors_product(const factors_t *factors){
+uint64_t nut_Factors_prod(const nut_Factors *factors){
 	uint64_t r = 1;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
-		r *= pow_u64(factors->factors[i].prime, factors->factors[i].power);
+		r *= nut_u64_pow(factors->factors[i].prime, factors->factors[i].power);
 	}
 	return r;
 }
 
-uint64_t divisor_count(const factors_t *factors){
+uint64_t nut_Factor_divcount(const nut_Factors *factors){
 	uint64_t s = 1;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		s *= factors->factors[i].power + 1;
@@ -52,63 +52,63 @@ uint64_t divisor_count(const factors_t *factors){
 	return s;
 }
 
-uint64_t divisor_sum(const factors_t *factors){
+uint64_t nut_Factor_divsum(const nut_Factors *factors){
 	uint64_t s = 1;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		uint64_t p = factors->factors[i].prime;
 		uint64_t a = factors->factors[i].power;
-		s *= (pow_u64(p, a + 1) - 1)/(p - 1);
+		s *= (nut_u64_pow(p, a + 1) - 1)/(p - 1);
 	}
 	return s;
 }
 
-uint64_t divisor_power_sum(const factors_t *factors, uint64_t power){
+uint64_t nut_Factor_divpowsum(const nut_Factors *factors, uint64_t power){
 	if(power == 0){
-		return divisor_count(factors);
+		return nut_Factor_divcount(factors);
 	}else if(power == 1){
-		return divisor_sum(factors);
+		return nut_Factor_divsum(factors);
 	}
 	uint64_t s = 1;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		uint64_t p = factors->factors[i].prime;
 		uint64_t a = factors->factors[i].power;
-		s *= (pow_u64(p, (a + 1)*power) - 1)/(pow_u64(p, power) - 1);
+		s *= (nut_u64_pow(p, (a + 1)*power) - 1)/(nut_u64_pow(p, power) - 1);
 	}
 	return s;
 }
 
-uint64_t divisor_tuple_count(const factors_t *factors, uint64_t k){
+uint64_t nut_Factor_divtupcount(const nut_Factors *factors, uint64_t k){
 	if(k == 0){
 		return !factors->num_primes;
 	}else if(k == 1){
 		return 1;
 	}else if(k == 2){
-		return divisor_count(factors);
+		return nut_Factor_divcount(factors);
 	}
 	uint64_t s = 1;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
-		s *= binom_u64(factors->factors[i].power + k - 1, k - 1);
+		s *= nut_u64_binom(factors->factors[i].power + k - 1, k - 1);
 	}
 	return s;
 }
 
-void factors_power(factors_t *factors, uint64_t power){
+void nut_Factor_ipow(nut_Factors *factors, uint64_t power){
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		factors->factors[i].power *= power;
 	}
 }
 
-uint64_t euler_phi(const factors_t *factors){
+uint64_t nut_Factor_phi(const nut_Factors *factors){
 	uint64_t s = 1;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		uint64_t p = factors->factors[i].prime;
 		uint64_t a = factors->factors[i].power;
-		s *= (pow_u64(p, a - 1))*(p - 1);
+		s *= (nut_u64_pow(p, a - 1))*(p - 1);
 	}
 	return s;
 }
 
-uint64_t carmichael_lambda(const factors_t *factors){
+uint64_t nut_Factor_carmichael(const nut_Factors *factors){
 	uint64_t s = 1;
 	if(!factors->num_primes){
 		return s;
@@ -122,27 +122,27 @@ uint64_t carmichael_lambda(const factors_t *factors){
 			s = 1ull << (a - 1);
 		}
 	}else{
-		s = pow_u64(p, a - 1)*(p - 1);
+		s = nut_u64_pow(p, a - 1)*(p - 1);
 	}
 	for(uint64_t i = 1; i < factors->num_primes; ++i){
 		p = factors->factors[i].prime;
 		a = factors->factors[i].power;
-		uint64_t phi_pk = (pow_u64(p, a - 1))*(p - 1);
-		s = lcm(s, phi_pk);
+		uint64_t phi_pk = (nut_u64_pow(p, a - 1))*(p - 1);
+		s = nut_i64_lcm(s, phi_pk);
 	}
 	return s;
 }
 
-int forall_divisors_tmptmp(const factors_t *factors, int (*f)(const factors_t*, uint64_t, void*), void *data){
+int nut_Factor_forall_divs_tmptmp(const nut_Factors *factors, int (*f)(const nut_Factors*, uint64_t, void*), void *data){
 //#pragma GCC diagnostic push
 //#pragma GCC diagnostic ignored "-Wincompatible-pointer-types"
-	factors_t *dfactors __attribute__((cleanup(cleanup_free))) = copy_factors_t(factors);
-	factors_t *pfactors __attribute__((cleanup(cleanup_free))) = copy_factors_t(factors);
+	nut_Factors *dfactors __attribute__((cleanup(cleanup_free))) = nut_Factors_copy(factors);
+	nut_Factors *pfactors __attribute__((cleanup(cleanup_free))) = nut_Factors_copy(factors);
 //#pragma GCC pop
-	return forall_divisors(factors, f, data, dfactors, pfactors);
+	return nut_Factor_forall_divs(factors, f, data, dfactors, pfactors);
 }
 
-int forall_divisors(const factors_t *factors, int (*f)(const factors_t*, uint64_t, void*), void *data, factors_t *dfactors, factors_t *pfactors){
+int nut_Factor_forall_divs(const nut_Factors *factors, int (*f)(const nut_Factors*, uint64_t, void*), void *data, nut_Factors *dfactors, nut_Factors *pfactors){
 	dfactors->num_primes = factors->num_primes;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		dfactors->factors[i].prime = factors->factors[i].prime;
@@ -172,16 +172,16 @@ int forall_divisors(const factors_t *factors, int (*f)(const factors_t*, uint64_
 	}
 }
 
-int forall_divisors_le_tmptmp(const factors_t *factors, uint64_t d_max, int (*f)(const factors_t*, uint64_t, void*), void *data){
+int nut_Factor_forall_divs_le_tmptmp(const nut_Factors *factors, uint64_t d_max, int (*f)(const nut_Factors*, uint64_t, void*), void *data){
 //#pragma GCC diagnostic push
 //#pragma GCC diagnostic ignored "-Wincompatible-pointer-types"
-	factors_t *dfactors __attribute__((cleanup(cleanup_free))) = copy_factors_t(factors);
-	factors_t *pfactors __attribute__((cleanup(cleanup_free))) = copy_factors_t(factors);
+	nut_Factors *dfactors __attribute__((cleanup(cleanup_free))) = nut_Factors_copy(factors);
+	nut_Factors *pfactors __attribute__((cleanup(cleanup_free))) = nut_Factors_copy(factors);
 //#pragma GCC pop
-	return forall_divisors_le(factors, d_max, f, data, dfactors, pfactors);
+	return nut_Factor_forall_divs_le(factors, d_max, f, data, dfactors, pfactors);
 }
 
-int forall_divisors_le(const factors_t *factors, uint64_t d_max, int (*f)(const factors_t*, uint64_t, void*), void *data, factors_t *dfactors, factors_t *pfactors){
+int nut_Factor_forall_divs_le(const nut_Factors *factors, uint64_t d_max, int (*f)(const nut_Factors*, uint64_t, void*), void *data, nut_Factors *dfactors, nut_Factors *pfactors){
 	dfactors->num_primes = factors->num_primes;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		dfactors->factors[i].prime = factors->factors[i].prime;
@@ -216,7 +216,7 @@ int forall_divisors_le(const factors_t *factors, uint64_t d_max, int (*f)(const 
 	}
 }
 
-void factors_append(factors_t *factors, uint64_t m, uint64_t k){
+void nut_Factor_append(nut_Factors *factors, uint64_t m, uint64_t k){
 	for(uint64_t i = 0;; ++i){
 		if(i == factors->num_primes){
 			factors->factors[i].prime = m;
@@ -236,8 +236,8 @@ void factors_append(factors_t *factors, uint64_t m, uint64_t k){
 	}
 }
 
-void factors_combine(factors_t *factors, const factors_t *factors2, uint64_t k){
-	factors_t *factors3 = init_factors_t_w(factors->num_primes + factors2->num_primes);
+void nut_Factor_combine(nut_Factors *factors, const nut_Factors *factors2, uint64_t k){
+	nut_Factors *factors3 = nut_make_Factors_w(factors->num_primes + factors2->num_primes);
 	uint64_t i = 0, i2 = 0, i3 = 0;
 	while(i < factors->num_primes && i2 < factors2->num_primes){
 		if(factors->factors[i].prime < factors2->factors[i2].prime){
@@ -263,7 +263,7 @@ void factors_combine(factors_t *factors, const factors_t *factors2, uint64_t k){
 	free(factors3);
 }
 
-int factors_fprint(FILE *file, const factors_t *factors){
+int nut_Factor_fprint(FILE *file, const nut_Factors *factors){
 	int res = 0;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		uint64_t power = factors->factors[i].power;
@@ -284,7 +284,7 @@ int factors_fprint(FILE *file, const factors_t *factors){
 	return res;
 }
 
-uint64_t powmod(uint64_t b, uint64_t e, uint64_t n){
+uint64_t nut_u64_powmod(uint64_t b, uint64_t e, uint64_t n){
 	uint64_t r = 1;
 	b %= n;
 	while(e){
@@ -297,7 +297,7 @@ uint64_t powmod(uint64_t b, uint64_t e, uint64_t n){
 	return (uint64_t)r;
 }
 
-int is_prime_dmr(uint64_t n){
+int nut_u64_is_prime_dmr(uint64_t n){
 	//static const uint64_t DMR_PRIMES[7] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};//sufficient for 64 bit numbers
 	//had to disable 7 base check because the last base is too large to be squared under 64 bit multiplication
 	static const uint64_t DMR_PRIMES[12] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};//sufficient for 64 bit numbers
@@ -316,12 +316,12 @@ int is_prime_dmr(uint64_t n){
 		if(a >= n){
 			break;
 		}
-		x = powmod(a, d, n);
+		x = nut_u64_powmod(a, d, n);
 		if(x == 1 || x == n - 1){
 			goto CONTINUE_WITNESSLOOP;
 		}
 		for(a = 0; a < s - 1; ++a){
-			x = powmod(x, 2, n);
+			x = nut_u64_powmod(x, 2, n);
 			if(x == 1){
 				return 0;
 			}
@@ -361,7 +361,7 @@ int is_prime_ecam(uint64_t n){
 }
 */
 
-uint64_t rand_u64(uint64_t a, uint64_t b){
+uint64_t nut_u64_rand(uint64_t a, uint64_t b){
 	uint64_t l = b - a, r = 0, bytes = (71 - __builtin_clzll(l))/8;
 	uint64_t ub;
 	if(bytes == 8){
@@ -379,20 +379,20 @@ uint64_t rand_u64(uint64_t a, uint64_t b){
 	return r%l + a;
 }
 
-uint64_t prand_u64(uint64_t a, uint64_t b){
-	return rand_u64(a, b);//TODO: test if this is a bottleneck, we don't need calls to this function to be secure
+uint64_t nut_u64_prand(uint64_t a, uint64_t b){
+	return nut_u64_rand(a, b);//TODO: test if this is a bottleneck, we don't need calls to this function to be secure
 }
 
-const uint64_t small_primes[25] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
+const uint64_t nut_small_primes[25] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
 
-const factor_conf_t default_factor_conf = {
+const nut_FactorConf nut_default_factor_conf = {
 	.pollard_max= 100000,    //maximum number to use Pollard's Rho algorithm for
 	.pollard_stride= 10,     //number of gcd operations to coalesce, decreases time for a single iteration at the cost of potentially doing twice this many extra iterations
 	.lenstra_max= UINT64_MAX,//maximum number to use Lenstra's Elliptic Curve algorithm for
 	.lenstra_bfac= 10        //roughly speaking, the number of iterations to try before picking a new random point and curve
 };
 
-uint64_t factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], factors_t *factors){
+uint64_t nut_u64_factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], nut_Factors *factors){
 	factors->num_primes = 0;
 	for(uint64_t i = 0; i < num_primes; ++i){
 		uint64_t p = primes[i];
@@ -418,25 +418,25 @@ uint64_t factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes
 	return n;
 }
 
-uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], const factor_conf_t *conf, factors_t *factors){
-	n = factor_trial_div(n, num_primes, primes, factors);
+uint64_t nut_u64_factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], const nut_FactorConf *conf, nut_Factors *factors){
+	n = nut_u64_factor_trial_div(n, num_primes, primes, factors);
 	if(n == 1){
 		return 1;
 	}
 	uint64_t exponent = 1;
-	is_perfect_power(n, 9, &n, &exponent);
-	if(is_prime_dmr(n)){//TODO: get a better primality test and possibly run it later (ie after some pollard-rho)
-		factors_append(factors, n, exponent);
+	nut_u64_is_perfect_power(n, 9, &n, &exponent);
+	if(nut_u64_is_prime_dmr(n)){//TODO: get a better primality test and possibly run it later (ie after some pollard-rho)
+		nut_Factor_append(factors, n, exponent);
 		return 1;
 	}
 	uint64_t smoothness = 101*101;
-	factors_t *factors2 = init_factors_t_w(MAX_PRIMES_64);
+	nut_Factors *factors2 = nut_make_Factors_w(NUT_MAX_PRIMES_64);
 	uint64_t m;
 	while(1){
 		if(n <= conf->pollard_max){//TODO: allow iteration count based stopping of pollard-rho brent so we can get small factors of big numbers that way?
 			do{
-				uint64_t x = prand_u64(0, n);
-				m = factor1_pollard_rho_brent(n, x, conf->pollard_stride);
+				uint64_t x = nut_u64_prand(0, n);
+				m = nut_u64_factor1_pollard_rho_brent(n, x, conf->pollard_stride);
 			}while(m == n);
 			uint64_t k = 1;
 			n /= m;
@@ -444,35 +444,35 @@ uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes
 				k += 1;
 				n /= m;
 			}
-			if(m < smoothness || is_prime_dmr(m)){
-				factors_append(factors, m, k*exponent);
+			if(m < smoothness || nut_u64_is_prime_dmr(m)){
+				nut_Factor_append(factors, m, k*exponent);
 			}else{
 				factors2->num_primes = 0;
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wnonnull"
-				m = factor_heuristic(m, 0, NULL, conf, factors2);
+				m = nut_u64_factor_heuristic(m, 0, NULL, conf, factors2);
 #pragma GCC diagnostic pop
 				if(m != 1){
 					free(factors2);
 					return m;//TODO: abort
 				}
-				factors_combine(factors, factors2, k*exponent);
+				nut_Factor_combine(factors, factors2, k*exponent);
 			}
 			if(n == 1){
 				free(factors2);
 				return 1;
 			}
-			if(n < smoothness || is_prime_dmr(n)){
-				factors_append(factors, n, exponent);
+			if(n < smoothness || nut_u64_is_prime_dmr(n)){
+				nut_Factor_append(factors, n, exponent);
 				free(factors2);
 				return 1;
 			}
 		}else if(n <= conf->lenstra_max){
 			do{
-				uint64_t x = prand_u64(0, n);
-				uint64_t y = prand_u64(0, n);
-				uint64_t a = prand_u64(0, n);
-				m = factor1_lenstra(n, x, y, a, conf->lenstra_bfac);
+				uint64_t x = nut_u64_prand(0, n);
+				uint64_t y = nut_u64_prand(0, n);
+				uint64_t a = nut_u64_prand(0, n);
+				m = nut_u64_factor1_lenstra(n, x, y, a, conf->lenstra_bfac);
 			}while(m == n);
 			uint64_t k = 1;
 			n /= m;
@@ -480,26 +480,26 @@ uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes
 				k += 1;
 				n /= m;
 			}
-			if(m < smoothness || is_prime_dmr(m)){
-				factors_append(factors, m, k*exponent);
+			if(m < smoothness || nut_u64_is_prime_dmr(m)){
+				nut_Factor_append(factors, m, k*exponent);
 			}else{
 				factors2->num_primes = 0;
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wnonnull"
-				m = factor_heuristic(m, 0, NULL, conf, factors2);
+				m = nut_u64_factor_heuristic(m, 0, NULL, conf, factors2);
 #pragma GCC diagnostic pop
 				if(m != 1){
 					free(factors2);
 					return m;//TODO: abort
 				}
-				factors_combine(factors, factors2, k*exponent);
+				nut_Factor_combine(factors, factors2, k*exponent);
 			}
 			if(n == 1){
 				free(factors2);
 				return 1;
 			}
-			if(n < smoothness || is_prime_dmr(n)){
-				factors_append(factors, n, exponent);
+			if(n < smoothness || nut_u64_is_prime_dmr(n)){
+				nut_Factor_append(factors, n, exponent);
 				free(factors2);
 				return 1;
 			}
@@ -510,7 +510,7 @@ uint64_t factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes
 	}
 }
 
-uint64_t u64_nth_root(uint64_t a, uint64_t n){
+uint64_t nut_u64_nth_root(uint64_t a, uint64_t n){
 	if(a < 2){
 		return a;
 	}
@@ -522,13 +522,13 @@ uint64_t u64_nth_root(uint64_t a, uint64_t n){
 			return 1;
 		}
 	}else for(x = 1;; ++x){
-		uint128_t x_pow = pow_u128(x + 1, n);
+		uint128_t x_pow = nut_u128_pow(x + 1, n);
 		if(x_pow > a){
 			return x;
 		}
 	}
 	for(uint64_t i = 0;; ++i){
-		uint128_t x_pow = pow_u128(x, n - 1);
+		uint128_t x_pow = nut_u128_pow(x, n - 1);
 		uint64_t x_next = ((n - 1)*x_pow*x + a)/(n*x_pow);
 		if(i > 1 && x_next >= x){
 			return x;
@@ -537,7 +537,7 @@ uint64_t u64_nth_root(uint64_t a, uint64_t n){
 	}
 }
 
-bool is_perfect_power(uint64_t a, uint64_t max, uint64_t *_base, uint64_t *_exp){
+bool nut_u64_is_perfect_power(uint64_t a, uint64_t max, uint64_t *_base, uint64_t *_exp){
 	if(a < 2){
 		return false;
 	}
@@ -545,13 +545,13 @@ bool is_perfect_power(uint64_t a, uint64_t max, uint64_t *_base, uint64_t *_exp)
 	/// so the maximum exponent we will ever have to take is 61.
 	uint64_t x = 1;
 	for(uint64_t i = 0; i < 18; ++i){
-		uint64_t p = small_primes[i];
+		uint64_t p = nut_small_primes[i];
 		if(p > max){
 			break;
 		}
 		while(1){
-			uint64_t r = u64_nth_root(a, p);
-			if(pow_u64(r, p) != a){
+			uint64_t r = nut_u64_nth_root(a, p);
+			if(nut_u64_pow(r, p) != a){
 				break;
 			}
 			x *= p;
@@ -571,18 +571,18 @@ bool is_perfect_power(uint64_t a, uint64_t max, uint64_t *_base, uint64_t *_exp)
 	return false;
 }
 
-uint64_t factor1_pollard_rho(uint64_t n, uint64_t x){
+uint64_t nut_u64_factor1_pollard_rho(uint64_t n, uint64_t x){
 	uint64_t y = x, d = 1;
 	while(d == 1){
 		x = (x*x + 1)%n;
 		y = (y*y + 1)%n;
 		y = (y*y + 1)%n;
-		d = egcd(x > y ? x - y : y - x, n, NULL, NULL);
+		d = nut_i64_egcd(x > y ? x - y : y - x, n, NULL, NULL);
 	}
 	return d;
 }
 
-uint64_t factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m){
+uint64_t nut_u64_factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m){
 	uint64_t y = x, ys = x;
 	uint64_t d = 1;//gcd of n and the difference of the terms in the sequence
 	uint64_t r = 1;//power of two in brent's algorithm
@@ -598,14 +598,14 @@ uint64_t factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m){
 				y = (y*y + 1)%n;
 				q = q*(x > y ? x - y : y - x)%n;
 			}
-			d = egcd(q, n, NULL, NULL);
+			d = nut_i64_egcd(q, n, NULL, NULL);
 		}
 		r *= 2;
 	}
 	if(d == n){
 		do{
 			ys = (ys*ys + 1)%n;
-			d = egcd(x > ys ? x - ys : ys - x, n, NULL, NULL);
+			d = nut_i64_egcd(x > ys ? x - ys : ys - x, n, NULL, NULL);
 		}while(d == 1);
 	}
 	return d;
@@ -618,16 +618,16 @@ static inline int ecg_double(int64_t n, int64_t a, int64_t x, int64_t y, int is_
 		return 1;
 	}
 	int64_t s, dy, dx;
-	dy = mod(3*x*x + a, n);
-	dx = mod(2*y, n);
-	int64_t d = egcd(dx, n, &s, NULL);
+	dy = nut_i64_mod(3*x*x + a, n);
+	dx = nut_i64_mod(2*y, n);
+	int64_t d = nut_i64_egcd(dx, n, &s, NULL);
 	if(d != 1){
 		*_xr = d;
 		return -1;
 	}
 	s = s*dy%n;
-	*_xr = mod(s*s - 2*x, n);
-	*_yr = mod(y + s*(*_xr - x), n);
+	*_xr = nut_i64_mod(s*s - 2*x, n);
+	*_yr = nut_i64_mod(y + s*(*_xr - x), n);
 	return 0;
 }
 
@@ -646,22 +646,22 @@ static inline int ecg_add(int64_t n, int64_t a, int64_t xp, int64_t yp, int is_i
 	}
 	int64_t s, dy, dx;
 	if(xp != xq){
-		dy = mod(yp - yq, n);
-		dx = mod(xp - xq, n);
+		dy = nut_i64_mod(yp - yq, n);
+		dx = nut_i64_mod(xp - xq, n);
 	}else if(yp != yq || yp == 0){
 		return 1;
 	}else{
-		dy = mod(3*xp*xp + a, n);
-		dx = mod(2*yp, n);
+		dy = nut_i64_mod(3*xp*xp + a, n);
+		dx = nut_i64_mod(2*yp, n);
 	}
-	int64_t d = egcd(dx, n, &s, NULL);
+	int64_t d = nut_i64_egcd(dx, n, &s, NULL);
 	if(d != 1){
 		*_xr = d;
 		return -1;
 	}
 	s = s*dy%n;
-	*_xr = mod(s*s - xp - xq, n);
-	*_yr = mod(yp + s*(*_xr - xp), n);
+	*_xr = nut_i64_mod(s*s - xp - xq, n);
+	*_yr = nut_i64_mod(yp + s*(*_xr - xp), n);
 	return 0;
 }
 
@@ -707,16 +707,16 @@ static inline int ecg_scale(int64_t n, int64_t a, int64_t x, int64_t y, int is_i
 
 //TODO: this whole function needs to be rewritten to use projective montgomery curves instead of affine wierstrass curves
 //TODO: consider adding brent's second stage for fun
-int64_t factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B){
-	int64_t d = egcd(n, 6, NULL, NULL);//ensure Z/nZ doesn't have a field of characteristic 2 or 3 as a subgroup
+int64_t nut_u64_factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B){
+	int64_t d = nut_i64_egcd(n, 6, NULL, NULL);//ensure Z/nZ doesn't have a field of characteristic 2 or 3 as a subgroup
 	if(d != 1){
 		return d;
 	}
 	int64_t b = (x*x + a)%n;
-	b = mod(y*y - x*b, n);
+	b = nut_i64_mod(y*y - x*b, n);
 	d = a*a%n;
 	d = 4*a*d%n;
-	d = egcd(d + 27*(b*b%n), n, NULL, NULL);//ensure the rhs of the elliptic curve does not have a repeated zero, leading to a cusp
+	d = nut_i64_egcd(d + 27*(b*b%n), n, NULL, NULL);//ensure the rhs of the elliptic curve does not have a repeated zero, leading to a cusp
 	if(d != 1){
 		return d;
 	}
@@ -779,28 +779,28 @@ int64_t factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B){
  *     ^    L=2L=(22)P=(2*11)P
  * and the result is L
  */
-int64_t factor1_lenstra_montgomery(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B){
-	int64_t d = egcd(n, 6, NULL, NULL);//check n does not contain a degenerate prime field
+int64_t nut_u64_factor1_lenstra_montgomery(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B){
+	int64_t d = nut_i64_egcd(n, 6, NULL, NULL);//check n does not contain a degenerate prime field
 	if(d != 1){
 		return d;
 	}
-	int64_t b = mod(y*y, n);
-	d = egcd(b, n, &b, NULL);//check that x, y is on some montgomery curve mod n with a given
+	int64_t b = nut_i64_mod(y*y, n);
+	d = nut_i64_egcd(b, n, &b, NULL);//check that x, y is on some montgomery curve mod n with a given
 	if(d != 1){
 		return d;
 	}
-	b = mod(b*x, n);
-	d = mod(x + a, n);
-	d = mod(x*d + 1, n);
-	b = mod(b*d, n);
-	d = mod(a*a - 4, n);
-	d = egcd(b*d, n, NULL, NULL);//check that the curve does not have a sharp cusp
+	b = nut_i64_mod(b*x, n);
+	d = nut_i64_mod(x + a, n);
+	d = nut_i64_mod(x*d + 1, n);
+	b = nut_i64_mod(b*d, n);
+	d = nut_i64_mod(a*a - 4, n);
+	d = nut_i64_egcd(b*d, n, NULL, NULL);//check that the curve does not have a sharp cusp
 	if(d != 1){
 		return d;
 	}
 	int64_t C;
-	egcd(4, n, &C, NULL);
-	C = mod((a + 2)*C, n);
+	nut_i64_egcd(4, n, &C, NULL);
+	C = nut_i64_mod((a + 2)*C, n);
 	int64_t Zh = 1, Xh = x;
 	int64_t Z1 = 1, X1 = x;
 	for(int64_t k = 2; k <= B; ++k){
@@ -809,50 +809,50 @@ int64_t factor1_lenstra_montgomery(int64_t n, int64_t x, int64_t y, int64_t a, i
 			if(k & t){
 				//L = L + H
 				//H = 2*H
-				int64_t dh = mod(Xh - Zh, n);
-				int64_t sl = mod(Xl + Zl, n);
-				int64_t sh = mod(Xh + Zh, n);
-				int64_t dl = mod(Xl - Zl, n);
-				int64_t dhsl = mod(dh*sl, n);
-				int64_t shdl = mod(sh*dl, n);
-				Xl = mod(dhsl + shdl, n);
-				Xl = mod(Xl*Xl, n);
-				Xl = mod(Z1*Xl, n);
-				Zl = mod(dhsl - shdl, n);
-				Zl = mod(Zl*Zl, n);
-				Zl = mod(X1*Zl, n);
-				int64_t sh2 = mod(sh*sh, n);
-				int64_t dh2 = mod(dh*dh, n);
-				int64_t ch = mod(sh2 - dh2, n);
-				Xh = mod(sh2*dh2, n);
-				Zh = mod(C*ch, n);
-				Zh = mod(ch*(dh2 + Zh), n);
+				int64_t dh = nut_i64_mod(Xh - Zh, n);
+				int64_t sl = nut_i64_mod(Xl + Zl, n);
+				int64_t sh = nut_i64_mod(Xh + Zh, n);
+				int64_t dl = nut_i64_mod(Xl - Zl, n);
+				int64_t dhsl = nut_i64_mod(dh*sl, n);
+				int64_t shdl = nut_i64_mod(sh*dl, n);
+				Xl = nut_i64_mod(dhsl + shdl, n);
+				Xl = nut_i64_mod(Xl*Xl, n);
+				Xl = nut_i64_mod(Z1*Xl, n);
+				Zl = nut_i64_mod(dhsl - shdl, n);
+				Zl = nut_i64_mod(Zl*Zl, n);
+				Zl = nut_i64_mod(X1*Zl, n);
+				int64_t sh2 = nut_i64_mod(sh*sh, n);
+				int64_t dh2 = nut_i64_mod(dh*dh, n);
+				int64_t ch = nut_i64_mod(sh2 - dh2, n);
+				Xh = nut_i64_mod(sh2*dh2, n);
+				Zh = nut_i64_mod(C*ch, n);
+				Zh = nut_i64_mod(ch*(dh2 + Zh), n);
 			}else{
 				//H = L + H
 				//L = 2*L
-				int64_t dh = mod(Xh - Zh, n);
-				int64_t sl = mod(Xl + Zl, n);
-				int64_t sh = mod(Xh + Zh, n);
-				int64_t dl = mod(Xl - Zl, n);
-				int64_t dhsl = mod(dh*sl, n);
-				int64_t shdl = mod(sh*dl, n);
-				Xh = mod(dhsl + shdl, n);
-				Xh = mod(Xh*Xh, n);
-				Zh = mod(dhsl - shdl, n);
-				Zh = mod(Zh*Zh, n);
-				Zh = mod(x*Zh, n);
-				int64_t sl2 = mod(sl*sl, n);
-				int64_t dl2 = mod(dl*dl, n);
-				int64_t cl = mod(sl2 - dl2, n);
-				Xl = mod(sl2*dl2, n);
-				Zl = mod(C*cl, n);
-				Zl = mod(cl*(dl2 + Zl), n);
+				int64_t dh = nut_i64_mod(Xh - Zh, n);
+				int64_t sl = nut_i64_mod(Xl + Zl, n);
+				int64_t sh = nut_i64_mod(Xh + Zh, n);
+				int64_t dl = nut_i64_mod(Xl - Zl, n);
+				int64_t dhsl = nut_i64_mod(dh*sl, n);
+				int64_t shdl = nut_i64_mod(sh*dl, n);
+				Xh = nut_i64_mod(dhsl + shdl, n);
+				Xh = nut_i64_mod(Xh*Xh, n);
+				Zh = nut_i64_mod(dhsl - shdl, n);
+				Zh = nut_i64_mod(Zh*Zh, n);
+				Zh = nut_i64_mod(x*Zh, n);
+				int64_t sl2 = nut_i64_mod(sl*sl, n);
+				int64_t dl2 = nut_i64_mod(dl*dl, n);
+				int64_t cl = nut_i64_mod(sl2 - dl2, n);
+				Xl = nut_i64_mod(sl2*dl2, n);
+				Zl = nut_i64_mod(C*cl, n);
+				Zl = nut_i64_mod(cl*(dl2 + Zl), n);
 			}
 		}
 		if(!Zl){
 			return n;
 		}
-		d = egcd(Zl, n, NULL, NULL);
+		d = nut_i64_egcd(Zl, n, NULL, NULL);
 		if(d != 1){
 			return d;
 		}
@@ -862,7 +862,7 @@ int64_t factor1_lenstra_montgomery(int64_t n, int64_t x, int64_t y, int64_t a, i
 	return n;
 }
 
-int64_t jacobi(int64_t n, int64_t k){
+int64_t nut_i64_jacobi(int64_t n, int64_t k){
 	int64_t j = 1;
 	while(1){
 		int64_t s = __builtin_ctzll(n);
@@ -882,24 +882,24 @@ int64_t jacobi(int64_t n, int64_t k){
 	}
 }
 
-int64_t rand_nr_i64(int64_t p){
+int64_t nut_i64_rand_nr(int64_t p){
 	while(1){
-		int64_t z = rand_u64(2, p);
-		if(jacobi(z, p) == -1){
+		int64_t z = nut_u64_rand(2, p);
+		if(nut_i64_jacobi(z, p) == -1){
 			return z;
 		}
 	}
 }
 
-int64_t sqrt_shanks(int64_t n, int64_t p){
+int64_t nut_i64_sqrt_shanks(int64_t n, int64_t p){
 	int64_t s = __builtin_ctzll(p-1);
 	int64_t q = p >> s;//p-1 = q*2^s
-	int64_t z = rand_nr_i64(p);
+	int64_t z = nut_i64_rand_nr(p);
 	//printf("trying \"nonresidue\" %"PRIu64"\n", z);
 	int64_t m = s;
-	int64_t c = powmod(z, q, p);
-	int64_t t = powmod(n, q, p);
-	int64_t r = powmod(n, (q + 1) >> 1, p);
+	int64_t c = nut_u64_powmod(z, q, p);
+	int64_t t = nut_u64_powmod(n, q, p);
+	int64_t r = nut_u64_powmod(n, (q + 1) >> 1, p);
 	while(t != 1){
 		int64_t i = 1;
 		for(int64_t s = (int128_t)t*t%p; s != 1; s = (int128_t)s*s%p, ++i);
@@ -915,12 +915,12 @@ int64_t sqrt_shanks(int64_t n, int64_t p){
 	return r;
 }
 
-int64_t sqrt_cipolla(int64_t n, int64_t p){
+int64_t nut_i64_sqrt_cipolla(int64_t n, int64_t p){
 	int64_t a, w;
 	do{
-		a = rand_u64(2, p);
-		w = mod((int128_t)a*a%p - n, p);
-	}while(jacobi(w, p) != -1);
+		a = nut_u64_rand(2, p);
+		w = nut_i64_mod((int128_t)a*a%p - n, p);
+	}while(nut_i64_jacobi(w, p) != -1);
 	int64_t u_s = a, w_s = 1;
 	int64_t u_r = 1, w_r = 0;
 	for(int64_t k = (p + 1) >> 1; k; k >>= 1){
@@ -943,22 +943,22 @@ int64_t sqrt_cipolla(int64_t n, int64_t p){
 	return u_r;
 }
 
-int64_t sqrt_mod(int64_t n, int64_t p){
+int64_t nut_i64_sqrt_mod(int64_t n, int64_t p){
 	int64_t r;
 	if((p&3) == 3){
-		r = powmod(n, (p + 1) >> 2, p);
+		r = nut_u64_powmod(n, (p + 1) >> 2, p);
 	}else if((p&7) == 5){
-		r = powmod(n, (p + 3) >> 3, p);
+		r = nut_u64_powmod(n, (p + 3) >> 3, p);
 		if(r*r%p != n){
-			r = (int128_t)r*powmod(2, (p - 1) >> 2, p)%p;
+			r = (int128_t)r*nut_u64_powmod(2, (p - 1) >> 2, p)%p;
 		}//can add 9 mod 16 case
 	}else{
 		int64_t m = 64 - __builtin_clzll(p);
 		int64_t s = __builtin_ctzll(p - 1);
 		if(8*m + 20 >= s*(s - 1)){
-			r = sqrt_shanks(n, p);
+			r = nut_i64_sqrt_shanks(n, p);
 		}else{
-			r = sqrt_cipolla(n, p);
+			r = nut_i64_sqrt_cipolla(n, p);
 		}
 	}
 	return r;

@@ -8,13 +8,13 @@
 
 int main(){
 	fprintf(stderr, "\e[1;34mSieving Factorizations  up to 1000...\e[0m\n");
-	uint64_t w = max_prime_divs(1000);
-	uint64_t *largest_factors = sieve_largest_factors(1000);
-	factors_t *factors = init_factors_t_w(w);
+	uint64_t w = nut_max_prime_divs(1000);
+	uint64_t *largest_factors = nut_sieve_largest_factors(1000);
+	nut_Factors *factors = nut_make_Factors_w(w);
 	bool passed = true;
 	for(uint64_t i = 2; i <= 1000; ++i){
-		fill_factors_from_largest(factors, i, largest_factors);
-		if(factors_product(factors) != i){
+		nut_fill_factors_from_largest(factors, i, largest_factors);
+		if(nut_Factors_prod(factors) != i){
 			fprintf(stderr, "\e[1;31mFactorization for %"PRIu64" doesn't match!\e[0m\n", i);
 			passed = false;
 			break;

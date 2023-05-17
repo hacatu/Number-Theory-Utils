@@ -12,7 +12,7 @@ int main(){
 		exit(EXIT_FAILURE);
 	}
 	for(uint64_t i = 2; i < 1000; ++i){
-		if(is_prime_dmr(i)){
+		if(nut_u64_is_prime_dmr(i)){
 			primes[num_primes++] = i;
 		}
 	}
@@ -25,7 +25,7 @@ int main(){
 		uint64_t p = primes[i];
 		int found_factor = 0;
 		for(uint64_t x = 0; x < p; ++x){
-			if(factor1_pollard_rho(p*p, x) == p){
+			if(nut_u64_factor1_pollard_rho(p*p, x) == p){
 				found_factor = 1;
 				if(x){
 					fprintf(stderr, "\e[1;32mSmallest pollard witness for %"PRIu64"**2 is %"PRIu64"\e[0m\n", p, x);
