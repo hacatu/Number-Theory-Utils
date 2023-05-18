@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['qsieve_5fmax_200',['qsieve_max',['../structfactor__conf__t.html#a04b5502c8acc68bdbacc2b02719b2a1c',1,'factor_conf_t']]]
+  ['qsieve_5fmax_259',['qsieve_max',['../structnut__FactorConf.html#a20f149624a1319ad52b8f24505061520',1,'nut_FactorConf']]]
 ];

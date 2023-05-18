@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['default_5ffactor_5fconf_194',['default_factor_conf',['../factorization_8h.html#a401ed81d2bb12d1accea148f09298e94',1,'factorization.h']]]
+  ['len_252',['len',['../structnut__Poly.html#a9e21e120f8234c52f4b3059d613357e7',1,'nut_Poly::len()'],['../structnut__Roots.html#a52b50bc7b374bb528cdae1b4477b69c1',1,'nut_Roots::len()']]],
+  ['lenstra_5fbfac_253',['lenstra_bfac',['../structnut__FactorConf.html#a6d1d1b2f0ffe8760c2186b3b3c515fa9',1,'nut_FactorConf']]],
+  ['lenstra_5fmax_254',['lenstra_max',['../structnut__FactorConf.html#a03a74ba961477004fd07cca592318954',1,'nut_FactorConf']]]
 ];

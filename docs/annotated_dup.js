@@ -1,9 +1,9 @@
 var annotated_dup =
 [
-    [ "diri_table", "structdiri__table.html", "structdiri__table" ],
-    [ "factor_conf_t", "structfactor__conf__t.html", "structfactor__conf__t" ],
-    [ "factors_t", "structfactors__t.html", "structfactors__t" ],
-    [ "fw_u64arr_t", "structfw__u64arr__t.html", "structfw__u64arr__t" ],
-    [ "poly_roots_t", "structpoly__roots__t.html", "structpoly__roots__t" ],
-    [ "poly_t", "structpoly__t.html", "structpoly__t" ]
+    [ "nut_Diri", "structnut__Diri.html", "structnut__Diri" ],
+    [ "nut_FactorConf", "structnut__FactorConf.html", "structnut__FactorConf" ],
+    [ "nut_Factors", "structnut__Factors.html", "structnut__Factors" ],
+    [ "nut_Poly", "structnut__Poly.html", "structnut__Poly" ],
+    [ "nut_Roots", "structnut__Roots.html", "structnut__Roots" ],
+    [ "nut_u64_Pitcharr", "structnut__u64__Pitcharr.html", "structnut__u64__Pitcharr" ]
 ];

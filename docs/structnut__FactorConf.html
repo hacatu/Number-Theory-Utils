@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Number Theory Utils: factor_conf_t Struct Reference</title>
+<title>Number Theory Utils: nut_FactorConf Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -82,7 +82,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('structfactor__conf__t.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structnut__FactorConf.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -104,46 +104,46 @@ $(document).ready(function(){initNavTree('structfactor__conf__t.html',''); initR
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">factor_conf_t Struct Reference</div>  </div>
+<div class="title">nut_FactorConf Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Configuration/tuning for heuristic factorization.  
- <a href="structfactor__conf__t.html#details">More...</a></p>
+ <a href="structnut__FactorConf.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="factorization_8h_source.html">factorization.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a8a6bc6a2a28fb40a6ebb1a4fafc888b9"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfactor__conf__t.html#a8a6bc6a2a28fb40a6ebb1a4fafc888b9">pollard_max</a></td></tr>
-<tr class="memdesc:a8a6bc6a2a28fb40a6ebb1a4fafc888b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use Pollard-Rho-Brent when factoring numbers at most this large.  <a href="structfactor__conf__t.html#a8a6bc6a2a28fb40a6ebb1a4fafc888b9">More...</a><br /></td></tr>
-<tr class="separator:a8a6bc6a2a28fb40a6ebb1a4fafc888b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac76f7b974f6d1309e72f2f981b320d03"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfactor__conf__t.html#ac76f7b974f6d1309e72f2f981b320d03">pollard_stride</a></td></tr>
-<tr class="memdesc:ac76f7b974f6d1309e72f2f981b320d03"><td class="mdescLeft">&#160;</td><td class="mdescRight">How many iterations of Pollard-Rho-Brent to do in between gcd tests.  <a href="structfactor__conf__t.html#ac76f7b974f6d1309e72f2f981b320d03">More...</a><br /></td></tr>
-<tr class="separator:ac76f7b974f6d1309e72f2f981b320d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07052875c84b8be1fc60677c4f9dfaf5"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfactor__conf__t.html#a07052875c84b8be1fc60677c4f9dfaf5">lenstra_max</a></td></tr>
-<tr class="memdesc:a07052875c84b8be1fc60677c4f9dfaf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use lenstra ecf when factoring numbers at most this large.  <a href="structfactor__conf__t.html#a07052875c84b8be1fc60677c4f9dfaf5">More...</a><br /></td></tr>
-<tr class="separator:a07052875c84b8be1fc60677c4f9dfaf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89c4084f7e9459f6eace98685209b553"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfactor__conf__t.html#a89c4084f7e9459f6eace98685209b553">lenstra_bfac</a></td></tr>
-<tr class="memdesc:a89c4084f7e9459f6eace98685209b553"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factorial smoothness bound for Lenstra ecf.  <a href="structfactor__conf__t.html#a89c4084f7e9459f6eace98685209b553">More...</a><br /></td></tr>
-<tr class="separator:a89c4084f7e9459f6eace98685209b553"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04b5502c8acc68bdbacc2b02719b2a1c"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfactor__conf__t.html#a04b5502c8acc68bdbacc2b02719b2a1c">qsieve_max</a></td></tr>
-<tr class="memdesc:a04b5502c8acc68bdbacc2b02719b2a1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Currently unused.  <a href="structfactor__conf__t.html#a04b5502c8acc68bdbacc2b02719b2a1c">More...</a><br /></td></tr>
-<tr class="separator:a04b5502c8acc68bdbacc2b02719b2a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a467689ec7f9f9118a8f128a9aeaf5b04"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__FactorConf.html#a467689ec7f9f9118a8f128a9aeaf5b04">pollard_max</a></td></tr>
+<tr class="memdesc:a467689ec7f9f9118a8f128a9aeaf5b04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use Pollard-Rho-Brent when factoring numbers at most this large.  <a href="structnut__FactorConf.html#a467689ec7f9f9118a8f128a9aeaf5b04">More...</a><br /></td></tr>
+<tr class="separator:a467689ec7f9f9118a8f128a9aeaf5b04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05d3b17c3e6a25ca26b778064d2231fe"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__FactorConf.html#a05d3b17c3e6a25ca26b778064d2231fe">pollard_stride</a></td></tr>
+<tr class="memdesc:a05d3b17c3e6a25ca26b778064d2231fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">How many iterations of Pollard-Rho-Brent to do in between gcd tests.  <a href="structnut__FactorConf.html#a05d3b17c3e6a25ca26b778064d2231fe">More...</a><br /></td></tr>
+<tr class="separator:a05d3b17c3e6a25ca26b778064d2231fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03a74ba961477004fd07cca592318954"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__FactorConf.html#a03a74ba961477004fd07cca592318954">lenstra_max</a></td></tr>
+<tr class="memdesc:a03a74ba961477004fd07cca592318954"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use lenstra ecf when factoring numbers at most this large.  <a href="structnut__FactorConf.html#a03a74ba961477004fd07cca592318954">More...</a><br /></td></tr>
+<tr class="separator:a03a74ba961477004fd07cca592318954"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d1d1b2f0ffe8760c2186b3b3c515fa9"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__FactorConf.html#a6d1d1b2f0ffe8760c2186b3b3c515fa9">lenstra_bfac</a></td></tr>
+<tr class="memdesc:a6d1d1b2f0ffe8760c2186b3b3c515fa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factorial smoothness bound for Lenstra ecf.  <a href="structnut__FactorConf.html#a6d1d1b2f0ffe8760c2186b3b3c515fa9">More...</a><br /></td></tr>
+<tr class="separator:a6d1d1b2f0ffe8760c2186b3b3c515fa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20f149624a1319ad52b8f24505061520"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__FactorConf.html#a20f149624a1319ad52b8f24505061520">qsieve_max</a></td></tr>
+<tr class="memdesc:a20f149624a1319ad52b8f24505061520"><td class="mdescLeft">&#160;</td><td class="mdescRight">Currently unused.  <a href="structnut__FactorConf.html#a20f149624a1319ad52b8f24505061520">More...</a><br /></td></tr>
+<tr class="separator:a20f149624a1319ad52b8f24505061520"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Configuration/tuning for heuristic factorization. </p>
 
 <p class="definition">Definition at line <a class="el" href="factorization_8h_source.html#l00049">49</a> of file <a class="el" href="factorization_8h_source.html">factorization.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="a8a6bc6a2a28fb40a6ebb1a4fafc888b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a6bc6a2a28fb40a6ebb1a4fafc888b9">&#9670;&nbsp;</a></span>pollard_max</h2>
+<a id="a467689ec7f9f9118a8f128a9aeaf5b04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a467689ec7f9f9118a8f128a9aeaf5b04">&#9670;&nbsp;</a></span>pollard_max</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t factor_conf_t::pollard_max</td>
+          <td class="memname">uint64_t nut_FactorConf::pollard_max</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -155,14 +155,14 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="ac76f7b974f6d1309e72f2f981b320d03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac76f7b974f6d1309e72f2f981b320d03">&#9670;&nbsp;</a></span>pollard_stride</h2>
+<a id="a05d3b17c3e6a25ca26b778064d2231fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05d3b17c3e6a25ca26b778064d2231fe">&#9670;&nbsp;</a></span>pollard_stride</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t factor_conf_t::pollard_stride</td>
+          <td class="memname">uint64_t nut_FactorConf::pollard_stride</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -174,14 +174,14 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a07052875c84b8be1fc60677c4f9dfaf5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a07052875c84b8be1fc60677c4f9dfaf5">&#9670;&nbsp;</a></span>lenstra_max</h2>
+<a id="a03a74ba961477004fd07cca592318954"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03a74ba961477004fd07cca592318954">&#9670;&nbsp;</a></span>lenstra_max</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t factor_conf_t::lenstra_max</td>
+          <td class="memname">uint64_t nut_FactorConf::lenstra_max</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -193,14 +193,14 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a89c4084f7e9459f6eace98685209b553"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89c4084f7e9459f6eace98685209b553">&#9670;&nbsp;</a></span>lenstra_bfac</h2>
+<a id="a6d1d1b2f0ffe8760c2186b3b3c515fa9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d1d1b2f0ffe8760c2186b3b3c515fa9">&#9670;&nbsp;</a></span>lenstra_bfac</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t factor_conf_t::lenstra_bfac</td>
+          <td class="memname">uint64_t nut_FactorConf::lenstra_bfac</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -212,14 +212,14 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a04b5502c8acc68bdbacc2b02719b2a1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04b5502c8acc68bdbacc2b02719b2a1c">&#9670;&nbsp;</a></span>qsieve_max</h2>
+<a id="a20f149624a1319ad52b8f24505061520"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20f149624a1319ad52b8f24505061520">&#9670;&nbsp;</a></span>qsieve_max</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t factor_conf_t::qsieve_max</td>
+          <td class="memname">uint64_t nut_FactorConf::qsieve_max</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -240,8 +240,8 @@ Data Fields</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="structfactor__conf__t.html">factor_conf_t</a></li>
-    <li class="footer">Generated on Wed May 10 2023 08:55:10 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="navelem"><a class="el" href="structnut__FactorConf.html">nut_FactorConf</a></li>
+    <li class="footer">Generated on Thu May 18 2023 07:13:25 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

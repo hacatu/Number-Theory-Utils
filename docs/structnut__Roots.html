@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Number Theory Utils: Data Structure Index</title>
+<title>Number Theory Utils: nut_Roots Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -82,7 +82,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classes.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structnut__Roots.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -101,22 +101,66 @@ $(document).ready(function(){initNavTree('classes.html',''); initResizable(); })
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">Data Structure Index</div>  </div>
+<div class="title">nut_Roots Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="qindex"><a class="qindex" href="#letter_N">N</a></div>
-<div class="classindex">
-<dl class="classindex even">
-<dt class="alphachar"><a name="letter_N">N</a></dt>
-<dd><a class="el" href="structnut__Diri.html">nut_Diri</a></dd><dd><a class="el" href="structnut__FactorConf.html">nut_FactorConf</a></dd><dd><a class="el" href="structnut__Factors.html">nut_Factors</a></dd><dd><a class="el" href="structnut__Poly.html">nut_Poly</a></dd><dd><a class="el" href="structnut__Roots.html">nut_Roots</a></dd><dd><a class="el" href="structnut__u64__Pitcharr.html">nut_u64_Pitcharr</a></dd></dl>
+
+<p>The roots of a polynomial over a finite field, ignoring multiplicity.  
+ <a href="structnut__Roots.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="polynomial_8h_source.html">polynomial.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a52b50bc7b374bb528cdae1b4477b69c1"><td class="memItemLeft" align="right" valign="top"><a id="a52b50bc7b374bb528cdae1b4477b69c1"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__Roots.html#a52b50bc7b374bb528cdae1b4477b69c1">len</a></td></tr>
+<tr class="memdesc:a52b50bc7b374bb528cdae1b4477b69c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of roots, can be 0 if there are none. <br /></td></tr>
+<tr class="separator:a52b50bc7b374bb528cdae1b4477b69c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c4fc3262be2a3850f653b9688e1a400"><td class="memItemLeft" align="right" valign="top"><a id="a8c4fc3262be2a3850f653b9688e1a400"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__Roots.html#a8c4fc3262be2a3850f653b9688e1a400">cap</a></td></tr>
+<tr class="memdesc:a8c4fc3262be2a3850f653b9688e1a400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of roots the roots buffer can currently store. <br /></td></tr>
+<tr class="separator:a8c4fc3262be2a3850f653b9688e1a400"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4938a9a6f1cb009c71930447a417b467"><td class="memItemLeft" align="right" valign="top">int64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__Roots.html#a4938a9a6f1cb009c71930447a417b467">roots</a></td></tr>
+<tr class="memdesc:a4938a9a6f1cb009c71930447a417b467"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of roots.  <a href="structnut__Roots.html#a4938a9a6f1cb009c71930447a417b467">More...</a><br /></td></tr>
+<tr class="separator:a4938a9a6f1cb009c71930447a417b467"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The roots of a polynomial over a finite field, ignoring multiplicity. </p>
+
+<p class="definition">Definition at line <a class="el" href="polynomial_8h_source.html#l00038">38</a> of file <a class="el" href="polynomial_8h_source.html">polynomial.h</a>.</p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a4938a9a6f1cb009c71930447a417b467"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4938a9a6f1cb009c71930447a417b467">&#9670;&nbsp;</a></span>roots</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t* nut_Roots::roots</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Array of roots. </p>
+<p>Should be managed by <a class="el" href="polynomial_8h.html#af2bcb707dcbac686106cb40758414b93">nut_Roots_init</a>, <a class="el" href="polynomial_8h.html#acfa2292bfc27186033c1c65930250f55">nut_Roots_destroy</a>, and <a class="el" href="polynomial_8h.html#a39e086af1c031262a639942b302800cc">nut_Roots_ensure_cap</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="polynomial_8h_source.html#l00045">45</a> of file <a class="el" href="polynomial_8h_source.html">polynomial.h</a>.</p>
+
 </div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/nut/<a class="el" href="polynomial_8h_source.html">polynomial.h</a></li>
+</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="structnut__Roots.html">nut_Roots</a></li>
     <li class="footer">Generated on Thu May 18 2023 07:13:25 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>

@@ -124,132 +124,132 @@ DESCRIPTION</h1>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpoly__t.html">poly_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A polynomial with signed integer coefficients.  <a href="structpoly__t.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__Poly.html">nut_Poly</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A polynomial with signed integer coefficients.  <a href="structnut__Poly.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpoly__roots__t.html">poly_roots_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The roots of a polynomial over a finite field, ignoring multiplicity.  <a href="structpoly__roots__t.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__Roots.html">nut_Roots</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The roots of a polynomial over a finite field, ignoring multiplicity.  <a href="structnut__Roots.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a608927f8b707837b8fcd315bcea00341"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a608927f8b707837b8fcd315bcea00341">init_poly</a> (<a class="el" href="structpoly__t.html">poly_t</a> *f, uint64_t reserve)</td></tr>
-<tr class="memdesc:a608927f8b707837b8fcd315bcea00341"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a polynomial with at least a given capacity.  <a href="polynomial_8h.html#a608927f8b707837b8fcd315bcea00341">More...</a><br /></td></tr>
-<tr class="separator:a608927f8b707837b8fcd315bcea00341"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b9bf7cc123816ef3e68640e17ca6f81"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a8b9bf7cc123816ef3e68640e17ca6f81">destroy_poly</a> (<a class="el" href="structpoly__t.html">poly_t</a> *f)</td></tr>
-<tr class="memdesc:a8b9bf7cc123816ef3e68640e17ca6f81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free resources held by a polynomial struct.  <a href="polynomial_8h.html#a8b9bf7cc123816ef3e68640e17ca6f81">More...</a><br /></td></tr>
-<tr class="separator:a8b9bf7cc123816ef3e68640e17ca6f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1346a0c296eb7dc64e7362c29dda6e8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ad1346a0c296eb7dc64e7362c29dda6e8">cmp_polys</a> (const <a class="el" href="structpoly__t.html">poly_t</a> *a, const <a class="el" href="structpoly__t.html">poly_t</a> *b)</td></tr>
-<tr class="memdesc:ad1346a0c296eb7dc64e7362c29dda6e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asymptotically compare polynomials.  <a href="polynomial_8h.html#ad1346a0c296eb7dc64e7362c29dda6e8">More...</a><br /></td></tr>
-<tr class="separator:ad1346a0c296eb7dc64e7362c29dda6e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0010cb7659c53c79e3ec3ada1809b978"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a0010cb7659c53c79e3ec3ada1809b978">init_poly_roots</a> (<a class="el" href="structpoly__roots__t.html">poly_roots_t</a> *roots, uint64_t reserve)</td></tr>
-<tr class="memdesc:a0010cb7659c53c79e3ec3ada1809b978"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a root buffer with at least a given capacity.  <a href="polynomial_8h.html#a0010cb7659c53c79e3ec3ada1809b978">More...</a><br /></td></tr>
-<tr class="separator:a0010cb7659c53c79e3ec3ada1809b978"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae501a32ed22a602c6da05679442e9ab6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ae501a32ed22a602c6da05679442e9ab6">destroy_poly_roots</a> (<a class="el" href="structpoly__roots__t.html">poly_roots_t</a> *roots)</td></tr>
-<tr class="memdesc:ae501a32ed22a602c6da05679442e9ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free resources held by a root buffer.  <a href="polynomial_8h.html#ae501a32ed22a602c6da05679442e9ab6">More...</a><br /></td></tr>
-<tr class="separator:ae501a32ed22a602c6da05679442e9ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f47d92ef4f1a07f4ddf3d99f244abc1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a5f47d92ef4f1a07f4ddf3d99f244abc1">ensure_poly_cap</a> (<a class="el" href="structpoly__t.html">poly_t</a> *f, uint64_t cap)</td></tr>
-<tr class="memdesc:a5f47d92ef4f1a07f4ddf3d99f244abc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extend the capacity of a polynomial struct if needed.  <a href="polynomial_8h.html#a5f47d92ef4f1a07f4ddf3d99f244abc1">More...</a><br /></td></tr>
-<tr class="separator:a5f47d92ef4f1a07f4ddf3d99f244abc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6dbd98a9607a1cbcddfe4d812550121b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a6dbd98a9607a1cbcddfe4d812550121b">zero_extend_poly</a> (<a class="el" href="structpoly__t.html">poly_t</a> *f, uint64_t len)</td></tr>
-<tr class="memdesc:a6dbd98a9607a1cbcddfe4d812550121b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extend the capacity of a polynomial struct if needed and set any new terms to 0.  <a href="polynomial_8h.html#a6dbd98a9607a1cbcddfe4d812550121b">More...</a><br /></td></tr>
-<tr class="separator:a6dbd98a9607a1cbcddfe4d812550121b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57a86948d29f075bdb00c6a2d3870b09"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a57a86948d29f075bdb00c6a2d3870b09">ensure_poly_roots_cap</a> (<a class="el" href="structpoly__roots__t.html">poly_roots_t</a> *roots, uint64_t cap)</td></tr>
-<tr class="memdesc:a57a86948d29f075bdb00c6a2d3870b09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extend the capacity of a root buffer if needed.  <a href="polynomial_8h.html#a57a86948d29f075bdb00c6a2d3870b09">More...</a><br /></td></tr>
-<tr class="separator:a57a86948d29f075bdb00c6a2d3870b09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace328b1c13ce42b4407116b48db24876"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ace328b1c13ce42b4407116b48db24876">normalize_poly</a> (<a class="el" href="structpoly__t.html">poly_t</a> *f)</td></tr>
-<tr class="memdesc:ace328b1c13ce42b4407116b48db24876"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strip off terms so the leading term is nonzero if needed.  <a href="polynomial_8h.html#ace328b1c13ce42b4407116b48db24876">More...</a><br /></td></tr>
-<tr class="separator:ace328b1c13ce42b4407116b48db24876"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a098b5a4655e573b5151be13bac6cb254"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a098b5a4655e573b5151be13bac6cb254">normalize_poly_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *f, int64_t n, int use_negatives)</td></tr>
-<tr class="memdesc:a098b5a4655e573b5151be13bac6cb254"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reduce coefficients mod n, then normalize.  <a href="polynomial_8h.html#a098b5a4655e573b5151be13bac6cb254">More...</a><br /></td></tr>
-<tr class="separator:a098b5a4655e573b5151be13bac6cb254"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0dd0ce039c8ce903e7e40aef587f93e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ab0dd0ce039c8ce903e7e40aef587f93e">normalize_exponents_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *f, uint64_t cn)</td></tr>
-<tr class="memdesc:ab0dd0ce039c8ce903e7e40aef587f93e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reduce any exponents over cn.  <a href="polynomial_8h.html#ab0dd0ce039c8ce903e7e40aef587f93e">More...</a><br /></td></tr>
-<tr class="separator:ab0dd0ce039c8ce903e7e40aef587f93e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e779775e04d83955296bdda258fc44a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a4e779775e04d83955296bdda258fc44a">copy_poly</a> (<a class="el" href="structpoly__t.html">poly_t</a> *g, const <a class="el" href="structpoly__t.html">poly_t</a> *f)</td></tr>
-<tr class="memdesc:a4e779775e04d83955296bdda258fc44a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy a polynomial.  <a href="polynomial_8h.html#a4e779775e04d83955296bdda258fc44a">More...</a><br /></td></tr>
-<tr class="separator:a4e779775e04d83955296bdda258fc44a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a388a67e34664ce74e3890bec295e907d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a388a67e34664ce74e3890bec295e907d">const_poly</a> (<a class="el" href="structpoly__t.html">poly_t</a> *f, int64_t c)</td></tr>
-<tr class="memdesc:a388a67e34664ce74e3890bec295e907d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a polynomial to a constant (linear terms and up zero).  <a href="polynomial_8h.html#a388a67e34664ce74e3890bec295e907d">More...</a><br /></td></tr>
-<tr class="separator:a388a67e34664ce74e3890bec295e907d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad67e8b256693afb95134c8bdcea71f89"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ad67e8b256693afb95134c8bdcea71f89">eval_poly_modn</a> (const <a class="el" href="structpoly__t.html">poly_t</a> *f, int64_t x, int64_t n)</td></tr>
-<tr class="memdesc:ad67e8b256693afb95134c8bdcea71f89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate a polynomial mod a number.  <a href="polynomial_8h.html#ad67e8b256693afb95134c8bdcea71f89">More...</a><br /></td></tr>
-<tr class="separator:ad67e8b256693afb95134c8bdcea71f89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af76265f19adf322b7cd06e174ef490fd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#af76265f19adf322b7cd06e174ef490fd">fprint_poly</a> (FILE *file, const <a class="el" href="structpoly__t.html">poly_t</a> *f, const char *vname, const char *add, const char *sub, const char *pow, int descending)</td></tr>
-<tr class="memdesc:af76265f19adf322b7cd06e174ef490fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print a polynomial to a file.  <a href="polynomial_8h.html#af76265f19adf322b7cd06e174ef490fd">More...</a><br /></td></tr>
-<tr class="separator:af76265f19adf322b7cd06e174ef490fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa4092e751842766c3739d7c43226bee"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#aaa4092e751842766c3739d7c43226bee">str_to_poly</a> (<a class="el" href="structpoly__t.html">poly_t</a> *f, int64_t *n, const char *str, const char **end)</td></tr>
-<tr class="memdesc:aaa4092e751842766c3739d7c43226bee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a string to a polynomial (and possibly modulus)  <a href="polynomial_8h.html#aaa4092e751842766c3739d7c43226bee">More...</a><br /></td></tr>
-<tr class="separator:aaa4092e751842766c3739d7c43226bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab430241bd078f4ab28f06e64dd935526"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ab430241bd078f4ab28f06e64dd935526">rand_poly_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *f, uint64_t max_len, int64_t n)</td></tr>
-<tr class="memdesc:ab430241bd078f4ab28f06e64dd935526"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random polynomial.  <a href="polynomial_8h.html#ab430241bd078f4ab28f06e64dd935526">More...</a><br /></td></tr>
-<tr class="separator:ab430241bd078f4ab28f06e64dd935526"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1338d410578bd4b6225494f8fc6dbc6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ac1338d410578bd4b6225494f8fc6dbc6">add_poly_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *h, const <a class="el" href="structpoly__t.html">poly_t</a> *f, const <a class="el" href="structpoly__t.html">poly_t</a> *g, int64_t n)</td></tr>
-<tr class="memdesc:ac1338d410578bd4b6225494f8fc6dbc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add polynomials f + g mod n and store the result in h.  <a href="polynomial_8h.html#ac1338d410578bd4b6225494f8fc6dbc6">More...</a><br /></td></tr>
-<tr class="separator:ac1338d410578bd4b6225494f8fc6dbc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2f5f895e0fabfc02f670aebd38fe9c1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ac2f5f895e0fabfc02f670aebd38fe9c1">sub_poly_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *h, const <a class="el" href="structpoly__t.html">poly_t</a> *f, const <a class="el" href="structpoly__t.html">poly_t</a> *g, int64_t n)</td></tr>
-<tr class="memdesc:ac2f5f895e0fabfc02f670aebd38fe9c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract polynomials f - g mod n and store the result in h.  <a href="polynomial_8h.html#ac2f5f895e0fabfc02f670aebd38fe9c1">More...</a><br /></td></tr>
-<tr class="separator:ac2f5f895e0fabfc02f670aebd38fe9c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdf6feb8398004536da3a7798cfc38a2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#acdf6feb8398004536da3a7798cfc38a2">dot_poly_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *h, const <a class="el" href="structpoly__t.html">poly_t</a> *f, const <a class="el" href="structpoly__t.html">poly_t</a> *g, int64_t n)</td></tr>
-<tr class="memdesc:acdf6feb8398004536da3a7798cfc38a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Take the termwise product of polynomials f and g mod n and store the result in h.  <a href="polynomial_8h.html#acdf6feb8398004536da3a7798cfc38a2">More...</a><br /></td></tr>
-<tr class="separator:acdf6feb8398004536da3a7798cfc38a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c199565663ad2afe5545af89862a20e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a9c199565663ad2afe5545af89862a20e">scale_poly_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *g, const <a class="el" href="structpoly__t.html">poly_t</a> *f, int64_t a, int64_t n)</td></tr>
-<tr class="memdesc:a9c199565663ad2afe5545af89862a20e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply a polynomial f by a scalar a and store the result in h.  <a href="polynomial_8h.html#a9c199565663ad2afe5545af89862a20e">More...</a><br /></td></tr>
-<tr class="separator:a9c199565663ad2afe5545af89862a20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e708389fed41e77730f6a2325137c26"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a3e708389fed41e77730f6a2325137c26">mul_poly_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *restrict h, const <a class="el" href="structpoly__t.html">poly_t</a> *f, const <a class="el" href="structpoly__t.html">poly_t</a> *g, int64_t n)</td></tr>
-<tr class="memdesc:a3e708389fed41e77730f6a2325137c26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply polynomials f*g mod n and store the result in h.  <a href="polynomial_8h.html#a3e708389fed41e77730f6a2325137c26">More...</a><br /></td></tr>
-<tr class="separator:a3e708389fed41e77730f6a2325137c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaac19f1e0aba417e5ab0c0e9eb09e733"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#aaac19f1e0aba417e5ab0c0e9eb09e733">pow_poly_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *restrict g, const <a class="el" href="structpoly__t.html">poly_t</a> *f, uint64_t e, int64_t n, uint64_t cn, <a class="el" href="structpoly__t.html">poly_t</a> tmps[static 2])</td></tr>
-<tr class="memdesc:aaac19f1e0aba417e5ab0c0e9eb09e733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raise f**x mod n and store the result in g.  <a href="polynomial_8h.html#aaac19f1e0aba417e5ab0c0e9eb09e733">More...</a><br /></td></tr>
-<tr class="separator:aaac19f1e0aba417e5ab0c0e9eb09e733"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2fdacf71dafef123812710ea492d403"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ac2fdacf71dafef123812710ea492d403">pow_poly_modn_tmptmp</a> (<a class="el" href="structpoly__t.html">poly_t</a> *restrict g, const <a class="el" href="structpoly__t.html">poly_t</a> *f, uint64_t e, int64_t n, uint64_t cn)</td></tr>
-<tr class="memdesc:ac2fdacf71dafef123812710ea492d403"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raise f**x mod n and store the result in g.  <a href="polynomial_8h.html#ac2fdacf71dafef123812710ea492d403">More...</a><br /></td></tr>
-<tr class="separator:ac2fdacf71dafef123812710ea492d403"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d088d0460ff8af443f3dd367a767563"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a1d088d0460ff8af443f3dd367a767563">compose_poly_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *restrict h, const <a class="el" href="structpoly__t.html">poly_t</a> *f, const <a class="el" href="structpoly__t.html">poly_t</a> *g, int64_t n, uint64_t cn, <a class="el" href="structpoly__t.html">poly_t</a> tmps[static 2])</td></tr>
-<tr class="memdesc:a1d088d0460ff8af443f3dd367a767563"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compose polynomial f(g(x)) mod n and store the result in h.  <a href="polynomial_8h.html#a1d088d0460ff8af443f3dd367a767563">More...</a><br /></td></tr>
-<tr class="separator:a1d088d0460ff8af443f3dd367a767563"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91028700dde9e550210e3cf02b5a8422"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a91028700dde9e550210e3cf02b5a8422">compose_poly_modn_tmptmp</a> (<a class="el" href="structpoly__t.html">poly_t</a> *restrict h, const <a class="el" href="structpoly__t.html">poly_t</a> *f, const <a class="el" href="structpoly__t.html">poly_t</a> *g, int64_t n, uint64_t cn)</td></tr>
-<tr class="memdesc:a91028700dde9e550210e3cf02b5a8422"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compose polynomial f(g(x)) mod n and store the result in h.  <a href="polynomial_8h.html#a91028700dde9e550210e3cf02b5a8422">More...</a><br /></td></tr>
-<tr class="separator:a91028700dde9e550210e3cf02b5a8422"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad361b57fd06b102b19372d58496c2af9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ad361b57fd06b102b19372d58496c2af9">quotrem_poly_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *restrict q, <a class="el" href="structpoly__t.html">poly_t</a> *restrict r, const <a class="el" href="structpoly__t.html">poly_t</a> *restrict f, const <a class="el" href="structpoly__t.html">poly_t</a> *restrict g, int64_t n)</td></tr>
-<tr class="memdesc:ad361b57fd06b102b19372d58496c2af9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divide two polynomials to get a quotient and remainder.  <a href="polynomial_8h.html#ad361b57fd06b102b19372d58496c2af9">More...</a><br /></td></tr>
-<tr class="separator:ad361b57fd06b102b19372d58496c2af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0367653abc70dbb16442c2af3f0521a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#aa0367653abc70dbb16442c2af3f0521a">gcd_poly_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *d, const <a class="el" href="structpoly__t.html">poly_t</a> *restrict f, const <a class="el" href="structpoly__t.html">poly_t</a> *restrict g, int64_t n, <a class="el" href="structpoly__t.html">poly_t</a> tmps[static 3])</td></tr>
-<tr class="memdesc:aa0367653abc70dbb16442c2af3f0521a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the gcd of two polynomials.  <a href="polynomial_8h.html#aa0367653abc70dbb16442c2af3f0521a">More...</a><br /></td></tr>
-<tr class="separator:aa0367653abc70dbb16442c2af3f0521a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa21df0cb319b523d0ada902566dc46a3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#aa21df0cb319b523d0ada902566dc46a3">gcd_poly_modn_tmptmp</a> (<a class="el" href="structpoly__t.html">poly_t</a> *d, const <a class="el" href="structpoly__t.html">poly_t</a> *restrict f, const <a class="el" href="structpoly__t.html">poly_t</a> *restrict g, int64_t n)</td></tr>
-<tr class="memdesc:aa21df0cb319b523d0ada902566dc46a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the gcd of two polynomials.  <a href="polynomial_8h.html#aa21df0cb319b523d0ada902566dc46a3">More...</a><br /></td></tr>
-<tr class="separator:aa21df0cb319b523d0ada902566dc46a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9997f17df7d049fb37fac0c1cc17e98"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ab9997f17df7d049fb37fac0c1cc17e98">powmod_poly_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *h, const <a class="el" href="structpoly__t.html">poly_t</a> *restrict f, uint64_t e, const <a class="el" href="structpoly__t.html">poly_t</a> *restrict g, int64_t n, <a class="el" href="structpoly__t.html">poly_t</a> tmps[static 3])</td></tr>
-<tr class="memdesc:ab9997f17df7d049fb37fac0c1cc17e98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the power of a polynomial mod another polynomial.  <a href="polynomial_8h.html#ab9997f17df7d049fb37fac0c1cc17e98">More...</a><br /></td></tr>
-<tr class="separator:ab9997f17df7d049fb37fac0c1cc17e98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14744ac34129a1c97ec0ee2e0d2a9d97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a14744ac34129a1c97ec0ee2e0d2a9d97">powmod_poly_modn_tmptmp</a> (<a class="el" href="structpoly__t.html">poly_t</a> *h, const <a class="el" href="structpoly__t.html">poly_t</a> *restrict f, uint64_t e, const <a class="el" href="structpoly__t.html">poly_t</a> *restrict g, int64_t n)</td></tr>
-<tr class="memdesc:a14744ac34129a1c97ec0ee2e0d2a9d97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the power of a polynomial mod another polynomial.  <a href="polynomial_8h.html#a14744ac34129a1c97ec0ee2e0d2a9d97">More...</a><br /></td></tr>
-<tr class="separator:a14744ac34129a1c97ec0ee2e0d2a9d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3af8bba9147873e5df2cd7bb5c833e81"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a3af8bba9147873e5df2cd7bb5c833e81">factors_d_poly_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *f_d, const <a class="el" href="structpoly__t.html">poly_t</a> *f, uint64_t d, int64_t n, <a class="el" href="structpoly__t.html">poly_t</a> tmps[static 4])</td></tr>
-<tr class="memdesc:a3af8bba9147873e5df2cd7bb5c833e81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the product of all irreducible factors of degree d.  <a href="polynomial_8h.html#a3af8bba9147873e5df2cd7bb5c833e81">More...</a><br /></td></tr>
-<tr class="separator:a3af8bba9147873e5df2cd7bb5c833e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87f98cbd3d02406302a8824c1cdff982"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a87f98cbd3d02406302a8824c1cdff982">factor1_poly_modn</a> (<a class="el" href="structpoly__t.html">poly_t</a> *g, const <a class="el" href="structpoly__t.html">poly_t</a> *f, uint64_t d, int64_t n, <a class="el" href="structpoly__t.html">poly_t</a> tmps[static 4])</td></tr>
-<tr class="memdesc:a87f98cbd3d02406302a8824c1cdff982"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to find a divisor of f_d.  <a href="polynomial_8h.html#a87f98cbd3d02406302a8824c1cdff982">More...</a><br /></td></tr>
-<tr class="separator:a87f98cbd3d02406302a8824c1cdff982"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a054b72254844b9bada1169f504cd290f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a054b72254844b9bada1169f504cd290f">roots_poly_modn</a> (const <a class="el" href="structpoly__t.html">poly_t</a> *f, int64_t n, <a class="el" href="structpoly__roots__t.html">poly_roots_t</a> *roots, <a class="el" href="structpoly__t.html">poly_t</a> tmps[static 6])</td></tr>
-<tr class="memdesc:a054b72254844b9bada1169f504cd290f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find all roots of a polynomial in an odd prime field.  <a href="polynomial_8h.html#a054b72254844b9bada1169f504cd290f">More...</a><br /></td></tr>
-<tr class="separator:a054b72254844b9bada1169f504cd290f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4447d3bca8cc270b9ceba25708b347ba"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a4447d3bca8cc270b9ceba25708b347ba">roots_poly_modn_tmptmp</a> (const <a class="el" href="structpoly__t.html">poly_t</a> *f, int64_t n, <a class="el" href="structpoly__roots__t.html">poly_roots_t</a> *roots)</td></tr>
-<tr class="memdesc:a4447d3bca8cc270b9ceba25708b347ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find all roots of a polynomial in an odd prime field.  <a href="polynomial_8h.html#a4447d3bca8cc270b9ceba25708b347ba">More...</a><br /></td></tr>
-<tr class="separator:a4447d3bca8cc270b9ceba25708b347ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fb52192485b90060f551adc53078729"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a1fb52192485b90060f551adc53078729">nut_Poly_init</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *f, uint64_t reserve)</td></tr>
+<tr class="memdesc:a1fb52192485b90060f551adc53078729"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a polynomial with at least a given capacity.  <a href="polynomial_8h.html#a1fb52192485b90060f551adc53078729">More...</a><br /></td></tr>
+<tr class="separator:a1fb52192485b90060f551adc53078729"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf706197f57e4ffc4496a4209d997985"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#adf706197f57e4ffc4496a4209d997985">nut_Poly_destroy</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *f)</td></tr>
+<tr class="memdesc:adf706197f57e4ffc4496a4209d997985"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free resources held by a polynomial struct.  <a href="polynomial_8h.html#adf706197f57e4ffc4496a4209d997985">More...</a><br /></td></tr>
+<tr class="separator:adf706197f57e4ffc4496a4209d997985"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d9c23e363221ea5903af5de81cfd016"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a5d9c23e363221ea5903af5de81cfd016">nut_Poly_cmp</a> (const <a class="el" href="structnut__Poly.html">nut_Poly</a> *a, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *b)</td></tr>
+<tr class="memdesc:a5d9c23e363221ea5903af5de81cfd016"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asymptotically compare polynomials.  <a href="polynomial_8h.html#a5d9c23e363221ea5903af5de81cfd016">More...</a><br /></td></tr>
+<tr class="separator:a5d9c23e363221ea5903af5de81cfd016"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2bcb707dcbac686106cb40758414b93"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#af2bcb707dcbac686106cb40758414b93">nut_Roots_init</a> (<a class="el" href="structnut__Roots.html">nut_Roots</a> *roots, uint64_t reserve)</td></tr>
+<tr class="memdesc:af2bcb707dcbac686106cb40758414b93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a root buffer with at least a given capacity.  <a href="polynomial_8h.html#af2bcb707dcbac686106cb40758414b93">More...</a><br /></td></tr>
+<tr class="separator:af2bcb707dcbac686106cb40758414b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfa2292bfc27186033c1c65930250f55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#acfa2292bfc27186033c1c65930250f55">nut_Roots_destroy</a> (<a class="el" href="structnut__Roots.html">nut_Roots</a> *roots)</td></tr>
+<tr class="memdesc:acfa2292bfc27186033c1c65930250f55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free resources held by a root buffer.  <a href="polynomial_8h.html#acfa2292bfc27186033c1c65930250f55">More...</a><br /></td></tr>
+<tr class="separator:acfa2292bfc27186033c1c65930250f55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4a6675e865355dc47349c1eafcf12e8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ac4a6675e865355dc47349c1eafcf12e8">nut_Poly_ensure_cap</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *f, uint64_t cap)</td></tr>
+<tr class="memdesc:ac4a6675e865355dc47349c1eafcf12e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extend the capacity of a polynomial struct if needed.  <a href="polynomial_8h.html#ac4a6675e865355dc47349c1eafcf12e8">More...</a><br /></td></tr>
+<tr class="separator:ac4a6675e865355dc47349c1eafcf12e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86184b16976ffda1d6e56da80f769f6e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a86184b16976ffda1d6e56da80f769f6e">nut_Poly_zero_extend</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *f, uint64_t len)</td></tr>
+<tr class="memdesc:a86184b16976ffda1d6e56da80f769f6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extend the capacity of a polynomial struct if needed and set any new terms to 0.  <a href="polynomial_8h.html#a86184b16976ffda1d6e56da80f769f6e">More...</a><br /></td></tr>
+<tr class="separator:a86184b16976ffda1d6e56da80f769f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39e086af1c031262a639942b302800cc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a39e086af1c031262a639942b302800cc">nut_Roots_ensure_cap</a> (<a class="el" href="structnut__Roots.html">nut_Roots</a> *roots, uint64_t cap)</td></tr>
+<tr class="memdesc:a39e086af1c031262a639942b302800cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extend the capacity of a root buffer if needed.  <a href="polynomial_8h.html#a39e086af1c031262a639942b302800cc">More...</a><br /></td></tr>
+<tr class="separator:a39e086af1c031262a639942b302800cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af76c908e410262cdcea083c1e7d1142b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#af76c908e410262cdcea083c1e7d1142b">nut_Poly_normalize</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *f)</td></tr>
+<tr class="memdesc:af76c908e410262cdcea083c1e7d1142b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strip off terms so the leading term is nonzero if needed.  <a href="polynomial_8h.html#af76c908e410262cdcea083c1e7d1142b">More...</a><br /></td></tr>
+<tr class="separator:af76c908e410262cdcea083c1e7d1142b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb4c4c8190b5933cd60df9f64baaa026"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#aeb4c4c8190b5933cd60df9f64baaa026">nut_Poly_normalize_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *f, int64_t n, int use_negatives)</td></tr>
+<tr class="memdesc:aeb4c4c8190b5933cd60df9f64baaa026"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reduce coefficients mod n, then normalize.  <a href="polynomial_8h.html#aeb4c4c8190b5933cd60df9f64baaa026">More...</a><br /></td></tr>
+<tr class="separator:aeb4c4c8190b5933cd60df9f64baaa026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62ac2cfd2ff60dde6e7895575071d8a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a62ac2cfd2ff60dde6e7895575071d8a1">nut_Poly_normalize_exps_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *f, uint64_t cn)</td></tr>
+<tr class="memdesc:a62ac2cfd2ff60dde6e7895575071d8a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reduce any exponents over cn.  <a href="polynomial_8h.html#a62ac2cfd2ff60dde6e7895575071d8a1">More...</a><br /></td></tr>
+<tr class="separator:a62ac2cfd2ff60dde6e7895575071d8a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af06a69ad8a4603c2bbee746b8994a989"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#af06a69ad8a4603c2bbee746b8994a989">nut_Poly_copy</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *g, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f)</td></tr>
+<tr class="memdesc:af06a69ad8a4603c2bbee746b8994a989"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy a polynomial.  <a href="polynomial_8h.html#af06a69ad8a4603c2bbee746b8994a989">More...</a><br /></td></tr>
+<tr class="separator:af06a69ad8a4603c2bbee746b8994a989"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a207d2705288bbbaba7fa98a44ad46164"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a207d2705288bbbaba7fa98a44ad46164">nut_Poly_setconst</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *f, int64_t c)</td></tr>
+<tr class="memdesc:a207d2705288bbbaba7fa98a44ad46164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a polynomial to a constant (linear terms and up zero).  <a href="polynomial_8h.html#a207d2705288bbbaba7fa98a44ad46164">More...</a><br /></td></tr>
+<tr class="separator:a207d2705288bbbaba7fa98a44ad46164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40da716a381b541f97edf4250c9df20c"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a40da716a381b541f97edf4250c9df20c">nut_Poly_eval_modn</a> (const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, int64_t x, int64_t n)</td></tr>
+<tr class="memdesc:a40da716a381b541f97edf4250c9df20c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate a polynomial mod a number.  <a href="polynomial_8h.html#a40da716a381b541f97edf4250c9df20c">More...</a><br /></td></tr>
+<tr class="separator:a40da716a381b541f97edf4250c9df20c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31d70fa9d9dbdee2f70e485115bdcde5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a31d70fa9d9dbdee2f70e485115bdcde5">nut_Poly_fprint</a> (FILE *file, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, const char *vname, const char *add, const char *sub, const char *pow, int descending)</td></tr>
+<tr class="memdesc:a31d70fa9d9dbdee2f70e485115bdcde5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print a polynomial to a file.  <a href="polynomial_8h.html#a31d70fa9d9dbdee2f70e485115bdcde5">More...</a><br /></td></tr>
+<tr class="separator:a31d70fa9d9dbdee2f70e485115bdcde5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a007f5577f1ef5120af0ad4c2f30b7352"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a007f5577f1ef5120af0ad4c2f30b7352">nut_Poly_parse</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *f, int64_t *n, const char *str, const char **end)</td></tr>
+<tr class="memdesc:a007f5577f1ef5120af0ad4c2f30b7352"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a string to a polynomial (and possibly modulus)  <a href="polynomial_8h.html#a007f5577f1ef5120af0ad4c2f30b7352">More...</a><br /></td></tr>
+<tr class="separator:a007f5577f1ef5120af0ad4c2f30b7352"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd5d16ea594da79127e3ea1c1477ee86"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#acd5d16ea594da79127e3ea1c1477ee86">nut_Poly_rand_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *f, uint64_t max_len, int64_t n)</td></tr>
+<tr class="memdesc:acd5d16ea594da79127e3ea1c1477ee86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random polynomial.  <a href="polynomial_8h.html#acd5d16ea594da79127e3ea1c1477ee86">More...</a><br /></td></tr>
+<tr class="separator:acd5d16ea594da79127e3ea1c1477ee86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafd6abe2c99f4a0681a89fbd88d83233"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#aafd6abe2c99f4a0681a89fbd88d83233">nut_Poly_add_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *h, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *g, int64_t n)</td></tr>
+<tr class="memdesc:aafd6abe2c99f4a0681a89fbd88d83233"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add polynomials f + g mod n and store the result in h.  <a href="polynomial_8h.html#aafd6abe2c99f4a0681a89fbd88d83233">More...</a><br /></td></tr>
+<tr class="separator:aafd6abe2c99f4a0681a89fbd88d83233"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a415e40f1f64ef7ceb58da25af77ad07d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a415e40f1f64ef7ceb58da25af77ad07d">nut_Poly_sub_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *h, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *g, int64_t n)</td></tr>
+<tr class="memdesc:a415e40f1f64ef7ceb58da25af77ad07d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract polynomials f - g mod n and store the result in h.  <a href="polynomial_8h.html#a415e40f1f64ef7ceb58da25af77ad07d">More...</a><br /></td></tr>
+<tr class="separator:a415e40f1f64ef7ceb58da25af77ad07d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5eb2118959b60869021525c60c84b33e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a5eb2118959b60869021525c60c84b33e">nut_Poly_dot_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *h, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *g, int64_t n)</td></tr>
+<tr class="memdesc:a5eb2118959b60869021525c60c84b33e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Take the termwise product of polynomials f and g mod n and store the result in h.  <a href="polynomial_8h.html#a5eb2118959b60869021525c60c84b33e">More...</a><br /></td></tr>
+<tr class="separator:a5eb2118959b60869021525c60c84b33e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26ad0fbcce7e075a0a4c2d4f971c2e0a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a26ad0fbcce7e075a0a4c2d4f971c2e0a">nut_Poly_scale_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *g, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, int64_t a, int64_t n)</td></tr>
+<tr class="memdesc:a26ad0fbcce7e075a0a4c2d4f971c2e0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply a polynomial f by a scalar a and store the result in h.  <a href="polynomial_8h.html#a26ad0fbcce7e075a0a4c2d4f971c2e0a">More...</a><br /></td></tr>
+<tr class="separator:a26ad0fbcce7e075a0a4c2d4f971c2e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad05070b82d188269e2c2d3c980eee6ea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ad05070b82d188269e2c2d3c980eee6ea">nut_Poly_mul_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict h, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *g, int64_t n)</td></tr>
+<tr class="memdesc:ad05070b82d188269e2c2d3c980eee6ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply polynomials f*g mod n and store the result in h.  <a href="polynomial_8h.html#ad05070b82d188269e2c2d3c980eee6ea">More...</a><br /></td></tr>
+<tr class="separator:ad05070b82d188269e2c2d3c980eee6ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9768d6b3a0f23bfde8a77c89b24f6e6c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a9768d6b3a0f23bfde8a77c89b24f6e6c">nut_Poly_pow_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict g, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, uint64_t e, int64_t n, uint64_t cn, <a class="el" href="structnut__Poly.html">nut_Poly</a> tmps[static 2])</td></tr>
+<tr class="memdesc:a9768d6b3a0f23bfde8a77c89b24f6e6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raise f**x mod n and store the result in g.  <a href="polynomial_8h.html#a9768d6b3a0f23bfde8a77c89b24f6e6c">More...</a><br /></td></tr>
+<tr class="separator:a9768d6b3a0f23bfde8a77c89b24f6e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af173f6f97384d952b84a02b5c9929232"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#af173f6f97384d952b84a02b5c9929232">nut_Poly_pow_modn_tmptmp</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict g, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, uint64_t e, int64_t n, uint64_t cn)</td></tr>
+<tr class="memdesc:af173f6f97384d952b84a02b5c9929232"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raise f**x mod n and store the result in g.  <a href="polynomial_8h.html#af173f6f97384d952b84a02b5c9929232">More...</a><br /></td></tr>
+<tr class="separator:af173f6f97384d952b84a02b5c9929232"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26c8d2457c87ff7650f626560f239376"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a26c8d2457c87ff7650f626560f239376">nut_Poly_compose_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict h, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *g, int64_t n, uint64_t cn, <a class="el" href="structnut__Poly.html">nut_Poly</a> tmps[static 2])</td></tr>
+<tr class="memdesc:a26c8d2457c87ff7650f626560f239376"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compose polynomial f(g(x)) mod n and store the result in h.  <a href="polynomial_8h.html#a26c8d2457c87ff7650f626560f239376">More...</a><br /></td></tr>
+<tr class="separator:a26c8d2457c87ff7650f626560f239376"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc91d3dc006af81fc08c92bb2e5f663d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#abc91d3dc006af81fc08c92bb2e5f663d">nut_Poly_compose_modn_tmptmp</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict h, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *g, int64_t n, uint64_t cn)</td></tr>
+<tr class="memdesc:abc91d3dc006af81fc08c92bb2e5f663d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compose polynomial f(g(x)) mod n and store the result in h.  <a href="polynomial_8h.html#abc91d3dc006af81fc08c92bb2e5f663d">More...</a><br /></td></tr>
+<tr class="separator:abc91d3dc006af81fc08c92bb2e5f663d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad1e4bf2ddfe60d7838f4a7574cae604"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#aad1e4bf2ddfe60d7838f4a7574cae604">nut_Poly_quotrem_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict q, <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict r, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict f, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict g, int64_t n)</td></tr>
+<tr class="memdesc:aad1e4bf2ddfe60d7838f4a7574cae604"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divide two polynomials to get a quotient and remainder.  <a href="polynomial_8h.html#aad1e4bf2ddfe60d7838f4a7574cae604">More...</a><br /></td></tr>
+<tr class="separator:aad1e4bf2ddfe60d7838f4a7574cae604"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35630e29092df06b0006a91ff5cebf4b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a35630e29092df06b0006a91ff5cebf4b">nut_Poly_gcd_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *d, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict f, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict g, int64_t n, <a class="el" href="structnut__Poly.html">nut_Poly</a> tmps[static 3])</td></tr>
+<tr class="memdesc:a35630e29092df06b0006a91ff5cebf4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the gcd of two polynomials.  <a href="polynomial_8h.html#a35630e29092df06b0006a91ff5cebf4b">More...</a><br /></td></tr>
+<tr class="separator:a35630e29092df06b0006a91ff5cebf4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b843c4d6e504e3eca810039932bb8e3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a5b843c4d6e504e3eca810039932bb8e3">nut_Poly_gcd_modn_tmptmp</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *d, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict f, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict g, int64_t n)</td></tr>
+<tr class="memdesc:a5b843c4d6e504e3eca810039932bb8e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the gcd of two polynomials.  <a href="polynomial_8h.html#a5b843c4d6e504e3eca810039932bb8e3">More...</a><br /></td></tr>
+<tr class="separator:a5b843c4d6e504e3eca810039932bb8e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a84e7761b68ca70fbef3f94a94ef788"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a5a84e7761b68ca70fbef3f94a94ef788">nut_Poly_powmod_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *h, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict f, uint64_t e, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict g, int64_t n, <a class="el" href="structnut__Poly.html">nut_Poly</a> tmps[static 3])</td></tr>
+<tr class="memdesc:a5a84e7761b68ca70fbef3f94a94ef788"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the power of a polynomial mod another polynomial.  <a href="polynomial_8h.html#a5a84e7761b68ca70fbef3f94a94ef788">More...</a><br /></td></tr>
+<tr class="separator:a5a84e7761b68ca70fbef3f94a94ef788"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad276fc0fb10ff644a7cb976d0110334"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#aad276fc0fb10ff644a7cb976d0110334">nut_Poly_powmod_modn_tmptmp</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *h, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict f, uint64_t e, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict g, int64_t n)</td></tr>
+<tr class="memdesc:aad276fc0fb10ff644a7cb976d0110334"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the power of a polynomial mod another polynomial.  <a href="polynomial_8h.html#aad276fc0fb10ff644a7cb976d0110334">More...</a><br /></td></tr>
+<tr class="separator:aad276fc0fb10ff644a7cb976d0110334"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e8cd6734c206682c226878cd542a884"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a3e8cd6734c206682c226878cd542a884">nut_Poly_factors_d_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *f_d, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, uint64_t d, int64_t n, <a class="el" href="structnut__Poly.html">nut_Poly</a> tmps[static 4])</td></tr>
+<tr class="memdesc:a3e8cd6734c206682c226878cd542a884"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the product of all irreducible factors of degree d.  <a href="polynomial_8h.html#a3e8cd6734c206682c226878cd542a884">More...</a><br /></td></tr>
+<tr class="separator:a3e8cd6734c206682c226878cd542a884"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14aa169ebc783f6fad7963633ebd9039"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a14aa169ebc783f6fad7963633ebd9039">nut_Poly_factor1_modn</a> (<a class="el" href="structnut__Poly.html">nut_Poly</a> *g, const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, uint64_t d, int64_t n, <a class="el" href="structnut__Poly.html">nut_Poly</a> tmps[static 4])</td></tr>
+<tr class="memdesc:a14aa169ebc783f6fad7963633ebd9039"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to find a divisor of f_d.  <a href="polynomial_8h.html#a14aa169ebc783f6fad7963633ebd9039">More...</a><br /></td></tr>
+<tr class="separator:a14aa169ebc783f6fad7963633ebd9039"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dea21e36497433aa233e83d95c10ead"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a0dea21e36497433aa233e83d95c10ead">nut_Poly_roots_modn</a> (const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, int64_t n, <a class="el" href="structnut__Roots.html">nut_Roots</a> *roots, <a class="el" href="structnut__Poly.html">nut_Poly</a> tmps[static 6])</td></tr>
+<tr class="memdesc:a0dea21e36497433aa233e83d95c10ead"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find all roots of a polynomial in an odd prime field.  <a href="polynomial_8h.html#a0dea21e36497433aa233e83d95c10ead">More...</a><br /></td></tr>
+<tr class="separator:a0dea21e36497433aa233e83d95c10ead"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a9ce1271f0e0909b7aa28dce18b630d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a3a9ce1271f0e0909b7aa28dce18b630d">nut_Poly_roots_modn_tmptmp</a> (const <a class="el" href="structnut__Poly.html">nut_Poly</a> *f, int64_t n, <a class="el" href="structnut__Roots.html">nut_Roots</a> *roots)</td></tr>
+<tr class="memdesc:a3a9ce1271f0e0909b7aa28dce18b630d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find all roots of a polynomial in an odd prime field.  <a href="polynomial_8h.html#a3a9ce1271f0e0909b7aa28dce18b630d">More...</a><br /></td></tr>
+<tr class="separator:a3a9ce1271f0e0909b7aa28dce18b630d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a608927f8b707837b8fcd315bcea00341"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a608927f8b707837b8fcd315bcea00341">&#9670;&nbsp;</a></span>init_poly()</h2>
+<a id="a1fb52192485b90060f551adc53078729"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fb52192485b90060f551adc53078729">&#9670;&nbsp;</a></span>nut_Poly_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int init_poly </td>
+          <td class="memname">int nut_Poly_init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -278,16 +278,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8b9bf7cc123816ef3e68640e17ca6f81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b9bf7cc123816ef3e68640e17ca6f81">&#9670;&nbsp;</a></span>destroy_poly()</h2>
+<a id="adf706197f57e4ffc4496a4209d997985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf706197f57e4ffc4496a4209d997985">&#9670;&nbsp;</a></span>nut_Poly_destroy()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void destroy_poly </td>
+          <td class="memname">void nut_Poly_destroy </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em></td><td>)</td>
           <td></td>
         </tr>
@@ -304,22 +304,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad1346a0c296eb7dc64e7362c29dda6e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1346a0c296eb7dc64e7362c29dda6e8">&#9670;&nbsp;</a></span>cmp_polys()</h2>
+<a id="a5d9c23e363221ea5903af5de81cfd016"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d9c23e363221ea5903af5de81cfd016">&#9670;&nbsp;</a></span>nut_Poly_cmp()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int cmp_polys </td>
+          <td class="memname">int nut_Poly_cmp </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -341,16 +341,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0010cb7659c53c79e3ec3ada1809b978"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0010cb7659c53c79e3ec3ada1809b978">&#9670;&nbsp;</a></span>init_poly_roots()</h2>
+<a id="af2bcb707dcbac686106cb40758414b93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2bcb707dcbac686106cb40758414b93">&#9670;&nbsp;</a></span>nut_Roots_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int init_poly_roots </td>
+          <td class="memname">int nut_Roots_init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__roots__t.html">poly_roots_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Roots.html">nut_Roots</a> *&#160;</td>
           <td class="paramname"><em>roots</em>, </td>
         </tr>
         <tr>
@@ -379,16 +379,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae501a32ed22a602c6da05679442e9ab6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae501a32ed22a602c6da05679442e9ab6">&#9670;&nbsp;</a></span>destroy_poly_roots()</h2>
+<a id="acfa2292bfc27186033c1c65930250f55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfa2292bfc27186033c1c65930250f55">&#9670;&nbsp;</a></span>nut_Roots_destroy()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void destroy_poly_roots </td>
+          <td class="memname">void nut_Roots_destroy </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__roots__t.html">poly_roots_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Roots.html">nut_Roots</a> *&#160;</td>
           <td class="paramname"><em>roots</em></td><td>)</td>
           <td></td>
         </tr>
@@ -405,16 +405,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5f47d92ef4f1a07f4ddf3d99f244abc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f47d92ef4f1a07f4ddf3d99f244abc1">&#9670;&nbsp;</a></span>ensure_poly_cap()</h2>
+<a id="ac4a6675e865355dc47349c1eafcf12e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4a6675e865355dc47349c1eafcf12e8">&#9670;&nbsp;</a></span>nut_Poly_ensure_cap()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int ensure_poly_cap </td>
+          <td class="memname">int nut_Poly_ensure_cap </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -443,16 +443,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6dbd98a9607a1cbcddfe4d812550121b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6dbd98a9607a1cbcddfe4d812550121b">&#9670;&nbsp;</a></span>zero_extend_poly()</h2>
+<a id="a86184b16976ffda1d6e56da80f769f6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86184b16976ffda1d6e56da80f769f6e">&#9670;&nbsp;</a></span>nut_Poly_zero_extend()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int zero_extend_poly </td>
+          <td class="memname">int nut_Poly_zero_extend </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -481,16 +481,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a57a86948d29f075bdb00c6a2d3870b09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57a86948d29f075bdb00c6a2d3870b09">&#9670;&nbsp;</a></span>ensure_poly_roots_cap()</h2>
+<a id="a39e086af1c031262a639942b302800cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39e086af1c031262a639942b302800cc">&#9670;&nbsp;</a></span>nut_Roots_ensure_cap()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int ensure_poly_roots_cap </td>
+          <td class="memname">int nut_Roots_ensure_cap </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__roots__t.html">poly_roots_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Roots.html">nut_Roots</a> *&#160;</td>
           <td class="paramname"><em>roots</em>, </td>
         </tr>
         <tr>
@@ -508,7 +508,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Extend the capacity of a root buffer if needed. </p>
-<p>Called by <a class="el" href="polynomial_8h.html#a054b72254844b9bada1169f504cd290f">roots_poly_modn</a> and <a class="el" href="polynomial_8h.html#a4447d3bca8cc270b9ceba25708b347ba">roots_poly_modn_tmptmp</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Called by <a class="el" href="polynomial_8h.html#a0dea21e36497433aa233e83d95c10ead">nut_Poly_roots_modn</a> and <a class="el" href="polynomial_8h.html#a3a9ce1271f0e0909b7aa28dce18b630d">nut_Poly_roots_modn_tmptmp</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">roots</td><td>root buffer to extend </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">cap</td><td>minimum capacity the root buffer should have aferwards </td></tr>
@@ -519,16 +519,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ace328b1c13ce42b4407116b48db24876"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace328b1c13ce42b4407116b48db24876">&#9670;&nbsp;</a></span>normalize_poly()</h2>
+<a id="af76c908e410262cdcea083c1e7d1142b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af76c908e410262cdcea083c1e7d1142b">&#9670;&nbsp;</a></span>nut_Poly_normalize()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void normalize_poly </td>
+          <td class="memname">void nut_Poly_normalize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em></td><td>)</td>
           <td></td>
         </tr>
@@ -545,16 +545,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a098b5a4655e573b5151be13bac6cb254"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a098b5a4655e573b5151be13bac6cb254">&#9670;&nbsp;</a></span>normalize_poly_modn()</h2>
+<a id="aeb4c4c8190b5933cd60df9f64baaa026"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb4c4c8190b5933cd60df9f64baaa026">&#9670;&nbsp;</a></span>nut_Poly_normalize_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void normalize_poly_modn </td>
+          <td class="memname">void nut_Poly_normalize_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -589,16 +589,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab0dd0ce039c8ce903e7e40aef587f93e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0dd0ce039c8ce903e7e40aef587f93e">&#9670;&nbsp;</a></span>normalize_exponents_modn()</h2>
+<a id="a62ac2cfd2ff60dde6e7895575071d8a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62ac2cfd2ff60dde6e7895575071d8a1">&#9670;&nbsp;</a></span>nut_Poly_normalize_exps_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void normalize_exponents_modn </td>
+          <td class="memname">void nut_Poly_normalize_exps_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -620,22 +620,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4e779775e04d83955296bdda258fc44a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e779775e04d83955296bdda258fc44a">&#9670;&nbsp;</a></span>copy_poly()</h2>
+<a id="af06a69ad8a4603c2bbee746b8994a989"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af06a69ad8a4603c2bbee746b8994a989">&#9670;&nbsp;</a></span>nut_Poly_copy()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int copy_poly </td>
+          <td class="memname">int nut_Poly_copy </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>&#160;</td>
         </tr>
         <tr>
@@ -658,16 +658,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a388a67e34664ce74e3890bec295e907d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a388a67e34664ce74e3890bec295e907d">&#9670;&nbsp;</a></span>const_poly()</h2>
+<a id="a207d2705288bbbaba7fa98a44ad46164"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a207d2705288bbbaba7fa98a44ad46164">&#9670;&nbsp;</a></span>nut_Poly_setconst()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int const_poly </td>
+          <td class="memname">int nut_Poly_setconst </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -696,16 +696,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad67e8b256693afb95134c8bdcea71f89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad67e8b256693afb95134c8bdcea71f89">&#9670;&nbsp;</a></span>eval_poly_modn()</h2>
+<a id="a40da716a381b541f97edf4250c9df20c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40da716a381b541f97edf4250c9df20c">&#9670;&nbsp;</a></span>nut_Poly_eval_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int64_t eval_poly_modn </td>
+          <td class="memname">int64_t nut_Poly_eval_modn </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -741,14 +741,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af76265f19adf322b7cd06e174ef490fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af76265f19adf322b7cd06e174ef490fd">&#9670;&nbsp;</a></span>fprint_poly()</h2>
+<a id="a31d70fa9d9dbdee2f70e485115bdcde5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31d70fa9d9dbdee2f70e485115bdcde5">&#9670;&nbsp;</a></span>nut_Poly_fprint()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int fprint_poly </td>
+          <td class="memname">int nut_Poly_fprint </td>
           <td>(</td>
           <td class="paramtype">FILE *&#160;</td>
           <td class="paramname"><em>file</em>, </td>
@@ -756,7 +756,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -814,16 +814,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aaa4092e751842766c3739d7c43226bee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa4092e751842766c3739d7c43226bee">&#9670;&nbsp;</a></span>str_to_poly()</h2>
+<a id="a007f5577f1ef5120af0ad4c2f30b7352"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a007f5577f1ef5120af0ad4c2f30b7352">&#9670;&nbsp;</a></span>nut_Poly_parse()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int str_to_poly </td>
+          <td class="memname">int nut_Poly_parse </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -866,16 +866,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab430241bd078f4ab28f06e64dd935526"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab430241bd078f4ab28f06e64dd935526">&#9670;&nbsp;</a></span>rand_poly_modn()</h2>
+<a id="acd5d16ea594da79127e3ea1c1477ee86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd5d16ea594da79127e3ea1c1477ee86">&#9670;&nbsp;</a></span>nut_Poly_rand_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int rand_poly_modn </td>
+          <td class="memname">int nut_Poly_rand_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -899,7 +899,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Generate a random polynomial. </p>
-<p>Coefficients are integers chosen uniformly on [0,n). max_len are chosen and then the polynomial is normalized (<a class="el" href="polynomial_8h.html#ace328b1c13ce42b4407116b48db24876">normalize_poly</a>). So max_len minus the actual length has bounded geometric distribution with success probability 1/n. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Coefficients are integers chosen uniformly on [0,n). max_len are chosen and then the polynomial is normalized (<a class="el" href="polynomial_8h.html#af76c908e410262cdcea083c1e7d1142b">nut_Poly_normalize</a>). So max_len minus the actual length has bounded geometric distribution with success probability 1/n. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">f</td><td>polynomial to randomize </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">max_len</td><td>number of coefficients to generate before normalizing. If 0, the output polynomial is always set to zero </td></tr>
@@ -911,28 +911,28 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac1338d410578bd4b6225494f8fc6dbc6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1338d410578bd4b6225494f8fc6dbc6">&#9670;&nbsp;</a></span>add_poly_modn()</h2>
+<a id="aafd6abe2c99f4a0681a89fbd88d83233"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafd6abe2c99f4a0681a89fbd88d83233">&#9670;&nbsp;</a></span>nut_Poly_add_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int add_poly_modn </td>
+          <td class="memname">int nut_Poly_add_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>h</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
@@ -962,28 +962,28 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac2f5f895e0fabfc02f670aebd38fe9c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2f5f895e0fabfc02f670aebd38fe9c1">&#9670;&nbsp;</a></span>sub_poly_modn()</h2>
+<a id="a415e40f1f64ef7ceb58da25af77ad07d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a415e40f1f64ef7ceb58da25af77ad07d">&#9670;&nbsp;</a></span>nut_Poly_sub_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int sub_poly_modn </td>
+          <td class="memname">int nut_Poly_sub_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>h</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
@@ -1013,28 +1013,28 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="acdf6feb8398004536da3a7798cfc38a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acdf6feb8398004536da3a7798cfc38a2">&#9670;&nbsp;</a></span>dot_poly_modn()</h2>
+<a id="a5eb2118959b60869021525c60c84b33e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5eb2118959b60869021525c60c84b33e">&#9670;&nbsp;</a></span>nut_Poly_dot_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int dot_poly_modn </td>
+          <td class="memname">int nut_Poly_dot_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>h</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
@@ -1064,22 +1064,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9c199565663ad2afe5545af89862a20e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c199565663ad2afe5545af89862a20e">&#9670;&nbsp;</a></span>scale_poly_modn()</h2>
+<a id="a26ad0fbcce7e075a0a4c2d4f971c2e0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26ad0fbcce7e075a0a4c2d4f971c2e0a">&#9670;&nbsp;</a></span>nut_Poly_scale_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int scale_poly_modn </td>
+          <td class="memname">int nut_Poly_scale_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -1116,28 +1116,28 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3e708389fed41e77730f6a2325137c26"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e708389fed41e77730f6a2325137c26">&#9670;&nbsp;</a></span>mul_poly_modn()</h2>
+<a id="ad05070b82d188269e2c2d3c980eee6ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad05070b82d188269e2c2d3c980eee6ea">&#9670;&nbsp;</a></span>nut_Poly_mul_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int mul_poly_modn </td>
+          <td class="memname">int nut_Poly_mul_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>h</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
@@ -1167,22 +1167,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aaac19f1e0aba417e5ab0c0e9eb09e733"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaac19f1e0aba417e5ab0c0e9eb09e733">&#9670;&nbsp;</a></span>pow_poly_modn()</h2>
+<a id="a9768d6b3a0f23bfde8a77c89b24f6e6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9768d6b3a0f23bfde8a77c89b24f6e6c">&#9670;&nbsp;</a></span>nut_Poly_pow_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int pow_poly_modn </td>
+          <td class="memname">int nut_Poly_pow_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -1206,7 +1206,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a>&#160;</td>
           <td class="paramname"><em>tmps</em>[static 2]&#160;</td>
         </tr>
         <tr>
@@ -1224,8 +1224,8 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>polynomial to find a power of </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">e</td><td>exponent to raise f to </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus to reduce result by </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cn</td><td>carmichael lambda function of n, basically modulus for exponents, see <a class="el" href="">carmichael_lambda</a> and <a class="el" href="sieves_8h.html#ae19a3c1887d6cdc9375c32f0abfd2ab3">sieve_carmichael</a> </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomial for scratch work, must have 1 initialized (or at least zeroed out) polynomial (<a class="el" href="polynomial_8h.html#ac2fdacf71dafef123812710ea492d403">pow_poly_modn_tmptmp</a>) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cn</td><td>carmichael lambda function of n, basically modulus for exponents, see <a class="el" href="">carmichael_lambda</a> and <a class="el" href="sieves_8h.html#a80312f8b853eeb8a9df48ff15078c2f0">nut_sieve_carmichael</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomial for scratch work, must have 1 initialized (or at least zeroed out) polynomial (<a class="el" href="polynomial_8h.html#af173f6f97384d952b84a02b5c9929232">nut_Poly_pow_modn_tmptmp</a>) </td></tr>
   </table>
   </dd>
 </dl>
@@ -1233,22 +1233,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac2fdacf71dafef123812710ea492d403"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2fdacf71dafef123812710ea492d403">&#9670;&nbsp;</a></span>pow_poly_modn_tmptmp()</h2>
+<a id="af173f6f97384d952b84a02b5c9929232"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af173f6f97384d952b84a02b5c9929232">&#9670;&nbsp;</a></span>nut_Poly_pow_modn_tmptmp()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int pow_poly_modn_tmptmp </td>
+          <td class="memname">int nut_Poly_pow_modn_tmptmp </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -1278,13 +1278,13 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Raise f**x mod n and store the result in g. </p>
-<p>Like <a class="el" href="polynomial_8h.html#aaac19f1e0aba417e5ab0c0e9eb09e733">pow_poly_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Like <a class="el" href="polynomial_8h.html#a9768d6b3a0f23bfde8a77c89b24f6e6c">nut_Poly_pow_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">g</td><td>polynomial in which to store f**x </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>polynomial to find a power of </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">e</td><td>exponent to raise f to </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus to reduce result by </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cn</td><td>carmichael lambda function of n, basically modulus for exponents, see <a class="el" href="">carmichael_lambda</a> and <a class="el" href="sieves_8h.html#ae19a3c1887d6cdc9375c32f0abfd2ab3">sieve_carmichael</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cn</td><td>carmichael lambda function of n, basically modulus for exponents, see <a class="el" href="">carmichael_lambda</a> and <a class="el" href="sieves_8h.html#a80312f8b853eeb8a9df48ff15078c2f0">nut_sieve_carmichael</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -1292,28 +1292,28 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1d088d0460ff8af443f3dd367a767563"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d088d0460ff8af443f3dd367a767563">&#9670;&nbsp;</a></span>compose_poly_modn()</h2>
+<a id="a26c8d2457c87ff7650f626560f239376"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26c8d2457c87ff7650f626560f239376">&#9670;&nbsp;</a></span>nut_Poly_compose_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int compose_poly_modn </td>
+          <td class="memname">int nut_Poly_compose_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>h</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
@@ -1331,7 +1331,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a>&#160;</td>
           <td class="paramname"><em>tmps</em>[static 2]&#160;</td>
         </tr>
         <tr>
@@ -1348,8 +1348,8 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">h</td><td>polynomial in which to store f(g(x)) mod n </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">f,g</td><td>polynomials to compose </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus to reduce result by </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cn</td><td>carmichael lambda function of n, basically modulus for exponents, see <a class="el" href="">carmichael_lambda</a> and <a class="el" href="sieves_8h.html#ae19a3c1887d6cdc9375c32f0abfd2ab3">sieve_carmichael</a> </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomial for scratch work, must have 1 initialized (or at least zeroed out) polynomial (<a class="el" href="polynomial_8h.html#a91028700dde9e550210e3cf02b5a8422">compose_poly_modn_tmptmp</a>) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cn</td><td>carmichael lambda function of n, basically modulus for exponents, see <a class="el" href="">carmichael_lambda</a> and <a class="el" href="sieves_8h.html#a80312f8b853eeb8a9df48ff15078c2f0">nut_sieve_carmichael</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomial for scratch work, must have 1 initialized (or at least zeroed out) polynomial (<a class="el" href="polynomial_8h.html#abc91d3dc006af81fc08c92bb2e5f663d">nut_Poly_compose_modn_tmptmp</a>) </td></tr>
   </table>
   </dd>
 </dl>
@@ -1357,28 +1357,28 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a91028700dde9e550210e3cf02b5a8422"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91028700dde9e550210e3cf02b5a8422">&#9670;&nbsp;</a></span>compose_poly_modn_tmptmp()</h2>
+<a id="abc91d3dc006af81fc08c92bb2e5f663d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc91d3dc006af81fc08c92bb2e5f663d">&#9670;&nbsp;</a></span>nut_Poly_compose_modn_tmptmp()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int compose_poly_modn_tmptmp </td>
+          <td class="memname">int nut_Poly_compose_modn_tmptmp </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>h</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
@@ -1402,12 +1402,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compose polynomial f(g(x)) mod n and store the result in h. </p>
-<p>Like <a class="el" href="polynomial_8h.html#a1d088d0460ff8af443f3dd367a767563">compose_poly_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Like <a class="el" href="polynomial_8h.html#a26c8d2457c87ff7650f626560f239376">nut_Poly_compose_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">h</td><td>polynomial in which to store f(g(x)) mod n </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">f,g</td><td>polynomials to compose </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus to reduce result by </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cn</td><td>carmichael lambda function of n, basically modulus for exponents, see <a class="el" href="">carmichael_lambda</a> and <a class="el" href="sieves_8h.html#ae19a3c1887d6cdc9375c32f0abfd2ab3">sieve_carmichael</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cn</td><td>carmichael lambda function of n, basically modulus for exponents, see <a class="el" href="">carmichael_lambda</a> and <a class="el" href="sieves_8h.html#a80312f8b853eeb8a9df48ff15078c2f0">nut_sieve_carmichael</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -1415,34 +1415,34 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad361b57fd06b102b19372d58496c2af9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad361b57fd06b102b19372d58496c2af9">&#9670;&nbsp;</a></span>quotrem_poly_modn()</h2>
+<a id="aad1e4bf2ddfe60d7838f4a7574cae604"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad1e4bf2ddfe60d7838f4a7574cae604">&#9670;&nbsp;</a></span>nut_Poly_quotrem_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int quotrem_poly_modn </td>
+          <td class="memname">int nut_Poly_quotrem_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>q</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>r</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
@@ -1472,28 +1472,28 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa0367653abc70dbb16442c2af3f0521a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0367653abc70dbb16442c2af3f0521a">&#9670;&nbsp;</a></span>gcd_poly_modn()</h2>
+<a id="a35630e29092df06b0006a91ff5cebf4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35630e29092df06b0006a91ff5cebf4b">&#9670;&nbsp;</a></span>nut_Poly_gcd_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int gcd_poly_modn </td>
+          <td class="memname">int nut_Poly_gcd_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>d</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
@@ -1505,7 +1505,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a>&#160;</td>
           <td class="paramname"><em>tmps</em>[static 3]&#160;</td>
         </tr>
         <tr>
@@ -1522,7 +1522,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">d</td><td>polynomial in which to store the monic gcd, or store 0 if both f and n are 0 </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">f,g</td><td>polynomials to take the gcd of </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus for the coefficient ring </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomials for scratch work, cannot be NULL (<a class="el" href="polynomial_8h.html#aa21df0cb319b523d0ada902566dc46a3">gcd_poly_modn_tmptmp</a>) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomials for scratch work, cannot be NULL (<a class="el" href="polynomial_8h.html#a5b843c4d6e504e3eca810039932bb8e3">nut_Poly_gcd_modn_tmptmp</a>) </td></tr>
   </table>
   </dd>
 </dl>
@@ -1530,28 +1530,28 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa21df0cb319b523d0ada902566dc46a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa21df0cb319b523d0ada902566dc46a3">&#9670;&nbsp;</a></span>gcd_poly_modn_tmptmp()</h2>
+<a id="a5b843c4d6e504e3eca810039932bb8e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b843c4d6e504e3eca810039932bb8e3">&#9670;&nbsp;</a></span>nut_Poly_gcd_modn_tmptmp()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int gcd_poly_modn_tmptmp </td>
+          <td class="memname">int nut_Poly_gcd_modn_tmptmp </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>d</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
@@ -1569,7 +1569,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Find the gcd of two polynomials. </p>
-<p>Like <a class="el" href="polynomial_8h.html#aa0367653abc70dbb16442c2af3f0521a">gcd_poly_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. Less efficient because early checking is not done. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Like <a class="el" href="polynomial_8h.html#a35630e29092df06b0006a91ff5cebf4b">nut_Poly_gcd_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. Less efficient because early checking is not done. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">d</td><td>polynomial in which to store the monic gcd, or store 0 if both f and n are 0 </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">f,g</td><td>polynomials to take the gcd of </td></tr>
@@ -1581,22 +1581,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab9997f17df7d049fb37fac0c1cc17e98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9997f17df7d049fb37fac0c1cc17e98">&#9670;&nbsp;</a></span>powmod_poly_modn()</h2>
+<a id="a5a84e7761b68ca70fbef3f94a94ef788"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a84e7761b68ca70fbef3f94a94ef788">&#9670;&nbsp;</a></span>nut_Poly_powmod_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int powmod_poly_modn </td>
+          <td class="memname">int nut_Poly_powmod_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>h</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -1608,7 +1608,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
@@ -1620,7 +1620,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a>&#160;</td>
           <td class="paramname"><em>tmps</em>[static 3]&#160;</td>
         </tr>
         <tr>
@@ -1639,7 +1639,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">e</td><td>exponent </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">g</td><td>modulus </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>coefficient modulus </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomials for scratch work, must have 3 initialized (or at least zeroed out) polynomials (<a class="el" href="polynomial_8h.html#a14744ac34129a1c97ec0ee2e0d2a9d97">powmod_poly_modn_tmptmp</a>) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomials for scratch work, must have 3 initialized (or at least zeroed out) polynomials (<a class="el" href="polynomial_8h.html#aad276fc0fb10ff644a7cb976d0110334">nut_Poly_powmod_modn_tmptmp</a>) </td></tr>
   </table>
   </dd>
 </dl>
@@ -1647,22 +1647,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a14744ac34129a1c97ec0ee2e0d2a9d97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14744ac34129a1c97ec0ee2e0d2a9d97">&#9670;&nbsp;</a></span>powmod_poly_modn_tmptmp()</h2>
+<a id="aad276fc0fb10ff644a7cb976d0110334"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad276fc0fb10ff644a7cb976d0110334">&#9670;&nbsp;</a></span>nut_Poly_powmod_modn_tmptmp()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int powmod_poly_modn_tmptmp </td>
+          <td class="memname">int nut_Poly_powmod_modn_tmptmp </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>h</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -1674,7 +1674,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *restrict&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *restrict&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
@@ -1692,7 +1692,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compute the power of a polynomial mod another polynomial. </p>
-<p>Like <a class="el" href="polynomial_8h.html#ab9997f17df7d049fb37fac0c1cc17e98">powmod_poly_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. Less efficient because early checking is not done. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Like <a class="el" href="polynomial_8h.html#a5a84e7761b68ca70fbef3f94a94ef788">nut_Poly_powmod_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. Less efficient because early checking is not done. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">h</td><td>polynomial in which to store the result </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>base </td></tr>
@@ -1706,22 +1706,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3af8bba9147873e5df2cd7bb5c833e81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3af8bba9147873e5df2cd7bb5c833e81">&#9670;&nbsp;</a></span>factors_d_poly_modn()</h2>
+<a id="a3e8cd6734c206682c226878cd542a884"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e8cd6734c206682c226878cd542a884">&#9670;&nbsp;</a></span>nut_Poly_factors_d_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int factors_d_poly_modn </td>
+          <td class="memname">int nut_Poly_factors_d_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f_d</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -1739,7 +1739,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a>&#160;</td>
           <td class="paramname"><em>tmps</em>[static 4]&#160;</td>
         </tr>
         <tr>
@@ -1751,7 +1751,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compute the product of all irreducible factors of degree d. </p>
-<p>This should be called repeatedly on squarefree factors, or else it will extract repeat factors for d &gt; 1. Thus if we only want roots in the field Z_p, or equivalently we only want linear factors, we can call this function without bothering to make f squarefree first. If f is already squarefree, let f_i be the product of all irreducible factors of f with degree i. Then we have f_1 = gcd(x^p-x, f), f_2 = gcd(x^(p^2), f/f_1), f_3 = gcd(x^(p^3), f/f_1/f_2), etc. Once the expression f/f_1/f_2/.../f_i becomes 1, we are done. This clearly takes at most k steps, where k is the degree of f. It is possible to show an irreducible f is irreducible by only showing it has no factors of degree k/q for any prime divisor q, ie f | x^(p^k) but gcd(f, x^(p^(k/q))) = 1 for all q. This function only takes care of computing gcd(x^(p^d)-x, f/f_1/.../f_(d-1)) given p, d, and f/f_1/.../f_(d-1). </p><dl class="params"><dt>Parameters</dt><dd>
+<p>This should be called repeatedly on squarefree factors, or else it will extract repeat factors for d &gt; 1. Thus if we only want roots in the field Z_p, or equivalently we only want linear factors, we can call this function without bothering to make f squarefree first. In the general case, getting the squarefree factorization of f is easy: any repeated root of f (in Z_p or indeed the splitting field of f) is also a root of f' the derivative of f, so we can say the squarefree part of f is f / gcd(f, f'). We can repeat this to find polynomials representing roots which occur exactly once (f / gcd(f, f')), roots which occur exactly twice (sqrt(gcd(f, f') / gcd(f, f''))), roots which occur exactly thrice (cbrt(gcd(f, f'') / gcd(f, f'''))), etc. Eventually, these quotients will saturate and just become 1 forever. If f is already squarefree, let f_i be the product of all irreducible factors of f with degree i. Then we have f_1 = gcd(x^p-x, f), f_2 = gcd(x^(p^2), f/f_1), f_3 = gcd(x^(p^3), f/f_1/f_2), etc. Once the expression f/f_1/f_2/.../f_i becomes 1, we are done. This clearly takes at most k steps, where k is the degree of f. It is possible to show an irreducible f is irreducible by only showing it has no factors of degree k/q for any prime divisor q, ie f | x^(p^k) but gcd(f, x^(p^(k/q))) = 1 for all q. This function only takes care of computing gcd(x^(p^d)-x, f/f_1/.../f_(d-1)) given p, d, and f/f_1/.../f_(d-1). </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">f_d</td><td>the product of all degree d irreducible factors of f </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>the polynomial to factor, which should be squarefree and have no irreducible factors with degree less than d </td></tr>
@@ -1765,22 +1765,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a87f98cbd3d02406302a8824c1cdff982"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87f98cbd3d02406302a8824c1cdff982">&#9670;&nbsp;</a></span>factor1_poly_modn()</h2>
+<a id="a14aa169ebc783f6fad7963633ebd9039"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14aa169ebc783f6fad7963633ebd9039">&#9670;&nbsp;</a></span>nut_Poly_factor1_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int factor1_poly_modn </td>
+          <td class="memname">int nut_Poly_factor1_modn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -1798,7 +1798,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a>&#160;</td>
           <td class="paramname"><em>tmps</em>[static 4]&#160;</td>
         </tr>
         <tr>
@@ -1824,16 +1824,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a054b72254844b9bada1169f504cd290f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a054b72254844b9bada1169f504cd290f">&#9670;&nbsp;</a></span>roots_poly_modn()</h2>
+<a id="a0dea21e36497433aa233e83d95c10ead"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dea21e36497433aa233e83d95c10ead">&#9670;&nbsp;</a></span>nut_Poly_roots_modn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int roots_poly_modn </td>
+          <td class="memname">int nut_Poly_roots_modn </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -1845,13 +1845,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structpoly__roots__t.html">poly_roots_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Roots.html">nut_Roots</a> *&#160;</td>
           <td class="paramname"><em>roots</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structpoly__t.html">poly_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Poly.html">nut_Poly</a>&#160;</td>
           <td class="paramname"><em>tmps</em>[static 6]&#160;</td>
         </tr>
         <tr>
@@ -1863,12 +1863,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Find all roots of a polynomial in an odd prime field. </p>
-<p>Uses the Cantor-Zassenhaus algorithm, specialized for linear factors (so we can skip squarefree factorization). This is implemented in the functions <a class="el" href="polynomial_8h.html#a3af8bba9147873e5df2cd7bb5c833e81">factors_d_poly_modn</a> and <a class="el" href="polynomial_8h.html#a87f98cbd3d02406302a8824c1cdff982">factor1_poly_modn</a>. After the first function, we know how many roots there are and allocate a buffer. The second function is called as many times as needed to find all the roots. TODO: optimize factoring quadratics using quadratic formula. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Uses the Cantor-Zassenhaus algorithm, specialized for linear factors (so we can skip squarefree factorization). This is implemented in the functions <a class="el" href="polynomial_8h.html#a3e8cd6734c206682c226878cd542a884">nut_Poly_factors_d_modn</a> and <a class="el" href="polynomial_8h.html#a14aa169ebc783f6fad7963633ebd9039">nut_Poly_factor1_modn</a>. After the first function, we know how many roots there are and allocate a buffer. The second function is called as many times as needed to find all the roots. TODO: optimize factoring quadratics using quadratic formula. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>polynomial to find roots of </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus of the coefficient field. MUST be prime. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">roots</td><td>store roots here. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomials for scratch work, must have 6 initialized (or at least zeroed out) polynomials (<a class="el" href="polynomial_8h.html#a4447d3bca8cc270b9ceba25708b347ba">roots_poly_modn_tmptmp</a>) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomials for scratch work, must have 6 initialized (or at least zeroed out) polynomials (<a class="el" href="polynomial_8h.html#a3a9ce1271f0e0909b7aa28dce18b630d">nut_Poly_roots_modn_tmptmp</a>) </td></tr>
   </table>
   </dd>
 </dl>
@@ -1876,16 +1876,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4447d3bca8cc270b9ceba25708b347ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4447d3bca8cc270b9ceba25708b347ba">&#9670;&nbsp;</a></span>roots_poly_modn_tmptmp()</h2>
+<a id="a3a9ce1271f0e0909b7aa28dce18b630d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a9ce1271f0e0909b7aa28dce18b630d">&#9670;&nbsp;</a></span>nut_Poly_roots_modn_tmptmp()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int roots_poly_modn_tmptmp </td>
+          <td class="memname">int nut_Poly_roots_modn_tmptmp </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structpoly__t.html">poly_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Poly.html">nut_Poly</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
@@ -1897,7 +1897,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structpoly__roots__t.html">poly_roots_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Roots.html">nut_Roots</a> *&#160;</td>
           <td class="paramname"><em>roots</em>&#160;</td>
         </tr>
         <tr>
@@ -1909,7 +1909,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Find all roots of a polynomial in an odd prime field. </p>
-<p>Like <a class="el" href="polynomial_8h.html#a054b72254844b9bada1169f504cd290f">roots_poly_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Like <a class="el" href="polynomial_8h.html#a0dea21e36497433aa233e83d95c10ead">nut_Poly_roots_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>polynomial to find roots of </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus of the coefficient field. MUST be prime. </td></tr>
@@ -1928,7 +1928,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="polynomial_8h.html">polynomial.h</a></li>
-    <li class="footer">Generated on Wed May 10 2023 08:55:10 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Thu May 18 2023 07:13:25 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

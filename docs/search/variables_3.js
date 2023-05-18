@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pollard_5fmax_198',['pollard_max',['../structfactor__conf__t.html#a8a6bc6a2a28fb40a6ebb1a4fafc888b9',1,'factor_conf_t']]],
-  ['pollard_5fstride_199',['pollard_stride',['../structfactor__conf__t.html#ac76f7b974f6d1309e72f2f981b320d03',1,'factor_conf_t']]]
+  ['pollard_5fmax_257',['pollard_max',['../structnut__FactorConf.html#a467689ec7f9f9118a8f128a9aeaf5b04',1,'nut_FactorConf']]],
+  ['pollard_5fstride_258',['pollard_stride',['../structnut__FactorConf.html#a05d3b17c3e6a25ca26b778064d2231fe',1,'nut_FactorConf']]]
 ];

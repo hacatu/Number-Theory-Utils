@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['cap_192',['cap',['../structpoly__t.html#ab7657ccfe02164b996b4c59470581a5d',1,'poly_t::cap()'],['../structpoly__roots__t.html#af1270bbe7a127572a5c0d7ee64f990cb',1,'poly_roots_t::cap()']]],
-  ['coeffs_193',['coeffs',['../structpoly__t.html#a13ed413ba90d81e19c4705647e1d96c5',1,'poly_t']]]
+  ['cap_250',['cap',['../structnut__Poly.html#a79d9b72fbeeadbeaf7e60e1cfe397dd0',1,'nut_Poly::cap()'],['../structnut__Roots.html#a8c4fc3262be2a3850f653b9688e1a400',1,'nut_Roots::cap()']]],
+  ['coeffs_251',['coeffs',['../structnut__Poly.html#aded3d1a8eb3c0ed745fc732eabc9c8d1',1,'nut_Poly']]]
 ];

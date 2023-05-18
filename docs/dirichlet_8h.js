@@ -1,15 +1,17 @@
 var dirichlet_8h =
 [
-    [ "diri_table", "structdiri__table.html", "structdiri__table" ],
-    [ "dirichlet_D", "dirichlet_8h.html#aa3d32a5036556fb3cf77c7c486ef92ec", null ],
-    [ "euler_sieve_conv_u", "dirichlet_8h.html#acd4b6fb3a8c9320cb22d0246957b80b9", null ],
-    [ "diri_table_init", "dirichlet_8h.html#abe7d7cd2da8f487677565933da2a1305", null ],
-    [ "diri_table_destroy", "dirichlet_8h.html#aebccd9f03f948282a520544a080c10e4", null ],
-    [ "compute_I_diri_table", "dirichlet_8h.html#a3601caf56001387588ef3f07a1a30a9e", null ],
-    [ "compute_u_diri_table", "dirichlet_8h.html#a0d31da7cd9e490926fa111e96705baa6", null ],
-    [ "compute_N_diri_table", "dirichlet_8h.html#a672d9d1f95b6bab3e47f098bc54947fe", null ],
-    [ "compute_mertens_diri_table", "dirichlet_8h.html#a173aecab4a5263848f4c5b9acdf4c68d", null ],
-    [ "compute_conv_u_diri_table", "dirichlet_8h.html#a212cb5be17e8def841034e9644442f72", null ],
-    [ "compute_conv_N_diri_table", "dirichlet_8h.html#a0c163df14bb9afde0f509608705b7004", null ],
-    [ "compute_conv_diri_table", "dirichlet_8h.html#aa6dc1b1c7e758b2ef113bc6e63ccbc75", null ]
+    [ "nut_Diri", "structnut__Diri.html", "structnut__Diri" ],
+    [ "nut_dirichlet_D", "dirichlet_8h.html#ac97771d5942ab2b6c68a5a778a05aa29", null ],
+    [ "nut_euler_sieve_conv_u", "dirichlet_8h.html#afba54063826533c5bfb2756df8639807", null ],
+    [ "nut_euler_sieve_conv_N", "dirichlet_8h.html#a261126219a98b49b22fb0f0dc21110bb", null ],
+    [ "nut_euler_sieve_conv", "dirichlet_8h.html#a3c57c65ec5c25aaecc89ed3f737baff9", null ],
+    [ "nut_Diri_init", "dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4", null ],
+    [ "nut_Diri_destroy", "dirichlet_8h.html#ad11c54899255356be156c2246edb24d2", null ],
+    [ "nut_Diri_compute_I", "dirichlet_8h.html#a72111f9468ba6240298b9265dc3f0ddd", null ],
+    [ "nut_Diri_compute_u", "dirichlet_8h.html#a2dc081efb5714b6c3ea635f143cf8084", null ],
+    [ "nut_Diri_compute_N", "dirichlet_8h.html#af820562ebdd3f97cb74388e4e4a1634e", null ],
+    [ "nut_Diri_compute_mertens", "dirichlet_8h.html#ad49d489db440faa48db16b0ff675f8dd", null ],
+    [ "nut_Diri_compute_conv_u", "dirichlet_8h.html#a8e10b52611110126f572865d89250de2", null ],
+    [ "nut_Diri_compute_conv_N", "dirichlet_8h.html#a5ae68d463d2a0d684e79af16a1b3353f", null ],
+    [ "nut_Diri_compute_conv", "dirichlet_8h.html#a70a1321a129e6a450ef769976799855a", null ]
 ];

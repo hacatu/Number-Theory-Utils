@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['ensure_5fpoly_5fcap_27',['ensure_poly_cap',['../polynomial_8h.html#a5f47d92ef4f1a07f4ddf3d99f244abc1',1,'polynomial.h']]],
-  ['ensure_5fpoly_5froots_5fcap_28',['ensure_poly_roots_cap',['../polynomial_8h.html#a57a86948d29f075bdb00c6a2d3870b09',1,'polynomial.h']]],
-  ['euler_5fsieve_5fconv_5fu_29',['euler_sieve_conv_u',['../dirichlet_8h.html#acd4b6fb3a8c9320cb22d0246957b80b9',1,'dirichlet.h']]],
-  ['eval_5fpoly_5fmodn_30',['eval_poly_modn',['../polynomial_8h.html#ad67e8b256693afb95134c8bdcea71f89',1,'polynomial.h']]]
+  ['len_6',['len',['../structnut__Poly.html#a9e21e120f8234c52f4b3059d613357e7',1,'nut_Poly::len()'],['../structnut__Roots.html#a52b50bc7b374bb528cdae1b4477b69c1',1,'nut_Roots::len()']]],
+  ['lenstra_5fbfac_7',['lenstra_bfac',['../structnut__FactorConf.html#a6d1d1b2f0ffe8760c2186b3b3c515fa9',1,'nut_FactorConf']]],
+  ['lenstra_5fmax_8',['lenstra_max',['../structnut__FactorConf.html#a03a74ba961477004fd07cca592318954',1,'nut_FactorConf']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['roots_201',['roots',['../structpoly__roots__t.html#a0bf0b9fc079ec3d1316b1712ab82137c',1,'poly_roots_t']]]
+  ['roots_260',['roots',['../structnut__Roots.html#a4938a9a6f1cb009c71930447a417b467',1,'nut_Roots']]]
 ];

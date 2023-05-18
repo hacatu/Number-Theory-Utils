@@ -124,56 +124,62 @@ DESCRIPTION</h1>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdiri__table.html">diri_table</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper to hold values of some multiplicative function.  <a href="structdiri__table.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__Diri.html">nut_Diri</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper to hold values of some multiplicative function.  <a href="structnut__Diri.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa3d32a5036556fb3cf77c7c486ef92ec"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#aa3d32a5036556fb3cf77c7c486ef92ec">dirichlet_D</a> (uint64_t max)</td></tr>
-<tr class="memdesc:aa3d32a5036556fb3cf77c7c486ef92ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the sum of the divisor count function d from 1 to max.  <a href="dirichlet_8h.html#aa3d32a5036556fb3cf77c7c486ef92ec">More...</a><br /></td></tr>
-<tr class="separator:aa3d32a5036556fb3cf77c7c486ef92ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd4b6fb3a8c9320cb22d0246957b80b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#acd4b6fb3a8c9320cb22d0246957b80b9">euler_sieve_conv_u</a> (int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1])</td></tr>
-<tr class="memdesc:acd4b6fb3a8c9320cb22d0246957b80b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a table of values of a multiplicative function f, compute (f &lt;*&gt; u)(x) for all x from 1 to n Currently this uses Euler's sieve, sometimes called a linear sieve, but this is almost certainly slower than a sieve of Eratosthenes in practice.  <a href="dirichlet_8h.html#acd4b6fb3a8c9320cb22d0246957b80b9">More...</a><br /></td></tr>
-<tr class="separator:acd4b6fb3a8c9320cb22d0246957b80b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe7d7cd2da8f487677565933da2a1305"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#abe7d7cd2da8f487677565933da2a1305">diri_table_init</a> (<a class="el" href="structdiri__table.html">diri_table</a> *self, int64_t x, int64_t y)</td></tr>
-<tr class="memdesc:abe7d7cd2da8f487677565933da2a1305"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate internal buffers for a diri table self-&gt;buf will have f(0) through f(y) at indicies 0 through y, and then f(x/1) through f(x/(yinv - 1)) at indicies y + 1 through y + yinv - 1.  <a href="dirichlet_8h.html#abe7d7cd2da8f487677565933da2a1305">More...</a><br /></td></tr>
-<tr class="separator:abe7d7cd2da8f487677565933da2a1305"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebccd9f03f948282a520544a080c10e4"><td class="memItemLeft" align="right" valign="top"><a id="aebccd9f03f948282a520544a080c10e4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#aebccd9f03f948282a520544a080c10e4">diri_table_destroy</a> (<a class="el" href="structdiri__table.html">diri_table</a> *self)</td></tr>
-<tr class="memdesc:aebccd9f03f948282a520544a080c10e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocate internal buffers for a diri table. <br /></td></tr>
-<tr class="separator:aebccd9f03f948282a520544a080c10e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3601caf56001387588ef3f07a1a30a9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a3601caf56001387588ef3f07a1a30a9e">compute_I_diri_table</a> (<a class="el" href="structdiri__table.html">diri_table</a> *self)</td></tr>
-<tr class="memdesc:a3601caf56001387588ef3f07a1a30a9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Just memset's the dense part, then sets index 1 and y + 1 through y + yinv - 1 to 1 (remember the sparse indicies are sums)  <a href="dirichlet_8h.html#a3601caf56001387588ef3f07a1a30a9e">More...</a><br /></td></tr>
-<tr class="separator:a3601caf56001387588ef3f07a1a30a9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d31da7cd9e490926fa111e96705baa6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a0d31da7cd9e490926fa111e96705baa6">compute_u_diri_table</a> (<a class="el" href="structdiri__table.html">diri_table</a> *self)</td></tr>
-<tr class="memdesc:a0d31da7cd9e490926fa111e96705baa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the unit function u(n) = 1 Fills the dense part of the table with 1s, and computes the sparse entries with table[y + k] = U(x/k) = x/k.  <a href="dirichlet_8h.html#a0d31da7cd9e490926fa111e96705baa6">More...</a><br /></td></tr>
-<tr class="separator:a0d31da7cd9e490926fa111e96705baa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a672d9d1f95b6bab3e47f098bc54947fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a672d9d1f95b6bab3e47f098bc54947fe">compute_N_diri_table</a> (<a class="el" href="structdiri__table.html">diri_table</a> *self)</td></tr>
-<tr class="memdesc:a672d9d1f95b6bab3e47f098bc54947fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the identity function N(n) = n Fills the dense part of the table with increasing numbers, and computes the sparse entries with table[y + k] = sum_N(v = x/k) = v*(v+1)/2.  <a href="dirichlet_8h.html#a672d9d1f95b6bab3e47f098bc54947fe">More...</a><br /></td></tr>
-<tr class="separator:a672d9d1f95b6bab3e47f098bc54947fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a173aecab4a5263848f4c5b9acdf4c68d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a173aecab4a5263848f4c5b9acdf4c68d">compute_mertens_diri_table</a> (<a class="el" href="structdiri__table.html">diri_table</a> *self, const uint8_t mobius[self-&gt;y/4+1])</td></tr>
-<tr class="memdesc:a173aecab4a5263848f4c5b9acdf4c68d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the mobius function mu(n) (whose sum is called the Mertens function) Requires both an initialized <a class="el" href="structdiri__table.html" title="Wrapper to hold values of some multiplicative function.">diri_table</a> from <a class="el" href="dirichlet_8h.html#abe7d7cd2da8f487677565933da2a1305">diri_table_init</a> and a packed table of mobius values from <a class="el" href="sieves_8h.html#a18155611a81e12f7f810d4cdf6bccb36">sieve_mobius</a>.  <a href="dirichlet_8h.html#a173aecab4a5263848f4c5b9acdf4c68d">More...</a><br /></td></tr>
-<tr class="separator:a173aecab4a5263848f4c5b9acdf4c68d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a212cb5be17e8def841034e9644442f72"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a212cb5be17e8def841034e9644442f72">compute_conv_u_diri_table</a> (<a class="el" href="structdiri__table.html">diri_table</a> *self, const <a class="el" href="structdiri__table.html">diri_table</a> *f_tbl)</td></tr>
-<tr class="memdesc:a212cb5be17e8def841034e9644442f72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f See <a class="el" href="dirichlet_8h.html#aa6dc1b1c7e758b2ef113bc6e63ccbc75">compute_conv_diri_table</a> for details, this is just that function but with several specializations due to u being very simple.  <a href="dirichlet_8h.html#a212cb5be17e8def841034e9644442f72">More...</a><br /></td></tr>
-<tr class="separator:a212cb5be17e8def841034e9644442f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c163df14bb9afde0f509608705b7004"><td class="memItemLeft" align="right" valign="top"><a id="a0c163df14bb9afde0f509608705b7004"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>compute_conv_N_diri_table</b> (<a class="el" href="structdiri__table.html">diri_table</a> *self, const <a class="el" href="structdiri__table.html">diri_table</a> *f_tbl)</td></tr>
-<tr class="separator:a0c163df14bb9afde0f509608705b7004"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6dc1b1c7e758b2ef113bc6e63ccbc75"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#aa6dc1b1c7e758b2ef113bc6e63ccbc75">compute_conv_diri_table</a> (<a class="el" href="structdiri__table.html">diri_table</a> *self, const <a class="el" href="structdiri__table.html">diri_table</a> *f_tbl, const <a class="el" href="structdiri__table.html">diri_table</a> *g_tbl)</td></tr>
-<tr class="memdesc:aa6dc1b1c7e758b2ef113bc6e63ccbc75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands self must have been initialized using <a class="el" href="dirichlet_8h.html#abe7d7cd2da8f487677565933da2a1305">diri_table_init</a>, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl must be set and match This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1)) If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then try to use a specialized function from this library and use that instead.  <a href="dirichlet_8h.html#aa6dc1b1c7e758b2ef113bc6e63ccbc75">More...</a><br /></td></tr>
-<tr class="separator:aa6dc1b1c7e758b2ef113bc6e63ccbc75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac97771d5942ab2b6c68a5a778a05aa29"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#ac97771d5942ab2b6c68a5a778a05aa29">nut_dirichlet_D</a> (uint64_t max)</td></tr>
+<tr class="memdesc:ac97771d5942ab2b6c68a5a778a05aa29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the sum of the divisor count function d from 1 to max.  <a href="dirichlet_8h.html#ac97771d5942ab2b6c68a5a778a05aa29">More...</a><br /></td></tr>
+<tr class="separator:ac97771d5942ab2b6c68a5a778a05aa29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afba54063826533c5bfb2756df8639807"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#afba54063826533c5bfb2756df8639807">nut_euler_sieve_conv_u</a> (int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1])</td></tr>
+<tr class="memdesc:afba54063826533c5bfb2756df8639807"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a table of values of a multiplicative function f, compute (f &lt;*&gt; u)(x) for all x from 1 to n Currently this uses Euler's sieve, sometimes called a linear sieve, but this is almost certainly slower than a sieve of Eratosthenes in practice.  <a href="dirichlet_8h.html#afba54063826533c5bfb2756df8639807">More...</a><br /></td></tr>
+<tr class="separator:afba54063826533c5bfb2756df8639807"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a261126219a98b49b22fb0f0dc21110bb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a261126219a98b49b22fb0f0dc21110bb">nut_euler_sieve_conv_N</a> (int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_N_vals[static n+1])</td></tr>
+<tr class="memdesc:a261126219a98b49b22fb0f0dc21110bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a table of values of a multiplicative function f, compute (f &lt;*&gt; N)(x) for all x from 1 to n Currently this uses Euler's sieve, sometimes called a linear sieve, but this is almost certainly slower than a sieve of Eratosthenes in practice.  <a href="dirichlet_8h.html#a261126219a98b49b22fb0f0dc21110bb">More...</a><br /></td></tr>
+<tr class="separator:a261126219a98b49b22fb0f0dc21110bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c57c65ec5c25aaecc89ed3f737baff9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a3c57c65ec5c25aaecc89ed3f737baff9">nut_euler_sieve_conv</a> (int64_t n, const int64_t f_vals[static n+1], const int64_t g_vals[static n+1], int64_t f_conv_g_vals[static n+1])</td></tr>
+<tr class="memdesc:a3c57c65ec5c25aaecc89ed3f737baff9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given tables of values of multiplicative functions f and g, compute (f &lt;*&gt; g)(x) for all x from 1 to n Currently this uses Euler's sieve, sometimes called a linear sieve, but this is almost certainly slower than a sieve of Eratosthenes in practice.  <a href="dirichlet_8h.html#a3c57c65ec5c25aaecc89ed3f737baff9">More...</a><br /></td></tr>
+<tr class="separator:a3c57c65ec5c25aaecc89ed3f737baff9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f69060eec4fdf127316bd2998e356d4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *self, int64_t x, int64_t y)</td></tr>
+<tr class="memdesc:a4f69060eec4fdf127316bd2998e356d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate internal buffers for a diri table self-&gt;buf will have f(0) through f(y) at indicies 0 through y, and then f(x/1) through f(x/(yinv - 1)) at indicies y + 1 through y + yinv - 1.  <a href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">More...</a><br /></td></tr>
+<tr class="separator:a4f69060eec4fdf127316bd2998e356d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad11c54899255356be156c2246edb24d2"><td class="memItemLeft" align="right" valign="top"><a id="ad11c54899255356be156c2246edb24d2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#ad11c54899255356be156c2246edb24d2">nut_Diri_destroy</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *self)</td></tr>
+<tr class="memdesc:ad11c54899255356be156c2246edb24d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocate internal buffers for a diri table. <br /></td></tr>
+<tr class="separator:ad11c54899255356be156c2246edb24d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72111f9468ba6240298b9265dc3f0ddd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a72111f9468ba6240298b9265dc3f0ddd">nut_Diri_compute_I</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *self)</td></tr>
+<tr class="memdesc:a72111f9468ba6240298b9265dc3f0ddd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Just memset's the dense part, then sets index 1 and y + 1 through y + yinv - 1 to 1 (remember the sparse indicies are sums)  <a href="dirichlet_8h.html#a72111f9468ba6240298b9265dc3f0ddd">More...</a><br /></td></tr>
+<tr class="separator:a72111f9468ba6240298b9265dc3f0ddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dc081efb5714b6c3ea635f143cf8084"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a2dc081efb5714b6c3ea635f143cf8084">nut_Diri_compute_u</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *self)</td></tr>
+<tr class="memdesc:a2dc081efb5714b6c3ea635f143cf8084"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the unit function u(n) = 1 Fills the dense part of the table with 1s, and computes the sparse entries with table[y + k] = U(x/k) = x/k.  <a href="dirichlet_8h.html#a2dc081efb5714b6c3ea635f143cf8084">More...</a><br /></td></tr>
+<tr class="separator:a2dc081efb5714b6c3ea635f143cf8084"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af820562ebdd3f97cb74388e4e4a1634e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#af820562ebdd3f97cb74388e4e4a1634e">nut_Diri_compute_N</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *self)</td></tr>
+<tr class="memdesc:af820562ebdd3f97cb74388e4e4a1634e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the identity function N(n) = n Fills the dense part of the table with increasing numbers, and computes the sparse entries with table[y + k] = sum_N(v = x/k) = v*(v+1)/2.  <a href="dirichlet_8h.html#af820562ebdd3f97cb74388e4e4a1634e">More...</a><br /></td></tr>
+<tr class="separator:af820562ebdd3f97cb74388e4e4a1634e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad49d489db440faa48db16b0ff675f8dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#ad49d489db440faa48db16b0ff675f8dd">nut_Diri_compute_mertens</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *self, const uint8_t mobius[self-&gt;y/4+1])</td></tr>
+<tr class="memdesc:ad49d489db440faa48db16b0ff675f8dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the mobius function mu(n) (whose sum is called the Mertens function) Requires both an initialized <a class="el" href="structnut__Diri.html" title="Wrapper to hold values of some multiplicative function.">nut_Diri</a> from <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a> and a packed table of mobius values from <a class="el" href="sieves_8h.html#ac1184e4b679ee165bb5e6ae0179f2d4b">nut_sieve_mobius</a>.  <a href="dirichlet_8h.html#ad49d489db440faa48db16b0ff675f8dd">More...</a><br /></td></tr>
+<tr class="separator:ad49d489db440faa48db16b0ff675f8dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e10b52611110126f572865d89250de2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a8e10b52611110126f572865d89250de2">nut_Diri_compute_conv_u</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *self, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *f_tbl)</td></tr>
+<tr class="memdesc:a8e10b52611110126f572865d89250de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f See <a class="el" href="dirichlet_8h.html#a70a1321a129e6a450ef769976799855a">nut_Diri_compute_conv</a> for details, this is just that function but with several specializations due to u being very simple.  <a href="dirichlet_8h.html#a8e10b52611110126f572865d89250de2">More...</a><br /></td></tr>
+<tr class="separator:a8e10b52611110126f572865d89250de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ae68d463d2a0d684e79af16a1b3353f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a5ae68d463d2a0d684e79af16a1b3353f">nut_Diri_compute_conv_N</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *self, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *f_tbl)</td></tr>
+<tr class="memdesc:a5ae68d463d2a0d684e79af16a1b3353f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for h = f &lt;*&gt; N, the dirichlet convolution of f and N (the identity function N(n) = n), given the value table for f See <a class="el" href="dirichlet_8h.html#a70a1321a129e6a450ef769976799855a">nut_Diri_compute_conv</a> for details, this is just that function but with several specializations due to N being very simple.  <a href="dirichlet_8h.html#a5ae68d463d2a0d684e79af16a1b3353f">More...</a><br /></td></tr>
+<tr class="separator:a5ae68d463d2a0d684e79af16a1b3353f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70a1321a129e6a450ef769976799855a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a70a1321a129e6a450ef769976799855a">nut_Diri_compute_conv</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *self, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *f_tbl, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *g_tbl)</td></tr>
+<tr class="memdesc:a70a1321a129e6a450ef769976799855a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands self must have been initialized using <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl must be set and match This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1)) If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then try to use a specialized function from this library and use that instead.  <a href="dirichlet_8h.html#a70a1321a129e6a450ef769976799855a">More...</a><br /></td></tr>
+<tr class="separator:a70a1321a129e6a450ef769976799855a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="aa3d32a5036556fb3cf77c7c486ef92ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3d32a5036556fb3cf77c7c486ef92ec">&#9670;&nbsp;</a></span>dirichlet_D()</h2>
+<a id="ac97771d5942ab2b6c68a5a778a05aa29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac97771d5942ab2b6c68a5a778a05aa29">&#9670;&nbsp;</a></span>nut_dirichlet_D()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t dirichlet_D </td>
+          <td class="memname">uint64_t nut_dirichlet_D </td>
           <td>(</td>
           <td class="paramtype">uint64_t&#160;</td>
           <td class="paramname"><em>max</em></td><td>)</td>
@@ -193,14 +199,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>compute_conv_N_diri_t
 
 </div>
 </div>
-<a id="acd4b6fb3a8c9320cb22d0246957b80b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd4b6fb3a8c9320cb22d0246957b80b9">&#9670;&nbsp;</a></span>euler_sieve_conv_u()</h2>
+<a id="afba54063826533c5bfb2756df8639807"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afba54063826533c5bfb2756df8639807">&#9670;&nbsp;</a></span>nut_euler_sieve_conv_u()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool euler_sieve_conv_u </td>
+          <td class="memname">bool nut_euler_sieve_conv_u </td>
           <td>(</td>
           <td class="paramtype">int64_t&#160;</td>
           <td class="paramname"><em>n</em>, </td>
@@ -238,16 +244,113 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>compute_conv_N_diri_t
 
 </div>
 </div>
-<a id="abe7d7cd2da8f487677565933da2a1305"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe7d7cd2da8f487677565933da2a1305">&#9670;&nbsp;</a></span>diri_table_init()</h2>
+<a id="a261126219a98b49b22fb0f0dc21110bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a261126219a98b49b22fb0f0dc21110bb">&#9670;&nbsp;</a></span>nut_euler_sieve_conv_N()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool diri_table_init </td>
+          <td class="memname">bool nut_euler_sieve_conv_N </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structdiri__table.html">diri_table</a> *&#160;</td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int64_t&#160;</td>
+          <td class="paramname"><em>f_vals</em>[static n+1], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>f_conv_N_vals</em>[static n+1]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Given a table of values of a multiplicative function f, compute (f &lt;*&gt; N)(x) for all x from 1 to n Currently this uses Euler's sieve, sometimes called a linear sieve, but this is almost certainly slower than a sieve of Eratosthenes in practice. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>inclusive upper bound of range to compute f &lt;*&gt; N over </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">f_vals</td><td>table of values for f </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">f_conv_N_vals</td><td>table to store values of f &lt;*&gt; N in </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true on success, false on allocation failure </dd></dl>
+
+</div>
+</div>
+<a id="a3c57c65ec5c25aaecc89ed3f737baff9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c57c65ec5c25aaecc89ed3f737baff9">&#9670;&nbsp;</a></span>nut_euler_sieve_conv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_euler_sieve_conv </td>
+          <td>(</td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int64_t&#160;</td>
+          <td class="paramname"><em>f_vals</em>[static n+1], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int64_t&#160;</td>
+          <td class="paramname"><em>g_vals</em>[static n+1], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>f_conv_g_vals</em>[static n+1]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Given tables of values of multiplicative functions f and g, compute (f &lt;*&gt; g)(x) for all x from 1 to n Currently this uses Euler's sieve, sometimes called a linear sieve, but this is almost certainly slower than a sieve of Eratosthenes in practice. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>inclusive upper bound of range to compute f &lt;*&gt; g over </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">f_vals</td><td>table of values for f </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">g_vals</td><td>table of values for f </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">f_conv_g_vals</td><td>table to store values of f &lt;*&gt; g in </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true on success, false on allocation failure </dd></dl>
+
+</div>
+</div>
+<a id="a4f69060eec4fdf127316bd2998e356d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f69060eec4fdf127316bd2998e356d4">&#9670;&nbsp;</a></span>nut_Diri_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_Diri_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td>
           <td class="paramname"><em>self</em>, </td>
         </tr>
         <tr>
@@ -282,16 +385,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>compute_conv_N_diri_t
 
 </div>
 </div>
-<a id="a3601caf56001387588ef3f07a1a30a9e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3601caf56001387588ef3f07a1a30a9e">&#9670;&nbsp;</a></span>compute_I_diri_table()</h2>
+<a id="a72111f9468ba6240298b9265dc3f0ddd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72111f9468ba6240298b9265dc3f0ddd">&#9670;&nbsp;</a></span>nut_Diri_compute_I()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void compute_I_diri_table </td>
+          <td class="memname">void nut_Diri_compute_I </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structdiri__table.html">diri_table</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td>
           <td class="paramname"><em>self</em></td><td>)</td>
           <td></td>
         </tr>
@@ -308,16 +411,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>compute_conv_N_diri_t
 
 </div>
 </div>
-<a id="a0d31da7cd9e490926fa111e96705baa6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d31da7cd9e490926fa111e96705baa6">&#9670;&nbsp;</a></span>compute_u_diri_table()</h2>
+<a id="a2dc081efb5714b6c3ea635f143cf8084"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dc081efb5714b6c3ea635f143cf8084">&#9670;&nbsp;</a></span>nut_Diri_compute_u()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void compute_u_diri_table </td>
+          <td class="memname">void nut_Diri_compute_u </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structdiri__table.html">diri_table</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td>
           <td class="paramname"><em>self</em></td><td>)</td>
           <td></td>
         </tr>
@@ -334,16 +437,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>compute_conv_N_diri_t
 
 </div>
 </div>
-<a id="a672d9d1f95b6bab3e47f098bc54947fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a672d9d1f95b6bab3e47f098bc54947fe">&#9670;&nbsp;</a></span>compute_N_diri_table()</h2>
+<a id="af820562ebdd3f97cb74388e4e4a1634e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af820562ebdd3f97cb74388e4e4a1634e">&#9670;&nbsp;</a></span>nut_Diri_compute_N()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void compute_N_diri_table </td>
+          <td class="memname">void nut_Diri_compute_N </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structdiri__table.html">diri_table</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td>
           <td class="paramname"><em>self</em></td><td>)</td>
           <td></td>
         </tr>
@@ -360,16 +463,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>compute_conv_N_diri_t
 
 </div>
 </div>
-<a id="a173aecab4a5263848f4c5b9acdf4c68d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a173aecab4a5263848f4c5b9acdf4c68d">&#9670;&nbsp;</a></span>compute_mertens_diri_table()</h2>
+<a id="ad49d489db440faa48db16b0ff675f8dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad49d489db440faa48db16b0ff675f8dd">&#9670;&nbsp;</a></span>nut_Diri_compute_mertens()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void compute_mertens_diri_table </td>
+          <td class="memname">void nut_Diri_compute_mertens </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structdiri__table.html">diri_table</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td>
           <td class="paramname"><em>self</em>, </td>
         </tr>
         <tr>
@@ -386,33 +489,33 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>compute_conv_N_diri_t
       </table>
 </div><div class="memdoc">
 
-<p>Compute the value table for the mobius function mu(n) (whose sum is called the Mertens function) Requires both an initialized <a class="el" href="structdiri__table.html" title="Wrapper to hold values of some multiplicative function.">diri_table</a> from <a class="el" href="dirichlet_8h.html#abe7d7cd2da8f487677565933da2a1305">diri_table_init</a> and a packed table of mobius values from <a class="el" href="sieves_8h.html#a18155611a81e12f7f810d4cdf6bccb36">sieve_mobius</a>. </p>
+<p>Compute the value table for the mobius function mu(n) (whose sum is called the Mertens function) Requires both an initialized <a class="el" href="structnut__Diri.html" title="Wrapper to hold values of some multiplicative function.">nut_Diri</a> from <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a> and a packed table of mobius values from <a class="el" href="sieves_8h.html#ac1184e4b679ee165bb5e6ae0179f2d4b">nut_sieve_mobius</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, and take the bounds from. Must be initialized </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mobius</td><td>packed table of mobius values, from <a class="el" href="sieves_8h.html#a18155611a81e12f7f810d4cdf6bccb36">sieve_mobius</a> (with upper bound self-&gt;y). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mobius</td><td>packed table of mobius values, from <a class="el" href="sieves_8h.html#ac1184e4b679ee165bb5e6ae0179f2d4b">nut_sieve_mobius</a> (with upper bound self-&gt;y). </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a212cb5be17e8def841034e9644442f72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a212cb5be17e8def841034e9644442f72">&#9670;&nbsp;</a></span>compute_conv_u_diri_table()</h2>
+<a id="a8e10b52611110126f572865d89250de2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e10b52611110126f572865d89250de2">&#9670;&nbsp;</a></span>nut_Diri_compute_conv_u()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool compute_conv_u_diri_table </td>
+          <td class="memname">bool nut_Diri_compute_conv_u </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structdiri__table.html">diri_table</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td>
           <td class="paramname"><em>self</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structdiri__table.html">diri_table</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td>
           <td class="paramname"><em>f_tbl</em>&#160;</td>
         </tr>
         <tr>
@@ -423,10 +526,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>compute_conv_N_diri_t
       </table>
 </div><div class="memdoc">
 
-<p>Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f See <a class="el" href="dirichlet_8h.html#aa6dc1b1c7e758b2ef113bc6e63ccbc75">compute_conv_diri_table</a> for details, this is just that function but with several specializations due to u being very simple. </p>
+<p>Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f See <a class="el" href="dirichlet_8h.html#a70a1321a129e6a450ef769976799855a">nut_Diri_compute_conv</a> for details, this is just that function but with several specializations due to u being very simple. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#abe7d7cd2da8f487677565933da2a1305">diri_table_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistend with the inputs </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistent with the inputs </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">f_tbl</td><td>table for the first operand </td></tr>
   </table>
   </dd>
@@ -434,28 +537,65 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>compute_conv_N_diri_t
 
 </div>
 </div>
-<a id="aa6dc1b1c7e758b2ef113bc6e63ccbc75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6dc1b1c7e758b2ef113bc6e63ccbc75">&#9670;&nbsp;</a></span>compute_conv_diri_table()</h2>
+<a id="a5ae68d463d2a0d684e79af16a1b3353f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ae68d463d2a0d684e79af16a1b3353f">&#9670;&nbsp;</a></span>nut_Diri_compute_conv_N()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool compute_conv_diri_table </td>
+          <td class="memname">bool nut_Diri_compute_conv_N </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structdiri__table.html">diri_table</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td>
           <td class="paramname"><em>self</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structdiri__table.html">diri_table</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td>
+          <td class="paramname"><em>f_tbl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the value table for h = f &lt;*&gt; N, the dirichlet convolution of f and N (the identity function N(n) = n), given the value table for f See <a class="el" href="dirichlet_8h.html#a70a1321a129e6a450ef769976799855a">nut_Diri_compute_conv</a> for details, this is just that function but with several specializations due to N being very simple. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistent with the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">f_tbl</td><td>table for the first operand </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a70a1321a129e6a450ef769976799855a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70a1321a129e6a450ef769976799855a">&#9670;&nbsp;</a></span>nut_Diri_compute_conv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_Diri_compute_conv </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td>
           <td class="paramname"><em>f_tbl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structdiri__table.html">diri_table</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td>
           <td class="paramname"><em>g_tbl</em>&#160;</td>
         </tr>
         <tr>
@@ -466,10 +606,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>compute_conv_N_diri_t
       </table>
 </div><div class="memdoc">
 
-<p>Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands self must have been initialized using <a class="el" href="dirichlet_8h.html#abe7d7cd2da8f487677565933da2a1305">diri_table_init</a>, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl must be set and match This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1)) If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then try to use a specialized function from this library and use that instead. </p>
+<p>Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands self must have been initialized using <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl must be set and match This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1)) If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then try to use a specialized function from this library and use that instead. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#abe7d7cd2da8f487677565933da2a1305">diri_table_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistend with the inputs </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistend with the inputs </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">f_tbl</td><td>table for the first operand (dirichlet convolution is commutative, so order doesn't matter) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">g_tbl</td><td>table for the second operand </td></tr>
   </table>
@@ -485,7 +625,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>compute_conv_N_diri_t
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="dirichlet_8h.html">dirichlet.h</a></li>
-    <li class="footer">Generated on Wed May 10 2023 08:55:10 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Thu May 18 2023 07:13:25 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>
