@@ -136,8 +136,8 @@ uint64_t nut_Factor_carmichael(const nut_Factors *factors){
 int nut_Factor_forall_divs_tmptmp(const nut_Factors *factors, int (*f)(const nut_Factors*, uint64_t, void*), void *data){
 //#pragma GCC diagnostic push
 //#pragma GCC diagnostic ignored "-Wincompatible-pointer-types"
-	nut_Factors *dfactors __attribute__((cleanup(cleanup_free))) = nut_Factors_copy(factors);
-	nut_Factors *pfactors __attribute__((cleanup(cleanup_free))) = nut_Factors_copy(factors);
+	nut_Factors *dfactors [[gnu::cleanup(cleanup_free)]] = nut_Factors_copy(factors);
+	nut_Factors *pfactors [[gnu::cleanup(cleanup_free)]] = nut_Factors_copy(factors);
 //#pragma GCC pop
 	return nut_Factor_forall_divs(factors, f, data, dfactors, pfactors);
 }
@@ -175,8 +175,8 @@ int nut_Factor_forall_divs(const nut_Factors *factors, int (*f)(const nut_Factor
 int nut_Factor_forall_divs_le_tmptmp(const nut_Factors *factors, uint64_t d_max, int (*f)(const nut_Factors*, uint64_t, void*), void *data){
 //#pragma GCC diagnostic push
 //#pragma GCC diagnostic ignored "-Wincompatible-pointer-types"
-	nut_Factors *dfactors __attribute__((cleanup(cleanup_free))) = nut_Factors_copy(factors);
-	nut_Factors *pfactors __attribute__((cleanup(cleanup_free))) = nut_Factors_copy(factors);
+	nut_Factors *dfactors [[gnu::cleanup(cleanup_free)]] = nut_Factors_copy(factors);
+	nut_Factors *pfactors [[gnu::cleanup(cleanup_free)]] = nut_Factors_copy(factors);
 //#pragma GCC pop
 	return nut_Factor_forall_divs_le(factors, d_max, f, data, dfactors, pfactors);
 }
