@@ -66,7 +66,7 @@ static void test_compute_conv_u_diri(){
 		check_alloc("dk sieve", dk_vals);
 		for(int64_t i = 1; i <= dk_table.y; ++i){
 			if(dk_vals[i] != (uint64_t)nut_Diri_get_dense(&dk_table, i)){
-				fprintf(stderr, "\e[1;31mu <*> u table was wrong at dense %"PRIi64"\e[0m\n", i);
+				fprintf(stderr, "\e[1;31md(k-1) <*> u table was wrong at dense %"PRIi64"\e[0m\n", i);
 			}
 		}
 		for(uint64_t i = 2; i <= sieve_max; ++i){
@@ -74,7 +74,7 @@ static void test_compute_conv_u_diri(){
 		}
 		for(int64_t i = 1; i < dk_table.yinv; ++i){
 			if(dk_vals[dk_table.x/i] != (uint64_t)nut_Diri_get_sparse(&dk_table, i)){
-				fprintf(stderr, "\e[1;31mu <*> u table was wrong at sparse %"PRIi64"\e[0m\n", i);
+				fprintf(stderr, "\e[1;31md(k-1) <*> u table was wrong at sparse %"PRIi64"\e[0m\n", i);
 			}
 		}
 		free(dk_vals);
@@ -84,6 +84,37 @@ static void test_compute_conv_u_diri(){
 	}
 	nut_Diri_destroy(&dkp_table);
 	nut_Diri_destroy(&dk_table);
+}
+
+static void test_compute_conv_N_diri(){
+	nut_Diri mertens_table = {}, Phi_table = {};
+	nut_Diri_init(&mertens_table, sieve_max, 0);
+	nut_Diri_init(&Phi_table, sieve_max, 0);
+	check_alloc("mertens table", mertens_table.buf);
+	check_alloc("Phi table", Phi_table.buf);
+	uint8_t *mobius = nut_sieve_mobius(mertens_table.y);
+	check_alloc("mobius sieve", mobius);
+	nut_Diri_compute_mertens(&mertens_table, mobius);
+	nut_Diri_compute_conv_N(&Phi_table, &mertens_table);
+	uint64_t *phi = nut_sieve_phi(sieve_max);
+	check_alloc("phi sieve", phi);
+	for(int64_t i = 1; i <= Phi_table.y; ++i){
+		if(phi[i] != (uint64_t)nut_Diri_get_dense(&Phi_table, i)){
+			fprintf(stderr, "\e[1;31mmu <*> N table was wrong at dense %"PRIi64"\e[0m\n", i);
+		}
+	}
+	for(uint64_t i = 2; i <= sieve_max; ++i){
+		phi[i] += phi[i - 1];
+	}
+	for(int64_t i = 1; i < Phi_table.yinv; ++i){
+			if(phi[Phi_table.x/i] != (uint64_t)nut_Diri_get_sparse(&Phi_table, i)){
+				fprintf(stderr, "\e[1;31md(k-1) <*> u table was wrong at sparse %"PRIi64"\e[0m\n", i);
+			}
+		}
+	nut_Diri_destroy(&mertens_table);
+	nut_Diri_destroy(&Phi_table);
+	free(mobius);
+	free(phi);
 }
 
 // oeis.org/A084237
@@ -122,7 +153,8 @@ int main(){
 	test_dirichlet_D();
 	test_euler_sieve_conv_u();
 	test_compute_conv_u_diri();
-	test_mertens(12);
+	test_mertens(11);
+	test_compute_conv_N_diri();
 	free(f_vals);
 	free(h_vals);
 }

@@ -39,6 +39,25 @@ uint64_t nut_dirichlet_D(uint64_t max);
 /// @return true on success, false on allocation failure
 bool nut_euler_sieve_conv_u(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1]);
 
+/// Given a table of values of a multiplicative function f, compute (f <*> N)(x) for all x from 1 to n
+/// Currently this uses Euler's sieve, sometimes called a linear sieve, but this is almost certainly slower than
+/// a sieve of Eratosthenes in practice
+/// @param [in] n: inclusive upper bound of range to compute f <*> N over
+/// @param [in] f_vals: table of values for f
+/// @param [out] f_conv_N_vals: table to store values of f <*> N in
+/// @return true on success, false on allocation failure
+bool nut_euler_sieve_conv_N(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_N_vals[static n+1]);
+
+/// Given tables of values of multiplicative functions f and g, compute (f <*> g)(x) for all x from 1 to n
+/// Currently this uses Euler's sieve, sometimes called a linear sieve, but this is almost certainly slower than
+/// a sieve of Eratosthenes in practice
+/// @param [in] n: inclusive upper bound of range to compute f <*> g over
+/// @param [in] f_vals: table of values for f
+/// @param [in] g_vals: table of values for f
+/// @param [out] f_conv_g_vals: table to store values of f <*> g in
+/// @return true on success, false on allocation failure
+bool nut_euler_sieve_conv(int64_t n, const int64_t f_vals[static n+1], const int64_t g_vals[static n+1], int64_t f_conv_g_vals[static n+1]);
+
 /// Allocate internal buffers for a diri table
 /// self->buf will have f(0) through f(y) at indicies 0 through y,
 /// and then f(x/1) through f(x/(yinv - 1)) at indicies y + 1 through y + yinv - 1.
@@ -95,12 +114,17 @@ void nut_Diri_compute_N(nut_Diri *self);
 void nut_Diri_compute_mertens(nut_Diri *self, const uint8_t mobius[self->y/4 + 1]);
 
 /// Compute the value table for h = f <*> u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f
-/// See { @link compute_conv_diri_table } for details, this is just that function but with several specializations due to u being very simple.
+/// See { @link nut_Diri_compute_conv } for details, this is just that function but with several specializations due to u being very simple.
 /// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init}.
-/// self->y, self->x, and self->yinv must be set and consistend with the inputs
+/// self->y, self->x, and self->yinv must be set and consistent with the inputs
 /// @param [in] f_tbl: table for the first operand
 bool nut_Diri_compute_conv_u(nut_Diri *self, const nut_Diri *f_tbl);
 
+/// Compute the value table for h = f <*> N, the dirichlet convolution of f and N (the identity function N(n) = n), given the value table for f
+/// See { @link nut_Diri_compute_conv } for details, this is just that function but with several specializations due to N being very simple.
+/// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init}.
+/// self->y, self->x, and self->yinv must be set and consistent with the inputs
+/// @param [in] f_tbl: table for the first operand
 bool nut_Diri_compute_conv_N(nut_Diri *self, const nut_Diri *f_tbl);
 
 /// Compute the value table for h = f <*> g, the dirichlet convolution of f and g, given value tables for the operands
