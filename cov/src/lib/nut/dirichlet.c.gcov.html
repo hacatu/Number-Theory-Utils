@@ -44,18 +44,18 @@
             <td class="headerValue">unnamed</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">148</td>
-            <td class="headerCovTableEntry">242</td>
-            <td class="headerCovTableEntryLo">61.2 %</td>
+            <td class="headerCovTableEntry">226</td>
+            <td class="headerCovTableEntry">255</td>
+            <td class="headerCovTableEntryMed">88.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-05-18 07:12:52</td>
+            <td class="headerValue">2023-05-21 03:18:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">9</td>
-            <td class="headerCovTableEntry">13</td>
-            <td class="headerCovTableEntryLo">69.2 %</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntryMed">85.7 %</td>
           </tr>
           <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -93,12 +93,12 @@
 <a name="18"><span class="lineNum">      18 </span><span class="lineCov">       1000 :     return 2*res - y*y;</span></a>
 <a name="19"><span class="lineNum">      19 </span>            : }</a>
 <a name="20"><span class="lineNum">      20 </span>            : </a>
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">       2178 : static inline bool is_composite_unpacked(uint64_t n, const uint8_t buf[static n/8 + 1]){</span></a>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">       4356 :     return buf[n/8] &amp; (1 &lt;&lt; (n%8));</span></a>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">       3357 : static inline bool is_composite_unpacked(uint64_t n, const uint8_t buf[static n/8 + 1]){</span></a>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">       6714 :     return buf[n/8] &amp; (1 &lt;&lt; (n%8));</span></a>
 <a name="23"><span class="lineNum">      23 </span>            : }</a>
 <a name="24"><span class="lineNum">      24 </span>            : </a>
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">       1776 : static inline void mark_composite_unpacked(uint64_t n, uint8_t buf[static n/8 + 1]){</span></a>
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">       1776 :     buf[n/8] |= (1 &lt;&lt; (n%8));</span></a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">       2721 : static inline void mark_composite_unpacked(uint64_t n, uint8_t buf[static n/8 + 1]){</span></a>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">       2721 :     buf[n/8] |= (1 &lt;&lt; (n%8));</span></a>
 <a name="27"><span class="lineNum">      27 </span>            : }</a>
 <a name="28"><span class="lineNum">      28 </span>            : </a>
 <a name="29"><span class="lineNum">      29 </span>            : // Implemented based on (https://gbroxey.github.io/blog/2023/04/30/mult-sum-1.html)</a>
@@ -115,59 +115,59 @@
 <a name="40"><span class="lineNum">      40 </span>            : // apply a quick modification to all the multiples of p**2 that just sits on top of the one we applied for multiples</a>
 <a name="41"><span class="lineNum">      41 </span>            : // of p.  But in general, we need to make sure that we only apply the value to each output entry for the maximal</a>
 <a name="42"><span class="lineNum">      42 </span>            : // power of each prime.</a>
-<a name="43"><span class="lineNum">      43 </span><span class="lineCov">          7 : bool nut_euler_sieve_conv_u(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1]){</span></a>
-<a name="44"><span class="lineNum">      44 </span><span class="lineCov">          7 :     int64_t *smallest_ppow = malloc((n+1)*sizeof(int64_t));</span></a>
-<a name="45"><span class="lineNum">      45 </span><span class="lineCov">          7 :     uint8_t *is_c_buf = calloc(n/8 + 1, sizeof(uint8_t));</span></a>
-<a name="46"><span class="lineNum">      46 </span><span class="lineCov">          7 :     uint64_t num_primes = 0;</span></a>
-<a name="47"><span class="lineNum">      47 </span><span class="lineCov">          7 :     int64_t *primes = malloc(nut_max_primes_le(n)*sizeof(int64_t));</span></a>
-<a name="48"><span class="lineNum">      48 </span><span class="lineCov">          7 :     if(!smallest_ppow || !is_c_buf || !primes){</span></a>
+<a name="43"><span class="lineNum">      43 </span><span class="lineCov">         11 : bool nut_euler_sieve_conv_u(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1]){</span></a>
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">         11 :     int64_t *smallest_ppow = malloc((n+1)*sizeof(int64_t));</span></a>
+<a name="45"><span class="lineNum">      45 </span><span class="lineCov">         11 :     uint8_t *is_c_buf = calloc(n/8 + 1, sizeof(uint8_t));</span></a>
+<a name="46"><span class="lineNum">      46 </span><span class="lineCov">         11 :     uint64_t num_primes = 0;</span></a>
+<a name="47"><span class="lineNum">      47 </span><span class="lineCov">         11 :     int64_t *primes = malloc(nut_max_primes_le(n)*sizeof(int64_t));</span></a>
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">         11 :     if(!smallest_ppow || !is_c_buf || !primes){</span></a>
 <a name="49"><span class="lineNum">      49 </span><span class="lineNoCov">          0 :         free(smallest_ppow);</span></a>
 <a name="50"><span class="lineNum">      50 </span><span class="lineNoCov">          0 :         free(is_c_buf);</span></a>
 <a name="51"><span class="lineNum">      51 </span><span class="lineNoCov">          0 :         free(primes);</span></a>
 <a name="52"><span class="lineNum">      52 </span><span class="lineNoCov">          0 :         return false;</span></a>
 <a name="53"><span class="lineNum">      53 </span>            :     }</a>
-<a name="54"><span class="lineNum">      54 </span><span class="lineCov">          7 :     f_conv_u_vals[1] = 1;</span></a>
-<a name="55"><span class="lineNum">      55 </span><span class="lineCov">       2155 :     for(int64_t i = 2; i &lt;= n; ++i){</span></a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">         11 :     f_conv_u_vals[1] = 1;</span></a>
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">       2279 :     for(int64_t i = 2; i &lt;= n; ++i){</span></a>
 <a name="56"><span class="lineNum">      56 </span>            :         // if i is prime, add it to the list of primes</a>
-<a name="57"><span class="lineNum">      57 </span><span class="lineCov">       2148 :         if(!is_composite_unpacked(i, is_c_buf)){</span></a>
-<a name="58"><span class="lineNum">      58 </span><span class="lineCov">        391 :             primes[num_primes++] = i;</span></a>
-<a name="59"><span class="lineNum">      59 </span><span class="lineCov">        391 :             f_conv_u_vals[i] = f_vals[i] + 1;</span></a>
-<a name="60"><span class="lineNum">      60 </span><span class="lineCov">        391 :             smallest_ppow[i] = i;</span></a>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">       2268 :         if(!is_composite_unpacked(i, is_c_buf)){</span></a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">        435 :             primes[num_primes++] = i;</span></a>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">        435 :             f_conv_u_vals[i] = f_vals[i] + 1;</span></a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">        435 :             smallest_ppow[i] = i;</span></a>
 <a name="61"><span class="lineNum">      61 </span>            :         }</a>
 <a name="62"><span class="lineNum">      62 </span>            :         // the key feature of euler's sieve is that it ONLY marks off multiples</a>
 <a name="63"><span class="lineNum">      63 </span>            :         // of each number i times primes &lt;= i.  This requires storing an array of</a>
 <a name="64"><span class="lineNum">      64 </span>            :         // primes and reading it A LOT of times, but ensures that each composite number</a>
 <a name="65"><span class="lineNum">      65 </span>            :         // is visited only once</a>
-<a name="66"><span class="lineNum">      66 </span><span class="lineCov">       3191 :         for(uint64_t j = 0; j &lt; num_primes; ++j){</span></a>
-<a name="67"><span class="lineNum">      67 </span><span class="lineCov">       3191 :             int64_t p = primes[j], m;</span></a>
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">       3191 :             if(__builtin_mul_overflow(p, i, &amp;m) || m &gt; n){</span></a>
+<a name="66"><span class="lineNum">      66 </span><span class="lineCov">       3347 :         for(uint64_t j = 0; j &lt; num_primes; ++j){</span></a>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">       3347 :             int64_t p = primes[j], m;</span></a>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">       3347 :             if(__builtin_mul_overflow(p, i, &amp;m) || m &gt; n){</span></a>
 <a name="69"><span class="lineNum">      69 </span>            :                 break;</a>
 <a name="70"><span class="lineNum">      70 </span>            :             }</a>
-<a name="71"><span class="lineNum">      71 </span><span class="lineCov">       1757 :             mark_composite_unpacked(m, is_c_buf);</span></a>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">       1757 :             if(i%p == 0){// i is a multiple of p, so in particular i and p are not coprime</span></a>
+<a name="71"><span class="lineNum">      71 </span><span class="lineCov">       1833 :             mark_composite_unpacked(m, is_c_buf);</span></a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">       1833 :             if(i%p == 0){// i is a multiple of p, so in particular i and p are not coprime</span></a>
 <a name="73"><span class="lineNum">      73 </span>            :                 // also notice that because we break out of this loop at the bottom of this if statement,</a>
 <a name="74"><span class="lineNum">      74 </span>            :                 // p is in fact the smallest prime divisor of i</a>
-<a name="75"><span class="lineNum">      75 </span><span class="lineCov">        714 :                 int64_t ppow = smallest_ppow[i];</span></a>
-<a name="76"><span class="lineNum">      76 </span><span class="lineCov">        714 :                 int64_t B = ppow*p;</span></a>
-<a name="77"><span class="lineNum">      77 </span><span class="lineCov">        714 :                 smallest_ppow[m] = B;</span></a>
-<a name="78"><span class="lineNum">      78 </span><span class="lineCov">        714 :                 int64_t v = i/ppow;</span></a>
-<a name="79"><span class="lineNum">      79 </span><span class="lineCov">        714 :                 if(v != 1){// i is not a perfect power of p, that is, i = v*p**a with v != 1</span></a>
-<a name="80"><span class="lineNum">      80 </span><span class="lineCov">        634 :                     f_conv_u_vals[m] = f_conv_u_vals[v]*f_conv_u_vals[B];</span></a>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">        754 :                 int64_t ppow = smallest_ppow[i];</span></a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">        754 :                 int64_t B = ppow*p;</span></a>
+<a name="77"><span class="lineNum">      77 </span><span class="lineCov">        754 :                 smallest_ppow[m] = B;</span></a>
+<a name="78"><span class="lineNum">      78 </span><span class="lineCov">        754 :                 int64_t v = i/ppow;</span></a>
+<a name="79"><span class="lineNum">      79 </span><span class="lineCov">        754 :                 if(v != 1){// i is not a perfect power of p, that is, i = v*p**a with v != 1</span></a>
+<a name="80"><span class="lineNum">      80 </span><span class="lineCov">        650 :                     f_conv_u_vals[m] = f_conv_u_vals[v]*f_conv_u_vals[B];</span></a>
 <a name="81"><span class="lineNum">      81 </span>            :                 }else{// i is a perfect power of p (and so is m)</a>
 <a name="82"><span class="lineNum">      82 </span>            :                     // from the definition, (f &lt;*&gt; u)(p**a) = f(1)*u(p**a) + f(p)*u(p**(a-1)) + ... + f(p**a)*u(1)</a>
 <a name="83"><span class="lineNum">      83 </span>            :                     // = f(1) + f(p) + ... + f(p**a) = (f &lt;*&gt; u)(p**(a-1)) + f(p**a)</a>
-<a name="84"><span class="lineNum">      84 </span><span class="lineCov">         80 :                     f_conv_u_vals[m] = f_conv_u_vals[i] + f_vals[m];</span></a>
+<a name="84"><span class="lineNum">      84 </span><span class="lineCov">        104 :                     f_conv_u_vals[m] = f_conv_u_vals[i] + f_vals[m];</span></a>
 <a name="85"><span class="lineNum">      85 </span>            :                 }</a>
 <a name="86"><span class="lineNum">      86 </span>            :                 break;</a>
 <a name="87"><span class="lineNum">      87 </span>            :             }// otherwise, i and p are coprime, so (f &lt;*&gt; u)(i*p) = (f &lt;*&gt; u)(i)*(f &lt;*&gt; u)(p)</a>
-<a name="88"><span class="lineNum">      88 </span><span class="lineCov">       1043 :             f_conv_u_vals[m] = f_conv_u_vals[i]*f_conv_u_vals[p];</span></a>
-<a name="89"><span class="lineNum">      89 </span><span class="lineCov">       1043 :             smallest_ppow[m] = p;</span></a>
+<a name="88"><span class="lineNum">      88 </span><span class="lineCov">       1079 :             f_conv_u_vals[m] = f_conv_u_vals[i]*f_conv_u_vals[p];</span></a>
+<a name="89"><span class="lineNum">      89 </span><span class="lineCov">       1079 :             smallest_ppow[m] = p;</span></a>
 <a name="90"><span class="lineNum">      90 </span>            :         }</a>
 <a name="91"><span class="lineNum">      91 </span>            :     }</a>
-<a name="92"><span class="lineNum">      92 </span><span class="lineCov">          7 :     free(smallest_ppow);</span></a>
-<a name="93"><span class="lineNum">      93 </span><span class="lineCov">          7 :     free(primes);</span></a>
-<a name="94"><span class="lineNum">      94 </span><span class="lineCov">          7 :     free(is_c_buf);</span></a>
-<a name="95"><span class="lineNum">      95 </span><span class="lineCov">          7 :     return true;</span></a>
+<a name="92"><span class="lineNum">      92 </span><span class="lineCov">         11 :     free(smallest_ppow);</span></a>
+<a name="93"><span class="lineNum">      93 </span><span class="lineCov">         11 :     free(primes);</span></a>
+<a name="94"><span class="lineNum">      94 </span><span class="lineCov">         11 :     free(is_c_buf);</span></a>
+<a name="95"><span class="lineNum">      95 </span><span class="lineCov">         11 :     return true;</span></a>
 <a name="96"><span class="lineNum">      96 </span>            : }</a>
 <a name="97"><span class="lineNum">      97 </span>            : </a>
 <a name="98"><span class="lineNum">      98 </span><span class="lineCov">          1 : bool nut_euler_sieve_conv_N(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_N_vals[static n+1]){</span></a>
@@ -225,256 +225,281 @@
 <a name="150"><span class="lineNum">     150 </span><span class="lineCov">          1 :     return true;</span></a>
 <a name="151"><span class="lineNum">     151 </span>            : }</a>
 <a name="152"><span class="lineNum">     152 </span>            : </a>
-<a name="153"><span class="lineNum">     153 </span><span class="lineNoCov">          0 : bool nut_euler_sieve_conv(int64_t n, const int64_t f_vals[static n+1], const int64_t g_vals[static n+1], int64_t f_conv_vals[static n+1]){</span></a>
-<a name="154"><span class="lineNum">     154 </span><span class="lineNoCov">          0 :     int64_t *smallest_ppow = malloc((n+1)*sizeof(int64_t));</span></a>
-<a name="155"><span class="lineNum">     155 </span><span class="lineNoCov">          0 :     uint8_t *is_c_buf = calloc(n/8 + 1, sizeof(uint8_t));</span></a>
-<a name="156"><span class="lineNum">     156 </span><span class="lineNoCov">          0 :     uint64_t num_primes = 0;</span></a>
-<a name="157"><span class="lineNum">     157 </span><span class="lineNoCov">          0 :     int64_t *primes = malloc(nut_max_primes_le(n)*sizeof(int64_t));</span></a>
-<a name="158"><span class="lineNum">     158 </span><span class="lineNoCov">          0 :     if(!smallest_ppow || !is_c_buf || !primes){</span></a>
+<a name="153"><span class="lineNum">     153 </span><span class="lineCov">          3 : bool nut_euler_sieve_conv(int64_t n, const int64_t f_vals[static n+1], const int64_t g_vals[static n+1], int64_t f_conv_vals[static n+1]){</span></a>
+<a name="154"><span class="lineNum">     154 </span><span class="lineCov">          3 :     int64_t *smallest_ppow = malloc((n+1)*sizeof(int64_t));</span></a>
+<a name="155"><span class="lineNum">     155 </span><span class="lineCov">          3 :     uint8_t *is_c_buf = calloc(n/8 + 1, sizeof(uint8_t));</span></a>
+<a name="156"><span class="lineNum">     156 </span><span class="lineCov">          3 :     uint64_t num_primes = 0;</span></a>
+<a name="157"><span class="lineNum">     157 </span><span class="lineCov">          3 :     int64_t *primes = malloc(nut_max_primes_le(n)*sizeof(int64_t));</span></a>
+<a name="158"><span class="lineNum">     158 </span><span class="lineCov">          3 :     if(!smallest_ppow || !is_c_buf || !primes){</span></a>
 <a name="159"><span class="lineNum">     159 </span><span class="lineNoCov">          0 :         free(smallest_ppow);</span></a>
 <a name="160"><span class="lineNum">     160 </span><span class="lineNoCov">          0 :         free(is_c_buf);</span></a>
 <a name="161"><span class="lineNum">     161 </span><span class="lineNoCov">          0 :         free(primes);</span></a>
 <a name="162"><span class="lineNum">     162 </span><span class="lineNoCov">          0 :         return false;</span></a>
 <a name="163"><span class="lineNum">     163 </span>            :     }</a>
-<a name="164"><span class="lineNum">     164 </span><span class="lineNoCov">          0 :     f_conv_vals[1] = 1;</span></a>
-<a name="165"><span class="lineNum">     165 </span><span class="lineNoCov">          0 :     for(int64_t i = 2; i &lt;= n; ++i){</span></a>
+<a name="164"><span class="lineNum">     164 </span><span class="lineCov">          3 :     f_conv_vals[1] = 1;</span></a>
+<a name="165"><span class="lineNum">     165 </span><span class="lineCov">       1062 :     for(int64_t i = 2; i &lt;= n; ++i){</span></a>
 <a name="166"><span class="lineNum">     166 </span>            :         // if i is prime, add it to the list of primes</a>
-<a name="167"><span class="lineNum">     167 </span><span class="lineNoCov">          0 :         if(!is_composite_unpacked(i, is_c_buf)){</span></a>
-<a name="168"><span class="lineNum">     168 </span><span class="lineNoCov">          0 :             primes[num_primes++] = i;</span></a>
-<a name="169"><span class="lineNum">     169 </span><span class="lineNoCov">          0 :             f_conv_vals[i] = f_vals[i] + g_vals[i];</span></a>
-<a name="170"><span class="lineNum">     170 </span><span class="lineNoCov">          0 :             smallest_ppow[i] = i;</span></a>
+<a name="167"><span class="lineNum">     167 </span><span class="lineCov">       1059 :         if(!is_composite_unpacked(i, is_c_buf)){</span></a>
+<a name="168"><span class="lineNum">     168 </span><span class="lineCov">        190 :             primes[num_primes++] = i;</span></a>
+<a name="169"><span class="lineNum">     169 </span><span class="lineCov">        190 :             f_conv_vals[i] = f_vals[i] + g_vals[i];</span></a>
+<a name="170"><span class="lineNum">     170 </span><span class="lineCov">        190 :             smallest_ppow[i] = i;</span></a>
 <a name="171"><span class="lineNum">     171 </span>            :         }</a>
 <a name="172"><span class="lineNum">     172 </span>            :         // the key feature of euler's sieve is that it ONLY marks off multiples</a>
 <a name="173"><span class="lineNum">     173 </span>            :         // of each number i times primes &lt;= i.  This requires storing an array of</a>
 <a name="174"><span class="lineNum">     174 </span>            :         // primes and reading it A LOT of times, but ensures that each composite number</a>
 <a name="175"><span class="lineNum">     175 </span>            :         // is visited only once</a>
-<a name="176"><span class="lineNum">     176 </span><span class="lineNoCov">          0 :         for(uint64_t j = 0; j &lt; num_primes; ++j){</span></a>
-<a name="177"><span class="lineNum">     177 </span><span class="lineNoCov">          0 :             int64_t p = primes[j], m;</span></a>
-<a name="178"><span class="lineNum">     178 </span><span class="lineNoCov">          0 :             if(__builtin_mul_overflow(p, i, &amp;m) || m &gt; n){</span></a>
+<a name="176"><span class="lineNum">     176 </span><span class="lineCov">       1576 :         for(uint64_t j = 0; j &lt; num_primes; ++j){</span></a>
+<a name="177"><span class="lineNum">     177 </span><span class="lineCov">       1576 :             int64_t p = primes[j], m;</span></a>
+<a name="178"><span class="lineNum">     178 </span><span class="lineCov">       1576 :             if(__builtin_mul_overflow(p, i, &amp;m) || m &gt; n){</span></a>
 <a name="179"><span class="lineNum">     179 </span>            :                 break;</a>
 <a name="180"><span class="lineNum">     180 </span>            :             }</a>
-<a name="181"><span class="lineNum">     181 </span><span class="lineNoCov">          0 :             mark_composite_unpacked(m, is_c_buf);</span></a>
-<a name="182"><span class="lineNum">     182 </span><span class="lineNoCov">          0 :             if(i%p == 0){// i is a multiple of p, so in particular i and p are not coprime</span></a>
+<a name="181"><span class="lineNum">     181 </span><span class="lineCov">        869 :             mark_composite_unpacked(m, is_c_buf);</span></a>
+<a name="182"><span class="lineNum">     182 </span><span class="lineCov">        869 :             if(i%p == 0){// i is a multiple of p, so in particular i and p are not coprime</span></a>
 <a name="183"><span class="lineNum">     183 </span>            :                 // also notice that because we break out of this loop at the bottom of this if statement,</a>
 <a name="184"><span class="lineNum">     184 </span>            :                 // p is in fact the smallest prime divisor of i</a>
-<a name="185"><span class="lineNum">     185 </span><span class="lineNoCov">          0 :                 int64_t ppow = smallest_ppow[i];</span></a>
-<a name="186"><span class="lineNum">     186 </span><span class="lineNoCov">          0 :                 int64_t B = ppow*p;</span></a>
-<a name="187"><span class="lineNum">     187 </span><span class="lineNoCov">          0 :                 smallest_ppow[m] = B;</span></a>
-<a name="188"><span class="lineNum">     188 </span><span class="lineNoCov">          0 :                 int64_t v = i/ppow;</span></a>
-<a name="189"><span class="lineNum">     189 </span><span class="lineNoCov">          0 :                 if(v != 1){// i is not a perfect power of p, that is, i = v*p**a with v != 1</span></a>
-<a name="190"><span class="lineNum">     190 </span><span class="lineNoCov">          0 :                     f_conv_vals[m] = f_conv_vals[v]*f_conv_vals[B];</span></a>
+<a name="185"><span class="lineNum">     185 </span><span class="lineCov">        352 :                 int64_t ppow = smallest_ppow[i];</span></a>
+<a name="186"><span class="lineNum">     186 </span><span class="lineCov">        352 :                 int64_t B = ppow*p;</span></a>
+<a name="187"><span class="lineNum">     187 </span><span class="lineCov">        352 :                 smallest_ppow[m] = B;</span></a>
+<a name="188"><span class="lineNum">     188 </span><span class="lineCov">        352 :                 int64_t v = i/ppow;</span></a>
+<a name="189"><span class="lineNum">     189 </span><span class="lineCov">        352 :                 if(v != 1){// i is not a perfect power of p, that is, i = v*p**a with v != 1</span></a>
+<a name="190"><span class="lineNum">     190 </span><span class="lineCov">        315 :                     f_conv_vals[m] = f_conv_vals[v]*f_conv_vals[B];</span></a>
 <a name="191"><span class="lineNum">     191 </span>            :                 }else{// i is a perfect power of p (and so is m)</a>
 <a name="192"><span class="lineNum">     192 </span>            :                     // from the definition, (f &lt;*&gt; g)(p**a) = f(1)*g(p**a) + f(p)*g(p**(a-1)) + ... + f(p**a)*g(1)</a>
-<a name="193"><span class="lineNum">     193 </span><span class="lineNoCov">          0 :                     int64_t c = f_vals[i] + g_vals[i];</span></a>
-<a name="194"><span class="lineNum">     194 </span><span class="lineNoCov">          0 :                     int64_t A = p;</span></a>
-<a name="195"><span class="lineNum">     195 </span><span class="lineNoCov">          0 :                     while(A &lt; ppow){</span></a>
-<a name="196"><span class="lineNum">     196 </span><span class="lineNoCov">          0 :                         c += f_vals[A]*g_vals[ppow] + f_vals[ppow]*g_vals[A];</span></a>
-<a name="197"><span class="lineNum">     197 </span><span class="lineNoCov">          0 :                         A *= p;</span></a>
-<a name="198"><span class="lineNum">     198 </span><span class="lineNoCov">          0 :                         ppow /= p;</span></a>
+<a name="193"><span class="lineNum">     193 </span><span class="lineCov">         37 :                     int64_t c = f_vals[m] + g_vals[m];</span></a>
+<a name="194"><span class="lineNum">     194 </span><span class="lineCov">         37 :                     int64_t A = p;</span></a>
+<a name="195"><span class="lineNum">     195 </span><span class="lineCov">         68 :                     while(A &lt; ppow){</span></a>
+<a name="196"><span class="lineNum">     196 </span><span class="lineCov">         31 :                         c += f_vals[A]*g_vals[ppow] + f_vals[ppow]*g_vals[A];</span></a>
+<a name="197"><span class="lineNum">     197 </span><span class="lineCov">         31 :                         A *= p;</span></a>
+<a name="198"><span class="lineNum">     198 </span><span class="lineCov">         31 :                         ppow /= p;</span></a>
 <a name="199"><span class="lineNum">     199 </span>            :                     }</a>
-<a name="200"><span class="lineNum">     200 </span><span class="lineNoCov">          0 :                     if(A == ppow){</span></a>
-<a name="201"><span class="lineNum">     201 </span><span class="lineNoCov">          0 :                         c += f_vals[A]*g_vals[A];</span></a>
+<a name="200"><span class="lineNum">     200 </span><span class="lineCov">         37 :                     if(A == ppow){</span></a>
+<a name="201"><span class="lineNum">     201 </span><span class="lineCov">         25 :                         c += f_vals[A]*g_vals[A];</span></a>
 <a name="202"><span class="lineNum">     202 </span>            :                     }</a>
-<a name="203"><span class="lineNum">     203 </span><span class="lineNoCov">          0 :                     f_conv_vals[m] = c;</span></a>
+<a name="203"><span class="lineNum">     203 </span><span class="lineCov">         37 :                     f_conv_vals[m] = c;</span></a>
 <a name="204"><span class="lineNum">     204 </span>            :                 }</a>
 <a name="205"><span class="lineNum">     205 </span>            :                 break;</a>
 <a name="206"><span class="lineNum">     206 </span>            :             }// otherwise, i and p are coprime, so (f &lt;*&gt; u)(i*p) = (f &lt;*&gt; u)(i)*(f &lt;*&gt; u)(p)</a>
-<a name="207"><span class="lineNum">     207 </span><span class="lineNoCov">          0 :             f_conv_vals[m] = f_conv_vals[i]*f_conv_vals[p];</span></a>
-<a name="208"><span class="lineNum">     208 </span><span class="lineNoCov">          0 :             smallest_ppow[m] = p;</span></a>
+<a name="207"><span class="lineNum">     207 </span><span class="lineCov">        517 :             f_conv_vals[m] = f_conv_vals[i]*f_conv_vals[p];</span></a>
+<a name="208"><span class="lineNum">     208 </span><span class="lineCov">        517 :             smallest_ppow[m] = p;</span></a>
 <a name="209"><span class="lineNum">     209 </span>            :         }</a>
 <a name="210"><span class="lineNum">     210 </span>            :     }</a>
-<a name="211"><span class="lineNum">     211 </span><span class="lineNoCov">          0 :     free(smallest_ppow);</span></a>
-<a name="212"><span class="lineNum">     212 </span><span class="lineNoCov">          0 :     free(primes);</span></a>
-<a name="213"><span class="lineNum">     213 </span><span class="lineNoCov">          0 :     free(is_c_buf);</span></a>
-<a name="214"><span class="lineNum">     214 </span><span class="lineNoCov">          0 :     return true;</span></a>
+<a name="211"><span class="lineNum">     211 </span><span class="lineCov">          3 :     free(smallest_ppow);</span></a>
+<a name="212"><span class="lineNum">     212 </span><span class="lineCov">          3 :     free(primes);</span></a>
+<a name="213"><span class="lineNum">     213 </span><span class="lineCov">          3 :     free(is_c_buf);</span></a>
+<a name="214"><span class="lineNum">     214 </span><span class="lineCov">          3 :     return true;</span></a>
 <a name="215"><span class="lineNum">     215 </span>            : }</a>
 <a name="216"><span class="lineNum">     216 </span>            : </a>
-<a name="217"><span class="lineNum">     217 </span><span class="lineCov">          5 : bool nut_Diri_init(nut_Diri *self, int64_t x, int64_t y){</span></a>
-<a name="218"><span class="lineNum">     218 </span><span class="lineCov">          5 :     int64_t ymin = nut_u64_nth_root(x, 2);</span></a>
-<a name="219"><span class="lineNum">     219 </span><span class="lineCov">          5 :     if(y &lt; ymin){</span></a>
+<a name="217"><span class="lineNum">     217 </span><span class="lineCov">         11 : bool nut_Diri_init(nut_Diri *self, int64_t x, int64_t y){</span></a>
+<a name="218"><span class="lineNum">     218 </span><span class="lineCov">         11 :     int64_t ymin = nut_u64_nth_root(x, 2);</span></a>
+<a name="219"><span class="lineNum">     219 </span><span class="lineCov">         11 :     if(y &lt; ymin){</span></a>
 <a name="220"><span class="lineNum">     220 </span>            :         y = ymin;</a>
 <a name="221"><span class="lineNum">     221 </span>            :     }</a>
-<a name="222"><span class="lineNum">     222 </span><span class="lineCov">          5 :     int64_t yinv = x/y;</span></a>
-<a name="223"><span class="lineNum">     223 </span><span class="lineCov">          5 :     if(!(self-&gt;buf = malloc((y + yinv + 2)*sizeof(int64_t)))){</span></a>
+<a name="222"><span class="lineNum">     222 </span><span class="lineCov">         11 :     int64_t yinv = x/y;</span></a>
+<a name="223"><span class="lineNum">     223 </span><span class="lineCov">         11 :     if(!(self-&gt;buf = malloc((y + yinv + 2)*sizeof(int64_t)))){</span></a>
 <a name="224"><span class="lineNum">     224 </span>            :         return false;</a>
 <a name="225"><span class="lineNum">     225 </span>            :     }</a>
-<a name="226"><span class="lineNum">     226 </span><span class="lineCov">          5 :     self-&gt;x = x;</span></a>
-<a name="227"><span class="lineNum">     227 </span><span class="lineCov">          5 :     self-&gt;y = y;</span></a>
-<a name="228"><span class="lineNum">     228 </span><span class="lineCov">          5 :     self-&gt;yinv = yinv;</span></a>
-<a name="229"><span class="lineNum">     229 </span><span class="lineCov">          5 :     return true;</span></a>
+<a name="226"><span class="lineNum">     226 </span><span class="lineCov">         11 :     self-&gt;x = x;</span></a>
+<a name="227"><span class="lineNum">     227 </span><span class="lineCov">         11 :     self-&gt;y = y;</span></a>
+<a name="228"><span class="lineNum">     228 </span><span class="lineCov">         11 :     self-&gt;yinv = yinv;</span></a>
+<a name="229"><span class="lineNum">     229 </span><span class="lineCov">         11 :     return true;</span></a>
 <a name="230"><span class="lineNum">     230 </span>            : }</a>
 <a name="231"><span class="lineNum">     231 </span>            : </a>
-<a name="232"><span class="lineNum">     232 </span><span class="lineCov">          5 : void nut_Diri_destroy(nut_Diri *self){</span></a>
-<a name="233"><span class="lineNum">     233 </span><span class="lineCov">          5 :     free(self-&gt;buf);</span></a>
-<a name="234"><span class="lineNum">     234 </span><span class="lineCov">          5 :     *self = (nut_Diri){};</span></a>
-<a name="235"><span class="lineNum">     235 </span><span class="lineCov">          5 : }</span></a>
+<a name="232"><span class="lineNum">     232 </span><span class="lineCov">         11 : void nut_Diri_destroy(nut_Diri *self){</span></a>
+<a name="233"><span class="lineNum">     233 </span><span class="lineCov">         11 :     free(self-&gt;buf);</span></a>
+<a name="234"><span class="lineNum">     234 </span><span class="lineCov">         11 :     *self = (nut_Diri){};</span></a>
+<a name="235"><span class="lineNum">     235 </span><span class="lineCov">         11 : }</span></a>
 <a name="236"><span class="lineNum">     236 </span>            : </a>
-<a name="237"><span class="lineNum">     237 </span><span class="lineNoCov">          0 : void nut_Diri_compute_I(nut_Diri *self){</span></a>
-<a name="238"><span class="lineNum">     238 </span><span class="lineNoCov">          0 :     memset(self-&gt;buf, 0, (self-&gt;y + 1)*sizeof(int64_t));</span></a>
-<a name="239"><span class="lineNum">     239 </span><span class="lineNoCov">          0 :     self-&gt;buf[1] = 1;</span></a>
-<a name="240"><span class="lineNum">     240 </span><span class="lineNoCov">          0 :     for(int64_t i = 1; i &lt;= self-&gt;yinv; ++i){</span></a>
-<a name="241"><span class="lineNum">     241 </span><span class="lineNoCov">          0 :         self-&gt;buf[self-&gt;y + i] = 1;</span></a>
-<a name="242"><span class="lineNum">     242 </span>            :     }</a>
-<a name="243"><span class="lineNum">     243 </span><span class="lineNoCov">          0 : }</span></a>
-<a name="244"><span class="lineNum">     244 </span>            : </a>
-<a name="245"><span class="lineNum">     245 </span><span class="lineCov">          1 : void nut_Diri_compute_u(nut_Diri *self){</span></a>
-<a name="246"><span class="lineNum">     246 </span><span class="lineCov">         33 :     for(int64_t i = 0; i &lt;= self-&gt;y; ++i){</span></a>
-<a name="247"><span class="lineNum">     247 </span><span class="lineCov">         32 :         self-&gt;buf[i] = 1;</span></a>
-<a name="248"><span class="lineNum">     248 </span>            :     }</a>
-<a name="249"><span class="lineNum">     249 </span><span class="lineCov">         33 :     for(int64_t i = 1; i &lt;= self-&gt;yinv; ++i){</span></a>
-<a name="250"><span class="lineNum">     250 </span><span class="lineCov">         32 :         self-&gt;buf[self-&gt;y + i] = self-&gt;x/i;</span></a>
-<a name="251"><span class="lineNum">     251 </span>            :     }</a>
-<a name="252"><span class="lineNum">     252 </span><span class="lineCov">          1 : }</span></a>
-<a name="253"><span class="lineNum">     253 </span>            : </a>
-<a name="254"><span class="lineNum">     254 </span><span class="lineNoCov">          0 : void nut_Diri_compute_N(nut_Diri *self){</span></a>
-<a name="255"><span class="lineNum">     255 </span><span class="lineNoCov">          0 :     for(int64_t i = 0; i &lt;= self-&gt;y; ++i){</span></a>
-<a name="256"><span class="lineNum">     256 </span><span class="lineNoCov">          0 :         self-&gt;buf[i] = i;</span></a>
-<a name="257"><span class="lineNum">     257 </span>            :     }</a>
-<a name="258"><span class="lineNum">     258 </span><span class="lineNoCov">          0 :     for(int64_t i = 1; i &lt;= self-&gt;yinv; ++i){</span></a>
-<a name="259"><span class="lineNum">     259 </span><span class="lineNoCov">          0 :         int64_t v = self-&gt;x/i;</span></a>
-<a name="260"><span class="lineNum">     260 </span><span class="lineNoCov">          0 :         self-&gt;buf[self-&gt;y + i] = v*(v + 1)/2;</span></a>
+<a name="237"><span class="lineNum">     237 </span><span class="lineCov">          2 : void nut_Diri_copy(nut_Diri *dest, const nut_Diri *src){</span></a>
+<a name="238"><span class="lineNum">     238 </span><span class="lineCov">          2 :     memcpy(dest-&gt;buf, src-&gt;buf, (src-&gt;y + src-&gt;yinv + 1)*sizeof(int64_t));</span></a>
+<a name="239"><span class="lineNum">     239 </span><span class="lineCov">          2 : }</span></a>
+<a name="240"><span class="lineNum">     240 </span>            : </a>
+<a name="241"><span class="lineNum">     241 </span><span class="lineNoCov">          0 : void nut_Diri_compute_I(nut_Diri *self){</span></a>
+<a name="242"><span class="lineNum">     242 </span><span class="lineNoCov">          0 :     memset(self-&gt;buf, 0, (self-&gt;y + 1)*sizeof(int64_t));</span></a>
+<a name="243"><span class="lineNum">     243 </span><span class="lineNoCov">          0 :     self-&gt;buf[1] = 1;</span></a>
+<a name="244"><span class="lineNum">     244 </span><span class="lineNoCov">          0 :     for(int64_t i = 1; i &lt;= self-&gt;yinv; ++i){</span></a>
+<a name="245"><span class="lineNum">     245 </span><span class="lineNoCov">          0 :         self-&gt;buf[self-&gt;y + i] = 1;</span></a>
+<a name="246"><span class="lineNum">     246 </span>            :     }</a>
+<a name="247"><span class="lineNum">     247 </span><span class="lineNoCov">          0 : }</span></a>
+<a name="248"><span class="lineNum">     248 </span>            : </a>
+<a name="249"><span class="lineNum">     249 </span><span class="lineCov">          3 : void nut_Diri_compute_u(nut_Diri *self){</span></a>
+<a name="250"><span class="lineNum">     250 </span><span class="lineCov">         99 :     for(int64_t i = 0; i &lt;= self-&gt;y; ++i){</span></a>
+<a name="251"><span class="lineNum">     251 </span><span class="lineCov">         96 :         self-&gt;buf[i] = 1;</span></a>
+<a name="252"><span class="lineNum">     252 </span>            :     }</a>
+<a name="253"><span class="lineNum">     253 </span><span class="lineCov">         99 :     for(int64_t i = 1; i &lt;= self-&gt;yinv; ++i){</span></a>
+<a name="254"><span class="lineNum">     254 </span><span class="lineCov">         96 :         self-&gt;buf[self-&gt;y + i] = self-&gt;x/i;</span></a>
+<a name="255"><span class="lineNum">     255 </span>            :     }</a>
+<a name="256"><span class="lineNum">     256 </span><span class="lineCov">          3 : }</span></a>
+<a name="257"><span class="lineNum">     257 </span>            : </a>
+<a name="258"><span class="lineNum">     258 </span><span class="lineNoCov">          0 : void nut_Diri_compute_N(nut_Diri *self){</span></a>
+<a name="259"><span class="lineNum">     259 </span><span class="lineNoCov">          0 :     for(int64_t i = 0; i &lt;= self-&gt;y; ++i){</span></a>
+<a name="260"><span class="lineNum">     260 </span><span class="lineNoCov">          0 :         self-&gt;buf[i] = i;</span></a>
 <a name="261"><span class="lineNum">     261 </span>            :     }</a>
-<a name="262"><span class="lineNum">     262 </span><span class="lineNoCov">          0 : }</span></a>
-<a name="263"><span class="lineNum">     263 </span>            : </a>
-<a name="264"><span class="lineNum">     264 </span><span class="lineCov">          2 : void nut_Diri_compute_mertens(nut_Diri *self, const uint8_t mobius[self-&gt;y/4 + 1]){</span></a>
-<a name="265"><span class="lineNum">     265 </span><span class="lineCov">          2 :     nut_Diri_set_dense(self, 0, 0);</span></a>
-<a name="266"><span class="lineNum">     266 </span><span class="lineCov">          2 :     nut_Diri_set_dense(self, 1, 1);</span></a>
-<a name="267"><span class="lineNum">     267 </span><span class="lineCov">    5386117 :     for(int64_t i = 2, acc = 1, v; i &lt;= self-&gt;y; ++i){</span></a>
-<a name="268"><span class="lineNum">     268 </span><span class="lineCov">    5386115 :         if((v = nut_Bitfield2_arr_get(mobius, i)) == 3){</span></a>
-<a name="269"><span class="lineNum">     269 </span><span class="lineCov">    1637584 :             v = -1;</span></a>
-<a name="270"><span class="lineNum">     270 </span>            :         }</a>
-<a name="271"><span class="lineNum">     271 </span><span class="lineCov">    5386115 :         nut_Diri_set_dense(self, i, acc += v);</span></a>
-<a name="272"><span class="lineNum">     272 </span>            :     }</a>
-<a name="273"><span class="lineNum">     273 </span><span class="lineCov">      18600 :     for(int64_t i = self-&gt;yinv; i; --i){</span></a>
-<a name="274"><span class="lineNum">     274 </span><span class="lineCov">      18598 :         int64_t v = self-&gt;x/i;</span></a>
-<a name="275"><span class="lineNum">     275 </span><span class="lineCov">      18598 :         int64_t M = 1;</span></a>
-<a name="276"><span class="lineNum">     276 </span><span class="lineCov">      18598 :         int64_t vr = nut_u64_nth_root(v, 2);</span></a>
-<a name="277"><span class="lineNum">     277 </span><span class="lineCov">   85725584 :         for(int64_t j = 1; j &lt;= vr; ++j){</span></a>
-<a name="278"><span class="lineNum">     278 </span><span class="lineCov">   85706986 :             M -= (nut_Diri_get_dense(self, j) - nut_Diri_get_dense(self, j - 1))*(v/j);</span></a>
-<a name="279"><span class="lineNum">     279 </span>            :         }</a>
-<a name="280"><span class="lineNum">     280 </span><span class="lineCov">   85706986 :         for(int64_t j = 2; j &lt;= vr; ++j){</span></a>
-<a name="281"><span class="lineNum">     281 </span><span class="lineCov">   85688388 :             if(i*j &gt; self-&gt;yinv){</span></a>
-<a name="282"><span class="lineNum">     282 </span><span class="lineCov">   85521500 :                 M -= nut_Diri_get_dense(self, v/j);</span></a>
-<a name="283"><span class="lineNum">     283 </span>            :             }else{</a>
-<a name="284"><span class="lineNum">     284 </span><span class="lineCov">     166888 :                 M -= nut_Diri_get_sparse(self, i*j);</span></a>
-<a name="285"><span class="lineNum">     285 </span>            :             }</a>
-<a name="286"><span class="lineNum">     286 </span>            :         }</a>
-<a name="287"><span class="lineNum">     287 </span><span class="lineCov">      18598 :         if(vr &lt;= self-&gt;y){</span></a>
-<a name="288"><span class="lineNum">     288 </span><span class="lineCov">      18598 :             M += nut_Diri_get_dense(self, vr)*vr;</span></a>
-<a name="289"><span class="lineNum">     289 </span>            :         }else{</a>
-<a name="290"><span class="lineNum">     290 </span><span class="lineNoCov">          0 :             M += nut_Diri_get_sparse(self, self-&gt;x/vr)*vr;</span></a>
-<a name="291"><span class="lineNum">     291 </span>            :         }</a>
-<a name="292"><span class="lineNum">     292 </span><span class="lineCov">      18598 :         nut_Diri_set_sparse(self, i, M);</span></a>
-<a name="293"><span class="lineNum">     293 </span>            :     }</a>
-<a name="294"><span class="lineNum">     294 </span><span class="lineCov">    5386117 :     for(int64_t i = 2, v; i &lt;= self-&gt;y; ++i){</span></a>
-<a name="295"><span class="lineNum">     295 </span><span class="lineCov">    5386115 :         if((v = nut_Bitfield2_arr_get(mobius, i)) == 3){</span></a>
-<a name="296"><span class="lineNum">     296 </span><span class="lineCov">    1637584 :             v = -1;</span></a>
-<a name="297"><span class="lineNum">     297 </span>            :         }</a>
-<a name="298"><span class="lineNum">     298 </span><span class="lineCov">    5386115 :         nut_Diri_set_dense(self, i, v);</span></a>
-<a name="299"><span class="lineNum">     299 </span>            :     }</a>
-<a name="300"><span class="lineNum">     300 </span><span class="lineCov">          2 : }</span></a>
-<a name="301"><span class="lineNum">     301 </span>            : </a>
-<a name="302"><span class="lineNum">     302 </span><span class="lineCov">          5 : bool nut_Diri_compute_conv_u(nut_Diri *self, const nut_Diri *f_tbl){</span></a>
-<a name="303"><span class="lineNum">     303 </span><span class="lineCov">          5 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x){</span></a>
-<a name="304"><span class="lineNum">     304 </span><span class="lineNoCov">          0 :         return false;</span></a>
-<a name="305"><span class="lineNum">     305 </span>            :     }</a>
-<a name="306"><span class="lineNum">     306 </span>            :     // use the dense part of self to temporarily store the sums of f for small n up to y</a>
-<a name="307"><span class="lineNum">     307 </span><span class="lineCov">          5 :     self-&gt;buf[0] = 0;</span></a>
-<a name="308"><span class="lineNum">     308 </span><span class="lineCov">        160 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></a>
-<a name="309"><span class="lineNum">     309 </span><span class="lineCov">        155 :         self-&gt;buf[i] = self-&gt;buf[i-1] + f_tbl-&gt;buf[i];</span></a>
-<a name="310"><span class="lineNum">     310 </span>            :     }</a>
-<a name="311"><span class="lineNum">     311 </span><span class="lineCov">        165 :     for(int64_t i = 1; i &lt;= self-&gt;yinv; ++i){</span></a>
-<a name="312"><span class="lineNum">     312 </span><span class="lineCov">        160 :         int64_t v = self-&gt;x/i;</span></a>
-<a name="313"><span class="lineNum">     313 </span><span class="lineCov">        160 :         int64_t vr = nut_u64_nth_root(v, 2);// TODO: v is close to the previous v, so only one newton step should be needed here</span></a>
-<a name="314"><span class="lineNum">     314 </span><span class="lineCov">        160 :         int64_t h = 0;</span></a>
-<a name="315"><span class="lineNum">     315 </span><span class="lineCov">       1650 :         for(int64_t n = 1; n &lt;= vr; ++n){</span></a>
-<a name="316"><span class="lineNum">     316 </span><span class="lineCov">       1490 :             if(v/n &lt;= self-&gt;y){</span></a>
-<a name="317"><span class="lineNum">     317 </span><span class="lineCov">        925 :                 h += nut_Diri_get_dense(self, v/n);</span></a>
-<a name="318"><span class="lineNum">     318 </span>            :             }else{</a>
-<a name="319"><span class="lineNum">     319 </span><span class="lineCov">        565 :                 h += nut_Diri_get_sparse(f_tbl, i*n);</span></a>
-<a name="320"><span class="lineNum">     320 </span>            :             }</a>
-<a name="321"><span class="lineNum">     321 </span><span class="lineCov">       1490 :             h += nut_Diri_get_dense(f_tbl, n)*(v/n);</span></a>
-<a name="322"><span class="lineNum">     322 </span>            :         }</a>
-<a name="323"><span class="lineNum">     323 </span><span class="lineCov">        160 :         h -= nut_Diri_get_dense(self, vr)*vr;</span></a>
-<a name="324"><span class="lineNum">     324 </span><span class="lineCov">        160 :         nut_Diri_set_sparse(self, i, h);</span></a>
-<a name="325"><span class="lineNum">     325 </span>            :     }</a>
-<a name="326"><span class="lineNum">     326 </span><span class="lineCov">          5 :     return nut_euler_sieve_conv_u(self-&gt;y, f_tbl-&gt;buf, self-&gt;buf);</span></a>
-<a name="327"><span class="lineNum">     327 </span>            : }</a>
-<a name="328"><span class="lineNum">     328 </span>            : </a>
-<a name="329"><span class="lineNum">     329 </span><span class="lineCov">          1 : bool nut_Diri_compute_conv_N(nut_Diri *self, const nut_Diri *f_tbl){</span></a>
-<a name="330"><span class="lineNum">     330 </span><span class="lineCov">          1 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x){</span></a>
-<a name="331"><span class="lineNum">     331 </span><span class="lineNoCov">          0 :         return false;</span></a>
-<a name="332"><span class="lineNum">     332 </span>            :     }</a>
-<a name="333"><span class="lineNum">     333 </span>            :     // use the dense part of self to temporarily store the sums of f for small n up to y</a>
-<a name="334"><span class="lineNum">     334 </span><span class="lineCov">          1 :     self-&gt;buf[0] = 0;</span></a>
-<a name="335"><span class="lineNum">     335 </span><span class="lineCov">         32 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></a>
-<a name="336"><span class="lineNum">     336 </span><span class="lineCov">         31 :         self-&gt;buf[i] = self-&gt;buf[i-1] + f_tbl-&gt;buf[i];</span></a>
-<a name="337"><span class="lineNum">     337 </span>            :     }</a>
-<a name="338"><span class="lineNum">     338 </span><span class="lineCov">         33 :     for(int64_t i = 1; i &lt;= self-&gt;yinv; ++i){</span></a>
-<a name="339"><span class="lineNum">     339 </span><span class="lineCov">         32 :         int64_t v = self-&gt;x/i;</span></a>
-<a name="340"><span class="lineNum">     340 </span><span class="lineCov">         32 :         int64_t vr = nut_u64_nth_root(v, 2);</span></a>
-<a name="341"><span class="lineNum">     341 </span><span class="lineCov">         32 :         int64_t h = 0;</span></a>
-<a name="342"><span class="lineNum">     342 </span>            :         // by hyperbola formula:</a>
-<a name="343"><span class="lineNum">     343 </span>            :         // (f &lt;*&gt; N)(v) = sum(n = 1 ... vr, f(n)*(v/n)*((v/n) + 1)/2) + sum(n = 1 ... vr, F(v/n)*n) - F(vr)*vr*(vr + 1)/2</a>
-<a name="344"><span class="lineNum">     344 </span>            :         // both sums are folded together into the following loop</a>
-<a name="345"><span class="lineNum">     345 </span><span class="lineCov">        330 :         for(int64_t n = 1; n &lt;= vr; ++n){</span></a>
-<a name="346"><span class="lineNum">     346 </span><span class="lineCov">        298 :             if(v/n &lt;= self-&gt;y){</span></a>
-<a name="347"><span class="lineNum">     347 </span><span class="lineCov">        185 :                 h += nut_Diri_get_dense(self, v/n)*n;</span></a>
-<a name="348"><span class="lineNum">     348 </span>            :             }else{</a>
-<a name="349"><span class="lineNum">     349 </span><span class="lineCov">        113 :                 h += nut_Diri_get_sparse(f_tbl, i*n)*n;</span></a>
-<a name="350"><span class="lineNum">     350 </span>            :             }</a>
-<a name="351"><span class="lineNum">     351 </span><span class="lineCov">        298 :             h += nut_Diri_get_dense(f_tbl, n)*((v/n)*(v/n + 1)/2);</span></a>
-<a name="352"><span class="lineNum">     352 </span>            :         }</a>
-<a name="353"><span class="lineNum">     353 </span>            :         // finally we apply the corrective term (remove double counted values)</a>
-<a name="354"><span class="lineNum">     354 </span><span class="lineCov">         32 :         h -= nut_Diri_get_dense(self, vr)*(vr*(vr + 1)/2);</span></a>
-<a name="355"><span class="lineNum">     355 </span><span class="lineCov">         32 :         nut_Diri_set_sparse(self, i, h);</span></a>
-<a name="356"><span class="lineNum">     356 </span>            :     }</a>
-<a name="357"><span class="lineNum">     357 </span><span class="lineCov">          1 :     return nut_euler_sieve_conv_N(self-&gt;y, f_tbl-&gt;buf, self-&gt;buf);</span></a>
-<a name="358"><span class="lineNum">     358 </span>            : }</a>
-<a name="359"><span class="lineNum">     359 </span>            : </a>
-<a name="360"><span class="lineNum">     360 </span><span class="lineNoCov">          0 : bool nut_Diri_compute_conv(nut_Diri *self, const nut_Diri *f_tbl, const nut_Diri *g_tbl){</span></a>
-<a name="361"><span class="lineNum">     361 </span><span class="lineNoCov">          0 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x){</span></a>
-<a name="362"><span class="lineNum">     362 </span><span class="lineNoCov">          0 :         return false;</span></a>
-<a name="363"><span class="lineNum">     363 </span>            :     }</a>
-<a name="364"><span class="lineNum">     364 </span>            :     // use the dense part of self to temporarily store the sums of f for small n up to y</a>
-<a name="365"><span class="lineNum">     365 </span><span class="lineNoCov">          0 :     self-&gt;buf[0] = 0;</span></a>
-<a name="366"><span class="lineNum">     366 </span><span class="lineNoCov">          0 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></a>
-<a name="367"><span class="lineNum">     367 </span><span class="lineNoCov">          0 :         self-&gt;buf[i] = self-&gt;buf[i-1] + f_tbl-&gt;buf[i];</span></a>
-<a name="368"><span class="lineNum">     368 </span>            :     }</a>
-<a name="369"><span class="lineNum">     369 </span><span class="lineNoCov">          0 :     for(int64_t i = 1; i &lt;= self-&gt;yinv; ++i){</span></a>
-<a name="370"><span class="lineNum">     370 </span><span class="lineNoCov">          0 :         int64_t v = self-&gt;x/i;</span></a>
-<a name="371"><span class="lineNum">     371 </span><span class="lineNoCov">          0 :         int64_t vr = nut_u64_nth_root(v, 2);</span></a>
-<a name="372"><span class="lineNum">     372 </span><span class="lineNoCov">          0 :         int64_t h = 0;</span></a>
-<a name="373"><span class="lineNum">     373 </span><span class="lineNoCov">          0 :         for(int64_t n = 1; n &lt;= vr; ++n){</span></a>
-<a name="374"><span class="lineNum">     374 </span><span class="lineNoCov">          0 :             if(v/n &lt;= self-&gt;y){</span></a>
-<a name="375"><span class="lineNum">     375 </span><span class="lineNoCov">          0 :                 h += nut_Diri_get_dense(self, v/n)*nut_Diri_get_dense(g_tbl, n);</span></a>
-<a name="376"><span class="lineNum">     376 </span>            :             }else{</a>
-<a name="377"><span class="lineNum">     377 </span><span class="lineNoCov">          0 :                 h += nut_Diri_get_sparse(f_tbl, i*n)*nut_Diri_get_dense(g_tbl, n);</span></a>
-<a name="378"><span class="lineNum">     378 </span>            :             }</a>
-<a name="379"><span class="lineNum">     379 </span>            :         }</a>
-<a name="380"><span class="lineNum">     380 </span><span class="lineNoCov">          0 :         h -= nut_Diri_get_dense(self, vr)*(vr*(vr + 1)/2);</span></a>
-<a name="381"><span class="lineNum">     381 </span><span class="lineNoCov">          0 :         nut_Diri_set_sparse(self, i, h);</span></a>
-<a name="382"><span class="lineNum">     382 </span>            :     }</a>
-<a name="383"><span class="lineNum">     383 </span>            :     // use the dense part of self to temporarily store the sums of g for small n up to y</a>
-<a name="384"><span class="lineNum">     384 </span><span class="lineNoCov">          0 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></a>
-<a name="385"><span class="lineNum">     385 </span><span class="lineNoCov">          0 :         self-&gt;buf[i] = self-&gt;buf[i-1] + g_tbl-&gt;buf[i];</span></a>
-<a name="386"><span class="lineNum">     386 </span>            :     }</a>
-<a name="387"><span class="lineNum">     387 </span><span class="lineNoCov">          0 :     for(int64_t i = 1; i &lt;= self-&gt;yinv; ++i){</span></a>
-<a name="388"><span class="lineNum">     388 </span><span class="lineNoCov">          0 :         int64_t v = self-&gt;x/i;</span></a>
-<a name="389"><span class="lineNum">     389 </span><span class="lineNoCov">          0 :         int64_t vr = nut_u64_nth_root(v, 2);</span></a>
-<a name="390"><span class="lineNum">     390 </span><span class="lineNoCov">          0 :         int64_t h = nut_Diri_get_sparse(self, i);</span></a>
-<a name="391"><span class="lineNum">     391 </span><span class="lineNoCov">          0 :         for(int64_t n = 1; n &lt;= vr; ++n){</span></a>
-<a name="392"><span class="lineNum">     392 </span><span class="lineNoCov">          0 :             if(v/n &lt;= self-&gt;y){</span></a>
-<a name="393"><span class="lineNum">     393 </span><span class="lineNoCov">          0 :                 h += nut_Diri_get_dense(f_tbl, n)*nut_Diri_get_dense(self, v/n);</span></a>
-<a name="394"><span class="lineNum">     394 </span>            :             }else{</a>
-<a name="395"><span class="lineNum">     395 </span><span class="lineNoCov">          0 :                 h += nut_Diri_get_dense(f_tbl, n)*nut_Diri_get_sparse(g_tbl, i*n);</span></a>
-<a name="396"><span class="lineNum">     396 </span>            :             }</a>
-<a name="397"><span class="lineNum">     397 </span>            :         }</a>
-<a name="398"><span class="lineNum">     398 </span><span class="lineNoCov">          0 :         nut_Diri_set_sparse(self, i, h);</span></a>
-<a name="399"><span class="lineNum">     399 </span>            :     }</a>
-<a name="400"><span class="lineNum">     400 </span><span class="lineNoCov">          0 :     return nut_euler_sieve_conv(self-&gt;y, f_tbl-&gt;buf, g_tbl-&gt;buf, self-&gt;buf);</span></a>
-<a name="401"><span class="lineNum">     401 </span>            : }</a>
-<a name="402"><span class="lineNum">     402 </span>            : </a>
+<a name="262"><span class="lineNum">     262 </span><span class="lineNoCov">          0 :     for(int64_t i = 1; i &lt;= self-&gt;yinv; ++i){</span></a>
+<a name="263"><span class="lineNum">     263 </span><span class="lineNoCov">          0 :         int64_t v = self-&gt;x/i;</span></a>
+<a name="264"><span class="lineNum">     264 </span><span class="lineNoCov">          0 :         self-&gt;buf[self-&gt;y + i] = v*(v + 1)/2;</span></a>
+<a name="265"><span class="lineNum">     265 </span>            :     }</a>
+<a name="266"><span class="lineNum">     266 </span><span class="lineNoCov">          0 : }</span></a>
+<a name="267"><span class="lineNum">     267 </span>            : </a>
+<a name="268"><span class="lineNum">     268 </span><span class="lineCov">          2 : void nut_Diri_compute_mertens(nut_Diri *self, const uint8_t mobius[self-&gt;y/4 + 1]){</span></a>
+<a name="269"><span class="lineNum">     269 </span><span class="lineCov">          2 :     nut_Diri_set_dense(self, 0, 0);</span></a>
+<a name="270"><span class="lineNum">     270 </span><span class="lineCov">          2 :     nut_Diri_set_dense(self, 1, 1);</span></a>
+<a name="271"><span class="lineNum">     271 </span><span class="lineCov">    1160428 :     for(int64_t i = 2, acc = 1, v; i &lt;= self-&gt;y; ++i){</span></a>
+<a name="272"><span class="lineNum">     272 </span><span class="lineCov">    1160426 :         if((v = nut_Bitfield2_arr_get(mobius, i)) == 3){</span></a>
+<a name="273"><span class="lineNum">     273 </span><span class="lineCov">     352703 :             v = -1;</span></a>
+<a name="274"><span class="lineNum">     274 </span>            :         }</a>
+<a name="275"><span class="lineNum">     275 </span><span class="lineCov">    1160426 :         nut_Diri_set_dense(self, i, acc += v);</span></a>
+<a name="276"><span class="lineNum">     276 </span>            :     }</a>
+<a name="277"><span class="lineNum">     277 </span><span class="lineCov">       8651 :     for(int64_t i = self-&gt;yinv; i; --i){</span></a>
+<a name="278"><span class="lineNum">     278 </span><span class="lineCov">       8649 :         int64_t v = self-&gt;x/i;</span></a>
+<a name="279"><span class="lineNum">     279 </span><span class="lineCov">       8649 :         int64_t M = 1;</span></a>
+<a name="280"><span class="lineNum">     280 </span><span class="lineCov">       8649 :         int64_t vr = nut_u64_nth_root(v, 2);</span></a>
+<a name="281"><span class="lineNum">     281 </span><span class="lineCov">   18424698 :         for(int64_t j = 1; j &lt;= vr; ++j){</span></a>
+<a name="282"><span class="lineNum">     282 </span><span class="lineCov">   18416049 :             M -= (nut_Diri_get_dense(self, j) - nut_Diri_get_dense(self, j - 1))*(v/j);</span></a>
+<a name="283"><span class="lineNum">     283 </span>            :         }</a>
+<a name="284"><span class="lineNum">     284 </span><span class="lineCov">   18416049 :         for(int64_t j = 2; j &lt;= vr; ++j){</span></a>
+<a name="285"><span class="lineNum">     285 </span><span class="lineCov">   18407400 :             if(i*j &gt; self-&gt;yinv){</span></a>
+<a name="286"><span class="lineNum">     286 </span><span class="lineCov">   18336517 :                 M -= nut_Diri_get_dense(self, v/j);</span></a>
+<a name="287"><span class="lineNum">     287 </span>            :             }else{</a>
+<a name="288"><span class="lineNum">     288 </span><span class="lineCov">      70883 :                 M -= nut_Diri_get_sparse(self, i*j);</span></a>
+<a name="289"><span class="lineNum">     289 </span>            :             }</a>
+<a name="290"><span class="lineNum">     290 </span>            :         }</a>
+<a name="291"><span class="lineNum">     291 </span><span class="lineCov">       8649 :         if(vr &lt;= self-&gt;y){</span></a>
+<a name="292"><span class="lineNum">     292 </span><span class="lineCov">       8649 :             M += nut_Diri_get_dense(self, vr)*vr;</span></a>
+<a name="293"><span class="lineNum">     293 </span>            :         }else{</a>
+<a name="294"><span class="lineNum">     294 </span><span class="lineNoCov">          0 :             M += nut_Diri_get_sparse(self, self-&gt;x/vr)*vr;</span></a>
+<a name="295"><span class="lineNum">     295 </span>            :         }</a>
+<a name="296"><span class="lineNum">     296 </span><span class="lineCov">       8649 :         nut_Diri_set_sparse(self, i, M);</span></a>
+<a name="297"><span class="lineNum">     297 </span>            :     }</a>
+<a name="298"><span class="lineNum">     298 </span><span class="lineCov">    1160428 :     for(int64_t i = 2, v; i &lt;= self-&gt;y; ++i){</span></a>
+<a name="299"><span class="lineNum">     299 </span><span class="lineCov">    1160426 :         if((v = nut_Bitfield2_arr_get(mobius, i)) == 3){</span></a>
+<a name="300"><span class="lineNum">     300 </span><span class="lineCov">     352703 :             v = -1;</span></a>
+<a name="301"><span class="lineNum">     301 </span>            :         }</a>
+<a name="302"><span class="lineNum">     302 </span><span class="lineCov">    1160426 :         nut_Diri_set_dense(self, i, v);</span></a>
+<a name="303"><span class="lineNum">     303 </span>            :     }</a>
+<a name="304"><span class="lineNum">     304 </span><span class="lineCov">          2 : }</span></a>
+<a name="305"><span class="lineNum">     305 </span>            : </a>
+<a name="306"><span class="lineNum">     306 </span><span class="lineCov">          9 : bool nut_Diri_compute_conv_u(nut_Diri *self, const nut_Diri *f_tbl){</span></a>
+<a name="307"><span class="lineNum">     307 </span><span class="lineCov">          9 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x){</span></a>
+<a name="308"><span class="lineNum">     308 </span><span class="lineNoCov">          0 :         return false;</span></a>
+<a name="309"><span class="lineNum">     309 </span>            :     }</a>
+<a name="310"><span class="lineNum">     310 </span>            :     // use the dense part of self to temporarily store the sums of f for small n up to y</a>
+<a name="311"><span class="lineNum">     311 </span><span class="lineCov">          9 :     self-&gt;buf[0] = 0;</span></a>
+<a name="312"><span class="lineNum">     312 </span><span class="lineCov">        288 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></a>
+<a name="313"><span class="lineNum">     313 </span><span class="lineCov">        279 :         self-&gt;buf[i] = self-&gt;buf[i-1] + f_tbl-&gt;buf[i];</span></a>
+<a name="314"><span class="lineNum">     314 </span>            :     }</a>
+<a name="315"><span class="lineNum">     315 </span><span class="lineCov">        297 :     for(int64_t i = 1; i &lt;= self-&gt;yinv; ++i){</span></a>
+<a name="316"><span class="lineNum">     316 </span><span class="lineCov">        288 :         int64_t v = self-&gt;x/i;</span></a>
+<a name="317"><span class="lineNum">     317 </span><span class="lineCov">        288 :         int64_t vr = nut_u64_nth_root(v, 2);// TODO: v is close to the previous v, so only one newton step should be needed here</span></a>
+<a name="318"><span class="lineNum">     318 </span><span class="lineCov">        288 :         int64_t h = 0;</span></a>
+<a name="319"><span class="lineNum">     319 </span><span class="lineCov">       2970 :         for(int64_t n = 1; n &lt;= vr; ++n){</span></a>
+<a name="320"><span class="lineNum">     320 </span><span class="lineCov">       2682 :             if(v/n &lt;= self-&gt;y){</span></a>
+<a name="321"><span class="lineNum">     321 </span><span class="lineCov">       1665 :                 h += nut_Diri_get_dense(self, v/n);</span></a>
+<a name="322"><span class="lineNum">     322 </span>            :             }else{</a>
+<a name="323"><span class="lineNum">     323 </span><span class="lineCov">       1017 :                 h += nut_Diri_get_sparse(f_tbl, i*n);</span></a>
+<a name="324"><span class="lineNum">     324 </span>            :             }</a>
+<a name="325"><span class="lineNum">     325 </span><span class="lineCov">       2682 :             h += nut_Diri_get_dense(f_tbl, n)*(v/n);</span></a>
+<a name="326"><span class="lineNum">     326 </span>            :         }</a>
+<a name="327"><span class="lineNum">     327 </span><span class="lineCov">        288 :         h -= nut_Diri_get_dense(self, vr)*vr;</span></a>
+<a name="328"><span class="lineNum">     328 </span><span class="lineCov">        288 :         nut_Diri_set_sparse(self, i, h);</span></a>
+<a name="329"><span class="lineNum">     329 </span>            :     }</a>
+<a name="330"><span class="lineNum">     330 </span><span class="lineCov">          9 :     return nut_euler_sieve_conv_u(self-&gt;y, f_tbl-&gt;buf, self-&gt;buf);</span></a>
+<a name="331"><span class="lineNum">     331 </span>            : }</a>
+<a name="332"><span class="lineNum">     332 </span>            : </a>
+<a name="333"><span class="lineNum">     333 </span><span class="lineCov">          1 : bool nut_Diri_compute_conv_N(nut_Diri *self, const nut_Diri *f_tbl){</span></a>
+<a name="334"><span class="lineNum">     334 </span><span class="lineCov">          1 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x){</span></a>
+<a name="335"><span class="lineNum">     335 </span><span class="lineNoCov">          0 :         return false;</span></a>
+<a name="336"><span class="lineNum">     336 </span>            :     }</a>
+<a name="337"><span class="lineNum">     337 </span>            :     // use the dense part of self to temporarily store the sums of f for small n up to y</a>
+<a name="338"><span class="lineNum">     338 </span><span class="lineCov">          1 :     self-&gt;buf[0] = 0;</span></a>
+<a name="339"><span class="lineNum">     339 </span><span class="lineCov">         32 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></a>
+<a name="340"><span class="lineNum">     340 </span><span class="lineCov">         31 :         self-&gt;buf[i] = self-&gt;buf[i-1] + f_tbl-&gt;buf[i];</span></a>
+<a name="341"><span class="lineNum">     341 </span>            :     }</a>
+<a name="342"><span class="lineNum">     342 </span><span class="lineCov">         33 :     for(int64_t i = 1; i &lt;= self-&gt;yinv; ++i){</span></a>
+<a name="343"><span class="lineNum">     343 </span><span class="lineCov">         32 :         int64_t v = self-&gt;x/i;</span></a>
+<a name="344"><span class="lineNum">     344 </span><span class="lineCov">         32 :         int64_t vr = nut_u64_nth_root(v, 2);</span></a>
+<a name="345"><span class="lineNum">     345 </span><span class="lineCov">         32 :         int64_t h = 0;</span></a>
+<a name="346"><span class="lineNum">     346 </span>            :         // by hyperbola formula:</a>
+<a name="347"><span class="lineNum">     347 </span>            :         // (f &lt;*&gt; N)(v) = sum(n = 1 ... vr, f(n)*(v/n)*((v/n) + 1)/2) + sum(n = 1 ... vr, F(v/n)*n) - F(vr)*vr*(vr + 1)/2</a>
+<a name="348"><span class="lineNum">     348 </span>            :         // both sums are folded together into the following loop</a>
+<a name="349"><span class="lineNum">     349 </span><span class="lineCov">        330 :         for(int64_t n = 1; n &lt;= vr; ++n){</span></a>
+<a name="350"><span class="lineNum">     350 </span><span class="lineCov">        298 :             if(v/n &lt;= self-&gt;y){</span></a>
+<a name="351"><span class="lineNum">     351 </span><span class="lineCov">        185 :                 h += nut_Diri_get_dense(self, v/n)*n;</span></a>
+<a name="352"><span class="lineNum">     352 </span>            :             }else{</a>
+<a name="353"><span class="lineNum">     353 </span><span class="lineCov">        113 :                 h += nut_Diri_get_sparse(f_tbl, i*n)*n;</span></a>
+<a name="354"><span class="lineNum">     354 </span>            :             }</a>
+<a name="355"><span class="lineNum">     355 </span><span class="lineCov">        298 :             h += nut_Diri_get_dense(f_tbl, n)*((v/n)*(v/n + 1)/2);</span></a>
+<a name="356"><span class="lineNum">     356 </span>            :         }</a>
+<a name="357"><span class="lineNum">     357 </span>            :         // finally we apply the corrective term (remove double counted values)</a>
+<a name="358"><span class="lineNum">     358 </span><span class="lineCov">         32 :         h -= nut_Diri_get_dense(self, vr)*(vr*(vr + 1)/2);</span></a>
+<a name="359"><span class="lineNum">     359 </span><span class="lineCov">         32 :         nut_Diri_set_sparse(self, i, h);</span></a>
+<a name="360"><span class="lineNum">     360 </span>            :     }</a>
+<a name="361"><span class="lineNum">     361 </span><span class="lineCov">          1 :     return nut_euler_sieve_conv_N(self-&gt;y, f_tbl-&gt;buf, self-&gt;buf);</span></a>
+<a name="362"><span class="lineNum">     362 </span>            : }</a>
+<a name="363"><span class="lineNum">     363 </span>            : </a>
+<a name="364"><span class="lineNum">     364 </span><span class="lineCov">          2 : bool nut_Diri_compute_conv(nut_Diri *self, const nut_Diri *f_tbl, const nut_Diri *g_tbl){</span></a>
+<a name="365"><span class="lineNum">     365 </span><span class="lineCov">          2 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x){</span></a>
+<a name="366"><span class="lineNum">     366 </span><span class="lineNoCov">          0 :         return false;</span></a>
+<a name="367"><span class="lineNum">     367 </span>            :     }</a>
+<a name="368"><span class="lineNum">     368 </span>            :     // use the dense part of self to temporarily store the sums of f for small n up to y</a>
+<a name="369"><span class="lineNum">     369 </span><span class="lineCov">          2 :     self-&gt;buf[0] = 0;</span></a>
+<a name="370"><span class="lineNum">     370 </span><span class="lineCov">         64 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></a>
+<a name="371"><span class="lineNum">     371 </span><span class="lineCov">         62 :         self-&gt;buf[i] = self-&gt;buf[i-1] + f_tbl-&gt;buf[i];</span></a>
+<a name="372"><span class="lineNum">     372 </span>            :     }</a>
+<a name="373"><span class="lineNum">     373 </span><span class="lineCov">         66 :     for(int64_t i = 1; i &lt;= self-&gt;yinv; ++i){</span></a>
+<a name="374"><span class="lineNum">     374 </span><span class="lineCov">         64 :         int64_t v = self-&gt;x/i;</span></a>
+<a name="375"><span class="lineNum">     375 </span><span class="lineCov">         64 :         int64_t vr = nut_u64_nth_root(v, 2);</span></a>
+<a name="376"><span class="lineNum">     376 </span><span class="lineCov">         64 :         int64_t h = 0;</span></a>
+<a name="377"><span class="lineNum">     377 </span><span class="lineCov">        660 :         for(int64_t n = 1; n &lt;= vr; ++n){</span></a>
+<a name="378"><span class="lineNum">     378 </span><span class="lineCov">        596 :             if(v/n &lt;= self-&gt;y){</span></a>
+<a name="379"><span class="lineNum">     379 </span><span class="lineCov">        370 :                 h += nut_Diri_get_dense(self, v/n)*nut_Diri_get_dense(g_tbl, n);</span></a>
+<a name="380"><span class="lineNum">     380 </span>            :             }else{</a>
+<a name="381"><span class="lineNum">     381 </span><span class="lineCov">        226 :                 h += nut_Diri_get_sparse(f_tbl, i*n)*nut_Diri_get_dense(g_tbl, n);</span></a>
+<a name="382"><span class="lineNum">     382 </span>            :             }</a>
+<a name="383"><span class="lineNum">     383 </span>            :         }</a>
+<a name="384"><span class="lineNum">     384 </span><span class="lineCov">         64 :         nut_Diri_set_sparse(self, i, h);</span></a>
+<a name="385"><span class="lineNum">     385 </span>            :     }</a>
+<a name="386"><span class="lineNum">     386 </span>            :     // use the dense part of self to temporarily store the sums of g for small n up to y</a>
+<a name="387"><span class="lineNum">     387 </span>            :     // simultaniously, apply the adjustments to the h values.</a>
+<a name="388"><span class="lineNum">     388 </span>            :     // H(x/j) has an adjustment of F(i)V(i) where i = sqrt(x/j)</a>
+<a name="389"><span class="lineNum">     389 </span>            :     // so for every i = sqrt(x/j) value, we need to adjust all H(x/j) values</a>
+<a name="390"><span class="lineNum">     390 </span>            :     // for j in the range (x/(i + 1)**2, x/i**2] &amp;&amp; [1, yinv]</a>
+<a name="391"><span class="lineNum">     391 </span>            :     // So we can ignore some small i values where this intersection is empty, that is, yinv &lt;= x/(i + 1)**2</a>
+<a name="392"><span class="lineNum">     392 </span>            :     // (i + 1)**2 &lt;= x/yinv &lt;=&gt; i + 1 &lt;= sqrt(x/yinv)</a>
+<a name="393"><span class="lineNum">     393 </span>            :     // that is, for i &lt;= sqrt(x/yinv) - 1, there are no corresponding j to adjust</a>
+<a name="394"><span class="lineNum">     394 </span>            :     // note that x/yinv = y and i &lt;= sqrt(y) - 1 &lt;=&gt; i &lt; sqrt(y)</a>
+<a name="395"><span class="lineNum">     395 </span><span class="lineCov">          2 :     int64_t i_ub = nut_u64_nth_root(self-&gt;y, 2);</span></a>
+<a name="396"><span class="lineNum">     396 </span><span class="lineCov">         10 :     for(int64_t i = 1; i &lt; i_ub; ++i){</span></a>
+<a name="397"><span class="lineNum">     397 </span><span class="lineCov">          8 :         self-&gt;buf[i] = self-&gt;buf[i-1] + g_tbl-&gt;buf[i];</span></a>
+<a name="398"><span class="lineNum">     398 </span>            :     }</a>
+<a name="399"><span class="lineNum">     399 </span><span class="lineCov">         56 :     for(int64_t i = i_ub; i &lt;= self-&gt;y; ++i){</span></a>
+<a name="400"><span class="lineNum">     400 </span><span class="lineCov">         54 :         int64_t F = self-&gt;buf[i];</span></a>
+<a name="401"><span class="lineNum">     401 </span><span class="lineCov">         54 :         int64_t G = self-&gt;buf[i-1] + g_tbl-&gt;buf[i];</span></a>
+<a name="402"><span class="lineNum">     402 </span><span class="lineCov">         54 :         self-&gt;buf[i] = G;</span></a>
+<a name="403"><span class="lineNum">     403 </span><span class="lineCov">         54 :         int64_t j_ub = self-&gt;x/(i*i);</span></a>
+<a name="404"><span class="lineNum">     404 </span><span class="lineCov">         54 :         if(j_ub &gt; self-&gt;yinv){</span></a>
+<a name="405"><span class="lineNum">     405 </span><span class="lineCov">          2 :             j_ub = self-&gt;yinv;</span></a>
+<a name="406"><span class="lineNum">     406 </span>            :         }</a>
+<a name="407"><span class="lineNum">     407 </span><span class="lineCov">        118 :         for(int64_t j = self-&gt;x/((i + 1)*(i + 1)) + 1; j &lt;= j_ub; ++j){</span></a>
+<a name="408"><span class="lineNum">     408 </span><span class="lineCov">         64 :             int64_t h = nut_Diri_get_sparse(self, j);</span></a>
+<a name="409"><span class="lineNum">     409 </span><span class="lineCov">         64 :             nut_Diri_set_sparse(self, j, h - F*G);</span></a>
+<a name="410"><span class="lineNum">     410 </span>            :         }</a>
+<a name="411"><span class="lineNum">     411 </span>            :     }</a>
+<a name="412"><span class="lineNum">     412 </span><span class="lineCov">         66 :     for(int64_t i = 1; i &lt;= self-&gt;yinv; ++i){</span></a>
+<a name="413"><span class="lineNum">     413 </span><span class="lineCov">         64 :         int64_t v = self-&gt;x/i;</span></a>
+<a name="414"><span class="lineNum">     414 </span><span class="lineCov">         64 :         int64_t vr = nut_u64_nth_root(v, 2);</span></a>
+<a name="415"><span class="lineNum">     415 </span><span class="lineCov">         64 :         int64_t h = nut_Diri_get_sparse(self, i);</span></a>
+<a name="416"><span class="lineNum">     416 </span><span class="lineCov">        660 :         for(int64_t n = 1; n &lt;= vr; ++n){</span></a>
+<a name="417"><span class="lineNum">     417 </span><span class="lineCov">        596 :             if(v/n &lt;= self-&gt;y){</span></a>
+<a name="418"><span class="lineNum">     418 </span><span class="lineCov">        370 :                 h += nut_Diri_get_dense(f_tbl, n)*nut_Diri_get_dense(self, v/n);</span></a>
+<a name="419"><span class="lineNum">     419 </span>            :             }else{</a>
+<a name="420"><span class="lineNum">     420 </span><span class="lineCov">        226 :                 h += nut_Diri_get_dense(f_tbl, n)*nut_Diri_get_sparse(g_tbl, i*n);</span></a>
+<a name="421"><span class="lineNum">     421 </span>            :             }</a>
+<a name="422"><span class="lineNum">     422 </span>            :         }</a>
+<a name="423"><span class="lineNum">     423 </span><span class="lineCov">         64 :         nut_Diri_set_sparse(self, i, h);</span></a>
+<a name="424"><span class="lineNum">     424 </span>            :     }</a>
+<a name="425"><span class="lineNum">     425 </span><span class="lineCov">          2 :     return nut_euler_sieve_conv(self-&gt;y, f_tbl-&gt;buf, g_tbl-&gt;buf, self-&gt;buf);</span></a>
+<a name="426"><span class="lineNum">     426 </span>            : }</a>
+<a name="427"><span class="lineNum">     427 </span>            : </a>
 </pre>
       </td>
     </tr>

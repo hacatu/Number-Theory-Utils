@@ -6,6 +6,7 @@ var dirichlet_8h =
     [ "nut_euler_sieve_conv_N", "dirichlet_8h.html#a261126219a98b49b22fb0f0dc21110bb", null ],
     [ "nut_euler_sieve_conv", "dirichlet_8h.html#a3c57c65ec5c25aaecc89ed3f737baff9", null ],
     [ "nut_Diri_init", "dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4", null ],
+    [ "nut_Diri_copy", "dirichlet_8h.html#a70936073344c2883507f89368a35ecff", null ],
     [ "nut_Diri_destroy", "dirichlet_8h.html#ad11c54899255356be156c2246edb24d2", null ],
     [ "nut_Diri_compute_I", "dirichlet_8h.html#a72111f9468ba6240298b9265dc3f0ddd", null ],
     [ "nut_Diri_compute_u", "dirichlet_8h.html#a2dc081efb5714b6c3ea635f143cf8084", null ],

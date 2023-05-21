@@ -50,7 +50,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-05-18 07:12:52</td>
+            <td class="headerValue">2023-05-21 03:18:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -143,8 +143,8 @@
 <a name="68"><span class="lineNum">      68 </span>            : /// @param [in] buf: pointer to array of bitfields</a>
 <a name="69"><span class="lineNum">      69 </span>            : /// @param [in] i: index of element to get</a>
 <a name="70"><span class="lineNum">      70 </span>            : /// @return i-th element (0, 1, 2, or 3)</a>
-<a name="71"><span class="lineNum">      71 </span><span class="lineCov">   11772230 : [[gnu::pure]] static inline uint8_t nut_Bitfield2_arr_get(const uint8_t *buf, uint64_t i){</span></a>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">   11772230 :     return (buf[i/4] &gt;&gt; (i%4*2)) &amp; 3;</span></a>
+<a name="71"><span class="lineNum">      71 </span><span class="lineCov">    3320852 : [[gnu::pure]] static inline uint8_t nut_Bitfield2_arr_get(const uint8_t *buf, uint64_t i){</span></a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">    3320852 :     return (buf[i/4] &gt;&gt; (i%4*2)) &amp; 3;</span></a>
 <a name="73"><span class="lineNum">      73 </span>            : }</a>
 <a name="74"><span class="lineNum">      74 </span>            : </a>
 <a name="75"><span class="lineNum">      75 </span>            : /// Compute the factorization for every number in the range from 0 to max.</a>
