@@ -9,6 +9,75 @@
 /// file, You can obtain one at http://mozilla.org/MPL/2.0/.
 /// @section DESCRIPTION
 /// Dirichlet Hyperbola based functions for computing sums of multiplicative functions at a single value quickly
+///
+/// For a function f defined over the natural numbers, we say f is multiplicative if f(ab) = f(a)f(b) whenever a and b are coprime
+/// (have gcd 1).  There are many functions in number theory that satisfy this condition, with one of the most well known being
+/// euler's phi function.
+///
+/// A brief list of common multiplicative functions is:
+/// The dirichlet convolution identity (explained later): I(n) = 1 if n == 1; 0 otherwise
+/// Sometimes written epsilon(n), (very confusingly) u(n), or delta(n, 0) (since it is just a kroneker delta function of course)
+/// The constant function: u(n) = 1
+/// Sometimes written 1(n)
+/// The identity function: N(n) = n
+/// Sometimes written Id(n) or id(n)
+/// The power functions: N_k(n) = n**k
+/// Sometimes written Id_k(n)
+/// The divisor count function: d(n) = #{k | n} (the number of natural numbers including 1 and n which divide n)
+/// The generalized divisor functions: d_k(n) = # k-tuples ks of natural numbers such that ks multiplies out to n
+/// The divisor power sum functions: sigma_a(n) = sum(k | n, k**a) (note that a can be any real number)
+/// The mobius function: mu(n) = 0 if n is not squarefree; (-1)**Omega(n) otherwise, where Omega(n) is the number of prime factors of n with multiplicity
+/// Euler's totient function: phi(n) = #{k = 1 ... n : (k coprime n)}
+/// Any constant raised to the power of Omega(n) or omega(n) (the number of prime factors of n counted with and without multiplicity respectively)
+/// The number of non-isomorphic abelian groups of order n: a(n)
+/// The Ramanujan tau function: tau(n)
+/// The unitary divisor power sums: sigma_a^*(n) = sum(d | n where (d coprime n/d), d**a)
+/// All dirichlet characters, including the legendre symbol (n/p) for fixed p and gcd(n, m) for fixed m
+///
+/// Some of these are fully multiplicative, meaning not only do they satisfy f(ab) = f(a)f(b) for a, b coprime, but they satisfy it for all a, b.
+/// In particular, I, u, N, and N_k are fully multiplicative.
+///
+/// We often want to find the sum of a multiplicative function, often denoted by a capital version, for instance phi and Phi, f and F (for a general function, etc).
+/// We also often want to be able to analyze multiplicative functions in terms of simpler functions.
+///
+/// Multiplicative functions are fully determined by their values at prime powers, which often leads to efficient sieve based approaches to calculating them.
+/// This header provides some functions for doing this, the nut_euler_sieve family of functions, although these are mainly intended as low level
+/// subroutines for the upcoming Dirichlet Hyperbola algorithm.
+///
+/// However, if we only want to compute the sum of a multiplicative function up to some value n, sieve based methods will basically be O(nlogn),
+/// which seems very bad considering how structured multiplicative functions are.
+///
+/// Indeed, we can often do better, in particular when we want to find the sum H(n) of some multiplicative function h(n) defined as h = f <*> g
+/// where <*> denotes Dirichlet convolution.  What is Dirichlet convolution?  It is an operation for combining functions, similar to ordinary
+/// multiplication, division, addition, subtraction, composition, and so on.  It is defined as (f <*> g)(n) = sum(k | n, f(k)g(n/k)).
+/// This is mostly useful because when f and g are multiplicative f <*> g will be as well, and it lets us build up more complicated functions in terms
+/// of simpler ones.
+///
+/// Obviously, not all operations on multiplicative functions will produce multiplicative functions.  For example, if f is multiplicative, 2f is not,
+/// so multiplicative functions are not closed under scalar multiplication, and thus they are not closed under addition.
+/// They are closed under multiplication and dirichlet convolution though.
+///
+/// The Dirichlet Hyperbola algorithm lets us rewrite H(x) = sum(n <= x, h(n)) in terms of F and G as well as f and g, but crucially it lets us evaluate them
+/// at fewer values.
+///
+/// In particular, sum(n <= x, (f <*> g)(n)) = sum(n <= x, ab = n, f(a)g(b)) = sum(ab <= x, f(a)g(b))
+/// = sum(a <= A, b <= x/a, f(a)g(b)) + sum(b <= B, a <= x/b, f(a)g(b)) - sum(a <= A, b <= B, f(a)g(b))
+/// = sum(a <= A, f(a)G(x/a)) + sum(b <= B, F(x/b)g(b)) - F(A)G(B)
+/// where AB = x.  To accomplish this rearrangement, we first expanded (f <*> g) using the definition of dirichlet convolution.
+/// Then, we interpreted the sum both as an a-indexed sum and as a b-indexed sum.
+/// We could find the sum either way, but considering both sets us up to cut the work down quadratically.
+/// These two ways of interpreting the sum are EXACTLY EQUIVALENT to the trick of transforming an integral of f(x) in terms of x into
+/// an integral of f_inverse(y) in terms of y.  For integrals, it is common to just pick whichever interpretation is easier, but for our sum,
+/// we benefit from realizing that if we sum f(a)g(b) for (a <= A, b <= x/a) and then separately for (b <= B, a <= x/b), then we double count the
+/// rectangular region (a <= A, b <= B).
+/// But more importantly, if we pick A = B = sqrt(x), then we've turned one sum over (f <*> g) for n from 1 to x, which we could accomplish in
+/// about O(xlogx), into two sums over f*G and F*g for n from 1 to sqrt(x), which we can sometimes accomplish in O(sqrt(x)).
+///
+/// There is a big catch though, we now need to know values of F and G as well as f and g.
+/// Wonderfully though, we only need to know F(x/n) and G(x/n) for integral values of n, and floor(x/n) has at most 2sqrt(x) distinct values.
+/// That, arguably, is the real magic, since it lets us store only O(sqrt(x)) values of F and G.
+/// When we want to compute only H(x), this is fine, but when we want to repeatedly compute the table of values of H(x/n) for integral values of n,
+/// it is often better to make A larger than B, eg A = x**(2/3) and B = x**(1/3).
 
 #include <inttypes.h>
 #include <stdlib.h>
@@ -68,6 +137,9 @@ bool nut_euler_sieve_conv(int64_t n, const int64_t f_vals[static n+1], const int
 /// Will be increased to sqrt(x) if needed, so 0 can be used to explicitly signal you want that behavior
 /// @return true on success, false on allocation failure
 bool nut_Diri_init(nut_Diri *self, int64_t x, int64_t y);
+
+/// Copy the values from one diri table to another, which must be initialized
+void nut_Diri_copy(nut_Diri *dest, const nut_Diri *src);
 
 /// Deallocate internal buffers for a diri table
 void nut_Diri_destroy(nut_Diri *self);

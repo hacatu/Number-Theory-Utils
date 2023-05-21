@@ -190,7 +190,7 @@ bool nut_euler_sieve_conv(int64_t n, const int64_t f_vals[static n+1], const int
 					f_conv_vals[m] = f_conv_vals[v]*f_conv_vals[B];
 				}else{// i is a perfect power of p (and so is m)
 					// from the definition, (f <*> g)(p**a) = f(1)*g(p**a) + f(p)*g(p**(a-1)) + ... + f(p**a)*g(1)
-					int64_t c = f_vals[i] + g_vals[i];
+					int64_t c = f_vals[m] + g_vals[m];
 					int64_t A = p;
 					while(A < ppow){
 						c += f_vals[A]*g_vals[ppow] + f_vals[ppow]*g_vals[A];
@@ -232,6 +232,10 @@ bool nut_Diri_init(nut_Diri *self, int64_t x, int64_t y){
 void nut_Diri_destroy(nut_Diri *self){
 	free(self->buf);
 	*self = (nut_Diri){};
+}
+
+void nut_Diri_copy(nut_Diri *dest, const nut_Diri *src){
+	memcpy(dest->buf, src->buf, (src->y + src->yinv + 1)*sizeof(int64_t));
 }
 
 void nut_Diri_compute_I(nut_Diri *self){
@@ -377,12 +381,33 @@ bool nut_Diri_compute_conv(nut_Diri *self, const nut_Diri *f_tbl, const nut_Diri
 				h += nut_Diri_get_sparse(f_tbl, i*n)*nut_Diri_get_dense(g_tbl, n);
 			}
 		}
-		h -= nut_Diri_get_dense(self, vr)*(vr*(vr + 1)/2);
 		nut_Diri_set_sparse(self, i, h);
 	}
 	// use the dense part of self to temporarily store the sums of g for small n up to y
-	for(int64_t i = 1; i <= self->y; ++i){
+	// simultaniously, apply the adjustments to the h values.
+	// H(x/j) has an adjustment of F(i)V(i) where i = sqrt(x/j)
+	// so for every i = sqrt(x/j) value, we need to adjust all H(x/j) values
+	// for j in the range (x/(i + 1)**2, x/i**2] && [1, yinv]
+	// So we can ignore some small i values where this intersection is empty, that is, yinv <= x/(i + 1)**2
+	// (i + 1)**2 <= x/yinv <=> i + 1 <= sqrt(x/yinv)
+	// that is, for i <= sqrt(x/yinv) - 1, there are no corresponding j to adjust
+	// note that x/yinv = y and i <= sqrt(y) - 1 <=> i < sqrt(y)
+	int64_t i_ub = nut_u64_nth_root(self->y, 2);
+	for(int64_t i = 1; i < i_ub; ++i){
 		self->buf[i] = self->buf[i-1] + g_tbl->buf[i];
+	}
+	for(int64_t i = i_ub; i <= self->y; ++i){
+		int64_t F = self->buf[i];
+		int64_t G = self->buf[i-1] + g_tbl->buf[i];
+		self->buf[i] = G;
+		int64_t j_ub = self->x/(i*i);
+		if(j_ub > self->yinv){
+			j_ub = self->yinv;
+		}
+		for(int64_t j = self->x/((i + 1)*(i + 1)) + 1; j <= j_ub; ++j){
+			int64_t h = nut_Diri_get_sparse(self, j);
+			nut_Diri_set_sparse(self, j, h - F*G);
+		}
 	}
 	for(int64_t i = 1; i <= self->yinv; ++i){
 		int64_t v = self->x/i;

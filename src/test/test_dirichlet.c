@@ -18,6 +18,7 @@ static int64_t *f_vals;
 static int64_t *h_vals;
 
 static void test_dirichlet_D(){
+	fprintf(stderr, "\e[1;34mComputing D using dirichlet hyperbola method\e[0m\n");
 	uint64_t correct = 0;
 	uint64_t acc = 0;
 	for(uint64_t n = 1; n <= sieve_max; ++n){
@@ -33,6 +34,7 @@ static void test_dirichlet_D(){
 }
 
 static void test_euler_sieve_conv_u(){
+	fprintf(stderr, "\e[1;34mTesting Euler conv u sieve\e[0m\n");
 	if(!nut_euler_sieve_conv_u(sieve_max, f_vals, h_vals)){
 		fprintf(stderr, "\e[1;31mAllocation failed for linear_sieve_conv_u!\e[0m\n");
 	}
@@ -53,6 +55,7 @@ static void test_euler_sieve_conv_u(){
 }
 
 static void test_compute_conv_u_diri(){
+	fprintf(stderr, "\e[1;34mTesting dirichlet table conv u\e[0m\n");
 	nut_Diri dkp_table = {}, dk_table = {};
 	nut_Diri_init(&dkp_table, sieve_max, 0);
 	nut_Diri_init(&dk_table, sieve_max, 0);
@@ -87,6 +90,7 @@ static void test_compute_conv_u_diri(){
 }
 
 static void test_compute_conv_N_diri(){
+	fprintf(stderr, "\e[1;34mTesting dirichlet table conv N\e[0m\n");
 	nut_Diri mertens_table = {}, Phi_table = {};
 	nut_Diri_init(&mertens_table, sieve_max, 0);
 	nut_Diri_init(&Phi_table, sieve_max, 0);
@@ -107,14 +111,96 @@ static void test_compute_conv_N_diri(){
 		phi[i] += phi[i - 1];
 	}
 	for(int64_t i = 1; i < Phi_table.yinv; ++i){
-			if(phi[Phi_table.x/i] != (uint64_t)nut_Diri_get_sparse(&Phi_table, i)){
-				fprintf(stderr, "\e[1;31md(k-1) <*> u table was wrong at sparse %"PRIi64"\e[0m\n", i);
-			}
+		if(phi[Phi_table.x/i] != (uint64_t)nut_Diri_get_sparse(&Phi_table, i)){
+			fprintf(stderr, "\e[1;31md(k-1) <*> u table was wrong at sparse %"PRIi64"\e[0m\n", i);
 		}
+	}
 	nut_Diri_destroy(&mertens_table);
 	nut_Diri_destroy(&Phi_table);
 	free(mobius);
 	free(phi);
+}
+
+static void test_compute_conv_diri_d2(){
+	fprintf(stderr, "\e[1;34mTesting generic conv of u <*> u\e[0m\n");
+	for(int64_t i = 1; i <= (int64_t)sieve_max; ++i){
+		f_vals[i] = 1;
+	}
+	nut_euler_sieve_conv(sieve_max, f_vals, f_vals, h_vals);
+	uint64_t *d2_vals = nut_sieve_sigma_0(sieve_max);
+	check_alloc("divisor counts", d2_vals);
+	for(uint64_t i = 1; i <= sieve_max; ++i){
+		if((int64_t)d2_vals[i] != h_vals[i]){
+			fprintf(stderr, "\e[1;31mlinear sieve failed to compute u <*> u at %"PRIi64"!\e[0m\n", i);
+			break;
+		}
+	}
+	nut_Diri u_table = {}, d2_table = {};
+	nut_Diri_init(&u_table, sieve_max, 0);
+	nut_Diri_init(&d2_table, sieve_max, 0);
+	check_alloc("u table", u_table.buf);
+	check_alloc("d2 table", d2_table.buf);
+	nut_Diri_compute_u(&u_table);
+	nut_Diri_compute_conv(&d2_table, &u_table, &u_table);
+	for(int64_t i = 1; i <= d2_table.y; ++i){
+		if(d2_vals[i] != (uint64_t)nut_Diri_get_dense(&d2_table, i)){
+			fprintf(stderr, "\e[1;31mu <*> u table was wrong at dense %"PRIi64"\e[0m\n", i);
+		}
+	}
+	for(uint64_t i = 2; i <= sieve_max; ++i){
+		d2_vals[i] += d2_vals[i - 1];
+	}
+	for(int64_t i = 1; i < d2_table.yinv; ++i){
+		if(d2_vals[d2_table.x/i] != (uint64_t)nut_Diri_get_sparse(&d2_table, i)){
+			fprintf(stderr, "\e[1;31mu <*> u table was wrong at sparse %"PRIi64"\e[0m\n", i);
+		}
+	}
+	free(d2_vals);
+	nut_Diri_destroy(&u_table);
+	nut_Diri_destroy(&d2_table);
+}
+
+static void test_compute_conv_diri(){
+	fprintf(stderr, "\e[1;34mTesting dirichlet table generic conv\e[0m\n");
+	nut_Diri dkp_table = {}, dk_table = {}, d2_table = {}, d3_table = {};
+	nut_Diri_init(&dkp_table, sieve_max, 0);
+	nut_Diri_init(&dk_table, sieve_max, 0);
+	nut_Diri_init(&d2_table, sieve_max, 0);
+	nut_Diri_init(&d3_table, sieve_max, 0);
+	check_alloc("u table", dkp_table.buf);
+	check_alloc("dk table", dk_table.buf);
+	check_alloc("d2 table", d2_table.buf);
+	check_alloc("d3 table", d3_table.buf);
+	nut_Diri_compute_u(&dkp_table);
+	for(uint64_t k = 2; k < 6; ++k){
+		fprintf(stderr, "\e[1;34mFinding d_%"PRIu64"...\e[0m\n", k);
+		nut_Diri_compute_conv_u(&dk_table, &dkp_table);
+		if(k == 2){
+			nut_Diri_copy(&d2_table, &dk_table);
+		}else if(k == 3){
+			nut_Diri_copy(&d3_table, &dk_table);
+		}
+		int64_t *tmp = dkp_table.buf;
+		dkp_table.buf = dk_table.buf;
+		dk_table.buf = tmp;
+	}
+	nut_Diri_compute_conv(&dk_table, &d2_table, &d3_table);
+	for(int64_t i = 1; i <= dk_table.y; ++i){
+		if(nut_Diri_get_dense(&dk_table, i) != nut_Diri_get_dense(&dkp_table, i)){
+			fprintf(stderr, "\e[1;31mMismatch at dense %"PRIi64"\e[0m\n", i);
+			break;
+		}
+	}
+	for(int64_t i = dk_table.yinv; i; --i){
+		if(nut_Diri_get_sparse(&dk_table, i) != nut_Diri_get_sparse(&dkp_table, i)){
+			fprintf(stderr, "\e[1;31mMismatch at sparse %"PRIi64"\e[0m\n", i);
+			break;
+		}
+	}
+	nut_Diri_destroy(&dkp_table);
+	nut_Diri_destroy(&dk_table);
+	nut_Diri_destroy(&d2_table);
+	nut_Diri_destroy(&d3_table);
 }
 
 // oeis.org/A084237
@@ -153,8 +239,10 @@ int main(){
 	test_dirichlet_D();
 	test_euler_sieve_conv_u();
 	test_compute_conv_u_diri();
-	test_mertens(11);
+	test_mertens(10);
 	test_compute_conv_N_diri();
+	test_compute_conv_diri_d2();
+	test_compute_conv_diri();
 	free(f_vals);
 	free(h_vals);
 }
