@@ -32,7 +32,19 @@ static inline void mark_composite_unpacked(uint64_t n, uint8_t buf[static n/8 + 
 // this is a modification of the sieve of eratosthenes which marks off each number only once.
 // this makes strapping computation of an arbitrary multiplicative function on top of it easier,
 // but even though the codeforces post claims it is linear, in practice it will often perform worse than
-// a basic sieve of eratosthenes.  Unfortunately, while there are other ways to extend the sieve of eratosthenes
+// a basic sieve of eratosthenes.
+// Euler's sieve normally works by looping over all i <= n, and for each, consider its multiple m = p*i for every prime
+// until one divides i.  This is the smallest prime factor of m, and also ensures each composite multiple m
+// will only be visited once.  This can almost be directly modified to compute dirichlet convolutions via multiplicity,
+// there is just one small detail to take care of.  When we encounter a prime i, we set (f <*> g)[i] = f[i] + g[i].
+// Then for every multiple m = p*i by a prime until the smallest prime dividing i, we must set (f <*> g)[m].
+// When p does not divide i, p and i are coprime so we can immediately apply multiplicativity.
+// When p does divide i, we use yet another table of maximal powers of smallest primes to compute i with all powers of p
+// divided out.  Then we are left with a coprime part v, which is either 1 if i (and hence m) is a perfect power of p,
+// or not 1 otherwise.  If v is not 1, we can apply multiplicativity to p*ppow(i) and v, where ppow(i) is the largest power of p dividing i.
+// Finally, if i is a perfect power of p, we have to fall back to computing (f <*> g)[i] as a sum over the divisors of i,
+// but when g is simple, like u or N, there is a closed form for these sums.
+// Unfortunately, while there are other ways to extend the sieve of eratosthenes
 // to compute arbitrary multiplicative functions, they are nontrivial.  The approach I would like
 // to try is a sieve of eratosthenes which keeps iterators to higher powers of the current prime p it is
 // looking at ... basically, the normal sieve of eratosthenes doesn't have to worry about powers of p at all,
@@ -212,6 +224,132 @@ bool nut_euler_sieve_conv(int64_t n, const int64_t f_vals[static n+1], const int
 	free(primes);
 	free(is_c_buf);
 	return true;
+}
+
+static inline void grouped_sieve_conv_u_pp(int64_t i, int64_t pp, const int64_t f_vals[static pp+1], int64_t f_conv_u_vals[static pp+1]){
+	f_conv_u_vals[pp] = f_conv_u_vals[pp/i] + f_vals[pp];
+}
+
+static inline void grouped_sieve_conv_mark_lastpp(int64_t n, int64_t f_conv_vals[static n+1], int64_t i, int64_t pp){
+	int64_t hpp = f_conv_vals[pp];
+	for(int64_t m = pp; !__builtin_add_overflow(pp, m, &m) && m <= n;){
+		f_conv_vals[m] *= hpp;
+	}
+}
+
+static inline void grouped_sieve_conv_mark(int64_t n, int64_t f_conv_vals[static n+1], int64_t i, int64_t pp, int64_t pp_next){
+	int64_t hpp = f_conv_vals[pp];
+	int64_t m = 2*pp;
+	for(int64_t mm = pp_next;;){
+		for(; m < mm; m += pp){
+			f_conv_vals[m] *= hpp;
+		}
+		if(__builtin_add_overflow(pp_next, mm, &mm)){
+			if(__builtin_add_overflow(2*pp, m, &m) || m > n){
+				return;
+			}
+			break;
+		}else{
+			m += 2*pp;
+			if(mm > n){
+				break;
+			}
+		}
+	}
+	while(1){
+		if(m > n){
+			break;
+		}
+		f_conv_vals[m] *= hpp;
+		if(__builtin_add_overflow(pp, m, &m)){
+			break;
+		}
+	}
+}
+
+// The nut_grouped_sieve_conv* family of functions computes dirichlet convolution values for all
+// numbers in a range using a modified sieve of Eratosthenes instead of Euler's sieve.
+// The basic algorithm is as follows:
+// 1: Initialize (f <*> g)[1, ..., n] = 1
+// 2: For every prime p (primes can be detected by starting at 2 and checking if (f <*> g)[p] is still 1):
+// 3:  For every a such that p**a <= n:
+// 4:   Set (f <*> g)[p**a] to f(1)g(p**a) + f(p)g(p**(a-1)) + ... (definition of dirichlet convolution)
+// 5:   For every multiple m of p**a that isn't a multiple of p**(a+1):
+// 6:    Multiply (f <*> g)[m] by (f <*> g)[p**a]
+void nut_grouped_sieve_conv_u(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1]){
+	for(int64_t i = 1; i <= n; ++i){
+		f_conv_u_vals[i] = 1;
+	}
+	for(int64_t i = 2; i <= n; ++i){
+		if(f_conv_u_vals[i] != 1){
+			continue;
+		}
+		for(int64_t pp = i, pp_next;; pp = pp_next){
+			grouped_sieve_conv_u_pp(i, pp, f_vals, f_conv_u_vals);
+			bool last = __builtin_mul_overflow(pp, i, &pp_next) || pp_next > n;
+			if(last){
+				grouped_sieve_conv_mark_lastpp(n, f_conv_u_vals, i, pp);
+				break;
+			}
+			grouped_sieve_conv_mark(n, f_conv_u_vals, i, pp, pp_next);
+		}
+	}
+}
+
+static inline void grouped_sieve_conv_N_pp(int64_t i, int64_t pp, const int64_t f_vals[static pp+1], int64_t f_conv_N_vals[static pp+1]){
+	f_conv_N_vals[pp] = i*f_conv_N_vals[pp/i] + f_vals[pp];
+}
+
+void nut_grouped_sieve_conv_N(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_N_vals[static n+1]){
+	for(int64_t i = 1; i <= n; ++i){
+		f_conv_N_vals[i] = 1;
+	}
+	for(int64_t i = 2; i <= n; ++i){
+		if(f_conv_N_vals[i] != 1){
+			continue;
+		}
+		for(int64_t pp = i, pp_next;; pp = pp_next){
+			grouped_sieve_conv_N_pp(i, pp, f_vals, f_conv_N_vals);
+			bool last = __builtin_mul_overflow(pp, i, &pp_next) || pp_next > n;
+			if(last){
+				grouped_sieve_conv_mark_lastpp(n, f_conv_N_vals, i, pp);
+				break;
+			}
+			grouped_sieve_conv_mark(n, f_conv_N_vals, i, pp, pp_next);
+		}
+	}
+}
+
+static inline void grouped_sieve_conv_g_pp(int64_t i, int64_t pp, const int64_t f_vals[static pp+1], const int64_t g_vals[static pp+1], int64_t f_conv_N_vals[static pp+1]){
+	int64_t hpp = f_vals[pp] + g_vals[pp];
+	int64_t A = i, B = pp/i;
+	for(; A < B; A *= i, B /= i){
+		hpp += f_vals[A]*g_vals[B] + f_vals[B]*g_vals[A];
+	}
+	if(A == B){
+		hpp += f_vals[A]*g_vals[A];
+	}
+	f_conv_N_vals[pp] = hpp;
+}
+
+void nut_grouped_sieve_conv(int64_t n, const int64_t f_vals[static n+1], int64_t g_vals[static n+1], int64_t f_conv_g_vals[static n+1]){
+	for(int64_t i = 1; i <= n; ++i){
+		f_conv_g_vals[i] = 1;
+	}
+	for(int64_t i = 2; i <= n; ++i){
+		if(f_conv_g_vals[i] != 1){
+			continue;
+		}
+		for(int64_t pp = i, pp_next;; pp = pp_next){
+			grouped_sieve_conv_g_pp(i, pp, f_vals, g_vals, f_conv_g_vals);
+			bool last = __builtin_mul_overflow(pp, i, &pp_next) || pp_next > n;
+			if(last){
+				grouped_sieve_conv_mark_lastpp(n, f_conv_g_vals, i, pp);
+				break;
+			}
+			grouped_sieve_conv_mark(n, f_conv_g_vals, i, pp, pp_next);
+		}
+	}
 }
 
 bool nut_Diri_init(nut_Diri *self, int64_t x, int64_t y){

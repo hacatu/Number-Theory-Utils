@@ -101,7 +101,7 @@ uint64_t nut_dirichlet_D(uint64_t max);
 
 /// Given a table of values of a multiplicative function f, compute (f <*> u)(x) for all x from 1 to n
 /// Currently this uses Euler's sieve, sometimes called a linear sieve, but this is almost certainly slower than
-/// a sieve of Eratosthenes in practice
+/// a sieve of Eratosthenes in practice.
 /// @param [in] n: inclusive upper bound of range to compute f <*> u over
 /// @param [in] f_vals: table of values for f
 /// @param [out] f_conv_u_vals: table to store values of f <*> u in
@@ -122,10 +122,32 @@ bool nut_euler_sieve_conv_N(int64_t n, const int64_t f_vals[static n+1], int64_t
 /// a sieve of Eratosthenes in practice
 /// @param [in] n: inclusive upper bound of range to compute f <*> g over
 /// @param [in] f_vals: table of values for f
-/// @param [in] g_vals: table of values for f
+/// @param [in] g_vals: table of values for g
 /// @param [out] f_conv_g_vals: table to store values of f <*> g in
 /// @return true on success, false on allocation failure
 bool nut_euler_sieve_conv(int64_t n, const int64_t f_vals[static n+1], const int64_t g_vals[static n+1], int64_t f_conv_g_vals[static n+1]);
+
+/// Compute f <*> u for all values in a range
+/// Similar to { @link nut_euler_sieve_conv_u} but uses less memory and might be faster
+/// @param [in] n: inclusive upper bound of range
+/// @param [in] f_vals: table of values for f
+/// @param [out] f_conv_u_vals: table to store values of f <*> u in
+void nut_grouped_sieve_conv_u(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1]);
+
+/// Compute f <*> N for all values in a range
+/// Similar to { @link nut_euler_sieve_conv_N} but uses less memory and might be faster
+/// @param [in] n: inclusive upper bound of range
+/// @param [in] f_vals: table of values for f
+/// @param [out] f_conv_N_vals: table to store values of f <*> N in
+void nut_grouped_sieve_conv_N(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_N_vals[static n+1]);
+
+/// Compute f <*> g for all values in a range
+/// Similar to { @link nut_euler_sieve_conv} but uses less memory and might be faster
+/// @param [in] n: inclusive upper bound of range
+/// @param [in] f_vals: table of values for f
+/// @param [in] g_vals: table of values for f
+/// @param [out] f_conv_u_vals: table to store values of f <*> g in
+void nut_grouped_sieve_conv(int64_t n, const int64_t f_vals[static n+1], int64_t g_vals[static n+1], int64_t f_conv_g_vals[static n+1]);
 
 /// Allocate internal buffers for a diri table
 /// self->buf will have f(0) through f(y) at indicies 0 through y,
