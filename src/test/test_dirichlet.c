@@ -23,7 +23,7 @@ static void test_dirichlet_D(){
 	uint64_t acc = 0;
 	for(uint64_t n = 1; n <= sieve_max; ++n){
 		acc += sigma_vals[n];
-		if(nut_dirichlet_D(n) == acc){
+		if(nut_dirichlet_D(n, 0) == acc){
 			++correct;
 		}else{
 			fprintf(stderr, "\e[1;31mdirichlet_D(%"PRIu64") should be %"PRIu64"\e[0m\n", n, acc);
@@ -35,7 +35,7 @@ static void test_dirichlet_D(){
 
 static void test_euler_sieve_conv_u(){
 	fprintf(stderr, "\e[1;34mTesting Euler conv u sieve\e[0m\n");
-	if(!nut_euler_sieve_conv_u(sieve_max, f_vals, h_vals)){
+	if(!nut_euler_sieve_conv_u(sieve_max, 0, f_vals, h_vals)){
 		fprintf(stderr, "\e[1;31mAllocation failed for linear_sieve_conv_u!\e[0m\n");
 	}
 	if(memcmp(sigma_vals + 1, h_vals + 1, sieve_max*sizeof(int64_t))){
@@ -43,7 +43,7 @@ static void test_euler_sieve_conv_u(){
 	}
 	free(sigma_vals);
 	memset(f_vals + 2, 0, (sieve_max - 2)*sizeof(int64_t));
-	if(!nut_euler_sieve_conv_u(sieve_max, f_vals, h_vals)){
+	if(!nut_euler_sieve_conv_u(sieve_max, 0, f_vals, h_vals)){
 		fprintf(stderr, "\e[1;31mAllocation failed for linear_sieve_conv_u!\e[0m\n");
 	}
 	for(uint64_t n = 1; n <= sieve_max; ++n){
@@ -61,10 +61,10 @@ static void test_compute_conv_u_diri(){
 	nut_Diri_init(&dk_table, sieve_max, 0);
 	check_alloc("u table", dkp_table.buf);
 	check_alloc("dk table", dk_table.buf);
-	nut_Diri_compute_u(&dkp_table);
+	nut_Diri_compute_u(&dkp_table, 0);
 	for(uint64_t k = 2; k < 7; ++k){
 		fprintf(stderr, "\e[1;34mFinding d_%"PRIu64"...\e[0m\n", k);
-		nut_Diri_compute_conv_u(&dk_table, &dkp_table);
+		nut_Diri_compute_conv_u(&dk_table, 0, &dkp_table);
 		uint64_t *dk_vals = nut_sieve_dk(sieve_max, k);
 		check_alloc("dk sieve", dk_vals);
 		for(int64_t i = 1; i <= dk_table.y; ++i){
@@ -98,8 +98,8 @@ static void test_compute_conv_N_diri(){
 	check_alloc("Phi table", Phi_table.buf);
 	uint8_t *mobius = nut_sieve_mobius(mertens_table.y);
 	check_alloc("mobius sieve", mobius);
-	nut_Diri_compute_mertens(&mertens_table, mobius);
-	nut_Diri_compute_conv_N(&Phi_table, &mertens_table);
+	nut_Diri_compute_mertens(&mertens_table, 0, mobius);
+	nut_Diri_compute_conv_N(&Phi_table, 0, &mertens_table);
 	uint64_t *phi = nut_sieve_phi(sieve_max);
 	check_alloc("phi sieve", phi);
 	for(int64_t i = 1; i <= Phi_table.y; ++i){
@@ -126,7 +126,7 @@ static void test_compute_conv_diri_d2(){
 	for(int64_t i = 1; i <= (int64_t)sieve_max; ++i){
 		f_vals[i] = 1;
 	}
-	nut_euler_sieve_conv(sieve_max, f_vals, f_vals, h_vals);
+	nut_euler_sieve_conv(sieve_max, 0, f_vals, f_vals, h_vals);
 	uint64_t *d2_vals = nut_sieve_sigma_0(sieve_max);
 	check_alloc("divisor counts", d2_vals);
 	for(uint64_t i = 1; i <= sieve_max; ++i){
@@ -140,8 +140,8 @@ static void test_compute_conv_diri_d2(){
 	nut_Diri_init(&d2_table, sieve_max, 0);
 	check_alloc("u table", u_table.buf);
 	check_alloc("d2 table", d2_table.buf);
-	nut_Diri_compute_u(&u_table);
-	nut_Diri_compute_conv(&d2_table, &u_table, &u_table);
+	nut_Diri_compute_u(&u_table, 0);
+	nut_Diri_compute_conv(&d2_table, 0, &u_table, &u_table);
 	for(int64_t i = 1; i <= d2_table.y; ++i){
 		if(d2_vals[i] != (uint64_t)nut_Diri_get_dense(&d2_table, i)){
 			fprintf(stderr, "\e[1;31mu <*> u table was wrong at dense %"PRIi64"\e[0m\n", i);
@@ -171,10 +171,10 @@ static void test_compute_conv_diri(){
 	check_alloc("dk table", dk_table.buf);
 	check_alloc("d2 table", d2_table.buf);
 	check_alloc("d3 table", d3_table.buf);
-	nut_Diri_compute_u(&dkp_table);
+	nut_Diri_compute_u(&dkp_table, 0);
 	for(uint64_t k = 2; k < 6; ++k){
 		fprintf(stderr, "\e[1;34mFinding d_%"PRIu64"...\e[0m\n", k);
-		nut_Diri_compute_conv_u(&dk_table, &dkp_table);
+		nut_Diri_compute_conv_u(&dk_table, 0, &dkp_table);
 		if(k == 2){
 			nut_Diri_copy(&d2_table, &dk_table);
 		}else if(k == 3){
@@ -184,7 +184,7 @@ static void test_compute_conv_diri(){
 		dkp_table.buf = dk_table.buf;
 		dk_table.buf = tmp;
 	}
-	nut_Diri_compute_conv(&dk_table, &d2_table, &d3_table);
+	nut_Diri_compute_conv(&dk_table, 0, &d2_table, &d3_table);
 	for(int64_t i = 1; i <= dk_table.y; ++i){
 		if(nut_Diri_get_dense(&dk_table, i) != nut_Diri_get_dense(&dkp_table, i)){
 			fprintf(stderr, "\e[1;31mMismatch at dense %"PRIi64"\e[0m\n", i);
@@ -218,7 +218,7 @@ static void test_mertens(uint64_t t){
 	uint8_t *mobius = nut_sieve_mobius(y);
 	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &sieve_done);
 	check_alloc("Mobius sieve", mobius);
-	nut_Diri_compute_mertens(&mertens_table, mobius);
+	nut_Diri_compute_mertens(&mertens_table, 0, mobius);
 	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end);
 	double sieve_secs = sieve_done.tv_sec - start.tv_sec + (sieve_done.tv_nsec - start.tv_nsec)*1e-9;
 	double diri_secs = end.tv_sec - sieve_done.tv_sec + (end.tv_nsec - sieve_done.tv_nsec)*1e-9;

@@ -96,36 +96,40 @@ typedef struct{
 
 /// Compute the sum of the divisor count function d from 1 to max.
 /// @param [in] max: inclusive upper bound of range to compute sum for
+/// @param [in] m: modulus to reduce result by, or 0 to skip reducing
 /// @return the sum d(1) + ... + d(max)
-uint64_t nut_dirichlet_D(uint64_t max);
+uint64_t nut_dirichlet_D(uint64_t max, uint64_t m);
 
 /// Given a table of values of a multiplicative function f, compute (f <*> u)(x) for all x from 1 to n
-/// Currently this uses Euler's sieve, sometimes called a linear sieve, but this is almost certainly slower than
-/// a sieve of Eratosthenes in practice
+/// See { @link nut_euler_sieve_conv_u} for more info}
 /// @param [in] n: inclusive upper bound of range to compute f <*> u over
+/// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] f_vals: table of values for f
 /// @param [out] f_conv_u_vals: table to store values of f <*> u in
 /// @return true on success, false on allocation failure
-bool nut_euler_sieve_conv_u(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1]);
+bool nut_euler_sieve_conv_u(int64_t n, int64_t m, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1]);
 
 /// Given a table of values of a multiplicative function f, compute (f <*> N)(x) for all x from 1 to n
-/// Currently this uses Euler's sieve, sometimes called a linear sieve, but this is almost certainly slower than
-/// a sieve of Eratosthenes in practice
+/// See { @link nut_euler_sieve_conv_u} for more info}
 /// @param [in] n: inclusive upper bound of range to compute f <*> N over
+/// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] f_vals: table of values for f
 /// @param [out] f_conv_N_vals: table to store values of f <*> N in
 /// @return true on success, false on allocation failure
-bool nut_euler_sieve_conv_N(int64_t n, const int64_t f_vals[static n+1], int64_t f_conv_N_vals[static n+1]);
+bool nut_euler_sieve_conv_N(int64_t n, int64_t m, const int64_t f_vals[static n+1], int64_t f_conv_N_vals[static n+1]);
 
 /// Given tables of values of multiplicative functions f and g, compute (f <*> g)(x) for all x from 1 to n
-/// Currently this uses Euler's sieve, sometimes called a linear sieve, but this is almost certainly slower than
-/// a sieve of Eratosthenes in practice
+/// This uses Euler's sieve, a variant of the sieve of Eratosthenes that only marks off each multiple once.
+/// This generally has worse performance than the sieve of Eratosthenes, but some preliminary tests showed
+/// that Eratosthenes is only about 14% faster in release mode than Euler, so currently only Euler's sieve
+/// is implemented.
 /// @param [in] n: inclusive upper bound of range to compute f <*> g over
+/// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] f_vals: table of values for f
 /// @param [in] g_vals: table of values for f
 /// @param [out] f_conv_g_vals: table to store values of f <*> g in
 /// @return true on success, false on allocation failure
-bool nut_euler_sieve_conv(int64_t n, const int64_t f_vals[static n+1], const int64_t g_vals[static n+1], int64_t f_conv_g_vals[static n+1]);
+bool nut_euler_sieve_conv(int64_t n, int64_t m, const int64_t f_vals[static n+1], const int64_t g_vals[static n+1], int64_t f_conv_g_vals[static n+1]);
 
 /// Allocate internal buffers for a diri table
 /// self->buf will have f(0) through f(y) at indicies 0 through y,
@@ -172,32 +176,37 @@ void nut_Diri_compute_I(nut_Diri *self);
 /// Compute the value table for the unit function u(n) = 1
 /// Fills the dense part of the table with 1s, and computes the sparse entries with table[y + k] = U(x/k) = x/k
 /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
-void nut_Diri_compute_u(nut_Diri *self);
+/// @param [in] m: modulus to reduce results by, or 0 to skip reducing
+void nut_Diri_compute_u(nut_Diri *self, int64_t m);
 
 /// Compute the value table for the identity function N(n) = n
 /// Fills the dense part of the table with increasing numbers, and computes the sparse entries with table[y + k] = sum_N(v = x/k) = v*(v+1)/2
 /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
-void nut_Diri_compute_N(nut_Diri *self);
+/// @param [in] m: modulus to reduce results by, or 0 to skip reducing
+void nut_Diri_compute_N(nut_Diri *self, int64_t m);
 
 /// Compute the value table for the mobius function mu(n) (whose sum is called the Mertens function)
 /// Requires both an initialized nut_Diri from {@link nut_Diri_init} and a packed table of mobius values from {@link nut_sieve_mobius}.
 /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
+/// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] mobius: packed table of mobius values, from {@link nut_sieve_mobius} (with upper bound self->y).
-void nut_Diri_compute_mertens(nut_Diri *self, const uint8_t mobius[self->y/4 + 1]);
+void nut_Diri_compute_mertens(nut_Diri *self, int64_t m, const uint8_t mobius[self->y/4 + 1]);
 
 /// Compute the value table for h = f <*> u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f
 /// See { @link nut_Diri_compute_conv } for details, this is just that function but with several specializations due to u being very simple.
 /// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init}.
 /// self->y, self->x, and self->yinv must be set and consistent with the inputs
+/// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] f_tbl: table for the first operand
-bool nut_Diri_compute_conv_u(nut_Diri *self, const nut_Diri *f_tbl);
+bool nut_Diri_compute_conv_u(nut_Diri *self, int64_t m, const nut_Diri *f_tbl);
 
 /// Compute the value table for h = f <*> N, the dirichlet convolution of f and N (the identity function N(n) = n), given the value table for f
 /// See { @link nut_Diri_compute_conv } for details, this is just that function but with several specializations due to N being very simple.
 /// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init}.
 /// self->y, self->x, and self->yinv must be set and consistent with the inputs
+/// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] f_tbl: table for the first operand
-bool nut_Diri_compute_conv_N(nut_Diri *self, const nut_Diri *f_tbl);
+bool nut_Diri_compute_conv_N(nut_Diri *self, int64_t m, const nut_Diri *f_tbl);
 
 /// Compute the value table for h = f <*> g, the dirichlet convolution of f and g, given value tables for the operands
 /// self must have been initialized using { @link nut_Diri_init}, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl
@@ -207,7 +216,8 @@ bool nut_Diri_compute_conv_N(nut_Diri *self, const nut_Diri *f_tbl);
 /// try to use a specialized function from this library and use that instead.
 /// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init}.
 /// self->y, self->x, and self->yinv must be set and consistend with the inputs
+/// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] f_tbl: table for the first operand (dirichlet convolution is commutative, so order doesn't matter)
 /// @param [in] g_tbl: table for the second operand
-bool nut_Diri_compute_conv(nut_Diri *self, const nut_Diri *f_tbl, const nut_Diri *g_tbl);
+bool nut_Diri_compute_conv(nut_Diri *self, int64_t m, const nut_Diri *f_tbl, const nut_Diri *g_tbl);
 
