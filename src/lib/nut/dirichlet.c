@@ -1,4 +1,3 @@
-#include "nut/modular_math.h"
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,6 +5,7 @@
 #include <math.h>
 #include <stdio.h>
 
+#include <nut/modular_math.h>
 #include <nut/factorization.h>
 #include <nut/dirichlet.h>
 #include <nut/sieves.h>
@@ -69,7 +69,7 @@ static inline void mark_composite_unpacked(uint64_t n, uint8_t buf[static n/8 + 
 // When i is prime, result[i] will remain set to 1 when we get to the ith loop.
 // HOWEVER, when (f <*> g)(n) can be 1 for composite values of n, this is a problem because result[i] = 1 no longer means i is prime.
 // For convolutions which can be 1 for composite inputs, we would need to allocate a separate array to store whether or not each i is prime.
-bool nut_euler_sieve_conv_u(int64_t n, int64_t modulus, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1]){
+bool nut_euler_sieve_conv_u(int64_t n, int64_t modulus, const int64_t f_vals[restrict static n+1], int64_t f_conv_u_vals[restrict static n+1]){
 	int64_t *smallest_ppow = malloc((n+1)*sizeof(int64_t));
 	uint8_t *is_c_buf = calloc(n/8 + 1, sizeof(uint8_t));
 	uint64_t num_primes = 0;
@@ -128,7 +128,7 @@ bool nut_euler_sieve_conv_u(int64_t n, int64_t modulus, const int64_t f_vals[sta
 	return true;
 }
 
-bool nut_euler_sieve_conv_N(int64_t n, int64_t modulus, const int64_t f_vals[static n+1], int64_t f_conv_N_vals[static n+1]){
+bool nut_euler_sieve_conv_N(int64_t n, int64_t modulus, const int64_t f_vals[restrict static n+1], int64_t f_conv_N_vals[restrict static n+1]){
 	int64_t *smallest_ppow = malloc((n+1)*sizeof(int64_t));
 	uint8_t *is_c_buf = calloc(n/8 + 1, sizeof(uint8_t));
 	uint64_t num_primes = 0;
@@ -191,7 +191,7 @@ bool nut_euler_sieve_conv_N(int64_t n, int64_t modulus, const int64_t f_vals[sta
 	return true;
 }
 
-bool nut_euler_sieve_conv(int64_t n, int64_t modulus, const int64_t f_vals[static n+1], const int64_t g_vals[static n+1], int64_t f_conv_vals[static n+1]){
+bool nut_euler_sieve_conv(int64_t n, int64_t modulus, const int64_t f_vals[static n+1], const int64_t g_vals[static n+1], int64_t f_conv_vals[restrict static n+1]){
 	int64_t *smallest_ppow = malloc((n+1)*sizeof(int64_t));
 	uint8_t *is_c_buf = calloc(n/8 + 1, sizeof(uint8_t));
 	uint64_t num_primes = 0;
@@ -289,7 +289,7 @@ void nut_Diri_destroy(nut_Diri *self){
 	*self = (nut_Diri){};
 }
 
-void nut_Diri_copy(nut_Diri *dest, const nut_Diri *src){
+void nut_Diri_copy(nut_Diri *restrict dest, const nut_Diri *restrict src){
 	memcpy(dest->buf, src->buf, (src->y + src->yinv + 1)*sizeof(int64_t));
 }
 
@@ -326,7 +326,7 @@ void nut_Diri_compute_N(nut_Diri *self, int64_t m){
 	}
 }
 
-void nut_Diri_compute_mertens(nut_Diri *self, int64_t m, const uint8_t mobius[self->y/4 + 1]){
+void nut_Diri_compute_mertens(nut_Diri *restrict self, int64_t m, const uint8_t mobius[restrict static self->y/4 + 1]){
 	nut_Diri_set_dense(self, 0, 0);
 	nut_Diri_set_dense(self, 1, 1);
 	for(int64_t i = 2, acc = 1, v; i <= self->y; ++i){
@@ -380,7 +380,7 @@ void nut_Diri_compute_mertens(nut_Diri *self, int64_t m, const uint8_t mobius[se
 	}
 }
 
-bool nut_Diri_compute_conv_u(nut_Diri *self, int64_t m, const nut_Diri *f_tbl){
+bool nut_Diri_compute_conv_u(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl){
 	if(self->y != f_tbl->y || self->x != f_tbl->x){
 		return false;
 	}
@@ -423,7 +423,7 @@ bool nut_Diri_compute_conv_u(nut_Diri *self, int64_t m, const nut_Diri *f_tbl){
 	return nut_euler_sieve_conv_u(self->y, m, f_tbl->buf, self->buf);
 }
 
-bool nut_Diri_compute_conv_N(nut_Diri *self, int64_t m, const nut_Diri *f_tbl){
+bool nut_Diri_compute_conv_N(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl){
 	if(self->y != f_tbl->y || self->x != f_tbl->x){
 		return false;
 	}
@@ -474,7 +474,7 @@ bool nut_Diri_compute_conv_N(nut_Diri *self, int64_t m, const nut_Diri *f_tbl){
 	return nut_euler_sieve_conv_N(self->y, m, f_tbl->buf, self->buf);
 }
 
-bool nut_Diri_compute_conv(nut_Diri *self, int64_t m, const nut_Diri *f_tbl, const nut_Diri *g_tbl){
+bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f_tbl, const nut_Diri *g_tbl){
 	if(self->y != f_tbl->y || self->x != f_tbl->x){
 		return false;
 	}

@@ -5,11 +5,7 @@
 
 #include <nut/modular_math.h>
 #include <nut/factorization.h>
-
-static inline void cleanup_free(void *_p){
-	free(*(void**)_p);
-	*(void**)_p = NULL;
-}
+#include <nut/debug.h>
 
 nut_Factors *nut_make_Factors_w(uint64_t max_primes){
 	static const nut_Factors dummy;
@@ -133,16 +129,13 @@ uint64_t nut_Factor_carmichael(const nut_Factors *factors){
 	return s;
 }
 
-int nut_Factor_forall_divs_tmptmp(const nut_Factors *factors, int (*f)(const nut_Factors*, uint64_t, void*), void *data){
-//#pragma GCC diagnostic push
-//#pragma GCC diagnostic ignored "-Wincompatible-pointer-types"
+int nut_Factor_forall_divs_tmptmp(const nut_Factors *restrict factors, int (*f)(const nut_Factors*, uint64_t, void*), void *restrict data){
 	nut_Factors *dfactors [[gnu::cleanup(cleanup_free)]] = nut_Factors_copy(factors);
 	nut_Factors *pfactors [[gnu::cleanup(cleanup_free)]] = nut_Factors_copy(factors);
-//#pragma GCC pop
-	return nut_Factor_forall_divs(factors, f, data, dfactors, pfactors);
+	return dfactors && pfactors && nut_Factor_forall_divs(factors, f, data, dfactors, pfactors);
 }
 
-int nut_Factor_forall_divs(const nut_Factors *factors, int (*f)(const nut_Factors*, uint64_t, void*), void *data, nut_Factors *dfactors, nut_Factors *pfactors){
+int nut_Factor_forall_divs(const nut_Factors *restrict factors, int (*f)(const nut_Factors*, uint64_t, void*), void *restrict data, nut_Factors *restrict dfactors, nut_Factors *restrict pfactors){
 	dfactors->num_primes = factors->num_primes;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		dfactors->factors[i].prime = factors->factors[i].prime;
@@ -172,16 +165,13 @@ int nut_Factor_forall_divs(const nut_Factors *factors, int (*f)(const nut_Factor
 	}
 }
 
-int nut_Factor_forall_divs_le_tmptmp(const nut_Factors *factors, uint64_t d_max, int (*f)(const nut_Factors*, uint64_t, void*), void *data){
-//#pragma GCC diagnostic push
-//#pragma GCC diagnostic ignored "-Wincompatible-pointer-types"
+int nut_Factor_forall_divs_le_tmptmp(const nut_Factors *restrict factors, uint64_t d_max, int (*f)(const nut_Factors*, uint64_t, void*), void *restrict data){
 	nut_Factors *dfactors [[gnu::cleanup(cleanup_free)]] = nut_Factors_copy(factors);
 	nut_Factors *pfactors [[gnu::cleanup(cleanup_free)]] = nut_Factors_copy(factors);
-//#pragma GCC pop
-	return nut_Factor_forall_divs_le(factors, d_max, f, data, dfactors, pfactors);
+	return dfactors && pfactors && nut_Factor_forall_divs_le(factors, d_max, f, data, dfactors, pfactors);
 }
 
-int nut_Factor_forall_divs_le(const nut_Factors *factors, uint64_t d_max, int (*f)(const nut_Factors*, uint64_t, void*), void *data, nut_Factors *dfactors, nut_Factors *pfactors){
+int nut_Factor_forall_divs_le(const nut_Factors *restrict factors, uint64_t d_max, int (*f)(const nut_Factors*, uint64_t, void*), void *restrict data, nut_Factors *restrict dfactors, nut_Factors *restrict pfactors){
 	dfactors->num_primes = factors->num_primes;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		dfactors->factors[i].prime = factors->factors[i].prime;
@@ -236,8 +226,8 @@ void nut_Factor_append(nut_Factors *factors, uint64_t m, uint64_t k){
 	}
 }
 
-void nut_Factor_combine(nut_Factors *factors, const nut_Factors *factors2, uint64_t k){
-	nut_Factors *factors3 = nut_make_Factors_w(factors->num_primes + factors2->num_primes);
+void nut_Factor_combine(nut_Factors *restrict factors, const nut_Factors *restrict factors2, uint64_t k){
+	nut_Factors *factors3 [[gnu::cleanup(cleanup_free)]] = nut_make_Factors_w(factors->num_primes + factors2->num_primes);
 	uint64_t i = 0, i2 = 0, i3 = 0;
 	while(i < factors->num_primes && i2 < factors2->num_primes){
 		if(factors->factors[i].prime < factors2->factors[i2].prime){
@@ -260,10 +250,9 @@ void nut_Factor_combine(nut_Factors *factors, const nut_Factors *factors2, uint6
 	//TODO: elide copying initial factors from factors to factors3 and back to factors
 	memcpy(factors->factors, factors3->factors, i3*sizeof(*factors->factors));
 	factors->num_primes = i3;
-	free(factors3);
 }
 
-int nut_Factor_fprint(FILE *file, const nut_Factors *factors){
+int nut_Factor_fprint(FILE *restrict file, const nut_Factors *restrict factors){
 	int res = 0;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		uint64_t power = factors->factors[i].power;
@@ -284,20 +273,7 @@ int nut_Factor_fprint(FILE *file, const nut_Factors *factors){
 	return res;
 }
 
-uint64_t nut_u64_powmod(uint64_t b, uint64_t e, uint64_t n){
-	uint64_t r = 1;
-	b %= n;
-	while(e){
-		if(e&1){
-			r = (uint128_t)r*b%n;
-		}
-		e >>= 1;
-		b = (uint128_t)b*b%n;
-	}
-	return (uint64_t)r;
-}
-
-int nut_u64_is_prime_dmr(uint64_t n){
+bool nut_u64_is_prime_dmr(uint64_t n){
 	//static const uint64_t DMR_PRIMES[7] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};//sufficient for 64 bit numbers
 	//had to disable 7 base check because the last base is too large to be squared under 64 bit multiplication
 	static const uint64_t DMR_PRIMES[12] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};//sufficient for 64 bit numbers
@@ -329,10 +305,10 @@ int nut_u64_is_prime_dmr(uint64_t n){
 				goto CONTINUE_WITNESSLOOP;
 			}
 		}
-		return 0;
+		return false;
 		CONTINUE_WITNESSLOOP:;
 	}
-	return 1;
+	return true;
 }
 
 /*
@@ -361,28 +337,6 @@ int is_prime_ecam(uint64_t n){
 }
 */
 
-uint64_t nut_u64_rand(uint64_t a, uint64_t b){
-	uint64_t l = b - a, r = 0, bytes = (71 - __builtin_clzll(l))/8;
-	uint64_t ub;
-	if(bytes == 8){
-		ub = 0x7FFFFFFFFFFFFFFFull%l*-2;
-	}else{
-		ub = 1ull << (bytes*8);
-		ub -= ub%l;
-	}
-	do{
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-result"
-		getrandom(&r, bytes, 0);
-#pragma GCC diagnostic pop
-	}while(r >= ub);
-	return r%l + a;
-}
-
-uint64_t nut_u64_prand(uint64_t a, uint64_t b){
-	return nut_u64_rand(a, b);//TODO: test if this is a bottleneck, we don't need calls to this function to be secure
-}
-
 const uint64_t nut_small_primes[25] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
 
 const nut_FactorConf nut_default_factor_conf = {
@@ -392,7 +346,7 @@ const nut_FactorConf nut_default_factor_conf = {
 	.lenstra_bfac= 10        //roughly speaking, the number of iterations to try before picking a new random point and curve
 };
 
-uint64_t nut_u64_factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], nut_Factors *factors){
+uint64_t nut_u64_factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes[restrict static num_primes], nut_Factors *restrict factors){
 	factors->num_primes = 0;
 	for(uint64_t i = 0; i < num_primes; ++i){
 		uint64_t p = primes[i];
@@ -418,7 +372,7 @@ uint64_t nut_u64_factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_
 	return n;
 }
 
-uint64_t nut_u64_factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], const nut_FactorConf *conf, nut_Factors *factors){
+uint64_t nut_u64_factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes[restrict static num_primes], const nut_FactorConf *restrict conf, nut_Factors *restrict factors){
 	n = nut_u64_factor_trial_div(n, num_primes, primes, factors);
 	if(n == 1){
 		return 1;
@@ -430,7 +384,7 @@ uint64_t nut_u64_factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_
 		return 1;
 	}
 	uint64_t smoothness = 101*101;
-	nut_Factors *factors2 = nut_make_Factors_w(NUT_MAX_PRIMES_64);
+	nut_Factors *factors2 [[gnu::cleanup(cleanup_free)]] = nut_make_Factors_w(NUT_MAX_PRIMES_64);
 	uint64_t m;
 	while(1){
 		if(n <= conf->pollard_max){//TODO: allow iteration count based stopping of pollard-rho brent so we can get small factors of big numbers that way?
@@ -448,23 +402,17 @@ uint64_t nut_u64_factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_
 				nut_Factor_append(factors, m, k*exponent);
 			}else{
 				factors2->num_primes = 0;
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wnonnull"
-				m = nut_u64_factor_heuristic(m, 0, NULL, conf, factors2);
-#pragma GCC diagnostic pop
+				m = nut_u64_factor_heuristic(m, 0, primes, conf, factors2);
 				if(m != 1){
-					free(factors2);
 					return m;//TODO: abort
 				}
 				nut_Factor_combine(factors, factors2, k*exponent);
 			}
 			if(n == 1){
-				free(factors2);
 				return 1;
 			}
 			if(n < smoothness || nut_u64_is_prime_dmr(n)){
 				nut_Factor_append(factors, n, exponent);
-				free(factors2);
 				return 1;
 			}
 		}else if(n <= conf->lenstra_max){
@@ -484,27 +432,20 @@ uint64_t nut_u64_factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_
 				nut_Factor_append(factors, m, k*exponent);
 			}else{
 				factors2->num_primes = 0;
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wnonnull"
-				m = nut_u64_factor_heuristic(m, 0, NULL, conf, factors2);
-#pragma GCC diagnostic pop
+				m = nut_u64_factor_heuristic(m, 0, primes, conf, factors2);
 				if(m != 1){
-					free(factors2);
 					return m;//TODO: abort
 				}
 				nut_Factor_combine(factors, factors2, k*exponent);
 			}
 			if(n == 1){
-				free(factors2);
 				return 1;
 			}
 			if(n < smoothness || nut_u64_is_prime_dmr(n)){
 				nut_Factor_append(factors, n, exponent);
-				free(factors2);
 				return 1;
 			}
 		}else{//TODO: implement quadratic sieve and number field sieve
-			free(factors2);
 			return n;
 		}
 	}
@@ -537,7 +478,7 @@ uint64_t nut_u64_nth_root(uint64_t a, uint64_t n){
 	}
 }
 
-bool nut_u64_is_perfect_power(uint64_t a, uint64_t max, uint64_t *_base, uint64_t *_exp){
+bool nut_u64_is_perfect_power(uint64_t a, uint64_t max, uint64_t *restrict _base, uint64_t *restrict _exp){
 	if(a < 2){
 		return false;
 	}
@@ -613,7 +554,9 @@ uint64_t nut_u64_factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m){
 
 //convenience function to double a point on an elliptic curve.  _xr and _yr are out params
 //returns 0 for an ordinary point, 1 for identity, and -1 if a nontrivial factor was found and placed in _xr
-static inline int ecg_double(int64_t n, int64_t a, int64_t x, int64_t y, int is_id, int64_t *_xr, int64_t *_yr){
+[[gnu::nonnull(6, 7)]]
+NUT_ATTR_ACCESS(write_only, 6) NUT_ATTR_ACCESS(write_only, 7)
+static inline int ecg_double(int64_t n, int64_t a, int64_t x, int64_t y, bool is_id, int64_t *restrict _xr, int64_t *restrict _yr){
 	if(is_id || y == 0){
 		return 1;
 	}
@@ -633,7 +576,9 @@ static inline int ecg_double(int64_t n, int64_t a, int64_t x, int64_t y, int is_
 
 //convenience function to add two points on an elliptic curve.  _xr and _yr are out params
 //returns 0 for an ordinary point, 1 for identity, and -1 if a nontrivial factor was found and placed in _xr
-static inline int ecg_add(int64_t n, int64_t a, int64_t xp, int64_t yp, int is_id_p, int64_t xq, int64_t yq, int is_id_q, int64_t *_xr, int64_t *_yr){
+[[gnu::nonnull(9, 10)]]
+NUT_ATTR_ACCESS(write_only, 9) NUT_ATTR_ACCESS(write_only, 10)
+static inline int ecg_add(int64_t n, int64_t a, int64_t xp, int64_t yp, bool is_id_p, int64_t xq, int64_t yq, bool is_id_q, int64_t *_xr, int64_t *_yr){
 	if(is_id_p){
 		if(is_id_q){
 			return 1;
@@ -667,7 +612,9 @@ static inline int ecg_add(int64_t n, int64_t a, int64_t xp, int64_t yp, int is_i
 
 //convenience function to add k copies of a point on an elliptic curve together.  _xr and _yr are out params
 //returns 0 for an ordinary point, 1 for identity, and -1 if a nontrivial factor was found and placed in _xr
-static inline int ecg_scale(int64_t n, int64_t a, int64_t x, int64_t y, int is_id, int64_t k, int64_t *_xr, int64_t *_yr){
+[[gnu::nonnull(7, 8)]]
+NUT_ATTR_ACCESS(write_only, 7) NUT_ATTR_ACCESS(write_only, 8)
+static inline int ecg_scale(int64_t n, int64_t a, int64_t x, int64_t y, bool is_id, int64_t k, int64_t *_xr, int64_t *_yr){
 	if(is_id || !k){
 		return 1;
 	}
@@ -860,107 +807,5 @@ int64_t nut_u64_factor1_lenstra_montgomery(int64_t n, int64_t x, int64_t y, int6
 		X1 = Xl;
 	}
 	return n;
-}
-
-int64_t nut_i64_jacobi(int64_t n, int64_t k){
-	int64_t j = 1;
-	while(1){
-		int64_t s = __builtin_ctzll(n);
-		int64_t q = n >> s;
-		if((s&1) && ((k&7) == 3 || ((k&7) == 5))){
-			j = -j;
-		}
-		if(q == 1){
-			return j;
-		}else if(q == k - 1){
-			return (k&3)==1 ? j : -j;
-		}else if((q&2) && (k&2)){
-			j = -j;
-		}
-		n = k%q;
-		k = q;
-	}
-}
-
-int64_t nut_i64_rand_nr(int64_t p){
-	while(1){
-		int64_t z = nut_u64_rand(2, p);
-		if(nut_i64_jacobi(z, p) == -1){
-			return z;
-		}
-	}
-}
-
-int64_t nut_i64_sqrt_shanks(int64_t n, int64_t p){
-	int64_t s = __builtin_ctzll(p-1);
-	int64_t q = p >> s;//p-1 = q*2^s
-	int64_t z = nut_i64_rand_nr(p);
-	//printf("trying \"nonresidue\" %"PRIu64"\n", z);
-	int64_t m = s;
-	int64_t c = nut_u64_powmod(z, q, p);
-	int64_t t = nut_u64_powmod(n, q, p);
-	int64_t r = nut_u64_powmod(n, (q + 1) >> 1, p);
-	while(t != 1){
-		int64_t i = 1;
-		for(int64_t s = (int128_t)t*t%p; s != 1; s = (int128_t)s*s%p, ++i);
-		int64_t b = c;
-		for(int64_t j = 0; j < m - i - 1; ++j){
-			b = (int128_t)b*b%p;
-		}
-		m = i;
-		c = (int128_t)b*b%p;
-		t = (int128_t)t*c%p;
-		r = (int128_t)r*b%p;
-	}
-	return r;
-}
-
-int64_t nut_i64_sqrt_cipolla(int64_t n, int64_t p){
-	int64_t a, w;
-	do{
-		a = nut_u64_rand(2, p);
-		w = nut_i64_mod((int128_t)a*a%p - n, p);
-	}while(nut_i64_jacobi(w, p) != -1);
-	int64_t u_s = a, w_s = 1;
-	int64_t u_r = 1, w_r = 0;
-	for(int64_t k = (p + 1) >> 1; k; k >>= 1){
-		if(k&1){
-			int64_t _w_r = (int128_t)u_r*w_s%p;
-			_w_r = (_w_r + (int128_t)w_r*u_s)%p;
-			u_r = (int128_t)u_r*u_s%p;
-			w_r = (int128_t)w_r*w_s%p;
-			w_r = (int128_t)w_r*w%p;
-			u_r = ((int128_t)u_r + w_r)%p;
-			w_r = _w_r;
-		}
-		int64_t _w_s = (int128_t)2*u_s*w_s%p;
-		u_s = (int128_t)u_s*u_s%p;
-		w_s = (int128_t)w_s*w_s%p;
-		w_s = (int128_t)w*w_s%p;
-		u_s = ((int128_t)u_s + w_s)%p;
-		w_s = _w_s;
-	}
-	return u_r;
-}
-
-int64_t nut_i64_sqrt_mod(int64_t n, int64_t p){
-	int64_t r;
-	if((p&3) == 3){
-		r = nut_u64_powmod(n, (p + 1) >> 2, p);
-	}else if((p&7) == 5){
-		r = nut_u64_powmod(n, (p + 3) >> 3, p);
-		if(r*r%p != n){
-			r = (int128_t)r*nut_u64_powmod(2, (p - 1) >> 2, p)%p;
-		}//can add 9 mod 16 case
-	}else{
-		int64_t m = 64 - __builtin_clzll(p);
-		int64_t s = __builtin_ctzll(p - 1);
-		if(8*m + 20 >= s*(s - 1)){
-			r = nut_i64_sqrt_shanks(n, p);
-		}else{
-			r = nut_i64_sqrt_cipolla(n, p);
-		}
-	}
-	return r;
 }
 

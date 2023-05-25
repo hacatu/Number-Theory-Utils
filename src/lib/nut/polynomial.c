@@ -1,19 +1,20 @@
 #include <string.h>
 #include <ctype.h>
 
+#include <nut/modular_math.h>
 #include <nut/factorization.h>
 #include <nut/polynomial.h>
 
-int nut_Poly_init(nut_Poly *f, uint64_t reserve){
+bool nut_Poly_init(nut_Poly *f, uint64_t reserve){
 	reserve = reserve ?: 4;
 	f->coeffs = malloc(reserve*sizeof(int64_t));
 	if(!f->coeffs){
-		return 0;
+		return false;
 	}
 	f->len = 1;
 	f->coeffs[0] = 0;
 	f->cap = reserve;
-	return 1;
+	return true;
 }
 
 void nut_Poly_destroy(nut_Poly *f){
@@ -58,15 +59,15 @@ int nut_Poly_cmp(const nut_Poly *a, const nut_Poly *b){
 	return 0;
 }
 
-int nut_Roots_init(nut_Roots *roots, uint64_t reserve){
+bool nut_Roots_init(nut_Roots *roots, uint64_t reserve){
 	reserve = reserve ?: 4;
 	roots->roots = malloc(reserve*sizeof(int64_t));
 	if(!roots->roots){
-		return 0;
+		return false;
 	}
 	roots->len = 0;
 	roots->cap = reserve;
-	return 1;
+	return true;
 }
 
 void nut_Roots_destroy(nut_Roots *roots){
@@ -85,46 +86,46 @@ int64_t nut_Poly_eval_modn(const nut_Poly *f, int64_t x, int64_t n){
 	return r;
 }
 
-int nut_Poly_ensure_cap(nut_Poly *f, uint64_t cap){
+bool nut_Poly_ensure_cap(nut_Poly *f, uint64_t cap){
 	if(f->cap < cap){
 		int64_t *tmp = realloc(f->coeffs, cap*sizeof(int64_t));
 		if(!tmp){
-			return 0;
+			return false;
 		}
 		f->coeffs = tmp;
 		f->cap = cap;
 	}
-	return 1;
+	return true;
 }
 
-int nut_Poly_zero_extend(nut_Poly *f, uint64_t len){
+bool nut_Poly_zero_extend(nut_Poly *f, uint64_t len){
 	if(!nut_Poly_ensure_cap(f, len)){
-		return 0;
+		return false;
 	}
 	for(uint64_t i = f->len; i < len; ++i){
-		f->coeffs[i] = 0;
+		f->coeffs[i] = false;
 	}
 	if(len > f->len){
 		f->len = len;
 	}
-	return 1;
+	return true;
 }
 
-int nut_Roots_ensure_cap(nut_Roots *roots, uint64_t cap){
+bool nut_Roots_ensure_cap(nut_Roots *roots, uint64_t cap){
 	if(roots->cap < cap){
 		int64_t *tmp = realloc(roots->roots, cap*sizeof(int64_t));
 		if(!tmp){
-			return 0;
+			return false;
 		}
 		roots->roots = tmp;
 		roots->cap = cap;
 	}
-	return 1;
+	return true;
 }
 
-int nut_Poly_add_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t n){
+bool nut_Poly_add_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t n){
 	if(!nut_Poly_ensure_cap(h, f->len > g->len ? f->len : g->len)){
-		return 0;
+		return false;
 	}
 	uint64_t i;
 	for(i = 0; i < f->len && i < g->len; ++i){
@@ -141,12 +142,12 @@ int nut_Poly_add_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t
 	if(same_len){
 		nut_Poly_normalize(h);
 	}
-	return 1;
+	return true;
 }
 
-int nut_Poly_sub_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t n){
+bool nut_Poly_sub_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t n){
 	if(!nut_Poly_ensure_cap(h, f->len > g->len ? f->len : g->len)){
-		return 0;
+		return false;
 	}
 	uint64_t i;
 	for(i = 0; i < f->len && i < g->len; ++i){
@@ -163,12 +164,12 @@ int nut_Poly_sub_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t
 	if(same_len){
 		nut_Poly_normalize(h);
 	}
-	return 1;
+	return true;
 }
 
-int nut_Poly_dot_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t n){
+bool nut_Poly_dot_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t n){
 	if(!nut_Poly_ensure_cap(h, f->len < g->len ? f->len : g->len)){
-		return 0;
+		return false;
 	}
 	uint64_t i;
 	for(i = 0; i < f->len && i < g->len; ++i){
@@ -176,50 +177,50 @@ int nut_Poly_dot_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t
 	}
 	h->len = f->len < g->len ? f->len : g->len;
 	nut_Poly_normalize(h);
-	return 1;
+	return true;
 }
 
-int nut_Poly_copy(nut_Poly *g, const nut_Poly *f){
+bool nut_Poly_copy(nut_Poly *restrict g, const nut_Poly *restrict f){
 	if(!nut_Poly_ensure_cap(g, f->len)){
-		return 0;
+		return false;
 	}
 	memcpy(g->coeffs, f->coeffs, f->len*sizeof(int64_t));
 	g->len = f->len;
-	return 1;
+	return true;
 }
 
-int nut_Poly_setconst(nut_Poly *f, int64_t c){
+bool nut_Poly_setconst(nut_Poly *f, int64_t c){
 	if(!nut_Poly_ensure_cap(f, 1)){
-		return 0;
+		return false;
 	}
 	f->coeffs[0] = c;
 	f->len = 1;
-	return 1;
+	return true;
 }
 
-int nut_Poly_scale_modn(nut_Poly *g, const nut_Poly *f, int64_t a, int64_t n){
+bool nut_Poly_scale_modn(nut_Poly *g, const nut_Poly *f, int64_t a, int64_t n){
 	if(!a){
 		return nut_Poly_setconst(g, 0);
 	}
 	if(!nut_Poly_ensure_cap(g, f->len)){
-		return 0;
+		return false;
 	}
 	for(uint64_t i = 0; i < f->len; ++i){
 		g->coeffs[i] = nut_i64_mod(a*f->coeffs[i], n);
 	}
 	g->len = f->len;
 	nut_Poly_normalize(g);
-	return 1;
+	return true;
 }
 
-int nut_Poly_mul_modn(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g, int64_t n){
+bool nut_Poly_mul_modn(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g, int64_t n){
 	if(f->len == 1){
 		return nut_Poly_scale_modn(h, g, f->coeffs[0], n);
 	}else if(g->len == 1){
 		return nut_Poly_scale_modn(h, f, g->coeffs[0], n);
 	}
 	if(!nut_Poly_ensure_cap(h, f->len + g->len - 1)){
-		return 0;
+		return false;
 	}
 	for(uint64_t k = 0; k < f->len + g->len - 1; ++k){
 		h->coeffs[k] = 0;
@@ -229,13 +230,13 @@ int nut_Poly_mul_modn(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g
 	}
 	h->len = f->len + g->len - 1;
 	nut_Poly_normalize(h);
-	return 1;
+	return true;
 }
 
-int nut_Poly_pow_modn(nut_Poly *restrict g, const nut_Poly *f, uint64_t e, int64_t n, uint64_t cn, nut_Poly tmps[static 2]){
+bool nut_Poly_pow_modn(nut_Poly *restrict g, const nut_Poly *f, uint64_t e, int64_t n, uint64_t cn, nut_Poly tmps[restrict static 2]){
 	//tmps: st, rt
 	if(f->len > cn + 1){
-		return 0;
+		return false;
 	}else if(!e){
 		return nut_Poly_setconst(g, 1); // TODO: deal with 0**0 case
 	}else if(e == 1){
@@ -245,7 +246,7 @@ int nut_Poly_pow_modn(nut_Poly *restrict g, const nut_Poly *f, uint64_t e, int64
 	if(f->len == 1){
 		return nut_Poly_setconst(g, nut_u64_pow(f->coeffs[0], e));
 	}else if(!nut_Poly_copy(tmps + 0, f) || !nut_Poly_ensure_cap(tmps + 0, 2*cn + 1) || !nut_Poly_ensure_cap(tmps + 1, 2*cn + 1)){
-		return 0;
+		return false;
 	}
 	nut_Poly *t = g, *s = tmps + 0, *r = tmps + 1;
 	while(e%2 == 0){
@@ -258,7 +259,9 @@ int nut_Poly_pow_modn(nut_Poly *restrict g, const nut_Poly *f, uint64_t e, int64
 		}//s = s*s
 		e >>= 1;
 	}
-	nut_Poly_copy(r, s);
+	if(!nut_Poly_copy(r, s)){
+		return false;
+	}
 	while((e >>= 1)){
 		nut_Poly_mul_modn(t, s, s, n);
 		nut_Poly_normalize_exps_modn(t, cn);
@@ -282,12 +285,12 @@ int nut_Poly_pow_modn(nut_Poly *restrict g, const nut_Poly *f, uint64_t e, int64
 			return 0;
 		}
 	}
-	return 1;
+	return true;
 }
 
-int nut_Poly_pow_modn_tmptmp(nut_Poly *restrict g, const nut_Poly *f, uint64_t e, int64_t n, uint64_t cn){
+bool nut_Poly_pow_modn_tmptmp(nut_Poly *restrict g, const nut_Poly *f, uint64_t e, int64_t n, uint64_t cn){
 	nut_Poly tmps[2] = {};
-	int status = 1;
+	bool status = true;
 	for(uint64_t i = 0; status && i < 2; ++i){
 		status = nut_Poly_init(tmps + i, 2*cn + 1);
 	}
@@ -302,7 +305,7 @@ int nut_Poly_pow_modn_tmptmp(nut_Poly *restrict g, const nut_Poly *f, uint64_t e
 	return status;
 }
 
-int nut_Poly_compose_modn(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g, int64_t n, uint64_t cn, nut_Poly tmps[static 2]){
+bool nut_Poly_compose_modn(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g, int64_t n, uint64_t cn, nut_Poly tmps[restrict static 2]){
 	if(f->len == 1){
 		return nut_Poly_setconst(h, f->coeffs[0]);
 	}else if(g->len == 1){
@@ -313,30 +316,30 @@ int nut_Poly_compose_modn(nut_Poly *restrict h, const nut_Poly *f, const nut_Pol
 		h_len = cn + 1;
 	}
 	if(!nut_Poly_ensure_cap(h, h_len) || !nut_Poly_setconst(h, f->coeffs[0])){
-		return 0;
+		return false;
 	}
 	nut_Poly *t = tmps + 0, *p = tmps + 1;
 	if(!nut_Poly_copy(p, g) || !nut_Poly_scale_modn(t, g, f->coeffs[1], n) || !nut_Poly_add_modn(h, h, t, n)){
-		return 0;
+		return false;
 	}
 	for(uint64_t e = 2; e <= cn && e < f->len; ++e){
 		if(!nut_Poly_mul_modn(t, p, g, n)){
-			return 0;
+			return false;
 		}
 		nut_Poly_normalize_exps_modn(t, cn);
 		void *tmp = t;
 		t = p;
 		p = tmp;
 		if(!nut_Poly_scale_modn(t, p, f->coeffs[e], n) || !nut_Poly_add_modn(h, h, t, n)){
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
 
-int nut_Poly_compose_modn_tmptmp(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g, int64_t n, uint64_t cn){
+bool nut_Poly_compose_modn_tmptmp(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g, int64_t n, uint64_t cn){
 	nut_Poly tmps[2] = {};
-	int status = 1;
+	bool status = true;
 	for(uint64_t i = 0; status && i < 2; ++i){
 		status = nut_Poly_init(tmps + i, 2*cn + 1);
 	}
@@ -351,35 +354,24 @@ int nut_Poly_compose_modn_tmptmp(nut_Poly *restrict h, const nut_Poly *f, const 
 	return status;
 }
 
-int nut_Poly_quotrem_modn(nut_Poly *restrict q, nut_Poly *restrict r, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n){
+bool nut_Poly_quotrem_modn(nut_Poly *restrict q, nut_Poly *restrict r, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n){
 	int64_t a, d = nut_i64_egcd(g->coeffs[g->len - 1], n, &a, NULL);
 	if(d != 1){
-		return 0;//TODO: set divide by zero error, or set remainder (?)
+		return false;//TODO: set divide by zero error, or set remainder (?)
 	}
-	if(g->len == 1){//dividing by a scalar
-		if(!g->coeffs[0]){
-			return 0;//TODO: set divide by zero error
-		}
-		if(!nut_Poly_setconst(r, 0)){
-			return 0;
-		}
-		return nut_Poly_scale_modn(q, f, a, n);
+	if(g->len == 1){//dividing by a scalar TODO: set divide by zero error if scalar is 0
+		return g->coeffs[0] && nut_Poly_setconst(r, 0) && nut_Poly_scale_modn(q, f, a, n);
 	}
 	if(f->len < g->len){//dividing by a polynomial with higher degree
-		if(!nut_Poly_setconst(q, 0)){
-			return 0;
-		}
-		return nut_Poly_copy(r, f);
+		return nut_Poly_setconst(q, 0) && nut_Poly_copy(r, f);
 	}
 	
 	//begin extended synthetic division
 	//compute max length of quotient and remainder and extend their buffers if need be
 	q->len = f->len - g->len + 1;
 	r->len = g->len - 1;
-	if(!nut_Poly_ensure_cap(q, q->len)){
-		return 0;
-	}else if(!nut_Poly_ensure_cap(r, r->len)){
-		return 0;
+	if(!nut_Poly_ensure_cap(q, q->len) || !nut_Poly_ensure_cap(r, r->len)){
+		return false;
 	}
 	
 	//initialize column sums/coeffs of results
@@ -408,7 +400,7 @@ int nut_Poly_quotrem_modn(nut_Poly *restrict q, nut_Poly *restrict r, const nut_
 		}
 	}
 	nut_Poly_normalize(r);
-	return 1;
+	return true;
 }
 
 void nut_Poly_normalize(nut_Poly *f){
@@ -417,7 +409,7 @@ void nut_Poly_normalize(nut_Poly *f){
 	}
 }
 
-void nut_Poly_normalize_modn(nut_Poly *f, int64_t n, int use_negatives){
+void nut_Poly_normalize_modn(nut_Poly *f, int64_t n, bool use_negatives){
 	int64_t offset = use_negatives ? (1-n)/2 : 0;
 	for(uint64_t i = 0; i < f->len; ++i){
 		f->coeffs[i] = offset + nut_i64_mod(f->coeffs[i] - offset, n);
@@ -436,7 +428,7 @@ void nut_Poly_normalize_exps_modn(nut_Poly *f, uint64_t cn){
 	nut_Poly_normalize(f);
 }
 
-int nut_Poly_fprint(FILE *file, const nut_Poly *f, const char *vname, const char *add, const char *sub, const char *pow, int descending){
+int nut_Poly_fprint(FILE *file, const nut_Poly *f, const char *vname, const char *add, const char *sub, const char *pow, bool descending){
 	int res = 0;
 	for(uint64_t i = 0; i < f->len; ++i){
 		uint64_t j = descending ? f->len - 1 - i : i;
@@ -469,13 +461,13 @@ int nut_Poly_fprint(FILE *file, const nut_Poly *f, const char *vname, const char
 	return res;
 }
 
-static void skip_whitespace(const char **_str){
+static inline void skip_whitespace(const char *restrict *restrict _str){
 	while(isspace(**_str)){
 		++*_str;
 	}
 }
 
-static int parse_monomial(nut_Poly *f, const char **_str){
+static inline int parse_monomial(nut_Poly *restrict f, const char *restrict *restrict _str){
 	const char *str = *_str;
 	int64_t sign = 1, coeff = 0;
 	uint64_t x = 0;
@@ -538,10 +530,7 @@ static int parse_monomial(nut_Poly *f, const char **_str){
 	return 1;
 }
 
-int nut_Poly_parse(nut_Poly *f, int64_t *n, const char *str, const char **end){
-	if(!f || !n){
-		return 0;
-	}
+int nut_Poly_parse(nut_Poly *restrict f, int64_t *restrict n, const char *restrict str, const char *restrict *restrict end){
 	if(!nut_Poly_setconst(f, 0) || !parse_monomial(f, &str)){
 		return 0;
 	}
@@ -585,25 +574,25 @@ int nut_Poly_parse(nut_Poly *f, int64_t *n, const char *str, const char **end){
 	return 1;
 }
 
-int nut_Poly_rand_modn(nut_Poly *f, uint64_t max_len, int64_t n){
+bool nut_Poly_rand_modn(nut_Poly *f, uint64_t max_len, int64_t n){
 	if(!max_len){
 		return nut_Poly_setconst(f, 0);
 	}
 	if(!nut_Poly_ensure_cap(f, max_len)){
-		return 0;
+		return false;
 	}
 	for(uint64_t i = 0; i < max_len; ++i){
 		f->coeffs[i] = nut_u64_rand(0, n);
 	}
 	f->len = max_len;
 	nut_Poly_normalize(f);
-	return 1;
+	return true;
 }
 
-int nut_Poly_gcd_modn(nut_Poly *d, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n, nut_Poly tmps[static 3]){
+bool nut_Poly_gcd_modn(nut_Poly *restrict d, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n, nut_Poly tmps[restrict static 3]){
 	//tmps: qt, r0t, r1t
 	nut_Poly *tmp, *r0, *r1, *r2;
-	int status = 1;
+	bool status = true;
 	if(g->len > f->len){//Ensure the degree of f is >= the degree of g
 		const nut_Poly *tmp = f;//Shadow the other tmp with a const version
 		f = g;
@@ -617,7 +606,7 @@ int nut_Poly_gcd_modn(nut_Poly *d, const nut_Poly *restrict f, const nut_Poly *r
 	r0 = d, r1 = tmps + 1, r2 = tmps + 2;
 	//Unroll first two remainder calculations to prevent copying
 	if(!nut_Poly_quotrem_modn(tmps + 0, r0, f, g, n)){
-		status = 0;
+		status = false;
 		goto CLEANUP;
 	}
 	if(r0->len == 1 && !r0->coeffs[0]){
@@ -626,7 +615,7 @@ int nut_Poly_gcd_modn(nut_Poly *d, const nut_Poly *restrict f, const nut_Poly *r
 	}
 	
 	if(!nut_Poly_quotrem_modn(tmps + 0, r1, g, r0, n)){
-		status = 0;
+		status = false;
 		goto CLEANUP;
 	}
 	if(r1->len == 1 && !r1->coeffs[0]){
@@ -636,7 +625,7 @@ int nut_Poly_gcd_modn(nut_Poly *d, const nut_Poly *restrict f, const nut_Poly *r
 	//Euclidean algorithm: take remainders until we reach 0, then the last nonzero remainder is the gcd
 	while(1){
 		if(!nut_Poly_quotrem_modn(tmps + 0, r2, r0, r1, n)){
-			status = 0;
+			status = false;
 			goto CLEANUP;
 		}
 		if(r2->len == 1 && !r2->coeffs[0]){
@@ -659,7 +648,7 @@ int nut_Poly_gcd_modn(nut_Poly *d, const nut_Poly *restrict f, const nut_Poly *r
 		}else if(a > 1){//If the leading coefficient is 0 or 1 the gcd is already monic
 			int64_t c, g = nut_i64_egcd(a, n, &c, NULL);//This g shadows the input
 			if(g != 1){//The leading coefficient cannot be inverted mod n
-				return 0;
+				return false;
 			}
 			nut_Poly_scale_modn(d, d, c, n);
 		}
@@ -667,7 +656,7 @@ int nut_Poly_gcd_modn(nut_Poly *d, const nut_Poly *restrict f, const nut_Poly *r
 	return status;
 }
 
-int nut_Poly_gcd_modn_tmptmp(nut_Poly *d, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n){
+bool nut_Poly_gcd_modn_tmptmp(nut_Poly *restrict d, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n){
 	nut_Poly tmps[3] = {};
 	uint64_t min_len, quot_len;
 	if(f->len <= g->len){
@@ -677,7 +666,7 @@ int nut_Poly_gcd_modn_tmptmp(nut_Poly *d, const nut_Poly *restrict f, const nut_
 		min_len = g->len;
 		quot_len = f->len - g->len + 1;
 	}
-	int status = nut_Poly_init(tmps + 0, quot_len) &&
+	bool status = nut_Poly_init(tmps + 0, quot_len) &&
 	         nut_Poly_init(tmps + 1, min_len) &&
 	         nut_Poly_init(tmps + 2, min_len) &&
 	         nut_Poly_gcd_modn(d, f, g, n, tmps);
@@ -689,14 +678,14 @@ int nut_Poly_gcd_modn_tmptmp(nut_Poly *d, const nut_Poly *restrict f, const nut_
 	return status;
 }
 
-int nut_Poly_powmod_modn(nut_Poly *h, const nut_Poly *restrict f, uint64_t e, const nut_Poly *restrict g, int64_t n, nut_Poly tmps[static 3]){
+bool nut_Poly_powmod_modn(nut_Poly *restrict h, const nut_Poly *restrict f, uint64_t e, const nut_Poly *restrict g, int64_t n, nut_Poly tmps[restrict static 3]){
 	//tmps: qt, st, rt
 	if(g->len <= f->len){
 		if(!nut_Poly_quotrem_modn(tmps + 0, tmps + 1, f, g, n)){
-			return 0;
+			return false;
 		}
 	}else if(!nut_Poly_copy(tmps + 1, f)){
-		return 0;
+		return false;
 	}
 	if(tmps[1].len == 1){
 		if(!tmps[1].coeffs[0]){
@@ -706,42 +695,44 @@ int nut_Poly_powmod_modn(nut_Poly *h, const nut_Poly *restrict f, uint64_t e, co
 		}
 	}
 	if(!nut_Poly_ensure_cap(tmps + 1, 2*g->len - 3) || !nut_Poly_ensure_cap(tmps + 2, 2*g->len - 3) || !nut_Poly_ensure_cap(h, 2*g->len - 3)){
-		return 0;
+		return false;
 	}
 	
 	nut_Poly *t = h, *s = tmps + 1, *r = tmps + 2;
 	while(e%2 == 0){
 		nut_Poly_mul_modn(t, s, s, n);
 		if(!nut_Poly_quotrem_modn(tmps + 0, s, t, g, n)){
-			return 0;
+			return false;
 		}//s = s*s%g
 		e >>= 1;
 	}
-	nut_Poly_copy(r, s);
+	if(!nut_Poly_copy(r, s)){
+		return false;
+	}
 	while((e >>= 1)){
 		nut_Poly_mul_modn(t, s, s, n);
 		if(!nut_Poly_quotrem_modn(tmps + 0, s, t, g, n)){
-			return 0;
+			return false;
 		}//s = s*s%g
 		if(e%2){
 			nut_Poly_mul_modn(t, r, s, n);
 			if(!nut_Poly_quotrem_modn(tmps + 0, r, t, g, n)){
-				return 0;
+				return false;
 			}//r = r*s%g
 		}
 	}
 	
 	if(r != h){// TODO: this check is always true, fix buffer juggling so we never need to copy
 		if(!nut_Poly_copy(h, r)){
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
 
-int nut_Poly_powmod_modn_tmptmp(nut_Poly *h, const nut_Poly *restrict f, uint64_t e, const nut_Poly *restrict g, int64_t n){
+bool nut_Poly_powmod_modn_tmptmp(nut_Poly *restrict h, const nut_Poly *restrict f, uint64_t e, const nut_Poly *restrict g, int64_t n){
 	nut_Poly tmps[3] = {};
-	int status = 1;
+	bool status = true;
 	for(uint64_t i = 0; status && i < 3; ++i){
 		status = nut_Poly_init(tmps + i, 2*g->len - 1);
 	}
@@ -756,50 +747,45 @@ int nut_Poly_powmod_modn_tmptmp(nut_Poly *h, const nut_Poly *restrict f, uint64_
 	return status;
 }
 
-int nut_Poly_factors_d_modn(nut_Poly *f_d, const nut_Poly *f, uint64_t d, int64_t n, nut_Poly tmps[static 4]){
+bool nut_Poly_factors_d_modn(nut_Poly *restrict f_d, const nut_Poly *restrict f, uint64_t d, int64_t n, nut_Poly tmps[restrict static 4]){
 	//tmps: xt, qt, st, rt
 	if(!nut_Poly_ensure_cap(f_d, f->len)){
-		return 0;
+		return false;
 	}
 	f_d->coeffs[0] = 0;
 	f_d->coeffs[1] = 1;
 	f_d->len = 2;
-	if(!nut_Poly_powmod_modn(tmps + 0, f_d, nut_u64_pow(n, d), f, n, tmps + 1)){
-		return 0;
-	}
-	if(!nut_Poly_sub_modn(tmps + 0, tmps + 0, f_d, n)){
-		return 0;
-	}
-	return nut_Poly_gcd_modn(f_d, tmps + 0, f, n, tmps + 1);
+	return nut_Poly_powmod_modn(tmps + 0, f_d, nut_u64_pow(n, d), f, n, tmps + 1) &&
+		nut_Poly_sub_modn(tmps + 0, tmps + 0, f_d, n) &&
+		nut_Poly_gcd_modn(f_d, tmps + 0, f, n, tmps + 1);
 }
 
-int nut_Poly_factor1_modn(nut_Poly *g, const nut_Poly *f, uint64_t d, int64_t n, nut_Poly tmps[static 4]){
+bool nut_Poly_factor1_modn(nut_Poly *restrict g, const nut_Poly *restrict f, uint64_t d, int64_t n, nut_Poly tmps[restrict static 4]){
 	//tmps: xt, qt, st, rt
 	while(1){
-		if(!nut_Poly_rand_modn(tmps + 0, f->len - 1, n)){
-			return 0;
-		}
-		if(!nut_Poly_gcd_modn(g, tmps + 0, f, n, tmps + 1)){
-			return 0;
+		if(!nut_Poly_rand_modn(tmps + 0, f->len - 1, n) || !nut_Poly_gcd_modn(g, tmps + 0, f, n, tmps + 1)){
+			return false;
 		}
 		if(g->len > 1 && g->len < f->len){
-			return 1;
+			return true;
 		}
-		if(!nut_Poly_powmod_modn(g, tmps + 0, (nut_u64_pow(n, d)-1)/2, f, n, tmps + 1)){
-			return 0;
-		}
-		nut_Poly_setconst(tmps + 0, 1);
-		nut_Poly_add_modn(tmps + 0, g, tmps + 0, n);
-		if(!nut_Poly_gcd_modn(g, tmps + 0, f, n, tmps + 1)){
-			return 0;
+		if(
+			!nut_Poly_powmod_modn(g, tmps + 0, (nut_u64_pow(n, d)-1)/2, f, n, tmps + 1) ||
+			!nut_Poly_setconst(tmps + 0, 1) ||
+			!nut_Poly_add_modn(tmps + 0, g, tmps + 0, n) ||
+			!nut_Poly_gcd_modn(g, tmps + 0, f, n, tmps + 1)
+		){
+			return false;
 		}
 		if(g->len > 1 && g->len < f->len){
-			return 1;
+			return true;
 		}
 	}
 }
 
-static inline int roots_polyn_modn_rec(nut_Roots *roots, int64_t n, nut_Poly tmps[static 6]){
+[[gnu::nonnull(1, 3)]]
+NUT_ATTR_ACCESS(read_write, 1)
+static inline bool roots_polyn_modn_rec(nut_Roots *restrict roots, int64_t n, nut_Poly tmps[restrict static 6]){
 	//tmps: gt, ft, xt, qt, st, rt
 	while(1){
 		//fprintf(stderr, "\e[1;33mFactoring (");
@@ -818,7 +804,7 @@ static inline int roots_polyn_modn_rec(nut_Roots *roots, int64_t n, nut_Poly tmp
 			}else{//zero root
 				roots->roots[roots->len++] = 0;
 			}
-			return 1;
+			return true;
 		}else if(tmps[1].len == 3){//quadratic factor
 			//fprintf(stderr, "\e[1;33m polynomial is quadratic\e[0m\n");
 			if(tmps[1].coeffs[2] != 1){//make monic
@@ -831,13 +817,10 @@ static inline int roots_polyn_modn_rec(nut_Roots *roots, int64_t n, nut_Poly tmp
 			int64_t r = nut_i64_sqrt_mod(nut_i64_mod(b*b - 4*c, n), n);
 			roots->roots[roots->len++] = nut_i64_mod((n+1)/2*(-b + r), n);
 			roots->roots[roots->len++] = nut_i64_mod((n+1)/2*(-b - r), n);
-			return 1;
+			return true;
 		}
-		if(!nut_Poly_factor1_modn(tmps + 0, tmps + 1, 1, n, tmps + 2)){
-			return 0;
-		}
-		if(!nut_Poly_quotrem_modn(tmps + 3, tmps + 5, tmps + 1, tmps + 0, n)){
-			return 0;
+		if(!nut_Poly_factor1_modn(tmps + 0, tmps + 1, 1, n, tmps + 2) || !nut_Poly_quotrem_modn(tmps + 3, tmps + 5, tmps + 1, tmps + 0, n)){
+			return false;
 		}
 		//tmps[0] and tmps[3] hold the nontrivial factors we found
 		//we have to do a recursive call on the factor with smaller degree
@@ -858,18 +841,19 @@ static inline int roots_polyn_modn_rec(nut_Roots *roots, int64_t n, nut_Poly tmp
 		//fprintf(stderr, ")(");
 		//nut_Poly_fprint(stderr, tmps + 3, "x", " + ", " - ", "**", 0);
 		//fprintf(stderr, ")\e[0m\n");
-		int have_small_factor = tmps[1].len <= 3;
+		bool have_small_factor = tmps[1].len <= 3;
 		if(!have_small_factor){
-			if(!nut_Poly_init(&tmp, tmps[3].len)){
-				return 0;
+			if(!nut_Poly_init(&tmp, tmps[3].len) || !nut_Poly_copy(&tmp, tmps + 3)){
+				return false;
 			}
-			nut_Poly_copy(&tmp, tmps + 3);
 		}
 		if(!roots_polyn_modn_rec(roots, n, tmps)){
-			return 0;
+			return false;
 		}
 		if(!have_small_factor){
-			nut_Poly_copy(tmps + 3, &tmp);
+			if(!nut_Poly_copy(tmps + 3, &tmp)){
+				return false;
+			}
 			nut_Poly_destroy(&tmp);
 		}
 		tmp = tmps[3];
@@ -878,24 +862,21 @@ static inline int roots_polyn_modn_rec(nut_Roots *roots, int64_t n, nut_Poly tmp
 	}
 }
 
-int nut_Poly_roots_modn(const nut_Poly *f, int64_t n, nut_Roots *roots, nut_Poly tmps[static 6]){
+bool nut_Poly_roots_modn(const nut_Poly *restrict f, int64_t n, nut_Roots *restrict roots, nut_Poly tmps[restrict static 6]){
 	//tmps: gt, ft, xt, qt, st, rt
 	if(!nut_Poly_factors_d_modn(tmps + 1, f, 1, n, tmps + 2)){
-		return 0;
+		return false;
 	}
 	roots->len = 0;
 	if(tmps[1].len == 1){
-		return 1;
+		return true;
 	}
-	if(!nut_Roots_ensure_cap(roots, tmps[1].len - 1)){
-		return 0;
-	}
-	return roots_polyn_modn_rec(roots, n, tmps);
+	return nut_Roots_ensure_cap(roots, tmps[1].len - 1) && roots_polyn_modn_rec(roots, n, tmps);
 }
 
-int nut_Poly_roots_modn_tmptmp(const nut_Poly *f, int64_t n, nut_Roots *roots){
+bool nut_Poly_roots_modn_tmptmp(const nut_Poly *restrict f, int64_t n, nut_Roots *restrict roots){
 	nut_Poly tmps[6] = {};
-	int status = 1;
+	bool status = true;
 	for(uint64_t i = 0; status && i < 6; ++i){
 		status = nut_Poly_init(tmps + i, f->len);
 	}

@@ -42,7 +42,7 @@ int main(){
 			fprintf(stderr, "\e[1;31mProduct of factorization doesn't match for %"PRIu64"\e[0m\n", n);
 			continue;
 		}
-		int status = 1;
+		bool status = true;
 		for(uint64_t i = 0; i < factors->num_primes; ++i){
 			if(!nut_u64_is_prime_dmr(factors->factors[i].prime)){
 				status = 0;

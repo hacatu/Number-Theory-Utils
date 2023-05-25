@@ -15,6 +15,7 @@
 #include <inttypes.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 
 /// Pretty name for signed 128 bit integer.
 /// GCC implements 128 bit arithmetic in terms of 64 bit arithmetic.
@@ -33,55 +34,50 @@ typedef struct{
 	uint64_t elems[];
 } nut_u64_Pitcharr;
 
-/// Compute nonnegative integral power of integer using binary exponentiation.
-/// @param [in] b, e: base and exponent
-/// @return b^e, not checked for overflow
-[[gnu::const]] static inline uint64_t nut_u64_pow(uint64_t b, uint64_t e){
-	uint64_t r = 1;
-	while(e){
-		if(e&1){
-			r = r*b;
-		}
-		e >>= 1;
-		b *= b;
-	}
-	return r;
-}
+/// Wrapper for gcc's `access` function annotation - no clang equivalent, and currently disabled because it is bugged
+/// See https://gcc.gnu.org/onlinedocs/gcc/Common-Function-Attributes.html
+#if __has_c_attribute(gnu::access) && 0
+#define NUT_ATTR_ACCESS(...) [[gnu::access(__VA_ARGS__)]]
+#else
+#define NUT_ATTR_ACCESS(...)
+#endif
 
 /// Compute nonnegative integral power of integer using binary exponentiation.
 /// @param [in] b, e: base and exponent
 /// @return b^e, not checked for overflow
-[[gnu::const]] static inline uint128_t nut_u128_pow(uint128_t b, uint64_t e){
-	uint128_t r = 1;
-	while(e){
-		if(e&1){
-			r = r*b;
-		}
-		e >>= 1;
-		b *= b;
-	}
-	return r;
-}
+[[gnu::const]]
+uint64_t nut_u64_pow(uint64_t b, uint64_t e);
+
+/// Compute nonnegative integral power of integer using binary exponentiation.
+/// @param [in] b, e: base and exponent
+/// @return b^e, not checked for overflow
+[[gnu::const]]
+uint128_t nut_u128_pow(uint128_t b, uint64_t e);
 
 /// Compute nonnegative integral power of a number modulo another using binary exponentiation.
 /// @param [in] b, e, n: base, exponent, and modulus
 /// @return b^e mod n, computed via binary exponentiation
-[[gnu::const]] uint64_t nut_u64_powmod(uint64_t b, uint64_t e, uint64_t n);
+[[gnu::const]]
+uint64_t nut_u64_powmod(uint64_t b, uint64_t e, uint64_t n);
 
 /// Compute single binomial coefficient semi-naively.
 /// Repeatedly does multiplications by n, n-1, n-2, ..., n-k+1 interleaved with divisions by 1, 2, 3, ..., k.
-/// There are better ways to do this if we need to know huge binomial coefficients mod some number, or find many
-/// binomial coefficients with the same n or k, but this function is sufficient a lot of the time
-[[gnu::const]] static inline uint64_t nut_u64_binom(uint64_t n, uint64_t k){
-	uint64_t res = 1;
-	if(n - k < k){
-		k = n - k;
-	}
-	for(uint64_t i = 0; i < k; ++i){
-		res = res*(n - i)/(1 + i);
-	}
-	return res;
-}
+/// Overflows quickly, look into mod m versions if using large inputs.
+/// See { @link nut_u64_binom_next} to iterate over values (n choose k), (n choose k+1).
+/// See { @link nut_u64_binom_next_mod_2t} to iterate over values mod powers of 2
+/// @param [in] n, k: Binomial coefficient arguments
+[[gnu::const]]
+uint64_t nut_u64_binom(uint64_t n, uint64_t k);
+
+/// Compute the binomial coefficient for (n choose k) given the binomial coefficient for (n choose k-1)
+/// Simply uses the recurrence (n choose k) = (n - k + 1)/k * (n choose k-1)
+/// The starting point should be (n choose 0) = 1.  To start at k != 0, use
+/// { @link nut_u64_binom}.
+/// See { @link nut_u64_binom_next_mod_2t} to iterate over values mod powers of 2.
+/// @param [in] n, k: Binomial coefficient arguments
+/// @param [in] prev: Binomial coefficient value for (n choose k-1)
+[[gnu::const]]
+uint64_t nut_u64_binom_next(uint64_t n, uint64_t k, uint64_t prev);
 
 /// Generate a (pseudo)random integer uniformly from [a, b).
 ///
@@ -103,71 +99,73 @@ uint64_t nut_u64_rand(uint64_t a, uint64_t b);
 /// @param [in] a, b: numbers to find gcd of
 /// @param [out] _t, _s: pointers to output x and y to respectively (ignored if NULL)
 /// @return d
-#pragma GCC diagnostic push
-#ifdef __clang__
-#pragma GCC diagnostic ignored "-Wunknown-attributes"
-#endif
-[[gnu::access(write_only, 3), gnu::access(write_only, 4)]] static inline int64_t nut_i64_egcd(int64_t a, int64_t b, int64_t *_t, int64_t *_s){
-#pragma GCC diagnostic pop
-	int64_t r0 = b, r1 = a;
-	int64_t s0 = 1, s1 = 0;
-	int64_t t0 = 0, t1 = 1;
-	while(r1){
-		int64_t q = r0/r1, t;
-		t = r1;
-		r1 = r0 - q*r1;
-		r0 = t;
-		t = s1;
-		s1 = s0 - q*s1;
-		s0 = t;
-		t = t1;
-		t1 = t0 - q*t1;
-		t0 = t;
-	}
-	if(_t){
-		*_t = t0;
-	}
-	if(_s){
-		*_s = s0;
-	}
-	return r0;
-}
+NUT_ATTR_ACCESS(write_only, 3) NUT_ATTR_ACCESS(write_only, 4)
+int64_t nut_i64_egcd(int64_t a, int64_t b, int64_t *restrict _t, int64_t *restrict _s);
+
+/// Find the multiplicative inverse of a mod b
+/// If b is a power of 2, use { @link nut_i64_modinv_2t}
+/// Just a wrapper around { @link nut_i64_egcd}.
+/// If a and b are not coprime, then the value
+/// returned will just be the bezout coefficient for a, and will yield gcd(a, b)
+/// when multiplied with a mod b instead of 1.
+[[gnu::const]]
+int64_t nut_i64_modinv(int64_t a, int64_t b);
+
+/// Find the multiplicative inverse of a mod 2**t
+/// This uses a hensel/newton like iterative algorithm, described here
+/// https://crypto.stackexchange.com/a/47496
+/// Basically, we use a lookup table to get the inverse mod 2**8, and then
+/// use the fact that ax = 1 mod 2**k --> ax(2-ax) = 1 mod 2**(2k) to lift the inverse to
+/// mod 2**16, mode 2**32, etc as needed.  This does cap out at 2**64.
+/// @param [in] a: number to invert, MUST be odd.
+/// @param [in] t: Exponent of modulus, ie we want to work mod 2**t, MUST be <= 64.  0 and 1 are allowed, but won't give very interesting results.
+/// @return b such that a*b = 1 mod 2**t and 0 <= b < 2**t
+[[gnu::const]]
+uint64_t nut_u64_modinv_2t(uint64_t a, uint64_t t);
 
 /// Compute the Euclidean remainder r = a mod n for positive n so that 0 <= r < n.
 /// @param [in] a, n: dividend and divisor
 /// @return a mod n
-[[gnu::const]] static inline int64_t nut_i64_mod(int64_t a, int64_t n){
-	int64_t r = a%n;
-	if(r < 0){
-		r += n;
-	}
-	return r;
-}
+[[gnu::const]]
+int64_t nut_i64_mod(int64_t a, int64_t n);
 
 /// Compute n mod pq st n = a mod p and n = b mod q, where p and q are coprime.
 /// @param [in] a, p, b, q: Chinese Remainder Theorem parameters.  The residues a and b should not be negative.
 /// The moduli p and q should be coprime.
 /// @return 0 <= 0 < pq so that n = a mod p and n = b mod q
-[[gnu::const]] static inline int64_t nut_i64_crt(int64_t a, int64_t p, int64_t b, int64_t q){
-	int64_t x, y;
-	nut_i64_egcd(p, q, &x, &y);
-	return nut_i64_mod(b*p%(p*q)*x + a*q%(p*q)*y, p*q);
-}
+[[gnu::const]]
+int64_t nut_i64_crt(int64_t a, int64_t p, int64_t b, int64_t q);
 
 /// Compute the least common multiple of a and b
 /// Divides the product by the gcd so can overflow for large arguments
 /// @param [in] a, b: numbers to find nut_i64_lcm of
 /// @return nut_i64_lcm(a, b)
-[[gnu::const]] static inline int64_t nut_i64_lcm(int64_t a, int64_t b){
-	return a*b/nut_i64_egcd(a, b, NULL, NULL);
-}
+[[gnu::const]]
+int64_t nut_i64_lcm(int64_t a, int64_t b);
+
+/// Compute the binomial coefficient for (n choose k) given the binomial coefficient for (n choose k-1)
+/// Simply uses the recurrence (n choose k) = (n - k + 1)/k * (n choose k-1)
+/// The starting point should be (n choose 0) = 1.  To start at k != 0, use
+/// { @link nut_u64_binom}.
+/// See { @link nut_u64_binom_next_mod_2t} to iterate over values mod powers of 2.
+/// @param [in] n, k: Binomial coefficient arguments
+/// @param [in] t: Exponent of modulus, ie we want to work mod 2^t
+/// @param [in, out] v2: 2-adic valuation of (n choose k-1), that is, the highest power of 2 dividing (n choose k-1).
+/// This will be updated in-place, so to start from (n choose 0) it can just be initialized to 0.
+/// @param [in, out] p2: 2-coprime part of (n choose k-1), that is, (n choose k-1) divided by 2^v2,
+/// This will be updated in-place, so to start from (n choose 0) it can just be initialized to 1.
+/// @return (n choose k) mod 2^t, which is equal to 2^v2 * p2 mod 2^t
+[[nodiscard, gnu::nonnull(4, 5)]]
+NUT_ATTR_ACCESS(read_write, 4) NUT_ATTR_ACCESS(read_write, 5)
+uint64_t nut_u64_binom_next_mod_2t(uint64_t n, uint64_t k, uint64_t t, uint64_t *restrict v2, uint64_t *restrict p2);
 
 /// Compute the Jacobi symbol of n mod k.
 ///
 /// Uses modified euclidean algorithm.
 /// @param [in] n, k: Jacobi symbol parameters
 /// @return Jacobi symbol (0 if k | n, +1 if n is a quadratic residue mod an odd number of prime divisors of k (with multiplicity), -1 otherwise)
-[[gnu::const]] int64_t nut_i64_jacobi(int64_t n, int64_t k);
+[[gnu::const]]
+int64_t nut_i64_jacobi(int64_t n, int64_t k);
 
 /// Compute a random number mod a prime that is not a quadratic residue.
 ///
@@ -184,6 +182,7 @@ int64_t nut_i64_rand_nr_mod(int64_t p);
 /// @param [in] n: a quadratic residue mod p
 /// @param [in] p: a prime
 /// @return r so that r^2 = n mod p
+[[gnu::const]]
 int64_t nut_i64_sqrt_shanks(int64_t n, int64_t p);
 
 /// Compute the square root of a quadratic residue mod a prime.
@@ -193,7 +192,8 @@ int64_t nut_i64_sqrt_shanks(int64_t n, int64_t p);
 /// @param [in] n: a quadratic residue mod p
 /// @param [in] p: a prime
 /// @return r so that r^2 = n mod p
-[[gnu::const]] int64_t nut_i64_sqrt_cipolla(int64_t n, int64_t p);
+[[gnu::const]]
+int64_t nut_i64_sqrt_cipolla(int64_t n, int64_t p);
 
 /// Compute the square root of a quadratic residue mod a prime.
 ///
@@ -206,5 +206,6 @@ int64_t nut_i64_sqrt_shanks(int64_t n, int64_t p);
 /// @param [in] n: a quadratic residue mod p
 /// @param [in] p: a prime
 /// @return r so that r^2 = n mod p
+[[gnu::const]]
 int64_t nut_i64_sqrt_mod(int64_t n, int64_t p);
 

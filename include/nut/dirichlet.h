@@ -15,6 +15,7 @@
 /// euler's phi function.
 ///
 /// A brief list of common multiplicative functions is:
+/// (see here https://en.wikipedia.org/wiki/Multiplicative_function)
 /// The dirichlet convolution identity (explained later): I(n) = 1 if n == 1; 0 otherwise
 /// Sometimes written epsilon(n), (very confusingly) u(n), or delta(n, 0) (since it is just a kroneker delta function of course)
 /// The constant function: u(n) = 1
@@ -52,6 +53,7 @@
 /// multiplication, division, addition, subtraction, composition, and so on.  It is defined as (f <*> g)(n) = sum(k | n, f(k)g(n/k)).
 /// This is mostly useful because when f and g are multiplicative f <*> g will be as well, and it lets us build up more complicated functions in terms
 /// of simpler ones.
+/// (see here https://en.wikipedia.org/wiki/Dirichlet_convolution)
 ///
 /// Obviously, not all operations on multiplicative functions will produce multiplicative functions.  For example, if f is multiplicative, 2f is not,
 /// so multiplicative functions are not closed under scalar multiplication, and thus they are not closed under addition.
@@ -63,7 +65,11 @@
 /// In particular, sum(n <= x, (f <*> g)(n)) = sum(n <= x, ab = n, f(a)g(b)) = sum(ab <= x, f(a)g(b))
 /// = sum(a <= A, b <= x/a, f(a)g(b)) + sum(b <= B, a <= x/b, f(a)g(b)) - sum(a <= A, b <= B, f(a)g(b))
 /// = sum(a <= A, f(a)G(x/a)) + sum(b <= B, F(x/b)g(b)) - F(A)G(B)
-/// where AB = x.  To accomplish this rearrangement, we first expanded (f <*> g) using the definition of dirichlet convolution.
+/// where AB = x.
+/// (see here https://gbroxey.github.io/blog/2023/04/30/mult-sum-1.html)
+/// (see here https://angyansheng.github.io/blog/dirichlet-hyperbola-method)
+/// (you may also find this instructive https://en.wikipedia.org/wiki/Marginal_distribution)
+/// To accomplish this rearrangement, we first expanded (f <*> g) using the definition of dirichlet convolution.
 /// Then, we interpreted the sum both as an a-indexed sum and as a b-indexed sum.
 /// We could find the sum either way, but considering both sets us up to cut the work down quadratically.
 /// These two ways of interpreting the sum are EXACTLY EQUIVALENT to the trick of transforming an integral of f(x) in terms of x into
@@ -85,6 +91,8 @@
 #include <stdbool.h>
 #include <assert.h>
 
+#include <nut/modular_math.h>
+
 /// Wrapper to hold values of some multiplicative function.
 /// Stores all values f(n) for n up to (and including) y, then
 /// stores values f(x/n) for n less than x/y
@@ -98,6 +106,7 @@ typedef struct{
 /// @param [in] max: inclusive upper bound of range to compute sum for
 /// @param [in] m: modulus to reduce result by, or 0 to skip reducing
 /// @return the sum d(1) + ... + d(max)
+[[gnu::const]]
 uint64_t nut_dirichlet_D(uint64_t max, uint64_t m);
 
 /// Given a table of values of a multiplicative function f, compute (f <*> u)(x) for all x from 1 to n
@@ -107,7 +116,9 @@ uint64_t nut_dirichlet_D(uint64_t max, uint64_t m);
 /// @param [in] f_vals: table of values for f
 /// @param [out] f_conv_u_vals: table to store values of f <*> u in
 /// @return true on success, false on allocation failure
-bool nut_euler_sieve_conv_u(int64_t n, int64_t m, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[static n+1]);
+[[gnu::nonnull(3, 4)]]
+NUT_ATTR_ACCESS(read_only, 3, 1) NUT_ATTR_ACCESS(read_write, 4, 1)
+bool nut_euler_sieve_conv_u(int64_t n, int64_t m, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[restrict static n+1]);
 
 /// Given a table of values of a multiplicative function f, compute (f <*> N)(x) for all x from 1 to n
 /// See { @link nut_euler_sieve_conv_u} for more info}
@@ -116,7 +127,9 @@ bool nut_euler_sieve_conv_u(int64_t n, int64_t m, const int64_t f_vals[static n+
 /// @param [in] f_vals: table of values for f
 /// @param [out] f_conv_N_vals: table to store values of f <*> N in
 /// @return true on success, false on allocation failure
-bool nut_euler_sieve_conv_N(int64_t n, int64_t m, const int64_t f_vals[static n+1], int64_t f_conv_N_vals[static n+1]);
+[[gnu::nonnull(3, 4)]]
+NUT_ATTR_ACCESS(read_only, 3, 1) NUT_ATTR_ACCESS(read_write, 4, 1)
+bool nut_euler_sieve_conv_N(int64_t n, int64_t m, const int64_t f_vals[static n+1], int64_t f_conv_N_vals[restrict static n+1]);
 
 /// Given tables of values of multiplicative functions f and g, compute (f <*> g)(x) for all x from 1 to n
 /// This uses Euler's sieve, a variant of the sieve of Eratosthenes that only marks off each multiple once.
@@ -129,7 +142,9 @@ bool nut_euler_sieve_conv_N(int64_t n, int64_t m, const int64_t f_vals[static n+
 /// @param [in] g_vals: table of values for f
 /// @param [out] f_conv_g_vals: table to store values of f <*> g in
 /// @return true on success, false on allocation failure
-bool nut_euler_sieve_conv(int64_t n, int64_t m, const int64_t f_vals[static n+1], const int64_t g_vals[static n+1], int64_t f_conv_g_vals[static n+1]);
+[[gnu::nonnull(3, 4, 5)]]
+NUT_ATTR_ACCESS(read_only, 3, 1) NUT_ATTR_ACCESS(read_only, 4, 1) NUT_ATTR_ACCESS(read_write, 5, 1)
+bool nut_euler_sieve_conv(int64_t n, int64_t m, const int64_t f_vals[static n+1], const int64_t g_vals[static n+1], int64_t f_conv_g_vals[restrict static n+1]);
 
 /// Allocate internal buffers for a diri table
 /// self->buf will have f(0) through f(y) at indicies 0 through y,
@@ -140,29 +155,44 @@ bool nut_euler_sieve_conv(int64_t n, int64_t m, const int64_t f_vals[static n+1]
 /// @param [in] y: inclusive upper bound of the dense portion of the domain of interest.
 /// Will be increased to sqrt(x) if needed, so 0 can be used to explicitly signal you want that behavior
 /// @return true on success, false on allocation failure
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(write_only, 1)
 bool nut_Diri_init(nut_Diri *self, int64_t x, int64_t y);
 
 /// Copy the values from one diri table to another, which must be initialized
-void nut_Diri_copy(nut_Diri *dest, const nut_Diri *src);
+[[gnu::nonnull(1, 2)]]
+NUT_ATTR_ACCESS(read_write, 1)
+NUT_ATTR_ACCESS(read_only, 2)
+void nut_Diri_copy(nut_Diri *restrict dest, const nut_Diri *restrict src);
 
 /// Deallocate internal buffers for a diri table
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
 void nut_Diri_destroy(nut_Diri *self);
 
+[[gnu::pure, gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_only, 1)
 static inline int64_t nut_Diri_get_dense(const nut_Diri *self, int64_t k){
 	assert(k >= 0 && k <= self->y);
 	return self->buf[k];
 }
 
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
 static inline void nut_Diri_set_dense(nut_Diri *self, int64_t k, int64_t v){
 	assert(k >= 0 && k <= self->y);
 	self->buf[k] = v;
 }
 
+[[gnu::pure, gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_only, 1)
 static inline int64_t nut_Diri_get_sparse(const nut_Diri *self, int64_t k){
 	assert(k > 0 && k <= self->yinv);
 	return self->buf[self->y + k];
 }
 
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
 static inline void nut_Diri_set_sparse(nut_Diri *self, int64_t k, int64_t v){
 	assert(k > 0 && k <= self->yinv);
 	self->buf[self->y + k] = v;
@@ -171,18 +201,24 @@ static inline void nut_Diri_set_sparse(nut_Diri *self, int64_t k, int64_t v){
 /// Compute the value table for the dirichlet convolution identity I(n) = \{1 if n == 0, 0 otherwise\}
 /// Just memset's the dense part, then sets index 1 and y + 1 through y + yinv - 1 to 1 (remember the sparse indicies are sums)
 /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
 void nut_Diri_compute_I(nut_Diri *self);
 
 /// Compute the value table for the unit function u(n) = 1
 /// Fills the dense part of the table with 1s, and computes the sparse entries with table[y + k] = U(x/k) = x/k
 /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
 /// @param [in] m: modulus to reduce results by, or 0 to skip reducing
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
 void nut_Diri_compute_u(nut_Diri *self, int64_t m);
 
 /// Compute the value table for the identity function N(n) = n
 /// Fills the dense part of the table with increasing numbers, and computes the sparse entries with table[y + k] = sum_N(v = x/k) = v*(v+1)/2
 /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
 /// @param [in] m: modulus to reduce results by, or 0 to skip reducing
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
 void nut_Diri_compute_N(nut_Diri *self, int64_t m);
 
 /// Compute the value table for the mobius function mu(n) (whose sum is called the Mertens function)
@@ -190,7 +226,9 @@ void nut_Diri_compute_N(nut_Diri *self, int64_t m);
 /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
 /// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] mobius: packed table of mobius values, from {@link nut_sieve_mobius} (with upper bound self->y).
-void nut_Diri_compute_mertens(nut_Diri *self, int64_t m, const uint8_t mobius[self->y/4 + 1]);
+[[gnu::nonnull(1, 3)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 3)
+void nut_Diri_compute_mertens(nut_Diri *restrict self, int64_t m, const uint8_t mobius[restrict static self->y/4 + 1]);
 
 /// Compute the value table for h = f <*> u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f
 /// See { @link nut_Diri_compute_conv } for details, this is just that function but with several specializations due to u being very simple.
@@ -198,7 +236,9 @@ void nut_Diri_compute_mertens(nut_Diri *self, int64_t m, const uint8_t mobius[se
 /// self->y, self->x, and self->yinv must be set and consistent with the inputs
 /// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] f_tbl: table for the first operand
-bool nut_Diri_compute_conv_u(nut_Diri *self, int64_t m, const nut_Diri *f_tbl);
+[[gnu::nonnull(1, 3)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 3)
+bool nut_Diri_compute_conv_u(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl);
 
 /// Compute the value table for h = f <*> N, the dirichlet convolution of f and N (the identity function N(n) = n), given the value table for f
 /// See { @link nut_Diri_compute_conv } for details, this is just that function but with several specializations due to N being very simple.
@@ -206,7 +246,9 @@ bool nut_Diri_compute_conv_u(nut_Diri *self, int64_t m, const nut_Diri *f_tbl);
 /// self->y, self->x, and self->yinv must be set and consistent with the inputs
 /// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] f_tbl: table for the first operand
-bool nut_Diri_compute_conv_N(nut_Diri *self, int64_t m, const nut_Diri *f_tbl);
+[[gnu::nonnull(1, 3)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 3)
+bool nut_Diri_compute_conv_N(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl);
 
 /// Compute the value table for h = f <*> g, the dirichlet convolution of f and g, given value tables for the operands
 /// self must have been initialized using { @link nut_Diri_init}, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl
@@ -219,5 +261,7 @@ bool nut_Diri_compute_conv_N(nut_Diri *self, int64_t m, const nut_Diri *f_tbl);
 /// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] f_tbl: table for the first operand (dirichlet convolution is commutative, so order doesn't matter)
 /// @param [in] g_tbl: table for the second operand
-bool nut_Diri_compute_conv(nut_Diri *self, int64_t m, const nut_Diri *f_tbl, const nut_Diri *g_tbl);
+[[gnu::nonnull(1, 3, 4)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 3) NUT_ATTR_ACCESS(read_only, 4)
+bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f_tbl, const nut_Diri *g_tbl);
 

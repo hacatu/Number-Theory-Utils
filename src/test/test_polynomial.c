@@ -4,6 +4,7 @@
 
 #include <nut/polynomial.h>
 #include <nut/factorization.h>
+#include <nut/debug.h>
 
 int main(){
 	uint64_t l = 10;
@@ -143,8 +144,7 @@ int main(){
 	passed = 0;
 	fprintf(stderr, "\e[1;34mTesting \"nut_Poly_setconst\"/\"nut_Poly_eval_modn\" for 0, 1, and 2 mod 3...\e[0m\n");
 	for(int64_t i = 0; i < (int64_t)trials; ++i){
-		nut_Poly_setconst(f, i);
-		if(nut_Poly_eval_modn(f, i, 3) == i){
+		if(nut_Poly_setconst(f, i) && nut_Poly_eval_modn(f, i, 3) == i){
 			++passed;
 		}
 	}
@@ -288,7 +288,7 @@ int main(){
 	g->coeffs[4] = 1;
 	g->len = 5;
 	
-	nut_Poly_ensure_cap(f, 24);
+	check_alloc("poly f", (void*)nut_Poly_ensure_cap(f, 24));
 	memset(f->coeffs, 0, 23*sizeof(int64_t));
 	f->coeffs[23] = 1;
 	f->coeffs[1] = 22;

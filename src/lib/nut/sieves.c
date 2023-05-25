@@ -134,7 +134,7 @@ uint64_t *nut_sieve_largest_factors(uint64_t max){
 	return buf;
 }
 
-void nut_fill_factors_from_largest(nut_Factors *out, uint64_t n, const uint64_t largest_factors[static n + 1]){
+void nut_fill_factors_from_largest(nut_Factors *restrict out, uint64_t n, const uint64_t largest_factors[restrict static n + 1]){
 	out->num_primes = 0;
 	for(uint64_t p = largest_factors[n], k = 1; p;){
 		n /= p;
@@ -700,7 +700,7 @@ uint64_t *nut_compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1
 	return res;
 }
 
-uint64_t nut_compute_pi_from_tables(uint64_t n, const uint64_t pi_table[static n/30], const uint8_t buf[static n/30 + 1]){
+uint64_t nut_compute_pi_from_tables(uint64_t n, const uint64_t pi_table[restrict static n/30], const uint8_t buf[restrict static n/30 + 1]){
 	if(n < 30){
 		uint64_t res;
 		for(res = 0; nut_small_primes[res] <= n; ++res);

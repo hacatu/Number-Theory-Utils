@@ -14,8 +14,9 @@
 #include <inttypes.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
-
+#include <nut/modular_math.h>
 
 /// A polynomial with signed integer coefficients.
 /// Uses a dense representation, ideal for low degree polynomials and polynomials with almost no
@@ -53,10 +54,14 @@ typedef struct{
 /// @param [out] f: polynomial to initialize
 /// @param [in] reserve: initial capacity, defaults to 4 if 0 is given
 /// @return 1 on success, 0 on failure
-int nut_Poly_init(nut_Poly *f, uint64_t reserve);
+[[nodiscard, gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
+bool nut_Poly_init(nut_Poly *f, uint64_t reserve);
 
 /// Free resources held by a polynomial struct.
 /// @param [in,out] f: polynomial to destroy
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
 void nut_Poly_destroy(nut_Poly *f);
 
 /// Asymptotically compare polynomials.
@@ -65,6 +70,8 @@ void nut_Poly_destroy(nut_Poly *f);
 /// Finds the highest degree term without matching coefficients.
 /// @param [in] a, b: polynomials to compare
 /// @return -1 if a < b, 1 if a > b, 0 if a == b
+[[gnu::pure, gnu::nonnull(1, 2)]]
+NUT_ATTR_ACCESS(read_only, 1) NUT_ATTR_ACCESS(read_only, 2)
 int nut_Poly_cmp(const nut_Poly *a, const nut_Poly *b);
 
 /// Initialize a root buffer with at least a given capacity.
@@ -73,10 +80,14 @@ int nut_Poly_cmp(const nut_Poly *a, const nut_Poly *b);
 /// @param [out] roots: root buffer to initialize.
 /// @param [in] reserve: initial capacity, defaults to 4 if 0 is given
 /// @return 1 on success, 0 on failure
-int nut_Roots_init(nut_Roots *roots, uint64_t reserve);
+[[nodiscard, gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
+bool nut_Roots_init(nut_Roots *roots, uint64_t reserve);
 
 /// Free resources held by a root buffer.
 /// @param [in,out] roots: root buffer to destroy
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
 void nut_Roots_destroy(nut_Roots *roots);
 
 
@@ -87,14 +98,18 @@ void nut_Roots_destroy(nut_Roots *roots);
 /// @param [in,out] f: polynomial to extend
 /// @param [in] cap: minimum capacity the polynomial should have aferwards
 /// @return 1 on success, 0 on failure
-int nut_Poly_ensure_cap(nut_Poly *f, uint64_t cap);
+[[nodiscard, gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
+bool nut_Poly_ensure_cap(nut_Poly *f, uint64_t cap);
 
 /// Extend the capacity of a polynomial struct if needed and set any new terms to 0.
 ///
 /// @param [in,out] f: polynomial to extend
 /// @param [in] len: length to extend poly to
 /// @return 1 on success, 0 on failure
-int nut_Poly_zero_extend(nut_Poly *f, uint64_t len);
+[[nodiscard, gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
+bool nut_Poly_zero_extend(nut_Poly *f, uint64_t len);
 
 /// Extend the capacity of a root buffer if needed.
 ///
@@ -102,24 +117,32 @@ int nut_Poly_zero_extend(nut_Poly *f, uint64_t len);
 /// @param [in,out] roots: root buffer to extend
 /// @param [in] cap: minimum capacity the root buffer should have aferwards
 /// @return 1 on success, 0 on failure
-int nut_Roots_ensure_cap(nut_Roots *roots, uint64_t cap);
+[[nodiscard, gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
+bool nut_Roots_ensure_cap(nut_Roots *roots, uint64_t cap);
 
 /// Strip off terms so the leading term is nonzero if needed.
 ///
 /// Generally called at the end of most functions.
 /// @param [in,out] f: polynomial to normalize
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
 void nut_Poly_normalize(nut_Poly *f);
 
 /// Reduce coefficients mod n, then normalize.
 /// @param [in,out] f: polynomial to normalize
 /// @param [in] n: modulus to reduce coefficients by
 /// @param [in] use_negatives: if false, coefficients will be in the range [0,n), otherwise [(1-n)/2,n/2)
-void nut_Poly_normalize_modn(nut_Poly *f, int64_t n, int use_negatives);
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
+void nut_Poly_normalize_modn(nut_Poly *f, int64_t n, bool use_negatives);
 
 /// Reduce any exponents over cn
 ///
 /// Generally called by functions that take a cn (carmichael lambda function of n) argument
 /// Remove any term x**(k*cn + a) where 0 < a <= cn and add its coefficient to term x**a
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
 void nut_Poly_normalize_exps_modn(nut_Poly *f, uint64_t cn);
 
 
@@ -128,13 +151,17 @@ void nut_Poly_normalize_exps_modn(nut_Poly *f, uint64_t cn);
 /// @param [out] g: destination
 /// @param [in] f: source
 /// @return 1 on success, 0 on failure
-int nut_Poly_copy(nut_Poly *g, const nut_Poly *f);
+[[nodiscard, gnu::nonnull(1, 2)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2)
+bool nut_Poly_copy(nut_Poly *restrict g, const nut_Poly *restrict f);
 
 /// Set a polynomial to a constant (linear terms and up zero).
 /// @param [out] f: polynomial to set to constant
 /// @param [in] c: constant to set polynomial to
 /// @return 1 on success, 0 on failure
-int nut_Poly_setconst(nut_Poly *f, int64_t c);
+[[nodiscard, gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
+bool nut_Poly_setconst(nut_Poly *f, int64_t c);
 
 
 
@@ -145,6 +172,8 @@ int nut_Poly_setconst(nut_Poly *f, int64_t c);
 /// @param [in] x: point at which to evaluate
 /// @param [in] n: modulus for the result
 /// @return f(x) mod n
+[[gnu::pure, gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_only, 1)
 int64_t nut_Poly_eval_modn(const nut_Poly *f, int64_t x, int64_t n);
 
 /// Print a polynomial to a file.
@@ -161,7 +190,9 @@ int64_t nut_Poly_eval_modn(const nut_Poly *f, int64_t x, int64_t n);
 /// @param [in] pow: string to use for exponents, eg "**" for "x**2" or "^" for "x^2"
 /// @param [in] descending: if true, print higher terms down to lower terms, otherwise print lower terms up to higher terms (Taylor Series order)
 /// @return the total number of characters printed
-int nut_Poly_fprint(FILE *file, const nut_Poly *f, const char *vname, const char *add, const char *sub, const char *pow, int descending);
+[[gnu::nonnull(1, 2, 3, 4, 5, 6)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 3) NUT_ATTR_ACCESS(read_only, 4) NUT_ATTR_ACCESS(read_only, 5) NUT_ATTR_ACCESS(read_only, 6)
+int nut_Poly_fprint(FILE *restrict file, const nut_Poly *restrict f, const char *vname, const char *add, const char *sub, const char *pow, bool descending);
 
 /// Convert a string to a polynomial (and possibly modulus)
 ///
@@ -176,7 +207,9 @@ int nut_Poly_fprint(FILE *file, const nut_Poly *f, const char *vname, const char
 /// @param [in] str: string to parse
 /// @param [out] end: pointer to store end of parsed content (first unparsed character, ie typically '\0')
 /// @return 0 on failure, 1 if polynomial was parsed without modulus, 2 if both polynomial and modulus were parsed
-int nut_Poly_parse(nut_Poly *f, int64_t *n, const char *str, const char **end);
+[[gnu::nonnull(1, 2, 3)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(write_only, 2) NUT_ATTR_ACCESS(read_only, 3) NUT_ATTR_ACCESS(write_only, 4)
+int nut_Poly_parse(nut_Poly *restrict f, int64_t *restrict n, const char *restrict str, const char *restrict *restrict end);
 
 /// Generate a random polynomial.
 ///
@@ -186,7 +219,9 @@ int nut_Poly_parse(nut_Poly *f, int64_t *n, const char *str, const char **end);
 /// @param [in] max_len: number of coefficients to generate before normalizing.  If 0, the output polynomial is always set to zero
 /// @param [in] n: modulus for coefficients
 /// @return 1 on succes, 0 on failure
-int nut_Poly_rand_modn(nut_Poly *f, uint64_t max_len, int64_t n);
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
+bool nut_Poly_rand_modn(nut_Poly *f, uint64_t max_len, int64_t n);
 
 
 
@@ -195,21 +230,27 @@ int nut_Poly_rand_modn(nut_Poly *f, uint64_t max_len, int64_t n);
 /// @param [in] f, g: polynomials to add
 /// @param [in] n: modulus to reduce result by
 /// @return 1 on success, 0 on failure
-int nut_Poly_add_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t n);
+[[gnu::nonnull(1, 2, 3)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 3)
+bool nut_Poly_add_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t n);
 
 /// Subtract polynomials f - g mod n and store the result in h.
 /// @param [out] h: polynomial in which to store the difference f - g mod n
 /// @param [in] f, g: polynomials to subtract
 /// @param [in] n: modulus to reduce result by
 /// @return 1 on success, 0 on failure
-int nut_Poly_sub_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t n);
+[[gnu::nonnull(1, 2, 3)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 3)
+bool nut_Poly_sub_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t n);
 
 /// Take the termwise product of polynomials f and g mod n and store the result in h.
 /// @param [out] h: polynomial in which to store the result
 /// @param [in] f, g: polynomials to multiply termwise
 /// @param [in] n: modulus to reduce result by
 /// @return 1 on success, 0 on failure
-int nut_Poly_dot_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t n);
+[[gnu::nonnull(1, 2, 3)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 3)
+bool nut_Poly_dot_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t n);
 
 /// Multiply a polynomial f by a scalar a and store the result in h.
 /// @param [out] g: polynomial in which to store a*f mod n
@@ -217,7 +258,9 @@ int nut_Poly_dot_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t
 /// @param [in] a: scalar to multiply by
 /// @param [in] n: modulus to reduce result by
 /// @return 1 on success, 0 on failure
-int nut_Poly_scale_modn(nut_Poly *g, const nut_Poly *f, int64_t a, int64_t n);
+[[gnu::nonnull(1, 2)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2)
+bool nut_Poly_scale_modn(nut_Poly *g, const nut_Poly *f, int64_t a, int64_t n);
 
 
 
@@ -228,7 +271,9 @@ int nut_Poly_scale_modn(nut_Poly *g, const nut_Poly *f, int64_t a, int64_t n);
 /// @param [in] f, g: polynomials to multiply
 /// @param [in] n: modulus to reduce result by
 /// @return 1 on success, 0 on failure
-int nut_Poly_mul_modn(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g, int64_t n);
+[[gnu::nonnull(1, 2, 3)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 3)
+bool nut_Poly_mul_modn(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g, int64_t n);
 
 /// Raise f**x mod n and store the result in g
 ///
@@ -239,7 +284,9 @@ int nut_Poly_mul_modn(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g
 /// @param [in] cn: carmichael lambda function of n, basically modulus for exponents, see {@link carmichael_lambda} and {@link nut_sieve_carmichael}
 /// @param [in] tmps: polynomial for scratch work, must have 1 initialized (or at least zeroed out) polynomial ({@link nut_Poly_pow_modn_tmptmp})
 /// @return 1 on success, 0 on failure
-int nut_Poly_pow_modn(nut_Poly *restrict g, const nut_Poly *f, uint64_t e, int64_t n, uint64_t cn, nut_Poly tmps[static 2]);
+[[gnu::nonnull(1, 2, 6)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_write, 6)
+bool nut_Poly_pow_modn(nut_Poly *restrict g, const nut_Poly *restrict f, uint64_t e, int64_t n, uint64_t cn, nut_Poly tmps[restrict static 2]);
 
 /// Raise f**x mod n and store the result in g
 ///
@@ -251,7 +298,9 @@ int nut_Poly_pow_modn(nut_Poly *restrict g, const nut_Poly *f, uint64_t e, int64
 /// @param [in] n: modulus to reduce result by
 /// @param [in] cn: carmichael lambda function of n, basically modulus for exponents, see {@link carmichael_lambda} and {@link nut_sieve_carmichael}
 /// @return 1 on success, 0 on failure
-int nut_Poly_pow_modn_tmptmp(nut_Poly *restrict g, const nut_Poly *f, uint64_t e, int64_t n, uint64_t cn);
+[[gnu::nonnull(1, 2)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2)
+bool nut_Poly_pow_modn_tmptmp(nut_Poly *restrict g, const nut_Poly *restrict f, uint64_t e, int64_t n, uint64_t cn);
 
 
 
@@ -263,7 +312,9 @@ int nut_Poly_pow_modn_tmptmp(nut_Poly *restrict g, const nut_Poly *f, uint64_t e
 /// @param [in] cn: carmichael lambda function of n, basically modulus for exponents, see {@link carmichael_lambda} and {@link nut_sieve_carmichael}
 /// @param [in] tmps: polynomial for scratch work, must have 1 initialized (or at least zeroed out) polynomial ({@link nut_Poly_compose_modn_tmptmp})
 /// @return 1 on success, 0 on failure
-int nut_Poly_compose_modn(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g, int64_t n, uint64_t cn, nut_Poly tmps[static 2]);
+[[gnu::nonnull(1, 2, 3, 6)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 3) NUT_ATTR_ACCESS(read_write, 6)
+bool nut_Poly_compose_modn(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g, int64_t n, uint64_t cn, nut_Poly tmps[restrict static 2]);
 
 /// Compose polynomial f(g(x)) mod n and store the result in h.
 ///
@@ -274,7 +325,9 @@ int nut_Poly_compose_modn(nut_Poly *restrict h, const nut_Poly *f, const nut_Pol
 /// @param [in] n: modulus to reduce result by
 /// @param [in] cn: carmichael lambda function of n, basically modulus for exponents, see {@link carmichael_lambda} and {@link nut_sieve_carmichael}
 /// @return 1 on success, 0 on failure
-int nut_Poly_compose_modn_tmptmp(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g, int64_t n, uint64_t cn);
+[[gnu::nonnull(1, 2, 3)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 3)
+bool nut_Poly_compose_modn_tmptmp(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g, int64_t n, uint64_t cn);
 
 
 
@@ -291,7 +344,9 @@ int nut_Poly_compose_modn_tmptmp(nut_Poly *restrict h, const nut_Poly *f, const 
 /// @param [in] f, g: polynomials to divide
 /// @param [in] n: modulus to reduce result by
 /// @return 1 on success, 0 on failure.  Can fail if the leading cofficient of g is not invertable mod n, as well as on allocation failure
-int nut_Poly_quotrem_modn(nut_Poly *restrict q, nut_Poly *restrict r, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n);
+[[gnu::nonnull(1, 2, 3, 4)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_write, 2) NUT_ATTR_ACCESS(read_only, 3) NUT_ATTR_ACCESS(read_only, 4)
+bool nut_Poly_quotrem_modn(nut_Poly *restrict q, nut_Poly *restrict r, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n);
 
 
 
@@ -313,7 +368,9 @@ int nut_Poly_quotrem_modn(nut_Poly *restrict q, nut_Poly *restrict r, const nut_
 /// @param [in] n: modulus for the coefficient ring
 /// @param [in] tmps: polynomials for scratch work, cannot be NULL ({ @link nut_Poly_gcd_modn_tmptmp})
 /// @return 1 on success, 0 on failure.  Can fail if a non-invertable leading coefficient is encountered, as well as on allocation failure.
-int nut_Poly_gcd_modn(nut_Poly *d, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n, nut_Poly tmps[static 3]);
+[[gnu::nonnull(1, 2, 3, 5)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 3) NUT_ATTR_ACCESS(read_write, 5)
+bool nut_Poly_gcd_modn(nut_Poly *restrict d, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n, nut_Poly tmps[restrict static 3]);
 
 /// Find the gcd of two polynomials.
 ///
@@ -323,7 +380,9 @@ int nut_Poly_gcd_modn(nut_Poly *d, const nut_Poly *restrict f, const nut_Poly *r
 /// @param [in] f, g: polynomials to take the gcd of
 /// @param [in] n: modulus for the coefficient ring
 /// @return 1 on success, 0 on failure.  Can fail if a non-invertable leading coefficient is encountered, as well as on allocation failure.
-int nut_Poly_gcd_modn_tmptmp(nut_Poly *d, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n);
+[[gnu::nonnull(1, 2, 3)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 3)
+bool nut_Poly_gcd_modn_tmptmp(nut_Poly *restrict d, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n);
 
 
 
@@ -337,7 +396,9 @@ int nut_Poly_gcd_modn_tmptmp(nut_Poly *d, const nut_Poly *restrict f, const nut_
 /// @param [in] n: coefficient modulus
 /// @param [in] tmps: polynomials for scratch work, must have 3 initialized (or at least zeroed out) polynomials ({@link nut_Poly_powmod_modn_tmptmp})
 /// @return 1 on success, 0 on failure.  Can fail if a non-invertable leading coefficient is encountered, as well as on allocation failure.
-int nut_Poly_powmod_modn(nut_Poly *h, const nut_Poly *restrict f, uint64_t e, const nut_Poly *restrict g, int64_t n, nut_Poly tmps[static 3]);
+[[gnu::nonnull(1, 2, 4, 6)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 4) NUT_ATTR_ACCESS(read_write, 6)
+bool nut_Poly_powmod_modn(nut_Poly *restrict h, const nut_Poly *restrict f, uint64_t e, const nut_Poly *restrict g, int64_t n, nut_Poly tmps[restrict static 3]);
 
 /// Compute the power of a polynomial mod another polynomial.
 ///
@@ -349,7 +410,9 @@ int nut_Poly_powmod_modn(nut_Poly *h, const nut_Poly *restrict f, uint64_t e, co
 /// @param [in] g: modulus
 /// @param [in] n: coefficient modulus
 /// @return 1 on success, 0 on failure.  Can fail if a non-invertable leading coefficient is encountered, as well as on allocation failure.
-int nut_Poly_powmod_modn_tmptmp(nut_Poly *h, const nut_Poly *restrict f, uint64_t e, const nut_Poly *restrict g, int64_t n);
+[[gnu::nonnull(1, 2, 4)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 4)
+bool nut_Poly_powmod_modn_tmptmp(nut_Poly *restrict h, const nut_Poly *restrict f, uint64_t e, const nut_Poly *restrict g, int64_t n);
 
 /// Compute the product of all irreducible factors of degree d.
 ///
@@ -373,7 +436,9 @@ int nut_Poly_powmod_modn_tmptmp(nut_Poly *h, const nut_Poly *restrict f, uint64_
 /// @param [in] n: coefficient modulus.  MUST be prime.
 /// @param [in] tmps: polynomials for scratch work, must have 4 initialized (or at least zeroed out) polynomials
 /// @return 1 on success, 0 on failure
-int nut_Poly_factors_d_modn(nut_Poly *f_d, const nut_Poly *f, uint64_t d, int64_t n, nut_Poly tmps[static 4]);
+[[gnu::nonnull(1, 2, 5)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_write, 5)
+bool nut_Poly_factors_d_modn(nut_Poly *restrict f_d, const nut_Poly *restrict f, uint64_t d, int64_t n, nut_Poly tmps[restrict static 4]);
 
 /// Attempt to find a divisor of f_d.
 ///
@@ -394,7 +459,9 @@ int nut_Poly_factors_d_modn(nut_Poly *f_d, const nut_Poly *f, uint64_t d, int64_
 /// @param [in] n: coefficient modulus.  MUST be prime.
 /// @param [in] tmps: polynomials for scratch work, must have 4 initialized (or at least zeroed out) polynomials
 /// @return 1 on success, 0 on failure
-int nut_Poly_factor1_modn(nut_Poly *g, const nut_Poly *f, uint64_t d, int64_t n, nut_Poly tmps[static 4]);
+[[gnu::nonnull(1, 2, 5)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_write, 5)
+bool nut_Poly_factor1_modn(nut_Poly *restrict g, const nut_Poly *restrict f, uint64_t d, int64_t n, nut_Poly tmps[restrict static 4]);
 
 /// Find all roots of a polynomial in an odd prime field.
 ///
@@ -407,7 +474,9 @@ int nut_Poly_factor1_modn(nut_Poly *g, const nut_Poly *f, uint64_t d, int64_t n,
 /// @param [out] roots: store roots here.
 /// @param [in] tmps: polynomials for scratch work, must have 6 initialized (or at least zeroed out) polynomials ({@link nut_Poly_roots_modn_tmptmp})
 /// @return 1 on success (including if the polynomial has 0 roots), 0 on failure.
-int nut_Poly_roots_modn(const nut_Poly *f, int64_t n, nut_Roots *roots, nut_Poly tmps[static 6]);
+[[gnu::nonnull(1, 3, 4)]]
+NUT_ATTR_ACCESS(read_only, 1) NUT_ATTR_ACCESS(read_write, 3) NUT_ATTR_ACCESS(read_write, 4)
+bool nut_Poly_roots_modn(const nut_Poly *restrict f, int64_t n, nut_Roots *restrict roots, nut_Poly tmps[restrict static 6]);
 
 /// Find all roots of a polynomial in an odd prime field.
 ///
@@ -417,6 +486,8 @@ int nut_Poly_roots_modn(const nut_Poly *f, int64_t n, nut_Roots *roots, nut_Poly
 /// @param [in] n: modulus of the coefficient field.  MUST be prime.
 /// @param [out] roots: store roots here.
 /// @return 1 on success (including if the polynomial has 0 roots), 0 on failure.
-int nut_Poly_roots_modn_tmptmp(const nut_Poly *f, int64_t n, nut_Roots *roots);
+[[gnu::nonnull(1, 3)]]
+NUT_ATTR_ACCESS(read_only, 1) NUT_ATTR_ACCESS(read_write, 3)
+bool nut_Poly_roots_modn_tmptmp(const nut_Poly *restrict f, int64_t n, nut_Roots *restrict roots);
 
 
