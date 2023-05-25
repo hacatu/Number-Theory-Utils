@@ -6,7 +6,8 @@ var sieves_8h =
     [ "nut_get_factorizations_pitch", "sieves_8h.html#a280efb1221ea2f423d3169c4b1bfff64", null ],
     [ "nut_sieve_factors", "sieves_8h.html#a67740f0cc15969487c93537cf52038d9", null ],
     [ "nut_sieve_largest_factors", "sieves_8h.html#a8a65ee088513d19d5a014d3126c7d526", null ],
-    [ "nut_fill_factors_from_largest", "sieves_8h.html#aeb90a15db3aef5cc5bc2e752baa81788", null ],
+    [ "NUT_ATTR_ACCESS", "sieves_8h.html#ad23dcc7562e209acadb64a6e4fa8414f", null ],
+    [ "nut_fill_factors_from_largest", "sieves_8h.html#ab7b97b3bb9a75fc40a32f293d56a17ba", null ],
     [ "nut_get_factors_pitch", "sieves_8h.html#a68b227ca1422f01350c384254de63530", null ],
     [ "nut_sieve_sigma_0", "sieves_8h.html#a3b3bf51e510e831251cf83c53f63ef50", null ],
     [ "nut_sieve_sigma_1", "sieves_8h.html#a0a923b3664a1ff3dd55c5ddccc716953", null ],
@@ -19,6 +20,7 @@ var sieves_8h =
     [ "nut_sieve_is_composite", "sieves_8h.html#aefe643cd3f2feb771b2c24ef15fcb190", null ],
     [ "nut_is_composite", "sieves_8h.html#a61fa59181aed2a20a677e4ae846e1ed9", null ],
     [ "nut_compute_pi_range", "sieves_8h.html#aac0f1a4de55e161c45e93c7d3c63d9f8", null ],
-    [ "nut_compute_pi_from_tables", "sieves_8h.html#a3a33279e84355fa048d4021c9ad60397", null ],
+    [ "NUT_ATTR_ACCESS", "sieves_8h.html#ad711843b7300b037e9404802cac9e361", null ],
+    [ "nut_compute_pi_from_tables", "sieves_8h.html#a0e232eb0295911b71001cdb4ca361990", null ],
     [ "nut_sieve_primes", "sieves_8h.html#aee997477c22920d4d8a3831dd24a8683", null ]
 ];

@@ -141,9 +141,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a8a65ee088513d19d5a014d3126c7d526"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a8a65ee088513d19d5a014d3126c7d526">nut_sieve_largest_factors</a> (uint64_t max)</td></tr>
 <tr class="memdesc:a8a65ee088513d19d5a014d3126c7d526"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the largest prime factor of every number in the range from 0 to max.  <a href="sieves_8h.html#a8a65ee088513d19d5a014d3126c7d526">More...</a><br /></td></tr>
 <tr class="separator:a8a65ee088513d19d5a014d3126c7d526"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb90a15db3aef5cc5bc2e752baa81788"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#aeb90a15db3aef5cc5bc2e752baa81788">nut_fill_factors_from_largest</a> (<a class="el" href="structnut__Factors.html">nut_Factors</a> *out, uint64_t n, const uint64_t largest_factors[static n+1])</td></tr>
-<tr class="memdesc:aeb90a15db3aef5cc5bc2e752baa81788"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use a table of largest prime factors to get the factorization of a number.  <a href="sieves_8h.html#aeb90a15db3aef5cc5bc2e752baa81788">More...</a><br /></td></tr>
-<tr class="separator:aeb90a15db3aef5cc5bc2e752baa81788"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad23dcc7562e209acadb64a6e4fa8414f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#ad23dcc7562e209acadb64a6e4fa8414f">NUT_ATTR_ACCESS</a> (read_write, 1) NUT_ATTR_ACCESS(read_only</td></tr>
+<tr class="memdesc:ad23dcc7562e209acadb64a6e4fa8414f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use a table of largest prime factors to get the factorization of a number.  <a href="sieves_8h.html#ad23dcc7562e209acadb64a6e4fa8414f">More...</a><br /></td></tr>
+<tr class="separator:ad23dcc7562e209acadb64a6e4fa8414f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7b97b3bb9a75fc40a32f293d56a17ba"><td class="memItemLeft" align="right" valign="top"><a id="ab7b97b3bb9a75fc40a32f293d56a17ba"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>nut_fill_factors_from_largest</b> (<a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict out, uint64_t n, const uint64_t largest_factors[restrict static n+1])</td></tr>
+<tr class="separator:ab7b97b3bb9a75fc40a32f293d56a17ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68b227ca1422f01350c384254de63530"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a68b227ca1422f01350c384254de63530">nut_get_factors_pitch</a> (uint64_t w)</td></tr>
 <tr class="memdesc:a68b227ca1422f01350c384254de63530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pitch for a pitched array of <a class="el" href="structnut__u64__Pitcharr.html">nut_u64_Pitcharr</a> factor lists.  <a href="sieves_8h.html#a68b227ca1422f01350c384254de63530">More...</a><br /></td></tr>
 <tr class="separator:a68b227ca1422f01350c384254de63530"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,9 +183,12 @@ Functions</h2></td></tr>
 <tr class="memitem:aac0f1a4de55e161c45e93c7d3c63d9f8"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#aac0f1a4de55e161c45e93c7d3c63d9f8">nut_compute_pi_range</a> (uint64_t max, const uint8_t buf[static max/30+1])</td></tr>
 <tr class="memdesc:aac0f1a4de55e161c45e93c7d3c63d9f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the pi (prime counting) function for every number from 0 to max.  <a href="sieves_8h.html#aac0f1a4de55e161c45e93c7d3c63d9f8">More...</a><br /></td></tr>
 <tr class="separator:aac0f1a4de55e161c45e93c7d3c63d9f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a33279e84355fa048d4021c9ad60397"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a3a33279e84355fa048d4021c9ad60397">nut_compute_pi_from_tables</a> (uint64_t n, const uint64_t pi_table[static n/30], const uint8_t buf[static n/30+1])</td></tr>
-<tr class="memdesc:a3a33279e84355fa048d4021c9ad60397"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value for the pi (prime counting) function for a particular number using precomputed tables.  <a href="sieves_8h.html#a3a33279e84355fa048d4021c9ad60397">More...</a><br /></td></tr>
-<tr class="separator:a3a33279e84355fa048d4021c9ad60397"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad711843b7300b037e9404802cac9e361"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#ad711843b7300b037e9404802cac9e361">NUT_ATTR_ACCESS</a> (read_only, 2) NUT_ATTR_ACCESS(read_only</td></tr>
+<tr class="memdesc:ad711843b7300b037e9404802cac9e361"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value for the pi (prime counting) function for a particular number using precomputed tables.  <a href="sieves_8h.html#ad711843b7300b037e9404802cac9e361">More...</a><br /></td></tr>
+<tr class="separator:ad711843b7300b037e9404802cac9e361"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e232eb0295911b71001cdb4ca361990"><td class="memItemLeft" align="right" valign="top"><a id="a0e232eb0295911b71001cdb4ca361990"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_compute_pi_from_tables</b> (uint64_t n, const uint64_t pi_table[restrict static n/30], const uint8_t buf[restrict static n/30+1])</td></tr>
+<tr class="separator:a0e232eb0295911b71001cdb4ca361990"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee997477c22920d4d8a3831dd24a8683"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#aee997477c22920d4d8a3831dd24a8683">nut_sieve_primes</a> (uint64_t max, uint64_t *_num_primes)</td></tr>
 <tr class="memdesc:aee997477c22920d4d8a3831dd24a8683"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute an array of all primes from 0 to max.  <a href="sieves_8h.html#aee997477c22920d4d8a3831dd24a8683">More...</a><br /></td></tr>
 <tr class="separator:aee997477c22920d4d8a3831dd24a8683"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -362,7 +368,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compute the largest prime factor of every number in the range from 0 to max. </p>
-<p>Compared to <a class="el" href="sieves_8h.html#a67740f0cc15969487c93537cf52038d9">nut_sieve_factors</a>, this uses up to 30 times less memory, so if the range is very large, most numbers will never actually have their factorizations accessed, or the factorizations will only be accessed about once, this function should be preferred. The factors of 0 and 1 are not actually computed, their entries in the returned array will be 0. You can use the resulting table as it is, or convert it to a factorization using <a class="el" href="sieves_8h.html#aeb90a15db3aef5cc5bc2e752baa81788">nut_fill_factors_from_largest</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Compared to <a class="el" href="sieves_8h.html#a67740f0cc15969487c93537cf52038d9">nut_sieve_factors</a>, this uses up to 30 times less memory, so if the range is very large, most numbers will never actually have their factorizations accessed, or the factorizations will only be accessed about once, this function should be preferred. The factors of 0 and 1 are not actually computed, their entries in the returned array will be 0. You can use the resulting table as it is, or convert it to a factorization using <a class="el" href="">nut_fill_factors_from_largest</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of sieving range in which to find largest prime factors of all numbers </td></tr>
   </table>
@@ -372,29 +378,23 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aeb90a15db3aef5cc5bc2e752baa81788"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb90a15db3aef5cc5bc2e752baa81788">&#9670;&nbsp;</a></span>nut_fill_factors_from_largest()</h2>
+<a id="ad23dcc7562e209acadb64a6e4fa8414f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad23dcc7562e209acadb64a6e4fa8414f">&#9670;&nbsp;</a></span>NUT_ATTR_ACCESS() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void nut_fill_factors_from_largest </td>
+          <td class="memname">NUT_ATTR_ACCESS </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td>
-          <td class="paramname"><em>out</em>, </td>
+          <td class="paramtype">read_write&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint64_t&#160;</td>
-          <td class="paramname"><em>largest_factors</em>[static n+1]&#160;</td>
+          <td class="paramtype">1&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -785,40 +785,34 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compute the pi (prime counting) function for every number from 0 to max. </p>
-<p>The result should be used with <a class="el" href="sieves_8h.html#a3a33279e84355fa048d4021c9ad60397">nut_compute_pi_from_tables</a> since pi is only actually calculated at every 240th number since intermediate results can be computed with a single popcount on the packed buf bitarray. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The result should be used with <a class="el" href="">nut_compute_pi_from_tables</a> since pi is only actually calculated at every 240th number since intermediate results can be computed with a single popcount on the packed buf bitarray. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of range to compute pi function </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>packed bitarray from <a class="el" href="sieves_8h.html#aefe643cd3f2feb771b2c24ef15fcb190">nut_sieve_is_composite</a> </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>an array of pi values at every 240th number (use <a class="el" href="sieves_8h.html#a3a33279e84355fa048d4021c9ad60397">nut_compute_pi_from_tables</a>) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>an array of pi values at every 240th number (use <a class="el" href="">nut_compute_pi_from_tables</a>) </dd></dl>
 
 </div>
 </div>
-<a id="a3a33279e84355fa048d4021c9ad60397"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a33279e84355fa048d4021c9ad60397">&#9670;&nbsp;</a></span>nut_compute_pi_from_tables()</h2>
+<a id="ad711843b7300b037e9404802cac9e361"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad711843b7300b037e9404802cac9e361">&#9670;&nbsp;</a></span>NUT_ATTR_ACCESS() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t nut_compute_pi_from_tables </td>
+          <td class="memname">NUT_ATTR_ACCESS </td>
           <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
+          <td class="paramtype">read_only&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint64_t&#160;</td>
-          <td class="paramname"><em>pi_table</em>[static n/30], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t&#160;</td>
-          <td class="paramname"><em>buf</em>[static n/30+1]&#160;</td>
+          <td class="paramtype">2&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -886,7 +880,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="sieves_8h.html">sieves.h</a></li>
-    <li class="footer">Generated on Sun May 21 2023 03:19:57 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Thu May 25 2023 08:49:14 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

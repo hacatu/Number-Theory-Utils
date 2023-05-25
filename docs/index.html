@@ -139,7 +139,7 @@ Examples</h1>
 Solve a quadratic equation mod some primes</h2>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span>(uint64_t i = 0; i &lt; 100; ++i){</div>
 <div class="line">    int64_t p = <a class="code" href="modular__math_8h.html#a0a826b9cca04021df02e1d6405cd2df0">nut_u64_rand</a>(2, 1ull &lt;&lt; 30);</div>
-<div class="line">    <span class="keywordflow">while</span>(!<a class="code" href="factorization_8h.html#a1c10f2f9f3cd3d8801d61e6568ebb231">nut_u64_is_prime_dmr</a>(p)){</div>
+<div class="line">    <span class="keywordflow">while</span>(!<a class="code" href="factorization_8h.html#a0dc289669b695862eb026cef3187d856">nut_u64_is_prime_dmr</a>(p)){</div>
 <div class="line">        ++p;</div>
 <div class="line">    }</div>
 <div class="line">    <span class="comment">//Want to solve n**2 - n + 1 == 0 mod p</span></div>
@@ -157,13 +157,14 @@ Solve a quadratic equation mod some primes</h2>
 <div class="line">            <span class="comment">//WARNING: here we know p - 3 is a quadratic residue, but nut_i64_sqrt_mod does not check this and thus if a nonresidue is given and</span></div>
 <div class="line">            <span class="comment">//Tonelli-Shanks is selected as the optimal algorithm for this p, this would be an infinite loop</span></div>
 <div class="line">            int64_t r = <a class="code" href="modular__math_8h.html#a0d036bce1d8fb851b49a4ec0729a5ba1">nut_i64_sqrt_mod</a>(p - 3, p);</div>
-<div class="line">            printf(<span class="stringliteral">&quot;n**2 - n + 1 has roots at %&quot;</span>PRId64<span class="stringliteral">&quot; and %&quot;</span>PRId64<span class="stringliteral">&quot; mod %&quot;</span>PRId64<span class="stringliteral">&quot;\n&quot;</span>, nut_i64_mod((p + 1)/2*(1 + r), p), nut_i64_mod((p + 1)/2*(1 - r), p), p);</div>
+<div class="line">            printf(<span class="stringliteral">&quot;n**2 - n + 1 has roots at %&quot;</span>PRId64<span class="stringliteral">&quot; and %&quot;</span>PRId64<span class="stringliteral">&quot; mod %&quot;</span>PRId64<span class="stringliteral">&quot;\n&quot;</span>, <a class="code" href="modular__math_8h.html#a4c8177a327f417ecf2c5f1152c0ba8cb">nut_i64_mod</a>((p + 1)/2*(1 + r), p), <a class="code" href="modular__math_8h.html#a4c8177a327f417ecf2c5f1152c0ba8cb">nut_i64_mod</a>((p + 1)/2*(1 - r), p), p);</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="afactorization_8h_html_a1c10f2f9f3cd3d8801d61e6568ebb231"><div class="ttname"><a href="factorization_8h.html#a1c10f2f9f3cd3d8801d61e6568ebb231">nut_u64_is_prime_dmr</a></div><div class="ttdeci">int nut_u64_is_prime_dmr(uint64_t n)</div><div class="ttdoc">Check if n is prime using a deterministic Miller-Rabin test.</div></div>
+<div class="ttc" id="afactorization_8h_html_a0dc289669b695862eb026cef3187d856"><div class="ttname"><a href="factorization_8h.html#a0dc289669b695862eb026cef3187d856">nut_u64_is_prime_dmr</a></div><div class="ttdeci">bool nut_u64_is_prime_dmr(uint64_t n)</div><div class="ttdoc">Check if n is prime using a deterministic Miller-Rabin test.</div></div>
 <div class="ttc" id="amodular__math_8h_html_a0a826b9cca04021df02e1d6405cd2df0"><div class="ttname"><a href="modular__math_8h.html#a0a826b9cca04021df02e1d6405cd2df0">nut_u64_rand</a></div><div class="ttdeci">uint64_t nut_u64_rand(uint64_t a, uint64_t b)</div><div class="ttdoc">Generate a (strong) random integer uniformly from [a, b).</div></div>
 <div class="ttc" id="amodular__math_8h_html_a0d036bce1d8fb851b49a4ec0729a5ba1"><div class="ttname"><a href="modular__math_8h.html#a0d036bce1d8fb851b49a4ec0729a5ba1">nut_i64_sqrt_mod</a></div><div class="ttdeci">int64_t nut_i64_sqrt_mod(int64_t n, int64_t p)</div><div class="ttdoc">Compute the square root of a quadratic residue mod a prime.</div></div>
+<div class="ttc" id="amodular__math_8h_html_a4c8177a327f417ecf2c5f1152c0ba8cb"><div class="ttname"><a href="modular__math_8h.html#a4c8177a327f417ecf2c5f1152c0ba8cb">nut_i64_mod</a></div><div class="ttdeci">int64_t nut_i64_mod(int64_t a, int64_t n)</div><div class="ttdoc">Compute the Euclidean remainder r = a mod n for positive n so that 0 &lt;= r &lt; n.</div></div>
 <div class="ttc" id="amodular__math_8h_html_a934e38bdacf035d2eef4efc9e35da2d5"><div class="ttname"><a href="modular__math_8h.html#a934e38bdacf035d2eef4efc9e35da2d5">nut_i64_jacobi</a></div><div class="ttdeci">int64_t nut_i64_jacobi(int64_t n, int64_t k)</div><div class="ttdoc">Compute the Jacobi symbol of n mod k.</div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md5"></a>
 Factor some numbers</h2>
@@ -175,50 +176,48 @@ Factor some numbers</h2>
 <div class="line">    <span class="comment">//and it should not return &gt; 1 unless n is greater than all the *_max fields in factor_conf and composite.</span></div>
 <div class="line">    <span class="comment">//the primes and num_primes arguments here are null because primes for trial division must be generated by</span></div>
 <div class="line">    <span class="comment">//some other function</span></div>
-<div class="line">    <span class="keywordflow">if</span>(<a class="code" href="factorization_8h.html#a230173e9e6e294ab141f555523840c65">nut_u64_factor_heuristic</a>(n, 0, NULL, &amp;<a class="code" href="factorization_8h.html#a435a05668997a808999bf713833f41dc">nut_default_factor_conf</a>, &amp;factors) != 1){</div>
+<div class="line">    <span class="keywordflow">if</span>(nut_u64_factor_heuristic(n, 0, NULL, &amp;<a class="code" href="factorization_8h.html#a435a05668997a808999bf713833f41dc">nut_default_factor_conf</a>, &amp;factors) != 1){</div>
 <div class="line">        printf(<span class="stringliteral">&quot;Failed to factor %&quot;</span>PRIu64<span class="stringliteral">&quot;!\n&quot;</span>, n);</div>
 <div class="line">    }<span class="keywordflow">else</span>{</div>
 <div class="line">        printf(<span class="stringliteral">&quot;%&quot;</span>PRIu64<span class="stringliteral">&quot; = &quot;</span>, n);</div>
-<div class="line">        <a class="code" href="factorization_8h.html#a1f675c4e5ec9d6904a1481b441f9d088">nut_Factor_fprint</a>(stdout, factors);</div>
+<div class="line">        nut_Factor_fprint(stdout, factors);</div>
 <div class="line">        printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="line">free(factors);</div>
-<div class="ttc" id="afactorization_8h_html_a1f675c4e5ec9d6904a1481b441f9d088"><div class="ttname"><a href="factorization_8h.html#a1f675c4e5ec9d6904a1481b441f9d088">nut_Factor_fprint</a></div><div class="ttdeci">int nut_Factor_fprint(FILE *file, const nut_Factors *factors)</div><div class="ttdoc">Print a factorization of a number.</div></div>
-<div class="ttc" id="afactorization_8h_html_a230173e9e6e294ab141f555523840c65"><div class="ttname"><a href="factorization_8h.html#a230173e9e6e294ab141f555523840c65">nut_u64_factor_heuristic</a></div><div class="ttdeci">uint64_t nut_u64_factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes], const nut_FactorConf *conf, nut_Factors *factors)</div><div class="ttdoc">Factor a number using a variety of approaches based on its size.</div></div>
 <div class="ttc" id="afactorization_8h_html_a2cc9af2019214dbca0a96c10863c45c3"><div class="ttname"><a href="factorization_8h.html#a2cc9af2019214dbca0a96c10863c45c3">nut_make_Factors_w</a></div><div class="ttdeci">nut_Factors * nut_make_Factors_w(uint64_t max_primes)</div><div class="ttdoc">Allocate a factors structure that can hold a given number of distinct primes.</div></div>
 <div class="ttc" id="afactorization_8h_html_a435a05668997a808999bf713833f41dc"><div class="ttname"><a href="factorization_8h.html#a435a05668997a808999bf713833f41dc">nut_default_factor_conf</a></div><div class="ttdeci">const nut_FactorConf nut_default_factor_conf</div><div class="ttdoc">Default value for nut_u64_factor_heuristic Use if you don't want to tune the parameters or don't care...</div></div>
 <div class="ttc" id="afactorization_8h_html_a978817b226b29e568d014886c6d82ee8"><div class="ttname"><a href="factorization_8h.html#a978817b226b29e568d014886c6d82ee8">NUT_MAX_PRIMES_64</a></div><div class="ttdeci">#define NUT_MAX_PRIMES_64</div><div class="ttdoc">The most distinct prime divisors a uint64_t can have.</div><div class="ttdef"><b>Definition:</b> <a href="factorization_8h_source.html#l00025">factorization.h:25</a></div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md6"></a>
 Factor a polynomial mod some primes</h2>
 <div class="fragment"><div class="line"><a class="code" href="structnut__Poly.html">nut_Poly</a> f[1];</div>
-<div class="line"><a class="code" href="polynomial_8h.html#a1fb52192485b90060f551adc53078729">nut_Poly_init</a>(f, 9);</div>
+<div class="line"><a class="code" href="polynomial_8h.html#a30f1e79256cd7e7f0f1c2d89406461cc">nut_Poly_init</a>(f, 9);</div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span> *end = <span class="stringliteral">&quot;&quot;</span>;</div>
 <div class="line">int64_t modulus;</div>
-<div class="line"><span class="keywordflow">if</span>(!<a class="code" href="polynomial_8h.html#a007f5577f1ef5120af0ad4c2f30b7352">nut_Poly_parse</a>(f, &amp;modulus, <span class="stringliteral">&quot;x^8 + x^7 - x^5 - x^4 - x^3 + x + 1&quot;</span>, &amp;end) || *end){</div>
+<div class="line"><span class="keywordflow">if</span>(!nut_Poly_parse(f, &amp;modulus, <span class="stringliteral">&quot;x^8 + x^7 - x^5 - x^4 - x^3 + x + 1&quot;</span>, &amp;end) || *end){</div>
 <div class="line">    printf(<span class="stringliteral">&quot;Failed to parse polynomial\n&quot;</span>);</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">fprintf(stderr, <span class="stringliteral">&quot;\e[1;34mComputing roots of (&quot;</span>);</div>
-<div class="line"><a class="code" href="polynomial_8h.html#a31d70fa9d9dbdee2f70e485115bdcde5">nut_Poly_fprint</a>(stderr, f, <span class="stringliteral">&quot;x&quot;</span>, <span class="stringliteral">&quot; + &quot;</span>, <span class="stringliteral">&quot; - &quot;</span>, <span class="stringliteral">&quot;**&quot;</span>, 1);</div>
+<div class="line">nut_Poly_fprint(stderr, f, <span class="stringliteral">&quot;x&quot;</span>, <span class="stringliteral">&quot; + &quot;</span>, <span class="stringliteral">&quot; - &quot;</span>, <span class="stringliteral">&quot;**&quot;</span>, 1);</div>
 <div class="line">fprintf(stderr, <span class="stringliteral">&quot;) nut_i64_mod p for %&quot;</span>PRIu64<span class="stringliteral">&quot; random primes...\e[0m\n&quot;</span>, trials);</div>
 <div class="line"> </div>
 <div class="line"><a class="code" href="structnut__Roots.html">nut_Roots</a> roots[1];</div>
-<div class="line"><a class="code" href="polynomial_8h.html#af2bcb707dcbac686106cb40758414b93">nut_Roots_init</a>(roots, 8);</div>
+<div class="line"><a class="code" href="polynomial_8h.html#a4fbb365d94859e8639c80fac884b109a">nut_Roots_init</a>(roots, 8);</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">for</span>(uint64_t i = 0; i &lt; 50; ++i){</div>
 <div class="line">    int64_t p = <a class="code" href="modular__math_8h.html#a0a826b9cca04021df02e1d6405cd2df0">nut_u64_rand</a>(2, 1ull &lt;&lt; 30);</div>
-<div class="line">    <span class="keywordflow">while</span>(!<a class="code" href="factorization_8h.html#a1c10f2f9f3cd3d8801d61e6568ebb231">nut_u64_is_prime_dmr</a>(p)){</div>
+<div class="line">    <span class="keywordflow">while</span>(!<a class="code" href="factorization_8h.html#a0dc289669b695862eb026cef3187d856">nut_u64_is_prime_dmr</a>(p)){</div>
 <div class="line">        ++p;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">if</span>(!<a class="code" href="polynomial_8h.html#a3a9ce1271f0e0909b7aa28dce18b630d">nut_Poly_roots_modn_tmptmp</a>(f, p, roots)){</div>
+<div class="line">    <span class="keywordflow">if</span>(!nut_Poly_roots_modn_tmptmp(f, p, roots)){</div>
 <div class="line">        printf(<span class="stringliteral">&quot;Failed to factor (&quot;</span>);</div>
-<div class="line">        <a class="code" href="polynomial_8h.html#a31d70fa9d9dbdee2f70e485115bdcde5">nut_Poly_fprint</a>(stdout, f, <span class="stringliteral">&quot;x&quot;</span>, <span class="stringliteral">&quot; + &quot;</span>, <span class="stringliteral">&quot; - &quot;</span>, <span class="stringliteral">&quot;**&quot;</span>, 1);</div>
+<div class="line">        nut_Poly_fprint(stdout, f, <span class="stringliteral">&quot;x&quot;</span>, <span class="stringliteral">&quot; + &quot;</span>, <span class="stringliteral">&quot; - &quot;</span>, <span class="stringliteral">&quot;**&quot;</span>, 1);</div>
 <div class="line">        printf(<span class="stringliteral">&quot;) nut_i64_mod %&quot;</span>PRId64<span class="stringliteral">&quot;\n&quot;</span>, p)</div>
 <div class="line">        <span class="keywordflow">continue</span>;</div>
 <div class="line">    }</div>
 <div class="line">    printf(<span class="stringliteral">&quot;Found %&quot;</span>PRIu64<span class="stringliteral">&quot; roots of (&quot;</span>, roots-&gt;<a class="code" href="structnut__Roots.html#a52b50bc7b374bb528cdae1b4477b69c1">len</a>);</div>
-<div class="line">    <a class="code" href="polynomial_8h.html#a31d70fa9d9dbdee2f70e485115bdcde5">nut_Poly_fprint</a>(stdout, f, <span class="stringliteral">&quot;x&quot;</span>, <span class="stringliteral">&quot; + &quot;</span>, <span class="stringliteral">&quot; - &quot;</span>, <span class="stringliteral">&quot;**&quot;</span>, 1);</div>
+<div class="line">    nut_Poly_fprint(stdout, f, <span class="stringliteral">&quot;x&quot;</span>, <span class="stringliteral">&quot; + &quot;</span>, <span class="stringliteral">&quot; - &quot;</span>, <span class="stringliteral">&quot;**&quot;</span>, 1);</div>
 <div class="line">    printf(<span class="stringliteral">&quot;) nut_i64_mod %&quot;</span>PRId64, p);</div>
 <div class="line">    <span class="keywordflow">if</span>(roots-&gt;<a class="code" href="structnut__Roots.html#a52b50bc7b374bb528cdae1b4477b69c1">len</a>){</div>
 <div class="line">        printf(<span class="stringliteral">&quot;: &quot;</span>);</div>
@@ -236,17 +235,14 @@ Factor a polynomial mod some primes</h2>
 <div class="line">}</div>
 <div class="line"><a class="code" href="polynomial_8h.html#acfa2292bfc27186033c1c65930250f55">nut_Roots_destroy</a>(roots);</div>
 <div class="line"><a class="code" href="polynomial_8h.html#adf706197f57e4ffc4496a4209d997985">nut_Poly_destroy</a>(f);</div>
-<div class="ttc" id="apolynomial_8h_html_a007f5577f1ef5120af0ad4c2f30b7352"><div class="ttname"><a href="polynomial_8h.html#a007f5577f1ef5120af0ad4c2f30b7352">nut_Poly_parse</a></div><div class="ttdeci">int nut_Poly_parse(nut_Poly *f, int64_t *n, const char *str, const char **end)</div><div class="ttdoc">Convert a string to a polynomial (and possibly modulus)</div></div>
-<div class="ttc" id="apolynomial_8h_html_a1fb52192485b90060f551adc53078729"><div class="ttname"><a href="polynomial_8h.html#a1fb52192485b90060f551adc53078729">nut_Poly_init</a></div><div class="ttdeci">int nut_Poly_init(nut_Poly *f, uint64_t reserve)</div><div class="ttdoc">Initialize a polynomial with at least a given capacity.</div></div>
-<div class="ttc" id="apolynomial_8h_html_a31d70fa9d9dbdee2f70e485115bdcde5"><div class="ttname"><a href="polynomial_8h.html#a31d70fa9d9dbdee2f70e485115bdcde5">nut_Poly_fprint</a></div><div class="ttdeci">int nut_Poly_fprint(FILE *file, const nut_Poly *f, const char *vname, const char *add, const char *sub, const char *pow, int descending)</div><div class="ttdoc">Print a polynomial to a file.</div></div>
-<div class="ttc" id="apolynomial_8h_html_a3a9ce1271f0e0909b7aa28dce18b630d"><div class="ttname"><a href="polynomial_8h.html#a3a9ce1271f0e0909b7aa28dce18b630d">nut_Poly_roots_modn_tmptmp</a></div><div class="ttdeci">int nut_Poly_roots_modn_tmptmp(const nut_Poly *f, int64_t n, nut_Roots *roots)</div><div class="ttdoc">Find all roots of a polynomial in an odd prime field.</div></div>
+<div class="ttc" id="apolynomial_8h_html_a30f1e79256cd7e7f0f1c2d89406461cc"><div class="ttname"><a href="polynomial_8h.html#a30f1e79256cd7e7f0f1c2d89406461cc">nut_Poly_init</a></div><div class="ttdeci">bool nut_Poly_init(nut_Poly *f, uint64_t reserve)</div><div class="ttdoc">Initialize a polynomial with at least a given capacity.</div></div>
+<div class="ttc" id="apolynomial_8h_html_a4fbb365d94859e8639c80fac884b109a"><div class="ttname"><a href="polynomial_8h.html#a4fbb365d94859e8639c80fac884b109a">nut_Roots_init</a></div><div class="ttdeci">bool nut_Roots_init(nut_Roots *roots, uint64_t reserve)</div><div class="ttdoc">Initialize a root buffer with at least a given capacity.</div></div>
 <div class="ttc" id="apolynomial_8h_html_acfa2292bfc27186033c1c65930250f55"><div class="ttname"><a href="polynomial_8h.html#acfa2292bfc27186033c1c65930250f55">nut_Roots_destroy</a></div><div class="ttdeci">void nut_Roots_destroy(nut_Roots *roots)</div><div class="ttdoc">Free resources held by a root buffer.</div></div>
 <div class="ttc" id="apolynomial_8h_html_adf706197f57e4ffc4496a4209d997985"><div class="ttname"><a href="polynomial_8h.html#adf706197f57e4ffc4496a4209d997985">nut_Poly_destroy</a></div><div class="ttdeci">void nut_Poly_destroy(nut_Poly *f)</div><div class="ttdoc">Free resources held by a polynomial struct.</div></div>
-<div class="ttc" id="apolynomial_8h_html_af2bcb707dcbac686106cb40758414b93"><div class="ttname"><a href="polynomial_8h.html#af2bcb707dcbac686106cb40758414b93">nut_Roots_init</a></div><div class="ttdeci">int nut_Roots_init(nut_Roots *roots, uint64_t reserve)</div><div class="ttdoc">Initialize a root buffer with at least a given capacity.</div></div>
-<div class="ttc" id="astructnut__Poly_html"><div class="ttname"><a href="structnut__Poly.html">nut_Poly</a></div><div class="ttdoc">A polynomial with signed integer coefficients.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8h_source.html#l00026">polynomial.h:26</a></div></div>
-<div class="ttc" id="astructnut__Roots_html"><div class="ttname"><a href="structnut__Roots.html">nut_Roots</a></div><div class="ttdoc">The roots of a polynomial over a finite field, ignoring multiplicity.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8h_source.html#l00038">polynomial.h:38</a></div></div>
-<div class="ttc" id="astructnut__Roots_html_a4938a9a6f1cb009c71930447a417b467"><div class="ttname"><a href="structnut__Roots.html#a4938a9a6f1cb009c71930447a417b467">nut_Roots::roots</a></div><div class="ttdeci">int64_t * roots</div><div class="ttdoc">Array of roots.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8h_source.html#l00045">polynomial.h:45</a></div></div>
-<div class="ttc" id="astructnut__Roots_html_a52b50bc7b374bb528cdae1b4477b69c1"><div class="ttname"><a href="structnut__Roots.html#a52b50bc7b374bb528cdae1b4477b69c1">nut_Roots::len</a></div><div class="ttdeci">uint64_t len</div><div class="ttdoc">Number of roots, can be 0 if there are none.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8h_source.html#l00040">polynomial.h:40</a></div></div>
+<div class="ttc" id="astructnut__Poly_html"><div class="ttname"><a href="structnut__Poly.html">nut_Poly</a></div><div class="ttdoc">A polynomial with signed integer coefficients.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8h_source.html#l00027">polynomial.h:27</a></div></div>
+<div class="ttc" id="astructnut__Roots_html"><div class="ttname"><a href="structnut__Roots.html">nut_Roots</a></div><div class="ttdoc">The roots of a polynomial over a finite field, ignoring multiplicity.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8h_source.html#l00039">polynomial.h:39</a></div></div>
+<div class="ttc" id="astructnut__Roots_html_a4938a9a6f1cb009c71930447a417b467"><div class="ttname"><a href="structnut__Roots.html#a4938a9a6f1cb009c71930447a417b467">nut_Roots::roots</a></div><div class="ttdeci">int64_t * roots</div><div class="ttdoc">Array of roots.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8h_source.html#l00046">polynomial.h:46</a></div></div>
+<div class="ttc" id="astructnut__Roots_html_a52b50bc7b374bb528cdae1b4477b69c1"><div class="ttname"><a href="structnut__Roots.html#a52b50bc7b374bb528cdae1b4477b69c1">nut_Roots::len</a></div><div class="ttdeci">uint64_t len</div><div class="ttdoc">Number of roots, can be 0 if there are none.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8h_source.html#l00041">polynomial.h:41</a></div></div>
 </div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -254,7 +250,7 @@ Factor a polynomial mod some primes</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun May 21 2023 03:19:57 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Thu May 25 2023 08:49:14 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>
