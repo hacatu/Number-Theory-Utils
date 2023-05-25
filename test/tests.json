@@ -1,4 +1,7 @@
 {
+	"test_binom": {
+		"no_red_tests": [[]]
+	},
 	"test_pi_sieve": {
 		"no_red_tests": [[]]
 	},
