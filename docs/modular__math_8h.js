@@ -24,5 +24,15 @@ var modular__math_8h =
     [ "nut_i64_rand_nr_mod", "modular__math_8h.html#a1ea912c9c389a530c1c41002d340f718", null ],
     [ "nut_i64_sqrt_shanks", "modular__math_8h.html#aef1c72a0459316ba22fc28ab1cb778ed", null ],
     [ "nut_i64_sqrt_cipolla", "modular__math_8h.html#a0bbfeddc4b2b03b38365a9f212e3538d", null ],
-    [ "nut_i64_sqrt_mod", "modular__math_8h.html#a0d036bce1d8fb851b49a4ec0729a5ba1", null ]
+    [ "nut_i64_sqrt_mod", "modular__math_8h.html#a0d036bce1d8fb851b49a4ec0729a5ba1", null ],
+    [ "nut_i32_fastmod_init", "modular__math_8h.html#a3f3d03f2c98dc46369e7b03c6d1e154e", null ],
+    [ "nut_u32_fastmod_init", "modular__math_8h.html#a3922adfdec9db4db8107872a6d58fd8f", null ],
+    [ "nut_i64_fastmod_init", "modular__math_8h.html#a9f4e131a45a8c8b1bae499fb7a3a7e6f", null ],
+    [ "nut_u64_fastmod_init", "modular__math_8h.html#a2a561ee4a36477bc88920a0dc98c3b6b", null ],
+    [ "nut_i32_fastmod_trunc", "modular__math_8h.html#af0852013ceab695aa56c2490a727cfb9", null ],
+    [ "nut_i32_fastmod_floor", "modular__math_8h.html#a5cd9ef5410f6d606ad02cde7224dad9b", null ],
+    [ "nut_u32_fastmod", "modular__math_8h.html#a8c2cf3d1c7a28c41afcd4e41ab04e384", null ],
+    [ "nut_i64_fastmod_trunc", "modular__math_8h.html#a192aa46411d8519d26d27c7fd407f993", null ],
+    [ "nut_i64_fastmod_floor", "modular__math_8h.html#ae7b3c8468ef4ebc16226f3f6a7cf3ee7", null ],
+    [ "nut_u64_fastmod", "modular__math_8h.html#ae67ab84aa76d638bb8f06a4200e13847", null ]
 ];
