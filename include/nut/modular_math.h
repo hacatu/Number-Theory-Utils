@@ -209,3 +209,76 @@ int64_t nut_i64_sqrt_cipolla(int64_t n, int64_t p);
 [[gnu::const]]
 int64_t nut_i64_sqrt_mod(int64_t n, int64_t p);
 
+
+/// Compute a constant to use to do modular division faster
+/// @param [in] pd: absolute value of divisor
+/// @return constant c for use with { @link nut_i32_fastmod}
+[[gnu::const]]
+uint64_t nut_i32_fastmod_init(uint32_t pd);
+
+/// Compute a constant to use to do modular division faster
+/// @param [in] d: divisor
+/// @return constant c for use with { @link nut_u32_fastmod}
+[[gnu::const]]
+uint64_t nut_u32_fastmod_init(uint32_t d);
+
+/// Compute a constant to use to do modular division faster
+/// @param [in] pd: absolute value of divisor
+/// @return constant c for use with { @link nut_i64_fastmod}
+[[gnu::const]]
+uint128_t nut_i64_fastmod_init(uint64_t pd);
+
+/// Compute a constant to use to do modular division faster
+/// @param [in] d: divisor
+/// @return constant c for use with { @link nut_u64_fastmod}
+[[gnu::const]]
+uint128_t nut_u64_fastmod_init(uint64_t d);
+
+/// Compute n mod d, choosing the smallest signed remainder
+/// @param [in] n: dividend
+/// @param [in] pd: absolute value of divisor
+/// @param [in] c: constant from { @link nut_i32_fastmod_init}
+/// @return n mod pd
+[[gnu::const]]
+int32_t nut_i32_fastmod_trunc(int32_t n, uint32_t pd, uint64_t c);
+
+/// Compute n mod d, choosing the euclidean remainder
+/// @param [in] n: dividend
+/// @param [in] pd: absolute value of divisor
+/// @param [in] c: constant from { @link nut_i32_fastmod_init}
+/// @return n mod pd
+[[gnu::const]]
+int32_t nut_i32_fastmod_floor(int32_t n, uint32_t pd, uint64_t c);
+
+/// Compute n mod d faster using a precomputed constant
+/// @param [in] n: dividend
+/// @param [in] d: divisor
+/// @param [in] c: constant from { @link nut_u32_fastmod_init}
+/// @return n mod d
+[[gnu::const]]
+uint32_t nut_u32_fastmod(uint32_t n, uint32_t d, uint64_t c);
+
+/// Compute n mod d, choosing the smallest signed remainder
+/// @param [in] n: dividend
+/// @param [in] pd: absolute value of divisor
+/// @param [in] c: constant from { @link nut_i64_fastmod_init}
+/// @return n mod pd
+[[gnu::const]]
+int64_t nut_i64_fastmod_trunc(int64_t n, uint64_t pd, uint128_t c);
+
+/// Compute n mod d, choosing the euclidean remainder
+/// @param [in] n: dividend
+/// @param [in] pd: absolute value of divisor
+/// @param [in] c: constant from { @link nut_i64_fastmod_init}
+/// @return n mod pd
+[[gnu::const]]
+int64_t nut_i64_fastmod_floor(int64_t n, uint64_t pd, uint128_t c);
+
+/// Compute n mod d faster using a precomputed constant
+/// @param [in] n: dividend
+/// @param [in] d: divisor
+/// @param [in] c: constant from { @link nut_u64_fastmod_init}
+/// @return n mod d
+[[gnu::const]]
+uint64_t nut_u64_fastmod(uint64_t n, uint64_t d, uint128_t c);
+

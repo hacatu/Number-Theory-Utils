@@ -276,3 +276,62 @@ int64_t nut_i64_sqrt_mod(int64_t n, int64_t p){
 	return r;
 }
 
+
+/// See https://arxiv.org/pdf/1902.01961.pdf
+uint64_t nut_i32_fastmod_init(uint32_t pd){
+	return ~0ull/pd + 1 + (__builtin_popcount(pd) == 1);
+}
+
+uint64_t nut_u32_fastmod_init(uint32_t d){
+	return ~0ull/d + 1;
+}
+
+uint128_t nut_i64_fastmod_init(uint64_t pd){
+	return ~(uint128_t)0/pd + 1 + (__builtin_popcount(pd) == 1);
+}
+
+uint128_t nut_u64_fastmod_init(uint64_t d){
+	return ~(uint128_t)0/d + 1;
+}
+
+
+int32_t nut_i32_fastmod_trunc(int32_t n, uint32_t pd, uint64_t c){
+	uint64_t cn = c*n;
+	int32_t cnd = ((uint128_t)cn*pd) >> 64;
+	return cnd - ((pd - 1) & (n >> 31));
+}
+
+int32_t nut_i32_fastmod_floor(int32_t n, uint32_t pd, uint64_t c){
+	uint64_t cn = c*n;
+	int32_t cnd = ((uint128_t)cn*pd) >> 64;
+	return cnd - ((pd - 1) && (n >> 31));
+}
+
+uint32_t nut_u32_fastmod(uint32_t n, uint32_t d, uint64_t c){
+	uint64_t cn = c*n;
+	return ((uint128_t)cn*d) >> 64;
+}
+
+int64_t nut_i64_fastmod_trunc(int64_t n, uint64_t pd, uint128_t c){
+	uint128_t cn = c*n;
+	uint64_t cn_hi = cn >> 64;
+	int64_t cnd_hi = ((uint128_t)cn_hi*pd) >> 64;
+	// c*n*pd >> 128 does not actually depend on the low bits of cn
+	return cnd_hi - ((pd - 1) & (n >> 63));
+}
+
+int64_t nut_i64_fastmod_floor(int64_t n, uint64_t pd, uint128_t c){
+	uint128_t cn = c*n;
+	uint64_t cn_hi = cn >> 64;
+	int64_t cnd_hi = ((uint128_t)cn_hi*pd) >> 64;
+	// c*n*pd >> 128 does not actually depend on the low bits of cn
+	return cnd_hi - ((pd - 1) && (n >> 63));
+}
+
+uint64_t nut_u64_fastmod(uint64_t n, uint64_t d, uint128_t c){
+	uint128_t cn = c*n;
+	uint64_t cn_hi = cn >> 64;
+	return ((uint128_t)cn_hi*d) >> 64;
+}
+
+
