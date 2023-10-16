@@ -1,5 +1,10 @@
 #include <stddef.h>
+#if __has_include(<sys/random.h>)
 #include <sys/random.h>
+#elifdef __MINGW32__
+#define _CRT_RAND_S
+#include <stdlib.h>
+#endif
 #include <string.h>
 #include <stdbool.h>
 
@@ -57,11 +62,13 @@ uint64_t nut_u64_binom_next(uint64_t n, uint64_t k, uint64_t prev){
 	return prev*(n - k + 1)/k;
 }
 
+#if __has_include(<sys/random.h>)
 uint64_t nut_u64_rand(uint64_t a, uint64_t b){
 	uint64_t l = b - a, r = 0, bytes = (71 - __builtin_clzll(l))/8;
 	uint64_t ub;
 	if(bytes == 8){
-		ub = l;
+		ub = ~0ull%l + 1;
+		ub = (ub == l) ? 0 : -ub;
 	}else{
 		ub = 1ull << (bytes*8);
 		ub -= ub%l;
@@ -71,9 +78,30 @@ uint64_t nut_u64_rand(uint64_t a, uint64_t b){
 #pragma GCC diagnostic ignored "-Wunused-result"
 		getrandom(&r, bytes, 0);
 #pragma GCC diagnostic pop
-	}while(r >= ub);
+	}while(ub && r >= ub);
 	return r%l + a;
 }
+#elifdef __MINGW32__
+uint64_t nut_u64_rand(uint64_t a, uint64_t b){
+	uint64_t l = b - a, r = 0;
+	uint64_t ub;
+	if(l > (1ull << 32)){
+		ub = ~0ull%l + 1;
+		ub = (ub == l) ? 0 : -ub;
+		do{
+			rand_s((uint32_t*)&r);
+			rand_s((uint32_t*)&r + 1);
+		}while(ub && r >= ub);
+	}else{
+		ub = 1ull << 32;
+		ub -= ub%l;
+		do{
+			rand_s((uint32_t*)&r);
+		}while(ub && r >= ub);
+	}
+	return r%l + a;
+}
+#endif
 
 uint64_t nut_u64_prand(uint64_t a, uint64_t b){
 	return nut_u64_rand(a, b);//TODO: test if this is a bottleneck, we don't need calls to this function to be secure

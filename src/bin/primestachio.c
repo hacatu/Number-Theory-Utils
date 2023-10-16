@@ -5,7 +5,11 @@
 #include <time.h>
 #include <stddef.h>
 
-#include "nut/sieves.h"
+#include <nut/sieves.h>
+
+#ifdef __MINGW32__
+#define CLOCK_MONOTONIC_RAW CLOCK_MONOTONIC
+#endif
 
 int main(int argc, char **argv){
 	if(argc != 2){

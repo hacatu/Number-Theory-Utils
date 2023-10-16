@@ -1,5 +1,4 @@
 #include <stddef.h>
-#include <sys/random.h>
 #include <string.h>
 #include <stdbool.h>
 

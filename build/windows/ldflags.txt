@@ -1,0 +1,13 @@
+-Llib
+-lnut
+-lm
+-lSDL2
+-O3
+-flto
+-std=c2x
+-fno-strict-aliasing
+-lwinpthread
+-static-libgcc
+-static-libstdc++
+--static
+
