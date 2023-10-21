@@ -42,6 +42,13 @@ typedef struct{
 #define NUT_ATTR_ACCESS(...)
 #endif
 
+/// Prevent clang from reporting spurious errors when a length zero array is passed to a length annotated function parameter
+#if __has_c_attribute(clang::no_sanitize)
+#define NUT_ATTR_NO_SAN_VLA_BOUND [[clang::no_sanitize("vla-bound")]]
+#else
+#define NUT_ATTR_NO_SAN_VLA_BOUND
+#endif
+
 /// Compute nonnegative integral power of integer using binary exponentiation.
 /// @param [in] b, e: base and exponent
 /// @return b^e, not checked for overflow

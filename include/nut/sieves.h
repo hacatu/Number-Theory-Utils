@@ -255,10 +255,7 @@ uint64_t *nut_compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1
 /// @param [in] buf: packed bitarray from {@link nut_sieve_is_composite}
 /// @return the number of primes <= n
 [[gnu::pure, gnu::nonnull(2, 3)]]
-NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 3)
-#if __has_c_attribute(clang::no_sanitize)
-[[clang::no_sanitize("vla-bound")]]
-#endif
+NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 3) NUT_ATTR_NO_SAN_VLA_BOUND
 uint64_t nut_compute_pi_from_tables(uint64_t n, const uint64_t pi_table[restrict static n/30], const uint8_t buf[restrict static n/30 + 1]);
 
 /// Compute an array of all primes from 0 to max.

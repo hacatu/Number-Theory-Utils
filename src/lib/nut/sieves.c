@@ -736,7 +736,7 @@ static uint64_t *copy_small_primes(uint64_t max, uint64_t *_num_primes){
 }
 
 uint64_t *nut_sieve_primes(uint64_t max, uint64_t *_num_primes){
-	if(max < 7){
+	if(max <= 100){
 		return copy_small_primes(max, _num_primes);
 	}
 	uint64_t *primes = malloc((size_t)nut_max_primes_le(max)*sizeof(uint64_t));
