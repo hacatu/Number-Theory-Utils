@@ -313,16 +313,12 @@ void nut_Diri_compute_u(nut_Diri *self, int64_t m){
 
 void nut_Diri_compute_N(nut_Diri *self, int64_t m){
 	for(int64_t i = 0; i <= self->y; ++i){
-		self->buf[i] = i;
+		self->buf[i] = m ? i%m : m;
 	}
 	for(int64_t i = 1; i <= self->yinv; ++i){
 		int64_t v = self->x/i;
 		int64_t term = (v&1) ? v*((v + 1) >> 1) : (v + 1)*(v >> 1);
-		if(m){
-			self->buf[self->y + i] = term%m;
-		}else{
-			self->buf[self->y + i] = term;
-		}
+		self->buf[self->y + i] = m ? term%m : term;
 	}
 }
 
@@ -378,6 +374,53 @@ void nut_Diri_compute_mertens(nut_Diri *restrict self, int64_t m, const uint8_t 
 		}
 		nut_Diri_set_dense(self, i, v);
 	}
+}
+
+bool nut_Diri_compute_dk(nut_Diri *restrict self, uint64_t k, int64_t m, nut_Diri *restrict f_tbl, nut_Diri *restrict g_tbl){
+	if(self->y != f_tbl->y || self->y != g_tbl->y || self->x != f_tbl->x || self->x != g_tbl->x){
+		return false;
+	}else if(!k){
+		nut_Diri_compute_I(self);
+		return true;
+	}else if(k == 1){
+		nut_Diri_compute_u(self, m);
+		return true;
+	}
+	nut_Diri_compute_u(f_tbl, m);
+	nut_Diri *t = self, *s = f_tbl, *r = g_tbl;
+	while(k%2 == 0){
+		if(!nut_Diri_compute_conv(t, m, s, s)){
+			return false;
+		}else{
+			void *tmp = t;
+			t = s;
+			s = tmp;
+		}//s = s*s
+		k >>= 1;
+	}
+	nut_Diri_copy(r, s);
+	while((k >>= 1)){
+		if(!nut_Diri_compute_conv(t, m, s, s)){
+			return false;
+		}else{
+			void *tmp = t;
+			t = s;
+			s = tmp;
+		}//s = s*s
+		if(k%2){
+			if(!nut_Diri_compute_conv(t, m, r, s)){
+				return false;
+			}else{
+				void *tmp = t;
+				t = r;
+				r = tmp;
+			}//r = r*s
+		}
+	}
+	if(r != self){
+		nut_Diri_copy(self, r);
+	}
+	return true;
 }
 
 bool nut_Diri_compute_conv_u(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl){

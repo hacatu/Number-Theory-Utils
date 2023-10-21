@@ -230,6 +230,19 @@ void nut_Diri_compute_N(nut_Diri *self, int64_t m);
 NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 3)
 void nut_Diri_compute_mertens(nut_Diri *restrict self, int64_t m, const uint8_t mobius[restrict static self->y/4 + 1]);
 
+/// Compute the value table for the kth generalized divisor function dk(n)
+/// dk(n) = da(n) <*> db(n) whenever a + b = k.
+/// This function uses binary exponentiation to compute dk in only log(k) convolutions.
+/// However, if all dk's are needed, calling { @link nut_Diri_compute_conv_u}
+/// is more efficient
+/// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init}.
+/// self->y, self->x, and self->yinv must be set and consistent with the inputs
+/// @param [in] k: k, ie which generalized divisor function to compute.  dk is u <*> u <*> ... <*> u with k u's
+/// @param [in] m: modulus to reduce the result by, or 0 to skip reducing
+/// @param [in, out] f_tbl, g_tbl: temporary tables for scratch work, initialized by { @link nut_Diri_init}, fields y, x, and yinv must be set
+/// Will still have scratch data stored on return
+bool nut_Diri_compute_dk(nut_Diri *restrict self, uint64_t k, int64_t m, nut_Diri *restrict f_tbl, nut_Diri *restrict g_tbl);
+
 /// Compute the value table for h = f <*> u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f
 /// See { @link nut_Diri_compute_conv } for details, this is just that function but with several specializations due to u being very simple.
 /// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init}.

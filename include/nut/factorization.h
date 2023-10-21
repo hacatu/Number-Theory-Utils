@@ -232,6 +232,12 @@ void nut_Factor_combine(nut_Factors *restrict factors, const nut_Factors *restri
 [[gnu::const]]
 bool nut_u64_is_prime_dmr(uint64_t n);
 
+/// Find the next prime >= n
+/// @param [in] n: inclusive lower bound for prime
+/// @return the smallest prime >= n
+[[gnu::const]]
+uint64_t nut_u64_next_prime_ge(uint64_t n);
+
 /// Factor out all powers of a given array of primes.
 ///
 /// Primesieve is a good general source for primes, but the api for this function is designed

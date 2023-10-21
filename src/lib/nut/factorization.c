@@ -310,6 +310,56 @@ bool nut_u64_is_prime_dmr(uint64_t n){
 	return true;
 }
 
+uint64_t nut_u64_next_prime_ge(uint64_t n){
+	if(n <= 97){
+		for(uint64_t i = 0; i < 25; ++i){
+			uint64_t p = nut_small_primes[i];
+			if(p >= n){
+				return p;
+			}
+		}
+	}
+	uint64_t res = n%30;
+	if(res <= 13){
+		if(res <= 7){
+			if(res <= 1){
+				n += 1 - res;
+			}else{
+				n += 7 - res;
+			}
+		}else if(res <= 11){
+			n += 11 - res;
+		}else{
+			n += 13 - res;
+		}
+	}else if(res <= 19){
+		if(res <= 17){
+			n += 17 - res;
+		}else{
+			n += 19 - res;
+		}
+	}else if(res <= 23){
+		n += 23 - res;
+	}else{
+		n += 29 - res;
+	}
+	res = n%30;
+	while(!nut_u64_is_prime_dmr(n)){
+		switch(res){
+			case 1: n += 6; res = 7; break;
+			case 7: n += 4; res = 11; break;
+			case 11: n += 2; res = 13; break;
+			case 13: n += 4; res = 17; break;
+			case 17: n += 2; res = 19; break;
+			case 19: n += 4; res = 23; break;
+			case 23: n += 6; res = 29; break;
+			case 29: n += 2; res = 1; break;
+			default: __builtin_unreachable();
+		}
+	}
+	return n;
+}
+
 /*
 int is_prime_ecam(uint64_t n){
 	static const uint64_t nDs[13] = {3, 4, 7, 8, 11, 12, 16, 19, 27, 28, 43, 67, 163};
