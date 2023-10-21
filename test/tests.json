@@ -11,6 +11,9 @@
 	"test_dirichlet": {
 		"no_red_tests": [[]]
 	},
+	"test_dirichlet_powerful": {
+		"no_red_tests": [["1000"]]
+	},
 	"test_sieve_primes": {
 		"no_red_tests": [[]]
 	},

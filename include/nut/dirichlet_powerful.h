@@ -95,3 +95,28 @@
 NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 3) NUT_ATTR_ACCESS(read_only, 4)
 bool nut_Diri_sum_adjusted_he(int64_t *restrict out, int64_t m, const nut_Diri *restrict g_tbl, const int64_t *restrict h_vals);
 
+/// Compute the sum of f = g <*> h (from 1 up to g_tbl->x), where f(p) = g(p)
+/// Equivalently, h(pq) = 0 when p and q are coprime, so we can define h(p^e) (h at prime powers)
+/// as a two parameter function.  If h only depends on e, use { @link nut_Diri_sum_adjusted_he}
+/// @param [out] out: store the result
+/// @param [in] m: modulus to reduce result by, or 0 to not reduce
+/// @param [in] g_tbl: table of values/sums for g, a simple function that's equal to f at primes
+/// @param [in] h_fn: callback to compute h at prime powers.  p is the prime (base), pp is the eth power of the prime,
+/// e is the exponent, and m is forwarded
+/// @return true on success, false on allocation failure
+[[gnu::nonnull(1, 3, 4)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 3)
+bool nut_Diri_sum_adjusted_hpe(int64_t *restrict out, int64_t m, const nut_Diri *restrict g_tbl, int64_t (*h_fn)(uint64_t p, uint64_t pp, uint64_t e, int64_t m));
+
+/// Compute the series quotient h = f / g for two (finite) power series
+/// In other words, h will be such that f = g * h (under power series multiplication, not Dirichlet convolution)
+/// Similar to polynomial division but cannot have a remainder
+/// @param [in] n: length of the power series.  Since this is the same for all three, if one of the series (ie f) is shorter, it must be zero padded
+/// @param [in] m: modulus to reduce result by, or zero to not reduce
+/// @param [out] h: store the quotient
+/// @param [in] f: dividend
+/// @param [in] g: divisor (MUST have g[0] = 1)
+[[gnu::nonnull(3, 4, 5)]]
+NUT_ATTR_ACCESS(read_write, 3) NUT_ATTR_ACCESS(read_only, 4) NUT_ATTR_ACCESS(read_only, 5)
+void nut_series_div(uint64_t n, int64_t m, int64_t h[restrict static n], int64_t f[restrict static n], int64_t g[restrict static n]);
+
