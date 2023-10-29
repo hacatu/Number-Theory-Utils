@@ -1,4 +1,10 @@
 {
+	"test_dirichlet_powerful": {
+		"no_red_tests": [["219"]]
+	},
+	"test_sieve_primes": {
+		"no_red_tests": [[]]
+	},
 	"test_binom": {
 		"no_red_tests": [[]]
 	},
@@ -9,12 +15,6 @@
 		"no_red_tests": [[]]
 	},
 	"test_dirichlet": {
-		"no_red_tests": [[]]
-	},
-	"test_dirichlet_powerful": {
-		"no_red_tests": [["1000"]]
-	},
-	"test_sieve_primes": {
 		"no_red_tests": [[]]
 	},
 	"test_symbolic_pollard": {

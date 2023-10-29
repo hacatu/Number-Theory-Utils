@@ -78,35 +78,78 @@
 #include <inttypes.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdbool.h>
 
 #include <nut/modular_math.h>
 #include <nut/dirichlet.h>
 
-/// Compute the sum of f = g <*> h (from 1 up to g_tbl->x), where f(p) = g(p) and h(p^e) depends only on e
-/// @param [out] out: store the result
-/// @param [in] m: modulus to reduce result by, or 0 to not reduce
-/// @param [in] g_tbl: table of values/sums for g, a simple function that's equal to f at primes
-/// @param [in] h_vals: table of values of h at arbitrary prime exponents: h_vals[e] stores the value of h(p^e),
-/// since this function requires h(p^e) depend only on e.  h_vals[0] must be 1, and h_vals must have entries up to
-/// floor(log_2(g_tbl->x))
-/// @return true on success, false on allocation failure
-[[gnu::nonnull(1, 3, 4)]]
-NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 3) NUT_ATTR_ACCESS(read_only, 4)
-bool nut_Diri_sum_adjusted_he(int64_t *restrict out, int64_t m, const nut_Diri *restrict g_tbl, const int64_t *restrict h_vals);
+/// Entry type for { @link nut_PfIt}
+typedef struct{
+	uint64_t n;
+	int64_t hn;
+	uint64_t i;
+} nut_PfStackEnt;
+
+/// Iterator to find all powerful numbers and evaluate a function h at them
+/// See { @link NUT_PfIt_INIT}, { @link nut_PfIt_destroy}, { @link nut_PfIt_next}
+typedef struct{
+	uint64_t len, cap, max, rt_max, *primes, num_primes, modulus;
+	nut_PfStackEnt *entries;
+	bool use_table;
+	union{
+		int64_t (*h_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m);
+		const int64_t *h_vals;
+	};
+} nut_PfIt;
+
+/// Set up a powerful iterator that uses a callback function to compute h
+[[gnu::nonnull(1, 4)]]
+NUT_ATTR_ACCESS(write_only, 1)
+bool nut_PfIt_init_fn(nut_PfIt *self, uint64_t max, uint64_t modulus, int64_t (*h_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m));
+
+/// Set up a powerful iterator that uses a table of values for h (when h(p^e) depends only on e)
+[[gnu::nonnull(1, 4)]]
+NUT_ATTR_ACCESS(write_only, 1)
+bool nut_PfIt_init_hvals(nut_PfIt *restrict self, uint64_t max, uint64_t modulus, const int64_t *restrict h_vals);
+
+/// Macro to automatically set up a powerful iterator using either { @link nut_PfIt_init_fn } or { @link nut_PfIt_init_hvals } depending on the type of h
+#define NUT_PfIt_INIT(self, max, modulus, h) _Generic((h), int64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t): nut_PfIt_init_fn, int64_t*: nut_PfIt_init_hvals)((self), (max), (modulus), (h))
+
+/// Delete backing arrays for a powerful number iterator
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
+void nut_PfIt_destroy(nut_PfIt *self);
+
+/// Mainly for internal use
+/// Push an entry into the internal stack of a powerful number iterator
+/// Doing this together with calling { @link nut_PfIt_next} will obviously break
+[[gnu::nonnull(1, 2)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2)
+bool nut_PfStack_push(nut_PfIt *restrict self, const nut_PfStackEnt *restrict ent);
+
+/// Mainly for internal use
+/// Pop an entry from the internal stack of a powerful number iterator
+/// Doing this together with calling { @link nut_PfIt_next} will obviously break
+[[gnu::nonnull(1, 2)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(write_only, 2)
+bool nut_PfStack_pop(nut_PfIt *restrict self, nut_PfStackEnt *restrict out);
+
+/// Get the next entry from a powerful number iterator
+/// This entry will have out->n set to a powerful number and out->hn set to the value of h
+/// evaluated at that n, where h is the function defined at iterator creation time.
+/// out->i is not meaningful to the caller.
+[[gnu::nonnull(1, 2)]]
+NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(write_only, 2)
+bool nut_PfIt_next(nut_PfIt *restrict self, nut_PfStackEnt *restrict out);
 
 /// Compute the sum of f = g <*> h (from 1 up to g_tbl->x), where f(p) = g(p)
-/// Equivalently, h(pq) = 0 when p and q are coprime, so we can define h(p^e) (h at prime powers)
-/// as a two parameter function.  If h only depends on e, use { @link nut_Diri_sum_adjusted_he}
+/// The modulus used to reduce the answer should be passed in when constructing pf_it, { @link NUT_PfIt_INIT}
 /// @param [out] out: store the result
-/// @param [in] m: modulus to reduce result by, or 0 to not reduce
 /// @param [in] g_tbl: table of values/sums for g, a simple function that's equal to f at primes
-/// @param [in] h_fn: callback to compute h at prime powers.  p is the prime (base), pp is the eth power of the prime,
-/// e is the exponent, and m is forwarded
+/// @param [in, out] pf_it: iterator that generates all powerful numbers n together with the value of h, hn, at each
 /// @return true on success, false on allocation failure
-[[gnu::nonnull(1, 3, 4)]]
-NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 3)
-bool nut_Diri_sum_adjusted_hpe(int64_t *restrict out, int64_t m, const nut_Diri *restrict g_tbl, int64_t (*h_fn)(uint64_t p, uint64_t pp, uint64_t e, int64_t m));
+[[gnu::nonnull(1, 2, 3)]]
+NUT_ATTR_ACCESS(write_only, 1) NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_write, 3)
+bool nut_Diri_sum_adjusted(int64_t *restrict out, const nut_Diri *restrict g_tbl, nut_PfIt *pf_it);
 
 /// Compute the series quotient h = f / g for two (finite) power series
 /// In other words, h will be such that f = g * h (under power series multiplication, not Dirichlet convolution)
