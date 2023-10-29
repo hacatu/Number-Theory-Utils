@@ -65,7 +65,7 @@ static void test_compute_conv_u_diri(){
 	for(uint64_t k = 2; k < 7; ++k){
 		fprintf(stderr, "\e[1;34mFinding d_%"PRIu64"...\e[0m\n", k);
 		nut_Diri_compute_conv_u(&dk_table, 0, &dkp_table);
-		uint64_t *dk_vals = nut_sieve_dk(sieve_max, k);
+		uint64_t *dk_vals = nut_sieve_dk(sieve_max, k, 0);
 		check_alloc("dk sieve", dk_vals);
 		for(int64_t i = 1; i <= dk_table.y; ++i){
 			if(dk_vals[i] != (uint64_t)nut_Diri_get_dense(&dk_table, i)){

@@ -127,41 +127,22 @@ static void test_factor_sieve(){
 	free(fs_buf);
 }
 
-static void test_function_sieve(uint64_t *(*sieve)(uint64_t max), uint64_t (*single)(const nut_Factors *factors), const char *sieve_name, const char *single_name, const char *plural_name){
-	fprintf(stderr, "\e[1;34mVerifying %s up to %"PRIu64"...\e[0m\n", sieve_name, sieve_max);
-	uint64_t *tmp_buf = sieve(sieve_max);
-	check_alloc(sieve_name, tmp_buf);
-	uint64_t correct = 0;
-	for(uint64_t n = 1; n <= sieve_max; ++n){
-		const nut_Factors *factors = nut_Pitcharr_get(fzn_buf, fzn_pitch, n);
-		uint64_t tmp = single(factors);
-		if(tmp != tmp_buf[n]){
-			fprintf(stderr, "\e[1;31m%s mismatch at %"PRIu64"\e[0m\n", single_name, n);
-			continue;
-		}
-		++correct;
-	}
-	free(tmp_buf);
-	print_summary(plural_name, correct, sieve_max);
-}
-
-static void test_function1_sieve(uint64_t *(*sieve)(uint64_t max, uint64_t x), uint64_t (*single)(const nut_Factors *factors, uint64_t x), uint64_t x, const char *sieve_name, const char *single_name, const char *plural_name){
-	fprintf(stderr, "\e[1;34mVerifying %s up to %"PRIu64"...\e[0m\n", sieve_name, sieve_max);
-	uint64_t *tmp_buf = sieve(sieve_max, x);
-	check_alloc(sieve_name, tmp_buf);
-	uint64_t correct = 0;
-	for(uint64_t n = 1; n <= sieve_max; ++n){
-		const nut_Factors *factors = nut_Pitcharr_get(fzn_buf, fzn_pitch, n);
-		uint64_t tmp = single(factors, x);
-		if(tmp != tmp_buf[n]){
-			fprintf(stderr, "\e[1;31m%s mismatch at %"PRIu64"\e[0m\n", single_name, n);
-			continue;
-		}
-		++correct;
-	}
-	free(tmp_buf);
-	print_summary(plural_name, correct, sieve_max);
-}
+#define TEST_FUNCTION_SIEVE(sieve, single, sieve_name, single_name, plural_name, ...) do{\
+	fprintf(stderr, "\e[1;34mVerifying %s up to %"PRIu64"...\e[0m\n", sieve_name, sieve_max);\
+	uint64_t *tmp_buf [[gnu::cleanup(cleanup_free)]] = sieve(sieve_max __VA_OPT__(,) __VA_ARGS__);\
+	check_alloc(sieve_name, tmp_buf);\
+	uint64_t correct = 0;\
+	for(uint64_t n = 1; n <= sieve_max; ++n){\
+		const nut_Factors *factors = nut_Pitcharr_get(fzn_buf, fzn_pitch, n);\
+		uint64_t tmp = single(factors __VA_OPT__(,) __VA_ARGS__);\
+		if(tmp != tmp_buf[n]){\
+			fprintf(stderr, "\e[1;31m%s mismatch at %"PRIu64"\e[0m\n", single_name, n);\
+			continue;\
+		}\
+		++correct;\
+	}\
+	print_summary(plural_name, correct, sieve_max);\
+}while(0)
 
 static void test_largest_factor_sieve(){
 	fprintf(stderr, "\e[1;34mVerifying largest factor sieve up to %"PRIu64"...\e[0m\n", sieve_max);
@@ -185,12 +166,13 @@ int main(){
 	test_prime_sieve();
 	test_factorization_sieve();
 	test_factor_sieve();
-	test_function_sieve(nut_sieve_sigma_0, nut_Factor_divcount, "nut_sieve_sigma_0", "divisor count", "divisor counts");
-	test_function_sieve(nut_sieve_sigma_1, nut_Factor_divsum, "nut_sieve_sigma_1", "divisor sum", "divisor sums");
-	test_function1_sieve(nut_sieve_sigma_e, nut_Factor_divpowsum, 2, "nut_sieve_sigma_e(2)", "divisor square sum", "divisor square sums");
-	test_function1_sieve(nut_sieve_dk, nut_Factor_divtupcount, 3, "nut_sieve_dk(3)", "divisor triple counts", "divisor square sums");
-	test_function_sieve(nut_sieve_phi, nut_Factor_phi, "nut_sieve_phi", "euler phi", "euler phi");
-	test_function_sieve(nut_sieve_carmichael, nut_Factor_carmichael, "nut_sieve_carmichael", "carmichael lambda", "carmichael lambda");
+	TEST_FUNCTION_SIEVE(nut_sieve_sigma_0, nut_Factor_divcount, "nut_sieve_sigma_0", "divisor count", "divisor counts");
+	TEST_FUNCTION_SIEVE(nut_sieve_sigma_1, nut_Factor_divsum, "nut_sieve_sigma_1", "divisor sum", "divisor sums");
+	TEST_FUNCTION_SIEVE(nut_sieve_sigma_e, nut_Factor_divpowsum, "nut_sieve_sigma_e(2)", "divisor square sum", "divisor square sums", 2);
+	TEST_FUNCTION_SIEVE(nut_sieve_dk, nut_Factor_divtupcount, "nut_sieve_dk(3)", "divisor triple counts", "divisor square sums", 3, 0);
+	TEST_FUNCTION_SIEVE(nut_sieve_dk, nut_Factor_divtupcount, "nut_sieve_dk(3) mod 65521", "divisor triple counts", "divisor square sums", 3, 65521);
+	TEST_FUNCTION_SIEVE(nut_sieve_phi, nut_Factor_phi, "nut_sieve_phi", "euler phi", "euler phi");
+	TEST_FUNCTION_SIEVE(nut_sieve_carmichael, nut_Factor_carmichael, "nut_sieve_carmichael", "carmichael lambda", "carmichael lambda");
 	free(fzn_buf);
 	test_largest_factor_sieve();
 }

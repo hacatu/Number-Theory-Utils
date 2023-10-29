@@ -16,7 +16,6 @@
 #include <inttypes.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdbool.h>
 
 #include <nut/modular_math.h>
 #include <nut/factorization.h>
@@ -58,15 +57,28 @@ static inline void *nut_Pitcharr_get(void *buf, size_t pitch, uint64_t i){
 }
 
 /// Get a bit from a bitarray.
-/// Simply does buf[i/64] & (1ull << (i%64)).
-/// Only the truthiness of the result should be considered, all nonzero values should be treated as equivalent
+/// Simply does buf[i/8] & (1ull << (i%8)).
 /// @param [in] buf: pointer to bitarray
 /// @param [in] i: index of element to get
-/// @return 0 if i-th element is false, nonzero otherwise
+/// @return false if i-th element is false, true otherwise
 [[gnu::pure, gnu::nonnull(1)]]
 NUT_ATTR_ACCESS(read_only, 1)
-static inline uint64_t nut_Bitarray_get(const uint64_t *buf, uint64_t i){
-	return buf[i/64] & (1ull << (i%64));
+static inline bool nut_Bitarray_get(const uint8_t *buf, uint64_t i){
+	return buf[i/8] & (UINT8_C(1) << (i%8));
+}
+
+/// Set a bit in a bitarray
+/// @param [in, out] buf: pointer to bitarray
+/// @param [in] i: index of element to set
+/// @param [in] v: true to set ith bit, false to clear
+[[gnu::nonnull(1)]]
+NUT_ATTR_ACCESS(read_write, 1)
+static inline void nut_Bitarray_set(uint8_t *buf, uint64_t i, bool v){
+	if(v){
+		buf[i/8] |= 1ull << (i%8);
+	}else{
+		buf[i/8] &= ~(UINT8_C(1) << (i%8));
+	}
 }
 
 /// Get an element from an array of bitfields of length 2, aka uint2's.
@@ -80,6 +92,16 @@ NUT_ATTR_ACCESS(read_only, 1)
 static inline uint8_t nut_Bitfield2_arr_get(const uint8_t *buf, uint64_t i){
 	return (buf[i/4] >> (i%4*2)) & 3;
 }
+
+/// Calculate factorials and inverse factorials for a given upper bound and modulus
+/// @param [in] k: factorials[bits + k - 1] is the last factorial that will be computed
+/// @param [in] modulus: modulus to reduce result by.  Must be large enough that all inv factorials are actually invertable
+/// @param [in] bits: used with k to find the last factorial to compute
+/// @param [in] max_denom: inv_factorials[max_denom] is the last one that will be computed
+/// @param [out] factorials: output for factorial table
+/// @param [out] inv_factorials: output for inverse factorial table
+/// @return true on success, false on failure (if the inverse of some factorial can't be found)
+bool nut_u64_make_factorial_tbl(uint64_t k, uint64_t modulus, uint64_t bits, uint64_t max_denom, uint64_t factorials[static bits + k], uint64_t inv_factorials[static max_denom + 1]);
 
 /// Compute the factorization for every number in the range from 0 to max.
 /// The factorizations for 0 and 1 are not actually computed.  The factorizations
@@ -183,9 +205,10 @@ uint64_t *nut_sieve_sigma_e(uint64_t max, uint64_t e);
 /// In other words, dk is exponential in k and this function will overflow if max^k is too large.
 /// @param [in] max: inclusive upper bound of sieving range in which to compute generalized divisor function
 /// @param [in] k: number of factors per factorization, eg for a prime power p^a we get binom(a + k, k).
+/// @param [in] modulus: modulus to reduce results by, or zero to skip reducing
 /// @return an array of dk results, or NULL on allocation failure
 [[gnu::malloc]]
-uint64_t *nut_sieve_dk(uint64_t max, uint64_t k);
+uint64_t *nut_sieve_dk(uint64_t max, uint64_t k, uint64_t modulus);
 
 /// Compute Euler's totient function for every number from 0 to max.
 /// The results for 0 and 1 are not actually computed.  This effectively computes {@link euler_phi} for
@@ -255,7 +278,7 @@ uint64_t *nut_compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1
 /// @param [in] buf: packed bitarray from {@link nut_sieve_is_composite}
 /// @return the number of primes <= n
 [[gnu::pure, gnu::nonnull(2, 3)]]
-NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 3) NUT_ATTR_NO_SAN_VLA_BOUND
+NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 3) NUT_ATTR_NO_SAN("vla-bound")
 uint64_t nut_compute_pi_from_tables(uint64_t n, const uint64_t pi_table[restrict static n/30], const uint8_t buf[restrict static n/30 + 1]);
 
 /// Compute an array of all primes from 0 to max.

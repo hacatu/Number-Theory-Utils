@@ -1,6 +1,6 @@
 #include <stddef.h>
+#include <inttypes.h>
 #include <string.h>
-#include <stdbool.h>
 
 #include <nut/modular_math.h>
 #include <nut/factorization.h>
@@ -72,19 +72,27 @@ uint64_t nut_Factor_divpowsum(const nut_Factors *factors, uint64_t power){
 	return s;
 }
 
-uint64_t nut_Factor_divtupcount(const nut_Factors *factors, uint64_t k){
+uint64_t nut_Factor_divtupcount(const nut_Factors *factors, uint64_t k, uint64_t modulus){
 	if(k == 0){
 		return !factors->num_primes;
 	}else if(k == 1){
 		return 1;
-	}else if(k == 2){
-		return nut_Factor_divcount(factors);
 	}
-	uint64_t s = 1;
-	for(uint64_t i = 0; i < factors->num_primes; ++i){
-		s *= nut_u64_binom(factors->factors[i].power + k - 1, k - 1);
+	uint64_t res = 1;
+	if(k == 2){
+		res = nut_Factor_divcount(factors)%modulus;
+		return modulus ? res % modulus : res;
 	}
-	return s;
+	if(modulus){
+		for(uint64_t i = 0; i < factors->num_primes; ++i){
+			res = res*nut_u64_binom(factors->factors[i].power + k - 1, k - 1)%modulus;
+		}
+	}else{
+		for(uint64_t i = 0; i < factors->num_primes; ++i){
+			res *= nut_u64_binom(factors->factors[i].power + k - 1, k - 1);
+		}
+	}
+	return res;
 }
 
 void nut_Factor_ipow(nut_Factors *factors, uint64_t power){
@@ -395,6 +403,7 @@ const nut_FactorConf nut_default_factor_conf = {
 	.lenstra_bfac= 10        //roughly speaking, the number of iterations to try before picking a new random point and curve
 };
 
+NUT_ATTR_NO_SAN("vla-bound")
 uint64_t nut_u64_factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes[restrict static num_primes], nut_Factors *restrict factors){
 	factors->num_primes = 0;
 	for(uint64_t i = 0; i < num_primes; ++i){
@@ -421,6 +430,7 @@ uint64_t nut_u64_factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_
 	return n;
 }
 
+NUT_ATTR_NO_SAN("vla-bound")
 uint64_t nut_u64_factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes[restrict static num_primes], const nut_FactorConf *restrict conf, nut_Factors *restrict factors){
 	n = nut_u64_factor_trial_div(n, num_primes, primes, factors);
 	if(n == 1){

@@ -15,7 +15,6 @@
 #include <inttypes.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdbool.h>
 
 #include <nut/modular_math.h>
 
@@ -131,9 +130,10 @@ uint64_t nut_Factor_divpowsum(const nut_Factors *factors, uint64_t power);
 /// Works by multiplying binom(power + k, k) for all prime factors, where power is the power of eaach prime
 /// @param [in] factors: pointer to factors struct, as obtained from { @link nut_u64_factor_trial_div}
 /// @param [in] k: tuple length
+/// @param [in] modulus: modulus to reduce answer by
 /// @return number of factorizations into k numbers, allowing repeats and considering order
 [[gnu::pure]]
-uint64_t nut_Factor_divtupcount(const nut_Factors *factors, uint64_t k);
+uint64_t nut_Factor_divtupcount(const nut_Factors *factors, uint64_t k, uint64_t modulus);
 
 /// Raise a factorization to a power, ie multiply all exponents by a constant.
 /// @param [in,out] factors: factorization to raise to a power

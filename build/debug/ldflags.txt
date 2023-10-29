@@ -5,6 +5,6 @@
 -fno-eliminate-unused-debug-types
 -fno-omit-frame-pointer
 -fno-optimize-sibling-calls
--fsanitize=memory,bool,builtin,bounds,enum,function,nonnull-attribute,nullability,pointer-overflow,returns-nonnull-attribute,shift,unsigned-shift-base,unreachable,vla-bound
+-fsanitize=memory,bool,builtin,bounds,enum,function,integer,nonnull-attribute,nullability,pointer-overflow,returns-nonnull-attribute,shift,unsigned-shift-base,unreachable,vla-bound
 -O1
 

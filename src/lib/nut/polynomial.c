@@ -80,7 +80,8 @@ int64_t nut_Poly_eval_modn(const nut_Poly *f, int64_t x, int64_t n){
 		return f->coeffs[0];
 	}
 	int64_t r = 0;
-	for(uint64_t i = f->len; i-- > 0;){
+	for(uint64_t i = f->len; i > 0;){
+		--i;
 		r = nut_i64_mod(r*x + f->coeffs[i], n);
 	}
 	return r;
@@ -380,7 +381,8 @@ bool nut_Poly_quotrem_modn(nut_Poly *restrict q, nut_Poly *restrict r, const nut
 	
 	//loop over quotient columns (coefficients in reverse order) which were initialized
 	//to the first q->len dividend coefficients
-	for(uint64_t k = q->len; k-- > 0;){
+	for(uint64_t k = q->len; k > 0;){
+		--k;
 		//finish the column by dividing the sum by the leading coefficient of the divisor
 		//for monic divisors (aka most of the time) a will simply be 1 so we may optimize this
 		q->coeffs[k] = nut_i64_mod(q->coeffs[k]*a, n);

@@ -1,11 +1,13 @@
-#include "nut/modular_math.h"
 #include <stdio.h>
 #include <inttypes.h>
 
+#include <nut/debug.h>
+#include <nut/modular_math.h>
 #include <nut/factorization.h>
 
-int main(){
-	uint64_t trials = 1000, passed = 0;
+NUT_ATTR_NO_SAN("unsigned-integer-overflow")
+static void test_modinv(uint64_t trials){
+	uint64_t passed = 0;
 	fprintf(stderr, "\e[1;34mInverting %"PRIu64" random odd numbers mod powers of 2...\e[0m\n", trials);
 	for(uint64_t i = 0, t; i < trials; ++i){
 		uint64_t x = (nut_u64_rand(0, 1ull << 63) << 1) + 1;
@@ -27,10 +29,11 @@ int main(){
 			++passed;
 		}
 	}
-	fprintf(stderr, "%s (%"PRIu64"/%"PRIu64" trials passed)\e[0m\n", passed == trials ? "\e[1;32mPASSED" : "\e[1;31mFAILED", passed, trials);
-	trials = 61;
-	passed = 0;
-	uint64_t binom_tbl[63] = {[0] = 1};
+	print_summary("modular inverse", passed, trials);
+}
+
+static void test_binom_simple(uint64_t trials, uint64_t binom_tbl[static 63]){
+	uint64_t passed = 0;
 	fprintf(stderr, "\e[1;34mTesting binomial coeffs until (61 choose k), the last n when the simple algorithm doesn't overflow...\e[0m\n");
 	for(uint64_t n = 1; n <= 61; ++n){
 		for(uint64_t k = n - 1; k; --k){
@@ -53,10 +56,13 @@ int main(){
 			++passed;
 		}
 	}
-	fprintf(stderr, "%s (%"PRIu64"/%"PRIu64" trials passed)\e[0m\n", passed == trials ? "\e[1;32mPASSED" : "\e[1;31mFAILED", passed, trials);
-	trials = 500;
-	passed = 0;
-	fprintf(stderr, "\e[1;34mTesting (n choose k) for n = 62, ..., 561 and k = 0, ..., 61...\e[0m\n");
+	print_summary("binomial coefficients", passed, trials);
+}
+
+NUT_ATTR_NO_SAN("unsigned-integer-overflow")
+static void test_binom_mod2t(uint64_t trials, uint64_t binom_tbl[static 63]){
+	uint64_t passed = 0;
+	fprintf(stderr, "\e[1;34mTesting (n choose k) mod 2**t for n = 62, ..., 561; k = 0, ..., 61; and t = 2, ..., 61...\e[0m\n");
 	for(uint64_t n = 62; n <= 561; ++n){
 		for(uint64_t k = 61; k; --k){
 			binom_tbl[k] += binom_tbl[k - 1]; // this will overflow, but this ok because we build with -fwrapv and are computing mod powers of 2
@@ -78,6 +84,13 @@ int main(){
 			break;
 		}
 	}
-	fprintf(stderr, "%s (%"PRIu64"/%"PRIu64" trials passed)\e[0m\n", passed == trials ? "\e[1;32mPASSED" : "\e[1;31mFAILED", passed, trials);
+	print_summary("binomial coefficients", passed, trials);
+}
+
+int main(){
+	test_modinv(1000);
+	uint64_t binom_tbl[63] = {[0] = 1};
+	test_binom_simple(61, binom_tbl);
+	test_binom_mod2t(500, binom_tbl);
 }
 

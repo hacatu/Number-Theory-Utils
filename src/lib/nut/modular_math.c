@@ -6,45 +6,56 @@
 #include <stdlib.h>
 #endif
 #include <string.h>
-#include <stdbool.h>
 
 #include <nut/modular_math.h>
 
 uint64_t nut_u64_pow(uint64_t b, uint64_t e){
+	if(!e){
+		return 1;
+	}
 	uint64_t r = 1;
-	while(e){
+	while(1){
 		if(e&1){
 			r = r*b;
 		}
-		e >>= 1;
+		if(!(e >>= 1)){
+			return r;
+		}
 		b *= b;
 	}
-	return r;
 }
 
 uint128_t nut_u128_pow(uint128_t b, uint64_t e){
+	if(!e){
+		return 1;
+	}
 	uint128_t r = 1;
-	while(e){
+	while(1){
 		if(e&1){
 			r = r*b;
 		}
-		e >>= 1;
+		if(!(e >>= 1)){
+			return r;
+		}
 		b *= b;
 	}
-	return r;
 }
 
 uint64_t nut_u64_powmod(uint64_t b, uint64_t e, uint64_t n){
+	if(!e){
+		return 1;
+	}
 	uint64_t r = 1;
 	b %= n;
-	while(e){
+	while(1){
 		if(e&1){
 			r = (uint128_t)r*b%n;
 		}
-		e >>= 1;
+		if(!(e >>= 1)){
+			return r;
+		}
 		b = (uint128_t)b*b%n;
 	}
-	return (uint64_t)r;
 }
 
 uint64_t nut_u64_binom(uint64_t n, uint64_t k){
@@ -143,9 +154,8 @@ int64_t nut_i64_modinv(int64_t a, int64_t b){
 // Basically, we use a lookup table to get the inverse mod 2**8, and then
 // use the fact that ax = 1 mod 2**k --> ax(2-ax) = 1 mod 2**(2k) to lift the inverse to
 // mod 2**16, mode 2**32, etc as needed.  This does cap out at 2**64.
-#if __has_c_attribute(clang::no_sanitize)
-[[clang::no_sanitize("unsigned-shift-base")]]
-#endif
+NUT_ATTR_NO_SAN("unsigned-shift-base")
+NUT_ATTR_NO_SAN("unsigned-integer-overflow")
 uint64_t nut_u64_modinv_2t(uint64_t a, uint64_t t){
 	static const uint8_t modinv_256_tbl[] = {
 		1, 171, 205, 183, 57, 163, 197, 239, 241, 27, 61, 167, 41, 19, 53, 223,
@@ -188,9 +198,8 @@ int64_t nut_i64_lcm(int64_t a, int64_t b){
 	return a*b/nut_i64_egcd(a, b, NULL, NULL);
 }
 
-#if __has_c_attribute(clang::no_sanitize)
-[[clang::no_sanitize("unsigned-shift-base")]]
-#endif
+NUT_ATTR_NO_SAN("unsigned-shift-base")
+NUT_ATTR_NO_SAN("unsigned-integer-overflow")
 uint64_t nut_u64_binom_next_mod_2t(uint64_t n, uint64_t k, uint64_t t, uint64_t *restrict v2, uint64_t *restrict p2){
 	uint64_t num = n - k + 1;
 	uint64_t num_v2 = __builtin_ctz(num);

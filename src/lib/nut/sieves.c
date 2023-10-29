@@ -1,13 +1,13 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 #include <inttypes.h>
 #include <math.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
 
+#include <nut/debug.h>
 #include <nut/modular_math.h>
 #include <nut/factorization.h>
 #include <nut/sieves.h>
@@ -236,19 +236,78 @@ uint64_t *nut_sieve_sigma_e(uint64_t max, uint64_t e){
 	return buf;
 }
 
-uint64_t *nut_sieve_dk(uint64_t max, uint64_t k){
+bool nut_u64_make_factorial_tbl(uint64_t k, uint64_t modulus, uint64_t bits, uint64_t max_denom, uint64_t factorials[static bits + k], uint64_t inv_factorials[static max_denom + 1]){
+	factorials[0] = 1;
+	for(uint64_t i = 1; i < bits + k; ++i){
+		factorials[i] = factorials[i - 1]*i%modulus;
+	}
+	memcpy(inv_factorials, factorials, 2*sizeof(uint64_t));
+	for(uint64_t i = 2; i <= max_denom; ++i){
+		int64_t inv;
+		if(nut_i64_egcd(factorials[i], modulus, &inv, NULL) != 1){
+			return false;
+		}else if(inv < 0){
+			inv_factorials[i] = inv + (int64_t)modulus;
+		}else{
+			inv_factorials[i] = inv;
+		}
+	}
+	return true;
+}
+
+static uint64_t *sieve_dk_mod(uint64_t max, uint64_t k, uint64_t modulus){
 	uint64_t *buf = malloc((max + 1)*sizeof(uint64_t));
-	if(!buf){
+	uint8_t *is_c_buf [[gnu::cleanup(cleanup_free)]] = calloc(max/8 + 1, sizeof(uint8_t));
+	uint64_t bits = 64 - __builtin_clzll(max);
+	uint64_t max_denom = bits > k - 1 ? bits : k - 1;
+	uint64_t *factorials [[gnu::cleanup(cleanup_free)]] = malloc((bits + k)*sizeof(uint64_t));
+	uint64_t *inv_factorials [[gnu::cleanup(cleanup_free)]] = malloc((max_denom + 1)*sizeof(uint64_t));
+	if(!buf || !is_c_buf || !factorials || !inv_factorials || modulus > INT64_MAX){
+		return NULL;
+	}
+	for(uint64_t i = 1; i <= max && i; ++i){
+		buf[i] = 1;
+	}
+	if(!nut_u64_make_factorial_tbl(k, modulus, bits, max_denom, factorials, inv_factorials)){
+		return NULL;
+	}
+	for(uint64_t n = 2; n <= max && n; ++n){//TODO: optimize loop
+		if(nut_Bitarray_get(is_c_buf, n)){
+			continue;
+		}
+		for(uint64_t m = n; m <= max;){
+			nut_Bitarray_set(is_c_buf, m, 1);
+			uint64_t m1 = m, a = 0;
+			while(m1%n == 0){
+				m1 /= n;
+				++a;
+			}
+			uint64_t term = buf[m]*factorials[a + k - 1]%modulus;
+			term = term*inv_factorials[k - 1]%modulus;
+			buf[m] = term*inv_factorials[a]%modulus;
+			if(__builtin_add_overflow(m, n, &m)){
+				break;
+			}
+		}
+	}
+	return buf;
+}
+
+static uint64_t *sieve_dk_u64(uint64_t max, uint64_t k){
+	uint64_t *buf = malloc((max + 1)*sizeof(uint64_t));
+	uint8_t *is_c_buf [[gnu::cleanup(cleanup_free)]] = calloc(max/8 + 1, sizeof(uint8_t));
+	if(!buf || !is_c_buf){
 		return NULL;
 	}
 	for(uint64_t i = 1; i <= max && i; ++i){
 		buf[i] = 1;
 	}
 	for(uint64_t n = 2; n <= max && n; ++n){//TODO: optimize loop
-		if(buf[n] != 1){
+		if(nut_Bitarray_get(is_c_buf, n)){
 			continue;
 		}
 		for(uint64_t m = n; m <= max;){
+			nut_Bitarray_set(is_c_buf, m, 1);
 			uint64_t m1 = m, a = 0;
 			while(m1%n == 0){
 				m1 /= n;
@@ -261,6 +320,10 @@ uint64_t *nut_sieve_dk(uint64_t max, uint64_t k){
 		}
 	}
 	return buf;
+}
+
+uint64_t *nut_sieve_dk(uint64_t max, uint64_t k, uint64_t modulus){
+	return modulus ? sieve_dk_mod(max, k, modulus) : sieve_dk_u64(max, k);
 }
 
 uint64_t *nut_sieve_phi(uint64_t max){
@@ -708,7 +771,7 @@ uint64_t nut_compute_pi_from_tables(uint64_t n, const uint64_t pi_table[restrict
 	}
 	uint64_t q = n/30;
 	uint64_t r = n%30;
-	uint64_t mask;
+	uint8_t mask;
 	if(!r){mask = 0x00;}
 	else if(r < 7){mask = 0x01;}
 	else if(r < 11){mask = 0x03;}
