@@ -28,8 +28,8 @@ static int64_t h_powerfulpart(uint64_t p, uint64_t pp, uint64_t e, uint64_t m){
 
 static void test_adjust_powerfulpart(uint64_t sieve_max){
 	fprintf(stderr, "\e[1;34mTesting powerful part sums using powerful number adjustments...\e[0m\n");
-	nut_Diri u_table = {};
-	nut_PfIt pf_it = {};
+	nut_Diri u_table [[gnu::cleanup(nut_Diri_destroy)]] = {};
+	nut_PfIt pf_it [[gnu::cleanup(nut_PfIt_destroy)]] = {};
 	check_alloc("powerful iterator", (void*)NUT_PfIt_INIT(&pf_it, sieve_max, 0, h_powerfulpart));
 	nut_Diri_init(&u_table, sieve_max, 0);
 	check_alloc("u table", u_table.buf);
@@ -52,7 +52,6 @@ static void test_adjust_powerfulpart(uint64_t sieve_max){
 		}
 		correct += pfp;
 	}
-	nut_Diri_destroy(&u_table);
 	free(largest_factors);
 	free(factors);
 	if(correct == res){
@@ -179,7 +178,7 @@ static void test_countprimes(uint64_t sieve_max){
 			}
 			nut_series_div(bits + 1, modulus, h_vals, f_vals, g_vals);
 			verify_series_product(bits + 1, modulus, f_vals, g_vals, h_vals);
-			nut_PfIt pf_it;
+			nut_PfIt pf_it = {};
 			NUT_PfIt_INIT(&pf_it, sieve_max, modulus, h_vals);
 			check_alloc("powerful iterator", pf_it.entries);
 			int64_t res, px = 1;
