@@ -119,7 +119,11 @@ static void test_countprimes(uint64_t sieve_max){
 	//    half using binary search
 	// this runs in a couple seconds in python.  Decimal must be used to get enough precision to reconstruct the max product from
 	// the max sum without having to do extra sieving and searching at the end
-	static const int64_t xs[] = {71, 73, 127, 137, 149, 163, 179, 211, 223};
+	//static const int64_t xs[] = {71, 73, 127, 137, 149, 163, 179, 211, 223};
+	// recalculated so that the PRODUCT does not overflow signed integers
+	//static const int64_t xs[] = {67, 71, 113, 127, 131, 157, 163, 191, 211};
+	// this is the shortest sequence of consecutive primes < 256 whose product is > 10^12
+	static const int64_t xs[] = {89, 97, 101, 103, 107, 109};
 	uint64_t ld_counts[4] = {[0]=1};
 	uint64_t *sigma_0_vals [[gnu::cleanup(cleanup_free)]] = nut_sieve_sigma_0(sieve_max);
 	check_alloc("divisor count sieve", sigma_0_vals);
@@ -152,57 +156,53 @@ static void test_countprimes(uint64_t sieve_max){
 	check_alloc("dx table", dx_tbl.buf);
 	check_alloc("f table", f_tbl.buf);
 	check_alloc("g table", g_tbl.buf);
-	for(uint64_t i = 0; i < 9; ++i){
-		int64_t x = xs[i];
-		int64_t modulus = x*x*x*x;
-		fprintf(stderr, "\e[1;34mx = %"PRIi64"\e[0m\n", x);
-		nut_Diri_compute_dk(&dx_tbl, x, modulus, &f_tbl, &g_tbl);
-		verify_dk(&dx_tbl, x, modulus);
-		nut_u64_make_factorial_tbl(223, modulus, bits, 223 - 1, factorials, inv_factorials);
-		memset(g_vals, 0, (bits + 1)*sizeof(int64_t));
-		for(int64_t j = 0, t = 1; t <= dx_tbl.x; ++j, t <<= 1){
-			g_vals[j] = factorials[j + x - 1]*inv_factorials[x - 1]%(uint64_t)modulus*inv_factorials[j]%(uint64_t)modulus;
-		}
-		memset(f_vals, 0, (bits + 1)*sizeof(int64_t));
-		f_vals[0] = 1;
-		for(uint64_t i = 1, px = x; i <= 3; ++i, px *= x){
-			f_vals[(1ull << i) - 1] = px;
+	int64_t coeffs[4] = {[0]=1};
+	for(uint64_t deg = 1; deg <= 3; ++deg){
+		fprintf(stderr, "\e[1;34mCalculating P_%"PRIu64"(n)(x)\e[0m\n", deg);
+		int64_t head_mod = 1, head_res = 0;
+		for(uint64_t i = 0; i < 6; ++i){
+			int64_t x = xs[i];
+			fprintf(stderr, "\e[1;34mx = %"PRIi64"\e[0m\n", x);
+			uint64_t modulus = x;
+			memset(f_vals, 0, (bits + 1)*sizeof(int64_t));
+			f_vals[0] = 1;
+			for(uint64_t i = 1; i <= deg; ++i, modulus *= x){
+				f_vals[(1ull << i) - 1] = modulus;
+			}
+			// now, modulus is x^(deg + 1)
+			nut_Diri_compute_dk(&dx_tbl, x, modulus, &f_tbl, &g_tbl);
+			verify_dk(&dx_tbl, x, modulus);
+			nut_u64_make_factorial_tbl(x, modulus, bits, x - 1, factorials, inv_factorials);
+			memset(g_vals, 0, (bits + 1)*sizeof(int64_t));
+			for(int64_t j = 0, t = 1; t <= dx_tbl.x; ++j, t <<= 1){
+				g_vals[j] = factorials[j + x - 1]*inv_factorials[x - 1]%(uint64_t)modulus*inv_factorials[j]%(uint64_t)modulus;
+			}
 			nut_series_div(bits + 1, modulus, h_vals, f_vals, g_vals);
 			verify_series_product(bits + 1, modulus, f_vals, g_vals, h_vals);
 			nut_PfIt pf_it;
 			NUT_PfIt_INIT(&pf_it, sieve_max, modulus, h_vals);
 			check_alloc("powerful iterator", pf_it.entries);
-			int64_t res;
+			int64_t res, px = 1;
 			nut_Diri_sum_adjusted(&res, &dx_tbl, &pf_it);
-			res = nut_i64_mod(res, px*x);
-			int64_t res_xdigits[4] = {nut_i64_mod(res, x)};
-			for(int64_t px = x, j = 1; px != modulus; ++j){
-				px *= x;
-				res_xdigits[j] = nut_i64_mod(res, px)/(px/x);
+			for(uint64_t i = 0; i < deg; ++i, px *= x){
+				res -= coeffs[i]*px;
 			}
-			int64_t expect_xdigits[4] = {[0] = 1};
-			for(uint64_t j = 1; j <= i; ++j){
-				expect_xdigits[j] = nut_i64_mod(ld_counts[j], x);
+			res /= px;
+			res = nut_i64_mod(res, x);
+			bool status = res == nut_i64_mod(ld_counts[deg], x);
+			fprintf(stderr, "%sGot [x^k]P_k(n)(x) mod x = %"PRIi64"\e[0m\n", status ? "\e[1;32m" : "\e[1;31m", res);
+			if(head_mod == 1){
+				head_mod = x;
+				head_res = res;
+			}else{
+				head_res = nut_i128_crt(head_res, head_mod, res, x);
+				head_mod *= x;
+				status = head_res == nut_i64_mod(ld_counts[deg], head_mod);
+				fprintf(stderr, "%sCRT [x^k]P_k(n)(x) mod x = %"PRIi64"\e[0m\n", status ? "\e[1;32m" : "\e[1;31m", head_res);
 			}
-			bool status = !memcmp(res_xdigits, expect_xdigits, 4*sizeof(int64_t));
-			fprintf(stderr, "%sGot sum of P_1(n)(x) = ", status ? "\e[1;32m" : "\e[1;31m");
-			status = false;
-			for(uint64_t j = 4; j > 0;){
-				--j;
-				if(res_xdigits[j]){
-					if(j > 1){
-						fprintf(stderr, "%s%"PRIi64"x^%"PRIu64, status ? " + " : "", res_xdigits[j], j);
-					}else if(j == 1){
-						fprintf(stderr, "%s%"PRIi64"x", status ? " + " : "", res_xdigits[j]);
-					}else{
-						fprintf(stderr, "%s%"PRIi64, status ? " + " : "", res_xdigits[j]);
-					}
-					status = true;
-				}
-			}
-			fprintf(stderr, "%s\e[0m\n", status ? "" : "0");
 			nut_PfIt_destroy(&pf_it);
 		}
+		coeffs[deg] = head_res;
 	}
 }
 

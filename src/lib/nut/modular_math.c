@@ -194,6 +194,15 @@ int64_t nut_i64_crt(int64_t a, int64_t p, int64_t b, int64_t q){
 	return nut_i64_mod(b*p%(p*q)*x + a*q%(p*q)*y, p*q);
 }
 
+int128_t nut_i128_crt(int64_t a, int64_t p, int64_t b, int64_t q){
+	int64_t _x, _y;
+	nut_i64_egcd(p, q, &_x, &_y);
+	int128_t x = _x, y = _y;
+	x = b*p%(p*q)*x + a*q%(p*q)*y;
+	x %= p*q;
+	return x < 0 ? x + p*q : x;
+}
+
 int64_t nut_i64_lcm(int64_t a, int64_t b){
 	return a*b/nut_i64_egcd(a, b, NULL, NULL);
 }

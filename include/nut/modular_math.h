@@ -143,6 +143,13 @@ int64_t nut_i64_mod(int64_t a, int64_t n);
 [[gnu::const]]
 int64_t nut_i64_crt(int64_t a, int64_t p, int64_t b, int64_t q);
 
+/// Compute n mod pq st n = a mod p and n = b mod q, where p and q are coprime.
+/// @param [in] a, p, b, q: Chinese Remainder Theorem parameters.  The residues a and b should not be negative.
+/// The moduli p and q should be coprime.
+/// @return 0 <= 0 < pq so that n = a mod p and n = b mod q
+[[gnu::const]]
+int128_t nut_i128_crt(int64_t a, int64_t p, int64_t b, int64_t q);
+
 /// Compute the least common multiple of a and b
 /// Divides the product by the gcd so can overflow for large arguments
 /// @param [in] a, b: numbers to find nut_i64_lcm of
