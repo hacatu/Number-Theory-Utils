@@ -18,12 +18,12 @@ jobs:
     - name: Run Coverage and Doxygen
       run: |
         sudo apt-get update
-        sudo apt-get install -y lcov doxygen libsdl2-dev valgrind clang-16 gcc-13
+        sudo apt-get install -y lcov doxygen libsdl2-dev valgrind clang-15 gcc-13
         echo "geninfo_gcov_tool = gcov-13" >> ~/.lcovrc
-        make BUILD_ROOT=build/debug CC=clang-16 LD=clang-16
+        make BUILD_ROOT=build/debug CC=clang-15 LD=clang-15
         make BUILD_ROOT=build/valgrind CC=gcc-13 LD=gcc-13
-        make BUILD_ROOT=build/coverage CC=clang-16 LD=clang-16
-        make BUILD_ROOT=build/release CC=clang-16 LD=clang-16 test
+        make BUILD_ROOT=build/coverage CC=clang-15 LD=clang-15
+        make BUILD_ROOT=build/release CC=clang-15 LD=clang-15 test
         grep -qF "$(printf '\e[1;32mtest.py suite passed all tests!\e[0m')" build/debug/log/test*.log
         grep -qF "$(printf '\e[1;32mtest.py suite passed all tests!\e[0m')" build/valgrind/log/test*.log
         grep -qF "$(printf '\e[1;32mtest.py suite passed all tests!\e[0m')" build/coverage/log/test*.log
