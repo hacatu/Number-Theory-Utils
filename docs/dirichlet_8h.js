@@ -14,6 +14,7 @@ var dirichlet_8h =
     [ "nut_Diri_compute_N", "dirichlet_8h.html#aef3a0c29121da13a74cec34c49d77d4b", null ],
     [ "NUT_ATTR_ACCESS", "dirichlet_8h.html#ad23dcc7562e209acadb64a6e4fa8414f", null ],
     [ "nut_Diri_compute_mertens", "dirichlet_8h.html#a1de369be5cae92e31d9f073144b6645d", null ],
+    [ "nut_Diri_compute_dk", "dirichlet_8h.html#aaa27d52f1bde28bec89dbe3ee2eb1c11", null ],
     [ "nut_Diri_compute_conv_u", "dirichlet_8h.html#abc3257dcff1b06c34b128c156572a4dd", null ],
     [ "nut_Diri_compute_conv_N", "dirichlet_8h.html#a54146e9f9dea0bbee06a22395833093a", null ],
     [ "NUT_ATTR_ACCESS", "dirichlet_8h.html#a797a93f1c667ba4876d390e57953aabc", null ],

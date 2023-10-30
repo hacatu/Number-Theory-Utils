@@ -110,16 +110,20 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 , <a class="el" href="sieves_8h.html#ad711843b7300b037e9404802cac9e361">sieves.h</a>
 , <a class="el" href="polynomial_8h.html#ad23dcc7562e209acadb64a6e4fa8414f">polynomial.h</a>
 , <a class="el" href="modular__math_8h.html#a52bc42c310d8f576237fd6bf59aa7db1">modular_math.h</a>
-, <a class="el" href="factorization_8h.html#a800b8004354c7cbb86f71ff9443c750a">factorization.h</a>
+, <a class="el" href="factorization_8h.html#a3b9c9161a7e6881ca778a4f5ef3fa53f">factorization.h</a>
 , <a class="el" href="dirichlet_8h.html#ad23dcc7562e209acadb64a6e4fa8414f">dirichlet.h</a>
 , <a class="el" href="dirichlet__powerful_8h.html#ad23dcc7562e209acadb64a6e4fa8414f">dirichlet_powerful.h</a>
-, <a class="el" href="factorization_8h.html#ad23dcc7562e209acadb64a6e4fa8414f">factorization.h</a>
+, <a class="el" href="factorization_8h.html#a51cfdef241be59af777a83e6bd2503aa">factorization.h</a>
+, <a class="el" href="dirichlet__powerful_8h.html#ad128c69852a6caad578c8e595caff8d0">dirichlet_powerful.h</a>
 </li>
 <li>nut_compute_mertens_range()
 : <a class="el" href="sieves_8h.html#aea9f97397c57da8e705cf667ad1e5cd3">sieves.h</a>
 </li>
 <li>nut_compute_pi_range()
 : <a class="el" href="sieves_8h.html#aac0f1a4de55e161c45e93c7d3c63d9f8">sieves.h</a>
+</li>
+<li>nut_Diri_compute_dk()
+: <a class="el" href="dirichlet_8h.html#aaa27d52f1bde28bec89dbe3ee2eb1c11">dirichlet.h</a>
 </li>
 <li>nut_Diri_compute_I()
 : <a class="el" href="dirichlet_8h.html#a72111f9468ba6240298b9265dc3f0ddd">dirichlet.h</a>
@@ -158,7 +162,7 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 : <a class="el" href="factorization_8h.html#a43539d06d26336f9479282176a1899cd">factorization.h</a>
 </li>
 <li>nut_Factor_divtupcount()
-: <a class="el" href="factorization_8h.html#a3ed29f77924e23c1de8fc81ad9bf4bff">factorization.h</a>
+: <a class="el" href="factorization_8h.html#a0e848ece5d9ab0a2953ad1859f71a42a">factorization.h</a>
 </li>
 <li>nut_Factor_ipow()
 : <a class="el" href="factorization_8h.html#a19a1f32d8d7197c9f60113616f10a5c2">factorization.h</a>
@@ -177,6 +181,9 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 </li>
 <li>nut_get_factors_pitch()
 : <a class="el" href="sieves_8h.html#a68b227ca1422f01350c384254de63530">sieves.h</a>
+</li>
+<li>nut_i128_crt()
+: <a class="el" href="modular__math_8h.html#a4b1e5f292a0aef9b260f7244ef79a371">modular_math.h</a>
 </li>
 <li>nut_i32_fastmod_floor()
 : <a class="el" href="modular__math_8h.html#a5cd9ef5410f6d606ad02cde7224dad9b">modular_math.h</a>
@@ -238,6 +245,15 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 <li>nut_max_primes_le()
 : <a class="el" href="sieves_8h.html#a96915f632c263ea824284611230412cc">sieves.h</a>
 </li>
+<li>nut_PfIt_destroy()
+: <a class="el" href="dirichlet__powerful_8h.html#a7c6f8806178cc935e541e82279c8d424">dirichlet_powerful.h</a>
+</li>
+<li>nut_PfIt_init_fn()
+: <a class="el" href="dirichlet__powerful_8h.html#a3d0fb8570869db5d315edd0446e42bea">dirichlet_powerful.h</a>
+</li>
+<li>nut_PfIt_init_hvals()
+: <a class="el" href="dirichlet__powerful_8h.html#ab662f10fa79426a40f0e7366ef660471">dirichlet_powerful.h</a>
+</li>
 <li>nut_Poly_destroy()
 : <a class="el" href="polynomial_8h.html#adf706197f57e4ffc4496a4209d997985">polynomial.h</a>
 </li>
@@ -281,7 +297,7 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 : <a class="el" href="sieves_8h.html#a80312f8b853eeb8a9df48ff15078c2f0">sieves.h</a>
 </li>
 <li>nut_sieve_dk()
-: <a class="el" href="sieves_8h.html#a0f5748fdec092b40c6daddb1040b48ea">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a7cdace58bcbe68f4fc52b38a9bf6855f">sieves.h</a>
 </li>
 <li>nut_sieve_factorizations()
 : <a class="el" href="sieves_8h.html#a1ae0bf943c49092ebc83d09d95cc2220">sieves.h</a>
@@ -349,8 +365,14 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 <li>nut_u64_is_prime_dmr()
 : <a class="el" href="factorization_8h.html#a0dc289669b695862eb026cef3187d856">factorization.h</a>
 </li>
+<li>nut_u64_make_factorial_tbl()
+: <a class="el" href="sieves_8h.html#a7c96f6c0f85946e60c6d5a7ec948fade">sieves.h</a>
+</li>
 <li>nut_u64_modinv_2t()
 : <a class="el" href="modular__math_8h.html#ae5fa714c4123955c11cb2b445557e195">modular_math.h</a>
+</li>
+<li>nut_u64_next_prime_ge()
+: <a class="el" href="factorization_8h.html#a94c9867d859d0c65b4878595ea501612">factorization.h</a>
 </li>
 <li>nut_u64_nth_root()
 : <a class="el" href="factorization_8h.html#a094a2a486994d386a66bf5905a960410">factorization.h</a>
@@ -374,7 +396,7 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 21 2023 19:49:39 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Oct 30 2023 20:16:38 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

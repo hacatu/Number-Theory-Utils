@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Number Theory Utils: nut_Factors Struct Reference</title>
+<title>Number Theory Utils: nut_PfStackEnt Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -82,7 +82,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('structnut__Factors.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structnut__PfStackEnt.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -104,38 +104,33 @@ $(document).ready(function(){initNavTree('structnut__Factors.html',''); initResi
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">nut_Factors Struct Reference</div>  </div>
+<div class="title">nut_PfStackEnt Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>A prime factorization.  
- <a href="structnut__Factors.html#details">More...</a></p>
+<p>Entry type for <a class="el" href="structnut__PfIt.html">nut_PfIt</a>.  
+ <a href="structnut__PfStackEnt.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="factorization_8h_source.html">factorization.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="dirichlet__powerful_8h_source.html">dirichlet_powerful.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a8f8f59d930c5054c6327e8d78c481931"><td class="memItemLeft" align="right" valign="top"><a id="a8f8f59d930c5054c6327e8d78c481931"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>num_primes</b></td></tr>
-<tr class="separator:a8f8f59d930c5054c6327e8d78c481931"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdee8744a081d8843bfef4bb7b400c8f"><td class="memItemLeft" ><a id="afdee8744a081d8843bfef4bb7b400c8f"></a>
-struct {</td></tr>
-<tr class="memitem:a6add4c4f1fe21483b433e80e046f9184"><td class="memItemLeft" >
-&#160;&#160;&#160;uint64_t&#160;&#160;&#160;<b>prime</b></td></tr>
-<tr class="separator:a6add4c4f1fe21483b433e80e046f9184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab495cebf54555c95dad8c59ac9dab4eb"><td class="memItemLeft" >
-&#160;&#160;&#160;uint64_t&#160;&#160;&#160;<b>power</b></td></tr>
-<tr class="separator:ab495cebf54555c95dad8c59ac9dab4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdee8744a081d8843bfef4bb7b400c8f"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>factors</b> []</td></tr>
-<tr class="separator:afdee8744a081d8843bfef4bb7b400c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad73ce8d212624b9287daf718c564eb32"><td class="memItemLeft" align="right" valign="top"><a id="ad73ce8d212624b9287daf718c564eb32"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>n</b></td></tr>
+<tr class="separator:ad73ce8d212624b9287daf718c564eb32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d9f4c471d61327cd0f809368a77201c"><td class="memItemLeft" align="right" valign="top"><a id="a0d9f4c471d61327cd0f809368a77201c"></a>
+int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>hn</b></td></tr>
+<tr class="separator:a0d9f4c471d61327cd0f809368a77201c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d28d4a84e839a23822c13098118d7a0"><td class="memItemLeft" align="right" valign="top"><a id="a6d28d4a84e839a23822c13098118d7a0"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>i</b></td></tr>
+<tr class="separator:a6d28d4a84e839a23822c13098118d7a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A prime factorization. </p>
-<p>Stores a list of prime, power pairs in a flexible length array, along with the number of primes in the factorization. Not intended to be reallocated, hence the absence of a cap field. </p>
+<div class="textblock"><p>Entry type for <a class="el" href="structnut__PfIt.html">nut_PfIt</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="factorization_8h_source.html#l00039">39</a> of file <a class="el" href="factorization_8h_source.html">factorization.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dirichlet__powerful_8h_source.html#l00086">86</a> of file <a class="el" href="dirichlet__powerful_8h_source.html">dirichlet_powerful.h</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>include/nut/<a class="el" href="factorization_8h_source.html">factorization.h</a></li>
+<li>include/nut/<a class="el" href="dirichlet__powerful_8h_source.html">dirichlet_powerful.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -143,7 +138,7 @@ struct {</td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="structnut__Factors.html">nut_Factors</a></li>
+    <li class="navelem"><a class="el" href="structnut__PfStackEnt.html">nut_PfStackEnt</a></li>
     <li class="footer">Generated on Mon Oct 30 2023 20:16:38 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>

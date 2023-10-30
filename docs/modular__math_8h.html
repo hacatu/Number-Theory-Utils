@@ -136,6 +136,10 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a7479a653e2f5c148b3d4b5b7243e7702">NUT_ATTR_ACCESS</a>(...)</td></tr>
 <tr class="memdesc:a7479a653e2f5c148b3d4b5b7243e7702"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for gcc's <code>access</code> function annotation - no clang equivalent, and currently disabled because it is bugged See <a href="https://gcc.gnu.org/onlinedocs/gcc/Common-Function-Attributes.html">https://gcc.gnu.org/onlinedocs/gcc/Common-Function-Attributes.html</a>. <br /></td></tr>
 <tr class="separator:a7479a653e2f5c148b3d4b5b7243e7702"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a632cb8a1d14576952485acf64494b800"><td class="memItemLeft" align="right" valign="top"><a id="a632cb8a1d14576952485acf64494b800"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a632cb8a1d14576952485acf64494b800">NUT_ATTR_NO_SAN</a>(name)</td></tr>
+<tr class="memdesc:a632cb8a1d14576952485acf64494b800"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent clang from reporting spurious errors when a length zero array is passed to a length annotated function parameter. <br /></td></tr>
+<tr class="separator:a632cb8a1d14576952485acf64494b800"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -187,6 +191,9 @@ int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_i64_egcd</b> (
 <tr class="memitem:a76ea0888f4f6792c3c46525893dc7955"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a76ea0888f4f6792c3c46525893dc7955">nut_i64_crt</a> (int64_t a, int64_t p, int64_t b, int64_t q)</td></tr>
 <tr class="memdesc:a76ea0888f4f6792c3c46525893dc7955"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute n mod pq st n = a mod p and n = b mod q, where p and q are coprime.  <a href="modular__math_8h.html#a76ea0888f4f6792c3c46525893dc7955">More...</a><br /></td></tr>
 <tr class="separator:a76ea0888f4f6792c3c46525893dc7955"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b1e5f292a0aef9b260f7244ef79a371"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#a46c4371d5a6429f33f04d01da5b166ec">int128_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a4b1e5f292a0aef9b260f7244ef79a371">nut_i128_crt</a> (int64_t a, int64_t p, int64_t b, int64_t q)</td></tr>
+<tr class="memdesc:a4b1e5f292a0aef9b260f7244ef79a371"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute n mod pq st n = a mod p and n = b mod q, where p and q are coprime.  <a href="modular__math_8h.html#a4b1e5f292a0aef9b260f7244ef79a371">More...</a><br /></td></tr>
+<tr class="separator:a4b1e5f292a0aef9b260f7244ef79a371"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a768119748174f941b8154a1894320961"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a768119748174f941b8154a1894320961">nut_i64_lcm</a> (int64_t a, int64_t b)</td></tr>
 <tr class="memdesc:a768119748174f941b8154a1894320961"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the least common multiple of a and b Divides the product by the gcd so can overflow for large arguments.  <a href="modular__math_8h.html#a768119748174f941b8154a1894320961">More...</a><br /></td></tr>
 <tr class="separator:a768119748174f941b8154a1894320961"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -704,6 +711,55 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_u64_binom_nex
       <table class="memname">
         <tr>
           <td class="memname">int64_t nut_i64_crt </td>
+          <td>(</td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>q</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute n mod pq st n = a mod p and n = b mod q, where p and q are coprime. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a,p,b,q</td><td>Chinese Remainder Theorem parameters. The residues a and b should not be negative. The moduli p and q should be coprime. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 &lt;= 0 &lt; pq so that n = a mod p and n = b mod q </dd></dl>
+
+</div>
+</div>
+<a id="a4b1e5f292a0aef9b260f7244ef79a371"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b1e5f292a0aef9b260f7244ef79a371">&#9670;&nbsp;</a></span>nut_i128_crt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="modular__math_8h.html#a46c4371d5a6429f33f04d01da5b166ec">int128_t</a> nut_i128_crt </td>
           <td>(</td>
           <td class="paramtype">int64_t&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -1385,7 +1441,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_u64_binom_nex
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="modular__math_8h.html">modular_math.h</a></li>
-    <li class="footer">Generated on Wed Jun 21 2023 19:49:39 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Oct 30 2023 20:16:38 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

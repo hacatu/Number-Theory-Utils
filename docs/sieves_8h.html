@@ -102,7 +102,8 @@ $(document).ready(function(){initNavTree('sieves_8h.html',''); initResizable(); 
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">sieves.h File Reference</div>  </div>
 </div><!--header-->
@@ -129,6 +130,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a96915f632c263ea824284611230412cc"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a96915f632c263ea824284611230412cc">nut_max_primes_le</a> (uint64_t max)</td></tr>
 <tr class="memdesc:a96915f632c263ea824284611230412cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute an upper bound on the number of primes up to max.  <a href="sieves_8h.html#a96915f632c263ea824284611230412cc">More...</a><br /></td></tr>
 <tr class="separator:a96915f632c263ea824284611230412cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c96f6c0f85946e60c6d5a7ec948fade"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a7c96f6c0f85946e60c6d5a7ec948fade">nut_u64_make_factorial_tbl</a> (uint64_t k, uint64_t modulus, uint64_t bits, uint64_t max_denom, uint64_t factorials[static bits+k], uint64_t inv_factorials[static max_denom+1])</td></tr>
+<tr class="memdesc:a7c96f6c0f85946e60c6d5a7ec948fade"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate factorials and inverse factorials for a given upper bound and modulus.  <a href="sieves_8h.html#a7c96f6c0f85946e60c6d5a7ec948fade">More...</a><br /></td></tr>
+<tr class="separator:a7c96f6c0f85946e60c6d5a7ec948fade"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ae0bf943c49092ebc83d09d95cc2220"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a1ae0bf943c49092ebc83d09d95cc2220">nut_sieve_factorizations</a> (uint64_t max, uint64_t *_w)</td></tr>
 <tr class="memdesc:a1ae0bf943c49092ebc83d09d95cc2220"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the factorization for every number in the range from 0 to max.  <a href="sieves_8h.html#a1ae0bf943c49092ebc83d09d95cc2220">More...</a><br /></td></tr>
 <tr class="separator:a1ae0bf943c49092ebc83d09d95cc2220"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,9 +163,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nut_fill_factors_from
 <tr class="memitem:a03de6de6ddfb26ac7ac9a867dd7d30e2"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a03de6de6ddfb26ac7ac9a867dd7d30e2">nut_sieve_sigma_e</a> (uint64_t max, uint64_t e)</td></tr>
 <tr class="memdesc:a03de6de6ddfb26ac7ac9a867dd7d30e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the sum of some power of divisors (including 1 and n) for every number n from 0 to max.  <a href="sieves_8h.html#a03de6de6ddfb26ac7ac9a867dd7d30e2">More...</a><br /></td></tr>
 <tr class="separator:a03de6de6ddfb26ac7ac9a867dd7d30e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f5748fdec092b40c6daddb1040b48ea"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a0f5748fdec092b40c6daddb1040b48ea">nut_sieve_dk</a> (uint64_t max, uint64_t k)</td></tr>
-<tr class="memdesc:a0f5748fdec092b40c6daddb1040b48ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the generalized divisor function dk(n) (number of k-tuples with product n) for every number n from 0 to max.  <a href="sieves_8h.html#a0f5748fdec092b40c6daddb1040b48ea">More...</a><br /></td></tr>
-<tr class="separator:a0f5748fdec092b40c6daddb1040b48ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cdace58bcbe68f4fc52b38a9bf6855f"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a7cdace58bcbe68f4fc52b38a9bf6855f">nut_sieve_dk</a> (uint64_t max, uint64_t k, uint64_t modulus)</td></tr>
+<tr class="memdesc:a7cdace58bcbe68f4fc52b38a9bf6855f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the generalized divisor function dk(n) (number of k-tuples with product n) for every number n from 0 to max.  <a href="sieves_8h.html#a7cdace58bcbe68f4fc52b38a9bf6855f">More...</a><br /></td></tr>
+<tr class="separator:a7cdace58bcbe68f4fc52b38a9bf6855f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af071928bf5a2b6ea12d5a5ccda164780"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#af071928bf5a2b6ea12d5a5ccda164780">nut_sieve_phi</a> (uint64_t max)</td></tr>
 <tr class="memdesc:af071928bf5a2b6ea12d5a5ccda164780"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute Euler's totient function for every number from 0 to max.  <a href="sieves_8h.html#af071928bf5a2b6ea12d5a5ccda164780">More...</a><br /></td></tr>
 <tr class="separator:af071928bf5a2b6ea12d5a5ccda164780"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -186,12 +190,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nut_fill_factors_from
 <tr class="memitem:ad711843b7300b037e9404802cac9e361"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#ad711843b7300b037e9404802cac9e361">NUT_ATTR_ACCESS</a> (read_only, 2) NUT_ATTR_ACCESS(read_only</td></tr>
 <tr class="memdesc:ad711843b7300b037e9404802cac9e361"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value for the pi (prime counting) function for a particular number using precomputed tables.  <a href="sieves_8h.html#ad711843b7300b037e9404802cac9e361">More...</a><br /></td></tr>
 <tr class="separator:ad711843b7300b037e9404802cac9e361"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e232eb0295911b71001cdb4ca361990"><td class="memItemLeft" align="right" valign="top"><a id="a0e232eb0295911b71001cdb4ca361990"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_compute_pi_from_tables</b> (uint64_t n, const uint64_t pi_table[restrict static n/30], const uint8_t buf[restrict static n/30+1])</td></tr>
-<tr class="separator:a0e232eb0295911b71001cdb4ca361990"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae679759c52a6a426e3efb05bfb8c7618"><td class="memItemLeft" align="right" valign="top"><a id="ae679759c52a6a426e3efb05bfb8c7618"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>NUT_ATTR_NO_SAN</b> (&quot;vla-bound&quot;) uint64_t nut_compute_pi_from_tables(uint64_t n</td></tr>
+<tr class="separator:ae679759c52a6a426e3efb05bfb8c7618"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee997477c22920d4d8a3831dd24a8683"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#aee997477c22920d4d8a3831dd24a8683">nut_sieve_primes</a> (uint64_t max, uint64_t *_num_primes)</td></tr>
 <tr class="memdesc:aee997477c22920d4d8a3831dd24a8683"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute an array of all primes from 0 to max.  <a href="sieves_8h.html#aee997477c22920d4d8a3831dd24a8683">More...</a><br /></td></tr>
 <tr class="separator:aee997477c22920d4d8a3831dd24a8683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a1307b537f4734411ecbf1cabb5235f9b"><td class="memItemLeft" align="right" valign="top"><a id="a1307b537f4734411ecbf1cabb5235f9b"></a>
+const uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>pi_table</b> [restrict static n/30]</td></tr>
+<tr class="separator:a1307b537f4734411ecbf1cabb5235f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dd3349080730e970ca7b1bd824833ce"><td class="memItemLeft" align="right" valign="top"><a id="a4dd3349080730e970ca7b1bd824833ce"></a>
+const uint64_t const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>buf</b> [restrict static n/30+1]</td></tr>
+<tr class="separator:a4dd3349080730e970ca7b1bd824833ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ab85186e50e24074c1e6c5f437a301a2f"></a>
@@ -245,6 +258,72 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_compute_pi_fr
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a7c96f6c0f85946e60c6d5a7ec948fade"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c96f6c0f85946e60c6d5a7ec948fade">&#9670;&nbsp;</a></span>nut_u64_make_factorial_tbl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_u64_make_factorial_tbl </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>modulus</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>bits</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>max_denom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>factorials</em>[static bits+k], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>inv_factorials</em>[static max_denom+1]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate factorials and inverse factorials for a given upper bound and modulus. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">k</td><td>factorials[bits + k - 1] is the last factorial that will be computed </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">modulus</td><td>modulus to reduce result by. Must be large enough that all inv factorials are actually invertable </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bits</td><td>used with k to find the last factorial to compute </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max_denom</td><td>inv_factorials[max_denom] is the last one that will be computed </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">factorials</td><td>output for factorial table </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">inv_factorials</td><td>output for inverse factorial table </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true on success, false on failure (if the inverse of some factorial can't be found) </dd></dl>
 
 </div>
 </div>
@@ -535,8 +614,8 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_compute_pi_fr
 
 </div>
 </div>
-<a id="a0f5748fdec092b40c6daddb1040b48ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f5748fdec092b40c6daddb1040b48ea">&#9670;&nbsp;</a></span>nut_sieve_dk()</h2>
+<a id="a7cdace58bcbe68f4fc52b38a9bf6855f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cdace58bcbe68f4fc52b38a9bf6855f">&#9670;&nbsp;</a></span>nut_sieve_dk()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -551,7 +630,13 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_compute_pi_fr
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>k</em>&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>modulus</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -566,6 +651,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_compute_pi_fr
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of sieving range in which to compute generalized divisor function </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">k</td><td>number of factors per factorization, eg for a prime power p^a we get binom(a + k, k). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">modulus</td><td>modulus to reduce results by, or zero to skip reducing </td></tr>
   </table>
   </dd>
 </dl>
@@ -880,7 +966,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_compute_pi_fr
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="sieves_8h.html">sieves.h</a></li>
-    <li class="footer">Generated on Wed Jun 21 2023 19:49:39 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Oct 30 2023 20:16:38 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

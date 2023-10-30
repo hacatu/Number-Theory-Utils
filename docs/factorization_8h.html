@@ -174,9 +174,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a1fac9466be4add4d561d9a8c14ea3f24"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a1fac9466be4add4d561d9a8c14ea3f24">nut_Factor_divpowsum</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors, uint64_t power)</td></tr>
 <tr class="memdesc:a1fac9466be4add4d561d9a8c14ea3f24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the sum of powers of divisors of a number given its prime factorization, including itself and 1.  <a href="factorization_8h.html#a1fac9466be4add4d561d9a8c14ea3f24">More...</a><br /></td></tr>
 <tr class="separator:a1fac9466be4add4d561d9a8c14ea3f24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ed29f77924e23c1de8fc81ad9bf4bff"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a3ed29f77924e23c1de8fc81ad9bf4bff">nut_Factor_divtupcount</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors, uint64_t k)</td></tr>
-<tr class="memdesc:a3ed29f77924e23c1de8fc81ad9bf4bff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the number of k-tuples with product n.  <a href="factorization_8h.html#a3ed29f77924e23c1de8fc81ad9bf4bff">More...</a><br /></td></tr>
-<tr class="separator:a3ed29f77924e23c1de8fc81ad9bf4bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e848ece5d9ab0a2953ad1859f71a42a"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a0e848ece5d9ab0a2953ad1859f71a42a">nut_Factor_divtupcount</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors, uint64_t k, uint64_t modulus)</td></tr>
+<tr class="memdesc:a0e848ece5d9ab0a2953ad1859f71a42a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the number of k-tuples with product n.  <a href="factorization_8h.html#a0e848ece5d9ab0a2953ad1859f71a42a">More...</a><br /></td></tr>
+<tr class="separator:a0e848ece5d9ab0a2953ad1859f71a42a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19a1f32d8d7197c9f60113616f10a5c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a19a1f32d8d7197c9f60113616f10a5c2">nut_Factor_ipow</a> (<a class="el" href="structnut__Factors.html">nut_Factors</a> *factors, uint64_t power)</td></tr>
 <tr class="memdesc:a19a1f32d8d7197c9f60113616f10a5c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raise a factorization to a power, ie multiply all exponents by a constant.  <a href="factorization_8h.html#a19a1f32d8d7197c9f60113616f10a5c2">More...</a><br /></td></tr>
 <tr class="separator:a19a1f32d8d7197c9f60113616f10a5c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -222,6 +222,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Factor_combine</b
 <tr class="memitem:a0dc289669b695862eb026cef3187d856"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a0dc289669b695862eb026cef3187d856">nut_u64_is_prime_dmr</a> (uint64_t n)</td></tr>
 <tr class="memdesc:a0dc289669b695862eb026cef3187d856"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if n is prime using a deterministic Miller-Rabin test.  <a href="factorization_8h.html#a0dc289669b695862eb026cef3187d856">More...</a><br /></td></tr>
 <tr class="separator:a0dc289669b695862eb026cef3187d856"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94c9867d859d0c65b4878595ea501612"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a94c9867d859d0c65b4878595ea501612">nut_u64_next_prime_ge</a> (uint64_t n)</td></tr>
+<tr class="memdesc:a94c9867d859d0c65b4878595ea501612"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the next prime &gt;= n.  <a href="factorization_8h.html#a94c9867d859d0c65b4878595ea501612">More...</a><br /></td></tr>
+<tr class="separator:a94c9867d859d0c65b4878595ea501612"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a800b8004354c7cbb86f71ff9443c750a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a800b8004354c7cbb86f71ff9443c750a">NUT_ATTR_ACCESS</a> (read_only, 3, 2) NUT_ATTR_ACCESS(read_write</td></tr>
 <tr class="memdesc:a800b8004354c7cbb86f71ff9443c750a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factor out all powers of a given array of primes.  <a href="factorization_8h.html#a800b8004354c7cbb86f71ff9443c750a">More...</a><br /></td></tr>
 <tr class="separator:a800b8004354c7cbb86f71ff9443c750a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -288,7 +291,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 <p>Currently unused. </p>
 <p>How many trial divisions to do before performing randomized prime tests (Miller Rabin). For 64 bit numbers, we can easily make Miller Rabin deterministic in 7 tests, whereas up to 40 would be used to check a large number. BSW and ECPP are also important for checking large primes, because BSW and Miller Rabin together can provide a higher primality confidence faster, whereas ECPP is much slower but provides an easily verifiable proof. </p>
 
-<p class="definition">Definition at line <a class="el" href="factorization_8h_source.html#l00035">35</a> of file <a class="el" href="factorization_8h_source.html">factorization.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="factorization_8h_source.html#l00034">34</a> of file <a class="el" href="factorization_8h_source.html">factorization.h</a>.</p>
 
 </div>
 </div>
@@ -511,8 +514,8 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a3ed29f77924e23c1de8fc81ad9bf4bff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ed29f77924e23c1de8fc81ad9bf4bff">&#9670;&nbsp;</a></span>nut_Factor_divtupcount()</h2>
+<a id="a0e848ece5d9ab0a2953ad1859f71a42a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e848ece5d9ab0a2953ad1859f71a42a">&#9670;&nbsp;</a></span>nut_Factor_divtupcount()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -527,7 +530,13 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>k</em>&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>modulus</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -542,6 +551,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>pointer to factors struct, as obtained from <a class="el" href="">nut_u64_factor_trial_div</a> </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">k</td><td>tuple length </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">modulus</td><td>modulus to reduce answer by </td></tr>
   </table>
   </dd>
 </dl>
@@ -811,6 +821,33 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if n is prime, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a94c9867d859d0c65b4878595ea501612"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94c9867d859d0c65b4878595ea501612">&#9670;&nbsp;</a></span>nut_u64_next_prime_ge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t nut_u64_next_prime_ge </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Find the next prime &gt;= n. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>inclusive lower bound for prime </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the smallest prime &gt;= n </dd></dl>
 
 </div>
 </div>
@@ -1180,7 +1217,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="factorization_8h.html">factorization.h</a></li>
-    <li class="footer">Generated on Wed Jun 21 2023 19:49:39 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Oct 30 2023 20:16:38 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

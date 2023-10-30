@@ -183,6 +183,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 <tr class="memitem:a1de369be5cae92e31d9f073144b6645d"><td class="memItemLeft" align="right" valign="top"><a id="a1de369be5cae92e31d9f073144b6645d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Diri_compute_mertens</b> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, int64_t m, const uint8_t mobius[restrict static self-&gt;y/4+1])</td></tr>
 <tr class="separator:a1de369be5cae92e31d9f073144b6645d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa27d52f1bde28bec89dbe3ee2eb1c11"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#aaa27d52f1bde28bec89dbe3ee2eb1c11">nut_Diri_compute_dk</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, uint64_t k, int64_t m, <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict f_tbl, <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict g_tbl)</td></tr>
+<tr class="memdesc:aaa27d52f1bde28bec89dbe3ee2eb1c11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the kth generalized divisor function dk(n) dk(n) = da(n) &lt;*&gt; db(n) whenever a + b = k.  <a href="dirichlet_8h.html#aaa27d52f1bde28bec89dbe3ee2eb1c11">More...</a><br /></td></tr>
+<tr class="separator:aaa27d52f1bde28bec89dbe3ee2eb1c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc3257dcff1b06c34b128c156572a4dd"><td class="memItemLeft" align="right" valign="top"><a id="abc3257dcff1b06c34b128c156572a4dd"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Diri_compute_conv_u</b> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, int64_t m, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict f_tbl)</td></tr>
 <tr class="separator:abc3257dcff1b06c34b128c156572a4dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -508,6 +511,8 @@ int64_t const <a class="el" href="structnut__Diri.html">nut_Diri</a> const <a cl
 <p>Convert a string to a polynomial (and possibly modulus)</p>
 <p>Print a polynomial to a file.</p>
 <p>Add all prime/power pairs in one factorization to another.</p>
+<p>Get the next entry from a powerful number iterator This entry will have out-&gt;n set to a powerful number and out-&gt;hn set to the value of h evaluated at that n, where h is the function defined at iterator creation time.</p>
+<p>Mainly for internal use Pop an entry from the internal stack of a powerful number iterator Doing this together with calling <a class="el" href="">nut_PfIt_next</a> will obviously break.</p>
 <p>Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands self must have been initialized using <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl must be set and match This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1)) If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then try to use a specialized function from this library and use that instead.</p>
 <p>Compute the value table for h = f &lt;*&gt; N, the dirichlet convolution of f and N (the identity function N(n) = n), given the value table for f See <a class="el" href="">nut_Diri_compute_conv</a> for details, this is just that function but with several specializations due to N being very simple.</p>
 <p>Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f See <a class="el" href="">nut_Diri_compute_conv</a> for details, this is just that function but with several specializations due to u being very simple.</p>
@@ -526,6 +531,7 @@ int64_t const <a class="el" href="structnut__Diri.html">nut_Diri</a> const <a cl
   </table>
   </dd>
 </dl>
+<p>out-&gt;i is not meaningful to the caller.</p>
 <p>If both inputs are sorted, the result will be sorted and no dupliate entries will be created. Acts as if <a class="el" href="">factors_append</a> were called repeatedly. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">factors</td><td>pointer to factorization struct which should be extended </td></tr>
@@ -723,6 +729,63 @@ int64_t const <a class="el" href="structnut__Diri.html">nut_Diri</a> const <a cl
 
 </div>
 </div>
+<a id="aaa27d52f1bde28bec89dbe3ee2eb1c11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa27d52f1bde28bec89dbe3ee2eb1c11">&#9670;&nbsp;</a></span>nut_Diri_compute_dk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_Diri_compute_dk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>f_tbl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>g_tbl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the value table for the kth generalized divisor function dk(n) dk(n) = da(n) &lt;*&gt; db(n) whenever a + b = k. </p>
+<p>This function uses binary exponentiation to compute dk in only log(k) convolutions. However, if all dk's are needed, calling <a class="el" href="">nut_Diri_compute_conv_u</a> is more efficient </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistent with the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">k</td><td>k, ie which generalized divisor function to compute. dk is u &lt;*&gt; u &lt;*&gt; ... &lt;*&gt; u with k u's </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>modulus to reduce the result by, or 0 to skip reducing </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">f_tbl,g_tbl</td><td>temporary tables for scratch work, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>, fields y, x, and yinv must be set Will still have scratch data stored on return </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
@@ -730,7 +793,7 @@ int64_t const <a class="el" href="structnut__Diri.html">nut_Diri</a> const <a cl
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="dirichlet_8h.html">dirichlet.h</a></li>
-    <li class="footer">Generated on Wed Jun 21 2023 19:49:39 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Oct 30 2023 20:16:38 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

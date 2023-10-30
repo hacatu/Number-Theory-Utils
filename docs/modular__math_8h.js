@@ -2,6 +2,7 @@ var modular__math_8h =
 [
     [ "nut_u64_Pitcharr", "structnut__u64__Pitcharr.html", "structnut__u64__Pitcharr" ],
     [ "NUT_ATTR_ACCESS", "modular__math_8h.html#a7479a653e2f5c148b3d4b5b7243e7702", null ],
+    [ "NUT_ATTR_NO_SAN", "modular__math_8h.html#a632cb8a1d14576952485acf64494b800", null ],
     [ "int128_t", "modular__math_8h.html#a46c4371d5a6429f33f04d01da5b166ec", null ],
     [ "uint128_t", "modular__math_8h.html#a396787e5ec029b1205bd3e4cd9763e7d", null ],
     [ "nut_u64_pow", "modular__math_8h.html#a8486f980b8b82e8601d17d544dafdabd", null ],
@@ -17,6 +18,7 @@ var modular__math_8h =
     [ "nut_u64_modinv_2t", "modular__math_8h.html#ae5fa714c4123955c11cb2b445557e195", null ],
     [ "nut_i64_mod", "modular__math_8h.html#a4c8177a327f417ecf2c5f1152c0ba8cb", null ],
     [ "nut_i64_crt", "modular__math_8h.html#a76ea0888f4f6792c3c46525893dc7955", null ],
+    [ "nut_i128_crt", "modular__math_8h.html#a4b1e5f292a0aef9b260f7244ef79a371", null ],
     [ "nut_i64_lcm", "modular__math_8h.html#a768119748174f941b8154a1894320961", null ],
     [ "NUT_ATTR_ACCESS", "modular__math_8h.html#a52bc42c310d8f576237fd6bf59aa7db1", null ],
     [ "nut_u64_binom_next_mod_2t", "modular__math_8h.html#a7caf7927a4df7886403b19fc2d8f6e86", null ],
