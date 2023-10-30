@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
+#include <stdbool.h>
 
 /// Pretty name for signed 128 bit integer.
 /// GCC implements 128 bit arithmetic in terms of 64 bit arithmetic.
