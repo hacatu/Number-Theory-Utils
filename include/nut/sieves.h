@@ -25,7 +25,7 @@
 /// decision diagram based on comparing the number to 2, 2*3, 2*3*5, etc.
 /// @param [in] max: number to find max unique prime divisors of
 /// @return the largest number of unique prime divisors any number not exceeding max can possibly have
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_max_prime_divs(uint64_t max);
 
 /// Compute an upper bound on the number of primes up to max.
@@ -33,7 +33,7 @@ uint64_t nut_max_prime_divs(uint64_t max);
 /// upper bound.
 /// @param [in] max: number to find the number of primes up to
 /// @param an upper bound on the number of primes up to max
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_max_primes_le(uint64_t max);
 
 /// Get an entry from a variable pitch array.
@@ -50,7 +50,9 @@ uint64_t nut_max_primes_le(uint64_t max);
 /// offsetof(type, fla_member) + w*fla_element_size, but a more complex computation should be used if alignment is critically important)
 /// @param [in] i: index of element to get
 /// @return pointer to the i-th member of an array with given base and pitch
-[[gnu::const, gnu::nonnull(1), gnu::returns_nonnull]]
+NUT_ATTR_CONST
+NUT_ATTR_NONNULL(1)
+NUT_ATTR_RETURNS_NONNULL
 NUT_ATTR_ACCESS(none, 1)
 static inline void *nut_Pitcharr_get(void *buf, size_t pitch, uint64_t i){
 	return buf + i*pitch;
@@ -61,7 +63,8 @@ static inline void *nut_Pitcharr_get(void *buf, size_t pitch, uint64_t i){
 /// @param [in] buf: pointer to bitarray
 /// @param [in] i: index of element to get
 /// @return false if i-th element is false, true otherwise
-[[gnu::pure, gnu::nonnull(1)]]
+NUT_ATTR_PURE
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_only, 1)
 static inline bool nut_Bitarray_get(const uint8_t *buf, uint64_t i){
 	return buf[i/8] & (UINT8_C(1) << (i%8));
@@ -71,7 +74,7 @@ static inline bool nut_Bitarray_get(const uint8_t *buf, uint64_t i){
 /// @param [in, out] buf: pointer to bitarray
 /// @param [in] i: index of element to set
 /// @param [in] v: true to set ith bit, false to clear
-[[gnu::nonnull(1)]]
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_write, 1)
 static inline void nut_Bitarray_set(uint8_t *buf, uint64_t i, bool v){
 	if(v){
@@ -87,7 +90,8 @@ static inline void nut_Bitarray_set(uint8_t *buf, uint64_t i, bool v){
 /// @param [in] buf: pointer to array of bitfields
 /// @param [in] i: index of element to get
 /// @return i-th element (0, 1, 2, or 3)
-[[gnu::pure, gnu::nonnull(1)]]
+NUT_ATTR_PURE
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_only, 1)
 static inline uint8_t nut_Bitfield2_arr_get(const uint8_t *buf, uint64_t i){
 	return (buf[i/4] >> (i%4*2)) & 3;
@@ -115,7 +119,8 @@ bool nut_u64_make_factorial_tbl(uint64_t k, uint64_t modulus, uint64_t bits, uin
 /// @param [out] _w: store w, the maximum number of unique prime divisors of a number not exceeding max
 /// @return a pointer to an array of factors_t structs containing the factorization of all numbers not exceeding max,
 /// or NULL on allocation failure
-[[gnu::nonnull(2), gnu::malloc]]
+NUT_ATTR_NONNULL(2)
+NUT_ATTR_MALLOC
 NUT_ATTR_ACCESS(write_only, 2)
 void *nut_sieve_factorizations(uint64_t max, uint64_t *_w);
 
@@ -126,7 +131,7 @@ void *nut_sieve_factorizations(uint64_t max, uint64_t *_w);
 /// Should be obtained from {@link nut_sieve_factorizations}, {@link max_prime_divisors}, etc.
 /// @return The pitch of a pitched array of factorization structs whose flexible length members all have w
 /// elements.
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_get_factorizations_pitch(uint64_t w);
 
 /// Compute the unique prime factors of every number in the range from 0 to max.
@@ -139,7 +144,8 @@ uint64_t nut_get_factorizations_pitch(uint64_t w);
 /// @param [out] _w: maximum numer of unique prime divisors of a number not exceeding max
 /// @return a pointer to an array of nut_u64_Pitcharr structs containing lists of unique prime factors for all numbers not exceeding max,
 /// or NULL on allocation failure
-[[gnu::nonnull(2), gnu::malloc]]
+NUT_ATTR_NONNULL(2)
+NUT_ATTR_MALLOC
 NUT_ATTR_ACCESS(write_only, 2)
 void *nut_sieve_factors(uint64_t max, uint64_t *_w);
 
@@ -152,7 +158,7 @@ void *nut_sieve_factors(uint64_t max, uint64_t *_w);
 /// a factorization using {@link nut_fill_factors_from_largest}.
 /// @param [in] max: inclusive upper bound of sieving range in which to find largest prime factors of all numbers
 /// @return a pointer to an array of largest prime factors for all numbers not exceeding max, or NULL on allocation failure.
-[[gnu::malloc]]
+NUT_ATTR_MALLOC
 uint64_t *nut_sieve_largest_factors(uint64_t max);
 
 /// Use a table of largest prime factors to get the factorization of a number
@@ -160,8 +166,9 @@ uint64_t *nut_sieve_largest_factors(uint64_t max);
 /// {@link nut_max_prime_divs} and {@link nut_make_Factors_w} if needed.
 /// @param [in] n: the number to get the factorization of
 /// @param [in] largest_factors: table of largest factors, from {@link nut_sieve_largest_factors}
-[[gnu::nonnull(1, 3)]]
-NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 3)
+NUT_ATTR_NONNULL(1, 3)
+NUT_ATTR_ACCESS(read_write, 1)
+NUT_ATTR_ACCESS(read_only, 3)
 void nut_fill_factors_from_largest(nut_Factors *restrict out, uint64_t n, const uint64_t largest_factors[restrict static n + 1]);
 
 /// Get the pitch for a pitched array of {@link nut_u64_Pitcharr} factor lists.
@@ -170,7 +177,7 @@ void nut_fill_factors_from_largest(nut_Factors *restrict out, uint64_t n, const 
 /// Should be obtained from {@link nut_sieve_factors}, {@link max_prime_divisors}, etc.
 /// @return The pitch of a pitched array of factor list structs whose flexible length members all have w
 /// elements.
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_get_factors_pitch(uint64_t w);
 
 /// Compute the number of divisors (including 1 and n) for every number n from 0 to max.
@@ -178,7 +185,7 @@ uint64_t nut_get_factors_pitch(uint64_t w);
 /// all numbers in the range, but without needing to compute or store the factorizations intermediately
 /// @param [in] max: inclusive upper bound of sieving range in which to find divisor counts for all numbers
 /// @return an array of divisor counts for all numbers in the range, or NULL on allocation failure
-[[gnu::malloc]]
+NUT_ATTR_MALLOC
 uint64_t *nut_sieve_sigma_0(uint64_t max);
 
 /// Compute the sum of divisors (including 1 and n) for every number n from 0 to max.
@@ -186,7 +193,7 @@ uint64_t *nut_sieve_sigma_0(uint64_t max);
 /// all numbers in the range, but without needing to compute or store the factorizations intermediately
 /// @param [in] max: inclusive upper bound of sieving range in which to find divisor sums for all numbers
 /// @return an array of divisor sums for all numbers in the range, or NULL on allocation failure
-[[gnu::malloc]]
+NUT_ATTR_MALLOC
 uint64_t *nut_sieve_sigma_1(uint64_t max);
 
 /// Compute the sum of some power of divisors (including 1 and n) for every number n from 0 to max.
@@ -195,7 +202,7 @@ uint64_t *nut_sieve_sigma_1(uint64_t max);
 /// @param [in] max: inclusive upper bound of sieving range in which to find divisor power sums for all numbers
 /// @param [in] e: power of divisors for summing, eg 0 would produce divisor counts, 1 divisor sums, 2 sums of squares of divisors, etc
 /// @return an array of divisor power sums for all numbers in the range, or NULL on allocation failure
-[[gnu::malloc]]
+NUT_ATTR_MALLOC
 uint64_t *nut_sieve_sigma_e(uint64_t max, uint64_t e);
 
 /// Compute the generalized divisor function dk(n) (number of k-tuples with product n) for every number n from 0 to max.
@@ -207,7 +214,7 @@ uint64_t *nut_sieve_sigma_e(uint64_t max, uint64_t e);
 /// @param [in] k: number of factors per factorization, eg for a prime power p^a we get binom(a + k, k).
 /// @param [in] modulus: modulus to reduce results by, or zero to skip reducing
 /// @return an array of dk results, or NULL on allocation failure
-[[gnu::malloc]]
+NUT_ATTR_MALLOC
 uint64_t *nut_sieve_dk(uint64_t max, uint64_t k, uint64_t modulus);
 
 /// Compute Euler's totient function for every number from 0 to max.
@@ -215,7 +222,7 @@ uint64_t *nut_sieve_dk(uint64_t max, uint64_t k, uint64_t modulus);
 /// all numbers in the range, but without needing to compute or store the factorizations intermediately
 /// @param [in] max: inclusive upper bound of sieving range in which to find totients for all numbers
 /// @return an array of totients for all numbers in the range, or NULL on allocation failure
-[[gnu::malloc]]
+NUT_ATTR_MALLOC
 uint64_t *nut_sieve_phi(uint64_t max);
 
 /// Compute the Carmichael function for every number from 0 to max.
@@ -223,7 +230,7 @@ uint64_t *nut_sieve_phi(uint64_t max);
 /// all numbers in the range, but without needing to compute or store the factorizations intermediately
 /// @param [in] max: inclusive upper bound of sieving range in which to compute Carmichael for all numbers
 /// @return an array of Carmichael function outputs for all numbers in the range, or NULL on allocation failure
-[[gnu::malloc]]
+NUT_ATTR_MALLOC
 uint64_t *nut_sieve_carmichael(uint64_t max);
 
 /// Compute the Mobius function for every number from 0 to max.
@@ -233,7 +240,7 @@ uint64_t *nut_sieve_carmichael(uint64_t max);
 /// @param [in] max: inclusive upper bound of sieving range in which to compute Mobius for all numbers
 /// @return a bitfield array of Mobius function outputs for all numbers in the range, with 3 instead of -1,
 /// or NULL on allocation failure
-[[gnu::malloc]]
+NUT_ATTR_MALLOC
 uint8_t *nut_sieve_mobius(uint64_t max);
 
 /// Compute the Mertens function (sum of Mobius function) for every number from 0 to max.
@@ -241,7 +248,8 @@ uint8_t *nut_sieve_mobius(uint64_t max);
 /// @param [in] max: inclusive upper bound of range in which to compute Mertens for all numbers
 /// @param [in] mobius: bitfield array of Mobius function outputs (from {@link nut_sieve_mobius}).
 /// @return an array of Mertens function outputs for all numbers in the range, or NULL on allocation failure
-[[gnu::malloc, gnu::nonnull(2)]]
+NUT_ATTR_MALLOC
+NUT_ATTR_NONNULL(2)
 NUT_ATTR_ACCESS(read_only, 2)
 int64_t *nut_compute_mertens_range(uint64_t max, const uint8_t mobius[static max/4 + 1]);
 
@@ -251,14 +259,15 @@ int64_t *nut_compute_mertens_range(uint64_t max, const uint8_t mobius[static max
 /// @param [in] max: inclusive upper bound of sieving range in which to check compositeness for all numbers
 /// @param [out] _num_primes: the number of primes in the range will be stored here.  May be NULL.
 /// @return a bitarray of whether or not each number in the range is composite, or NULL on allocation failure
-[[gnu::malloc]]
+NUT_ATTR_MALLOC
 uint8_t *nut_sieve_is_composite(uint64_t max);
 
 /// Check if a number is composite using a packed bitarray from {@link nut_sieve_is_composite}
 /// @param [in] n: the number to check if composite
 /// @param [in] buf: packed bitarray from {@link nut_sieve_is_composite}
 /// @return true if n is composite, false if n is prime
-[[gnu::pure, gnu::nonnull(2)]]
+NUT_ATTR_PURE
+NUT_ATTR_NONNULL(2)
 NUT_ATTR_ACCESS(read_only, 2)
 bool nut_is_composite(uint64_t n, const uint8_t buf[static n/30 + 1]);
 
@@ -268,7 +277,8 @@ bool nut_is_composite(uint64_t n, const uint8_t buf[static n/30 + 1]);
 /// @param [in] max: inclusive upper bound of range to compute pi function
 /// @param [in] buf: packed bitarray from {@link nut_sieve_is_composite}
 /// @return an array of pi values at every 240th number (use {@link nut_compute_pi_from_tables})
-[[gnu::nonnull(2), gnu::malloc]]
+NUT_ATTR_NONNULL(2)
+NUT_ATTR_MALLOC
 NUT_ATTR_ACCESS(read_only, 2)
 uint64_t *nut_compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1]);
 
@@ -277,15 +287,19 @@ uint64_t *nut_compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1
 /// @param [in] pi_table: array of partial pi values from {@link nut_compute_pi_range}
 /// @param [in] buf: packed bitarray from {@link nut_sieve_is_composite}
 /// @return the number of primes <= n
-[[gnu::pure, gnu::nonnull(2, 3)]]
-NUT_ATTR_ACCESS(read_only, 2) NUT_ATTR_ACCESS(read_only, 3) NUT_ATTR_NO_SAN("vla-bound")
+NUT_ATTR_PURE
+NUT_ATTR_NONNULL(2, 3)
+NUT_ATTR_ACCESS(read_only, 2)
+NUT_ATTR_ACCESS(read_only, 3)
+NUT_ATTR_NO_SAN("vla-bound")
 uint64_t nut_compute_pi_from_tables(uint64_t n, const uint64_t pi_table[restrict static n/30], const uint8_t buf[restrict static n/30 + 1]);
 
 /// Compute an array of all primes from 0 to max.
 /// @param [in] max: inclusive upper bound of sieving range
 /// @param [out] _num_primes: how many primes were found in the range (this pointer cannot be null)
 /// @return an array of all primes from 0 to max, or NULL on allocation failure
-[[gnu::malloc, gnu::nonnull(2)]]
+NUT_ATTR_MALLOC
+NUT_ATTR_NONNULL(2)
 NUT_ATTR_ACCESS(write_only, 2)
 uint64_t *nut_sieve_primes(uint64_t max, uint64_t *_num_primes);
 

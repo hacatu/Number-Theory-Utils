@@ -71,7 +71,7 @@ typedef struct{
 /// Allocate a factors structure that can hold a given number of distinct primes.
 /// @param [in] max_primes: the number of distinct primes that should be storable
 /// @return pointer to factors structure that can hold max_primes.  pointer needs to be free'd
-[[gnu::malloc]]
+NUT_ATTR_MALLOC
 nut_Factors *nut_make_Factors_w(uint64_t max_primes);
 
 /// Allocate a factors structure that can hold all factors of n, even if it has as many prime factors as possible.
@@ -81,21 +81,24 @@ nut_Factors *nut_make_Factors_w(uint64_t max_primes);
 /// @param [in] num_primes: number of primes in array
 /// @param [in] primes: array of primes
 /// @return pointer to factors structure that can hold enough distinct primes to factor any number up through n.  pointer needs to be free'd
-[[gnu::malloc, gnu::nonnull(3)]]
+NUT_ATTR_MALLOC
+NUT_ATTR_NONNULL(3)
 NUT_ATTR_ACCESS(read_only, 3, 2)
 nut_Factors *nut_make_Factors_ub(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes]);
 
 /// Allocate a copy of a factors struct, but with only enough memory to store its current factors and not its max capacity if higher
 /// @param [in] factors: the struct to copy
 /// @return a copy of the input or NULL on allocation failure
-[[gnu::malloc, gnu::nonnull(1)]]
+NUT_ATTR_MALLOC
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_only, 1)
 nut_Factors *nut_Factors_copy(const nut_Factors *factors);
 
 /// Multiply a factorization into a number.
 /// @param [in] factors: pointer to factors struct, as obtained from { @link nut_u64_factor_trial_div}
 /// @return product of prime powers described by factors
-[[gnu::pure, gnu::nonnull(1)]]
+NUT_ATTR_PURE
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_only, 1)
 uint64_t nut_Factors_prod(const nut_Factors *factors);
 
@@ -103,7 +106,8 @@ uint64_t nut_Factors_prod(const nut_Factors *factors);
 /// Works by multiplying power + 1 for all prime factors
 /// @param [in] factors: pointer to factors struct, as obtained from { @link nut_u64_factor_trial_div}
 /// @return number of divisors
-[[gnu::pure, gnu::nonnull(1)]]
+NUT_ATTR_PURE
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_only, 1)
 uint64_t nut_Factor_divcount(const nut_Factors *factors);
 
@@ -111,7 +115,8 @@ uint64_t nut_Factor_divcount(const nut_Factors *factors);
 /// Works by multiplying (prime**(power+1)-1)/(prime-1) for all prime factors
 /// @param [in] factors: pointer to factors struct, as obtained from { @link nut_u64_factor_trial_div}
 /// @return sum of divisors
-[[gnu::pure, gnu::nonnull(1)]]
+NUT_ATTR_PURE
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_only, 1)
 uint64_t nut_Factor_divsum(const nut_Factors *factors);
 
@@ -122,7 +127,8 @@ uint64_t nut_Factor_divsum(const nut_Factors *factors);
 /// @param [in] factors: pointer to factors struct, as obtained from { @link nut_u64_factor_trial_div}
 /// @param [in] power: power of divisors to sum
 /// @return sum of divisor powers
-[[gnu::pure, gnu::nonnull(1)]]
+NUT_ATTR_PURE
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_only, 1)
 uint64_t nut_Factor_divpowsum(const nut_Factors *factors, uint64_t power);
 
@@ -132,20 +138,21 @@ uint64_t nut_Factor_divpowsum(const nut_Factors *factors, uint64_t power);
 /// @param [in] k: tuple length
 /// @param [in] modulus: modulus to reduce answer by
 /// @return number of factorizations into k numbers, allowing repeats and considering order
-[[gnu::pure]]
+NUT_ATTR_PURE
 uint64_t nut_Factor_divtupcount(const nut_Factors *factors, uint64_t k, uint64_t modulus);
 
 /// Raise a factorization to a power, ie multiply all exponents by a constant.
 /// @param [in,out] factors: factorization to raise to a power
 /// @param [in] power: power to raise the factorization to
-[[gnu::nonnull(1)]]
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_write, 1)
 void nut_Factor_ipow(nut_Factors *factors, uint64_t power);
 
 /// Find Euler's Phi function, the number of coprime numbers less than n.
 /// @param [in] factors: the factorization of n for which to compute phi
 /// @return phi(n)
-[[gnu::pure, gnu::nonnull(1)]]
+NUT_ATTR_PURE
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_only, 1)
 uint64_t nut_Factor_phi(const nut_Factors *factors);
 
@@ -153,13 +160,15 @@ uint64_t nut_Factor_phi(const nut_Factors *factors);
 /// Always divides phi(n).
 /// @param [in] factors: the factorization of n for which to compute the carmichael function
 /// @return lambda(n)
-[[gnu::pure, gnu::nonnull(1)]]
+NUT_ATTR_PURE
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_only, 1)
 uint64_t nut_Factor_carmichael(const nut_Factors *factors);
 
 /// Call { @link forall_divisors} with temporarily allocated dfactors and pfactors structs.
-[[gnu::nonnull(1, 2)]]
-NUT_ATTR_ACCESS(read_only, 1) NUT_ATTR_ACCESS(read_write, 3)
+NUT_ATTR_NONNULL(1, 2)
+NUT_ATTR_ACCESS(read_only, 1)
+NUT_ATTR_ACCESS(read_write, 3)
 int nut_Factor_forall_divs_tmptmp(const nut_Factors *restrict factors, int (*f)(const nut_Factors*, uint64_t, void*), void *restrict data);
 
 /// Call a given function on each divisor of a number, given its factorization.
@@ -170,13 +179,17 @@ int nut_Factor_forall_divs_tmptmp(const nut_Factors *restrict factors, int (*f)(
 /// @param [in] dfactors: buffer to store internal work.  Should be allocated to hold at least factors->num_primes
 /// @param [in] pfactors: buffer to store internal work.  Should be allocated to hlod at least factors->num_primes
 /// @return 0 if the callback never returned 1 and all divisors were visited, or 1 if the callback ever returned nonzero.
-[[gnu::nonnull(1, 2, 4, 5)]]
-NUT_ATTR_ACCESS(read_only, 1) NUT_ATTR_ACCESS(read_write, 3) NUT_ATTR_ACCESS(read_write, 4) NUT_ATTR_ACCESS(read_write, 5)
+NUT_ATTR_NONNULL(1, 2, 4, 5)
+NUT_ATTR_ACCESS(read_only, 1)
+NUT_ATTR_ACCESS(read_write, 3)
+NUT_ATTR_ACCESS(read_write, 4)
+NUT_ATTR_ACCESS(read_write, 5)
 int nut_Factor_forall_divs(const nut_Factors *restrict factors, int (*f)(const nut_Factors*, uint64_t, void*), void *data, nut_Factors *restrict dfactors, nut_Factors *restrict pfactors);
 
 /// Call { @link forall_divisors_le} with temporarily allocated dfactors and pfactors structs.
-[[gnu::nonnull(1, 3)]]
-NUT_ATTR_ACCESS(read_only, 1) NUT_ATTR_ACCESS(read_write, 4)
+NUT_ATTR_NONNULL(1, 3)
+NUT_ATTR_ACCESS(read_only, 1)
+NUT_ATTR_ACCESS(read_write, 4)
 int nut_Factor_forall_divs_le_tmptmp(const nut_Factors *restrict factors, uint64_t d_max, int (*f)(const nut_Factors*, uint64_t, void*), void *restrict data);
 
 /// Call a given function on each divisor of a number, given its factorization, skipping divisors over a given bound.
@@ -188,16 +201,20 @@ int nut_Factor_forall_divs_le_tmptmp(const nut_Factors *restrict factors, uint64
 /// @param [in] dfactors: buffer to store internal work.  Should be allocated to hold at least factors->num_primes
 /// @param [in] pfactors: buffer to store internal work.  Should be allocated to hlod at least factors->num_primes
 /// @return 0 if the callback never returned 1 and all divisors were visited, or 1 if the callback ever returned nonzero.
-[[gnu::nonnull(1, 3, 5, 6)]]
-NUT_ATTR_ACCESS(read_only, 1) NUT_ATTR_ACCESS(read_write, 4) NUT_ATTR_ACCESS(read_write, 5) NUT_ATTR_ACCESS(read_write, 6)
+NUT_ATTR_NONNULL(1, 3, 5, 6)
+NUT_ATTR_ACCESS(read_only, 1)
+NUT_ATTR_ACCESS(read_write, 4)
+NUT_ATTR_ACCESS(read_write, 5)
+NUT_ATTR_ACCESS(read_write, 6)
 int nut_Factor_forall_divs_le(const nut_Factors *restrict factors, uint64_t d_max, int (*f)(const nut_Factors*, uint64_t, void*), void *restrict data, nut_Factors *restrict dfactors, nut_Factors *restrict pfactors);
 
 /// Print a factorization of a number.
 /// @param [in,out] file: pointer to file to print to
 /// @param [in] factors: pointer to factorization struct
 /// @return number of characters printed
-[[gnu::nonnull(1, 2)]]
-NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2)
+NUT_ATTR_NONNULL(1, 2)
+NUT_ATTR_ACCESS(read_write, 1)
+NUT_ATTR_ACCESS(read_only, 2)
 int nut_Factor_fprint(FILE *restrict file, const nut_Factors *restrict factors);
 
 /// Add a power of some prime to an existing factorization struct.
@@ -210,7 +227,7 @@ int nut_Factor_fprint(FILE *restrict file, const nut_Factors *restrict factors);
 /// @param [in,out] factors: pointer to factorization struct
 /// @param [in] m: prime
 /// @param [in] k: power
-[[gnu::nonnull(1)]]
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_write, 1)
 void nut_Factor_append(nut_Factors *factors, uint64_t m, uint64_t k);
 
@@ -221,21 +238,22 @@ void nut_Factor_append(nut_Factors *factors, uint64_t m, uint64_t k);
 /// @param [in,out] factors: pointer to factorization struct which should be extended
 /// @param [in] factors2: pointer to factorization struct whose entries will be added to the other struct
 /// @param [in] k: power to multiply entries of factors2 by, for if some composite number m was discovered where m^k divides n and we have factored m
-[[gnu::nonnull(1, 2)]]
-NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 2)
+NUT_ATTR_NONNULL(1, 2)
+NUT_ATTR_ACCESS(read_write, 1)
+NUT_ATTR_ACCESS(read_only, 2)
 void nut_Factor_combine(nut_Factors *restrict factors, const nut_Factors *restrict factors2, uint64_t k);
 
 /// Check if n is prime using a deterministic Miller-Rabin test.
 /// 7 partictular bases are used so that no composite number will falsely be reported as prime for the entire 64-bit range
 /// @param [in] n: number to check for primality
 /// @return true if n is prime, false otherwise
-[[gnu::const]]
+NUT_ATTR_CONST
 bool nut_u64_is_prime_dmr(uint64_t n);
 
 /// Find the next prime >= n
 /// @param [in] n: inclusive lower bound for prime
 /// @return the smallest prime >= n
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_u64_next_prime_ge(uint64_t n);
 
 /// Factor out all powers of a given array of primes.
@@ -249,8 +267,10 @@ uint64_t nut_u64_next_prime_ge(uint64_t n);
 /// @param [in] primes: the array of primes
 /// @param [out] factors: pointer to struct where factors will be stored
 /// @return n with all factors found and stored in factors divided out.  Thus if n factors completely over the given primes, 1 is returned.
-[[nodiscard, gnu::nonnull(3, 4)]]
-NUT_ATTR_ACCESS(read_only, 3, 2) NUT_ATTR_ACCESS(read_write, 4)
+NUT_ATTR_NODISCARD
+NUT_ATTR_NONNULL(3, 4)
+NUT_ATTR_ACCESS(read_only, 3, 2)
+NUT_ATTR_ACCESS(read_write, 4)
 uint64_t nut_u64_factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes[restrict static num_primes], nut_Factors *restrict factors);
 
 /// Factor a number using a variety of approaches based on its size.
@@ -266,8 +286,11 @@ uint64_t nut_u64_factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_
 /// @param [in] conf: limits for different algorithms (can use {@link nut_default_factor_conf})
 /// @param [out] factors: output
 /// @return n with all factors found and stored in factors divided out.  Thus if n factors completely, 1 is returned.
-[[nodiscard, gnu::nonnull(4, 5)]]
-NUT_ATTR_ACCESS(read_only, 3, 2) NUT_ATTR_ACCESS(read_only, 4) NUT_ATTR_ACCESS(read_write, 5)
+NUT_ATTR_NODISCARD
+NUT_ATTR_NONNULL(4, 5)
+NUT_ATTR_ACCESS(read_only, 3, 2)
+NUT_ATTR_ACCESS(read_only, 4)
+NUT_ATTR_ACCESS(read_write, 5)
 uint64_t nut_u64_factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_t primes[restrict static num_primes], const nut_FactorConf *restrict conf, nut_Factors *restrict factors);
 
 /// Get the floor of the nth root of a
@@ -276,7 +299,7 @@ uint64_t nut_u64_factor_heuristic(uint64_t n, uint64_t num_primes, const uint64_
 /// @param [in] a: the number to take the nth root of
 /// @param [in] n: root to take
 /// @return floor(a**(1/n)), ie the largest integer x such that x**n <= a
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_u64_nth_root(uint64_t a, uint64_t n);
 
 /// Check if a is a perfect power of some integer.
@@ -317,7 +340,8 @@ uint64_t nut_u64_nth_root(uint64_t a, uint64_t n);
 /// @param [out] _base: if a is found to be a perfect power, store the base here
 /// @param [out] _exp: if a is found to be a perfect power, store the exponent here
 /// @return true if a is a perfect power (with exponent max or lower), false otherwise (could mean a is not a perfect power, or could mean a is a perfect power with exponent max + 1 to 61)
-NUT_ATTR_ACCESS(write_only, 3) NUT_ATTR_ACCESS(write_only, 4)
+NUT_ATTR_ACCESS(write_only, 3)
+NUT_ATTR_ACCESS(write_only, 4)
 bool nut_u64_is_perfect_power(uint64_t a, uint64_t max, uint64_t *restrict _base, uint64_t *restrict _exp);
 
 /// Try to find a factor of a number using Pollard's Rho algorithm with Floyd cycle finding.
@@ -325,7 +349,7 @@ bool nut_u64_is_perfect_power(uint64_t a, uint64_t max, uint64_t *restrict _base
 /// @param [in] n: number to find a factor of
 /// @param [in] x: random value mod n
 /// @return a nontrivial factor of n if found, 1 or n otherwise
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_u64_factor1_pollard_rho(uint64_t n, uint64_t x);
 
 /// Try to find a factor of a number using Pollard's Rho algorithm with Brent cycle finding and gcd coalescing.
@@ -336,7 +360,7 @@ uint64_t nut_u64_factor1_pollard_rho(uint64_t n, uint64_t x);
 /// @param [in] x: random value mod n
 /// @param [in] m: number of iterations per gcd check
 /// @return a nontrivial factor of n if found, 1 or n otherwise
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_u64_factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m);
 
 /// Try to find a factor of a number using Lenstra ecf.
@@ -347,7 +371,7 @@ uint64_t nut_u64_factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m);
 /// @param [in] x, y, a: random values mod n
 /// @param [in] B: number of trials before giving up (we compute kP for k from 2 to B)
 /// @return a nontrivial factor of n if found, 1 or n otherwise
-[[gnu::const]]
+NUT_ATTR_CONST
 int64_t nut_u64_factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B);
 
 /// Same as { @link nut_u64_factor1_lenstra} but using a projective Montgomery curve and Montgomery ladder.
@@ -358,7 +382,7 @@ int64_t nut_u64_factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int6
 /// @param [in] x, y, a: random numbers mod n
 /// @param [in] B: number of trials before giving up (we compute kP for k from 2 to B)
 /// @return a nontrivial factor of n if found, 1 or n otherwise
-[[gnu::const]]
+NUT_ATTR_CONST
 int64_t nut_u64_factor1_lenstra_montgomery(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B);
 
 

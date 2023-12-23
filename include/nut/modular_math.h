@@ -36,35 +36,84 @@ typedef struct{
 
 /// Wrapper for gcc's `access` function annotation - no clang equivalent, and currently disabled because it is bugged
 /// See https://gcc.gnu.org/onlinedocs/gcc/Common-Function-Attributes.html
-#if __has_c_attribute(gnu::access) && 0
+#if !defined(DOXYGEN) &&__has_c_attribute(gnu::access) && 0
 #define NUT_ATTR_ACCESS(...) [[gnu::access(__VA_ARGS__)]]
 #else
 #define NUT_ATTR_ACCESS(...)
 #endif
 
 /// Prevent clang from reporting spurious errors when a length zero array is passed to a length annotated function parameter
-#if __has_c_attribute(clang::no_sanitize)
+#if !defined(DOXYGEN) && __has_c_attribute(clang::no_sanitize)
 #define NUT_ATTR_NO_SAN(name) [[clang::no_sanitize(name)]]
 #else
 #define NUT_ATTR_NO_SAN(name)
 #endif
 
+/// Wrapper for gnu::const attr - such a function has no side effects and cannot read memory
+#if !defined(DOXYGEN)
+#define NUT_ATTR_CONST [[gnu::const]]
+#else
+#define NUT_ATTR_CONST
+#endif
+
+/// Wrapper for gnu::pure attr - similar to const but the function can read non-volatile memory (including passed-in pointers)
+#if !defined(DOXYGEN)
+#define NUT_ATTR_PURE [[gnu::pure]]
+#else
+#define NUT_ATTR_PURE
+#endif
+
+/// Wrapper for nodiscard attr - requires return value be used
+#if !defined(DOXYGEN)
+#define NUT_ATTR_NODISCARD [[nodiscard]]
+#else
+#define NUT_ATTR_NODISCARD
+#endif
+
+/// Wrapper for gnu::nonnull attr
+#if !defined(DOXYGEN)
+#define NUT_ATTR_NONNULL(...) [[gnu::nonnull(__VA_ARGS__)]]
+#else
+#define NUT_ATTR_NONNULL(...)
+#endif
+
+/// Wrapper for gnu::returns_nonnull attr
+#if !defined(DOXYGEN)
+#define NUT_ATTR_RETURNS_NONNULL [[gnu::returns_nonnull]]
+#else
+#define NUT_ATTR_RETURNS_NONNULL
+#endif
+
+/// Wrapper for gnu::malloc attr - indicates the function returns a malloc'd pointer that must be free'd
+#if !defined(DOXYGEN)
+#define NUT_ATTR_MALLOC [[gnu::malloc]]
+#else
+#define NUT_ATTR_MALLOC
+#endif
+
+/// Wrapper for gnu::artificial attr - hint that the function should be ignored in debuggers
+#if !defined(DOXYGEN)
+#define NUT_ATTR_ARTIFICIAL [[gnu::artificial]]
+#else
+#define NUT_ATTR_ARTIFICIAL
+#endif
+
 /// Compute nonnegative integral power of integer using binary exponentiation.
 /// @param [in] b, e: base and exponent
 /// @return b^e, not checked for overflow
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_u64_pow(uint64_t b, uint64_t e);
 
 /// Compute nonnegative integral power of integer using binary exponentiation.
 /// @param [in] b, e: base and exponent
 /// @return b^e, not checked for overflow
-[[gnu::const]]
+NUT_ATTR_CONST
 uint128_t nut_u128_pow(uint128_t b, uint64_t e);
 
 /// Compute nonnegative integral power of a number modulo another using binary exponentiation.
 /// @param [in] b, e, n: base, exponent, and modulus
 /// @return b^e mod n, computed via binary exponentiation
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_u64_powmod(uint64_t b, uint64_t e, uint64_t n);
 
 /// Compute single binomial coefficient semi-naively.
@@ -73,7 +122,7 @@ uint64_t nut_u64_powmod(uint64_t b, uint64_t e, uint64_t n);
 /// See { @link nut_u64_binom_next} to iterate over values (n choose k), (n choose k+1).
 /// See { @link nut_u64_binom_next_mod_2t} to iterate over values mod powers of 2
 /// @param [in] n, k: Binomial coefficient arguments
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_u64_binom(uint64_t n, uint64_t k);
 
 /// Compute the binomial coefficient for (n choose k) given the binomial coefficient for (n choose k-1)
@@ -83,7 +132,7 @@ uint64_t nut_u64_binom(uint64_t n, uint64_t k);
 /// See { @link nut_u64_binom_next_mod_2t} to iterate over values mod powers of 2.
 /// @param [in] n, k: Binomial coefficient arguments
 /// @param [in] prev: Binomial coefficient value for (n choose k-1)
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_u64_binom_next(uint64_t n, uint64_t k, uint64_t prev);
 
 /// Generate a (pseudo)random integer uniformly from [a, b).
@@ -106,7 +155,8 @@ uint64_t nut_u64_rand(uint64_t a, uint64_t b);
 /// @param [in] a, b: numbers to find gcd of
 /// @param [out] _t, _s: pointers to output x and y to respectively (ignored if NULL)
 /// @return d
-NUT_ATTR_ACCESS(write_only, 3) NUT_ATTR_ACCESS(write_only, 4)
+NUT_ATTR_ACCESS(write_only, 3)
+NUT_ATTR_ACCESS(write_only, 4)
 int64_t nut_i64_egcd(int64_t a, int64_t b, int64_t *restrict _t, int64_t *restrict _s);
 
 /// Find the multiplicative inverse of a mod b
@@ -115,7 +165,7 @@ int64_t nut_i64_egcd(int64_t a, int64_t b, int64_t *restrict _t, int64_t *restri
 /// If a and b are not coprime, then the value
 /// returned will just be the bezout coefficient for a, and will yield gcd(a, b)
 /// when multiplied with a mod b instead of 1.
-[[gnu::const]]
+NUT_ATTR_CONST
 int64_t nut_i64_modinv(int64_t a, int64_t b);
 
 /// Find the multiplicative inverse of a mod 2**t
@@ -127,34 +177,34 @@ int64_t nut_i64_modinv(int64_t a, int64_t b);
 /// @param [in] a: number to invert, MUST be odd.
 /// @param [in] t: Exponent of modulus, ie we want to work mod 2**t, MUST be <= 64.  0 and 1 are allowed, but won't give very interesting results.
 /// @return b such that a*b = 1 mod 2**t and 0 <= b < 2**t
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_u64_modinv_2t(uint64_t a, uint64_t t);
 
 /// Compute the Euclidean remainder r = a mod n for positive n so that 0 <= r < n.
 /// @param [in] a, n: dividend and divisor
 /// @return a mod n
-[[gnu::const]]
+NUT_ATTR_CONST
 int64_t nut_i64_mod(int64_t a, int64_t n);
 
 /// Compute n mod pq st n = a mod p and n = b mod q, where p and q are coprime.
 /// @param [in] a, p, b, q: Chinese Remainder Theorem parameters.  The residues a and b should not be negative.
 /// The moduli p and q should be coprime.
 /// @return 0 <= 0 < pq so that n = a mod p and n = b mod q
-[[gnu::const]]
+NUT_ATTR_CONST
 int64_t nut_i64_crt(int64_t a, int64_t p, int64_t b, int64_t q);
 
 /// Compute n mod pq st n = a mod p and n = b mod q, where p and q are coprime.
 /// @param [in] a, p, b, q: Chinese Remainder Theorem parameters.  The residues a and b should not be negative.
 /// The moduli p and q should be coprime.
 /// @return 0 <= 0 < pq so that n = a mod p and n = b mod q
-[[gnu::const]]
+NUT_ATTR_CONST
 int128_t nut_i128_crt(int64_t a, int64_t p, int64_t b, int64_t q);
 
 /// Compute the least common multiple of a and b
 /// Divides the product by the gcd so can overflow for large arguments
 /// @param [in] a, b: numbers to find nut_i64_lcm of
 /// @return nut_i64_lcm(a, b)
-[[gnu::const]]
+NUT_ATTR_CONST
 int64_t nut_i64_lcm(int64_t a, int64_t b);
 
 /// Compute the binomial coefficient for (n choose k) given the binomial coefficient for (n choose k-1)
@@ -169,8 +219,10 @@ int64_t nut_i64_lcm(int64_t a, int64_t b);
 /// @param [in, out] p2: 2-coprime part of (n choose k-1), that is, (n choose k-1) divided by 2^v2,
 /// This will be updated in-place, so to start from (n choose 0) it can just be initialized to 1.
 /// @return (n choose k) mod 2^t, which is equal to 2^v2 * p2 mod 2^t
-[[nodiscard, gnu::nonnull(4, 5)]]
-NUT_ATTR_ACCESS(read_write, 4) NUT_ATTR_ACCESS(read_write, 5)
+NUT_ATTR_NODISCARD
+NUT_ATTR_NONNULL(4, 5)
+NUT_ATTR_ACCESS(read_write, 4)
+NUT_ATTR_ACCESS(read_write, 5)
 uint64_t nut_u64_binom_next_mod_2t(uint64_t n, uint64_t k, uint64_t t, uint64_t *restrict v2, uint64_t *restrict p2);
 
 /// Compute the Jacobi symbol of n mod k.
@@ -178,7 +230,7 @@ uint64_t nut_u64_binom_next_mod_2t(uint64_t n, uint64_t k, uint64_t t, uint64_t 
 /// Uses modified euclidean algorithm.
 /// @param [in] n, k: Jacobi symbol parameters
 /// @return Jacobi symbol (0 if k | n, +1 if n is a quadratic residue mod an odd number of prime divisors of k (with multiplicity), -1 otherwise)
-[[gnu::const]]
+NUT_ATTR_CONST
 int64_t nut_i64_jacobi(int64_t n, int64_t k);
 
 /// Compute a random number mod a prime that is not a quadratic residue.
@@ -196,7 +248,7 @@ int64_t nut_i64_rand_nr_mod(int64_t p);
 /// @param [in] n: a quadratic residue mod p
 /// @param [in] p: a prime
 /// @return r so that r^2 = n mod p
-[[gnu::const]]
+NUT_ATTR_CONST
 int64_t nut_i64_sqrt_shanks(int64_t n, int64_t p);
 
 /// Compute the square root of a quadratic residue mod a prime.
@@ -206,7 +258,7 @@ int64_t nut_i64_sqrt_shanks(int64_t n, int64_t p);
 /// @param [in] n: a quadratic residue mod p
 /// @param [in] p: a prime
 /// @return r so that r^2 = n mod p
-[[gnu::const]]
+NUT_ATTR_CONST
 int64_t nut_i64_sqrt_cipolla(int64_t n, int64_t p);
 
 /// Compute the square root of a quadratic residue mod a prime.
@@ -220,32 +272,32 @@ int64_t nut_i64_sqrt_cipolla(int64_t n, int64_t p);
 /// @param [in] n: a quadratic residue mod p
 /// @param [in] p: a prime
 /// @return r so that r^2 = n mod p
-[[gnu::const]]
+NUT_ATTR_CONST
 int64_t nut_i64_sqrt_mod(int64_t n, int64_t p);
 
 
 /// Compute a constant to use to do modular division faster
 /// @param [in] pd: absolute value of divisor
 /// @return constant c for use with { @link nut_i32_fastmod}
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_i32_fastmod_init(uint32_t pd);
 
 /// Compute a constant to use to do modular division faster
 /// @param [in] d: divisor
 /// @return constant c for use with { @link nut_u32_fastmod}
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_u32_fastmod_init(uint32_t d);
 
 /// Compute a constant to use to do modular division faster
 /// @param [in] pd: absolute value of divisor
 /// @return constant c for use with { @link nut_i64_fastmod}
-[[gnu::const]]
+NUT_ATTR_CONST
 uint128_t nut_i64_fastmod_init(uint64_t pd);
 
 /// Compute a constant to use to do modular division faster
 /// @param [in] d: divisor
 /// @return constant c for use with { @link nut_u64_fastmod}
-[[gnu::const]]
+NUT_ATTR_CONST
 uint128_t nut_u64_fastmod_init(uint64_t d);
 
 /// Compute n mod d, choosing the smallest signed remainder
@@ -253,7 +305,7 @@ uint128_t nut_u64_fastmod_init(uint64_t d);
 /// @param [in] pd: absolute value of divisor
 /// @param [in] c: constant from { @link nut_i32_fastmod_init}
 /// @return n mod pd
-[[gnu::const]]
+NUT_ATTR_CONST
 int32_t nut_i32_fastmod_trunc(int32_t n, uint32_t pd, uint64_t c);
 
 /// Compute n mod d, choosing the euclidean remainder
@@ -261,7 +313,7 @@ int32_t nut_i32_fastmod_trunc(int32_t n, uint32_t pd, uint64_t c);
 /// @param [in] pd: absolute value of divisor
 /// @param [in] c: constant from { @link nut_i32_fastmod_init}
 /// @return n mod pd
-[[gnu::const]]
+NUT_ATTR_CONST
 int32_t nut_i32_fastmod_floor(int32_t n, uint32_t pd, uint64_t c);
 
 /// Compute n mod d faster using a precomputed constant
@@ -269,7 +321,7 @@ int32_t nut_i32_fastmod_floor(int32_t n, uint32_t pd, uint64_t c);
 /// @param [in] d: divisor
 /// @param [in] c: constant from { @link nut_u32_fastmod_init}
 /// @return n mod d
-[[gnu::const]]
+NUT_ATTR_CONST
 uint32_t nut_u32_fastmod(uint32_t n, uint32_t d, uint64_t c);
 
 /// Compute n mod d, choosing the smallest signed remainder
@@ -277,7 +329,7 @@ uint32_t nut_u32_fastmod(uint32_t n, uint32_t d, uint64_t c);
 /// @param [in] pd: absolute value of divisor
 /// @param [in] c: constant from { @link nut_i64_fastmod_init}
 /// @return n mod pd
-[[gnu::const]]
+NUT_ATTR_CONST
 int64_t nut_i64_fastmod_trunc(int64_t n, uint64_t pd, uint128_t c);
 
 /// Compute n mod d, choosing the euclidean remainder
@@ -285,7 +337,7 @@ int64_t nut_i64_fastmod_trunc(int64_t n, uint64_t pd, uint128_t c);
 /// @param [in] pd: absolute value of divisor
 /// @param [in] c: constant from { @link nut_i64_fastmod_init}
 /// @return n mod pd
-[[gnu::const]]
+NUT_ATTR_CONST
 int64_t nut_i64_fastmod_floor(int64_t n, uint64_t pd, uint128_t c);
 
 /// Compute n mod d faster using a precomputed constant
@@ -293,6 +345,6 @@ int64_t nut_i64_fastmod_floor(int64_t n, uint64_t pd, uint128_t c);
 /// @param [in] d: divisor
 /// @param [in] c: constant from { @link nut_u64_fastmod_init}
 /// @return n mod d
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_u64_fastmod(uint64_t n, uint64_t d, uint128_t c);
 

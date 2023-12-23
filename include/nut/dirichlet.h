@@ -106,7 +106,7 @@ typedef struct{
 /// @param [in] max: inclusive upper bound of range to compute sum for
 /// @param [in] m: modulus to reduce result by, or 0 to skip reducing
 /// @return the sum d(1) + ... + d(max)
-[[gnu::const]]
+NUT_ATTR_CONST
 uint64_t nut_dirichlet_D(uint64_t max, uint64_t m);
 
 /// Given a table of values of a multiplicative function f, compute (f <*> u)(x) for all x from 1 to n
@@ -116,8 +116,9 @@ uint64_t nut_dirichlet_D(uint64_t max, uint64_t m);
 /// @param [in] f_vals: table of values for f
 /// @param [out] f_conv_u_vals: table to store values of f <*> u in
 /// @return true on success, false on allocation failure
-[[gnu::nonnull(3, 4)]]
-NUT_ATTR_ACCESS(read_only, 3, 1) NUT_ATTR_ACCESS(read_write, 4, 1)
+NUT_ATTR_NONNULL(3, 4)
+NUT_ATTR_ACCESS(read_only, 3, 1)
+NUT_ATTR_ACCESS(read_write, 4, 1)
 bool nut_euler_sieve_conv_u(int64_t n, int64_t m, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[restrict static n+1]);
 
 /// Given a table of values of a multiplicative function f, compute (f <*> N)(x) for all x from 1 to n
@@ -127,8 +128,9 @@ bool nut_euler_sieve_conv_u(int64_t n, int64_t m, const int64_t f_vals[static n+
 /// @param [in] f_vals: table of values for f
 /// @param [out] f_conv_N_vals: table to store values of f <*> N in
 /// @return true on success, false on allocation failure
-[[gnu::nonnull(3, 4)]]
-NUT_ATTR_ACCESS(read_only, 3, 1) NUT_ATTR_ACCESS(read_write, 4, 1)
+NUT_ATTR_NONNULL(3, 4)
+NUT_ATTR_ACCESS(read_only, 3, 1)
+NUT_ATTR_ACCESS(read_write, 4, 1)
 bool nut_euler_sieve_conv_N(int64_t n, int64_t m, const int64_t f_vals[static n+1], int64_t f_conv_N_vals[restrict static n+1]);
 
 /// Given tables of values of multiplicative functions f and g, compute (f <*> g)(x) for all x from 1 to n
@@ -142,8 +144,10 @@ bool nut_euler_sieve_conv_N(int64_t n, int64_t m, const int64_t f_vals[static n+
 /// @param [in] g_vals: table of values for f
 /// @param [out] f_conv_g_vals: table to store values of f <*> g in
 /// @return true on success, false on allocation failure
-[[gnu::nonnull(3, 4, 5)]]
-NUT_ATTR_ACCESS(read_only, 3, 1) NUT_ATTR_ACCESS(read_only, 4, 1) NUT_ATTR_ACCESS(read_write, 5, 1)
+NUT_ATTR_NONNULL(3, 4, 5)
+NUT_ATTR_ACCESS(read_only, 3, 1)
+NUT_ATTR_ACCESS(read_only, 4, 1)
+NUT_ATTR_ACCESS(read_write, 5, 1)
 bool nut_euler_sieve_conv(int64_t n, int64_t m, const int64_t f_vals[static n+1], const int64_t g_vals[static n+1], int64_t f_conv_g_vals[restrict static n+1]);
 
 /// Allocate internal buffers for a diri table
@@ -155,43 +159,45 @@ bool nut_euler_sieve_conv(int64_t n, int64_t m, const int64_t f_vals[static n+1]
 /// @param [in] y: inclusive upper bound of the dense portion of the domain of interest.
 /// Will be increased to sqrt(x) if needed, so 0 can be used to explicitly signal you want that behavior
 /// @return true on success, false on allocation failure
-[[gnu::nonnull(1)]]
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(write_only, 1)
 bool nut_Diri_init(nut_Diri *self, int64_t x, int64_t y);
 
 /// Copy the values from one diri table to another, which must be initialized
-[[gnu::nonnull(1, 2)]]
+NUT_ATTR_NONNULL(1, 2)
 NUT_ATTR_ACCESS(read_write, 1)
 NUT_ATTR_ACCESS(read_only, 2)
 void nut_Diri_copy(nut_Diri *restrict dest, const nut_Diri *restrict src);
 
 /// Deallocate internal buffers for a diri table
-[[gnu::nonnull(1)]]
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_write, 1)
 void nut_Diri_destroy(nut_Diri *self);
 
-[[gnu::pure, gnu::nonnull(1)]]
+NUT_ATTR_PURE
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_only, 1)
 static inline int64_t nut_Diri_get_dense(const nut_Diri *self, int64_t k){
 	assert(k >= 0 && k <= self->y);
 	return self->buf[k];
 }
 
-[[gnu::nonnull(1)]]
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_write, 1)
 static inline void nut_Diri_set_dense(nut_Diri *self, int64_t k, int64_t v){
 	assert(k >= 0 && k <= self->y);
 	self->buf[k] = v;
 }
 
-[[gnu::pure, gnu::nonnull(1)]]
+NUT_ATTR_PURE
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_only, 1)
 static inline int64_t nut_Diri_get_sparse(const nut_Diri *self, int64_t k){
 	assert(k > 0 && k <= self->yinv);
 	return self->buf[self->y + k];
 }
 
-[[gnu::nonnull(1)]]
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_write, 1)
 static inline void nut_Diri_set_sparse(nut_Diri *self, int64_t k, int64_t v){
 	assert(k > 0 && k <= self->yinv);
@@ -201,7 +207,7 @@ static inline void nut_Diri_set_sparse(nut_Diri *self, int64_t k, int64_t v){
 /// Compute the value table for the dirichlet convolution identity I(n) = \{1 if n == 0, 0 otherwise\}
 /// Just memset's the dense part, then sets index 1 and y + 1 through y + yinv - 1 to 1 (remember the sparse indicies are sums)
 /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
-[[gnu::nonnull(1)]]
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_write, 1)
 void nut_Diri_compute_I(nut_Diri *self);
 
@@ -209,7 +215,7 @@ void nut_Diri_compute_I(nut_Diri *self);
 /// Fills the dense part of the table with 1s, and computes the sparse entries with table[y + k] = U(x/k) = x/k
 /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
 /// @param [in] m: modulus to reduce results by, or 0 to skip reducing
-[[gnu::nonnull(1)]]
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_write, 1)
 void nut_Diri_compute_u(nut_Diri *self, int64_t m);
 
@@ -217,7 +223,7 @@ void nut_Diri_compute_u(nut_Diri *self, int64_t m);
 /// Fills the dense part of the table with increasing numbers, and computes the sparse entries with table[y + k] = sum_N(v = x/k) = v*(v+1)/2
 /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
 /// @param [in] m: modulus to reduce results by, or 0 to skip reducing
-[[gnu::nonnull(1)]]
+NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_write, 1)
 void nut_Diri_compute_N(nut_Diri *self, int64_t m);
 
@@ -226,8 +232,9 @@ void nut_Diri_compute_N(nut_Diri *self, int64_t m);
 /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
 /// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] mobius: packed table of mobius values, from {@link nut_sieve_mobius} (with upper bound self->y).
-[[gnu::nonnull(1, 3)]]
-NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 3)
+NUT_ATTR_NONNULL(1, 3)
+NUT_ATTR_ACCESS(read_write, 1)
+NUT_ATTR_ACCESS(read_only, 3)
 void nut_Diri_compute_mertens(nut_Diri *restrict self, int64_t m, const uint8_t mobius[restrict static self->y/4 + 1]);
 
 /// Compute the value table for the kth generalized divisor function dk(n)
@@ -249,8 +256,9 @@ bool nut_Diri_compute_dk(nut_Diri *restrict self, uint64_t k, int64_t m, nut_Dir
 /// self->y, self->x, and self->yinv must be set and consistent with the inputs
 /// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] f_tbl: table for the first operand
-[[gnu::nonnull(1, 3)]]
-NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 3)
+NUT_ATTR_NONNULL(1, 3)
+NUT_ATTR_ACCESS(read_write, 1)
+NUT_ATTR_ACCESS(read_only, 3)
 bool nut_Diri_compute_conv_u(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl);
 
 /// Compute the value table for h = f <*> N, the dirichlet convolution of f and N (the identity function N(n) = n), given the value table for f
@@ -259,8 +267,9 @@ bool nut_Diri_compute_conv_u(nut_Diri *restrict self, int64_t m, const nut_Diri 
 /// self->y, self->x, and self->yinv must be set and consistent with the inputs
 /// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] f_tbl: table for the first operand
-[[gnu::nonnull(1, 3)]]
-NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 3)
+NUT_ATTR_NONNULL(1, 3)
+NUT_ATTR_ACCESS(read_write, 1)
+NUT_ATTR_ACCESS(read_only, 3)
 bool nut_Diri_compute_conv_N(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl);
 
 /// Compute the value table for h = f <*> g, the dirichlet convolution of f and g, given value tables for the operands
@@ -274,7 +283,9 @@ bool nut_Diri_compute_conv_N(nut_Diri *restrict self, int64_t m, const nut_Diri 
 /// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] f_tbl: table for the first operand (dirichlet convolution is commutative, so order doesn't matter)
 /// @param [in] g_tbl: table for the second operand
-[[gnu::nonnull(1, 3, 4)]]
-NUT_ATTR_ACCESS(read_write, 1) NUT_ATTR_ACCESS(read_only, 3) NUT_ATTR_ACCESS(read_only, 4)
+NUT_ATTR_NONNULL(1, 3, 4)
+NUT_ATTR_ACCESS(read_write, 1)
+NUT_ATTR_ACCESS(read_only, 3)
+NUT_ATTR_ACCESS(read_only, 4)
 bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f_tbl, const nut_Diri *g_tbl);
 
