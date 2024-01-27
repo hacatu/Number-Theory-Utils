@@ -2,6 +2,7 @@
 -lnut
 -lm
 -lSDL2
+-lOpenCL
 -O3
 -flto
 -std=c2x

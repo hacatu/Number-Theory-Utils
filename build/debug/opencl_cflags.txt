@@ -1,0 +1,9 @@
+-Wall
+-Wextra
+-Werror
+-target spirv64
+-cl-std=CL2.0
+-O0
+-g
+
+

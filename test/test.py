@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os, subprocess, sys, json, argparse, shutil
+from pathlib import Path
 
 def runNoRedTest(test_path, test_argv, log_name):
 	global vg_iota
@@ -73,6 +74,7 @@ if __name__ == "__main__":
 	log_name = os.path.join(args.cfg_dir, "tmp.log")
 	valgrind_log_name = os.path.join(args.cfg_dir, "tmp.valgrind.log")
 	vg_iota = 0
+	curr_variant = Path().absolute().name
 
 	with open(os.path.join(args.cfg_dir, "tests.json"), "r") as test_json:
 		test_cfg = json.load(test_json)
@@ -80,6 +82,9 @@ if __name__ == "__main__":
 	passed = 0
 	tested = 0
 	for test_name, test_spec in test_cfg.items():
+		run_on_builds = test_spec.get("run_on_builds", None)
+		if run_on_builds is not None and curr_variant not in run_on_builds:
+			continue
 		no_red_tests = test_spec.get("no_red_tests", ())
 		test_path = os.path.join(args.bin_dir, test_name)
 		for i, test_argv in enumerate(no_red_tests):

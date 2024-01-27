@@ -1,11 +1,13 @@
 CC := clang
 LD := clang
 AR := ar
+SPIRV_CC := clang
 PROJECT_ROOT := $(shell pwd)
 
 LIB_SOURCES := $(shell find ../../src/lib -name '*.c')
 TEST_SOURCES := $(shell find ../../src/test -name '*.c')
 BINARY_SOURCES := $(shell find ../../src/bin -name '*.c')
+OPENCL_SOURCES := $(shell find ../../src/opencl -name '*.cl')
 
 LIB_OBJS := $(patsubst ../../src/lib/%.c,obj/lib/%.o,$(LIB_SOURCES))
 TEST_OBJS := $(patsubst ../../src/test/%.c,obj/test/%.o,$(TEST_SOURCES))
@@ -14,6 +16,7 @@ BINARY_OBJS := $(patsubst ../../src/bin/%.c,obj/bin/%.o,$(BINARY_SOURCES))
 LIB_CFLAGS := @cflags.txt
 TEST_CFLAGS := @cflags.txt
 BINARY_CFLAGS := @cflags.txt
+OPENCL_CFLAGS := @opencl_cflags.txt
 
 TEST_LDFLAGS := @ldflags.txt
 BINARY_LDFLAGS := @ldflags.txt
@@ -28,13 +31,15 @@ COMPOUND_LIB_ARCS := $(patsubst ../../src/lib/%,lib/lib%.a,$(shell find ../../sr
 COMPOUND_TEST_BINS := $(patsubst ../../src/test/%,bin/test/%,$(shell find ../../src/test -mindepth 1 -maxdepth 1 -type d))
 COMPOUND_BINARIES := $(patsubst ../../src/bin/%,bin/%,$(shell find ../../src/bin -mindepth 1 -maxdepth 1 -type d))
 
+OPENCL_BINS := $(patsubst ../../src/opencl/%.cl,obj/opencl/%.spv,$(OPENCL_SOURCES))
+
 .DEFAULT_GOAL := test
 
 .PHONY: all
 all: $(SIMPLE_LIB_ARCS) $(COMPOUND_LIB_ARCS) $(SIMPLE_BINARIES) $(COMPOUND_BINARIES)
 
 .SECONDARY:
-bin bin/test lib obj obj/lib obj/bin obj/test log:
+bin bin/test lib obj obj/lib obj/bin obj/test obj/opencl log:
 	@mkdir -p $@
 
 obj/lib/%.o: ../../src/lib/%.c | obj/lib
@@ -81,6 +86,12 @@ endef
 $(foreach c,$(patsubst lib/lib%.a,%,$(COMPOUND_LIB_ARCS)),$(eval $(call make-compound,lib,$c,$(LIB_OBJS))))
 $(foreach c,$(patsubst bin/test/%,%,$(COMPOUND_TEST_BINS)),$(eval $(call make-compound,bin/test,$c,$(TEST_OBJS))))
 $(foreach c,$(patsubst bin/%,%,$(COMPOUND_BINARIES)),$(eval $(call make-compound,bin,$c,$(BINARY_OBJS))))
+
+.PHONY: spirv
+spirv: $(OPENCL_BINS)
+
+obj/opencl/%.spv: ../../src/opencl/%.cl | obj/opencl
+	$(SPIRV_CC) $(OPENCL_CFLAGS) -o $@ $^
 
 .PHONY: test
 test: all $(SIMPLE_TEST_BINS) $(COMPOUND_TEST_BINS) log

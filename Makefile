@@ -29,6 +29,10 @@ root_check:
 all: root_check
 	$(MAKE) -C $(BUILD_ROOT)
 
+.PHONY: spirv
+spirv:
+	$(MAKE) -C $(BUILD_ROOT) spirv
+
 .PHONY: test
 test: root_check
 	$(MAKE) -C $(BUILD_ROOT) test

@@ -1,6 +1,7 @@
 -Llib
 -lnut
 -lm
+-lOpenCL
 -lSDL2
 -O3
 -flto

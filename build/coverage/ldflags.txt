@@ -1,9 +1,11 @@
 -Llib
 -lnut
 -lm
+-lOpenCL
 -ggdb3
 -pg
 -fno-eliminate-unused-debug-types
 --coverage
 -fsanitize=address,object-size,vla-bound
+-pthread
 
