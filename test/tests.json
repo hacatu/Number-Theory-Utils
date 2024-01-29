@@ -1,4 +1,8 @@
 {
+	"test_dirichlet_cl":{
+		"no_red_tests": [[]],
+		"run_on_builds": ["coverage", "release"]
+	},
 	"test_dirichlet_powerful": {
 		"no_red_tests": [["219"]]
 	},
