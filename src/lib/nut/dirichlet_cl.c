@@ -254,7 +254,7 @@ const char *nut_cl_read_source(nut_ClMgr *mgr, const char *filename){
 		nut_cl_check_errno(mgr, "Could not allocate buffer for cl source file", filename);
 		goto CLEANUP;
 	}
-	fread(kernel_source, 1, stat_buf.st_size, file);
+	(void)fread(kernel_source, 1, stat_buf.st_size, file);
 	if(ferror(file)){
 		nut_cl_check_errno(mgr, "Could not read cl source file", filename);
 		goto CLEANUP;
