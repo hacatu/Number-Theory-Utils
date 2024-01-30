@@ -17,6 +17,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen_awesome.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen_awesome_sidebar.css" rel="stylesheet" type="text/css"/>
@@ -140,6 +147,34 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a632cb8a1d14576952485acf64494b800">NUT_ATTR_NO_SAN</a>(name)</td></tr>
 <tr class="memdesc:a632cb8a1d14576952485acf64494b800"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent clang from reporting spurious errors when a length zero array is passed to a length annotated function parameter. <br /></td></tr>
 <tr class="separator:a632cb8a1d14576952485acf64494b800"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe429016b65e7ca254c5d49c178ade29"><td class="memItemLeft" align="right" valign="top"><a id="abe429016b65e7ca254c5d49c178ade29"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a></td></tr>
+<tr class="memdesc:abe429016b65e7ca254c5d49c178ade29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for gnu::const attr - such a function has no side effects and cannot read memory. <br /></td></tr>
+<tr class="separator:abe429016b65e7ca254c5d49c178ade29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab14d56052242c417a7a8ee522570da9d"><td class="memItemLeft" align="right" valign="top"><a id="ab14d56052242c417a7a8ee522570da9d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a></td></tr>
+<tr class="memdesc:ab14d56052242c417a7a8ee522570da9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for gnu::pure attr - similar to const but the function can read non-volatile memory (including passed-in pointers) <br /></td></tr>
+<tr class="separator:ab14d56052242c417a7a8ee522570da9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae158eaae70da54bc82bfe48f0428eb7"><td class="memItemLeft" align="right" valign="top"><a id="aae158eaae70da54bc82bfe48f0428eb7"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#aae158eaae70da54bc82bfe48f0428eb7">NUT_ATTR_NODISCARD</a></td></tr>
+<tr class="memdesc:aae158eaae70da54bc82bfe48f0428eb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for nodiscard attr - requires return value be used. <br /></td></tr>
+<tr class="separator:aae158eaae70da54bc82bfe48f0428eb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7581a5842fc5c4c142d42e87052938ae"><td class="memItemLeft" align="right" valign="top"><a id="a7581a5842fc5c4c142d42e87052938ae"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a7581a5842fc5c4c142d42e87052938ae">NUT_ATTR_NONNULL</a>(...)</td></tr>
+<tr class="memdesc:a7581a5842fc5c4c142d42e87052938ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for gnu::nonnull attr. <br /></td></tr>
+<tr class="separator:a7581a5842fc5c4c142d42e87052938ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a293096c11d22a7fa9db6e0dca8167262"><td class="memItemLeft" align="right" valign="top"><a id="a293096c11d22a7fa9db6e0dca8167262"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a293096c11d22a7fa9db6e0dca8167262">NUT_ATTR_RETURNS_NONNULL</a></td></tr>
+<tr class="memdesc:a293096c11d22a7fa9db6e0dca8167262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for gnu::returns_nonnull attr. <br /></td></tr>
+<tr class="separator:a293096c11d22a7fa9db6e0dca8167262"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5dad36b30fdd76ddce141ee49748d98"><td class="memItemLeft" align="right" valign="top"><a id="ac5dad36b30fdd76ddce141ee49748d98"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#ac5dad36b30fdd76ddce141ee49748d98">NUT_ATTR_MALLOC</a></td></tr>
+<tr class="memdesc:ac5dad36b30fdd76ddce141ee49748d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for gnu::malloc attr - indicates the function returns a malloc'd pointer that must be free'd. <br /></td></tr>
+<tr class="separator:ac5dad36b30fdd76ddce141ee49748d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7524889b84956587523e5014112fab3a"><td class="memItemLeft" align="right" valign="top"><a id="a7524889b84956587523e5014112fab3a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a7524889b84956587523e5014112fab3a">NUT_ATTR_ARTIFICIAL</a></td></tr>
+<tr class="memdesc:a7524889b84956587523e5014112fab3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for gnu::artificial attr - hint that the function should be ignored in debuggers. <br /></td></tr>
+<tr class="separator:a7524889b84956587523e5014112fab3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -173,14 +208,11 @@ Functions</h2></td></tr>
 <tr class="memitem:a0a826b9cca04021df02e1d6405cd2df0"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a0a826b9cca04021df02e1d6405cd2df0">nut_u64_rand</a> (uint64_t a, uint64_t b)</td></tr>
 <tr class="memdesc:a0a826b9cca04021df02e1d6405cd2df0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a (strong) random integer uniformly from [a, b).  <a href="modular__math_8h.html#a0a826b9cca04021df02e1d6405cd2df0">More...</a><br /></td></tr>
 <tr class="separator:a0a826b9cca04021df02e1d6405cd2df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b9c9161a7e6881ca778a4f5ef3fa53f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a3b9c9161a7e6881ca778a4f5ef3fa53f">NUT_ATTR_ACCESS</a> (write_only, 3) NUT_ATTR_ACCESS(write_only</td></tr>
-<tr class="memdesc:a3b9c9161a7e6881ca778a4f5ef3fa53f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute d = gcd(a, b) and x, y st.  <a href="modular__math_8h.html#a3b9c9161a7e6881ca778a4f5ef3fa53f">More...</a><br /></td></tr>
-<tr class="separator:a3b9c9161a7e6881ca778a4f5ef3fa53f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3230b6674c286a695a59cd5a91eb68a"><td class="memItemLeft" align="right" valign="top"><a id="aa3230b6674c286a695a59cd5a91eb68a"></a>
-int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_i64_egcd</b> (int64_t a, int64_t b, int64_t *restrict _t, int64_t *restrict _s)</td></tr>
+<tr class="memitem:aa3230b6674c286a695a59cd5a91eb68a"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#aa3230b6674c286a695a59cd5a91eb68a">nut_i64_egcd</a> (int64_t a, int64_t b, int64_t *restrict _t, int64_t *restrict _s)</td></tr>
+<tr class="memdesc:aa3230b6674c286a695a59cd5a91eb68a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute d = gcd(a, b) and x, y st.  <a href="modular__math_8h.html#aa3230b6674c286a695a59cd5a91eb68a">More...</a><br /></td></tr>
 <tr class="separator:aa3230b6674c286a695a59cd5a91eb68a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d12c0fcdb2fdaf78aabf96f7093b105"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a1d12c0fcdb2fdaf78aabf96f7093b105">nut_i64_modinv</a> (int64_t a, int64_t b)</td></tr>
-<tr class="memdesc:a1d12c0fcdb2fdaf78aabf96f7093b105"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the multiplicative inverse of a mod b If b is a power of 2, use <a class="el" href="">nut_i64_modinv_2t</a> Just a wrapper around <a class="el" href="">nut_i64_egcd</a>.  <a href="modular__math_8h.html#a1d12c0fcdb2fdaf78aabf96f7093b105">More...</a><br /></td></tr>
+<tr class="memdesc:a1d12c0fcdb2fdaf78aabf96f7093b105"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the multiplicative inverse of a mod b If b is a power of 2, use <a class="el" href="">nut_i64_modinv_2t</a> Just a wrapper around <a class="el" href="modular__math_8h.html#aa3230b6674c286a695a59cd5a91eb68a">nut_i64_egcd</a>.  <a href="modular__math_8h.html#a1d12c0fcdb2fdaf78aabf96f7093b105">More...</a><br /></td></tr>
 <tr class="separator:a1d12c0fcdb2fdaf78aabf96f7093b105"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5fa714c4123955c11cb2b445557e195"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#ae5fa714c4123955c11cb2b445557e195">nut_u64_modinv_2t</a> (uint64_t a, uint64_t t)</td></tr>
 <tr class="memdesc:ae5fa714c4123955c11cb2b445557e195"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the multiplicative inverse of a mod 2**t This uses a hensel/newton like iterative algorithm, described here <a href="https://crypto.stackexchange.com/a/47496">https://crypto.stackexchange.com/a/47496</a> Basically, we use a lookup table to get the inverse mod 2**8, and then use the fact that ax = 1 mod 2**k --&gt; ax(2-ax) = 1 mod 2**(2k) to lift the inverse to mod 2**16, mode 2**32, etc as needed.  <a href="modular__math_8h.html#ae5fa714c4123955c11cb2b445557e195">More...</a><br /></td></tr>
@@ -197,11 +229,8 @@ int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_i64_egcd</b> (
 <tr class="memitem:a768119748174f941b8154a1894320961"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a768119748174f941b8154a1894320961">nut_i64_lcm</a> (int64_t a, int64_t b)</td></tr>
 <tr class="memdesc:a768119748174f941b8154a1894320961"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the least common multiple of a and b Divides the product by the gcd so can overflow for large arguments.  <a href="modular__math_8h.html#a768119748174f941b8154a1894320961">More...</a><br /></td></tr>
 <tr class="separator:a768119748174f941b8154a1894320961"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52bc42c310d8f576237fd6bf59aa7db1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a52bc42c310d8f576237fd6bf59aa7db1">NUT_ATTR_ACCESS</a> (read_write, 4) NUT_ATTR_ACCESS(read_write</td></tr>
-<tr class="memdesc:a52bc42c310d8f576237fd6bf59aa7db1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the binomial coefficient for (n choose k) given the binomial coefficient for (n choose k-1) Simply uses the recurrence (n choose k) = (n - k + 1)/k * (n choose k-1) The starting point should be (n choose 0) = 1.  <a href="modular__math_8h.html#a52bc42c310d8f576237fd6bf59aa7db1">More...</a><br /></td></tr>
-<tr class="separator:a52bc42c310d8f576237fd6bf59aa7db1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7caf7927a4df7886403b19fc2d8f6e86"><td class="memItemLeft" align="right" valign="top"><a id="a7caf7927a4df7886403b19fc2d8f6e86"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_u64_binom_next_mod_2t</b> (uint64_t n, uint64_t k, uint64_t t, uint64_t *restrict v2, uint64_t *restrict p2)</td></tr>
+<tr class="memitem:a7caf7927a4df7886403b19fc2d8f6e86"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a7caf7927a4df7886403b19fc2d8f6e86">nut_u64_binom_next_mod_2t</a> (uint64_t n, uint64_t k, uint64_t t, uint64_t *restrict v2, uint64_t *restrict p2)</td></tr>
+<tr class="memdesc:a7caf7927a4df7886403b19fc2d8f6e86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the binomial coefficient for (n choose k) given the binomial coefficient for (n choose k-1) Simply uses the recurrence (n choose k) = (n - k + 1)/k * (n choose k-1) The starting point should be (n choose 0) = 1.  <a href="modular__math_8h.html#a7caf7927a4df7886403b19fc2d8f6e86">More...</a><br /></td></tr>
 <tr class="separator:a7caf7927a4df7886403b19fc2d8f6e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a934e38bdacf035d2eef4efc9e35da2d5"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a934e38bdacf035d2eef4efc9e35da2d5">nut_i64_jacobi</a> (int64_t n, int64_t k)</td></tr>
 <tr class="memdesc:a934e38bdacf035d2eef4efc9e35da2d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobi symbol of n mod k.  <a href="modular__math_8h.html#a934e38bdacf035d2eef4efc9e35da2d5">More...</a><br /></td></tr>
@@ -433,7 +462,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_u64_binom_nex
 </div><div class="memdoc">
 
 <p>Compute single binomial coefficient semi-naively. </p>
-<p>Repeatedly does multiplications by n, n-1, n-2, ..., n-k+1 interleaved with divisions by 1, 2, 3, ..., k. Overflows quickly, look into mod m versions if using large inputs. See <a class="el" href="modular__math_8h.html#aa69c39ae7ebf49b75aec87d676265441">nut_u64_binom_next</a> to iterate over values (n choose k), (n choose k+1). See <a class="el" href="">nut_u64_binom_next_mod_2t</a> to iterate over values mod powers of 2 </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Repeatedly does multiplications by n, n-1, n-2, ..., n-k+1 interleaved with divisions by 1, 2, 3, ..., k. Overflows quickly, look into mod m versions if using large inputs. See <a class="el" href="modular__math_8h.html#aa69c39ae7ebf49b75aec87d676265441">nut_u64_binom_next</a> to iterate over values (n choose k), (n choose k+1). See <a class="el" href="modular__math_8h.html#a7caf7927a4df7886403b19fc2d8f6e86">nut_u64_binom_next_mod_2t</a> to iterate over values mod powers of 2 </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">n,k</td><td>Binomial coefficient arguments </td></tr>
   </table>
@@ -475,7 +504,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_u64_binom_nex
 </div><div class="memdoc">
 
 <p>Compute the binomial coefficient for (n choose k) given the binomial coefficient for (n choose k-1) Simply uses the recurrence (n choose k) = (n - k + 1)/k * (n choose k-1) The starting point should be (n choose 0) = 1. </p>
-<p>To start at k != 0, use <a class="el" href="modular__math_8h.html#a911e8e970e6defa3875246decc2bada9">nut_u64_binom</a>. See <a class="el" href="">nut_u64_binom_next_mod_2t</a> to iterate over values mod powers of 2. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>To start at k != 0, use <a class="el" href="modular__math_8h.html#a911e8e970e6defa3875246decc2bada9">nut_u64_binom</a>. See <a class="el" href="modular__math_8h.html#a7caf7927a4df7886403b19fc2d8f6e86">nut_u64_binom_next_mod_2t</a> to iterate over values mod powers of 2. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">n,k</td><td>Binomial coefficient arguments </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">prev</td><td>Binomial coefficient value for (n choose k-1) </td></tr>
@@ -559,23 +588,35 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_u64_binom_nex
 
 </div>
 </div>
-<a id="a3b9c9161a7e6881ca778a4f5ef3fa53f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b9c9161a7e6881ca778a4f5ef3fa53f">&#9670;&nbsp;</a></span>NUT_ATTR_ACCESS() <span class="overload">[1/2]</span></h2>
+<a id="aa3230b6674c286a695a59cd5a91eb68a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3230b6674c286a695a59cd5a91eb68a">&#9670;&nbsp;</a></span>nut_i64_egcd()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NUT_ATTR_ACCESS </td>
+          <td class="memname">int64_t nut_i64_egcd </td>
           <td>(</td>
-          <td class="paramtype">write_only&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">3&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t *restrict&#160;</td>
+          <td class="paramname"><em>_t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t *restrict&#160;</td>
+          <td class="paramname"><em>_s</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -623,7 +664,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_u64_binom_nex
       </table>
 </div><div class="memdoc">
 
-<p>Find the multiplicative inverse of a mod b If b is a power of 2, use <a class="el" href="">nut_i64_modinv_2t</a> Just a wrapper around <a class="el" href="">nut_i64_egcd</a>. </p>
+<p>Find the multiplicative inverse of a mod b If b is a power of 2, use <a class="el" href="">nut_i64_modinv_2t</a> Just a wrapper around <a class="el" href="modular__math_8h.html#aa3230b6674c286a695a59cd5a91eb68a">nut_i64_egcd</a>. </p>
 <p>If a and b are not coprime, then the value returned will just be the bezout coefficient for a, and will yield gcd(a, b) when multiplied with a mod b instead of 1. </p>
 
 </div>
@@ -838,23 +879,41 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_u64_binom_nex
 
 </div>
 </div>
-<a id="a52bc42c310d8f576237fd6bf59aa7db1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52bc42c310d8f576237fd6bf59aa7db1">&#9670;&nbsp;</a></span>NUT_ATTR_ACCESS() <span class="overload">[2/2]</span></h2>
+<a id="a7caf7927a4df7886403b19fc2d8f6e86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7caf7927a4df7886403b19fc2d8f6e86">&#9670;&nbsp;</a></span>nut_u64_binom_next_mod_2t()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NUT_ATTR_ACCESS </td>
+          <td class="memname">uint64_t nut_u64_binom_next_mod_2t </td>
           <td>(</td>
-          <td class="paramtype">read_write&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">4&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t *restrict&#160;</td>
+          <td class="paramname"><em>v2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t *restrict&#160;</td>
+          <td class="paramname"><em>p2</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -865,7 +924,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_u64_binom_nex
 </div><div class="memdoc">
 
 <p>Compute the binomial coefficient for (n choose k) given the binomial coefficient for (n choose k-1) Simply uses the recurrence (n choose k) = (n - k + 1)/k * (n choose k-1) The starting point should be (n choose 0) = 1. </p>
-<p>To start at k != 0, use <a class="el" href="modular__math_8h.html#a911e8e970e6defa3875246decc2bada9">nut_u64_binom</a>. See <a class="el" href="">nut_u64_binom_next_mod_2t</a> to iterate over values mod powers of 2. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>To start at k != 0, use <a class="el" href="modular__math_8h.html#a911e8e970e6defa3875246decc2bada9">nut_u64_binom</a>. See <a class="el" href="modular__math_8h.html#a7caf7927a4df7886403b19fc2d8f6e86">nut_u64_binom_next_mod_2t</a> to iterate over values mod powers of 2. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">n,k</td><td>Binomial coefficient arguments </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>Exponent of modulus, ie we want to work mod 2^t </td></tr>
@@ -1045,7 +1104,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_u64_binom_nex
 </div><div class="memdoc">
 
 <p>Compute the square root of a quadratic residue mod a prime. </p>
-<p>If n is not a residue or p is not a prime, this function is not guaranteed to terminate. If your use case does not guarantee this, call <a class="el" href="factorization_8h.html#a0dc289669b695862eb026cef3187d856">nut_u64_is_prime_dmr</a> and <a class="el" href="modular__math_8h.html#a934e38bdacf035d2eef4efc9e35da2d5">nut_i64_jacobi</a> beforehand. uses shortcuts for primes that are 3, 5, or 7 mod 8, otherwise uses Shanks's algorithm unless p-1 is divisible by a sufficiently high power of 2 so Cipolla's algorithm will be faster, in which case it is used. Only the Shank's branch can fail to terminate, although other branches give useless results if the preconditions are not met. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>If n is not a residue or p is not a prime, this function is not guaranteed to terminate. If your use case does not guarantee this, call <a class="el" href="factorization_8h.html#a48e4f1425cdf116059ee5e0f84348bd5">nut_u64_is_prime_dmr</a> and <a class="el" href="modular__math_8h.html#a934e38bdacf035d2eef4efc9e35da2d5">nut_i64_jacobi</a> beforehand. uses shortcuts for primes that are 3, 5, or 7 mod 8, otherwise uses Shanks's algorithm unless p-1 is divisible by a sufficiently high power of 2 so Cipolla's algorithm will be faster, in which case it is used. Only the Shank's branch can fail to terminate, although other branches give useless results if the preconditions are not met. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>a quadratic residue mod p </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>a prime </td></tr>
@@ -1441,7 +1500,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_u64_binom_nex
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="modular__math_8h.html">modular_math.h</a></li>
-    <li class="footer">Generated on Mon Oct 30 2023 20:16:38 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jan 30 2024 01:27:08 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -1,5 +1,6 @@
 var annotated_dup =
 [
+    [ "nut_ClMgr", "structnut__ClMgr.html", "structnut__ClMgr" ],
     [ "nut_Diri", "structnut__Diri.html", "structnut__Diri" ],
     [ "nut_FactorConf", "structnut__FactorConf.html", "structnut__FactorConf" ],
     [ "nut_Factors", "structnut__Factors.html", "structnut__Factors" ],

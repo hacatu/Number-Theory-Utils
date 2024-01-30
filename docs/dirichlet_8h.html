@@ -17,6 +17,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen_awesome.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen_awesome_sidebar.css" rel="stylesheet" type="text/css"/>
@@ -103,8 +110,7 @@ $(document).ready(function(){initNavTree('dirichlet_8h.html',''); initResizable(
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">dirichlet.h File Reference</div>  </div>
 </div><!--header-->
@@ -142,21 +148,18 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a48cf875993b4e4c48c3bb214d84285b1"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a48cf875993b4e4c48c3bb214d84285b1">nut_dirichlet_D</a> (uint64_t max, uint64_t m)</td></tr>
-<tr class="memdesc:a48cf875993b4e4c48c3bb214d84285b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the sum of the divisor count function d from 1 to max.  <a href="dirichlet_8h.html#a48cf875993b4e4c48c3bb214d84285b1">More...</a><br /></td></tr>
-<tr class="separator:a48cf875993b4e4c48c3bb214d84285b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6281d3554686ce3abc5195a104945526"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a6281d3554686ce3abc5195a104945526">NUT_ATTR_ACCESS</a> (read_only, 3, 1) NUT_ATTR_ACCESS(read_write</td></tr>
-<tr class="memdesc:a6281d3554686ce3abc5195a104945526"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a table of values of a multiplicative function f, compute (f &lt;*&gt; u)(x) for all x from 1 to n See <a class="el" href="">nut_euler_sieve_conv_u</a> for more info}.  <a href="dirichlet_8h.html#a6281d3554686ce3abc5195a104945526">More...</a><br /></td></tr>
-<tr class="separator:a6281d3554686ce3abc5195a104945526"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff2f0dc86d8486a52cc05f57a42ec453"><td class="memItemLeft" align="right" valign="top"><a id="aff2f0dc86d8486a52cc05f57a42ec453"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>nut_euler_sieve_conv_u</b> (int64_t n, int64_t m, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[restrict static n+1])</td></tr>
+<tr class="memitem:a2db407b902fdb86d740d579e445223c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a2db407b902fdb86d740d579e445223c8">nut_dirichlet_D</a> (uint64_t max, uint64_t m)</td></tr>
+<tr class="memdesc:a2db407b902fdb86d740d579e445223c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the sum of the divisor count function d from 1 to max.  <a href="dirichlet_8h.html#a2db407b902fdb86d740d579e445223c8">More...</a><br /></td></tr>
+<tr class="separator:a2db407b902fdb86d740d579e445223c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff2f0dc86d8486a52cc05f57a42ec453"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#aff2f0dc86d8486a52cc05f57a42ec453">nut_euler_sieve_conv_u</a> (int64_t n, int64_t m, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[restrict static n+1])</td></tr>
+<tr class="memdesc:aff2f0dc86d8486a52cc05f57a42ec453"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a table of values of a multiplicative function f, compute (f &lt;*&gt; u)(x) for all x from 1 to n See <a class="el" href="dirichlet_8h.html#aff2f0dc86d8486a52cc05f57a42ec453">nut_euler_sieve_conv_u</a> for more info}.  <a href="dirichlet_8h.html#aff2f0dc86d8486a52cc05f57a42ec453">More...</a><br /></td></tr>
 <tr class="separator:aff2f0dc86d8486a52cc05f57a42ec453"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74180d3515220729cf659328a49154c9"><td class="memItemLeft" align="right" valign="top"><a id="a74180d3515220729cf659328a49154c9"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>nut_euler_sieve_conv_N</b> (int64_t n, int64_t m, const int64_t f_vals[static n+1], int64_t f_conv_N_vals[restrict static n+1])</td></tr>
+<tr class="memitem:a74180d3515220729cf659328a49154c9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a74180d3515220729cf659328a49154c9">nut_euler_sieve_conv_N</a> (int64_t n, int64_t m, const int64_t f_vals[static n+1], int64_t f_conv_N_vals[restrict static n+1])</td></tr>
+<tr class="memdesc:a74180d3515220729cf659328a49154c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a table of values of a multiplicative function f, compute (f &lt;*&gt; N)(x) for all x from 1 to n See <a class="el" href="dirichlet_8h.html#aff2f0dc86d8486a52cc05f57a42ec453">nut_euler_sieve_conv_u</a> for more info}.  <a href="dirichlet_8h.html#a74180d3515220729cf659328a49154c9">More...</a><br /></td></tr>
 <tr class="separator:a74180d3515220729cf659328a49154c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c97cee216670192e4e6601449f406c1"><td class="memItemLeft" align="right" valign="top"><a id="a0c97cee216670192e4e6601449f406c1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>NUT_ATTR_ACCESS</b> (read_write, 5, 1) bool nut_euler_sieve_conv(int64_t n</td></tr>
-<tr class="separator:a0c97cee216670192e4e6601449f406c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52f9358d979df1a3063c09cfbe19d93d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a52f9358d979df1a3063c09cfbe19d93d">nut_euler_sieve_conv</a> (int64_t n, int64_t m, const int64_t f_vals[static n+1], const int64_t g_vals[static n+1], int64_t f_conv_g_vals[restrict static n+1])</td></tr>
+<tr class="memdesc:a52f9358d979df1a3063c09cfbe19d93d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given tables of values of multiplicative functions f and g, compute (f &lt;*&gt; g)(x) for all x from 1 to n This uses Euler's sieve, a variant of the sieve of Eratosthenes that only marks off each multiple once.  <a href="dirichlet_8h.html#a52f9358d979df1a3063c09cfbe19d93d">More...</a><br /></td></tr>
+<tr class="separator:a52f9358d979df1a3063c09cfbe19d93d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f69060eec4fdf127316bd2998e356d4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *self, int64_t x, int64_t y)</td></tr>
 <tr class="memdesc:a4f69060eec4fdf127316bd2998e356d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate internal buffers for a diri table self-&gt;buf will have f(0) through f(y) at indicies 0 through y, and then f(x/1) through f(x/(yinv - 1)) at indicies y + 1 through y + yinv - 1.  <a href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">More...</a><br /></td></tr>
 <tr class="separator:a4f69060eec4fdf127316bd2998e356d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,55 +180,31 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 <tr class="memitem:aef3a0c29121da13a74cec34c49d77d4b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#aef3a0c29121da13a74cec34c49d77d4b">nut_Diri_compute_N</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *self, int64_t m)</td></tr>
 <tr class="memdesc:aef3a0c29121da13a74cec34c49d77d4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the identity function N(n) = n Fills the dense part of the table with increasing numbers, and computes the sparse entries with table[y + k] = sum_N(v = x/k) = v*(v+1)/2.  <a href="dirichlet_8h.html#aef3a0c29121da13a74cec34c49d77d4b">More...</a><br /></td></tr>
 <tr class="separator:aef3a0c29121da13a74cec34c49d77d4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad23dcc7562e209acadb64a6e4fa8414f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#ad23dcc7562e209acadb64a6e4fa8414f">NUT_ATTR_ACCESS</a> (read_write, 1) NUT_ATTR_ACCESS(read_only</td></tr>
-<tr class="memdesc:ad23dcc7562e209acadb64a6e4fa8414f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the mobius function mu(n) (whose sum is called the Mertens function) Requires both an initialized <a class="el" href="structnut__Diri.html" title="Wrapper to hold values of some multiplicative function.">nut_Diri</a> from <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a> and a packed table of mobius values from <a class="el" href="sieves_8h.html#ac1184e4b679ee165bb5e6ae0179f2d4b">nut_sieve_mobius</a>.  <a href="dirichlet_8h.html#ad23dcc7562e209acadb64a6e4fa8414f">More...</a><br /></td></tr>
-<tr class="separator:ad23dcc7562e209acadb64a6e4fa8414f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1de369be5cae92e31d9f073144b6645d"><td class="memItemLeft" align="right" valign="top"><a id="a1de369be5cae92e31d9f073144b6645d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Diri_compute_mertens</b> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, int64_t m, const uint8_t mobius[restrict static self-&gt;y/4+1])</td></tr>
+<tr class="memitem:a1de369be5cae92e31d9f073144b6645d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a1de369be5cae92e31d9f073144b6645d">nut_Diri_compute_mertens</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, int64_t m, const uint8_t mobius[restrict static self-&gt;y/4+1])</td></tr>
+<tr class="memdesc:a1de369be5cae92e31d9f073144b6645d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the mobius function mu(n) (whose sum is called the Mertens function) Requires both an initialized <a class="el" href="structnut__Diri.html" title="Wrapper to hold values of some multiplicative function.">nut_Diri</a> from <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a> and a packed table of mobius values from <a class="el" href="sieves_8h.html#aed3a407903d4975ef6e95c867ed3c42e">nut_sieve_mobius</a>.  <a href="dirichlet_8h.html#a1de369be5cae92e31d9f073144b6645d">More...</a><br /></td></tr>
 <tr class="separator:a1de369be5cae92e31d9f073144b6645d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa27d52f1bde28bec89dbe3ee2eb1c11"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#aaa27d52f1bde28bec89dbe3ee2eb1c11">nut_Diri_compute_dk</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, uint64_t k, int64_t m, <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict f_tbl, <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict g_tbl)</td></tr>
 <tr class="memdesc:aaa27d52f1bde28bec89dbe3ee2eb1c11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the kth generalized divisor function dk(n) dk(n) = da(n) &lt;*&gt; db(n) whenever a + b = k.  <a href="dirichlet_8h.html#aaa27d52f1bde28bec89dbe3ee2eb1c11">More...</a><br /></td></tr>
 <tr class="separator:aaa27d52f1bde28bec89dbe3ee2eb1c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc3257dcff1b06c34b128c156572a4dd"><td class="memItemLeft" align="right" valign="top"><a id="abc3257dcff1b06c34b128c156572a4dd"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Diri_compute_conv_u</b> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, int64_t m, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict f_tbl)</td></tr>
+<tr class="memitem:abc3257dcff1b06c34b128c156572a4dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#abc3257dcff1b06c34b128c156572a4dd">nut_Diri_compute_conv_u</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, int64_t m, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict f_tbl)</td></tr>
+<tr class="memdesc:abc3257dcff1b06c34b128c156572a4dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f See <a class="el" href="dirichlet_8h.html#ac129473cb990ee5563de30608d75d253">nut_Diri_compute_conv</a> for details, this is just that function but with several specializations due to u being very simple.  <a href="dirichlet_8h.html#abc3257dcff1b06c34b128c156572a4dd">More...</a><br /></td></tr>
 <tr class="separator:abc3257dcff1b06c34b128c156572a4dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54146e9f9dea0bbee06a22395833093a"><td class="memItemLeft" align="right" valign="top"><a id="a54146e9f9dea0bbee06a22395833093a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Diri_compute_conv_N</b> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, int64_t m, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict f_tbl)</td></tr>
+<tr class="memitem:a54146e9f9dea0bbee06a22395833093a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a54146e9f9dea0bbee06a22395833093a">nut_Diri_compute_conv_N</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, int64_t m, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict f_tbl)</td></tr>
+<tr class="memdesc:a54146e9f9dea0bbee06a22395833093a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for h = f &lt;*&gt; N, the dirichlet convolution of f and N (the identity function N(n) = n), given the value table for f See <a class="el" href="dirichlet_8h.html#ac129473cb990ee5563de30608d75d253">nut_Diri_compute_conv</a> for details, this is just that function but with several specializations due to N being very simple.  <a href="dirichlet_8h.html#a54146e9f9dea0bbee06a22395833093a">More...</a><br /></td></tr>
 <tr class="separator:a54146e9f9dea0bbee06a22395833093a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a797a93f1c667ba4876d390e57953aabc"><td class="memItemLeft" align="right" valign="top"><a id="a797a93f1c667ba4876d390e57953aabc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>NUT_ATTR_ACCESS</b> (read_only, 4) bool nut_Diri_compute_conv(<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self</td></tr>
-<tr class="separator:a797a93f1c667ba4876d390e57953aabc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a3500d32707f04424ffa97759a0dbac14"><td class="memItemLeft" align="right" valign="top"><a id="a3500d32707f04424ffa97759a0dbac14"></a>
-int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>m</b></td></tr>
-<tr class="separator:a3500d32707f04424ffa97759a0dbac14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd887471564417d3361a6eaa5c1958a9"><td class="memItemLeft" align="right" valign="top"><a id="abd887471564417d3361a6eaa5c1958a9"></a>
-int64_t const int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>f_vals</b> [static n+1]</td></tr>
-<tr class="separator:abd887471564417d3361a6eaa5c1958a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cc187c85461251571e98be6893a9cd4"><td class="memItemLeft" align="right" valign="top"><a id="a2cc187c85461251571e98be6893a9cd4"></a>
-int64_t const int64_t const int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>g_vals</b> [static n+1]</td></tr>
-<tr class="separator:a2cc187c85461251571e98be6893a9cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02f0998994a1d94edf25c460b84c5e24"><td class="memItemLeft" align="right" valign="top"><a id="a02f0998994a1d94edf25c460b84c5e24"></a>
-int64_t const int64_t const int64_t int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>f_conv_g_vals</b> [restrict static n+1]</td></tr>
-<tr class="separator:a02f0998994a1d94edf25c460b84c5e24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac17e814985ed472ec37fe1d0b357b8b0"><td class="memItemLeft" align="right" valign="top"><a id="ac17e814985ed472ec37fe1d0b357b8b0"></a>
-int64_t const <a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>f_tbl</b></td></tr>
-<tr class="separator:ac17e814985ed472ec37fe1d0b357b8b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a963e45ca4677560c96f56b25289ba599"><td class="memItemLeft" align="right" valign="top"><a id="a963e45ca4677560c96f56b25289ba599"></a>
-int64_t const <a class="el" href="structnut__Diri.html">nut_Diri</a> const <a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>g_tbl</b></td></tr>
-<tr class="separator:a963e45ca4677560c96f56b25289ba599"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac129473cb990ee5563de30608d75d253"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#ac129473cb990ee5563de30608d75d253">nut_Diri_compute_conv</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, int64_t m, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *f_tbl, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *g_tbl)</td></tr>
+<tr class="memdesc:ac129473cb990ee5563de30608d75d253"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands self must have been initialized using <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl must be set and match This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1)) If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then try to use a specialized function from this library and use that instead.  <a href="dirichlet_8h.html#ac129473cb990ee5563de30608d75d253">More...</a><br /></td></tr>
+<tr class="separator:ac129473cb990ee5563de30608d75d253"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a48cf875993b4e4c48c3bb214d84285b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48cf875993b4e4c48c3bb214d84285b1">&#9670;&nbsp;</a></span>nut_dirichlet_D()</h2>
+<a id="a2db407b902fdb86d740d579e445223c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2db407b902fdb86d740d579e445223c8">&#9670;&nbsp;</a></span>nut_dirichlet_D()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t nut_dirichlet_D </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> uint64_t nut_dirichlet_D </td>
           <td>(</td>
           <td class="paramtype">uint64_t&#160;</td>
           <td class="paramname"><em>max</em>, </td>
@@ -256,29 +235,35 @@ int64_t const <a class="el" href="structnut__Diri.html">nut_Diri</a> const <a cl
 
 </div>
 </div>
-<a id="a6281d3554686ce3abc5195a104945526"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6281d3554686ce3abc5195a104945526">&#9670;&nbsp;</a></span>NUT_ATTR_ACCESS() <span class="overload">[1/2]</span></h2>
+<a id="aff2f0dc86d8486a52cc05f57a42ec453"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff2f0dc86d8486a52cc05f57a42ec453">&#9670;&nbsp;</a></span>nut_euler_sieve_conv_u()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NUT_ATTR_ACCESS </td>
+          <td class="memname">bool nut_euler_sieve_conv_u </td>
           <td>(</td>
-          <td class="paramtype">read_only&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">3&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">1&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">const int64_t&#160;</td>
+          <td class="paramname"><em>f_vals</em>[static n+1], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>f_conv_u_vals</em>[restrict static n+1]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -288,9 +273,7 @@ int64_t const <a class="el" href="structnut__Diri.html">nut_Diri</a> const <a cl
       </table>
 </div><div class="memdoc">
 
-<p>Given a table of values of a multiplicative function f, compute (f &lt;*&gt; u)(x) for all x from 1 to n See <a class="el" href="">nut_euler_sieve_conv_u</a> for more info}. </p>
-<p>Given tables of values of multiplicative functions f and g, compute (f &lt;*&gt; g)(x) for all x from 1 to n This uses Euler's sieve, a variant of the sieve of Eratosthenes that only marks off each multiple once.</p>
-<p>Given a table of values of a multiplicative function f, compute (f &lt;*&gt; N)(x) for all x from 1 to n See <a class="el" href="">nut_euler_sieve_conv_u</a> for more info}.</p>
+<p>Given a table of values of a multiplicative function f, compute (f &lt;*&gt; u)(x) for all x from 1 to n See <a class="el" href="dirichlet_8h.html#aff2f0dc86d8486a52cc05f57a42ec453">nut_euler_sieve_conv_u</a> for more info}. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>inclusive upper bound of range to compute f &lt;*&gt; u over </td></tr>
@@ -300,7 +283,49 @@ int64_t const <a class="el" href="structnut__Diri.html">nut_Diri</a> const <a cl
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true on success, false on allocation failure</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true on success, false on allocation failure </dd></dl>
+
+</div>
+</div>
+<a id="a74180d3515220729cf659328a49154c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74180d3515220729cf659328a49154c9">&#9670;&nbsp;</a></span>nut_euler_sieve_conv_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_euler_sieve_conv_N </td>
+          <td>(</td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int64_t&#160;</td>
+          <td class="paramname"><em>f_vals</em>[static n+1], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>f_conv_N_vals</em>[restrict static n+1]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Given a table of values of a multiplicative function f, compute (f &lt;*&gt; N)(x) for all x from 1 to n See <a class="el" href="dirichlet_8h.html#aff2f0dc86d8486a52cc05f57a42ec453">nut_euler_sieve_conv_u</a> for more info}. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>inclusive upper bound of range to compute f &lt;*&gt; N over </td></tr>
@@ -310,7 +335,55 @@ int64_t const <a class="el" href="structnut__Diri.html">nut_Diri</a> const <a cl
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true on success, false on allocation failure</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true on success, false on allocation failure </dd></dl>
+
+</div>
+</div>
+<a id="a52f9358d979df1a3063c09cfbe19d93d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52f9358d979df1a3063c09cfbe19d93d">&#9670;&nbsp;</a></span>nut_euler_sieve_conv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_euler_sieve_conv </td>
+          <td>(</td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int64_t&#160;</td>
+          <td class="paramname"><em>f_vals</em>[static n+1], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int64_t&#160;</td>
+          <td class="paramname"><em>g_vals</em>[static n+1], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>f_conv_g_vals</em>[restrict static n+1]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Given tables of values of multiplicative functions f and g, compute (f &lt;*&gt; g)(x) for all x from 1 to n This uses Euler's sieve, a variant of the sieve of Eratosthenes that only marks off each multiple once. </p>
 <p>This generally has worse performance than the sieve of Eratosthenes, but some preliminary tests showed that Eratosthenes is only about 14% faster in release mode than Euler, so currently only Euler's sieve is implemented. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>inclusive upper bound of range to compute f &lt;*&gt; g over </td></tr>
@@ -469,23 +542,29 @@ int64_t const <a class="el" href="structnut__Diri.html">nut_Diri</a> const <a cl
 
 </div>
 </div>
-<a id="ad23dcc7562e209acadb64a6e4fa8414f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad23dcc7562e209acadb64a6e4fa8414f">&#9670;&nbsp;</a></span>NUT_ATTR_ACCESS() <span class="overload">[2/2]</span></h2>
+<a id="a1de369be5cae92e31d9f073144b6645d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1de369be5cae92e31d9f073144b6645d">&#9670;&nbsp;</a></span>nut_Diri_compute_mertens()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NUT_ATTR_ACCESS </td>
+          <td class="memname">void nut_Diri_compute_mertens </td>
           <td>(</td>
-          <td class="paramtype">read_write&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">1&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>mobius</em>[restrict static self-&gt;y/4+1]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -495,237 +574,15 @@ int64_t const <a class="el" href="structnut__Diri.html">nut_Diri</a> const <a cl
       </table>
 </div><div class="memdoc">
 
-<p>Compute the value table for the mobius function mu(n) (whose sum is called the Mertens function) Requires both an initialized <a class="el" href="structnut__Diri.html" title="Wrapper to hold values of some multiplicative function.">nut_Diri</a> from <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a> and a packed table of mobius values from <a class="el" href="sieves_8h.html#ac1184e4b679ee165bb5e6ae0179f2d4b">nut_sieve_mobius</a>. </p>
-<p>Attempt to find a divisor of f_d.</p>
-<p>Compute the product of all irreducible factors of degree d.</p>
-<p>Compute the power of a polynomial mod another polynomial.</p>
-<p>Find the gcd of two polynomials.</p>
-<p>Divide two polynomials to get a quotient and remainder.</p>
-<p>Compose polynomial f(g(x)) mod n and store the result in h.</p>
-<p>Raise f**x mod n and store the result in g.</p>
-<p>Multiply polynomials f*g mod n and store the result in h.</p>
-<p>Multiply a polynomial f by a scalar a and store the result in h.</p>
-<p>Take the termwise product of polynomials f and g mod n and store the result in h.</p>
-<p>Subtract polynomials f - g mod n and store the result in h.</p>
-<p>Add polynomials f + g mod n and store the result in h.</p>
-<p>Convert a string to a polynomial (and possibly modulus)</p>
-<p>Print a polynomial to a file.</p>
-<p>Add all prime/power pairs in one factorization to another.</p>
-<p>Get the next entry from a powerful number iterator This entry will have out-&gt;n set to a powerful number and out-&gt;hn set to the value of h evaluated at that n, where h is the function defined at iterator creation time.</p>
-<p>Mainly for internal use Pop an entry from the internal stack of a powerful number iterator Doing this together with calling <a class="el" href="">nut_PfIt_next</a> will obviously break.</p>
-<p>Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands self must have been initialized using <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl must be set and match This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1)) If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then try to use a specialized function from this library and use that instead.</p>
-<p>Compute the value table for h = f &lt;*&gt; N, the dirichlet convolution of f and N (the identity function N(n) = n), given the value table for f See <a class="el" href="">nut_Diri_compute_conv</a> for details, this is just that function but with several specializations due to N being very simple.</p>
-<p>Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f See <a class="el" href="">nut_Diri_compute_conv</a> for details, this is just that function but with several specializations due to u being very simple.</p>
+<p>Compute the value table for the mobius function mu(n) (whose sum is called the Mertens function) Requires both an initialized <a class="el" href="structnut__Diri.html" title="Wrapper to hold values of some multiplicative function.">nut_Diri</a> from <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a> and a packed table of mobius values from <a class="el" href="sieves_8h.html#aed3a407903d4975ef6e95c867ed3c42e">nut_sieve_mobius</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, and take the bounds from. Must be initialized </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>modulus to reduce results by, or 0 to skip reducing </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mobius</td><td>packed table of mobius values, from <a class="el" href="sieves_8h.html#ac1184e4b679ee165bb5e6ae0179f2d4b">nut_sieve_mobius</a> (with upper bound self-&gt;y).</td></tr>
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistent with the inputs </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>modulus to reduce results by, or 0 to skip reducing </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f_tbl</td><td>table for the first operand</td></tr>
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistend with the inputs </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>modulus to reduce results by, or 0 to skip reducing </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f_tbl</td><td>table for the first operand (dirichlet convolution is commutative, so order doesn't matter) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">g_tbl</td><td>table for the second operand</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mobius</td><td>packed table of mobius values, from <a class="el" href="sieves_8h.html#aed3a407903d4975ef6e95c867ed3c42e">nut_sieve_mobius</a> (with upper bound self-&gt;y). </td></tr>
   </table>
   </dd>
 </dl>
-<p>out-&gt;i is not meaningful to the caller.</p>
-<p>If both inputs are sorted, the result will be sorted and no dupliate entries will be created. Acts as if <a class="el" href="">factors_append</a> were called repeatedly. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">factors</td><td>pointer to factorization struct which should be extended </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">factors2</td><td>pointer to factorization struct whose entries will be added to the other struct </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">k</td><td>power to multiply entries of factors2 by, for if some composite number m was discovered where m^k divides n and we have factored m</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Skips zero terms, coefficients of 1 or -1, powers of 0 or 1, and any leading plus sign. Thus the the format is "x^2 + 2x + 1". The zero polynomial is displayed as "0", and a leading negative sign is always displayed as "-" with no trailing space. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">file</td><td>file to write to </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>polynomial to print </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">vname</td><td>string to use for variable, eg "x" </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">add</td><td>string to use for adding two monomials together, eg "+" or " + " </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">sub</td><td>string to use for subtracting two monomials, eg "-" or " - " </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pow</td><td>string to use for exponents, eg "**" for "x**2" or "^" for "x^2" </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">descending</td><td>if true, print higher terms down to lower terms, otherwise print lower terms up to higher terms (Taylor Series order) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>the total number of characters printed</dd></dl>
-<p>Ignores whitespace, ignores variable names, allows multiplication signs, duplicate terms, and duplicate minus signs. The format is poly = monomial (+|- monomial)* ("mod" \d+)? monomial = -* ((coeff *? vpow) | coeff | vpow) coeff = \d+ vpow = \w (("**"|"^") \d+)? </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">f</td><td>polynomial to store output in </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">n</td><td>pointer to store modulus n in if found </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">str</td><td>string to parse </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">end</td><td>pointer to store end of parsed content (first unparsed character, ie typically '\0') </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on failure, 1 if polynomial was parsed without modulus, 2 if both polynomial and modulus were parsed</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">h</td><td>polynomial in which to store the sum </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f,g</td><td>polynomials to add </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus to reduce result by </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">h</td><td>polynomial in which to store the difference f - g mod n </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f,g</td><td>polynomials to subtract </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus to reduce result by </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">h</td><td>polynomial in which to store the result </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f,g</td><td>polynomials to multiply termwise </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus to reduce result by </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">g</td><td>polynomial in which to store a*f mod n </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>polynomial to multiply by a scalar </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>scalar to multiply by </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus to reduce result by </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure</dd></dl>
-<p>Uses the basic algorithm </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">h</td><td>polynomial in which to store f*g mod n </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f,g</td><td>polynomials to multiply </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus to reduce result by </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">g</td><td>polynomial in which to store f**x </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>polynomial to find a power of </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">e</td><td>exponent to raise f to </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus to reduce result by </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cn</td><td>carmichael lambda function of n, basically modulus for exponents, see <a class="el" href="">carmichael_lambda</a> and <a class="el" href="sieves_8h.html#a80312f8b853eeb8a9df48ff15078c2f0">nut_sieve_carmichael</a> </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomial for scratch work, must have 1 initialized (or at least zeroed out) polynomial (<a class="el" href="">nut_Poly_pow_modn_tmptmp</a>) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure</dd></dl>
-<p>Like <a class="el" href="">nut_Poly_pow_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">g</td><td>polynomial in which to store f**x </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>polynomial to find a power of </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">e</td><td>exponent to raise f to </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus to reduce result by </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cn</td><td>carmichael lambda function of n, basically modulus for exponents, see <a class="el" href="">carmichael_lambda</a> and <a class="el" href="sieves_8h.html#a80312f8b853eeb8a9df48ff15078c2f0">nut_sieve_carmichael</a> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">h</td><td>polynomial in which to store f(g(x)) mod n </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f,g</td><td>polynomials to compose </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus to reduce result by </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cn</td><td>carmichael lambda function of n, basically modulus for exponents, see <a class="el" href="">carmichael_lambda</a> and <a class="el" href="sieves_8h.html#a80312f8b853eeb8a9df48ff15078c2f0">nut_sieve_carmichael</a> </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomial for scratch work, must have 1 initialized (or at least zeroed out) polynomial (<a class="el" href="">nut_Poly_compose_modn_tmptmp</a>) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure</dd></dl>
-<p>Like <a class="el" href="">nut_Poly_compose_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">h</td><td>polynomial in which to store f(g(x)) mod n </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f,g</td><td>polynomials to compose </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus to reduce result by </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cn</td><td>carmichael lambda function of n, basically modulus for exponents, see <a class="el" href="">carmichael_lambda</a> and <a class="el" href="sieves_8h.html#a80312f8b853eeb8a9df48ff15078c2f0">nut_sieve_carmichael</a> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure</dd></dl>
-<p>f = q*g + r mod n. Uses extended synthetic division. Note that while weaker forms of polynomial division can be defined for weaker forms of rings than fields, the synthetic division algorithm can fail if the coefficient ring is not a field because division by the leading coefficient might fail. Even if n is composite, if the leading coefficient of the divisor is 1 then this algorithm will not fail, otherwise, this function fails. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">q,r</td><td>polynomials in which to store the quotient and remainder such that f = q*g + r mod n </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f,g</td><td>polynomials to divide </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus to reduce result by </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure. Can fail if the leading cofficient of g is not invertable mod n, as well as on allocation failure</dd></dl>
-<p>The gcd is reduced to be monic, so if n is not prime this can fail. If d = gcd(f, g), then there is some pair of polynomials a and b so that f = ad and g = bd (d is a common divisor), and for any other common divisor h, d = ch for some polynomial c (d is greatest because it has at least as high degree as any other common divisor. Note that in the integers, we have two choices for gcd, which are associates (meaning one is the negative of the other) and we pick the positive one by convention. Similarly for polynomials with coefficients from a field, the the gcd is not unique and any associate of the gcd is also a gcd. Thus we restrict the gcd to be monic. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">d</td><td>polynomial in which to store the monic gcd, or store 0 if both f and n are 0 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f,g</td><td>polynomials to take the gcd of </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus for the coefficient ring </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomials for scratch work, cannot be NULL (<a class="el" href="">nut_Poly_gcd_modn_tmptmp</a>) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure. Can fail if a non-invertable leading coefficient is encountered, as well as on allocation failure.</dd></dl>
-<p>Like <a class="el" href="">nut_Poly_gcd_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. Less efficient because early checking is not done. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">d</td><td>polynomial in which to store the monic gcd, or store 0 if both f and n are 0 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f,g</td><td>polynomials to take the gcd of </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus for the coefficient ring </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure. Can fail if a non-invertable leading coefficient is encountered, as well as on allocation failure.</dd></dl>
-<p>Uses binary exponentiation. The coefficients themselves are in the cyclic group Z_n as usual. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">h</td><td>polynomial in which to store the result </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>base </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">e</td><td>exponent </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">g</td><td>modulus </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>coefficient modulus </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomials for scratch work, must have 3 initialized (or at least zeroed out) polynomials (<a class="el" href="">nut_Poly_powmod_modn_tmptmp</a>) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure. Can fail if a non-invertable leading coefficient is encountered, as well as on allocation failure.</dd></dl>
-<p>Like <a class="el" href="">nut_Poly_powmod_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. Less efficient because early checking is not done. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">h</td><td>polynomial in which to store the result </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>base </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">e</td><td>exponent </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">g</td><td>modulus </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>coefficient modulus </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure. Can fail if a non-invertable leading coefficient is encountered, as well as on allocation failure.</dd></dl>
-<p>This should be called repeatedly on squarefree factors, or else it will extract repeat factors for d &gt; 1. Thus if we only want roots in the field Z_p, or equivalently we only want linear factors, we can call this function without bothering to make f squarefree first. In the general case, getting the squarefree factorization of f is easy: any repeated root of f (in Z_p or indeed the splitting field of f) is also a root of f' the derivative of f, so we can say the squarefree part of f is f / gcd(f, f'). We can repeat this to find polynomials representing roots which occur exactly once (f / gcd(f, f')), roots which occur exactly twice (sqrt(gcd(f, f') / gcd(f, f''))), roots which occur exactly thrice (cbrt(gcd(f, f'') / gcd(f, f'''))), etc. Eventually, these quotients will saturate and just become 1 forever. If f is already squarefree, let f_i be the product of all irreducible factors of f with degree i. Then we have f_1 = gcd(x^p-x, f), f_2 = gcd(x^(p^2), f/f_1), f_3 = gcd(x^(p^3), f/f_1/f_2), etc. Once the expression f/f_1/f_2/.../f_i becomes 1, we are done. This clearly takes at most k steps, where k is the degree of f. It is possible to show an irreducible f is irreducible by only showing it has no factors of degree k/q for any prime divisor q, ie f | x^(p^k) but gcd(f, x^(p^(k/q))) = 1 for all q. This function only takes care of computing gcd(x^(p^d)-x, f/f_1/.../f_(d-1)) given p, d, and f/f_1/.../f_(d-1). </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">f_d</td><td>the product of all degree d irreducible factors of f </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>the polynomial to factor, which should be squarefree and have no irreducible factors with degree less than d </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">d</td><td>the degree of irreducible factors to extract. Note that f should be free from irreducible factors with lower degree, so once d exceeds half the degree of f, f must be irreducible. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>coefficient modulus. MUST be prime. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomials for scratch work, must have 4 initialized (or at least zeroed out) polynomials </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure</dd></dl>
-<p>Given a squarefree polynomial f whose irreducible factors all have degree d, if f has degree k which is greater than d (it must be a multiple of d) it must split. Mod an odd prime p, we can find a nontrivial factor of f by 1) choosing a random r with degree less than k (if gcd(r, f) isn't 1 we are done), 2) computing s = r^((p^d-1)/2) mod f, 3) gcd(s + 1, f) is a nontrivial factor with probability greater than 1/2. This works because not only does x^(p^d)-x factor as x(x^((p^d-1)/2)-1)(x^((p^d-1)/2)+1), this holds if we replace x with any polynomial. If a factor isn't contained in the first term, it has about a 1/2 chance of being contained in the second term, hence this algorithm. This function returns a single nontrivial factor g, and both g and f/g may need to be factored further if they are not degree d. Note that if f is degree 2 with irreducible factors of degree 1, completing the square/using the quadratic formula is faster, although for such small polynomials this is unimportant. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">g</td><td>a nontrivial factor of f. Both g and f/g could potentially need to be factored further with more calls to this method. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>the polynomial to factor, which should be squarefree and have multiple irreducible factors of degree d </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">d</td><td>the degree of irreducible factors of f </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>coefficient modulus. MUST be prime. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomials for scratch work, must have 4 initialized (or at least zeroed out) polynomials </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure </dd></dl>
 
 </div>
 </div>
@@ -774,12 +631,151 @@ int64_t const <a class="el" href="structnut__Diri.html">nut_Diri</a> const <a cl
 </div><div class="memdoc">
 
 <p>Compute the value table for the kth generalized divisor function dk(n) dk(n) = da(n) &lt;*&gt; db(n) whenever a + b = k. </p>
-<p>This function uses binary exponentiation to compute dk in only log(k) convolutions. However, if all dk's are needed, calling <a class="el" href="">nut_Diri_compute_conv_u</a> is more efficient </p><dl class="params"><dt>Parameters</dt><dd>
+<p>This function uses binary exponentiation to compute dk in only log(k) convolutions. However, if all dk's are needed, calling <a class="el" href="dirichlet_8h.html#abc3257dcff1b06c34b128c156572a4dd">nut_Diri_compute_conv_u</a> is more efficient </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistent with the inputs </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">k</td><td>k, ie which generalized divisor function to compute. dk is u &lt;*&gt; u &lt;*&gt; ... &lt;*&gt; u with k u's </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>modulus to reduce the result by, or 0 to skip reducing </td></tr>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">f_tbl,g_tbl</td><td>temporary tables for scratch work, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>, fields y, x, and yinv must be set Will still have scratch data stored on return </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abc3257dcff1b06c34b128c156572a4dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc3257dcff1b06c34b128c156572a4dd">&#9670;&nbsp;</a></span>nut_Diri_compute_conv_u()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_Diri_compute_conv_u </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>f_tbl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f See <a class="el" href="dirichlet_8h.html#ac129473cb990ee5563de30608d75d253">nut_Diri_compute_conv</a> for details, this is just that function but with several specializations due to u being very simple. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistent with the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>modulus to reduce results by, or 0 to skip reducing </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">f_tbl</td><td>table for the first operand </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a54146e9f9dea0bbee06a22395833093a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54146e9f9dea0bbee06a22395833093a">&#9670;&nbsp;</a></span>nut_Diri_compute_conv_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_Diri_compute_conv_N </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>f_tbl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the value table for h = f &lt;*&gt; N, the dirichlet convolution of f and N (the identity function N(n) = n), given the value table for f See <a class="el" href="dirichlet_8h.html#ac129473cb990ee5563de30608d75d253">nut_Diri_compute_conv</a> for details, this is just that function but with several specializations due to N being very simple. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistent with the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>modulus to reduce results by, or 0 to skip reducing </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">f_tbl</td><td>table for the first operand </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac129473cb990ee5563de30608d75d253"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac129473cb990ee5563de30608d75d253">&#9670;&nbsp;</a></span>nut_Diri_compute_conv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_Diri_compute_conv </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td>
+          <td class="paramname"><em>f_tbl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnut__Diri.html">nut_Diri</a> *&#160;</td>
+          <td class="paramname"><em>g_tbl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands self must have been initialized using <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl must be set and match This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1)) If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then try to use a specialized function from this library and use that instead. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistend with the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>modulus to reduce results by, or 0 to skip reducing </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">f_tbl</td><td>table for the first operand (dirichlet convolution is commutative, so order doesn't matter) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">g_tbl</td><td>table for the second operand </td></tr>
   </table>
   </dd>
 </dl>
@@ -793,7 +789,7 @@ int64_t const <a class="el" href="structnut__Diri.html">nut_Diri</a> const <a cl
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="dirichlet_8h.html">dirichlet.h</a></li>
-    <li class="footer">Generated on Mon Oct 30 2023 20:16:38 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jan 30 2024 01:27:08 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

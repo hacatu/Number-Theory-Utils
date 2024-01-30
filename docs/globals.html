@@ -17,6 +17,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen_awesome.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen_awesome_sidebar.css" rel="stylesheet" type="text/css"/>
@@ -111,35 +118,92 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 
 
 <h3><a id="index_n"></a>- n -</h3><ul>
-<li>NUT_ATTR_ACCESS()
-: <a class="el" href="debug_8h.html#a24d19e46f3777851166e00069dd6a3f1">debug.h</a>
-, <a class="el" href="modular__math_8h.html#a7479a653e2f5c148b3d4b5b7243e7702">modular_math.h</a>
-, <a class="el" href="sieves_8h.html#ad711843b7300b037e9404802cac9e361">sieves.h</a>
-, <a class="el" href="polynomial_8h.html#ad23dcc7562e209acadb64a6e4fa8414f">polynomial.h</a>
-, <a class="el" href="modular__math_8h.html#a52bc42c310d8f576237fd6bf59aa7db1">modular_math.h</a>
-, <a class="el" href="factorization_8h.html#a3b9c9161a7e6881ca778a4f5ef3fa53f">factorization.h</a>
-, <a class="el" href="dirichlet_8h.html#a6281d3554686ce3abc5195a104945526">dirichlet.h</a>
-, <a class="el" href="dirichlet__powerful_8h.html#ad23dcc7562e209acadb64a6e4fa8414f">dirichlet_powerful.h</a>
-, <a class="el" href="factorization_8h.html#a51cfdef241be59af777a83e6bd2503aa">factorization.h</a>
-, <a class="el" href="dirichlet__powerful_8h.html#ad128c69852a6caad578c8e595caff8d0">dirichlet_powerful.h</a>
+<li>NUT_ATTR_ACCESS
+: <a class="el" href="modular__math_8h.html#a7479a653e2f5c148b3d4b5b7243e7702">modular_math.h</a>
+</li>
+<li>NUT_ATTR_ARTIFICIAL
+: <a class="el" href="modular__math_8h.html#a7524889b84956587523e5014112fab3a">modular_math.h</a>
+</li>
+<li>NUT_ATTR_CONST
+: <a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">modular_math.h</a>
+</li>
+<li>NUT_ATTR_MALLOC
+: <a class="el" href="modular__math_8h.html#ac5dad36b30fdd76ddce141ee49748d98">modular_math.h</a>
 </li>
 <li>NUT_ATTR_NO_SAN
 : <a class="el" href="modular__math_8h.html#a632cb8a1d14576952485acf64494b800">modular_math.h</a>
 </li>
+<li>NUT_ATTR_NODISCARD
+: <a class="el" href="modular__math_8h.html#aae158eaae70da54bc82bfe48f0428eb7">modular_math.h</a>
+</li>
+<li>NUT_ATTR_NONNULL
+: <a class="el" href="modular__math_8h.html#a7581a5842fc5c4c142d42e87052938ae">modular_math.h</a>
+</li>
+<li>NUT_ATTR_PURE
+: <a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">modular_math.h</a>
+</li>
+<li>NUT_ATTR_RETURNS_NONNULL
+: <a class="el" href="modular__math_8h.html#a293096c11d22a7fa9db6e0dca8167262">modular_math.h</a>
+</li>
+<li>nut_cl_check_err()
+: <a class="el" href="cl_8h.html#a8677634e45c37bcec7cf3b78ed3c5cdf">cl.h</a>
+</li>
+<li>nut_cl_close()
+: <a class="el" href="cl_8h.html#a80371870cd45702faa15bf0d2de7aa8f">cl.h</a>
+</li>
+<li>nut_cl_create_all_kernels()
+: <a class="el" href="cl_8h.html#ad75f1fc0811a8ee4158d4edf519c5ac0">cl.h</a>
+</li>
+<li>nut_cl_create_kernel()
+: <a class="el" href="cl_8h.html#a1be98afb4f7443c6d8acd9fecc7b8f61">cl.h</a>
+</li>
+<li>NUT_CL_FLAG_DIE
+: <a class="el" href="cl_8h.html#a649be233b3a28fad793418502085dc8e">cl.h</a>
+</li>
+<li>NUT_CL_FLAG_MT_SAFE
+: <a class="el" href="cl_8h.html#abc3f0b8f021b3e363706c030a722ad2a">cl.h</a>
+</li>
+<li>NUT_CL_FLAG_VERBOSE
+: <a class="el" href="cl_8h.html#ae02f23cf2b6183ccc98dd87ac6bad565">cl.h</a>
+</li>
+<li>nut_cl_make_program_from_source()
+: <a class="el" href="cl_8h.html#a2d57a72d019816c9165fa992bd3f2a98">cl.h</a>
+</li>
+<li>nut_cl_read_source()
+: <a class="el" href="cl_8h.html#a73a32f57182812d9adfb66da07612536">cl.h</a>
+</li>
+<li>nut_cl_setup()
+: <a class="el" href="cl_8h.html#a963698ef91fd18c9f58a4d099f23c6b5">cl.h</a>
+</li>
 <li>nut_compute_mertens_range()
-: <a class="el" href="sieves_8h.html#aea9f97397c57da8e705cf667ad1e5cd3">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a30646bb9f4510ba9011c145e0036b9c5">sieves.h</a>
+</li>
+<li>nut_compute_pi_from_tables()
+: <a class="el" href="sieves_8h.html#ad64c4875a689a595e8469b2613270754">sieves.h</a>
 </li>
 <li>nut_compute_pi_range()
-: <a class="el" href="sieves_8h.html#aac0f1a4de55e161c45e93c7d3c63d9f8">sieves.h</a>
+: <a class="el" href="sieves_8h.html#aa659dfd4ebb1f61dba61958e27744118">sieves.h</a>
 </li>
 <li>nut_default_factor_conf
 : <a class="el" href="factorization_8h.html#a435a05668997a808999bf713833f41dc">factorization.h</a>
+</li>
+<li>nut_Diri_compute_conv()
+: <a class="el" href="dirichlet_8h.html#ac129473cb990ee5563de30608d75d253">dirichlet.h</a>
+</li>
+<li>nut_Diri_compute_conv_N()
+: <a class="el" href="dirichlet_8h.html#a54146e9f9dea0bbee06a22395833093a">dirichlet.h</a>
+</li>
+<li>nut_Diri_compute_conv_u()
+: <a class="el" href="dirichlet_8h.html#abc3257dcff1b06c34b128c156572a4dd">dirichlet.h</a>
 </li>
 <li>nut_Diri_compute_dk()
 : <a class="el" href="dirichlet_8h.html#aaa27d52f1bde28bec89dbe3ee2eb1c11">dirichlet.h</a>
 </li>
 <li>nut_Diri_compute_I()
 : <a class="el" href="dirichlet_8h.html#a72111f9468ba6240298b9265dc3f0ddd">dirichlet.h</a>
+</li>
+<li>nut_Diri_compute_mertens()
+: <a class="el" href="dirichlet_8h.html#a1de369be5cae92e31d9f073144b6645d">dirichlet.h</a>
 </li>
 <li>nut_Diri_compute_N()
 : <a class="el" href="dirichlet_8h.html#aef3a0c29121da13a74cec34c49d77d4b">dirichlet.h</a>
@@ -156,47 +220,80 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 <li>nut_Diri_init()
 : <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">dirichlet.h</a>
 </li>
+<li>nut_Diri_sum_adjusted()
+: <a class="el" href="dirichlet__powerful_8h.html#a0955257f1f62a3f9ead64f4610d8c618">dirichlet_powerful.h</a>
+</li>
 <li>nut_dirichlet_D()
-: <a class="el" href="dirichlet_8h.html#a48cf875993b4e4c48c3bb214d84285b1">dirichlet.h</a>
+: <a class="el" href="dirichlet_8h.html#a2db407b902fdb86d740d579e445223c8">dirichlet.h</a>
 </li>
 <li>NUT_DIVS_BEFORE_PRIME_CHECK
 : <a class="el" href="factorization_8h.html#a37007210bdaed85795ad6a44f9ce4efd">factorization.h</a>
+</li>
+<li>nut_euler_sieve_conv()
+: <a class="el" href="dirichlet_8h.html#a52f9358d979df1a3063c09cfbe19d93d">dirichlet.h</a>
+</li>
+<li>nut_euler_sieve_conv_N()
+: <a class="el" href="dirichlet_8h.html#a74180d3515220729cf659328a49154c9">dirichlet.h</a>
+</li>
+<li>nut_euler_sieve_conv_u()
+: <a class="el" href="dirichlet_8h.html#aff2f0dc86d8486a52cc05f57a42ec453">dirichlet.h</a>
 </li>
 <li>nut_Factor_append()
 : <a class="el" href="factorization_8h.html#a830a7ccc32e3e054804091b4ce8187cb">factorization.h</a>
 </li>
 <li>nut_Factor_carmichael()
-: <a class="el" href="factorization_8h.html#add8819f2ba3596013368d1df1d0a93d9">factorization.h</a>
+: <a class="el" href="factorization_8h.html#a0ac931c6a62bec58d63ee6043878315d">factorization.h</a>
+</li>
+<li>nut_Factor_combine()
+: <a class="el" href="factorization_8h.html#ab072eac902961986de4d94138ea73cf1">factorization.h</a>
 </li>
 <li>nut_Factor_divcount()
-: <a class="el" href="factorization_8h.html#a08f155937eaf4a13b8cc4c3a20eb3f01">factorization.h</a>
+: <a class="el" href="factorization_8h.html#a64fbbcd12b9fc33a8e832633a58496a6">factorization.h</a>
 </li>
 <li>nut_Factor_divpowsum()
-: <a class="el" href="factorization_8h.html#a1fac9466be4add4d561d9a8c14ea3f24">factorization.h</a>
+: <a class="el" href="factorization_8h.html#abbb9a53990f1ee3ca4ce9e430d93826f">factorization.h</a>
 </li>
 <li>nut_Factor_divsum()
-: <a class="el" href="factorization_8h.html#a43539d06d26336f9479282176a1899cd">factorization.h</a>
+: <a class="el" href="factorization_8h.html#addc45f8dffe0fdb32ebbcb7510b700bd">factorization.h</a>
 </li>
 <li>nut_Factor_divtupcount()
-: <a class="el" href="factorization_8h.html#a0e848ece5d9ab0a2953ad1859f71a42a">factorization.h</a>
+: <a class="el" href="factorization_8h.html#a7099c574cebc270affcc2fef5cab6b80">factorization.h</a>
+</li>
+<li>nut_Factor_forall_divs()
+: <a class="el" href="factorization_8h.html#a92121419128c9016b2c012ec6fdf4aec">factorization.h</a>
+</li>
+<li>nut_Factor_forall_divs_le()
+: <a class="el" href="factorization_8h.html#a57b424ebab8bf8de4e2d8a6bcb5a588b">factorization.h</a>
+</li>
+<li>nut_Factor_forall_divs_le_tmptmp()
+: <a class="el" href="factorization_8h.html#a8bcaa51dc194ca6075de84c5b5de29be">factorization.h</a>
+</li>
+<li>nut_Factor_forall_divs_tmptmp()
+: <a class="el" href="factorization_8h.html#a0c8e843ae366d9d94ce0bff300657199">factorization.h</a>
+</li>
+<li>nut_Factor_fprint()
+: <a class="el" href="factorization_8h.html#a6c9fc3c6bf989efd453ac7453d8342a1">factorization.h</a>
 </li>
 <li>nut_Factor_ipow()
 : <a class="el" href="factorization_8h.html#a19a1f32d8d7197c9f60113616f10a5c2">factorization.h</a>
 </li>
 <li>nut_Factor_phi()
-: <a class="el" href="factorization_8h.html#af0339dda40c0ea2f01873f469982a322">factorization.h</a>
+: <a class="el" href="factorization_8h.html#a9abda9091fb2fcf758f069bf8a674412">factorization.h</a>
 </li>
 <li>nut_Factors_copy()
-: <a class="el" href="factorization_8h.html#a0c95682b8d28b1a2881cce9c8f2b5ba3">factorization.h</a>
+: <a class="el" href="factorization_8h.html#a0fbd6f1b89d78911f4d773481812efcc">factorization.h</a>
 </li>
 <li>nut_Factors_prod()
-: <a class="el" href="factorization_8h.html#a91e0d733fa61c3d05bee2ffbb37d2366">factorization.h</a>
+: <a class="el" href="factorization_8h.html#a36decdbb615f72803d65bbffcc7bc3f6">factorization.h</a>
+</li>
+<li>nut_fill_factors_from_largest()
+: <a class="el" href="sieves_8h.html#ab7b97b3bb9a75fc40a32f293d56a17ba">sieves.h</a>
 </li>
 <li>nut_get_factorizations_pitch()
-: <a class="el" href="sieves_8h.html#a280efb1221ea2f423d3169c4b1bfff64">sieves.h</a>
+: <a class="el" href="sieves_8h.html#aabca50ca5c4cbb3c713fb5ebd50cfcfb">sieves.h</a>
 </li>
 <li>nut_get_factors_pitch()
-: <a class="el" href="sieves_8h.html#a68b227ca1422f01350c384254de63530">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a72e7870b123862d9093f9c72cc6ef0f2">sieves.h</a>
 </li>
 <li>nut_i128_crt()
 : <a class="el" href="modular__math_8h.html#a4b1e5f292a0aef9b260f7244ef79a371">modular_math.h</a>
@@ -212,6 +309,9 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 </li>
 <li>nut_i64_crt()
 : <a class="el" href="modular__math_8h.html#a76ea0888f4f6792c3c46525893dc7955">modular_math.h</a>
+</li>
+<li>nut_i64_egcd()
+: <a class="el" href="modular__math_8h.html#aa3230b6674c286a695a59cd5a91eb68a">modular_math.h</a>
 </li>
 <li>nut_i64_fastmod_floor()
 : <a class="el" href="modular__math_8h.html#ae7b3c8468ef4ebc16226f3f6a7cf3ee7">modular_math.h</a>
@@ -247,16 +347,16 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 : <a class="el" href="modular__math_8h.html#aef1c72a0459316ba22fc28ab1cb778ed">modular_math.h</a>
 </li>
 <li>nut_is_composite()
-: <a class="el" href="sieves_8h.html#a61fa59181aed2a20a677e4ae846e1ed9">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a51424350ddf0a7ddddcec3f3333e3894">sieves.h</a>
 </li>
 <li>nut_make_Factors_ub()
-: <a class="el" href="factorization_8h.html#a0a7a7d6265a52b529aeca7757ea82cc2">factorization.h</a>
+: <a class="el" href="factorization_8h.html#a486374f04085863d94317b23445d8f7e">factorization.h</a>
 </li>
 <li>nut_make_Factors_w()
-: <a class="el" href="factorization_8h.html#a2cc9af2019214dbca0a96c10863c45c3">factorization.h</a>
+: <a class="el" href="factorization_8h.html#a68ae1e577404fdf655e577a3886dcd3f">factorization.h</a>
 </li>
 <li>nut_max_prime_divs()
-: <a class="el" href="sieves_8h.html#ab85186e50e24074c1e6c5f437a301a2f">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a8a864de0211893024920e684b8086cc9">sieves.h</a>
 </li>
 <li>NUT_MAX_PRIMES_128
 : <a class="el" href="factorization_8h.html#aa4b95f5d79313e77dff307d5b7856b1d">factorization.h</a>
@@ -268,7 +368,7 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 : <a class="el" href="factorization_8h.html#a978817b226b29e568d014886c6d82ee8">factorization.h</a>
 </li>
 <li>nut_max_primes_le()
-: <a class="el" href="sieves_8h.html#a96915f632c263ea824284611230412cc">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a65b63d0d55fe0ff8c270fdb78ce49672">sieves.h</a>
 </li>
 <li>nut_PfIt_destroy()
 : <a class="el" href="dirichlet__powerful_8h.html#a7c6f8806178cc935e541e82279c8d424">dirichlet_powerful.h</a>
@@ -282,17 +382,62 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 <li>nut_PfIt_init_hvals()
 : <a class="el" href="dirichlet__powerful_8h.html#ab662f10fa79426a40f0e7366ef660471">dirichlet_powerful.h</a>
 </li>
+<li>nut_PfIt_next()
+: <a class="el" href="dirichlet__powerful_8h.html#ac10e34c391364d1114342736d9f573e1">dirichlet_powerful.h</a>
+</li>
+<li>nut_PfStack_pop()
+: <a class="el" href="dirichlet__powerful_8h.html#affb590378a2c53e3322a0edf92c3f8c1">dirichlet_powerful.h</a>
+</li>
+<li>nut_PfStack_push()
+: <a class="el" href="dirichlet__powerful_8h.html#a820893f4bb6d4f9a2ca8835ec075e323">dirichlet_powerful.h</a>
+</li>
+<li>nut_Poly_add_modn()
+: <a class="el" href="polynomial_8h.html#aeabcf16f72395734b247f5c0bdbc7dd2">polynomial.h</a>
+</li>
+<li>nut_Poly_cmp()
+: <a class="el" href="polynomial_8h.html#ad134ed40d4240b66dbd6f6184615e273">polynomial.h</a>
+</li>
+<li>nut_Poly_compose_modn()
+: <a class="el" href="polynomial_8h.html#a0525d4c8370238c9f81b10a51fbbeeb8">polynomial.h</a>
+</li>
+<li>nut_Poly_compose_modn_tmptmp()
+: <a class="el" href="polynomial_8h.html#a33db8d514194bba0ee32f67e00c76445">polynomial.h</a>
+</li>
+<li>nut_Poly_copy()
+: <a class="el" href="polynomial_8h.html#a63f4a82d0f03b6a2826c59e196696e0c">polynomial.h</a>
+</li>
 <li>nut_Poly_destroy()
 : <a class="el" href="polynomial_8h.html#adf706197f57e4ffc4496a4209d997985">polynomial.h</a>
 </li>
+<li>nut_Poly_dot_modn()
+: <a class="el" href="polynomial_8h.html#a30db8959bfab84c51cf1f5039896063f">polynomial.h</a>
+</li>
 <li>nut_Poly_ensure_cap()
-: <a class="el" href="polynomial_8h.html#a5cfad9e8c81aba9097a88e52117edafc">polynomial.h</a>
+: <a class="el" href="polynomial_8h.html#aeb26d6a1f571d9a813b9008b13251518">polynomial.h</a>
 </li>
 <li>nut_Poly_eval_modn()
-: <a class="el" href="polynomial_8h.html#a40da716a381b541f97edf4250c9df20c">polynomial.h</a>
+: <a class="el" href="polynomial_8h.html#a2bc85ebcbee48d129bfdf6a468d5d7fa">polynomial.h</a>
+</li>
+<li>nut_Poly_factor1_modn()
+: <a class="el" href="polynomial_8h.html#a237a1e60a7ca8e822ea8fcee0528e8b6">polynomial.h</a>
+</li>
+<li>nut_Poly_factors_d_modn()
+: <a class="el" href="polynomial_8h.html#ab2bb2ddb8fb65518dbca7f53259c7e7f">polynomial.h</a>
+</li>
+<li>nut_Poly_fprint()
+: <a class="el" href="polynomial_8h.html#af487a60a5381651e58b69252125b7b56">polynomial.h</a>
+</li>
+<li>nut_Poly_gcd_modn()
+: <a class="el" href="polynomial_8h.html#ab08aeb4705f04f743142b371f51b212f">polynomial.h</a>
+</li>
+<li>nut_Poly_gcd_modn_tmptmp()
+: <a class="el" href="polynomial_8h.html#ab66de3034f7953aa651a305e99aab9bd">polynomial.h</a>
 </li>
 <li>nut_Poly_init()
-: <a class="el" href="polynomial_8h.html#a30f1e79256cd7e7f0f1c2d89406461cc">polynomial.h</a>
+: <a class="el" href="polynomial_8h.html#ad6a9d3a96f876ec4d7e63a16a7437ec5">polynomial.h</a>
+</li>
+<li>nut_Poly_mul_modn()
+: <a class="el" href="polynomial_8h.html#a2e2fe661113ff636a4f1349c5eb92e71">polynomial.h</a>
 </li>
 <li>nut_Poly_normalize()
 : <a class="el" href="polynomial_8h.html#af76c908e410262cdcea083c1e7d1142b">polynomial.h</a>
@@ -303,59 +448,92 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 <li>nut_Poly_normalize_modn()
 : <a class="el" href="polynomial_8h.html#ac574340aa050cc6c4f4390d7d6da82a9">polynomial.h</a>
 </li>
+<li>nut_Poly_parse()
+: <a class="el" href="polynomial_8h.html#a769b94e1c6b23b4fa4af0452a7d26eef">polynomial.h</a>
+</li>
+<li>nut_Poly_pow_modn()
+: <a class="el" href="polynomial_8h.html#a73c7652e1ea1496eaf8ebbb0e0eec174">polynomial.h</a>
+</li>
+<li>nut_Poly_pow_modn_tmptmp()
+: <a class="el" href="polynomial_8h.html#acec2d5bee9c87be7c0e1787dd398f80d">polynomial.h</a>
+</li>
+<li>nut_Poly_powmod_modn()
+: <a class="el" href="polynomial_8h.html#ab0bdcaf6aad4e993a050f6a6c8bae818">polynomial.h</a>
+</li>
+<li>nut_Poly_powmod_modn_tmptmp()
+: <a class="el" href="polynomial_8h.html#aaa4cf2869cd3e879cc566496d5c8bbcf">polynomial.h</a>
+</li>
+<li>nut_Poly_quotrem_modn()
+: <a class="el" href="polynomial_8h.html#a060d75e495582873ef56ae85b0fe55e6">polynomial.h</a>
+</li>
 <li>nut_Poly_rand_modn()
 : <a class="el" href="polynomial_8h.html#a3e6d58406b8a4b4e02285485a5c9a1c2">polynomial.h</a>
 </li>
+<li>nut_Poly_roots_modn()
+: <a class="el" href="polynomial_8h.html#a5cc91e23a7f5d6f5b376d044044ee7ad">polynomial.h</a>
+</li>
+<li>nut_Poly_roots_modn_tmptmp()
+: <a class="el" href="polynomial_8h.html#a1ff32591f043cb44bcabba3996a2c619">polynomial.h</a>
+</li>
+<li>nut_Poly_scale_modn()
+: <a class="el" href="polynomial_8h.html#ae51c0a0807506b701a6f2aa9bafbd6e8">polynomial.h</a>
+</li>
 <li>nut_Poly_setconst()
-: <a class="el" href="polynomial_8h.html#af75f6d8b1d7d993f0d91982232597b3d">polynomial.h</a>
+: <a class="el" href="polynomial_8h.html#ae077266c3e13c7664a2cdec47691c31a">polynomial.h</a>
+</li>
+<li>nut_Poly_sub_modn()
+: <a class="el" href="polynomial_8h.html#a20006ffa8de9abf9ac94d113b8a234e4">polynomial.h</a>
 </li>
 <li>nut_Poly_zero_extend()
-: <a class="el" href="polynomial_8h.html#a4a316f88cc4f1bad25c717b136430bda">polynomial.h</a>
+: <a class="el" href="polynomial_8h.html#acfa13e5c705b8b90ed6f30a0fd753880">polynomial.h</a>
 </li>
 <li>nut_Roots_destroy()
 : <a class="el" href="polynomial_8h.html#acfa2292bfc27186033c1c65930250f55">polynomial.h</a>
 </li>
 <li>nut_Roots_ensure_cap()
-: <a class="el" href="polynomial_8h.html#acf839058b890b588ae8c89d8a23ce03a">polynomial.h</a>
+: <a class="el" href="polynomial_8h.html#a88451f2c0e548ddb7ce1f0bbe49e3fa0">polynomial.h</a>
 </li>
 <li>nut_Roots_init()
-: <a class="el" href="polynomial_8h.html#a4fbb365d94859e8639c80fac884b109a">polynomial.h</a>
+: <a class="el" href="polynomial_8h.html#ac64995d45deb2bc583b4d70cbce1d5c2">polynomial.h</a>
+</li>
+<li>nut_series_div()
+: <a class="el" href="dirichlet__powerful_8h.html#ae208f6364581328a25c55fbbd6d4d7d1">dirichlet_powerful.h</a>
 </li>
 <li>nut_sieve_carmichael()
-: <a class="el" href="sieves_8h.html#a80312f8b853eeb8a9df48ff15078c2f0">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a91d158bff7c9a25bf87ebfb8a0c55ecb">sieves.h</a>
 </li>
 <li>nut_sieve_dk()
-: <a class="el" href="sieves_8h.html#a7cdace58bcbe68f4fc52b38a9bf6855f">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a4eaa7c06dc4a2dc2506e1b13b7460744">sieves.h</a>
 </li>
 <li>nut_sieve_factorizations()
-: <a class="el" href="sieves_8h.html#a1ae0bf943c49092ebc83d09d95cc2220">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a7f8162f5acffdc332c1e9e49b9295cd5">sieves.h</a>
 </li>
 <li>nut_sieve_factors()
-: <a class="el" href="sieves_8h.html#a67740f0cc15969487c93537cf52038d9">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a1f740df1f2b3c5981ffd388f7b755549">sieves.h</a>
 </li>
 <li>nut_sieve_is_composite()
-: <a class="el" href="sieves_8h.html#aefe643cd3f2feb771b2c24ef15fcb190">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a5002bd87d6e56bf03a633ae89b3ffc52">sieves.h</a>
 </li>
 <li>nut_sieve_largest_factors()
-: <a class="el" href="sieves_8h.html#a8a65ee088513d19d5a014d3126c7d526">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a09ee1bd653d38fe65de1e49ba6c249a4">sieves.h</a>
 </li>
 <li>nut_sieve_mobius()
-: <a class="el" href="sieves_8h.html#ac1184e4b679ee165bb5e6ae0179f2d4b">sieves.h</a>
+: <a class="el" href="sieves_8h.html#aed3a407903d4975ef6e95c867ed3c42e">sieves.h</a>
 </li>
 <li>nut_sieve_phi()
-: <a class="el" href="sieves_8h.html#af071928bf5a2b6ea12d5a5ccda164780">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a7f4baf357124c47035055a2684454314">sieves.h</a>
 </li>
 <li>nut_sieve_primes()
-: <a class="el" href="sieves_8h.html#aee997477c22920d4d8a3831dd24a8683">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a86090a72a62c0ac85fdb8160888b7a86">sieves.h</a>
 </li>
 <li>nut_sieve_sigma_0()
-: <a class="el" href="sieves_8h.html#a3b3bf51e510e831251cf83c53f63ef50">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a1051b6aa106513cdcbcd807d2a5cf501">sieves.h</a>
 </li>
 <li>nut_sieve_sigma_1()
-: <a class="el" href="sieves_8h.html#a0a923b3664a1ff3dd55c5ddccc716953">sieves.h</a>
+: <a class="el" href="sieves_8h.html#a49cbf6da28161a23c52e691242a2937e">sieves.h</a>
 </li>
 <li>nut_sieve_sigma_e()
-: <a class="el" href="sieves_8h.html#a03de6de6ddfb26ac7ac9a867dd7d30e2">sieves.h</a>
+: <a class="el" href="sieves_8h.html#acb6be35354ef59c627f55fa1ffe9041e">sieves.h</a>
 </li>
 <li>nut_small_primes
 : <a class="el" href="factorization_8h.html#a3629c7b068fca6d74cc56e33283a8b2e">factorization.h</a>
@@ -375,17 +553,26 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 <li>nut_u64_binom_next()
 : <a class="el" href="modular__math_8h.html#aa69c39ae7ebf49b75aec87d676265441">modular_math.h</a>
 </li>
+<li>nut_u64_binom_next_mod_2t()
+: <a class="el" href="modular__math_8h.html#a7caf7927a4df7886403b19fc2d8f6e86">modular_math.h</a>
+</li>
 <li>nut_u64_factor1_lenstra()
-: <a class="el" href="factorization_8h.html#a102fafe0132a5467ed09dc016fc4deca">factorization.h</a>
+: <a class="el" href="factorization_8h.html#a4c2f3e9578e5cb8925ecae35bbe71410">factorization.h</a>
 </li>
 <li>nut_u64_factor1_lenstra_montgomery()
-: <a class="el" href="factorization_8h.html#ac7bd7f87ea190ff4bab212582cfb3b0d">factorization.h</a>
+: <a class="el" href="factorization_8h.html#a28a6429f597edf2c64d5e19bf12d0423">factorization.h</a>
 </li>
 <li>nut_u64_factor1_pollard_rho()
-: <a class="el" href="factorization_8h.html#aa4ca5739549c2256107a68a89f7a7b56">factorization.h</a>
+: <a class="el" href="factorization_8h.html#aaca18db901b14c771139a2b199e92c2e">factorization.h</a>
 </li>
 <li>nut_u64_factor1_pollard_rho_brent()
-: <a class="el" href="factorization_8h.html#af1cedab962ac0298e4995c1b54f2a3e0">factorization.h</a>
+: <a class="el" href="factorization_8h.html#ad8795bf097ec71353cdd3e39b234761f">factorization.h</a>
+</li>
+<li>nut_u64_factor_heuristic()
+: <a class="el" href="factorization_8h.html#a17d2d8452d2f53bfe6be95d2d8cd21bb">factorization.h</a>
+</li>
+<li>nut_u64_factor_trial_div()
+: <a class="el" href="factorization_8h.html#ad81b28e5571235af292694f0f878eed1">factorization.h</a>
 </li>
 <li>nut_u64_fastmod()
 : <a class="el" href="modular__math_8h.html#ae67ab84aa76d638bb8f06a4200e13847">modular_math.h</a>
@@ -393,8 +580,11 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 <li>nut_u64_fastmod_init()
 : <a class="el" href="modular__math_8h.html#a2a561ee4a36477bc88920a0dc98c3b6b">modular_math.h</a>
 </li>
+<li>nut_u64_is_perfect_power()
+: <a class="el" href="factorization_8h.html#a2783bcbef71c9084463093b7cb55fb76">factorization.h</a>
+</li>
 <li>nut_u64_is_prime_dmr()
-: <a class="el" href="factorization_8h.html#a0dc289669b695862eb026cef3187d856">factorization.h</a>
+: <a class="el" href="factorization_8h.html#a48e4f1425cdf116059ee5e0f84348bd5">factorization.h</a>
 </li>
 <li>nut_u64_make_factorial_tbl()
 : <a class="el" href="sieves_8h.html#a7c96f6c0f85946e60c6d5a7ec948fade">sieves.h</a>
@@ -403,10 +593,10 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 : <a class="el" href="modular__math_8h.html#ae5fa714c4123955c11cb2b445557e195">modular_math.h</a>
 </li>
 <li>nut_u64_next_prime_ge()
-: <a class="el" href="factorization_8h.html#a94c9867d859d0c65b4878595ea501612">factorization.h</a>
+: <a class="el" href="factorization_8h.html#af100b74caf393425a7070f2acc1a1ec2">factorization.h</a>
 </li>
 <li>nut_u64_nth_root()
-: <a class="el" href="factorization_8h.html#a094a2a486994d386a66bf5905a960410">factorization.h</a>
+: <a class="el" href="factorization_8h.html#a83b70a4d4fb8c7f9fa524c70a67afc38">factorization.h</a>
 </li>
 <li>nut_u64_pow()
 : <a class="el" href="modular__math_8h.html#a8486f980b8b82e8601d17d544dafdabd">modular_math.h</a>
@@ -434,7 +624,7 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Oct 30 2023 20:16:38 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jan 30 2024 01:27:08 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

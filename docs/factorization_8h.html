@@ -17,6 +17,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen_awesome.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen_awesome_sidebar.css" rel="stylesheet" type="text/css"/>
@@ -153,126 +160,101 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2cc9af2019214dbca0a96c10863c45c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a2cc9af2019214dbca0a96c10863c45c3">nut_make_Factors_w</a> (uint64_t max_primes)</td></tr>
-<tr class="memdesc:a2cc9af2019214dbca0a96c10863c45c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a factors structure that can hold a given number of distinct primes.  <a href="factorization_8h.html#a2cc9af2019214dbca0a96c10863c45c3">More...</a><br /></td></tr>
-<tr class="separator:a2cc9af2019214dbca0a96c10863c45c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a7a7d6265a52b529aeca7757ea82cc2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a0a7a7d6265a52b529aeca7757ea82cc2">nut_make_Factors_ub</a> (uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes])</td></tr>
-<tr class="memdesc:a0a7a7d6265a52b529aeca7757ea82cc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a factors structure that can hold all factors of n, even if it has as many prime factors as possible.  <a href="factorization_8h.html#a0a7a7d6265a52b529aeca7757ea82cc2">More...</a><br /></td></tr>
-<tr class="separator:a0a7a7d6265a52b529aeca7757ea82cc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c95682b8d28b1a2881cce9c8f2b5ba3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a0c95682b8d28b1a2881cce9c8f2b5ba3">nut_Factors_copy</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors)</td></tr>
-<tr class="memdesc:a0c95682b8d28b1a2881cce9c8f2b5ba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a copy of a factors struct, but with only enough memory to store its current factors and not its max capacity if higher.  <a href="factorization_8h.html#a0c95682b8d28b1a2881cce9c8f2b5ba3">More...</a><br /></td></tr>
-<tr class="separator:a0c95682b8d28b1a2881cce9c8f2b5ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91e0d733fa61c3d05bee2ffbb37d2366"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a91e0d733fa61c3d05bee2ffbb37d2366">nut_Factors_prod</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors)</td></tr>
-<tr class="memdesc:a91e0d733fa61c3d05bee2ffbb37d2366"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply a factorization into a number.  <a href="factorization_8h.html#a91e0d733fa61c3d05bee2ffbb37d2366">More...</a><br /></td></tr>
-<tr class="separator:a91e0d733fa61c3d05bee2ffbb37d2366"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08f155937eaf4a13b8cc4c3a20eb3f01"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a08f155937eaf4a13b8cc4c3a20eb3f01">nut_Factor_divcount</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors)</td></tr>
-<tr class="memdesc:a08f155937eaf4a13b8cc4c3a20eb3f01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the number of divisors of a number given its prime factorization, including itself and 1.  <a href="factorization_8h.html#a08f155937eaf4a13b8cc4c3a20eb3f01">More...</a><br /></td></tr>
-<tr class="separator:a08f155937eaf4a13b8cc4c3a20eb3f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43539d06d26336f9479282176a1899cd"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a43539d06d26336f9479282176a1899cd">nut_Factor_divsum</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors)</td></tr>
-<tr class="memdesc:a43539d06d26336f9479282176a1899cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the sum of divisors of a number given its prime factorization, including itself and 1.  <a href="factorization_8h.html#a43539d06d26336f9479282176a1899cd">More...</a><br /></td></tr>
-<tr class="separator:a43539d06d26336f9479282176a1899cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fac9466be4add4d561d9a8c14ea3f24"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a1fac9466be4add4d561d9a8c14ea3f24">nut_Factor_divpowsum</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors, uint64_t power)</td></tr>
-<tr class="memdesc:a1fac9466be4add4d561d9a8c14ea3f24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the sum of powers of divisors of a number given its prime factorization, including itself and 1.  <a href="factorization_8h.html#a1fac9466be4add4d561d9a8c14ea3f24">More...</a><br /></td></tr>
-<tr class="separator:a1fac9466be4add4d561d9a8c14ea3f24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e848ece5d9ab0a2953ad1859f71a42a"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a0e848ece5d9ab0a2953ad1859f71a42a">nut_Factor_divtupcount</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors, uint64_t k, uint64_t modulus)</td></tr>
-<tr class="memdesc:a0e848ece5d9ab0a2953ad1859f71a42a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the number of k-tuples with product n.  <a href="factorization_8h.html#a0e848ece5d9ab0a2953ad1859f71a42a">More...</a><br /></td></tr>
-<tr class="separator:a0e848ece5d9ab0a2953ad1859f71a42a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68ae1e577404fdf655e577a3886dcd3f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ac5dad36b30fdd76ddce141ee49748d98">NUT_ATTR_MALLOC</a> <a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a68ae1e577404fdf655e577a3886dcd3f">nut_make_Factors_w</a> (uint64_t max_primes)</td></tr>
+<tr class="memdesc:a68ae1e577404fdf655e577a3886dcd3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a factors structure that can hold a given number of distinct primes.  <a href="factorization_8h.html#a68ae1e577404fdf655e577a3886dcd3f">More...</a><br /></td></tr>
+<tr class="separator:a68ae1e577404fdf655e577a3886dcd3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a486374f04085863d94317b23445d8f7e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ac5dad36b30fdd76ddce141ee49748d98">NUT_ATTR_MALLOC</a> <a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a486374f04085863d94317b23445d8f7e">nut_make_Factors_ub</a> (uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes])</td></tr>
+<tr class="memdesc:a486374f04085863d94317b23445d8f7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a factors structure that can hold all factors of n, even if it has as many prime factors as possible.  <a href="factorization_8h.html#a486374f04085863d94317b23445d8f7e">More...</a><br /></td></tr>
+<tr class="separator:a486374f04085863d94317b23445d8f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fbd6f1b89d78911f4d773481812efcc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ac5dad36b30fdd76ddce141ee49748d98">NUT_ATTR_MALLOC</a> <a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a0fbd6f1b89d78911f4d773481812efcc">nut_Factors_copy</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors)</td></tr>
+<tr class="memdesc:a0fbd6f1b89d78911f4d773481812efcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a copy of a factors struct, but with only enough memory to store its current factors and not its max capacity if higher.  <a href="factorization_8h.html#a0fbd6f1b89d78911f4d773481812efcc">More...</a><br /></td></tr>
+<tr class="separator:a0fbd6f1b89d78911f4d773481812efcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36decdbb615f72803d65bbffcc7bc3f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a36decdbb615f72803d65bbffcc7bc3f6">nut_Factors_prod</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors)</td></tr>
+<tr class="memdesc:a36decdbb615f72803d65bbffcc7bc3f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply a factorization into a number.  <a href="factorization_8h.html#a36decdbb615f72803d65bbffcc7bc3f6">More...</a><br /></td></tr>
+<tr class="separator:a36decdbb615f72803d65bbffcc7bc3f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64fbbcd12b9fc33a8e832633a58496a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a64fbbcd12b9fc33a8e832633a58496a6">nut_Factor_divcount</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors)</td></tr>
+<tr class="memdesc:a64fbbcd12b9fc33a8e832633a58496a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the number of divisors of a number given its prime factorization, including itself and 1.  <a href="factorization_8h.html#a64fbbcd12b9fc33a8e832633a58496a6">More...</a><br /></td></tr>
+<tr class="separator:a64fbbcd12b9fc33a8e832633a58496a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addc45f8dffe0fdb32ebbcb7510b700bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#addc45f8dffe0fdb32ebbcb7510b700bd">nut_Factor_divsum</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors)</td></tr>
+<tr class="memdesc:addc45f8dffe0fdb32ebbcb7510b700bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the sum of divisors of a number given its prime factorization, including itself and 1.  <a href="factorization_8h.html#addc45f8dffe0fdb32ebbcb7510b700bd">More...</a><br /></td></tr>
+<tr class="separator:addc45f8dffe0fdb32ebbcb7510b700bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbb9a53990f1ee3ca4ce9e430d93826f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#abbb9a53990f1ee3ca4ce9e430d93826f">nut_Factor_divpowsum</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors, uint64_t power)</td></tr>
+<tr class="memdesc:abbb9a53990f1ee3ca4ce9e430d93826f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the sum of powers of divisors of a number given its prime factorization, including itself and 1.  <a href="factorization_8h.html#abbb9a53990f1ee3ca4ce9e430d93826f">More...</a><br /></td></tr>
+<tr class="separator:abbb9a53990f1ee3ca4ce9e430d93826f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7099c574cebc270affcc2fef5cab6b80"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a7099c574cebc270affcc2fef5cab6b80">nut_Factor_divtupcount</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors, uint64_t k, uint64_t modulus)</td></tr>
+<tr class="memdesc:a7099c574cebc270affcc2fef5cab6b80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the number of k-tuples with product n.  <a href="factorization_8h.html#a7099c574cebc270affcc2fef5cab6b80">More...</a><br /></td></tr>
+<tr class="separator:a7099c574cebc270affcc2fef5cab6b80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19a1f32d8d7197c9f60113616f10a5c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a19a1f32d8d7197c9f60113616f10a5c2">nut_Factor_ipow</a> (<a class="el" href="structnut__Factors.html">nut_Factors</a> *factors, uint64_t power)</td></tr>
 <tr class="memdesc:a19a1f32d8d7197c9f60113616f10a5c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raise a factorization to a power, ie multiply all exponents by a constant.  <a href="factorization_8h.html#a19a1f32d8d7197c9f60113616f10a5c2">More...</a><br /></td></tr>
 <tr class="separator:a19a1f32d8d7197c9f60113616f10a5c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0339dda40c0ea2f01873f469982a322"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#af0339dda40c0ea2f01873f469982a322">nut_Factor_phi</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors)</td></tr>
-<tr class="memdesc:af0339dda40c0ea2f01873f469982a322"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find Euler's Phi function, the number of coprime numbers less than n.  <a href="factorization_8h.html#af0339dda40c0ea2f01873f469982a322">More...</a><br /></td></tr>
-<tr class="separator:af0339dda40c0ea2f01873f469982a322"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add8819f2ba3596013368d1df1d0a93d9"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#add8819f2ba3596013368d1df1d0a93d9">nut_Factor_carmichael</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors)</td></tr>
-<tr class="memdesc:add8819f2ba3596013368d1df1d0a93d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find Carmichael's Lambda function, the smallest exponent m so a^m = 1 for all 0 &lt; a &lt; n.  <a href="factorization_8h.html#add8819f2ba3596013368d1df1d0a93d9">More...</a><br /></td></tr>
-<tr class="separator:add8819f2ba3596013368d1df1d0a93d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51cfdef241be59af777a83e6bd2503aa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a51cfdef241be59af777a83e6bd2503aa">NUT_ATTR_ACCESS</a> (read_only, 1) NUT_ATTR_ACCESS(read_write</td></tr>
-<tr class="memdesc:a51cfdef241be59af777a83e6bd2503aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call <a class="el" href="">forall_divisors</a> with temporarily allocated dfactors and pfactors structs.  <a href="factorization_8h.html#a51cfdef241be59af777a83e6bd2503aa">More...</a><br /></td></tr>
-<tr class="separator:a51cfdef241be59af777a83e6bd2503aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9abda9091fb2fcf758f069bf8a674412"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a9abda9091fb2fcf758f069bf8a674412">nut_Factor_phi</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors)</td></tr>
+<tr class="memdesc:a9abda9091fb2fcf758f069bf8a674412"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find Euler's Phi function, the number of coprime numbers less than n.  <a href="factorization_8h.html#a9abda9091fb2fcf758f069bf8a674412">More...</a><br /></td></tr>
+<tr class="separator:a9abda9091fb2fcf758f069bf8a674412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ac931c6a62bec58d63ee6043878315d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a0ac931c6a62bec58d63ee6043878315d">nut_Factor_carmichael</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors)</td></tr>
+<tr class="memdesc:a0ac931c6a62bec58d63ee6043878315d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find Carmichael's Lambda function, the smallest exponent m so a^m = 1 for all 0 &lt; a &lt; n.  <a href="factorization_8h.html#a0ac931c6a62bec58d63ee6043878315d">More...</a><br /></td></tr>
+<tr class="separator:a0ac931c6a62bec58d63ee6043878315d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c8e843ae366d9d94ce0bff300657199"><td class="memItemLeft" align="right" valign="top"><a id="a0c8e843ae366d9d94ce0bff300657199"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Factor_forall_divs_tmptmp</b> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors, int(*f)(const <a class="el" href="structnut__Factors.html">nut_Factors</a> *, uint64_t, void *), void *restrict data)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a0c8e843ae366d9d94ce0bff300657199">nut_Factor_forall_divs_tmptmp</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors, int(*f)(const <a class="el" href="structnut__Factors.html">nut_Factors</a> *, uint64_t, void *), void *restrict data)</td></tr>
+<tr class="memdesc:a0c8e843ae366d9d94ce0bff300657199"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call <a class="el" href="">forall_divisors</a> with temporarily allocated dfactors and pfactors structs. <br /></td></tr>
 <tr class="separator:a0c8e843ae366d9d94ce0bff300657199"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52bc42c310d8f576237fd6bf59aa7db1"><td class="memItemLeft" align="right" valign="top"><a id="a52bc42c310d8f576237fd6bf59aa7db1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>NUT_ATTR_ACCESS</b> (read_write, 4) NUT_ATTR_ACCESS(read_write</td></tr>
-<tr class="separator:a52bc42c310d8f576237fd6bf59aa7db1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92121419128c9016b2c012ec6fdf4aec"><td class="memItemLeft" align="right" valign="top"><a id="a92121419128c9016b2c012ec6fdf4aec"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Factor_forall_divs</b> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors, int(*f)(const <a class="el" href="structnut__Factors.html">nut_Factors</a> *, uint64_t, void *), void *data, <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict dfactors, <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict pfactors)</td></tr>
+<tr class="memitem:a92121419128c9016b2c012ec6fdf4aec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a92121419128c9016b2c012ec6fdf4aec">nut_Factor_forall_divs</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors, int(*f)(const <a class="el" href="structnut__Factors.html">nut_Factors</a> *, uint64_t, void *), void *data, <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict dfactors, <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict pfactors)</td></tr>
+<tr class="memdesc:a92121419128c9016b2c012ec6fdf4aec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call a given function on each divisor of a number, given its factorization.  <a href="factorization_8h.html#a92121419128c9016b2c012ec6fdf4aec">More...</a><br /></td></tr>
 <tr class="separator:a92121419128c9016b2c012ec6fdf4aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bcaa51dc194ca6075de84c5b5de29be"><td class="memItemLeft" align="right" valign="top"><a id="a8bcaa51dc194ca6075de84c5b5de29be"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Factor_forall_divs_le_tmptmp</b> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors, uint64_t d_max, int(*f)(const <a class="el" href="structnut__Factors.html">nut_Factors</a> *, uint64_t, void *), void *restrict data)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a8bcaa51dc194ca6075de84c5b5de29be">nut_Factor_forall_divs_le_tmptmp</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors, uint64_t d_max, int(*f)(const <a class="el" href="structnut__Factors.html">nut_Factors</a> *, uint64_t, void *), void *restrict data)</td></tr>
+<tr class="memdesc:a8bcaa51dc194ca6075de84c5b5de29be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call <a class="el" href="">forall_divisors_le</a> with temporarily allocated dfactors and pfactors structs. <br /></td></tr>
 <tr class="separator:a8bcaa51dc194ca6075de84c5b5de29be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c06680ab8a4bdde29502d4013ea0ad1"><td class="memItemLeft" align="right" valign="top"><a id="a2c06680ab8a4bdde29502d4013ea0ad1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>NUT_ATTR_ACCESS</b> (read_write, 5) NUT_ATTR_ACCESS(read_write</td></tr>
-<tr class="separator:a2c06680ab8a4bdde29502d4013ea0ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57b424ebab8bf8de4e2d8a6bcb5a588b"><td class="memItemLeft" align="right" valign="top"><a id="a57b424ebab8bf8de4e2d8a6bcb5a588b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Factor_forall_divs_le</b> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors, uint64_t d_max, int(*f)(const <a class="el" href="structnut__Factors.html">nut_Factors</a> *, uint64_t, void *), void *restrict data, <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict dfactors, <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict pfactors)</td></tr>
+<tr class="memitem:a57b424ebab8bf8de4e2d8a6bcb5a588b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a57b424ebab8bf8de4e2d8a6bcb5a588b">nut_Factor_forall_divs_le</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors, uint64_t d_max, int(*f)(const <a class="el" href="structnut__Factors.html">nut_Factors</a> *, uint64_t, void *), void *restrict data, <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict dfactors, <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict pfactors)</td></tr>
+<tr class="memdesc:a57b424ebab8bf8de4e2d8a6bcb5a588b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call a given function on each divisor of a number, given its factorization, skipping divisors over a given bound.  <a href="factorization_8h.html#a57b424ebab8bf8de4e2d8a6bcb5a588b">More...</a><br /></td></tr>
 <tr class="separator:a57b424ebab8bf8de4e2d8a6bcb5a588b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad23dcc7562e209acadb64a6e4fa8414f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#ad23dcc7562e209acadb64a6e4fa8414f">NUT_ATTR_ACCESS</a> (read_write, 1) NUT_ATTR_ACCESS(read_only</td></tr>
-<tr class="memdesc:ad23dcc7562e209acadb64a6e4fa8414f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print a factorization of a number.  <a href="factorization_8h.html#ad23dcc7562e209acadb64a6e4fa8414f">More...</a><br /></td></tr>
-<tr class="separator:ad23dcc7562e209acadb64a6e4fa8414f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c9fc3c6bf989efd453ac7453d8342a1"><td class="memItemLeft" align="right" valign="top"><a id="a6c9fc3c6bf989efd453ac7453d8342a1"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Factor_fprint</b> (FILE *restrict file, const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors)</td></tr>
+<tr class="memitem:a6c9fc3c6bf989efd453ac7453d8342a1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a6c9fc3c6bf989efd453ac7453d8342a1">nut_Factor_fprint</a> (FILE *restrict file, const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors)</td></tr>
+<tr class="memdesc:a6c9fc3c6bf989efd453ac7453d8342a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print a factorization of a number.  <a href="factorization_8h.html#a6c9fc3c6bf989efd453ac7453d8342a1">More...</a><br /></td></tr>
 <tr class="separator:a6c9fc3c6bf989efd453ac7453d8342a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a830a7ccc32e3e054804091b4ce8187cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a830a7ccc32e3e054804091b4ce8187cb">nut_Factor_append</a> (<a class="el" href="structnut__Factors.html">nut_Factors</a> *factors, uint64_t m, uint64_t k)</td></tr>
 <tr class="memdesc:a830a7ccc32e3e054804091b4ce8187cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a power of some prime to an existing factorization struct.  <a href="factorization_8h.html#a830a7ccc32e3e054804091b4ce8187cb">More...</a><br /></td></tr>
 <tr class="separator:a830a7ccc32e3e054804091b4ce8187cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab072eac902961986de4d94138ea73cf1"><td class="memItemLeft" align="right" valign="top"><a id="ab072eac902961986de4d94138ea73cf1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Factor_combine</b> (<a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors, const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors2, uint64_t k)</td></tr>
+<tr class="memitem:ab072eac902961986de4d94138ea73cf1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#ab072eac902961986de4d94138ea73cf1">nut_Factor_combine</a> (<a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors, const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors2, uint64_t k)</td></tr>
+<tr class="memdesc:ab072eac902961986de4d94138ea73cf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add all prime/power pairs in one factorization to another.  <a href="factorization_8h.html#ab072eac902961986de4d94138ea73cf1">More...</a><br /></td></tr>
 <tr class="separator:ab072eac902961986de4d94138ea73cf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0dc289669b695862eb026cef3187d856"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a0dc289669b695862eb026cef3187d856">nut_u64_is_prime_dmr</a> (uint64_t n)</td></tr>
-<tr class="memdesc:a0dc289669b695862eb026cef3187d856"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if n is prime using a deterministic Miller-Rabin test.  <a href="factorization_8h.html#a0dc289669b695862eb026cef3187d856">More...</a><br /></td></tr>
-<tr class="separator:a0dc289669b695862eb026cef3187d856"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94c9867d859d0c65b4878595ea501612"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a94c9867d859d0c65b4878595ea501612">nut_u64_next_prime_ge</a> (uint64_t n)</td></tr>
-<tr class="memdesc:a94c9867d859d0c65b4878595ea501612"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the next prime &gt;= n.  <a href="factorization_8h.html#a94c9867d859d0c65b4878595ea501612">More...</a><br /></td></tr>
-<tr class="separator:a94c9867d859d0c65b4878595ea501612"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a800b8004354c7cbb86f71ff9443c750a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a800b8004354c7cbb86f71ff9443c750a">NUT_ATTR_ACCESS</a> (read_only, 3, 2) NUT_ATTR_ACCESS(read_write</td></tr>
-<tr class="memdesc:a800b8004354c7cbb86f71ff9443c750a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factor out all powers of a given array of primes.  <a href="factorization_8h.html#a800b8004354c7cbb86f71ff9443c750a">More...</a><br /></td></tr>
-<tr class="separator:a800b8004354c7cbb86f71ff9443c750a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac214c0c250f3fb73d87441691a08e8aa"><td class="memItemLeft" align="right" valign="top"><a id="ac214c0c250f3fb73d87441691a08e8aa"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>nut_u64_factor_trial_div</b> (uint64_t n, uint64_t num_primes, const uint64_t primes[restrict static num_primes], <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors)</td></tr>
-<tr class="separator:ac214c0c250f3fb73d87441691a08e8aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a094a2a486994d386a66bf5905a960410"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a094a2a486994d386a66bf5905a960410">nut_u64_nth_root</a> (uint64_t a, uint64_t n)</td></tr>
-<tr class="memdesc:a094a2a486994d386a66bf5905a960410"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the floor of the nth root of a.  <a href="factorization_8h.html#a094a2a486994d386a66bf5905a960410">More...</a><br /></td></tr>
-<tr class="separator:a094a2a486994d386a66bf5905a960410"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b9c9161a7e6881ca778a4f5ef3fa53f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a3b9c9161a7e6881ca778a4f5ef3fa53f">NUT_ATTR_ACCESS</a> (write_only, 3) NUT_ATTR_ACCESS(write_only</td></tr>
-<tr class="memdesc:a3b9c9161a7e6881ca778a4f5ef3fa53f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a is a perfect power of some integer.  <a href="factorization_8h.html#a3b9c9161a7e6881ca778a4f5ef3fa53f">More...</a><br /></td></tr>
-<tr class="separator:a3b9c9161a7e6881ca778a4f5ef3fa53f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2783bcbef71c9084463093b7cb55fb76"><td class="memItemLeft" align="right" valign="top"><a id="a2783bcbef71c9084463093b7cb55fb76"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>nut_u64_is_perfect_power</b> (uint64_t a, uint64_t max, uint64_t *restrict _base, uint64_t *restrict _exp)</td></tr>
+<tr class="memitem:a48e4f1425cdf116059ee5e0f84348bd5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a48e4f1425cdf116059ee5e0f84348bd5">nut_u64_is_prime_dmr</a> (uint64_t n)</td></tr>
+<tr class="memdesc:a48e4f1425cdf116059ee5e0f84348bd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if n is prime using a deterministic Miller-Rabin test.  <a href="factorization_8h.html#a48e4f1425cdf116059ee5e0f84348bd5">More...</a><br /></td></tr>
+<tr class="separator:a48e4f1425cdf116059ee5e0f84348bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af100b74caf393425a7070f2acc1a1ec2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#af100b74caf393425a7070f2acc1a1ec2">nut_u64_next_prime_ge</a> (uint64_t n)</td></tr>
+<tr class="memdesc:af100b74caf393425a7070f2acc1a1ec2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the next prime &gt;= n.  <a href="factorization_8h.html#af100b74caf393425a7070f2acc1a1ec2">More...</a><br /></td></tr>
+<tr class="separator:af100b74caf393425a7070f2acc1a1ec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad81b28e5571235af292694f0f878eed1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#aae158eaae70da54bc82bfe48f0428eb7">NUT_ATTR_NODISCARD</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#ad81b28e5571235af292694f0f878eed1">nut_u64_factor_trial_div</a> (uint64_t n, uint64_t num_primes, const uint64_t primes[restrict static num_primes], <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors)</td></tr>
+<tr class="memdesc:ad81b28e5571235af292694f0f878eed1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factor out all powers of a given array of primes.  <a href="factorization_8h.html#ad81b28e5571235af292694f0f878eed1">More...</a><br /></td></tr>
+<tr class="separator:ad81b28e5571235af292694f0f878eed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17d2d8452d2f53bfe6be95d2d8cd21bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#aae158eaae70da54bc82bfe48f0428eb7">NUT_ATTR_NODISCARD</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a17d2d8452d2f53bfe6be95d2d8cd21bb">nut_u64_factor_heuristic</a> (uint64_t n, uint64_t num_primes, const uint64_t primes[restrict static num_primes], const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a> *restrict conf, <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors)</td></tr>
+<tr class="memdesc:a17d2d8452d2f53bfe6be95d2d8cd21bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factor a number using a variety of approaches based on its size.  <a href="factorization_8h.html#a17d2d8452d2f53bfe6be95d2d8cd21bb">More...</a><br /></td></tr>
+<tr class="separator:a17d2d8452d2f53bfe6be95d2d8cd21bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83b70a4d4fb8c7f9fa524c70a67afc38"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a83b70a4d4fb8c7f9fa524c70a67afc38">nut_u64_nth_root</a> (uint64_t a, uint64_t n)</td></tr>
+<tr class="memdesc:a83b70a4d4fb8c7f9fa524c70a67afc38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the floor of the nth root of a.  <a href="factorization_8h.html#a83b70a4d4fb8c7f9fa524c70a67afc38">More...</a><br /></td></tr>
+<tr class="separator:a83b70a4d4fb8c7f9fa524c70a67afc38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2783bcbef71c9084463093b7cb55fb76"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a2783bcbef71c9084463093b7cb55fb76">nut_u64_is_perfect_power</a> (uint64_t a, uint64_t max, uint64_t *restrict _base, uint64_t *restrict _exp)</td></tr>
+<tr class="memdesc:a2783bcbef71c9084463093b7cb55fb76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a is a perfect power of some integer.  <a href="factorization_8h.html#a2783bcbef71c9084463093b7cb55fb76">More...</a><br /></td></tr>
 <tr class="separator:a2783bcbef71c9084463093b7cb55fb76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4ca5739549c2256107a68a89f7a7b56"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#aa4ca5739549c2256107a68a89f7a7b56">nut_u64_factor1_pollard_rho</a> (uint64_t n, uint64_t x)</td></tr>
-<tr class="memdesc:aa4ca5739549c2256107a68a89f7a7b56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to find a factor of a number using Pollard's Rho algorithm with Floyd cycle finding.  <a href="factorization_8h.html#aa4ca5739549c2256107a68a89f7a7b56">More...</a><br /></td></tr>
-<tr class="separator:aa4ca5739549c2256107a68a89f7a7b56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1cedab962ac0298e4995c1b54f2a3e0"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#af1cedab962ac0298e4995c1b54f2a3e0">nut_u64_factor1_pollard_rho_brent</a> (uint64_t n, uint64_t x, uint64_t m)</td></tr>
-<tr class="memdesc:af1cedab962ac0298e4995c1b54f2a3e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to find a factor of a number using Pollard's Rho algorithm with Brent cycle finding and gcd coalescing.  <a href="factorization_8h.html#af1cedab962ac0298e4995c1b54f2a3e0">More...</a><br /></td></tr>
-<tr class="separator:af1cedab962ac0298e4995c1b54f2a3e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a102fafe0132a5467ed09dc016fc4deca"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a102fafe0132a5467ed09dc016fc4deca">nut_u64_factor1_lenstra</a> (int64_t n, int64_t x, int64_t y, int64_t a, int64_t B)</td></tr>
-<tr class="memdesc:a102fafe0132a5467ed09dc016fc4deca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to find a factor of a number using Lenstra ecf.  <a href="factorization_8h.html#a102fafe0132a5467ed09dc016fc4deca">More...</a><br /></td></tr>
-<tr class="separator:a102fafe0132a5467ed09dc016fc4deca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7bd7f87ea190ff4bab212582cfb3b0d"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#ac7bd7f87ea190ff4bab212582cfb3b0d">nut_u64_factor1_lenstra_montgomery</a> (int64_t n, int64_t x, int64_t y, int64_t a, int64_t B)</td></tr>
-<tr class="memdesc:ac7bd7f87ea190ff4bab212582cfb3b0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="factorization_8h.html#a102fafe0132a5467ed09dc016fc4deca">nut_u64_factor1_lenstra</a> but using a projective Montgomery curve and Montgomery ladder.  <a href="factorization_8h.html#ac7bd7f87ea190ff4bab212582cfb3b0d">More...</a><br /></td></tr>
-<tr class="separator:ac7bd7f87ea190ff4bab212582cfb3b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaca18db901b14c771139a2b199e92c2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#aaca18db901b14c771139a2b199e92c2e">nut_u64_factor1_pollard_rho</a> (uint64_t n, uint64_t x)</td></tr>
+<tr class="memdesc:aaca18db901b14c771139a2b199e92c2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to find a factor of a number using Pollard's Rho algorithm with Floyd cycle finding.  <a href="factorization_8h.html#aaca18db901b14c771139a2b199e92c2e">More...</a><br /></td></tr>
+<tr class="separator:aaca18db901b14c771139a2b199e92c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8795bf097ec71353cdd3e39b234761f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#ad8795bf097ec71353cdd3e39b234761f">nut_u64_factor1_pollard_rho_brent</a> (uint64_t n, uint64_t x, uint64_t m)</td></tr>
+<tr class="memdesc:ad8795bf097ec71353cdd3e39b234761f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to find a factor of a number using Pollard's Rho algorithm with Brent cycle finding and gcd coalescing.  <a href="factorization_8h.html#ad8795bf097ec71353cdd3e39b234761f">More...</a><br /></td></tr>
+<tr class="separator:ad8795bf097ec71353cdd3e39b234761f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c2f3e9578e5cb8925ecae35bbe71410"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a4c2f3e9578e5cb8925ecae35bbe71410">nut_u64_factor1_lenstra</a> (int64_t n, int64_t x, int64_t y, int64_t a, int64_t B)</td></tr>
+<tr class="memdesc:a4c2f3e9578e5cb8925ecae35bbe71410"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to find a factor of a number using Lenstra ecf.  <a href="factorization_8h.html#a4c2f3e9578e5cb8925ecae35bbe71410">More...</a><br /></td></tr>
+<tr class="separator:a4c2f3e9578e5cb8925ecae35bbe71410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28a6429f597edf2c64d5e19bf12d0423"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a28a6429f597edf2c64d5e19bf12d0423">nut_u64_factor1_lenstra_montgomery</a> (int64_t n, int64_t x, int64_t y, int64_t a, int64_t B)</td></tr>
+<tr class="memdesc:a28a6429f597edf2c64d5e19bf12d0423"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="factorization_8h.html#a4c2f3e9578e5cb8925ecae35bbe71410">nut_u64_factor1_lenstra</a> but using a projective Montgomery curve and Montgomery ladder.  <a href="factorization_8h.html#a28a6429f597edf2c64d5e19bf12d0423">More...</a><br /></td></tr>
+<tr class="separator:a28a6429f597edf2c64d5e19bf12d0423"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ae8c8ea55d6cfc6e989c02428663c4584"><td class="memItemLeft" align="right" valign="top"><a id="ae8c8ea55d6cfc6e989c02428663c4584"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>num_primes</b></td></tr>
-<tr class="separator:ae8c8ea55d6cfc6e989c02428663c4584"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf413fa5040e4fbb65d973c71beb876d"><td class="memItemLeft" align="right" valign="top"><a id="aaf413fa5040e4fbb65d973c71beb876d"></a>
-uint64_t const uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>primes</b> [restrict static num_primes]</td></tr>
-<tr class="separator:aaf413fa5040e4fbb65d973c71beb876d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade4e79cd6082480e6497e12053b7a732"><td class="memItemLeft" align="right" valign="top"><a id="ade4e79cd6082480e6497e12053b7a732"></a>
-uint64_t const uint64_t const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a> *restrict&#160;</td><td class="memItemRight" valign="bottom"><b>conf</b></td></tr>
-<tr class="separator:ade4e79cd6082480e6497e12053b7a732"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae93d257d69c323a53bc187cea0785a5f"><td class="memItemLeft" align="right" valign="top"><a id="ae93d257d69c323a53bc187cea0785a5f"></a>
-uint64_t const uint64_t const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a> *restrict <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict&#160;</td><td class="memItemRight" valign="bottom"><b>factors</b></td></tr>
-<tr class="separator:ae93d257d69c323a53bc187cea0785a5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3629c7b068fca6d74cc56e33283a8b2e"><td class="memItemLeft" align="right" valign="top">const uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a3629c7b068fca6d74cc56e33283a8b2e">nut_small_primes</a> [25]</td></tr>
 <tr class="memdesc:a3629c7b068fca6d74cc56e33283a8b2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">An array containing the 25 primes up to 100.  <a href="factorization_8h.html#a3629c7b068fca6d74cc56e33283a8b2e">More...</a><br /></td></tr>
 <tr class="separator:a3629c7b068fca6d74cc56e33283a8b2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a435a05668997a808999bf713833f41dc"><td class="memItemLeft" align="right" valign="top"><a id="a435a05668997a808999bf713833f41dc"></a>
 const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a435a05668997a808999bf713833f41dc">nut_default_factor_conf</a></td></tr>
-<tr class="memdesc:a435a05668997a808999bf713833f41dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for <a class="el" href="">nut_u64_factor_heuristic</a> Use if you don't want to tune the parameters or don't care. <br /></td></tr>
+<tr class="memdesc:a435a05668997a808999bf713833f41dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for <a class="el" href="factorization_8h.html#a17d2d8452d2f53bfe6be95d2d8cd21bb">nut_u64_factor_heuristic</a> Use if you don't want to tune the parameters or don't care. <br /></td></tr>
 <tr class="separator:a435a05668997a808999bf713833f41dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -296,14 +278,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a2cc9af2019214dbca0a96c10863c45c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cc9af2019214dbca0a96c10863c45c3">&#9670;&nbsp;</a></span>nut_make_Factors_w()</h2>
+<a id="a68ae1e577404fdf655e577a3886dcd3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68ae1e577404fdf655e577a3886dcd3f">&#9670;&nbsp;</a></span>nut_make_Factors_w()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structnut__Factors.html">nut_Factors</a>* nut_make_Factors_w </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#ac5dad36b30fdd76ddce141ee49748d98">NUT_ATTR_MALLOC</a> <a class="el" href="structnut__Factors.html">nut_Factors</a>* nut_make_Factors_w </td>
           <td>(</td>
           <td class="paramtype">uint64_t&#160;</td>
           <td class="paramname"><em>max_primes</em></td><td>)</td>
@@ -323,14 +305,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a0a7a7d6265a52b529aeca7757ea82cc2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a7a7d6265a52b529aeca7757ea82cc2">&#9670;&nbsp;</a></span>nut_make_Factors_ub()</h2>
+<a id="a486374f04085863d94317b23445d8f7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a486374f04085863d94317b23445d8f7e">&#9670;&nbsp;</a></span>nut_make_Factors_ub()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structnut__Factors.html">nut_Factors</a>* nut_make_Factors_ub </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#ac5dad36b30fdd76ddce141ee49748d98">NUT_ATTR_MALLOC</a> <a class="el" href="structnut__Factors.html">nut_Factors</a>* nut_make_Factors_ub </td>
           <td>(</td>
           <td class="paramtype">uint64_t&#160;</td>
           <td class="paramname"><em>n</em>, </td>
@@ -368,14 +350,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a0c95682b8d28b1a2881cce9c8f2b5ba3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c95682b8d28b1a2881cce9c8f2b5ba3">&#9670;&nbsp;</a></span>nut_Factors_copy()</h2>
+<a id="a0fbd6f1b89d78911f4d773481812efcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fbd6f1b89d78911f4d773481812efcc">&#9670;&nbsp;</a></span>nut_Factors_copy()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structnut__Factors.html">nut_Factors</a>* nut_Factors_copy </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#ac5dad36b30fdd76ddce141ee49748d98">NUT_ATTR_MALLOC</a> <a class="el" href="structnut__Factors.html">nut_Factors</a>* nut_Factors_copy </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td>
           <td class="paramname"><em>factors</em></td><td>)</td>
@@ -395,14 +377,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a91e0d733fa61c3d05bee2ffbb37d2366"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91e0d733fa61c3d05bee2ffbb37d2366">&#9670;&nbsp;</a></span>nut_Factors_prod()</h2>
+<a id="a36decdbb615f72803d65bbffcc7bc3f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36decdbb615f72803d65bbffcc7bc3f6">&#9670;&nbsp;</a></span>nut_Factors_prod()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t nut_Factors_prod </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t nut_Factors_prod </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td>
           <td class="paramname"><em>factors</em></td><td>)</td>
@@ -414,7 +396,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 <p>Multiply a factorization into a number. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>pointer to factors struct, as obtained from <a class="el" href="">nut_u64_factor_trial_div</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>pointer to factors struct, as obtained from <a class="el" href="factorization_8h.html#ad81b28e5571235af292694f0f878eed1">nut_u64_factor_trial_div</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -422,14 +404,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a08f155937eaf4a13b8cc4c3a20eb3f01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08f155937eaf4a13b8cc4c3a20eb3f01">&#9670;&nbsp;</a></span>nut_Factor_divcount()</h2>
+<a id="a64fbbcd12b9fc33a8e832633a58496a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64fbbcd12b9fc33a8e832633a58496a6">&#9670;&nbsp;</a></span>nut_Factor_divcount()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t nut_Factor_divcount </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t nut_Factor_divcount </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td>
           <td class="paramname"><em>factors</em></td><td>)</td>
@@ -441,7 +423,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 <p>Find the number of divisors of a number given its prime factorization, including itself and 1. </p>
 <p>Works by multiplying power + 1 for all prime factors </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>pointer to factors struct, as obtained from <a class="el" href="">nut_u64_factor_trial_div</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>pointer to factors struct, as obtained from <a class="el" href="factorization_8h.html#ad81b28e5571235af292694f0f878eed1">nut_u64_factor_trial_div</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -449,14 +431,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a43539d06d26336f9479282176a1899cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43539d06d26336f9479282176a1899cd">&#9670;&nbsp;</a></span>nut_Factor_divsum()</h2>
+<a id="addc45f8dffe0fdb32ebbcb7510b700bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addc45f8dffe0fdb32ebbcb7510b700bd">&#9670;&nbsp;</a></span>nut_Factor_divsum()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t nut_Factor_divsum </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t nut_Factor_divsum </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td>
           <td class="paramname"><em>factors</em></td><td>)</td>
@@ -468,7 +450,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 <p>Find the sum of divisors of a number given its prime factorization, including itself and 1. </p>
 <p>Works by multiplying (prime**(power+1)-1)/(prime-1) for all prime factors </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>pointer to factors struct, as obtained from <a class="el" href="">nut_u64_factor_trial_div</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>pointer to factors struct, as obtained from <a class="el" href="factorization_8h.html#ad81b28e5571235af292694f0f878eed1">nut_u64_factor_trial_div</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -476,14 +458,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a1fac9466be4add4d561d9a8c14ea3f24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fac9466be4add4d561d9a8c14ea3f24">&#9670;&nbsp;</a></span>nut_Factor_divpowsum()</h2>
+<a id="abbb9a53990f1ee3ca4ce9e430d93826f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbb9a53990f1ee3ca4ce9e430d93826f">&#9670;&nbsp;</a></span>nut_Factor_divpowsum()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t nut_Factor_divpowsum </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t nut_Factor_divpowsum </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td>
           <td class="paramname"><em>factors</em>, </td>
@@ -505,7 +487,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 <p>Find the sum of powers of divisors of a number given its prime factorization, including itself and 1. </p>
 <p>Note this is NOT the same as the sum of divisors of a number. Works by multiplying (prime**((power+1)*e)-1)/(prime**e-1) for all prime factors, where power is the power of each prime and e is the power of divisors to sum </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>pointer to factors struct, as obtained from <a class="el" href="">nut_u64_factor_trial_div</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>pointer to factors struct, as obtained from <a class="el" href="factorization_8h.html#ad81b28e5571235af292694f0f878eed1">nut_u64_factor_trial_div</a> </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">power</td><td>power of divisors to sum </td></tr>
   </table>
   </dd>
@@ -514,14 +496,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a0e848ece5d9ab0a2953ad1859f71a42a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e848ece5d9ab0a2953ad1859f71a42a">&#9670;&nbsp;</a></span>nut_Factor_divtupcount()</h2>
+<a id="a7099c574cebc270affcc2fef5cab6b80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7099c574cebc270affcc2fef5cab6b80">&#9670;&nbsp;</a></span>nut_Factor_divtupcount()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t nut_Factor_divtupcount </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t nut_Factor_divtupcount </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td>
           <td class="paramname"><em>factors</em>, </td>
@@ -549,7 +531,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 <p>Find the number of k-tuples with product n. </p>
 <p>given the factorization of n. Works by multiplying binom(power + k, k) for all prime factors, where power is the power of eaach prime </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>pointer to factors struct, as obtained from <a class="el" href="">nut_u64_factor_trial_div</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>pointer to factors struct, as obtained from <a class="el" href="factorization_8h.html#ad81b28e5571235af292694f0f878eed1">nut_u64_factor_trial_div</a> </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">k</td><td>tuple length </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">modulus</td><td>modulus to reduce answer by </td></tr>
   </table>
@@ -596,14 +578,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="af0339dda40c0ea2f01873f469982a322"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0339dda40c0ea2f01873f469982a322">&#9670;&nbsp;</a></span>nut_Factor_phi()</h2>
+<a id="a9abda9091fb2fcf758f069bf8a674412"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9abda9091fb2fcf758f069bf8a674412">&#9670;&nbsp;</a></span>nut_Factor_phi()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t nut_Factor_phi </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t nut_Factor_phi </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td>
           <td class="paramname"><em>factors</em></td><td>)</td>
@@ -623,14 +605,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="add8819f2ba3596013368d1df1d0a93d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add8819f2ba3596013368d1df1d0a93d9">&#9670;&nbsp;</a></span>nut_Factor_carmichael()</h2>
+<a id="a0ac931c6a62bec58d63ee6043878315d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ac931c6a62bec58d63ee6043878315d">&#9670;&nbsp;</a></span>nut_Factor_carmichael()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t nut_Factor_carmichael </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t nut_Factor_carmichael </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td>
           <td class="paramname"><em>factors</em></td><td>)</td>
@@ -650,23 +632,41 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a51cfdef241be59af777a83e6bd2503aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51cfdef241be59af777a83e6bd2503aa">&#9670;&nbsp;</a></span>NUT_ATTR_ACCESS() <span class="overload">[1/4]</span></h2>
+<a id="a92121419128c9016b2c012ec6fdf4aec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92121419128c9016b2c012ec6fdf4aec">&#9670;&nbsp;</a></span>nut_Factor_forall_divs()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NUT_ATTR_ACCESS </td>
+          <td class="memname">int nut_Factor_forall_divs </td>
           <td>(</td>
-          <td class="paramtype">read_only&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict&#160;</td>
+          <td class="paramname"><em>factors</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">1&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">int(*)(const <a class="el" href="structnut__Factors.html">nut_Factors</a> *, uint64_t, void *)&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict&#160;</td>
+          <td class="paramname"><em>dfactors</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict&#160;</td>
+          <td class="paramname"><em>pfactors</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -676,10 +676,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
       </table>
 </div><div class="memdoc">
 
-<p>Call <a class="el" href="">forall_divisors</a> with temporarily allocated dfactors and pfactors structs. </p>
-<p>Call a given function on each divisor of a number, given its factorization, skipping divisors over a given bound.</p>
-<p>Call <a class="el" href="">forall_divisors_le</a> with temporarily allocated dfactors and pfactors structs.</p>
-<p>Call a given function on each divisor of a number, given its factorization.</p>
+<p>Call a given function on each divisor of a number, given its factorization. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>the factorization of n for which to compute all divisors </td></tr>
@@ -690,7 +687,61 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 if the callback never returned 1 and all divisors were visited, or 1 if the callback ever returned nonzero.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if the callback never returned 1 and all divisors were visited, or 1 if the callback ever returned nonzero. </dd></dl>
+
+</div>
+</div>
+<a id="a57b424ebab8bf8de4e2d8a6bcb5a588b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57b424ebab8bf8de4e2d8a6bcb5a588b">&#9670;&nbsp;</a></span>nut_Factor_forall_divs_le()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int nut_Factor_forall_divs_le </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict&#160;</td>
+          <td class="paramname"><em>factors</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>d_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int(*)(const <a class="el" href="structnut__Factors.html">nut_Factors</a> *, uint64_t, void *)&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *restrict&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict&#160;</td>
+          <td class="paramname"><em>dfactors</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict&#160;</td>
+          <td class="paramname"><em>pfactors</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Call a given function on each divisor of a number, given its factorization, skipping divisors over a given bound. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>the factorization of n for which to compute all divisors </td></tr>
@@ -706,23 +757,23 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="ad23dcc7562e209acadb64a6e4fa8414f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad23dcc7562e209acadb64a6e4fa8414f">&#9670;&nbsp;</a></span>NUT_ATTR_ACCESS() <span class="overload">[2/4]</span></h2>
+<a id="a6c9fc3c6bf989efd453ac7453d8342a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c9fc3c6bf989efd453ac7453d8342a1">&#9670;&nbsp;</a></span>nut_Factor_fprint()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NUT_ATTR_ACCESS </td>
+          <td class="memname">int nut_Factor_fprint </td>
           <td>(</td>
-          <td class="paramtype">read_write&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">FILE *restrict&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">1&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict&#160;</td>
+          <td class="paramname"><em>factors</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -733,7 +784,6 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 </div><div class="memdoc">
 
 <p>Print a factorization of a number. </p>
-<p>Add all prime/power pairs in one factorization to another.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">file</td><td>pointer to file to print to </td></tr>
@@ -741,15 +791,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>number of characters printed</dd></dl>
-<p>If both inputs are sorted, the result will be sorted and no dupliate entries will be created. Acts as if <a class="el" href="">factors_append</a> were called repeatedly. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">factors</td><td>pointer to factorization struct which should be extended </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">factors2</td><td>pointer to factorization struct whose entries will be added to the other struct </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">k</td><td>power to multiply entries of factors2 by, for if some composite number m was discovered where m^k divides n and we have factored m </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>number of characters printed </dd></dl>
 
 </div>
 </div>
@@ -797,14 +839,58 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a0dc289669b695862eb026cef3187d856"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0dc289669b695862eb026cef3187d856">&#9670;&nbsp;</a></span>nut_u64_is_prime_dmr()</h2>
+<a id="ab072eac902961986de4d94138ea73cf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab072eac902961986de4d94138ea73cf1">&#9670;&nbsp;</a></span>nut_Factor_combine()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool nut_u64_is_prime_dmr </td>
+          <td class="memname">void nut_Factor_combine </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict&#160;</td>
+          <td class="paramname"><em>factors</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict&#160;</td>
+          <td class="paramname"><em>factors2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>k</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add all prime/power pairs in one factorization to another. </p>
+<p>If both inputs are sorted, the result will be sorted and no dupliate entries will be created. Acts as if <a class="el" href="">factors_append</a> were called repeatedly. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">factors</td><td>pointer to factorization struct which should be extended </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">factors2</td><td>pointer to factorization struct whose entries will be added to the other struct </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">k</td><td>power to multiply entries of factors2 by, for if some composite number m was discovered where m^k divides n and we have factored m </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a48e4f1425cdf116059ee5e0f84348bd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48e4f1425cdf116059ee5e0f84348bd5">&#9670;&nbsp;</a></span>nut_u64_is_prime_dmr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> bool nut_u64_is_prime_dmr </td>
           <td>(</td>
           <td class="paramtype">uint64_t&#160;</td>
           <td class="paramname"><em>n</em></td><td>)</td>
@@ -824,14 +910,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a94c9867d859d0c65b4878595ea501612"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94c9867d859d0c65b4878595ea501612">&#9670;&nbsp;</a></span>nut_u64_next_prime_ge()</h2>
+<a id="af100b74caf393425a7070f2acc1a1ec2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af100b74caf393425a7070f2acc1a1ec2">&#9670;&nbsp;</a></span>nut_u64_next_prime_ge()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t nut_u64_next_prime_ge </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> uint64_t nut_u64_next_prime_ge </td>
           <td>(</td>
           <td class="paramtype">uint64_t&#160;</td>
           <td class="paramname"><em>n</em></td><td>)</td>
@@ -851,29 +937,35 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a800b8004354c7cbb86f71ff9443c750a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a800b8004354c7cbb86f71ff9443c750a">&#9670;&nbsp;</a></span>NUT_ATTR_ACCESS() <span class="overload">[3/4]</span></h2>
+<a id="ad81b28e5571235af292694f0f878eed1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad81b28e5571235af292694f0f878eed1">&#9670;&nbsp;</a></span>nut_u64_factor_trial_div()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NUT_ATTR_ACCESS </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#aae158eaae70da54bc82bfe48f0428eb7">NUT_ATTR_NODISCARD</a> uint64_t nut_u64_factor_trial_div </td>
           <td>(</td>
-          <td class="paramtype">read_only&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">3&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>num_primes</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">2&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">const uint64_t&#160;</td>
+          <td class="paramname"><em>primes</em>[restrict static num_primes], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict&#160;</td>
+          <td class="paramname"><em>factors</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -884,8 +976,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 </div><div class="memdoc">
 
 <p>Factor out all powers of a given array of primes. </p>
-<p>Factor a number using a variety of approaches based on its size.</p>
-<p>Primesieve is a good general source for primes, but the api for this function is designed to allow giving a specialized list of primes like only primes equal to 1 mod 6 if it is known that all factors have some form, or to provide an empty list when this function is used in a more generic context like <a class="el" href="">nut_u64_factor_heuristic</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Primesieve is a good general source for primes, but the api for this function is designed to allow giving a specialized list of primes like only primes equal to 1 mod 6 if it is known that all factors have some form, or to provide an empty list when this function is used in a more generic context like <a class="el" href="factorization_8h.html#a17d2d8452d2f53bfe6be95d2d8cd21bb">nut_u64_factor_heuristic</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>the number to factor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">num_primes</td><td>the number of primes in the array </td></tr>
@@ -894,8 +985,56 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>n with all factors found and stored in factors divided out. Thus if n factors completely over the given primes, 1 is returned.</dd></dl>
-<p>If conf-&gt;pollard_max is greater than 3, the primes array should include at least 2 and 5 to avoid an infinite loop since <a class="el" href="factorization_8h.html#aa4ca5739549c2256107a68a89f7a7b56">nut_u64_factor1_pollard_rho</a> can't factor 4 or 25. Currently a configuration struct must be passed. Kraitcheck methods (quadratic sieve and number field sieve) are not implemented because they are useless on 64 bit integers. Parameters to Pollard-Rho-Brent with gcd aggregation and Lenstra ecf are not tuned by this function. </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="section return"><dt>Returns</dt><dd>n with all factors found and stored in factors divided out. Thus if n factors completely over the given primes, 1 is returned. </dd></dl>
+
+</div>
+</div>
+<a id="a17d2d8452d2f53bfe6be95d2d8cd21bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17d2d8452d2f53bfe6be95d2d8cd21bb">&#9670;&nbsp;</a></span>nut_u64_factor_heuristic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="modular__math_8h.html#aae158eaae70da54bc82bfe48f0428eb7">NUT_ATTR_NODISCARD</a> uint64_t nut_u64_factor_heuristic </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>num_primes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint64_t&#160;</td>
+          <td class="paramname"><em>primes</em>[restrict static num_primes], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a> *restrict&#160;</td>
+          <td class="paramname"><em>conf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict&#160;</td>
+          <td class="paramname"><em>factors</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Factor a number using a variety of approaches based on its size. </p>
+<p>If conf-&gt;pollard_max is greater than 3, the primes array should include at least 2 and 5 to avoid an infinite loop since <a class="el" href="factorization_8h.html#aaca18db901b14c771139a2b199e92c2e">nut_u64_factor1_pollard_rho</a> can't factor 4 or 25. Currently a configuration struct must be passed. Kraitcheck methods (quadratic sieve and number field sieve) are not implemented because they are useless on 64 bit integers. Parameters to Pollard-Rho-Brent with gcd aggregation and Lenstra ecf are not tuned by this function. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>the number to factor </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">num_primes</td><td>the number of primes in the array to try trial division on (use 25 if using <a class="el" href="factorization_8h.html#a3629c7b068fca6d74cc56e33283a8b2e">nut_small_primes</a>) </td></tr>
@@ -909,14 +1048,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a094a2a486994d386a66bf5905a960410"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a094a2a486994d386a66bf5905a960410">&#9670;&nbsp;</a></span>nut_u64_nth_root()</h2>
+<a id="a83b70a4d4fb8c7f9fa524c70a67afc38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83b70a4d4fb8c7f9fa524c70a67afc38">&#9670;&nbsp;</a></span>nut_u64_nth_root()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t nut_u64_nth_root </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> uint64_t nut_u64_nth_root </td>
           <td>(</td>
           <td class="paramtype">uint64_t&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -947,23 +1086,35 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a3b9c9161a7e6881ca778a4f5ef3fa53f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b9c9161a7e6881ca778a4f5ef3fa53f">&#9670;&nbsp;</a></span>NUT_ATTR_ACCESS() <span class="overload">[4/4]</span></h2>
+<a id="a2783bcbef71c9084463093b7cb55fb76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2783bcbef71c9084463093b7cb55fb76">&#9670;&nbsp;</a></span>nut_u64_is_perfect_power()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NUT_ATTR_ACCESS </td>
+          <td class="memname">bool nut_u64_is_perfect_power </td>
           <td>(</td>
-          <td class="paramtype">write_only&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">3&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t *restrict&#160;</td>
+          <td class="paramname"><em>_base</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t *restrict&#160;</td>
+          <td class="paramname"><em>_exp</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -974,7 +1125,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 </div><div class="memdoc">
 
 <p>Check if a is a perfect power of some integer. </p>
-<p>Used in <a class="el" href="">nut_u64_factor_heuristic</a>. max is the max exponent a could possibly be, which is limited because it is a uint64_t. If nothing is known about a, then the max exponent it could be is 63, if it were 2**63. However, if we know that the base of a must be larger than some minimum, such as if we know a is not divisible by any primes up to some point, then we can set a lower limit on the max exponent. For example, if a is 2-rough (not divisible by any primes &lt;= 2), then the minimum possible base is 3, so the maximal exponent is 40 instead. For all primes in the nut_small_primes array, the max exponents are as follows: 2-rough -&gt; min base 3 -&gt; max exponent 40 3 -&gt; 5 -&gt; 27 5 -&gt; 7 -&gt; 22 7 -&gt; 11 -&gt; 18 11 -&gt; 13 -&gt; 17 13 -&gt; 17 -&gt; 15 19 -&gt; 23 -&gt; 14 23 -&gt; 29 -&gt; 13 29 -&gt; 31 -&gt; 12 37 -&gt; 41 -&gt; 11 57 -&gt; 59 -&gt; 10 83 -&gt; 89 -&gt; 9 and going over 100: 137 -&gt; 139 -&gt; 8 251 -&gt; 257 -&gt; 7 563 -&gt; 569 -&gt; 6 1621 -&gt; 1627 -&gt; 5 7129 -&gt; 7151 -&gt; 4 65521 -&gt; 65537 -&gt; 3 2642239 -&gt; 2642257 -&gt; 2 4294967291 -&gt; 4294967311 -&gt; 1 The max exponent can also be brought down if a is known to be small, but depending on context it may or may not be worth computing log(a)/log(p) where p is the largest prime not known to not divide a. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used in <a class="el" href="factorization_8h.html#a17d2d8452d2f53bfe6be95d2d8cd21bb">nut_u64_factor_heuristic</a>. max is the max exponent a could possibly be, which is limited because it is a uint64_t. If nothing is known about a, then the max exponent it could be is 63, if it were 2**63. However, if we know that the base of a must be larger than some minimum, such as if we know a is not divisible by any primes up to some point, then we can set a lower limit on the max exponent. For example, if a is 2-rough (not divisible by any primes &lt;= 2), then the minimum possible base is 3, so the maximal exponent is 40 instead. For all primes in the nut_small_primes array, the max exponents are as follows: 2-rough -&gt; min base 3 -&gt; max exponent 40 3 -&gt; 5 -&gt; 27 5 -&gt; 7 -&gt; 22 7 -&gt; 11 -&gt; 18 11 -&gt; 13 -&gt; 17 13 -&gt; 17 -&gt; 15 19 -&gt; 23 -&gt; 14 23 -&gt; 29 -&gt; 13 29 -&gt; 31 -&gt; 12 37 -&gt; 41 -&gt; 11 57 -&gt; 59 -&gt; 10 83 -&gt; 89 -&gt; 9 and going over 100: 137 -&gt; 139 -&gt; 8 251 -&gt; 257 -&gt; 7 563 -&gt; 569 -&gt; 6 1621 -&gt; 1627 -&gt; 5 7129 -&gt; 7151 -&gt; 4 65521 -&gt; 65537 -&gt; 3 2642239 -&gt; 2642257 -&gt; 2 4294967291 -&gt; 4294967311 -&gt; 1 The max exponent can also be brought down if a is known to be small, but depending on context it may or may not be worth computing log(a)/log(p) where p is the largest prime not known to not divide a. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>the number to check for being a perfect power </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>the max exponent a could possibly be. Use eg 63 if unknown, 11 if a has had all factors of primes up to 47 removed. </td></tr>
@@ -987,14 +1138,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="aa4ca5739549c2256107a68a89f7a7b56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4ca5739549c2256107a68a89f7a7b56">&#9670;&nbsp;</a></span>nut_u64_factor1_pollard_rho()</h2>
+<a id="aaca18db901b14c771139a2b199e92c2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaca18db901b14c771139a2b199e92c2e">&#9670;&nbsp;</a></span>nut_u64_factor1_pollard_rho()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t nut_u64_factor1_pollard_rho </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> uint64_t nut_u64_factor1_pollard_rho </td>
           <td>(</td>
           <td class="paramtype">uint64_t&#160;</td>
           <td class="paramname"><em>n</em>, </td>
@@ -1025,14 +1176,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="af1cedab962ac0298e4995c1b54f2a3e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1cedab962ac0298e4995c1b54f2a3e0">&#9670;&nbsp;</a></span>nut_u64_factor1_pollard_rho_brent()</h2>
+<a id="ad8795bf097ec71353cdd3e39b234761f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8795bf097ec71353cdd3e39b234761f">&#9670;&nbsp;</a></span>nut_u64_factor1_pollard_rho_brent()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t nut_u64_factor1_pollard_rho_brent </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> uint64_t nut_u64_factor1_pollard_rho_brent </td>
           <td>(</td>
           <td class="paramtype">uint64_t&#160;</td>
           <td class="paramname"><em>n</em>, </td>
@@ -1070,14 +1221,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="a102fafe0132a5467ed09dc016fc4deca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a102fafe0132a5467ed09dc016fc4deca">&#9670;&nbsp;</a></span>nut_u64_factor1_lenstra()</h2>
+<a id="a4c2f3e9578e5cb8925ecae35bbe71410"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c2f3e9578e5cb8925ecae35bbe71410">&#9670;&nbsp;</a></span>nut_u64_factor1_lenstra()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int64_t nut_u64_factor1_lenstra </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> int64_t nut_u64_factor1_lenstra </td>
           <td>(</td>
           <td class="paramtype">int64_t&#160;</td>
           <td class="paramname"><em>n</em>, </td>
@@ -1127,14 +1278,14 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 
 </div>
 </div>
-<a id="ac7bd7f87ea190ff4bab212582cfb3b0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7bd7f87ea190ff4bab212582cfb3b0d">&#9670;&nbsp;</a></span>nut_u64_factor1_lenstra_montgomery()</h2>
+<a id="a28a6429f597edf2c64d5e19bf12d0423"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28a6429f597edf2c64d5e19bf12d0423">&#9670;&nbsp;</a></span>nut_u64_factor1_lenstra_montgomery()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int64_t nut_u64_factor1_lenstra_montgomery </td>
+          <td class="memname"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> int64_t nut_u64_factor1_lenstra_montgomery </td>
           <td>(</td>
           <td class="paramtype">int64_t&#160;</td>
           <td class="paramname"><em>n</em>, </td>
@@ -1171,7 +1322,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
       </table>
 </div><div class="memdoc">
 
-<p>Same as <a class="el" href="factorization_8h.html#a102fafe0132a5467ed09dc016fc4deca">nut_u64_factor1_lenstra</a> but using a projective Montgomery curve and Montgomery ladder. </p>
+<p>Same as <a class="el" href="factorization_8h.html#a4c2f3e9578e5cb8925ecae35bbe71410">nut_u64_factor1_lenstra</a> but using a projective Montgomery curve and Montgomery ladder. </p>
 <p>Instead of an affine Wierstrass curve and binary multiplication. This is supposed to be faster but seems to be about the same. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>number to find a factor of </td></tr>
@@ -1206,7 +1357,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 </div><div class="memdoc">
 
 <p>An array containing the 25 primes up to 100. </p>
-<p><a class="el" href="factorization_8h.html#aa4ca5739549c2256107a68a89f7a7b56">nut_u64_factor1_pollard_rho</a> and <a class="el" href="factorization_8h.html#af1cedab962ac0298e4995c1b54f2a3e0">nut_u64_factor1_pollard_rho_brent</a> can't find factors of 4 or 25 using the default polynomial, so if using <a class="el" href="">nut_u64_factor_heuristic</a> at least these primes should be used for trial division if the configuration allows pollard rho to be called. </p>
+<p><a class="el" href="factorization_8h.html#aaca18db901b14c771139a2b199e92c2e">nut_u64_factor1_pollard_rho</a> and <a class="el" href="factorization_8h.html#ad8795bf097ec71353cdd3e39b234761f">nut_u64_factor1_pollard_rho_brent</a> can't find factors of 4 or 25 using the default polynomial, so if using <a class="el" href="factorization_8h.html#a17d2d8452d2f53bfe6be95d2d8cd21bb">nut_u64_factor_heuristic</a> at least these primes should be used for trial division if the configuration allows pollard rho to be called. </p>
 
 </div>
 </div>
@@ -1217,7 +1368,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="factorization_8h.html">factorization.h</a></li>
-    <li class="footer">Generated on Mon Oct 30 2023 20:16:38 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jan 30 2024 01:27:08 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

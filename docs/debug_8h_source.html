@@ -17,6 +17,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen_awesome.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen_awesome_sidebar.css" rel="stylesheet" type="text/css"/>
@@ -114,30 +121,33 @@ $(document).ready(function(){initNavTree('debug_8h_source.html',''); initResizab
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="modular__math_8h.html">nut/modular_math.h</a>&gt;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;[[gnu::artificial]]</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<a class="code" href="debug_8h.html#a24d19e46f3777851166e00069dd6a3f1">NUT_ATTR_ACCESS</a>(read_write, 1)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<a class="code" href="modular__math_8h.html#a7524889b84956587523e5014112fab3a">NUT_ATTR_ARTIFICIAL</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<a class="code" href="modular__math_8h.html#a7479a653e2f5c148b3d4b5b7243e7702">NUT_ATTR_ACCESS</a>(read_write, 1)</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;static inline <span class="keywordtype">void</span> cleanup_free(<span class="keywordtype">void</span> *_p){</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    free(*(<span class="keywordtype">void</span>**)_p);</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    *(<span class="keywordtype">void</span>**)_p = NULL;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;[[gnu::nonnull(1)]]</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="debug_8h.html#a24d19e46f3777851166e00069dd6a3f1">   27</a></span>&#160;<a class="code" href="debug_8h.html#a24d19e46f3777851166e00069dd6a3f1">NUT_ATTR_ACCESS</a>(read_only, 1) <a class="code" href="debug_8h.html#a24d19e46f3777851166e00069dd6a3f1">NUT_ATTR_ACCESS</a>(none, 2)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;static inline <span class="keywordtype">void</span> check_alloc(const <span class="keywordtype">char</span> *restrict what, const <span class="keywordtype">void</span> *restrict buf){</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">if</span>(!buf){</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;\e[1;31mAllocation failed for %s!\e[0m\n&quot;</span>, what);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        exit(0);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;[[gnu::nonnull(1)]]</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<a class="code" href="debug_8h.html#a24d19e46f3777851166e00069dd6a3f1">NUT_ATTR_ACCESS</a>(read_only, 1)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;static inline <span class="keywordtype">void</span> print_summary(const <span class="keywordtype">char</span> *what, uint64_t correct, uint64_t total){</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;%s (found %s for %&quot;</span>PRIu64<span class="stringliteral">&quot;/%&quot;</span>PRIu64<span class="stringliteral">&quot; numbers correctly)\e[0m\n&quot;</span>, correct == total ? <span class="stringliteral">&quot;\e[1;32mPASSED&quot;</span> : <span class="stringliteral">&quot;\e[1;31mFAILED&quot;</span>, what, correct, total);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="ttc" id="adebug_8h_html_a24d19e46f3777851166e00069dd6a3f1"><div class="ttname"><a href="debug_8h.html#a24d19e46f3777851166e00069dd6a3f1">NUT_ATTR_ACCESS</a></div><div class="ttdeci">NUT_ATTR_ACCESS(read_only, 1) NUT_ATTR_ACCESS(none</div><div class="ttdoc">Call a given function on each divisor of a number, given its factorization.</div></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<a class="code" href="modular__math_8h.html#a7581a5842fc5c4c142d42e87052938ae">NUT_ATTR_NONNULL</a>(1)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<a class="code" href="modular__math_8h.html#a7479a653e2f5c148b3d4b5b7243e7702">NUT_ATTR_ACCESS</a>(read_only, 1)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<a class="code" href="modular__math_8h.html#a7479a653e2f5c148b3d4b5b7243e7702">NUT_ATTR_ACCESS</a>(none, 2)</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;static inline <span class="keywordtype">void</span> check_alloc(const <span class="keywordtype">char</span> *restrict what, const <span class="keywordtype">void</span> *restrict buf){</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">if</span>(!buf){</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;\e[1;31mAllocation failed for %s!\e[0m\n&quot;</span>, what);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        exit(0);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<a class="code" href="modular__math_8h.html#a7581a5842fc5c4c142d42e87052938ae">NUT_ATTR_NONNULL</a>(1)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<a class="code" href="modular__math_8h.html#a7479a653e2f5c148b3d4b5b7243e7702">NUT_ATTR_ACCESS</a>(read_only, 1)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;static inline <span class="keywordtype">void</span> print_summary(const <span class="keywordtype">char</span> *what, uint64_t correct, uint64_t total){</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;%s (found %s for %&quot;</span>PRIu64<span class="stringliteral">&quot;/%&quot;</span>PRIu64<span class="stringliteral">&quot; numbers correctly)\e[0m\n&quot;</span>, correct == total ? <span class="stringliteral">&quot;\e[1;32mPASSED&quot;</span> : <span class="stringliteral">&quot;\e[1;31mFAILED&quot;</span>, what, correct, total);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="ttc" id="amodular__math_8h_html"><div class="ttname"><a href="modular__math_8h.html">modular_math.h</a></div></div>
+<div class="ttc" id="amodular__math_8h_html_a7479a653e2f5c148b3d4b5b7243e7702"><div class="ttname"><a href="modular__math_8h.html#a7479a653e2f5c148b3d4b5b7243e7702">NUT_ATTR_ACCESS</a></div><div class="ttdeci">#define NUT_ATTR_ACCESS(...)</div><div class="ttdoc">Wrapper for gcc's access function annotation - no clang equivalent, and currently disabled because it...</div><div class="ttdef"><b>Definition:</b> <a href="modular__math_8h_source.html#l00042">modular_math.h:42</a></div></div>
+<div class="ttc" id="amodular__math_8h_html_a7524889b84956587523e5014112fab3a"><div class="ttname"><a href="modular__math_8h.html#a7524889b84956587523e5014112fab3a">NUT_ATTR_ARTIFICIAL</a></div><div class="ttdeci">#define NUT_ATTR_ARTIFICIAL</div><div class="ttdoc">Wrapper for gnu::artificial attr - hint that the function should be ignored in debuggers.</div><div class="ttdef"><b>Definition:</b> <a href="modular__math_8h_source.html#l00098">modular_math.h:98</a></div></div>
+<div class="ttc" id="amodular__math_8h_html_a7581a5842fc5c4c142d42e87052938ae"><div class="ttname"><a href="modular__math_8h.html#a7581a5842fc5c4c142d42e87052938ae">NUT_ATTR_NONNULL</a></div><div class="ttdeci">#define NUT_ATTR_NONNULL(...)</div><div class="ttdoc">Wrapper for gnu::nonnull attr.</div><div class="ttdef"><b>Definition:</b> <a href="modular__math_8h_source.html#l00077">modular_math.h:77</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
@@ -145,7 +155,7 @@ $(document).ready(function(){initNavTree('debug_8h_source.html',''); initResizab
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="debug_8h.html">debug.h</a></li>
-    <li class="footer">Generated on Mon Oct 30 2023 20:16:38 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jan 30 2024 01:27:08 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

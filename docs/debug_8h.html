@@ -17,6 +17,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen_awesome.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen_awesome_sidebar.css" rel="stylesheet" type="text/css"/>
@@ -101,8 +108,6 @@ $(document).ready(function(){initNavTree('debug_8h.html',''); initResizable(); }
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">debug.h File Reference</div>  </div>
 </div><!--header-->
@@ -120,89 +125,6 @@ DESCRIPTION</h1>
 <p class="definition">Definition in file <a class="el" href="debug_8h_source.html">debug.h</a>.</p>
 </div>
 <p><a href="debug_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a24d19e46f3777851166e00069dd6a3f1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#a24d19e46f3777851166e00069dd6a3f1">NUT_ATTR_ACCESS</a> (read_only, 1) NUT_ATTR_ACCESS(none</td></tr>
-<tr class="memdesc:a24d19e46f3777851166e00069dd6a3f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call a given function on each divisor of a number, given its factorization.  <a href="debug_8h.html#a24d19e46f3777851166e00069dd6a3f1">More...</a><br /></td></tr>
-<tr class="separator:a24d19e46f3777851166e00069dd6a3f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a24d19e46f3777851166e00069dd6a3f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24d19e46f3777851166e00069dd6a3f1">&#9670;&nbsp;</a></span>NUT_ATTR_ACCESS()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">NUT_ATTR_ACCESS </td>
-          <td>(</td>
-          <td class="paramtype">read_only&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">1&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Call a given function on each divisor of a number, given its factorization. </p>
-<p>Find all roots of a polynomial in an odd prime field.</p>
-<p>Call a given function on each divisor of a number, given its factorization, skipping divisors over a given bound.</p>
-<p>Call <a class="el" href="">forall_divisors_le</a> with temporarily allocated dfactors and pfactors structs.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>the factorization of n for which to compute all divisors </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>callback function. Arguments are factorization of divisor, divisor, user data (respectively). Should return 0 to continue, or 1 to break. </td></tr>
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">data</td><td>user data (allows arbitrary data to be passed in and out of the callback) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">dfactors</td><td>buffer to store internal work. Should be allocated to hold at least factors-&gt;num_primes </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pfactors</td><td>buffer to store internal work. Should be allocated to hlod at least factors-&gt;num_primes </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 if the callback never returned 1 and all divisors were visited, or 1 if the callback ever returned nonzero.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>the factorization of n for which to compute all divisors </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">d_max</td><td>max divisor to visit. This should be less than the product of factors, otherwise just use forall_divisors </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>callback function. Arguments are factorization of divisor, divisor, user data (respectively). Should return 0 to continue, or 1 to break. </td></tr>
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">data</td><td>user data (allows arbitrary data to be passed in and out of the callback) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">dfactors</td><td>buffer to store internal work. Should be allocated to hold at least factors-&gt;num_primes </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pfactors</td><td>buffer to store internal work. Should be allocated to hlod at least factors-&gt;num_primes </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 if the callback never returned 1 and all divisors were visited, or 1 if the callback ever returned nonzero.</dd></dl>
-<p>Uses the Cantor-Zassenhaus algorithm, specialized for linear factors (so we can skip squarefree factorization). This is implemented in the functions <a class="el" href="">nut_Poly_factors_d_modn</a> and <a class="el" href="">nut_Poly_factor1_modn</a>. After the first function, we know how many roots there are and allocate a buffer. The second function is called as many times as needed to find all the roots. TODO: optimize factoring quadratics using quadratic formula. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>polynomial to find roots of </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus of the coefficient field. MUST be prime. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">roots</td><td>store roots here. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tmps</td><td>polynomials for scratch work, must have 6 initialized (or at least zeroed out) polynomials (<a class="el" href="">nut_Poly_roots_modn_tmptmp</a>) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success (including if the polynomial has 0 roots), 0 on failure.</dd></dl>
-<p>Like <a class="el" href="">nut_Poly_roots_modn</a> except temporary polynomials are allocated and freed internally instead of using supplied temporaries. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">f</td><td>polynomial to find roots of </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>modulus of the coefficient field. MUST be prime. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">roots</td><td>store roots here. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success (including if the polynomial has 0 roots), 0 on failure. </dd></dl>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
@@ -210,7 +132,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="debug_8h.html">debug.h</a></li>
-    <li class="footer">Generated on Mon Oct 30 2023 20:16:38 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jan 30 2024 01:27:08 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

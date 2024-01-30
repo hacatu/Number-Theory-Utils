@@ -17,6 +17,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen_awesome.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen_awesome_sidebar.css" rel="stylesheet" type="text/css"/>
@@ -104,8 +111,7 @@ $(document).ready(function(){initNavTree('dirichlet__powerful_8h.html',''); init
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">dirichlet_powerful.h File Reference</div>  </div>
 </div><!--header-->
@@ -134,7 +140,7 @@ Data Structures</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Entry type for <a class="el" href="structnut__PfIt.html">nut_PfIt</a>.  <a href="structnut__PfStackEnt.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__PfIt.html">nut_PfIt</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterator to find all powerful numbers and evaluate a function h at them See <a class="el" href="dirichlet__powerful_8h.html#a150182cb7259ac915dd58b10dec687dc">NUT_PfIt_INIT</a>, <a class="el" href="dirichlet__powerful_8h.html#a7c6f8806178cc935e541e82279c8d424">nut_PfIt_destroy</a>, <a class="el" href="">nut_PfIt_next</a>.  <a href="structnut__PfIt.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterator to find all powerful numbers and evaluate a function h at them See <a class="el" href="dirichlet__powerful_8h.html#a150182cb7259ac915dd58b10dec687dc">NUT_PfIt_INIT</a>, <a class="el" href="dirichlet__powerful_8h.html#a7c6f8806178cc935e541e82279c8d424">nut_PfIt_destroy</a>, <a class="el" href="dirichlet__powerful_8h.html#ac10e34c391364d1114342736d9f573e1">nut_PfIt_next</a>.  <a href="structnut__PfIt.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -158,67 +164,42 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#a7c6f8806178cc935e541e82279c8d424">nut_PfIt_destroy</a> (<a class="el" href="structnut__PfIt.html">nut_PfIt</a> *self)</td></tr>
 <tr class="memdesc:a7c6f8806178cc935e541e82279c8d424"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete backing arrays for a powerful number iterator. <br /></td></tr>
 <tr class="separator:a7c6f8806178cc935e541e82279c8d424"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad23dcc7562e209acadb64a6e4fa8414f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#ad23dcc7562e209acadb64a6e4fa8414f">NUT_ATTR_ACCESS</a> (read_write, 1) NUT_ATTR_ACCESS(read_only</td></tr>
-<tr class="memdesc:ad23dcc7562e209acadb64a6e4fa8414f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mainly for internal use Push an entry into the internal stack of a powerful number iterator Doing this together with calling <a class="el" href="">nut_PfIt_next</a> will obviously break.  <a href="dirichlet__powerful_8h.html#ad23dcc7562e209acadb64a6e4fa8414f">More...</a><br /></td></tr>
-<tr class="separator:ad23dcc7562e209acadb64a6e4fa8414f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a820893f4bb6d4f9a2ca8835ec075e323"><td class="memItemLeft" align="right" valign="top"><a id="a820893f4bb6d4f9a2ca8835ec075e323"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>nut_PfStack_push</b> (<a class="el" href="structnut__PfIt.html">nut_PfIt</a> *restrict self, const <a class="el" href="structnut__PfStackEnt.html">nut_PfStackEnt</a> *restrict ent)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#a820893f4bb6d4f9a2ca8835ec075e323">nut_PfStack_push</a> (<a class="el" href="structnut__PfIt.html">nut_PfIt</a> *restrict self, const <a class="el" href="structnut__PfStackEnt.html">nut_PfStackEnt</a> *restrict ent)</td></tr>
+<tr class="memdesc:a820893f4bb6d4f9a2ca8835ec075e323"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mainly for internal use Push an entry into the internal stack of a powerful number iterator Doing this together with calling <a class="el" href="dirichlet__powerful_8h.html#ac10e34c391364d1114342736d9f573e1">nut_PfIt_next</a> will obviously break. <br /></td></tr>
 <tr class="separator:a820893f4bb6d4f9a2ca8835ec075e323"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affb590378a2c53e3322a0edf92c3f8c1"><td class="memItemLeft" align="right" valign="top"><a id="affb590378a2c53e3322a0edf92c3f8c1"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>nut_PfStack_pop</b> (<a class="el" href="structnut__PfIt.html">nut_PfIt</a> *restrict self, <a class="el" href="structnut__PfStackEnt.html">nut_PfStackEnt</a> *restrict out)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#affb590378a2c53e3322a0edf92c3f8c1">nut_PfStack_pop</a> (<a class="el" href="structnut__PfIt.html">nut_PfIt</a> *restrict self, <a class="el" href="structnut__PfStackEnt.html">nut_PfStackEnt</a> *restrict out)</td></tr>
+<tr class="memdesc:affb590378a2c53e3322a0edf92c3f8c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mainly for internal use Pop an entry from the internal stack of a powerful number iterator Doing this together with calling <a class="el" href="dirichlet__powerful_8h.html#ac10e34c391364d1114342736d9f573e1">nut_PfIt_next</a> will obviously break. <br /></td></tr>
 <tr class="separator:affb590378a2c53e3322a0edf92c3f8c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac10e34c391364d1114342736d9f573e1"><td class="memItemLeft" align="right" valign="top"><a id="ac10e34c391364d1114342736d9f573e1"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>nut_PfIt_next</b> (<a class="el" href="structnut__PfIt.html">nut_PfIt</a> *restrict self, <a class="el" href="structnut__PfStackEnt.html">nut_PfStackEnt</a> *restrict out)</td></tr>
+<tr class="memitem:ac10e34c391364d1114342736d9f573e1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#ac10e34c391364d1114342736d9f573e1">nut_PfIt_next</a> (<a class="el" href="structnut__PfIt.html">nut_PfIt</a> *restrict self, <a class="el" href="structnut__PfStackEnt.html">nut_PfStackEnt</a> *restrict out)</td></tr>
+<tr class="memdesc:ac10e34c391364d1114342736d9f573e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the next entry from a powerful number iterator This entry will have out-&gt;n set to a powerful number and out-&gt;hn set to the value of h evaluated at that n, where h is the function defined at iterator creation time.  <a href="dirichlet__powerful_8h.html#ac10e34c391364d1114342736d9f573e1">More...</a><br /></td></tr>
 <tr class="separator:ac10e34c391364d1114342736d9f573e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad128c69852a6caad578c8e595caff8d0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#ad128c69852a6caad578c8e595caff8d0">NUT_ATTR_ACCESS</a> (write_only, 1) NUT_ATTR_ACCESS(read_only</td></tr>
-<tr class="memdesc:ad128c69852a6caad578c8e595caff8d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the sum of f = g &lt;*&gt; h (from 1 up to g_tbl-&gt;x), where f(p) = g(p) The modulus used to reduce the answer should be passed in when constructing pf_it, <a class="el" href="dirichlet__powerful_8h.html#a150182cb7259ac915dd58b10dec687dc">NUT_PfIt_INIT</a>.  <a href="dirichlet__powerful_8h.html#ad128c69852a6caad578c8e595caff8d0">More...</a><br /></td></tr>
-<tr class="separator:ad128c69852a6caad578c8e595caff8d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1dfdba213b3cc5e7f9bc5a080b9ceb2d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#a1dfdba213b3cc5e7f9bc5a080b9ceb2d">NUT_ATTR_ACCESS</a> (read_write, 3) NUT_ATTR_ACCESS(read_only</td></tr>
-<tr class="memdesc:a1dfdba213b3cc5e7f9bc5a080b9ceb2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the series quotient h = f / g for two (finite) power series In other words, h will be such that f = g * h (under power series multiplication, not Dirichlet convolution) Similar to polynomial division but cannot have a remainder.  <a href="dirichlet__powerful_8h.html#a1dfdba213b3cc5e7f9bc5a080b9ceb2d">More...</a><br /></td></tr>
-<tr class="separator:a1dfdba213b3cc5e7f9bc5a080b9ceb2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa286059551c4d63efeb0bbdd47e3814c"><td class="memItemLeft" align="right" valign="top"><a id="aa286059551c4d63efeb0bbdd47e3814c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>NUT_ATTR_ACCESS</b> (read_only, 5) void nut_series_div(uint64_t n</td></tr>
-<tr class="separator:aa286059551c4d63efeb0bbdd47e3814c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a5cf938a92e5e1b26915f303a733a3b8b"><td class="memItemLeft" align="right" valign="top"><a id="a5cf938a92e5e1b26915f303a733a3b8b"></a>
-const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td><td class="memItemRight" valign="bottom"><b>g_tbl</b></td></tr>
-<tr class="separator:a5cf938a92e5e1b26915f303a733a3b8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69e02291611fea40bf94cb25cf20f93b"><td class="memItemLeft" align="right" valign="top"><a id="a69e02291611fea40bf94cb25cf20f93b"></a>
-const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict <a class="el" href="structnut__PfIt.html">nut_PfIt</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>pf_it</b></td></tr>
-<tr class="separator:a69e02291611fea40bf94cb25cf20f93b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3500d32707f04424ffa97759a0dbac14"><td class="memItemLeft" align="right" valign="top"><a id="a3500d32707f04424ffa97759a0dbac14"></a>
-int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>m</b></td></tr>
-<tr class="separator:a3500d32707f04424ffa97759a0dbac14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad54ac0f120b96817e34fc6375788c013"><td class="memItemLeft" align="right" valign="top"><a id="ad54ac0f120b96817e34fc6375788c013"></a>
-int64_t int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>h</b> [restrict static n]</td></tr>
-<tr class="separator:ad54ac0f120b96817e34fc6375788c013"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95770d6ee924487e4dec83e52f024ec9"><td class="memItemLeft" align="right" valign="top"><a id="a95770d6ee924487e4dec83e52f024ec9"></a>
-int64_t int64_t int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>f</b> [restrict static n]</td></tr>
-<tr class="separator:a95770d6ee924487e4dec83e52f024ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ac1b113e249a1ebc8ccd6f2d724739b"><td class="memItemLeft" align="right" valign="top"><a id="a0ac1b113e249a1ebc8ccd6f2d724739b"></a>
-int64_t int64_t int64_t int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>g</b> [restrict static n]</td></tr>
-<tr class="separator:a0ac1b113e249a1ebc8ccd6f2d724739b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0955257f1f62a3f9ead64f4610d8c618"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#a0955257f1f62a3f9ead64f4610d8c618">nut_Diri_sum_adjusted</a> (int64_t *restrict out, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict g_tbl, <a class="el" href="structnut__PfIt.html">nut_PfIt</a> *pf_it)</td></tr>
+<tr class="memdesc:a0955257f1f62a3f9ead64f4610d8c618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the sum of f = g &lt;*&gt; h (from 1 up to g_tbl-&gt;x), where f(p) = g(p) The modulus used to reduce the answer should be passed in when constructing pf_it, <a class="el" href="dirichlet__powerful_8h.html#a150182cb7259ac915dd58b10dec687dc">NUT_PfIt_INIT</a>.  <a href="dirichlet__powerful_8h.html#a0955257f1f62a3f9ead64f4610d8c618">More...</a><br /></td></tr>
+<tr class="separator:a0955257f1f62a3f9ead64f4610d8c618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae208f6364581328a25c55fbbd6d4d7d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#ae208f6364581328a25c55fbbd6d4d7d1">nut_series_div</a> (uint64_t n, int64_t m, int64_t h[restrict static n], int64_t f[restrict static n], int64_t g[restrict static n])</td></tr>
+<tr class="memdesc:ae208f6364581328a25c55fbbd6d4d7d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the series quotient h = f / g for two (finite) power series In other words, h will be such that f = g * h (under power series multiplication, not Dirichlet convolution) Similar to polynomial division but cannot have a remainder.  <a href="dirichlet__powerful_8h.html#ae208f6364581328a25c55fbbd6d4d7d1">More...</a><br /></td></tr>
+<tr class="separator:ae208f6364581328a25c55fbbd6d4d7d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ad23dcc7562e209acadb64a6e4fa8414f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad23dcc7562e209acadb64a6e4fa8414f">&#9670;&nbsp;</a></span>NUT_ATTR_ACCESS() <span class="overload">[1/3]</span></h2>
+<a id="ac10e34c391364d1114342736d9f573e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac10e34c391364d1114342736d9f573e1">&#9670;&nbsp;</a></span>nut_PfIt_next()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NUT_ATTR_ACCESS </td>
+          <td class="memname">bool nut_PfIt_next </td>
           <td>(</td>
-          <td class="paramtype">read_write&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype"><a class="el" href="structnut__PfIt.html">nut_PfIt</a> *restrict&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">1&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype"><a class="el" href="structnut__PfStackEnt.html">nut_PfStackEnt</a> *restrict&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -228,30 +209,34 @@ int64_t int64_t int64_t int64_t&#160;</td><td class="memItemRight" valign="botto
       </table>
 </div><div class="memdoc">
 
-<p>Mainly for internal use Push an entry into the internal stack of a powerful number iterator Doing this together with calling <a class="el" href="">nut_PfIt_next</a> will obviously break. </p>
-<p>Get the next entry from a powerful number iterator This entry will have out-&gt;n set to a powerful number and out-&gt;hn set to the value of h evaluated at that n, where h is the function defined at iterator creation time.</p>
-<p>Mainly for internal use Pop an entry from the internal stack of a powerful number iterator Doing this together with calling <a class="el" href="">nut_PfIt_next</a> will obviously break.</p>
+<p>Get the next entry from a powerful number iterator This entry will have out-&gt;n set to a powerful number and out-&gt;hn set to the value of h evaluated at that n, where h is the function defined at iterator creation time. </p>
 <p>out-&gt;i is not meaningful to the caller. </p>
 
 </div>
 </div>
-<a id="ad128c69852a6caad578c8e595caff8d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad128c69852a6caad578c8e595caff8d0">&#9670;&nbsp;</a></span>NUT_ATTR_ACCESS() <span class="overload">[2/3]</span></h2>
+<a id="a0955257f1f62a3f9ead64f4610d8c618"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0955257f1f62a3f9ead64f4610d8c618">&#9670;&nbsp;</a></span>nut_Diri_sum_adjusted()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NUT_ATTR_ACCESS </td>
+          <td class="memname">bool nut_Diri_sum_adjusted </td>
           <td>(</td>
-          <td class="paramtype">write_only&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">int64_t *restrict&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">1&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>g_tbl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnut__PfIt.html">nut_PfIt</a> *&#160;</td>
+          <td class="paramname"><em>pf_it</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -274,23 +259,41 @@ int64_t int64_t int64_t int64_t&#160;</td><td class="memItemRight" valign="botto
 
 </div>
 </div>
-<a id="a1dfdba213b3cc5e7f9bc5a080b9ceb2d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1dfdba213b3cc5e7f9bc5a080b9ceb2d">&#9670;&nbsp;</a></span>NUT_ATTR_ACCESS() <span class="overload">[3/3]</span></h2>
+<a id="ae208f6364581328a25c55fbbd6d4d7d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae208f6364581328a25c55fbbd6d4d7d1">&#9670;&nbsp;</a></span>nut_series_div()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NUT_ATTR_ACCESS </td>
+          <td class="memname">void nut_series_div </td>
           <td>(</td>
-          <td class="paramtype">read_write&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">3&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>h</em>[restrict static n], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>f</em>[restrict static n], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>g</em>[restrict static n]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -321,7 +324,7 @@ int64_t int64_t int64_t int64_t&#160;</td><td class="memItemRight" valign="botto
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="dirichlet__powerful_8h.html">dirichlet_powerful.h</a></li>
-    <li class="footer">Generated on Mon Oct 30 2023 20:16:38 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jan 30 2024 01:27:08 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>
