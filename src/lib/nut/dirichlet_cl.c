@@ -1,5 +1,7 @@
 #define _GNU_SOURCE
 #include <inttypes.h>
+#include <stddef.h>
+#include <stdalign.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,7 +13,19 @@
 #include <nut/debug.h>
 #include <nut/factorization.h>
 
+// need to double include so vscode doesn't automagically insert it above feature test macro defs
+// and break the code
+#include <CL/cl.h>
+
 #define CLKIDX_DIRICHLET_D 0
+
+static size_t nut_cl_get_nck_size(nut_ClMgr *mgr){
+	size_t min_size = offsetof(nut_ClKernel, work_item_sizes) + mgr->max_work_item_dimensions*sizeof(size_t);
+	size_t align = alignof(nut_ClKernel);
+	// round up min_size so it is a multiple of align
+	min_size += align - 1;
+	return min_size - min_size%align;
+}
 
 static void nut_cl_log_error(nut_ClMgr *mgr, const char *title, const char *subtitle, const char *evar, const char *what){
 	if(mgr->flags & NUT_CL_FLAG_VERBOSE){
@@ -197,7 +211,49 @@ bool nut_cl_setup(nut_ClMgr *mgr, int flags){
 	if(!nut_cl_check_err(mgr, "OpenCL failed to create context", "")){
 		return false;
 	}
+
+	mgr->err = clGetDeviceInfo(mgr->device_ids[0], CL_DEVICE_MAX_COMPUTE_UNITS, sizeof(cl_uint), &mgr->max_compute_units, NULL);
+	if(!nut_cl_check_err(mgr, "OpenCL failed to get max compute units", "")){
+		return false;
+	}else if(verbose){
+		fprintf(stderr, "   MAX_COMPUTE_UNITS: %u\n", mgr->max_compute_units);
+	}
+
+	mgr->err = clGetDeviceInfo(mgr->device_ids[0], CL_DEVICE_MAX_WORK_GROUP_SIZE, sizeof(size_t), &mgr->max_work_group_size, NULL);
+	if(!nut_cl_check_err(mgr, "OpenCL failed to get max work group size", "")){
+		return false;
+	}else if(verbose){
+		fprintf(stderr, "   MAX_WORK_GROUP_SIZE: %zu\n", mgr->max_work_group_size);
+	}
+
+	mgr->err = clGetDeviceInfo(mgr->device_ids[0], CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS, sizeof(cl_uint), &mgr->max_work_item_dimensions, NULL);
+	if(!nut_cl_check_err(mgr, "OpenCL failed to get max work item dimensions", "")){
+		return false;
+	}else if(verbose){
+		fprintf(stderr, "   MAX_WORK_ITEM_DIMENSIONS: %u\n", mgr->max_compute_units);
+	}
+
+	mgr->max_work_item_sizes = malloc(mgr->max_work_item_dimensions*sizeof(size_t));
+	if(!mgr->max_work_item_sizes){
+		mgr->err = CL_OUT_OF_HOST_MEMORY;
+		nut_cl_check_err(mgr, "Could not allocate mgr->max_work_item_sizes", "");
+		return false;
+	}
+	mgr->err = clGetDeviceInfo(mgr->device_ids[0], CL_DEVICE_MAX_WORK_ITEM_SIZES, mgr->max_work_item_dimensions*sizeof(size_t), mgr->max_work_item_sizes, NULL);
+	if(!nut_cl_check_err(mgr, "OpenCL failed to get max work item sizes", "")){
+		return false;
+	}else if(verbose){
+		fprintf(stderr, "   MAX_WORK_ITEM_SIZES: %zu", mgr->max_work_item_sizes[0]);
+		for(size_t i = 1; i < mgr->max_work_item_dimensions; ++i){
+			fprintf(stderr, ", %zu", mgr->max_work_item_sizes[i]);
+		}
+		fprintf(stderr, "\n");
+	}
+
 	mgr->queue = clCreateCommandQueueWithProperties(mgr->context, mgr->device_ids[0], NULL, &mgr->err);
+	if(!nut_cl_check_err(mgr, "OpenCL failed to create command queue", "")){
+		return false;
+	}
 
 	mgr->programs = malloc(1*sizeof(cl_program));
 	if(!mgr->programs){
@@ -205,7 +261,7 @@ bool nut_cl_setup(nut_ClMgr *mgr, int flags){
 		nut_cl_check_err(mgr, "Could not allocate programs buffer", "");
 		return false;
 	}
-	mgr->kernels = malloc(1*sizeof(cl_kernel));
+	mgr->kernels = malloc(1*nut_cl_get_nck_size(mgr));
 	if(!mgr->kernels){
 		mgr->err = CL_OUT_OF_HOST_MEMORY;
 		nut_cl_check_err(mgr, "Could not allocate kernels buffer", "");
@@ -220,11 +276,12 @@ bool nut_cl_setup(nut_ClMgr *mgr, int flags){
 
 void nut_cl_close(nut_ClMgr *mgr){
 	for(size_t i = 0; i < mgr->kernels_len; ++i){
-		clReleaseKernel(mgr->kernels[i]);
+		clReleaseKernel(mgr->kernels[i].kernel);
 	}
 	for(size_t i = 0; i < mgr->programs_len; ++i){
 		clReleaseProgram(mgr->programs[i]);
 	}
+	free(mgr->max_work_item_sizes);
 	free(mgr->kernels);
 	free(mgr->programs);
 	clReleaseCommandQueue(mgr->queue);
@@ -238,25 +295,31 @@ void nut_cl_close(nut_ClMgr *mgr){
 }
 
 const char *nut_cl_read_source(nut_ClMgr *mgr, const char *filename){
-	FILE *file = fopen(filename, "r");
 	struct stat stat_buf;
 	char *kernel_source = NULL;
+	const char *base_dir = getenv("NUT_CL_BASEDIR") ?: "../../src/opencl";
+	char *full_path [[gnu::cleanup(cleanup_free)]] = NULL;
+	if(asprintf(&full_path, "%s/%s", base_dir, filename) < 0){
+		nut_cl_check_errno(mgr, "Could not concatenate path", filename);
+		goto CLEANUP;
+	}
+	FILE *file = fopen(full_path, "r");
 	if(!file){
-		nut_cl_check_errno(mgr, "Could not open cl source file", filename);
+		nut_cl_check_errno(mgr, "Could not open cl source file", full_path);
 		goto CLEANUP;
 	}
 	if(fstat(fileno(file), &stat_buf) < 0){
-		nut_cl_check_errno(mgr, "Could not stat cl source file", filename);
+		nut_cl_check_errno(mgr, "Could not stat cl source file", full_path);
 		goto CLEANUP;
 	}
 	kernel_source = malloc(stat_buf.st_size + 1);
 	if(!kernel_source){
-		nut_cl_check_errno(mgr, "Could not allocate buffer for cl source file", filename);
+		nut_cl_check_errno(mgr, "Could not allocate buffer for cl source file", full_path);
 		goto CLEANUP;
 	}
 	(void)!fread(kernel_source, 1, stat_buf.st_size, file);
 	if(ferror(file)){
-		nut_cl_check_errno(mgr, "Could not read cl source file", filename);
+		nut_cl_check_errno(mgr, "Could not read cl source file", full_path);
 		goto CLEANUP;
 	}
 	if(file){
@@ -338,16 +401,33 @@ bool nut_cl_make_program_from_source(nut_ClMgr *mgr, const char *source){
 	return true;
 }
 
-bool nut_cl_create_kernel(nut_ClMgr *mgr, size_t program_idx, const char *name){
-	if(!nut_cl_try_ensure_buffer_cap(mgr, (void**)&mgr->kernels, &mgr->kernels_cap, mgr->kernels_len, sizeof(cl_kernel), "kernels")){
-		return false;
-	}
+static bool nut_cl_create_kernel_single(nut_ClMgr *mgr, size_t program_idx, const char *name){
 	cl_kernel kernel = clCreateKernel(mgr->programs[program_idx], name, &mgr->err);
 	if(!nut_cl_check_err(mgr, "OpenCL failed to get kernel ", name)){
 		return false;
 	}
-	mgr->kernels[mgr->kernels_len++] = kernel;
+	mgr->kernels[mgr->kernels_len].kernel = kernel;
+	mgr->err = clGetKernelWorkGroupInfo(kernel, mgr->device_ids[0], CL_KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE, sizeof(size_t),
+		&mgr->kernels[mgr->kernels_len].preferred_work_group_size_multiple, NULL);
+	if(!nut_cl_check_err(mgr, "OpenCL failed to get kernel preferred work group size multiple for ", name)){
+		return false;
+	}
+	mgr->err = clGetKernelWorkGroupInfo(kernel, mgr->device_ids[0], CL_KERNEL_WORK_GROUP_SIZE, sizeof(size_t),
+		&mgr->kernels[mgr->kernels_len].work_group_size, NULL);
+	if(!nut_cl_check_err(mgr, "OpenCL failed to get kernel work group size for ", name)){
+		return false;
+	}
+	mgr->err = clGetKernelWorkGroupInfo(kernel, mgr->device_ids[0], CL_KERNEL_WORK_GROUP_SIZE, 3*sizeof(size_t),
+		&mgr->kernels[mgr->kernels_len].work_item_sizes, NULL);
+	++mgr->kernels_len;
 	return true;
+}
+
+bool nut_cl_create_kernel(nut_ClMgr *mgr, size_t program_idx, const char *name){
+	if(!nut_cl_try_ensure_buffer_cap(mgr, (void**)&mgr->kernels, &mgr->kernels_cap, mgr->kernels_len, nut_cl_get_nck_size(mgr), "kernels")){
+		return false;
+	}
+	return nut_cl_create_kernel_single(mgr, program_idx, name);
 }
 
 bool nut_cl_create_all_kernels(nut_ClMgr *mgr, size_t program_idx){
@@ -356,7 +436,7 @@ bool nut_cl_create_all_kernels(nut_ClMgr *mgr, size_t program_idx){
 	if(!nut_cl_check_err(mgr, "OpenCL failed to get number of kernels in program", "")){
 		return false;
 	}
-	if(!nut_cl_try_ensure_buffer_cap(mgr, (void**)&mgr->kernels, &mgr->kernels_cap, mgr->kernels_len + num_kernels, sizeof(cl_kernel), "kernels")){
+	if(!nut_cl_try_ensure_buffer_cap(mgr, (void**)&mgr->kernels, &mgr->kernels_cap, mgr->kernels_len + num_kernels, nut_cl_get_nck_size(mgr), "kernels")){
 		return false;
 	}
 	size_t names_cap = 64*num_kernels;
@@ -389,11 +469,7 @@ bool nut_cl_create_all_kernels(nut_ClMgr *mgr, size_t program_idx){
 		if(!name){
 			break;
 		}
-		cl_kernel kernel = clCreateKernel(mgr->programs[program_idx], name, &mgr->err);
-		if(!nut_cl_check_err(mgr, "OpenCL failed to create kernel", name)){
-			return false;
-		}
-		mgr->kernels[mgr->kernels_len++] = kernel;
+		nut_cl_create_kernel_single(mgr, program_idx, name);
 	}
 	free(names);
 	return true;
@@ -403,20 +479,55 @@ uint64_t nut_cl_dirichlet_D(nut_ClMgr *mgr, uint64_t n, uint64_t m){
 	bool verbose = mgr->flags & NUT_CL_FLAG_VERBOSE;
 
 	uint64_t y = nut_u64_nth_root(n, 2);
-	cl_mem buf_sums = clCreateBuffer(mgr->context, CL_MEM_READ_ONLY, y*sizeof(uint64_t), NULL, NULL);
+	cl_mem buf_sums = clCreateBuffer(mgr->context, CL_MEM_READ_WRITE, y*sizeof(uint64_t), NULL, &mgr->err);
+	if(!nut_cl_check_err(mgr, "OpenCL could not create work buffer for kernel", "")){
+		return 0;
+	}
 	//clEnqueueWriteBuffer(mgr->queue, buf_sums, CL_TRUE, 0, y*sizeof(uint64_t), sums, 0, NULL, NULL);
-	clSetKernelArg(mgr->kernels[CLKIDX_DIRICHLET_D], 0, sizeof(uint64_t), &n);
-	clSetKernelArg(mgr->kernels[CLKIDX_DIRICHLET_D], 1, sizeof(uint64_t), &y);
-	clSetKernelArg(mgr->kernels[CLKIDX_DIRICHLET_D], 2, sizeof(uint64_t), &m);
-	clSetKernelArg(mgr->kernels[CLKIDX_DIRICHLET_D], 3, sizeof(cl_mem), &buf_sums);
+	mgr->err = clSetKernelArg(mgr->kernels[CLKIDX_DIRICHLET_D].kernel, 0, sizeof(uint64_t), &n);
+	if(!nut_cl_check_err(mgr, "OpenCL failed to set kernel argument", "")){
+		return 0;
+	}
+	mgr->err = clSetKernelArg(mgr->kernels[CLKIDX_DIRICHLET_D].kernel, 1, sizeof(uint64_t), &y);
+	if(!nut_cl_check_err(mgr, "OpenCL failed to set kernel argument", "")){
+		return 0;
+	}
+	mgr->err = clSetKernelArg(mgr->kernels[CLKIDX_DIRICHLET_D].kernel, 2, sizeof(uint64_t), &m);
+	if(!nut_cl_check_err(mgr, "OpenCL failed to set kernel argument", "")){
+		return 0;
+	}
+	mgr->err = clSetKernelArg(mgr->kernels[CLKIDX_DIRICHLET_D].kernel, 3, sizeof(cl_mem), &buf_sums);
+	if(!nut_cl_check_err(mgr, "OpenCL failed to set kernel argument", "")){
+		return 0;
+	}
 
-	size_t local_dims[1] = {y};
-	size_t global_dims[1] = {y};
+	size_t max_wg_size = mgr->kernels[CLKIDX_DIRICHLET_D].work_group_size;
+	size_t pref_wg_size_mult = mgr->kernels[CLKIDX_DIRICHLET_D].preferred_work_group_size_multiple;
+	if(max_wg_size > pref_wg_size_mult){
+		max_wg_size -= max_wg_size%pref_wg_size_mult;
+	}
+	size_t max_wg_count = mgr->max_compute_units;
+	size_t local_dims[1] = {max_wg_size};
+	size_t global_dims[1] = {max_wg_size*max_wg_count};
+	if(max_wg_size*max_wg_count > y){
+		size_t trunc_y = y - y%pref_wg_size_mult;
+		if(!trunc_y){
+			local_dims[0] = y;
+			global_dims[0] = y;
+		}else if(trunc_y <= max_wg_size){
+			local_dims[0] = trunc_y;
+			global_dims[0] = trunc_y;
+		}else{
+			max_wg_count = trunc_y/max_wg_size;
+			global_dims[0] = max_wg_count;
+		}
+	}
+
 	cl_event event = NULL;
 	if(verbose){
 		fprintf(stderr, ">>> Ready to launch OpenCL kernel\n");
 	}
-	mgr->err = clEnqueueNDRangeKernel(mgr->queue, mgr->kernels[CLKIDX_DIRICHLET_D], 1, NULL, global_dims, local_dims, 0, NULL, &event);
+	mgr->err = clEnqueueNDRangeKernel(mgr->queue, mgr->kernels[CLKIDX_DIRICHLET_D].kernel, 1, NULL, global_dims, local_dims, 0, NULL, &event);
 	if(!nut_cl_check_err(mgr, "OpenCL failed to run kernel", "")){
 		return 0;
 	}

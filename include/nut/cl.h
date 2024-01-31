@@ -27,6 +27,13 @@
 /// a lock
 #define NUT_CL_FLAG_MT_SAFE 0x4
 
+typedef struct{
+	cl_kernel kernel;
+	size_t preferred_work_group_size_multiple;
+	size_t work_group_size;
+	size_t work_item_sizes[];
+} nut_ClKernel;
+
 /// Manages "global" OpenCL state including programs, kernels, the context, and the command queue.
 /// Multiple can be created, but this would require manually setting up all but the first to use
 /// distinct devices, otherwise there would be multiple for the same device.
@@ -37,12 +44,16 @@ typedef struct{
 	cl_platform_id *platform_ids;
 	cl_uint num_devices;
 	cl_device_id *device_ids;
+	cl_uint max_compute_units;
+	cl_uint max_work_item_dimensions;
+	size_t max_work_group_size;
+	size_t *max_work_item_sizes;
 	cl_context context;
 	cl_command_queue queue;
 	size_t programs_len, programs_cap;
 	cl_program *programs;
 	size_t kernels_len, kernels_cap;
-	cl_kernel *kernels;
+	nut_ClKernel *kernels;
 	pthread_mutex_t log_lock;
 } nut_ClMgr;
 
@@ -81,11 +92,11 @@ bool nut_cl_setup(nut_ClMgr *mgr, int flags);
 void nut_cl_close(nut_ClMgr *mgr);
 
 /// Read an OpenCL source file (.cl) into a string
+/// The filename can be any relative path, and is appended to
+/// the base path, which defaults to "../../src/opencl" but can be
+/// overridden by setting the environment variable "NUT_CL_BASEDIR"
 /// The returned string is malloc'd and should be free'd after it is
 /// used (once it has been passed to { @link nut_cl_make_program_from_source }).
-/// Currently, no fancy searching is done and filename is simply resolved as a path
-/// relative to the current working directory (ie a relative path can be used or an absolute
-/// path to enhance relocatability)
 const char *nut_cl_read_source(nut_ClMgr *mgr, const char *filename);
 
 /// Compile OpenCL source read into an OpenCL program

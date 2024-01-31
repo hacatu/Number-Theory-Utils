@@ -8,7 +8,7 @@ int main(){
 	nut_ClMgr mgr;
 	nut_cl_setup(&mgr, NUT_CL_FLAG_DIE | NUT_CL_FLAG_VERBOSE);
 
-	const char *kernel_source = nut_cl_read_source(&mgr, "../../src/opencl/dirichlet.cl");
+	const char *kernel_source = nut_cl_read_source(&mgr, "dirichlet.cl");
 	nut_cl_make_program_from_source(&mgr, kernel_source);
 	free((char*)kernel_source);
 	nut_cl_create_all_kernels(&mgr, 0);
