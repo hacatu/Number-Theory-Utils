@@ -43,6 +43,11 @@ jobs:
       with:
         name: vg_logs
         path: "test/*.valgrind.log"
+    - uses: actions/upload-artifacts@v3
+      if: failure()
+      with:
+        name: waf_logs
+        path: "build/config.log"
     - name: Deploy Coverage and Docs to Pages
       uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
