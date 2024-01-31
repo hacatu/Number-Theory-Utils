@@ -21,7 +21,7 @@ jobs:
         sudo apt-get install -y lcov cpanminus doxygen libsdl2-dev valgrind clang-15 gcc-13 opencl-headers ocl-icd-opencl-dev libpocl2 mesa-opencl-icd
         cpanm Cpanel::JSON::XS
         echo "geninfo_gcov_tool = gcov-13" >> ~/.lcovrc
-        ./waf configure
+        ./waf configure -v
         ./waf build_debug test_debug
         ./waf build_valgrind test_valgrind
         ./waf build_coverage test_coverage
