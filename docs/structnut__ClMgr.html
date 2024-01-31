@@ -140,6 +140,18 @@ cl_uint&#160;</td><td class="memItemRight" valign="bottom"><b>num_devices</b></t
 <tr class="memitem:ac53ca8d52d78267508845f163730025c"><td class="memItemLeft" align="right" valign="top"><a id="ac53ca8d52d78267508845f163730025c"></a>
 cl_device_id *&#160;</td><td class="memItemRight" valign="bottom"><b>device_ids</b></td></tr>
 <tr class="separator:ac53ca8d52d78267508845f163730025c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9ec2de0b98a4b04e59e8036a9667567"><td class="memItemLeft" align="right" valign="top"><a id="ab9ec2de0b98a4b04e59e8036a9667567"></a>
+cl_uint&#160;</td><td class="memItemRight" valign="bottom"><b>max_compute_units</b></td></tr>
+<tr class="separator:ab9ec2de0b98a4b04e59e8036a9667567"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a690f35a843579db14d65826bc56ce37f"><td class="memItemLeft" align="right" valign="top"><a id="a690f35a843579db14d65826bc56ce37f"></a>
+cl_uint&#160;</td><td class="memItemRight" valign="bottom"><b>max_work_item_dimensions</b></td></tr>
+<tr class="separator:a690f35a843579db14d65826bc56ce37f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1c9ee1cd70ddbfe2e77c1d4d7a435a3"><td class="memItemLeft" align="right" valign="top"><a id="af1c9ee1cd70ddbfe2e77c1d4d7a435a3"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_work_group_size</b></td></tr>
+<tr class="separator:af1c9ee1cd70ddbfe2e77c1d4d7a435a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22bb21e897c2a0ae6e7b82f4b5b7d610"><td class="memItemLeft" align="right" valign="top"><a id="a22bb21e897c2a0ae6e7b82f4b5b7d610"></a>
+size_t *&#160;</td><td class="memItemRight" valign="bottom"><b>max_work_item_sizes</b></td></tr>
+<tr class="separator:a22bb21e897c2a0ae6e7b82f4b5b7d610"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c08f72ad59d9823381cbb42ec751cde"><td class="memItemLeft" align="right" valign="top"><a id="a2c08f72ad59d9823381cbb42ec751cde"></a>
 cl_context&#160;</td><td class="memItemRight" valign="bottom"><b>context</b></td></tr>
 <tr class="separator:a2c08f72ad59d9823381cbb42ec751cde"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,9 +173,9 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>kernels_len</b></td
 <tr class="memitem:a3e75208cfbaa2b8accc547f705a70405"><td class="memItemLeft" align="right" valign="top"><a id="a3e75208cfbaa2b8accc547f705a70405"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>kernels_cap</b></td></tr>
 <tr class="separator:a3e75208cfbaa2b8accc547f705a70405"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3f6fdf6fca229b4dc29d1bbad93ae25"><td class="memItemLeft" align="right" valign="top"><a id="af3f6fdf6fca229b4dc29d1bbad93ae25"></a>
-cl_kernel *&#160;</td><td class="memItemRight" valign="bottom"><b>kernels</b></td></tr>
-<tr class="separator:af3f6fdf6fca229b4dc29d1bbad93ae25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a203ffb0fcf91671a111e7bc2caa192d5"><td class="memItemLeft" align="right" valign="top"><a id="a203ffb0fcf91671a111e7bc2caa192d5"></a>
+<a class="el" href="structnut__ClKernel.html">nut_ClKernel</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>kernels</b></td></tr>
+<tr class="separator:a203ffb0fcf91671a111e7bc2caa192d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a7b2f41f60fc8109a98729ee2e82178"><td class="memItemLeft" align="right" valign="top"><a id="a7a7b2f41f60fc8109a98729ee2e82178"></a>
 pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><b>log_lock</b></td></tr>
 <tr class="separator:a7a7b2f41f60fc8109a98729ee2e82178"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,7 +184,7 @@ pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><b>log_lock</
 <div class="textblock"><p>Manages "global" OpenCL state including programs, kernels, the context, and the command queue. </p>
 <p>Multiple can be created, but this would require manually setting up all but the first to use distinct devices, otherwise there would be multiple for the same device. </p>
 
-<p class="definition">Definition at line <a class="el" href="cl_8h_source.html#l00033">33</a> of file <a class="el" href="cl_8h_source.html">cl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cl_8h_source.html#l00040">40</a> of file <a class="el" href="cl_8h_source.html">cl.h</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/nut/<a class="el" href="cl_8h_source.html">cl.h</a></li>
 </ul>
@@ -183,7 +195,7 @@ pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><b>log_lock</
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structnut__ClMgr.html">nut_ClMgr</a></li>
-    <li class="footer">Generated on Tue Jan 30 2024 01:27:08 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jan 31 2024 21:24:41 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

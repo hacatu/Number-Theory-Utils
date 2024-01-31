@@ -124,44 +124,56 @@ $(document).ready(function(){initNavTree('cl_8h_source.html',''); initResizable(
 <div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="cl_8h.html#ae02f23cf2b6183ccc98dd87ac6bad565">   24</a></span>&#160;<span class="preprocessor">#define NUT_CL_FLAG_VERBOSE 0x2</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="cl_8h.html#abc3f0b8f021b3e363706c030a722ad2a">   28</a></span>&#160;<span class="preprocessor">#define NUT_CL_FLAG_MT_SAFE 0x4</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structnut__ClMgr.html">   33</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span>{</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">int</span> flags;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    cl_int err;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    cl_uint num_platforms;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    cl_platform_id *platform_ids;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    cl_uint num_devices;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    cl_device_id *device_ids;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    cl_context context;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    cl_command_queue queue;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">size_t</span> programs_len, programs_cap;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    cl_program *programs;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">size_t</span> kernels_len, kernels_cap;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    cl_kernel *kernels;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    pthread_mutex_t log_lock;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;} <a class="code" href="structnut__ClMgr.html">nut_ClMgr</a>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="cl_8h.html#a8677634e45c37bcec7cf3b78ed3c5cdf">   61</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="cl_8h.html#a8677634e45c37bcec7cf3b78ed3c5cdf">nut_cl_check_err</a>(<a class="code" href="structnut__ClMgr.html">nut_ClMgr</a> *mgr, <span class="keyword">const</span> <span class="keywordtype">char</span> *title, <span class="keyword">const</span> <span class="keywordtype">char</span> *subtitle);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="cl_8h.html#a963698ef91fd18c9f58a4d099f23c6b5">   72</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="cl_8h.html#a963698ef91fd18c9f58a4d099f23c6b5">nut_cl_setup</a>(<a class="code" href="structnut__ClMgr.html">nut_ClMgr</a> *mgr, <span class="keywordtype">int</span> flags);</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structnut__ClKernel.html">   30</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span>{</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    cl_kernel kernel;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">size_t</span> preferred_work_group_size_multiple;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">size_t</span> work_group_size;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">size_t</span> work_item_sizes[];</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;} <a class="code" href="structnut__ClKernel.html">nut_ClKernel</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structnut__ClMgr.html">   40</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span>{</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">int</span> flags;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    cl_int err;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    cl_uint num_platforms;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    cl_platform_id *platform_ids;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    cl_uint num_devices;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    cl_device_id *device_ids;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    cl_uint max_compute_units;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    cl_uint max_work_item_dimensions;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">size_t</span> max_work_group_size;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">size_t</span> *max_work_item_sizes;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    cl_context context;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    cl_command_queue queue;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">size_t</span> programs_len, programs_cap;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    cl_program *programs;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">size_t</span> kernels_len, kernels_cap;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="structnut__ClKernel.html">nut_ClKernel</a> *kernels;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    pthread_mutex_t log_lock;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;} <a class="code" href="structnut__ClMgr.html">nut_ClMgr</a>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="cl_8h.html#a8677634e45c37bcec7cf3b78ed3c5cdf">   72</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="cl_8h.html#a8677634e45c37bcec7cf3b78ed3c5cdf">nut_cl_check_err</a>(<a class="code" href="structnut__ClMgr.html">nut_ClMgr</a> *mgr, <span class="keyword">const</span> <span class="keywordtype">char</span> *title, <span class="keyword">const</span> <span class="keywordtype">char</span> *subtitle);</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="cl_8h.html#a80371870cd45702faa15bf0d2de7aa8f">   81</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="cl_8h.html#a80371870cd45702faa15bf0d2de7aa8f">nut_cl_close</a>(<a class="code" href="structnut__ClMgr.html">nut_ClMgr</a> *mgr);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="cl_8h.html#a73a32f57182812d9adfb66da07612536">   89</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="cl_8h.html#a73a32f57182812d9adfb66da07612536">nut_cl_read_source</a>(<a class="code" href="structnut__ClMgr.html">nut_ClMgr</a> *mgr, <span class="keyword">const</span> <span class="keywordtype">char</span> *filename);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="cl_8h.html#a2d57a72d019816c9165fa992bd3f2a98">  105</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="cl_8h.html#a2d57a72d019816c9165fa992bd3f2a98">nut_cl_make_program_from_source</a>(<a class="code" href="structnut__ClMgr.html">nut_ClMgr</a> *mgr, <span class="keyword">const</span> <span class="keywordtype">char</span> *source);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="cl_8h.html#a1be98afb4f7443c6d8acd9fecc7b8f61">  117</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="cl_8h.html#a1be98afb4f7443c6d8acd9fecc7b8f61">nut_cl_create_kernel</a>(<a class="code" href="structnut__ClMgr.html">nut_ClMgr</a> *mgr, <span class="keywordtype">size_t</span> program_idx, <span class="keyword">const</span> <span class="keywordtype">char</span> *name);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="cl_8h.html#ad75f1fc0811a8ee4158d4edf519c5ac0">  125</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="cl_8h.html#ad75f1fc0811a8ee4158d4edf519c5ac0">nut_cl_create_all_kernels</a>(<a class="code" href="structnut__ClMgr.html">nut_ClMgr</a> *mgr, <span class="keywordtype">size_t</span> program_idx);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="cl_8h.html#a963698ef91fd18c9f58a4d099f23c6b5">   83</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="cl_8h.html#a963698ef91fd18c9f58a4d099f23c6b5">nut_cl_setup</a>(<a class="code" href="structnut__ClMgr.html">nut_ClMgr</a> *mgr, <span class="keywordtype">int</span> flags);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="cl_8h.html#a80371870cd45702faa15bf0d2de7aa8f">   92</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="cl_8h.html#a80371870cd45702faa15bf0d2de7aa8f">nut_cl_close</a>(<a class="code" href="structnut__ClMgr.html">nut_ClMgr</a> *mgr);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="cl_8h.html#a73a32f57182812d9adfb66da07612536">  100</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="cl_8h.html#a73a32f57182812d9adfb66da07612536">nut_cl_read_source</a>(<a class="code" href="structnut__ClMgr.html">nut_ClMgr</a> *mgr, <span class="keyword">const</span> <span class="keywordtype">char</span> *filename);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="cl_8h.html#a2d57a72d019816c9165fa992bd3f2a98">  116</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="cl_8h.html#a2d57a72d019816c9165fa992bd3f2a98">nut_cl_make_program_from_source</a>(<a class="code" href="structnut__ClMgr.html">nut_ClMgr</a> *mgr, <span class="keyword">const</span> <span class="keywordtype">char</span> *source);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="cl_8h.html#a1be98afb4f7443c6d8acd9fecc7b8f61">  128</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="cl_8h.html#a1be98afb4f7443c6d8acd9fecc7b8f61">nut_cl_create_kernel</a>(<a class="code" href="structnut__ClMgr.html">nut_ClMgr</a> *mgr, <span class="keywordtype">size_t</span> program_idx, <span class="keyword">const</span> <span class="keywordtype">char</span> *name);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="cl_8h.html#ad75f1fc0811a8ee4158d4edf519c5ac0">  136</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="cl_8h.html#ad75f1fc0811a8ee4158d4edf519c5ac0">nut_cl_create_all_kernels</a>(<a class="code" href="structnut__ClMgr.html">nut_ClMgr</a> *mgr, <span class="keywordtype">size_t</span> program_idx);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
 <div class="ttc" id="acl_8h_html_a1be98afb4f7443c6d8acd9fecc7b8f61"><div class="ttname"><a href="cl_8h.html#a1be98afb4f7443c6d8acd9fecc7b8f61">nut_cl_create_kernel</a></div><div class="ttdeci">bool nut_cl_create_kernel(nut_ClMgr *mgr, size_t program_idx, const char *name)</div><div class="ttdoc">Create one kernel with a given name program_idx should be the index of the program in mgr.</div></div>
 <div class="ttc" id="acl_8h_html_a2d57a72d019816c9165fa992bd3f2a98"><div class="ttname"><a href="cl_8h.html#a2d57a72d019816c9165fa992bd3f2a98">nut_cl_make_program_from_source</a></div><div class="ttdeci">bool nut_cl_make_program_from_source(nut_ClMgr *mgr, const char *source)</div><div class="ttdoc">Compile OpenCL source read into an OpenCL program The source should come from nut_cl_read_source.</div></div>
-<div class="ttc" id="acl_8h_html_a73a32f57182812d9adfb66da07612536"><div class="ttname"><a href="cl_8h.html#a73a32f57182812d9adfb66da07612536">nut_cl_read_source</a></div><div class="ttdeci">const char * nut_cl_read_source(nut_ClMgr *mgr, const char *filename)</div><div class="ttdoc">Read an OpenCL source file (.cl) into a string The returned string is malloc'd and should be free'd a...</div></div>
+<div class="ttc" id="acl_8h_html_a73a32f57182812d9adfb66da07612536"><div class="ttname"><a href="cl_8h.html#a73a32f57182812d9adfb66da07612536">nut_cl_read_source</a></div><div class="ttdeci">const char * nut_cl_read_source(nut_ClMgr *mgr, const char *filename)</div><div class="ttdoc">Read an OpenCL source file (.cl) into a string The filename can be any relative path,...</div></div>
 <div class="ttc" id="acl_8h_html_a80371870cd45702faa15bf0d2de7aa8f"><div class="ttname"><a href="cl_8h.html#a80371870cd45702faa15bf0d2de7aa8f">nut_cl_close</a></div><div class="ttdeci">void nut_cl_close(nut_ClMgr *mgr)</div><div class="ttdoc">Shut down OpenCL and clean up all resources associated with mgr This cleans up all programs,...</div></div>
 <div class="ttc" id="acl_8h_html_a8677634e45c37bcec7cf3b78ed3c5cdf"><div class="ttname"><a href="cl_8h.html#a8677634e45c37bcec7cf3b78ed3c5cdf">nut_cl_check_err</a></div><div class="ttdeci">bool nut_cl_check_err(nut_ClMgr *mgr, const char *title, const char *subtitle)</div><div class="ttdoc">Check and report/resolve OpenCL errors after manually calling OpenCL functions Will print errors and/...</div></div>
 <div class="ttc" id="acl_8h_html_a963698ef91fd18c9f58a4d099f23c6b5"><div class="ttname"><a href="cl_8h.html#a963698ef91fd18c9f58a4d099f23c6b5">nut_cl_setup</a></div><div class="ttdeci">bool nut_cl_setup(nut_ClMgr *mgr, int flags)</div><div class="ttdoc">Initialize OpenCL and store the relevant state in mgr The first available platform and device will be...</div></div>
 <div class="ttc" id="acl_8h_html_ad75f1fc0811a8ee4158d4edf519c5ac0"><div class="ttname"><a href="cl_8h.html#ad75f1fc0811a8ee4158d4edf519c5ac0">nut_cl_create_all_kernels</a></div><div class="ttdeci">bool nut_cl_create_all_kernels(nut_ClMgr *mgr, size_t program_idx)</div><div class="ttdoc">Create all kernels within a given program Automatically extracts kernel names from the program and ge...</div></div>
-<div class="ttc" id="astructnut__ClMgr_html"><div class="ttname"><a href="structnut__ClMgr.html">nut_ClMgr</a></div><div class="ttdoc">Manages &quot;global&quot; OpenCL state including programs, kernels, the context, and the command queue.</div><div class="ttdef"><b>Definition:</b> <a href="cl_8h_source.html#l00033">cl.h:33</a></div></div>
+<div class="ttc" id="astructnut__ClKernel_html"><div class="ttname"><a href="structnut__ClKernel.html">nut_ClKernel</a></div><div class="ttdef"><b>Definition:</b> <a href="cl_8h_source.html#l00030">cl.h:30</a></div></div>
+<div class="ttc" id="astructnut__ClMgr_html"><div class="ttname"><a href="structnut__ClMgr.html">nut_ClMgr</a></div><div class="ttdoc">Manages &quot;global&quot; OpenCL state including programs, kernels, the context, and the command queue.</div><div class="ttdef"><b>Definition:</b> <a href="cl_8h_source.html#l00040">cl.h:40</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
@@ -169,7 +181,7 @@ $(document).ready(function(){initNavTree('cl_8h_source.html',''); initResizable(
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="cl_8h.html">cl.h</a></li>
-    <li class="footer">Generated on Tue Jan 30 2024 01:27:08 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jan 31 2024 21:24:40 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

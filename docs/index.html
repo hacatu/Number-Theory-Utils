@@ -120,25 +120,36 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <p>For polynomials, also includes arithmetic (addition, subtraction, scalar multiplication, coefficientwise multiplication, multiplication, quotient and remainder, Horner evaluation, gcd, and powers), printing/normalization, and distinct degree factorization. Currently there is a simple driver function that will find all roots of a polynomial over a prime field, but if a full factorization is desired the squarefree step must still be done manually. Like the factorization part of the library, polynomials use 64 bit integers, so computations involving numbers larger than about 2<sup>30</sup> potentially can fail due to overflow.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Building</h1>
-<p>This library uses variant makefiles for each build type. To build the release variant, simply run <code>make</code> in the project root directory. The resulting files will be in <code>build/release/lib</code> and <code>build/release/bin</code>, or you can run <code>sudo make install</code> after <code>make</code> finishes.</p>
-<p>To build a different variant, change the <code></code> variable from <code>build/release</code> to <code>build/debug</code> or some other value, for instance <code>make BUILD_ROOT=build/release</code>. You can check what variants exist by looking at the subdirectories of <code>build</code>, and you can create your own by copying and modifying <code>build/debug</code>.</p>
-<p>The currently extant variants are</p><ul>
-<li><code>build/coverage</code>: debug variant, includes address sanitizer and some ub sanitizers. builds using <code>gcc</code>. default <code>make</code> target: <code>coverage</code></li>
-<li><code>build/debug</code>: debug variant, includes memory sanitizer and most ub sanitizers. builds using <code>clang</code>. default <code>make</code> target: <code>test</code></li>
-<li><code>build/release</code>: release variant, no sanitizers. builds using <code>gcc</code> with <code>-O3</code>. default <code>make</code> target: <code>all</code></li>
-<li><code>build/valgrind</code>: debug variant, no sanitizers. builds using <code>clang</code> with <code>-O1</code>. default <code>make</code> target: <code>test</code>. passes <code>-g</code> to <code>test.py</code> to invoke the valgrind wrapper</li>
+<p>This library uses <a href="https://waf.io">Waf</a> as the build system. To build the release variant, simply run <code>./waf configure build_release</code> in the project root directory. The resulting files will be in <code>build/release</code> and <code>build/release/bin</code>, or you can run <code>sudo ./waf install_release</code> after building.</p>
+<p>The general usage of Waf is <code>./waf subcommand_1 subcommand_2 ...</code>, where each subcommand is either user defined/modified or builtin, and many subcommands can be specified. Additionally, environment variables can be changed as needed normally by doing <code>CC=clang-13 ./waf ...</code> or similar.</p>
+<p>The main subcommands to be aware of are</p><ul>
+<li><code>configure</code>: set up Waf, must be run before most other commands</li>
+<li><code>build_&lt;variant&gt;</code>: build the indicated variant. Results are stored in <code>build/&lt;variant&gt;</code>. The currently extant variants are:<ul>
+<li><code>coverage</code>: debug variant, includes address sanitizer, some ub sanitizers, and coverage collection. builds using <code>gcc</code></li>
+<li><code>debug</code>: debug variant, includes memory sanitizer and most ub sanitizers. builds using <code>clang</code></li>
+<li><code>release</code>: release variant, no sanitizers. builds using <code>gcc</code> with <code>-O3</code></li>
+<li><code>valgrind</code>: debug variant, no sanitizers. builds using <code>clang</code> with <code>-O1</code></li>
+<li><code>windows</code>: release variant, no sanitizers. builds using <code>x86_64-w64-mingw32-gcc</code></li>
 </ul>
-<p>The files in a variant build directory are arranged as follows: <code>Makefile</code> is the makefile, variants probably won't have to modify this much aside from removing coverage information; <code>cflags.txt</code>, <code>ldflags.txt</code>, and <code>makedeps_cflags.txt</code> contain configuration flags that should be passed to the compiler and linker. Flag files are used to consolidate compiler flags, reduce how often the makefile needs to be tweaked, and clean up build logs.</p>
-<p>Based on the source files in <code>include</code> and <code>src</code>, together with the configuration in a variant build directory, output files are produced in the following subdirectories of <code></code>: <code>bin</code> for executables, <code>bin/test</code> for test executables, <code>lib</code> for static and dynamic libraries, <code>obj</code> for object files and dependency files, <code>notes</code> for coverage information, <code>log</code> for test logs, and <code>cov</code> for human readable coverage reports.</p>
-<p>Executables, static libraries, and test executables are automatically created based on the contents of <code>src</code>: every C file or directory in <code>src/bin</code> is turned into its own executable in <code>/bin</code>, every C file or directory in <code>src/lib</code> is turned into its own static library in <code>/lib</code>, and every C file or directory in <code>src/test</code> is turned into its own test executable in <code>/bin/test</code>.</p>
-<p><code>make clean</code> should remove all output files in all variant build directories, as well as all generated documentation.</p>
-<p>Finally, <code>make docs</code> generates the documentation in the <code>docs</code> directory. Like <code>make clean</code>, this is not tied to a build variant and even if you specify one the same thing will happen.</p>
-<p><code>make debug_makefile</code> simply exists to facillitate printing make variables, don't worry about it.</p>
-<p>Only Linux is properly supported. To build, only <code>gcc</code>, <code>ar</code>, and <code>make</code> are strictly required, but <code>lcov</code> and <code>doxygen</code> are required for coverage and documentation, and <code>python</code>, <code>clang</code>, and <code>valgrind</code> are required for testing.</p>
-<p>If running as root in an automated environment, you will need to either pass <code>ALLOW_ROOT=1</code> as an option to <code>make</code>, or pipe <code>yes</code> into <code>make</code> to auto accept the safety prompt for running as root.</p>
+</li>
+<li><code>clean_&lt;variant&gt;</code>: delete build files</li>
+<li><code>install_&lt;variant&gt;</code>: copy headers, built libraries, and build binaries (but not test binaries) to the system. Typically requires <code>sudo</code>. Consider running without <code>sudo</code> first to ensure it's doing what you want.</li>
+<li><code>uninstall_&lt;variant&gt;</code>: remove installed files. Typically requires <code>sudo</code>. Consider running without <code>sudo</code> first to ensure it's doing what you want.</li>
+<li><code>test_&lt;variant&gt;</code>: run tests (invoke <code>tests/test.py</code>). This is a special rule, it will always run tests, unlike <code>build_*</code> which only builds outputs if their inputs have changed. Requires <code>build_&lt;variant&gt;</code> to have been run successfully first.<ul>
+<li>For the <code>coverage</code> variant, <code>geninfo</code> and <code>genhtml</code> are automatically invoked after tests succeed.</li>
+</ul>
+</li>
+<li><code>distclean</code>: delete the whole build directory (build files for all variants)</li>
+<li><code>docs</code>: run <code>doxygen</code> to create the documentation. Similar to <code>test_&lt;variant&gt;</code> this always executes, but it is not tied to a variant.</li>
+</ul>
+<p>To introduce new variants, look in <code>wscript</code> and add an appropriate section in <code>configure</code> as well as the <code>for</code> loop at the end of the file.</p>
+<p>Waf depends on two main files: <code>waf</code>, the compressed python script comprising Waf itself, and <code>wscript</code>, the main user config. These are somewhat analagous to the systemwide <code>make</code> executable and the <code>Makefile</code>. Waf is intended to be distributed with the project, with a separate copy in each project.</p>
+<p>Executables, static libraries, and test executables are automatically created based on the contents of <code>src</code>: every C file or directory in <code>src/bin</code> is turned into its own executable in <code>$build/&lt;variant&gt;/bin</code>, every C file or directory in <code>src/lib</code> is turned into its own static library in <code>build/&lt;variant&gt;</code>, and every C file or directory in <code>src/test</code> is turned into its own test executable in <code>build/&lt;variant&gt;</code>.</p>
+<p><code>./waf distclean</code> will not remove <code>cov</code> and <code>docs</code>, the directories generated by <code>test_coverage</code> and <code>docs</code> respectively; these can be removed with <code>rm -rf cov docs</code>.</p>
+<p>Only Linux is properly supported. To build, only (<code>gcc</code> and <code>ar</code> or <code>clang</code>) and <code>python</code> are strictly required, but <code>lcov</code> and <code>doxygen</code> are required for coverage and documentation, <code>valgrind</code> is required for testing, and it's recommended to have both <code>gcc</code> and <code>clang</code>. Cross compiling for windows requires <code>x86_64-w64-mingw32-gcc</code> and <code>libwinpthread</code> and isn't fully supported. WSL or similar may be better for windows users.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Linking</h1>
-<p>Once the library has been built, it can be linked with C programs by adding the flags <code>-Lbuild/debug -lnut</code> or <code>-L -lnut</code> to use a different variant build. You can also install it to your system libraries by doing <code>sudo make BUILD_ROOT=build/release install</code>. This will place the libraries in <code>/usr/lib/nut/</code> and the headers in <code>/usr/include/nut/</code>. Then the <code>-L</code> flag can be omitted and the library can be linked with simply <code>-lnut</code>.</p>
+<p>Once the library has been built, it can be linked with C programs by adding the flags <code>-Lbuild/release -lnut</code> ( or <code>-Lbuild/&lt;variant&gt; -lnut</code> for a different variant). You can also install it to your system libraries by doing <code>sudo ./waf install_release</code>. This will place the libraries in <code>/usr/local/lib/</code>, the headers in <code>/usr/local/include/nut/</code>, and non-test binaries in <code>/usr/local/bin/</code>. Then the <code>-L</code> flag can be omitted and the library can be linked with simply <code>-lnut</code>. Having the release variant installed systemwide and linking manually against the debug variant if some need arises is probably most convenient.</p>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Examples</h1>
 <p>The tests in <code>src/test</code> offer a lot more interesting examples, with basically every function being at least used.</p>
@@ -262,7 +273,7 @@ Factor a polynomial mod some primes</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jan 30 2024 01:27:08 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jan 31 2024 21:24:41 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -50,7 +50,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-01-30 01:26:42</td>
+            <td class="headerValue">2024-01-31 21:24:21</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">33</td>
@@ -80,22 +80,22 @@
 <a name="5"><span class="lineNum">       5 </span>            : #include &lt;nut/factorization.h&gt;</a>
 <a name="6"><span class="lineNum">       6 </span>            : #include &lt;nut/polynomial.h&gt;</a>
 <a name="7"><span class="lineNum">       7 </span>            : </a>
-<a name="8"><span class="lineNum">       8 </span><span class="lineCov">      30449 : bool nut_Poly_init(nut_Poly *f, uint64_t reserve){</span></a>
-<a name="9"><span class="lineNum">       9 </span><span class="lineCov">      30449 :     reserve = reserve ?: 4;</span></a>
-<a name="10"><span class="lineNum">      10 </span><span class="lineCov">      30449 :     f-&gt;coeffs = malloc(reserve*sizeof(int64_t));</span></a>
-<a name="11"><span class="lineNum">      11 </span><span class="lineCov">      30449 :     if(!f-&gt;coeffs){</span></a>
+<a name="8"><span class="lineNum">       8 </span><span class="lineCov">      30450 : bool nut_Poly_init(nut_Poly *f, uint64_t reserve){</span></a>
+<a name="9"><span class="lineNum">       9 </span><span class="lineCov">      30450 :     reserve = reserve ?: 4;</span></a>
+<a name="10"><span class="lineNum">      10 </span><span class="lineCov">      30450 :     f-&gt;coeffs = malloc(reserve*sizeof(int64_t));</span></a>
+<a name="11"><span class="lineNum">      11 </span><span class="lineCov">      30450 :     if(!f-&gt;coeffs){</span></a>
 <a name="12"><span class="lineNum">      12 </span>            :         return false;</a>
 <a name="13"><span class="lineNum">      13 </span>            :     }</a>
-<a name="14"><span class="lineNum">      14 </span><span class="lineCov">      30449 :     f-&gt;len = 1;</span></a>
-<a name="15"><span class="lineNum">      15 </span><span class="lineCov">      30449 :     f-&gt;coeffs[0] = 0;</span></a>
-<a name="16"><span class="lineNum">      16 </span><span class="lineCov">      30449 :     f-&gt;cap = reserve;</span></a>
-<a name="17"><span class="lineNum">      17 </span><span class="lineCov">      30449 :     return true;</span></a>
+<a name="14"><span class="lineNum">      14 </span><span class="lineCov">      30450 :     f-&gt;len = 1;</span></a>
+<a name="15"><span class="lineNum">      15 </span><span class="lineCov">      30450 :     f-&gt;coeffs[0] = 0;</span></a>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">      30450 :     f-&gt;cap = reserve;</span></a>
+<a name="17"><span class="lineNum">      17 </span><span class="lineCov">      30450 :     return true;</span></a>
 <a name="18"><span class="lineNum">      18 </span>            : }</a>
 <a name="19"><span class="lineNum">      19 </span>            : </a>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">      30455 : void nut_Poly_destroy(nut_Poly *f){</span></a>
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">      30455 :     free(f-&gt;coeffs);</span></a>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">      30455 :     *f = (nut_Poly){};</span></a>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">      30455 : }</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">      30456 : void nut_Poly_destroy(nut_Poly *f){</span></a>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">      30456 :     free(f-&gt;coeffs);</span></a>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">      30456 :     *f = (nut_Poly){};</span></a>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">      30456 : }</span></a>
 <a name="24"><span class="lineNum">      24 </span>            : </a>
 <a name="25"><span class="lineNum">      25 </span><span class="lineNoCov">          0 : int nut_Poly_cmp(const nut_Poly *a, const nut_Poly *b){</span></a>
 <a name="26"><span class="lineNum">      26 </span><span class="lineNoCov">          0 :     uint64_t min_len;</span></a>
@@ -150,26 +150,26 @@
 <a name="75"><span class="lineNum">      75 </span><span class="lineCov">          1 :     *roots = (nut_Roots){};</span></a>
 <a name="76"><span class="lineNum">      76 </span><span class="lineCov">          1 : }</span></a>
 <a name="77"><span class="lineNum">      77 </span>            : </a>
-<a name="78"><span class="lineNum">      78 </span><span class="lineCov">   26116884 : int64_t nut_Poly_eval_modn(const nut_Poly *f, int64_t x, int64_t n){</span></a>
-<a name="79"><span class="lineNum">      79 </span><span class="lineCov">   26116884 :     if(!x){</span></a>
+<a name="78"><span class="lineNum">      78 </span><span class="lineCov">   25583857 : int64_t nut_Poly_eval_modn(const nut_Poly *f, int64_t x, int64_t n){</span></a>
+<a name="79"><span class="lineNum">      79 </span><span class="lineCov">   25583857 :     if(!x){</span></a>
 <a name="80"><span class="lineNum">      80 </span><span class="lineCov">       5001 :         return f-&gt;coeffs[0];</span></a>
 <a name="81"><span class="lineNum">      81 </span>            :     }</a>
-<a name="82"><span class="lineNum">      82 </span><span class="lineCov">   26111883 :     int64_t r = 0;</span></a>
-<a name="83"><span class="lineNum">      83 </span><span class="lineCov">  261088814 :     for(uint64_t i = f-&gt;len; i &gt; 0;){</span></a>
-<a name="84"><span class="lineNum">      84 </span><span class="lineCov">  234976931 :         --i;</span></a>
-<a name="85"><span class="lineNum">      85 </span><span class="lineCov">  234976931 :         r = nut_i64_mod(r*x + f-&gt;coeffs[i], n);</span></a>
+<a name="82"><span class="lineNum">      82 </span><span class="lineCov">   25578856 :     int64_t r = 0;</span></a>
+<a name="83"><span class="lineNum">      83 </span><span class="lineCov">  255758544 :     for(uint64_t i = f-&gt;len; i &gt; 0;){</span></a>
+<a name="84"><span class="lineNum">      84 </span><span class="lineCov">  230179688 :         --i;</span></a>
+<a name="85"><span class="lineNum">      85 </span><span class="lineCov">  230179688 :         r = nut_i64_mod(r*x + f-&gt;coeffs[i], n);</span></a>
 <a name="86"><span class="lineNum">      86 </span>            :     }</a>
 <a name="87"><span class="lineNum">      87 </span>            :     return r;</a>
 <a name="88"><span class="lineNum">      88 </span>            : }</a>
 <a name="89"><span class="lineNum">      89 </span>            : </a>
-<a name="90"><span class="lineNum">      90 </span><span class="lineCov">     583147 : bool nut_Poly_ensure_cap(nut_Poly *f, uint64_t cap){</span></a>
-<a name="91"><span class="lineNum">      91 </span><span class="lineCov">     583147 :     if(f-&gt;cap &lt; cap){</span></a>
-<a name="92"><span class="lineNum">      92 </span><span class="lineCov">      15713 :         int64_t *tmp = realloc(f-&gt;coeffs, cap*sizeof(int64_t));</span></a>
-<a name="93"><span class="lineNum">      93 </span><span class="lineCov">      15713 :         if(!tmp){</span></a>
+<a name="90"><span class="lineNum">      90 </span><span class="lineCov">     579183 : bool nut_Poly_ensure_cap(nut_Poly *f, uint64_t cap){</span></a>
+<a name="91"><span class="lineNum">      91 </span><span class="lineCov">     579183 :     if(f-&gt;cap &lt; cap){</span></a>
+<a name="92"><span class="lineNum">      92 </span><span class="lineCov">      15680 :         int64_t *tmp = realloc(f-&gt;coeffs, cap*sizeof(int64_t));</span></a>
+<a name="93"><span class="lineNum">      93 </span><span class="lineCov">      15680 :         if(!tmp){</span></a>
 <a name="94"><span class="lineNum">      94 </span>            :             return false;</a>
 <a name="95"><span class="lineNum">      95 </span>            :         }</a>
-<a name="96"><span class="lineNum">      96 </span><span class="lineCov">      15713 :         f-&gt;coeffs = tmp;</span></a>
-<a name="97"><span class="lineNum">      97 </span><span class="lineCov">      15713 :         f-&gt;cap = cap;</span></a>
+<a name="96"><span class="lineNum">      96 </span><span class="lineCov">      15680 :         f-&gt;coeffs = tmp;</span></a>
+<a name="97"><span class="lineNum">      97 </span><span class="lineCov">      15680 :         f-&gt;cap = cap;</span></a>
 <a name="98"><span class="lineNum">      98 </span>            :     }</a>
 <a name="99"><span class="lineNum">      99 </span>            :     return true;</a>
 <a name="100"><span class="lineNum">     100 </span>            : }</a>
@@ -187,8 +187,8 @@
 <a name="112"><span class="lineNum">     112 </span>            :     return true;</a>
 <a name="113"><span class="lineNum">     113 </span>            : }</a>
 <a name="114"><span class="lineNum">     114 </span>            : </a>
-<a name="115"><span class="lineNum">     115 </span><span class="lineCov">        535 : bool nut_Roots_ensure_cap(nut_Roots *roots, uint64_t cap){</span></a>
-<a name="116"><span class="lineNum">     116 </span><span class="lineCov">        535 :     if(roots-&gt;cap &lt; cap){</span></a>
+<a name="115"><span class="lineNum">     115 </span><span class="lineCov">        510 : bool nut_Roots_ensure_cap(nut_Roots *roots, uint64_t cap){</span></a>
+<a name="116"><span class="lineNum">     116 </span><span class="lineCov">        510 :     if(roots-&gt;cap &lt; cap){</span></a>
 <a name="117"><span class="lineNum">     117 </span><span class="lineNoCov">          0 :         int64_t *tmp = realloc(roots-&gt;roots, cap*sizeof(int64_t));</span></a>
 <a name="118"><span class="lineNum">     118 </span><span class="lineNoCov">          0 :         if(!tmp){</span></a>
 <a name="119"><span class="lineNum">     119 </span>            :             return false;</a>
@@ -199,24 +199,24 @@
 <a name="124"><span class="lineNum">     124 </span>            :     return true;</a>
 <a name="125"><span class="lineNum">     125 </span>            : }</a>
 <a name="126"><span class="lineNum">     126 </span>            : </a>
-<a name="127"><span class="lineNum">     127 </span><span class="lineCov">       6563 : bool nut_Poly_add_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t n){</span></a>
-<a name="128"><span class="lineNum">     128 </span><span class="lineCov">       6563 :     if(!nut_Poly_ensure_cap(h, f-&gt;len &gt; g-&gt;len ? f-&gt;len : g-&gt;len)){</span></a>
+<a name="127"><span class="lineNum">     127 </span><span class="lineCov">       6511 : bool nut_Poly_add_modn(nut_Poly *h, const nut_Poly *f, const nut_Poly *g, int64_t n){</span></a>
+<a name="128"><span class="lineNum">     128 </span><span class="lineCov">       6511 :     if(!nut_Poly_ensure_cap(h, f-&gt;len &gt; g-&gt;len ? f-&gt;len : g-&gt;len)){</span></a>
 <a name="129"><span class="lineNum">     129 </span>            :         return false;</a>
 <a name="130"><span class="lineNum">     130 </span>            :     }</a>
 <a name="131"><span class="lineNum">     131 </span>            :     uint64_t i;</a>
-<a name="132"><span class="lineNum">     132 </span><span class="lineCov">      30126 :     for(i = 0; i &lt; f-&gt;len &amp;&amp; i &lt; g-&gt;len; ++i){</span></a>
-<a name="133"><span class="lineNum">     133 </span><span class="lineCov">      23563 :         h-&gt;coeffs[i] = nut_i64_mod(f-&gt;coeffs[i] + g-&gt;coeffs[i], n);</span></a>
+<a name="132"><span class="lineNum">     132 </span><span class="lineCov">      30022 :     for(i = 0; i &lt; f-&gt;len &amp;&amp; i &lt; g-&gt;len; ++i){</span></a>
+<a name="133"><span class="lineNum">     133 </span><span class="lineCov">      23511 :         h-&gt;coeffs[i] = nut_i64_mod(f-&gt;coeffs[i] + g-&gt;coeffs[i], n);</span></a>
 <a name="134"><span class="lineNum">     134 </span>            :     }</a>
-<a name="135"><span class="lineNum">     135 </span><span class="lineCov">      24140 :     for(; i &lt; f-&gt;len; ++i){</span></a>
-<a name="136"><span class="lineNum">     136 </span><span class="lineCov">      17577 :         h-&gt;coeffs[i] = f-&gt;coeffs[i];</span></a>
+<a name="135"><span class="lineNum">     135 </span><span class="lineCov">      23720 :     for(; i &lt; f-&gt;len; ++i){</span></a>
+<a name="136"><span class="lineNum">     136 </span><span class="lineCov">      17209 :         h-&gt;coeffs[i] = f-&gt;coeffs[i];</span></a>
 <a name="137"><span class="lineNum">     137 </span>            :     }</a>
-<a name="138"><span class="lineNum">     138 </span><span class="lineCov">      10699 :     for(; i &lt; g-&gt;len; ++i){</span></a>
+<a name="138"><span class="lineNum">     138 </span><span class="lineCov">      10647 :     for(; i &lt; g-&gt;len; ++i){</span></a>
 <a name="139"><span class="lineNum">     139 </span><span class="lineCov">       4136 :         h-&gt;coeffs[i] = g-&gt;coeffs[i];</span></a>
 <a name="140"><span class="lineNum">     140 </span>            :     }</a>
-<a name="141"><span class="lineNum">     141 </span><span class="lineCov">       6563 :     int same_len = f-&gt;len == g-&gt;len;</span></a>
-<a name="142"><span class="lineNum">     142 </span><span class="lineCov">       6563 :     h-&gt;len = f-&gt;len &gt; g-&gt;len ? f-&gt;len : g-&gt;len;</span></a>
-<a name="143"><span class="lineNum">     143 </span><span class="lineCov">       6563 :     if(same_len){</span></a>
-<a name="144"><span class="lineNum">     144 </span><span class="lineCov">       1347 :         nut_Poly_normalize(h);</span></a>
+<a name="141"><span class="lineNum">     141 </span><span class="lineCov">       6511 :     int same_len = f-&gt;len == g-&gt;len;</span></a>
+<a name="142"><span class="lineNum">     142 </span><span class="lineCov">       6511 :     h-&gt;len = f-&gt;len &gt; g-&gt;len ? f-&gt;len : g-&gt;len;</span></a>
+<a name="143"><span class="lineNum">     143 </span><span class="lineCov">       6511 :     if(same_len){</span></a>
+<a name="144"><span class="lineNum">     144 </span><span class="lineCov">       1367 :         nut_Poly_normalize(h);</span></a>
 <a name="145"><span class="lineNum">     145 </span>            :     }</a>
 <a name="146"><span class="lineNum">     146 </span>            :     return true;</a>
 <a name="147"><span class="lineNum">     147 </span>            : }</a>
@@ -229,8 +229,8 @@
 <a name="154"><span class="lineNum">     154 </span><span class="lineCov">      36003 :     for(i = 0; i &lt; f-&gt;len &amp;&amp; i &lt; g-&gt;len; ++i){</span></a>
 <a name="155"><span class="lineNum">     155 </span><span class="lineCov">      28002 :         h-&gt;coeffs[i] = nut_i64_mod(f-&gt;coeffs[i] - g-&gt;coeffs[i], n);</span></a>
 <a name="156"><span class="lineNum">     156 </span>            :     }</a>
-<a name="157"><span class="lineNum">     157 </span><span class="lineCov">      33440 :     for(; i &lt; f-&gt;len; ++i){</span></a>
-<a name="158"><span class="lineNum">     158 </span><span class="lineCov">      25439 :         h-&gt;coeffs[i] = f-&gt;coeffs[i];</span></a>
+<a name="157"><span class="lineNum">     157 </span><span class="lineCov">      33927 :     for(; i &lt; f-&gt;len; ++i){</span></a>
+<a name="158"><span class="lineNum">     158 </span><span class="lineCov">      25926 :         h-&gt;coeffs[i] = f-&gt;coeffs[i];</span></a>
 <a name="159"><span class="lineNum">     159 </span>            :     }</a>
 <a name="160"><span class="lineNum">     160 </span><span class="lineCov">      12001 :     for(; i &lt; g-&gt;len; ++i){</span></a>
 <a name="161"><span class="lineNum">     161 </span><span class="lineCov">       4000 :         h-&gt;coeffs[i] = g-&gt;coeffs[i] ? n - g-&gt;coeffs[i] : 0;</span></a>
@@ -238,7 +238,7 @@
 <a name="163"><span class="lineNum">     163 </span><span class="lineCov">       8001 :     int same_len = f-&gt;len == g-&gt;len;</span></a>
 <a name="164"><span class="lineNum">     164 </span><span class="lineCov">       8001 :     h-&gt;len = f-&gt;len &gt; g-&gt;len ? f-&gt;len : g-&gt;len;</span></a>
 <a name="165"><span class="lineNum">     165 </span><span class="lineCov">       8001 :     if(same_len){</span></a>
-<a name="166"><span class="lineNum">     166 </span><span class="lineCov">       1535 :         nut_Poly_normalize(h);</span></a>
+<a name="166"><span class="lineNum">     166 </span><span class="lineCov">       1510 :         nut_Poly_normalize(h);</span></a>
 <a name="167"><span class="lineNum">     167 </span>            :     }</a>
 <a name="168"><span class="lineNum">     168 </span>            :     return true;</a>
 <a name="169"><span class="lineNum">     169 </span>            : }</a>
@@ -256,57 +256,57 @@
 <a name="181"><span class="lineNum">     181 </span><span class="lineNoCov">          0 :     return true;</span></a>
 <a name="182"><span class="lineNum">     182 </span>            : }</a>
 <a name="183"><span class="lineNum">     183 </span>            : </a>
-<a name="184"><span class="lineNum">     184 </span><span class="lineCov">      75787 : bool nut_Poly_copy(nut_Poly *restrict g, const nut_Poly *restrict f){</span></a>
-<a name="185"><span class="lineNum">     185 </span><span class="lineCov">      75787 :     if(!nut_Poly_ensure_cap(g, f-&gt;len)){</span></a>
+<a name="184"><span class="lineNum">     184 </span><span class="lineCov">      75495 : bool nut_Poly_copy(nut_Poly *restrict g, const nut_Poly *restrict f){</span></a>
+<a name="185"><span class="lineNum">     185 </span><span class="lineCov">      75495 :     if(!nut_Poly_ensure_cap(g, f-&gt;len)){</span></a>
 <a name="186"><span class="lineNum">     186 </span>            :         return false;</a>
 <a name="187"><span class="lineNum">     187 </span>            :     }</a>
-<a name="188"><span class="lineNum">     188 </span><span class="lineCov">      75787 :     memcpy(g-&gt;coeffs, f-&gt;coeffs, f-&gt;len*sizeof(int64_t));</span></a>
-<a name="189"><span class="lineNum">     189 </span><span class="lineCov">      75787 :     g-&gt;len = f-&gt;len;</span></a>
-<a name="190"><span class="lineNum">     190 </span><span class="lineCov">      75787 :     return true;</span></a>
+<a name="188"><span class="lineNum">     188 </span><span class="lineCov">      75495 :     memcpy(g-&gt;coeffs, f-&gt;coeffs, f-&gt;len*sizeof(int64_t));</span></a>
+<a name="189"><span class="lineNum">     189 </span><span class="lineCov">      75495 :     g-&gt;len = f-&gt;len;</span></a>
+<a name="190"><span class="lineNum">     190 </span><span class="lineCov">      75495 :     return true;</span></a>
 <a name="191"><span class="lineNum">     191 </span>            : }</a>
 <a name="192"><span class="lineNum">     192 </span>            : </a>
-<a name="193"><span class="lineNum">     193 </span><span class="lineCov">      56147 : bool nut_Poly_setconst(nut_Poly *f, int64_t c){</span></a>
-<a name="194"><span class="lineNum">     194 </span><span class="lineCov">      56147 :     if(!nut_Poly_ensure_cap(f, 1)){</span></a>
+<a name="193"><span class="lineNum">     193 </span><span class="lineCov">      55870 : bool nut_Poly_setconst(nut_Poly *f, int64_t c){</span></a>
+<a name="194"><span class="lineNum">     194 </span><span class="lineCov">      55870 :     if(!nut_Poly_ensure_cap(f, 1)){</span></a>
 <a name="195"><span class="lineNum">     195 </span>            :         return false;</a>
 <a name="196"><span class="lineNum">     196 </span>            :     }</a>
-<a name="197"><span class="lineNum">     197 </span><span class="lineCov">      56147 :     f-&gt;coeffs[0] = c;</span></a>
-<a name="198"><span class="lineNum">     198 </span><span class="lineCov">      56147 :     f-&gt;len = 1;</span></a>
-<a name="199"><span class="lineNum">     199 </span><span class="lineCov">      56147 :     return true;</span></a>
+<a name="197"><span class="lineNum">     197 </span><span class="lineCov">      55870 :     f-&gt;coeffs[0] = c;</span></a>
+<a name="198"><span class="lineNum">     198 </span><span class="lineCov">      55870 :     f-&gt;len = 1;</span></a>
+<a name="199"><span class="lineNum">     199 </span><span class="lineCov">      55870 :     return true;</span></a>
 <a name="200"><span class="lineNum">     200 </span>            : }</a>
 <a name="201"><span class="lineNum">     201 </span>            : </a>
-<a name="202"><span class="lineNum">     202 </span><span class="lineCov">      22546 : bool nut_Poly_scale_modn(nut_Poly *g, const nut_Poly *f, int64_t a, int64_t n){</span></a>
-<a name="203"><span class="lineNum">     203 </span><span class="lineCov">      22546 :     if(!a){</span></a>
+<a name="202"><span class="lineNum">     202 </span><span class="lineCov">      22391 : bool nut_Poly_scale_modn(nut_Poly *g, const nut_Poly *f, int64_t a, int64_t n){</span></a>
+<a name="203"><span class="lineNum">     203 </span><span class="lineCov">      22391 :     if(!a){</span></a>
 <a name="204"><span class="lineNum">     204 </span><span class="lineCov">         27 :         return nut_Poly_setconst(g, 0);</span></a>
 <a name="205"><span class="lineNum">     205 </span>            :     }</a>
-<a name="206"><span class="lineNum">     206 </span><span class="lineCov">      22519 :     if(!nut_Poly_ensure_cap(g, f-&gt;len)){</span></a>
+<a name="206"><span class="lineNum">     206 </span><span class="lineCov">      22364 :     if(!nut_Poly_ensure_cap(g, f-&gt;len)){</span></a>
 <a name="207"><span class="lineNum">     207 </span>            :         return false;</a>
 <a name="208"><span class="lineNum">     208 </span>            :     }</a>
-<a name="209"><span class="lineNum">     209 </span><span class="lineCov">     114682 :     for(uint64_t i = 0; i &lt; f-&gt;len; ++i){</span></a>
-<a name="210"><span class="lineNum">     210 </span><span class="lineCov">      92163 :         g-&gt;coeffs[i] = nut_i64_mod(a*f-&gt;coeffs[i], n);</span></a>
+<a name="209"><span class="lineNum">     209 </span><span class="lineCov">     114141 :     for(uint64_t i = 0; i &lt; f-&gt;len; ++i){</span></a>
+<a name="210"><span class="lineNum">     210 </span><span class="lineCov">      91777 :         g-&gt;coeffs[i] = nut_i64_mod(a*f-&gt;coeffs[i], n);</span></a>
 <a name="211"><span class="lineNum">     211 </span>            :     }</a>
-<a name="212"><span class="lineNum">     212 </span><span class="lineCov">      22519 :     g-&gt;len = f-&gt;len;</span></a>
-<a name="213"><span class="lineNum">     213 </span><span class="lineCov">      22519 :     nut_Poly_normalize(g);</span></a>
-<a name="214"><span class="lineNum">     214 </span><span class="lineCov">      22519 :     return true;</span></a>
+<a name="212"><span class="lineNum">     212 </span><span class="lineCov">      22364 :     g-&gt;len = f-&gt;len;</span></a>
+<a name="213"><span class="lineNum">     213 </span><span class="lineCov">      22364 :     nut_Poly_normalize(g);</span></a>
+<a name="214"><span class="lineNum">     214 </span><span class="lineCov">      22364 :     return true;</span></a>
 <a name="215"><span class="lineNum">     215 </span>            : }</a>
 <a name="216"><span class="lineNum">     216 </span>            : </a>
-<a name="217"><span class="lineNum">     217 </span><span class="lineCov">     130924 : bool nut_Poly_mul_modn(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g, int64_t n){</span></a>
-<a name="218"><span class="lineNum">     218 </span><span class="lineCov">     130924 :     if(f-&gt;len == 1){</span></a>
-<a name="219"><span class="lineNum">     219 </span><span class="lineCov">       2704 :         return nut_Poly_scale_modn(h, g, f-&gt;coeffs[0], n);</span></a>
-<a name="220"><span class="lineNum">     220 </span><span class="lineCov">     128220 :     }else if(g-&gt;len == 1){</span></a>
+<a name="217"><span class="lineNum">     217 </span><span class="lineCov">     129998 : bool nut_Poly_mul_modn(nut_Poly *restrict h, const nut_Poly *f, const nut_Poly *g, int64_t n){</span></a>
+<a name="218"><span class="lineNum">     218 </span><span class="lineCov">     129998 :     if(f-&gt;len == 1){</span></a>
+<a name="219"><span class="lineNum">     219 </span><span class="lineCov">       2682 :         return nut_Poly_scale_modn(h, g, f-&gt;coeffs[0], n);</span></a>
+<a name="220"><span class="lineNum">     220 </span><span class="lineCov">     127316 :     }else if(g-&gt;len == 1){</span></a>
 <a name="221"><span class="lineNum">     221 </span><span class="lineCov">       1000 :         return nut_Poly_scale_modn(h, f, g-&gt;coeffs[0], n);</span></a>
 <a name="222"><span class="lineNum">     222 </span>            :     }</a>
-<a name="223"><span class="lineNum">     223 </span><span class="lineCov">     127220 :     if(!nut_Poly_ensure_cap(h, f-&gt;len + g-&gt;len - 1)){</span></a>
+<a name="223"><span class="lineNum">     223 </span><span class="lineCov">     126316 :     if(!nut_Poly_ensure_cap(h, f-&gt;len + g-&gt;len - 1)){</span></a>
 <a name="224"><span class="lineNum">     224 </span>            :         return false;</a>
 <a name="225"><span class="lineNum">     225 </span>            :     }</a>
-<a name="226"><span class="lineNum">     226 </span><span class="lineCov">    1448772 :     for(uint64_t k = 0; k &lt; f-&gt;len + g-&gt;len - 1; ++k){</span></a>
-<a name="227"><span class="lineNum">     227 </span><span class="lineCov">    1321552 :         h-&gt;coeffs[k] = 0;</span></a>
-<a name="228"><span class="lineNum">     228 </span><span class="lineCov">  258563914 :         for(uint64_t i = k &gt;= g-&gt;len ? k - g-&gt;len + 1 : 0; i &lt; f-&gt;len &amp;&amp; i &lt;= k; ++i){</span></a>
-<a name="229"><span class="lineNum">     229 </span><span class="lineCov">  255920810 :             h-&gt;coeffs[k] = nut_i64_mod(h-&gt;coeffs[k] + f-&gt;coeffs[i]*g-&gt;coeffs[k - i], n);</span></a>
+<a name="226"><span class="lineNum">     226 </span><span class="lineCov">    1437282 :     for(uint64_t k = 0; k &lt; f-&gt;len + g-&gt;len - 1; ++k){</span></a>
+<a name="227"><span class="lineNum">     227 </span><span class="lineCov">    1310966 :         h-&gt;coeffs[k] = 0;</span></a>
+<a name="228"><span class="lineNum">     228 </span><span class="lineCov">  258506490 :         for(uint64_t i = k &gt;= g-&gt;len ? k - g-&gt;len + 1 : 0; i &lt; f-&gt;len &amp;&amp; i &lt;= k; ++i){</span></a>
+<a name="229"><span class="lineNum">     229 </span><span class="lineCov">  255884558 :             h-&gt;coeffs[k] = nut_i64_mod(h-&gt;coeffs[k] + f-&gt;coeffs[i]*g-&gt;coeffs[k - i], n);</span></a>
 <a name="230"><span class="lineNum">     230 </span>            :         }</a>
 <a name="231"><span class="lineNum">     231 </span>            :     }</a>
-<a name="232"><span class="lineNum">     232 </span><span class="lineCov">     127220 :     h-&gt;len = f-&gt;len + g-&gt;len - 1;</span></a>
-<a name="233"><span class="lineNum">     233 </span><span class="lineCov">     127220 :     nut_Poly_normalize(h);</span></a>
-<a name="234"><span class="lineNum">     234 </span><span class="lineCov">     127220 :     return true;</span></a>
+<a name="232"><span class="lineNum">     232 </span><span class="lineCov">     126316 :     h-&gt;len = f-&gt;len + g-&gt;len - 1;</span></a>
+<a name="233"><span class="lineNum">     233 </span><span class="lineCov">     126316 :     nut_Poly_normalize(h);</span></a>
+<a name="234"><span class="lineNum">     234 </span><span class="lineCov">     126316 :     return true;</span></a>
 <a name="235"><span class="lineNum">     235 </span>            : }</a>
 <a name="236"><span class="lineNum">     236 </span>            : </a>
 <a name="237"><span class="lineNum">     237 </span><span class="lineNoCov">          0 : bool nut_Poly_pow_modn(nut_Poly *restrict g, const nut_Poly *f, uint64_t e, int64_t n, uint64_t cn, nut_Poly tmps[restrict static 2]){</span></a>
@@ -430,61 +430,61 @@
 <a name="355"><span class="lineNum">     355 </span><span class="lineNoCov">          0 :     return status;</span></a>
 <a name="356"><span class="lineNum">     356 </span>            : }</a>
 <a name="357"><span class="lineNum">     357 </span>            : </a>
-<a name="358"><span class="lineNum">     358 </span><span class="lineCov">     172330 : bool nut_Poly_quotrem_modn(nut_Poly *restrict q, nut_Poly *restrict r, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n){</span></a>
-<a name="359"><span class="lineNum">     359 </span><span class="lineCov">     172330 :     int64_t a, d = nut_i64_egcd(g-&gt;coeffs[g-&gt;len - 1], n, &amp;a, NULL);</span></a>
-<a name="360"><span class="lineNum">     360 </span><span class="lineCov">     172330 :     if(d != 1){</span></a>
+<a name="358"><span class="lineNum">     358 </span><span class="lineCov">     171052 : bool nut_Poly_quotrem_modn(nut_Poly *restrict q, nut_Poly *restrict r, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n){</span></a>
+<a name="359"><span class="lineNum">     359 </span><span class="lineCov">     171052 :     int64_t a, d = nut_i64_egcd(g-&gt;coeffs[g-&gt;len - 1], n, &amp;a, NULL);</span></a>
+<a name="360"><span class="lineNum">     360 </span><span class="lineCov">     171052 :     if(d != 1){</span></a>
 <a name="361"><span class="lineNum">     361 </span>            :         return false;//TODO: set divide by zero error, or set remainder (?)</a>
 <a name="362"><span class="lineNum">     362 </span>            :     }</a>
-<a name="363"><span class="lineNum">     363 </span><span class="lineCov">     172330 :     if(g-&gt;len == 1){//dividing by a scalar TODO: set divide by zero error if scalar is 0</span></a>
-<a name="364"><span class="lineNum">     364 </span><span class="lineCov">       7974 :         return g-&gt;coeffs[0] &amp;&amp; nut_Poly_setconst(r, 0) &amp;&amp; nut_Poly_scale_modn(q, f, a, n);</span></a>
+<a name="363"><span class="lineNum">     363 </span><span class="lineCov">     171052 :     if(g-&gt;len == 1){//dividing by a scalar TODO: set divide by zero error if scalar is 0</span></a>
+<a name="364"><span class="lineNum">     364 </span><span class="lineCov">       7947 :         return g-&gt;coeffs[0] &amp;&amp; nut_Poly_setconst(r, 0) &amp;&amp; nut_Poly_scale_modn(q, f, a, n);</span></a>
 <a name="365"><span class="lineNum">     365 </span>            :     }</a>
-<a name="366"><span class="lineNum">     366 </span><span class="lineCov">     164356 :     if(f-&gt;len &lt; g-&gt;len){//dividing by a polynomial with higher degree</span></a>
-<a name="367"><span class="lineNum">     367 </span><span class="lineCov">      45442 :         return nut_Poly_setconst(q, 0) &amp;&amp; nut_Poly_copy(r, f);</span></a>
+<a name="366"><span class="lineNum">     366 </span><span class="lineCov">     163105 :     if(f-&gt;len &lt; g-&gt;len){//dividing by a polynomial with higher degree</span></a>
+<a name="367"><span class="lineNum">     367 </span><span class="lineCov">      45229 :         return nut_Poly_setconst(q, 0) &amp;&amp; nut_Poly_copy(r, f);</span></a>
 <a name="368"><span class="lineNum">     368 </span>            :     }</a>
 <a name="369"><span class="lineNum">     369 </span>            :     </a>
 <a name="370"><span class="lineNum">     370 </span>            :     //begin extended synthetic division</a>
 <a name="371"><span class="lineNum">     371 </span>            :     //compute max length of quotient and remainder and extend their buffers if need be</a>
-<a name="372"><span class="lineNum">     372 </span><span class="lineCov">     118914 :     q-&gt;len = f-&gt;len - g-&gt;len + 1;</span></a>
-<a name="373"><span class="lineNum">     373 </span><span class="lineCov">     118914 :     r-&gt;len = g-&gt;len - 1;</span></a>
-<a name="374"><span class="lineNum">     374 </span><span class="lineCov">     118914 :     if(!nut_Poly_ensure_cap(q, q-&gt;len) || !nut_Poly_ensure_cap(r, r-&gt;len)){</span></a>
+<a name="372"><span class="lineNum">     372 </span><span class="lineCov">     117876 :     q-&gt;len = f-&gt;len - g-&gt;len + 1;</span></a>
+<a name="373"><span class="lineNum">     373 </span><span class="lineCov">     117876 :     r-&gt;len = g-&gt;len - 1;</span></a>
+<a name="374"><span class="lineNum">     374 </span><span class="lineCov">     117876 :     if(!nut_Poly_ensure_cap(q, q-&gt;len) || !nut_Poly_ensure_cap(r, r-&gt;len)){</span></a>
 <a name="375"><span class="lineNum">     375 </span><span class="lineNoCov">          0 :         return false;</span></a>
 <a name="376"><span class="lineNum">     376 </span>            :     }</a>
 <a name="377"><span class="lineNum">     377 </span>            :     </a>
 <a name="378"><span class="lineNum">     378 </span>            :     //initialize column sums/coeffs of results</a>
-<a name="379"><span class="lineNum">     379 </span><span class="lineCov">     118914 :     memcpy(r-&gt;coeffs, f-&gt;coeffs, r-&gt;len*sizeof(int64_t));</span></a>
-<a name="380"><span class="lineNum">     380 </span><span class="lineCov">     118914 :     memcpy(q-&gt;coeffs, f-&gt;coeffs + r-&gt;len, q-&gt;len*sizeof(int64_t));</span></a>
+<a name="379"><span class="lineNum">     379 </span><span class="lineCov">     117876 :     memcpy(r-&gt;coeffs, f-&gt;coeffs, r-&gt;len*sizeof(int64_t));</span></a>
+<a name="380"><span class="lineNum">     380 </span><span class="lineCov">     117876 :     memcpy(q-&gt;coeffs, f-&gt;coeffs + r-&gt;len, q-&gt;len*sizeof(int64_t));</span></a>
 <a name="381"><span class="lineNum">     381 </span>            :     </a>
 <a name="382"><span class="lineNum">     382 </span>            :     //loop over quotient columns (coefficients in reverse order) which were initialized</a>
 <a name="383"><span class="lineNum">     383 </span>            :     //to the first q-&gt;len dividend coefficients</a>
-<a name="384"><span class="lineNum">     384 </span><span class="lineCov">     636840 :     for(uint64_t k = q-&gt;len; k &gt; 0;){</span></a>
-<a name="385"><span class="lineNum">     385 </span><span class="lineCov">     517926 :         --k;</span></a>
+<a name="384"><span class="lineNum">     384 </span><span class="lineCov">     630459 :     for(uint64_t k = q-&gt;len; k &gt; 0;){</span></a>
+<a name="385"><span class="lineNum">     385 </span><span class="lineCov">     512583 :         --k;</span></a>
 <a name="386"><span class="lineNum">     386 </span>            :         //finish the column by dividing the sum by the leading coefficient of the divisor</a>
 <a name="387"><span class="lineNum">     387 </span>            :         //for monic divisors (aka most of the time) a will simply be 1 so we may optimize this</a>
-<a name="388"><span class="lineNum">     388 </span><span class="lineCov">     517926 :         q-&gt;coeffs[k] = nut_i64_mod(q-&gt;coeffs[k]*a, n);</span></a>
+<a name="388"><span class="lineNum">     388 </span><span class="lineCov">     512583 :         q-&gt;coeffs[k] = nut_i64_mod(q-&gt;coeffs[k]*a, n);</span></a>
 <a name="389"><span class="lineNum">     389 </span>            :         //subtract the adjusted column sum times the some of the divisor coefficients from the</a>
 <a name="390"><span class="lineNum">     390 </span>            :         //remainder coefficients.  the remainder coefficients were initialized to the last r-&gt;len</a>
 <a name="391"><span class="lineNum">     391 </span>            :         //dividend coefficients.  we start q-&gt;len - k columns after the current column we just finished.</a>
 <a name="392"><span class="lineNum">     392 </span>            :         //if k == 0 we should go from coefficient 0 in the remainder to coefficient r-&gt;len - 1</a>
 <a name="393"><span class="lineNum">     393 </span>            :         //so in general we should go from k to r-&gt;len - 1 (this can easily be an empty interval)</a>
-<a name="394"><span class="lineNum">     394 </span><span class="lineCov">  127519858 :         for(uint64_t i = 0, j = k; j &lt; r-&gt;len; ++i, ++j){</span></a>
-<a name="395"><span class="lineNum">     395 </span><span class="lineCov">  127001932 :             r-&gt;coeffs[j] = nut_i64_mod(r-&gt;coeffs[j] - q-&gt;coeffs[k]*g-&gt;coeffs[i], n);</span></a>
+<a name="394"><span class="lineNum">     394 </span><span class="lineCov">  127493976 :         for(uint64_t i = 0, j = k; j &lt; r-&gt;len; ++i, ++j){</span></a>
+<a name="395"><span class="lineNum">     395 </span><span class="lineCov">  126981393 :             r-&gt;coeffs[j] = nut_i64_mod(r-&gt;coeffs[j] - q-&gt;coeffs[k]*g-&gt;coeffs[i], n);</span></a>
 <a name="396"><span class="lineNum">     396 </span>            :         }</a>
 <a name="397"><span class="lineNum">     397 </span>            :         //j goes from max(k - g-&gt;len + 1, 0) to k - 1 (both inclusive)</a>
 <a name="398"><span class="lineNum">     398 </span>            :         //i ends at g-&gt;len - 2 (inclusive) and should go through the same number of values</a>
 <a name="399"><span class="lineNum">     399 </span>            :         //so i starts at g-&gt;len - 2 - (k - 1 - j) = g-&gt;len + j - k - 1</a>
-<a name="400"><span class="lineNum">     400 </span><span class="lineCov">  122479551 :         for(uint64_t j = k &gt; g-&gt;len - 1 ? k - g-&gt;len + 1 : 0, i = g-&gt;len + j - k - 1; i &lt; g-&gt;len - 1; ++i, ++j){</span></a>
-<a name="401"><span class="lineNum">     401 </span><span class="lineCov">  121961625 :             q-&gt;coeffs[j] = nut_i64_mod(q-&gt;coeffs[j] - q-&gt;coeffs[k]*g-&gt;coeffs[i], n);</span></a>
+<a name="400"><span class="lineNum">     400 </span><span class="lineCov">  122463293 :         for(uint64_t j = k &gt; g-&gt;len - 1 ? k - g-&gt;len + 1 : 0, i = g-&gt;len + j - k - 1; i &lt; g-&gt;len - 1; ++i, ++j){</span></a>
+<a name="401"><span class="lineNum">     401 </span><span class="lineCov">  121950710 :             q-&gt;coeffs[j] = nut_i64_mod(q-&gt;coeffs[j] - q-&gt;coeffs[k]*g-&gt;coeffs[i], n);</span></a>
 <a name="402"><span class="lineNum">     402 </span>            :         }</a>
 <a name="403"><span class="lineNum">     403 </span>            :     }</a>
-<a name="404"><span class="lineNum">     404 </span><span class="lineCov">     118914 :     nut_Poly_normalize(r);</span></a>
-<a name="405"><span class="lineNum">     405 </span><span class="lineCov">     118914 :     return true;</span></a>
+<a name="404"><span class="lineNum">     404 </span><span class="lineCov">     117876 :     nut_Poly_normalize(r);</span></a>
+<a name="405"><span class="lineNum">     405 </span><span class="lineCov">     117876 :     return true;</span></a>
 <a name="406"><span class="lineNum">     406 </span>            : }</a>
 <a name="407"><span class="lineNum">     407 </span>            : </a>
-<a name="408"><span class="lineNum">     408 </span><span class="lineCov">     293109 : void nut_Poly_normalize(nut_Poly *f){</span></a>
-<a name="409"><span class="lineNum">     409 </span><span class="lineCov">     422726 :     while(f-&gt;len &gt; 1 &amp;&amp; !f-&gt;coeffs[f-&gt;len - 1]){</span></a>
-<a name="410"><span class="lineNum">     410 </span><span class="lineCov">     129617 :         --f-&gt;len;</span></a>
+<a name="408"><span class="lineNum">     408 </span><span class="lineCov">     290955 : void nut_Poly_normalize(nut_Poly *f){</span></a>
+<a name="409"><span class="lineNum">     409 </span><span class="lineCov">     419352 :     while(f-&gt;len &gt; 1 &amp;&amp; !f-&gt;coeffs[f-&gt;len - 1]){</span></a>
+<a name="410"><span class="lineNum">     410 </span><span class="lineCov">     128397 :         --f-&gt;len;</span></a>
 <a name="411"><span class="lineNum">     411 </span>            :     }</a>
-<a name="412"><span class="lineNum">     412 </span><span class="lineCov">     293109 : }</span></a>
+<a name="412"><span class="lineNum">     412 </span><span class="lineCov">     290955 : }</span></a>
 <a name="413"><span class="lineNum">     413 </span>            : </a>
 <a name="414"><span class="lineNum">     414 </span><span class="lineCov">         30 : void nut_Poly_normalize_modn(nut_Poly *f, int64_t n, bool use_negatives){</span></a>
 <a name="415"><span class="lineNum">     415 </span><span class="lineCov">         30 :     int64_t offset = use_negatives ? (1-n)/2 : 0;</span></a>
@@ -651,65 +651,65 @@
 <a name="576"><span class="lineNum">     576 </span><span class="lineNoCov">          0 :     return 1;</span></a>
 <a name="577"><span class="lineNum">     577 </span>            : }</a>
 <a name="578"><span class="lineNum">     578 </span>            : </a>
-<a name="579"><span class="lineNum">     579 </span><span class="lineCov">      21517 : bool nut_Poly_rand_modn(nut_Poly *f, uint64_t max_len, int64_t n){</span></a>
-<a name="580"><span class="lineNum">     580 </span><span class="lineCov">      21517 :     if(!max_len){</span></a>
+<a name="579"><span class="lineNum">     579 </span><span class="lineCov">      21465 : bool nut_Poly_rand_modn(nut_Poly *f, uint64_t max_len, int64_t n){</span></a>
+<a name="580"><span class="lineNum">     580 </span><span class="lineCov">      21465 :     if(!max_len){</span></a>
 <a name="581"><span class="lineNum">     581 </span><span class="lineNoCov">          0 :         return nut_Poly_setconst(f, 0);</span></a>
 <a name="582"><span class="lineNum">     582 </span>            :     }</a>
-<a name="583"><span class="lineNum">     583 </span><span class="lineCov">      21517 :     if(!nut_Poly_ensure_cap(f, max_len)){</span></a>
+<a name="583"><span class="lineNum">     583 </span><span class="lineCov">      21465 :     if(!nut_Poly_ensure_cap(f, max_len)){</span></a>
 <a name="584"><span class="lineNum">     584 </span>            :         return false;</a>
 <a name="585"><span class="lineNum">     585 </span>            :     }</a>
-<a name="586"><span class="lineNum">     586 </span><span class="lineCov">     172416 :     for(uint64_t i = 0; i &lt; max_len; ++i){</span></a>
-<a name="587"><span class="lineNum">     587 </span><span class="lineCov">     150899 :         f-&gt;coeffs[i] = nut_u64_rand(0, n);</span></a>
+<a name="586"><span class="lineNum">     586 </span><span class="lineCov">     171997 :     for(uint64_t i = 0; i &lt; max_len; ++i){</span></a>
+<a name="587"><span class="lineNum">     587 </span><span class="lineCov">     150532 :         f-&gt;coeffs[i] = nut_u64_rand(0, n);</span></a>
 <a name="588"><span class="lineNum">     588 </span>            :     }</a>
-<a name="589"><span class="lineNum">     589 </span><span class="lineCov">      21517 :     f-&gt;len = max_len;</span></a>
-<a name="590"><span class="lineNum">     590 </span><span class="lineCov">      21517 :     nut_Poly_normalize(f);</span></a>
-<a name="591"><span class="lineNum">     591 </span><span class="lineCov">      21517 :     return true;</span></a>
+<a name="589"><span class="lineNum">     589 </span><span class="lineCov">      21465 :     f-&gt;len = max_len;</span></a>
+<a name="590"><span class="lineNum">     590 </span><span class="lineCov">      21465 :     nut_Poly_normalize(f);</span></a>
+<a name="591"><span class="lineNum">     591 </span><span class="lineCov">      21465 :     return true;</span></a>
 <a name="592"><span class="lineNum">     592 </span>            : }</a>
 <a name="593"><span class="lineNum">     593 </span>            : </a>
-<a name="594"><span class="lineNum">     594 </span><span class="lineCov">      10028 : bool nut_Poly_gcd_modn(nut_Poly *restrict d, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n, nut_Poly tmps[restrict static 3]){</span></a>
+<a name="594"><span class="lineNum">     594 </span><span class="lineCov">       9924 : bool nut_Poly_gcd_modn(nut_Poly *restrict d, const nut_Poly *restrict f, const nut_Poly *restrict g, int64_t n, nut_Poly tmps[restrict static 3]){</span></a>
 <a name="595"><span class="lineNum">     595 </span>            :     //tmps: qt, r0t, r1t</a>
-<a name="596"><span class="lineNum">     596 </span><span class="lineCov">      10028 :     nut_Poly *tmp, *r0, *r1, *r2;</span></a>
-<a name="597"><span class="lineNum">     597 </span><span class="lineCov">      10028 :     bool status = true;</span></a>
-<a name="598"><span class="lineNum">     598 </span><span class="lineCov">      10028 :     if(g-&gt;len &gt; f-&gt;len){//Ensure the degree of f is &gt;= the degree of g</span></a>
-<a name="599"><span class="lineNum">     599 </span><span class="lineCov">      10027 :         const nut_Poly *tmp = f;//Shadow the other tmp with a const version</span></a>
-<a name="600"><span class="lineNum">     600 </span><span class="lineCov">      10027 :         f = g;</span></a>
-<a name="601"><span class="lineNum">     601 </span><span class="lineCov">      10027 :         g = tmp;</span></a>
+<a name="596"><span class="lineNum">     596 </span><span class="lineCov">       9924 :     nut_Poly *tmp, *r0, *r1, *r2;</span></a>
+<a name="597"><span class="lineNum">     597 </span><span class="lineCov">       9924 :     bool status = true;</span></a>
+<a name="598"><span class="lineNum">     598 </span><span class="lineCov">       9924 :     if(g-&gt;len &gt; f-&gt;len){//Ensure the degree of f is &gt;= the degree of g</span></a>
+<a name="599"><span class="lineNum">     599 </span><span class="lineCov">       9923 :         const nut_Poly *tmp = f;//Shadow the other tmp with a const version</span></a>
+<a name="600"><span class="lineNum">     600 </span><span class="lineCov">       9923 :         f = g;</span></a>
+<a name="601"><span class="lineNum">     601 </span><span class="lineCov">       9923 :         g = tmp;</span></a>
 <a name="602"><span class="lineNum">     602 </span>            :     }</a>
-<a name="603"><span class="lineNum">     603 </span><span class="lineCov">      10028 :     if(g-&gt;len == 1){//If one of the inputs is a constant, we either have the gcd of something and a unit or something and zero</span></a>
-<a name="604"><span class="lineNum">     604 </span><span class="lineCov">        855 :         status = g-&gt;coeffs[0] ? nut_Poly_setconst(d, 1) : nut_Poly_copy(d, f);</span></a>
-<a name="605"><span class="lineNum">     605 </span><span class="lineCov">        855 :         goto CLEANUP;</span></a>
+<a name="603"><span class="lineNum">     603 </span><span class="lineCov">       9924 :     if(g-&gt;len == 1){//If one of the inputs is a constant, we either have the gcd of something and a unit or something and zero</span></a>
+<a name="604"><span class="lineNum">     604 </span><span class="lineCov">        850 :         status = g-&gt;coeffs[0] ? nut_Poly_setconst(d, 1) : nut_Poly_copy(d, f);</span></a>
+<a name="605"><span class="lineNum">     605 </span><span class="lineCov">        850 :         goto CLEANUP;</span></a>
 <a name="606"><span class="lineNum">     606 </span>            :     }</a>
 <a name="607"><span class="lineNum">     607 </span>            :     </a>
-<a name="608"><span class="lineNum">     608 </span><span class="lineCov">       9173 :     r0 = d, r1 = tmps + 1, r2 = tmps + 2;</span></a>
+<a name="608"><span class="lineNum">     608 </span><span class="lineCov">       9074 :     r0 = d, r1 = tmps + 1, r2 = tmps + 2;</span></a>
 <a name="609"><span class="lineNum">     609 </span>            :     //Unroll first two remainder calculations to prevent copying</a>
-<a name="610"><span class="lineNum">     610 </span><span class="lineCov">       9173 :     if(!nut_Poly_quotrem_modn(tmps + 0, r0, f, g, n)){</span></a>
+<a name="610"><span class="lineNum">     610 </span><span class="lineCov">       9074 :     if(!nut_Poly_quotrem_modn(tmps + 0, r0, f, g, n)){</span></a>
 <a name="611"><span class="lineNum">     611 </span><span class="lineNoCov">          0 :         status = false;</span></a>
 <a name="612"><span class="lineNum">     612 </span><span class="lineNoCov">          0 :         goto CLEANUP;</span></a>
 <a name="613"><span class="lineNum">     613 </span>            :     }</a>
-<a name="614"><span class="lineNum">     614 </span><span class="lineCov">       9173 :     if(r0-&gt;len == 1 &amp;&amp; !r0-&gt;coeffs[0]){</span></a>
-<a name="615"><span class="lineNum">     615 </span><span class="lineCov">        585 :         status = nut_Poly_copy(d, g);</span></a>
-<a name="616"><span class="lineNum">     616 </span><span class="lineCov">        585 :         goto CLEANUP;</span></a>
+<a name="614"><span class="lineNum">     614 </span><span class="lineCov">       9074 :     if(r0-&gt;len == 1 &amp;&amp; !r0-&gt;coeffs[0]){</span></a>
+<a name="615"><span class="lineNum">     615 </span><span class="lineCov">        591 :         status = nut_Poly_copy(d, g);</span></a>
+<a name="616"><span class="lineNum">     616 </span><span class="lineCov">        591 :         goto CLEANUP;</span></a>
 <a name="617"><span class="lineNum">     617 </span>            :     }</a>
 <a name="618"><span class="lineNum">     618 </span>            :     </a>
-<a name="619"><span class="lineNum">     619 </span><span class="lineCov">       8588 :     if(!nut_Poly_quotrem_modn(tmps + 0, r1, g, r0, n)){</span></a>
+<a name="619"><span class="lineNum">     619 </span><span class="lineCov">       8483 :     if(!nut_Poly_quotrem_modn(tmps + 0, r1, g, r0, n)){</span></a>
 <a name="620"><span class="lineNum">     620 </span><span class="lineNoCov">          0 :         status = false;</span></a>
 <a name="621"><span class="lineNum">     621 </span><span class="lineNoCov">          0 :         goto CLEANUP;</span></a>
 <a name="622"><span class="lineNum">     622 </span>            :     }</a>
-<a name="623"><span class="lineNum">     623 </span><span class="lineCov">       8588 :     if(r1-&gt;len == 1 &amp;&amp; !r1-&gt;coeffs[0]){</span></a>
-<a name="624"><span class="lineNum">     624 </span><span class="lineCov">       1624 :         goto CLEANUP;// r0 == d in this case, no need to copy</span></a>
+<a name="623"><span class="lineNum">     623 </span><span class="lineCov">       8483 :     if(r1-&gt;len == 1 &amp;&amp; !r1-&gt;coeffs[0]){</span></a>
+<a name="624"><span class="lineNum">     624 </span><span class="lineCov">       1515 :         goto CLEANUP;// r0 == d in this case, no need to copy</span></a>
 <a name="625"><span class="lineNum">     625 </span>            :     }</a>
 <a name="626"><span class="lineNum">     626 </span>            :     </a>
 <a name="627"><span class="lineNum">     627 </span>            :     //Euclidean algorithm: take remainders until we reach 0, then the last nonzero remainder is the gcd</a>
-<a name="628"><span class="lineNum">     628 </span><span class="lineCov">      22475 :     while(1){</span></a>
-<a name="629"><span class="lineNum">     629 </span><span class="lineCov">      22475 :         if(!nut_Poly_quotrem_modn(tmps + 0, r2, r0, r1, n)){</span></a>
+<a name="628"><span class="lineNum">     628 </span><span class="lineCov">      22399 :     while(1){</span></a>
+<a name="629"><span class="lineNum">     629 </span><span class="lineCov">      22399 :         if(!nut_Poly_quotrem_modn(tmps + 0, r2, r0, r1, n)){</span></a>
 <a name="630"><span class="lineNum">     630 </span><span class="lineNoCov">          0 :             status = false;</span></a>
 <a name="631"><span class="lineNum">     631 </span><span class="lineNoCov">          0 :             goto CLEANUP;</span></a>
 <a name="632"><span class="lineNum">     632 </span>            :         }</a>
-<a name="633"><span class="lineNum">     633 </span><span class="lineCov">      22475 :         if(r2-&gt;len == 1 &amp;&amp; !r2-&gt;coeffs[0]){</span></a>
-<a name="634"><span class="lineNum">     634 </span><span class="lineCov">       6964 :             if(r1 != d){//Make sure the result is in the output and not a temporary</span></a>
-<a name="635"><span class="lineNum">     635 </span><span class="lineCov">       5653 :                 status = nut_Poly_copy(d, r1);</span></a>
+<a name="633"><span class="lineNum">     633 </span><span class="lineCov">      22399 :         if(r2-&gt;len == 1 &amp;&amp; !r2-&gt;coeffs[0]){</span></a>
+<a name="634"><span class="lineNum">     634 </span><span class="lineCov">       6968 :             if(r1 != d){//Make sure the result is in the output and not a temporary</span></a>
+<a name="635"><span class="lineNum">     635 </span><span class="lineCov">       5742 :                 status = nut_Poly_copy(d, r1);</span></a>
 <a name="636"><span class="lineNum">     636 </span>            :             }</a>
-<a name="637"><span class="lineNum">     637 </span><span class="lineCov">       5653 :             goto CLEANUP;</span></a>
+<a name="637"><span class="lineNum">     637 </span><span class="lineCov">       5742 :             goto CLEANUP;</span></a>
 <a name="638"><span class="lineNum">     638 </span>            :         }</a>
 <a name="639"><span class="lineNum">     639 </span>            :         tmp = r0;</a>
 <a name="640"><span class="lineNum">     640 </span>            :         r0 = r1;</a>
@@ -717,17 +717,17 @@
 <a name="642"><span class="lineNum">     642 </span>            :         r2 = tmp;</a>
 <a name="643"><span class="lineNum">     643 </span>            :     }</a>
 <a name="644"><span class="lineNum">     644 </span>            :     </a>
-<a name="645"><span class="lineNum">     645 </span><span class="lineCov">      10028 :     CLEANUP:;</span></a>
-<a name="646"><span class="lineNum">     646 </span><span class="lineCov">      10028 :     if(status){//If the gcd was found, make it monic</span></a>
-<a name="647"><span class="lineNum">     647 </span><span class="lineCov">      10028 :         int64_t a = d-&gt;coeffs[d-&gt;len - 1];</span></a>
-<a name="648"><span class="lineNum">     648 </span><span class="lineCov">      10028 :         if(a == n - 1){//Inverse of -1 is always -1</span></a>
-<a name="649"><span class="lineNum">     649 </span><span class="lineCov">         11 :             nut_Poly_scale_modn(d, d, a, n);</span></a>
-<a name="650"><span class="lineNum">     650 </span><span class="lineCov">      10017 :         }else if(a &gt; 1){//If the leading coefficient is 0 or 1 the gcd is already monic</span></a>
-<a name="651"><span class="lineNum">     651 </span><span class="lineCov">       7803 :             int64_t c, g = nut_i64_egcd(a, n, &amp;c, NULL);//This g shadows the input</span></a>
-<a name="652"><span class="lineNum">     652 </span><span class="lineCov">       7803 :             if(g != 1){//The leading coefficient cannot be inverted mod n</span></a>
+<a name="645"><span class="lineNum">     645 </span><span class="lineCov">       9924 :     CLEANUP:;</span></a>
+<a name="646"><span class="lineNum">     646 </span><span class="lineCov">       9924 :     if(status){//If the gcd was found, make it monic</span></a>
+<a name="647"><span class="lineNum">     647 </span><span class="lineCov">       9924 :         int64_t a = d-&gt;coeffs[d-&gt;len - 1];</span></a>
+<a name="648"><span class="lineNum">     648 </span><span class="lineCov">       9924 :         if(a == n - 1){//Inverse of -1 is always -1</span></a>
+<a name="649"><span class="lineNum">     649 </span><span class="lineCov">         14 :             nut_Poly_scale_modn(d, d, a, n);</span></a>
+<a name="650"><span class="lineNum">     650 </span><span class="lineCov">       9910 :         }else if(a &gt; 1){//If the leading coefficient is 0 or 1 the gcd is already monic</span></a>
+<a name="651"><span class="lineNum">     651 </span><span class="lineCov">       7694 :             int64_t c, g = nut_i64_egcd(a, n, &amp;c, NULL);//This g shadows the input</span></a>
+<a name="652"><span class="lineNum">     652 </span><span class="lineCov">       7694 :             if(g != 1){//The leading coefficient cannot be inverted mod n</span></a>
 <a name="653"><span class="lineNum">     653 </span><span class="lineNoCov">          0 :                 return false;</span></a>
 <a name="654"><span class="lineNum">     654 </span>            :             }</a>
-<a name="655"><span class="lineNum">     655 </span><span class="lineCov">       7803 :             nut_Poly_scale_modn(d, d, c, n);</span></a>
+<a name="655"><span class="lineNum">     655 </span><span class="lineCov">       7694 :             nut_Poly_scale_modn(d, d, c, n);</span></a>
 <a name="656"><span class="lineNum">     656 </span>            :         }</a>
 <a name="657"><span class="lineNum">     657 </span>            :     }</a>
 <a name="658"><span class="lineNum">     658 </span>            :     return status;</a>
@@ -755,52 +755,52 @@
 <a name="680"><span class="lineNum">     680 </span><span class="lineCov">          2 :     return status;</span></a>
 <a name="681"><span class="lineNum">     681 </span>            : }</a>
 <a name="682"><span class="lineNum">     682 </span>            : </a>
-<a name="683"><span class="lineNum">     683 </span><span class="lineCov">       7511 : bool nut_Poly_powmod_modn(nut_Poly *restrict h, const nut_Poly *restrict f, uint64_t e, const nut_Poly *restrict g, int64_t n, nut_Poly tmps[restrict static 3]){</span></a>
+<a name="683"><span class="lineNum">     683 </span><span class="lineCov">       7459 : bool nut_Poly_powmod_modn(nut_Poly *restrict h, const nut_Poly *restrict f, uint64_t e, const nut_Poly *restrict g, int64_t n, nut_Poly tmps[restrict static 3]){</span></a>
 <a name="684"><span class="lineNum">     684 </span>            :     //tmps: qt, st, rt</a>
-<a name="685"><span class="lineNum">     685 </span><span class="lineCov">       7511 :     if(g-&gt;len &lt;= f-&gt;len){</span></a>
+<a name="685"><span class="lineNum">     685 </span><span class="lineCov">       7459 :     if(g-&gt;len &lt;= f-&gt;len){</span></a>
 <a name="686"><span class="lineNum">     686 </span><span class="lineNoCov">          0 :         if(!nut_Poly_quotrem_modn(tmps + 0, tmps + 1, f, g, n)){</span></a>
 <a name="687"><span class="lineNum">     687 </span>            :             return false;</a>
 <a name="688"><span class="lineNum">     688 </span>            :         }</a>
-<a name="689"><span class="lineNum">     689 </span><span class="lineCov">       7511 :     }else if(!nut_Poly_copy(tmps + 1, f)){</span></a>
+<a name="689"><span class="lineNum">     689 </span><span class="lineCov">       7459 :     }else if(!nut_Poly_copy(tmps + 1, f)){</span></a>
 <a name="690"><span class="lineNum">     690 </span>            :         return false;</a>
 <a name="691"><span class="lineNum">     691 </span>            :     }</a>
-<a name="692"><span class="lineNum">     692 </span><span class="lineCov">       7511 :     if(tmps[1].len == 1){</span></a>
+<a name="692"><span class="lineNum">     692 </span><span class="lineCov">       7459 :     if(tmps[1].len == 1){</span></a>
 <a name="693"><span class="lineNum">     693 </span><span class="lineNoCov">          0 :         if(!tmps[1].coeffs[0]){</span></a>
 <a name="694"><span class="lineNum">     694 </span><span class="lineNoCov">          0 :             return nut_Poly_setconst(h, 0);</span></a>
 <a name="695"><span class="lineNum">     695 </span><span class="lineNoCov">          0 :         }else if(!e){</span></a>
 <a name="696"><span class="lineNum">     696 </span><span class="lineNoCov">          0 :             return nut_Poly_setconst(h, 1);</span></a>
 <a name="697"><span class="lineNum">     697 </span>            :         }</a>
 <a name="698"><span class="lineNum">     698 </span>            :     }</a>
-<a name="699"><span class="lineNum">     699 </span><span class="lineCov">       7511 :     if(!nut_Poly_ensure_cap(tmps + 1, 2*g-&gt;len - 3) || !nut_Poly_ensure_cap(tmps + 2, 2*g-&gt;len - 3) || !nut_Poly_ensure_cap(h, 2*g-&gt;len - 3)){</span></a>
+<a name="699"><span class="lineNum">     699 </span><span class="lineCov">       7459 :     if(!nut_Poly_ensure_cap(tmps + 1, 2*g-&gt;len - 3) || !nut_Poly_ensure_cap(tmps + 2, 2*g-&gt;len - 3) || !nut_Poly_ensure_cap(h, 2*g-&gt;len - 3)){</span></a>
 <a name="700"><span class="lineNum">     700 </span><span class="lineNoCov">          0 :         return false;</span></a>
 <a name="701"><span class="lineNum">     701 </span>            :     }</a>
 <a name="702"><span class="lineNum">     702 </span>            :     </a>
 <a name="703"><span class="lineNum">     703 </span>            :     nut_Poly *t = h, *s = tmps + 1, *r = tmps + 2;</a>
-<a name="704"><span class="lineNum">     704 </span><span class="lineCov">      10269 :     while(e%2 == 0){</span></a>
-<a name="705"><span class="lineNum">     705 </span><span class="lineCov">       2758 :         nut_Poly_mul_modn(t, s, s, n);</span></a>
-<a name="706"><span class="lineNum">     706 </span><span class="lineCov">       2758 :         if(!nut_Poly_quotrem_modn(tmps + 0, s, t, g, n)){</span></a>
+<a name="704"><span class="lineNum">     704 </span><span class="lineCov">       9776 :     while(e%2 == 0){</span></a>
+<a name="705"><span class="lineNum">     705 </span><span class="lineCov">       2317 :         nut_Poly_mul_modn(t, s, s, n);</span></a>
+<a name="706"><span class="lineNum">     706 </span><span class="lineCov">       2317 :         if(!nut_Poly_quotrem_modn(tmps + 0, s, t, g, n)){</span></a>
 <a name="707"><span class="lineNum">     707 </span>            :             return false;</a>
 <a name="708"><span class="lineNum">     708 </span>            :         }//s = s*s%g</a>
-<a name="709"><span class="lineNum">     709 </span><span class="lineCov">       2758 :         e &gt;&gt;= 1;</span></a>
+<a name="709"><span class="lineNum">     709 </span><span class="lineCov">       2317 :         e &gt;&gt;= 1;</span></a>
 <a name="710"><span class="lineNum">     710 </span>            :     }</a>
-<a name="711"><span class="lineNum">     711 </span><span class="lineCov">       7511 :     if(!nut_Poly_copy(r, s)){</span></a>
+<a name="711"><span class="lineNum">     711 </span><span class="lineCov">       7459 :     if(!nut_Poly_copy(r, s)){</span></a>
 <a name="712"><span class="lineNum">     712 </span>            :         return false;</a>
 <a name="713"><span class="lineNum">     713 </span>            :     }</a>
-<a name="714"><span class="lineNum">     714 </span><span class="lineCov">      88477 :     while((e &gt;&gt;= 1)){</span></a>
-<a name="715"><span class="lineNum">     715 </span><span class="lineCov">      80966 :         nut_Poly_mul_modn(t, s, s, n);</span></a>
-<a name="716"><span class="lineNum">     716 </span><span class="lineCov">      80966 :         if(!nut_Poly_quotrem_modn(tmps + 0, s, t, g, n)){</span></a>
+<a name="714"><span class="lineNum">     714 </span><span class="lineCov">      87960 :     while((e &gt;&gt;= 1)){</span></a>
+<a name="715"><span class="lineNum">     715 </span><span class="lineCov">      80501 :         nut_Poly_mul_modn(t, s, s, n);</span></a>
+<a name="716"><span class="lineNum">     716 </span><span class="lineCov">      80501 :         if(!nut_Poly_quotrem_modn(tmps + 0, s, t, g, n)){</span></a>
 <a name="717"><span class="lineNum">     717 </span>            :             return false;</a>
 <a name="718"><span class="lineNum">     718 </span>            :         }//s = s*s%g</a>
-<a name="719"><span class="lineNum">     719 </span><span class="lineCov">      80966 :         if(e%2){</span></a>
-<a name="720"><span class="lineNum">     720 </span><span class="lineCov">      43173 :             nut_Poly_mul_modn(t, r, s, n);</span></a>
-<a name="721"><span class="lineNum">     721 </span><span class="lineCov">      43173 :             if(!nut_Poly_quotrem_modn(tmps + 0, r, t, g, n)){</span></a>
+<a name="719"><span class="lineNum">     719 </span><span class="lineCov">      80501 :         if(e%2){</span></a>
+<a name="720"><span class="lineNum">     720 </span><span class="lineCov">      43153 :             nut_Poly_mul_modn(t, r, s, n);</span></a>
+<a name="721"><span class="lineNum">     721 </span><span class="lineCov">      43153 :             if(!nut_Poly_quotrem_modn(tmps + 0, r, t, g, n)){</span></a>
 <a name="722"><span class="lineNum">     722 </span>            :                 return false;</a>
 <a name="723"><span class="lineNum">     723 </span>            :             }//r = r*s%g</a>
 <a name="724"><span class="lineNum">     724 </span>            :         }</a>
 <a name="725"><span class="lineNum">     725 </span>            :     }</a>
 <a name="726"><span class="lineNum">     726 </span>            :     </a>
-<a name="727"><span class="lineNum">     727 </span><span class="lineCov">       7511 :     if(r != h){// TODO: this check is always true, fix buffer juggling so we never need to copy</span></a>
-<a name="728"><span class="lineNum">     728 </span><span class="lineCov">       7511 :         if(!nut_Poly_copy(h, r)){</span></a>
+<a name="727"><span class="lineNum">     727 </span><span class="lineCov">       7459 :     if(r != h){// TODO: this check is always true, fix buffer juggling so we never need to copy</span></a>
+<a name="728"><span class="lineNum">     728 </span><span class="lineCov">       7459 :         if(!nut_Poly_copy(h, r)){</span></a>
 <a name="729"><span class="lineNum">     729 </span>            :             return false;</a>
 <a name="730"><span class="lineNum">     730 </span>            :         }</a>
 <a name="731"><span class="lineNum">     731 </span>            :     }</a>
@@ -837,24 +837,24 @@
 <a name="762"><span class="lineNum">     762 </span><span class="lineCov">       5000 :         nut_Poly_gcd_modn(f_d, tmps + 0, f, n, tmps + 1);</span></a>
 <a name="763"><span class="lineNum">     763 </span>            : }</a>
 <a name="764"><span class="lineNum">     764 </span>            : </a>
-<a name="765"><span class="lineNum">     765 </span><span class="lineCov">       2197 : bool nut_Poly_factor1_modn(nut_Poly *restrict g, const nut_Poly *restrict f, uint64_t d, int64_t n, nut_Poly tmps[restrict static 4]){</span></a>
+<a name="765"><span class="lineNum">     765 </span><span class="lineCov">       2125 : bool nut_Poly_factor1_modn(nut_Poly *restrict g, const nut_Poly *restrict f, uint64_t d, int64_t n, nut_Poly tmps[restrict static 4]){</span></a>
 <a name="766"><span class="lineNum">     766 </span>            :     //tmps: xt, qt, st, rt</a>
-<a name="767"><span class="lineNum">     767 </span><span class="lineCov">       2517 :     while(1){</span></a>
-<a name="768"><span class="lineNum">     768 </span><span class="lineCov">       2517 :         if(!nut_Poly_rand_modn(tmps + 0, f-&gt;len - 1, n) || !nut_Poly_gcd_modn(g, tmps + 0, f, n, tmps + 1)){</span></a>
+<a name="767"><span class="lineNum">     767 </span><span class="lineCov">       2465 :     while(1){</span></a>
+<a name="768"><span class="lineNum">     768 </span><span class="lineCov">       2465 :         if(!nut_Poly_rand_modn(tmps + 0, f-&gt;len - 1, n) || !nut_Poly_gcd_modn(g, tmps + 0, f, n, tmps + 1)){</span></a>
 <a name="769"><span class="lineNum">     769 </span><span class="lineNoCov">          0 :             return false;</span></a>
 <a name="770"><span class="lineNum">     770 </span>            :         }</a>
-<a name="771"><span class="lineNum">     771 </span><span class="lineCov">       2517 :         if(g-&gt;len &gt; 1 &amp;&amp; g-&gt;len &lt; f-&gt;len){</span></a>
+<a name="771"><span class="lineNum">     771 </span><span class="lineCov">       2465 :         if(g-&gt;len &gt; 1 &amp;&amp; g-&gt;len &lt; f-&gt;len){</span></a>
 <a name="772"><span class="lineNum">     772 </span>            :             return true;</a>
 <a name="773"><span class="lineNum">     773 </span>            :         }</a>
-<a name="774"><span class="lineNum">     774 </span><span class="lineCov">       2509 :         if(</span></a>
-<a name="775"><span class="lineNum">     775 </span><span class="lineCov">       5018 :             !nut_Poly_powmod_modn(g, tmps + 0, (nut_u64_pow(n, d)-1)/2, f, n, tmps + 1) ||</span></a>
-<a name="776"><span class="lineNum">     776 </span><span class="lineCov">       5018 :             !nut_Poly_setconst(tmps + 0, 1) ||</span></a>
-<a name="777"><span class="lineNum">     777 </span><span class="lineCov">       5018 :             !nut_Poly_add_modn(tmps + 0, g, tmps + 0, n) ||</span></a>
-<a name="778"><span class="lineNum">     778 </span><span class="lineCov">       2509 :             !nut_Poly_gcd_modn(g, tmps + 0, f, n, tmps + 1)</span></a>
+<a name="774"><span class="lineNum">     774 </span><span class="lineCov">       2457 :         if(</span></a>
+<a name="775"><span class="lineNum">     775 </span><span class="lineCov">       4914 :             !nut_Poly_powmod_modn(g, tmps + 0, (nut_u64_pow(n, d)-1)/2, f, n, tmps + 1) ||</span></a>
+<a name="776"><span class="lineNum">     776 </span><span class="lineCov">       4914 :             !nut_Poly_setconst(tmps + 0, 1) ||</span></a>
+<a name="777"><span class="lineNum">     777 </span><span class="lineCov">       4914 :             !nut_Poly_add_modn(tmps + 0, g, tmps + 0, n) ||</span></a>
+<a name="778"><span class="lineNum">     778 </span><span class="lineCov">       2457 :             !nut_Poly_gcd_modn(g, tmps + 0, f, n, tmps + 1)</span></a>
 <a name="779"><span class="lineNum">     779 </span>            :         ){</a>
 <a name="780"><span class="lineNum">     780 </span><span class="lineNoCov">          0 :             return false;</span></a>
 <a name="781"><span class="lineNum">     781 </span>            :         }</a>
-<a name="782"><span class="lineNum">     782 </span><span class="lineCov">       2509 :         if(g-&gt;len &gt; 1 &amp;&amp; g-&gt;len &lt; f-&gt;len){</span></a>
+<a name="782"><span class="lineNum">     782 </span><span class="lineCov">       2457 :         if(g-&gt;len &gt; 1 &amp;&amp; g-&gt;len &lt; f-&gt;len){</span></a>
 <a name="783"><span class="lineNum">     783 </span>            :             return true;</a>
 <a name="784"><span class="lineNum">     784 </span>            :         }</a>
 <a name="785"><span class="lineNum">     785 </span>            :     }</a>
@@ -862,17 +862,17 @@
 <a name="787"><span class="lineNum">     787 </span>            : </a>
 <a name="788"><span class="lineNum">     788 </span>            : [[gnu::nonnull(1, 3)]]</a>
 <a name="789"><span class="lineNum">     789 </span>            : NUT_ATTR_ACCESS(read_write, 1)</a>
-<a name="790"><span class="lineNum">     790 </span><span class="lineCov">       2732 : static inline bool roots_polyn_modn_rec(nut_Roots *restrict roots, int64_t n, nut_Poly tmps[restrict static 6]){</span></a>
+<a name="790"><span class="lineNum">     790 </span><span class="lineCov">       2635 : static inline bool roots_polyn_modn_rec(nut_Roots *restrict roots, int64_t n, nut_Poly tmps[restrict static 6]){</span></a>
 <a name="791"><span class="lineNum">     791 </span>            :     //tmps: gt, ft, xt, qt, st, rt</a>
-<a name="792"><span class="lineNum">     792 </span><span class="lineCov">       2197 :     while(1){</span></a>
+<a name="792"><span class="lineNum">     792 </span><span class="lineCov">       2125 :     while(1){</span></a>
 <a name="793"><span class="lineNum">     793 </span>            :         //fprintf(stderr, &quot;\e[1;33mFactoring (&quot;);</a>
 <a name="794"><span class="lineNum">     794 </span>            :         //nut_Poly_fprint(stderr, tmps + 1, &quot;x&quot;, &quot; + &quot;, &quot; - &quot;, &quot;**&quot;, 0);</a>
 <a name="795"><span class="lineNum">     795 </span>            :         //fprintf(stderr, &quot;) mod %&quot;PRId64&quot;\e[0m\n&quot;, n);</a>
-<a name="796"><span class="lineNum">     796 </span><span class="lineCov">       4929 :         if(tmps[1].len == 2){//linear factor</span></a>
+<a name="796"><span class="lineNum">     796 </span><span class="lineCov">       4760 :         if(tmps[1].len == 2){//linear factor</span></a>
 <a name="797"><span class="lineNum">     797 </span>            :             //fprintf(stderr, &quot;\e[1;33m polynomial is linear\e[0m\n&quot;);</a>
-<a name="798"><span class="lineNum">     798 </span><span class="lineCov">       1184 :             if(tmps[1].coeffs[0]){//nonzero root</span></a>
-<a name="799"><span class="lineNum">     799 </span><span class="lineCov">       1184 :                 if(tmps[1].coeffs[1] == 1){//monic</span></a>
-<a name="800"><span class="lineNum">     800 </span><span class="lineCov">       1184 :                     roots-&gt;roots[roots-&gt;len++] = n - tmps[1].coeffs[0];</span></a>
+<a name="798"><span class="lineNum">     798 </span><span class="lineCov">       1190 :             if(tmps[1].coeffs[0]){//nonzero root</span></a>
+<a name="799"><span class="lineNum">     799 </span><span class="lineCov">       1190 :                 if(tmps[1].coeffs[1] == 1){//monic</span></a>
+<a name="800"><span class="lineNum">     800 </span><span class="lineCov">       1190 :                     roots-&gt;roots[roots-&gt;len++] = n - tmps[1].coeffs[0];</span></a>
 <a name="801"><span class="lineNum">     801 </span>            :                 }else{//not monic</a>
 <a name="802"><span class="lineNum">     802 </span><span class="lineNoCov">          0 :                     int64_t a;</span></a>
 <a name="803"><span class="lineNum">     803 </span><span class="lineNoCov">          0 :                     nut_i64_egcd(tmps[1].coeffs[0], n, &amp;a, NULL);</span></a>
@@ -881,36 +881,36 @@
 <a name="806"><span class="lineNum">     806 </span>            :             }else{//zero root</a>
 <a name="807"><span class="lineNum">     807 </span><span class="lineNoCov">          0 :                 roots-&gt;roots[roots-&gt;len++] = 0;</span></a>
 <a name="808"><span class="lineNum">     808 </span>            :             }</a>
-<a name="809"><span class="lineNum">     809 </span><span class="lineCov">       2732 :             return true;</span></a>
-<a name="810"><span class="lineNum">     810 </span><span class="lineCov">       3745 :         }else if(tmps[1].len == 3){//quadratic factor</span></a>
+<a name="809"><span class="lineNum">     809 </span><span class="lineCov">       2635 :             return true;</span></a>
+<a name="810"><span class="lineNum">     810 </span><span class="lineCov">       3570 :         }else if(tmps[1].len == 3){//quadratic factor</span></a>
 <a name="811"><span class="lineNum">     811 </span>            :             //fprintf(stderr, &quot;\e[1;33m polynomial is quadratic\e[0m\n&quot;);</a>
-<a name="812"><span class="lineNum">     812 </span><span class="lineCov">       1548 :             if(tmps[1].coeffs[2] != 1){//make monic</span></a>
+<a name="812"><span class="lineNum">     812 </span><span class="lineCov">       1445 :             if(tmps[1].coeffs[2] != 1){//make monic</span></a>
 <a name="813"><span class="lineNum">     813 </span><span class="lineNoCov">          0 :                 int64_t a;</span></a>
 <a name="814"><span class="lineNum">     814 </span><span class="lineNoCov">          0 :                 nut_i64_egcd(tmps[1].coeffs[2], n, &amp;a, NULL);</span></a>
 <a name="815"><span class="lineNum">     815 </span><span class="lineNoCov">          0 :                 nut_Poly_scale_modn(tmps + 1, tmps + 1, a, n);</span></a>
 <a name="816"><span class="lineNum">     816 </span>            :             }</a>
-<a name="817"><span class="lineNum">     817 </span><span class="lineCov">       1548 :             int64_t c = tmps[1].coeffs[0];</span></a>
-<a name="818"><span class="lineNum">     818 </span><span class="lineCov">       1548 :             int64_t b = tmps[1].coeffs[1];</span></a>
-<a name="819"><span class="lineNum">     819 </span><span class="lineCov">       1548 :             int64_t r = nut_i64_sqrt_mod(nut_i64_mod(b*b - 4*c, n), n);</span></a>
-<a name="820"><span class="lineNum">     820 </span><span class="lineCov">       1548 :             roots-&gt;roots[roots-&gt;len++] = nut_i64_mod((n+1)/2*(-b + r), n);</span></a>
-<a name="821"><span class="lineNum">     821 </span><span class="lineCov">       1548 :             roots-&gt;roots[roots-&gt;len++] = nut_i64_mod((n+1)/2*(-b - r), n);</span></a>
-<a name="822"><span class="lineNum">     822 </span><span class="lineCov">       1548 :             return true;</span></a>
+<a name="817"><span class="lineNum">     817 </span><span class="lineCov">       1445 :             int64_t c = tmps[1].coeffs[0];</span></a>
+<a name="818"><span class="lineNum">     818 </span><span class="lineCov">       1445 :             int64_t b = tmps[1].coeffs[1];</span></a>
+<a name="819"><span class="lineNum">     819 </span><span class="lineCov">       1445 :             int64_t r = nut_i64_sqrt_mod(nut_i64_mod(b*b - 4*c, n), n);</span></a>
+<a name="820"><span class="lineNum">     820 </span><span class="lineCov">       1445 :             roots-&gt;roots[roots-&gt;len++] = nut_i64_mod((n+1)/2*(-b + r), n);</span></a>
+<a name="821"><span class="lineNum">     821 </span><span class="lineCov">       1445 :             roots-&gt;roots[roots-&gt;len++] = nut_i64_mod((n+1)/2*(-b - r), n);</span></a>
+<a name="822"><span class="lineNum">     822 </span><span class="lineCov">       1445 :             return true;</span></a>
 <a name="823"><span class="lineNum">     823 </span>            :         }</a>
-<a name="824"><span class="lineNum">     824 </span><span class="lineCov">       2197 :         if(!nut_Poly_factor1_modn(tmps + 0, tmps + 1, 1, n, tmps + 2) || !nut_Poly_quotrem_modn(tmps + 3, tmps + 5, tmps + 1, tmps + 0, n)){</span></a>
+<a name="824"><span class="lineNum">     824 </span><span class="lineCov">       2125 :         if(!nut_Poly_factor1_modn(tmps + 0, tmps + 1, 1, n, tmps + 2) || !nut_Poly_quotrem_modn(tmps + 3, tmps + 5, tmps + 1, tmps + 0, n)){</span></a>
 <a name="825"><span class="lineNum">     825 </span><span class="lineNoCov">          0 :             return false;</span></a>
 <a name="826"><span class="lineNum">     826 </span>            :         }</a>
 <a name="827"><span class="lineNum">     827 </span>            :         //tmps[0] and tmps[3] hold the nontrivial factors we found</a>
 <a name="828"><span class="lineNum">     828 </span>            :         //we have to do a recursive call on the factor with smaller degree</a>
 <a name="829"><span class="lineNum">     829 </span>            :         //if it is linear or quadratic, we do not need to copy the larger factor</a>
 <a name="830"><span class="lineNum">     830 </span>            :         //otherwise we do</a>
-<a name="831"><span class="lineNum">     831 </span><span class="lineCov">       2197 :         nut_Poly tmp;</span></a>
-<a name="832"><span class="lineNum">     832 </span><span class="lineCov">       2197 :         tmp = tmps[0];</span></a>
-<a name="833"><span class="lineNum">     833 </span><span class="lineCov">       2197 :         tmps[0] = tmps[1];</span></a>
-<a name="834"><span class="lineNum">     834 </span><span class="lineCov">       2197 :         if(tmp.len &lt;= tmps[3].len){</span></a>
-<a name="835"><span class="lineNum">     835 </span><span class="lineCov">       1302 :             tmps[1] = tmp;</span></a>
+<a name="831"><span class="lineNum">     831 </span><span class="lineCov">       2125 :         nut_Poly tmp;</span></a>
+<a name="832"><span class="lineNum">     832 </span><span class="lineCov">       2125 :         tmp = tmps[0];</span></a>
+<a name="833"><span class="lineNum">     833 </span><span class="lineCov">       2125 :         tmps[0] = tmps[1];</span></a>
+<a name="834"><span class="lineNum">     834 </span><span class="lineCov">       2125 :         if(tmp.len &lt;= tmps[3].len){</span></a>
+<a name="835"><span class="lineNum">     835 </span><span class="lineCov">       1256 :             tmps[1] = tmp;</span></a>
 <a name="836"><span class="lineNum">     836 </span>            :         }else{</a>
-<a name="837"><span class="lineNum">     837 </span><span class="lineCov">        895 :             tmps[1] = tmps[3];</span></a>
-<a name="838"><span class="lineNum">     838 </span><span class="lineCov">        895 :             tmps[3] = tmp;</span></a>
+<a name="837"><span class="lineNum">     837 </span><span class="lineCov">        869 :             tmps[1] = tmps[3];</span></a>
+<a name="838"><span class="lineNum">     838 </span><span class="lineCov">        869 :             tmps[3] = tmp;</span></a>
 <a name="839"><span class="lineNum">     839 </span>            :         }</a>
 <a name="840"><span class="lineNum">     840 </span>            :         //now, tmps[1] and tmps[3] hold the nontrivial factors, with tmps[1] having smallest degree</a>
 <a name="841"><span class="lineNum">     841 </span>            :         //fprintf(stderr, &quot;\e[1;33m got factors (&quot;);</a>
@@ -918,24 +918,24 @@
 <a name="843"><span class="lineNum">     843 </span>            :         //fprintf(stderr, &quot;)(&quot;);</a>
 <a name="844"><span class="lineNum">     844 </span>            :         //nut_Poly_fprint(stderr, tmps + 3, &quot;x&quot;, &quot; + &quot;, &quot; - &quot;, &quot;**&quot;, 0);</a>
 <a name="845"><span class="lineNum">     845 </span>            :         //fprintf(stderr, &quot;)\e[0m\n&quot;);</a>
-<a name="846"><span class="lineNum">     846 </span><span class="lineCov">       2197 :         bool have_small_factor = tmps[1].len &lt;= 3;</span></a>
-<a name="847"><span class="lineNum">     847 </span><span class="lineCov">       2197 :         if(!have_small_factor){</span></a>
-<a name="848"><span class="lineNum">     848 </span><span class="lineCov">        428 :             if(!nut_Poly_init(&amp;tmp, tmps[3].len) || !nut_Poly_copy(&amp;tmp, tmps + 3)){</span></a>
+<a name="846"><span class="lineNum">     846 </span><span class="lineCov">       2125 :         bool have_small_factor = tmps[1].len &lt;= 3;</span></a>
+<a name="847"><span class="lineNum">     847 </span><span class="lineCov">       2125 :         if(!have_small_factor){</span></a>
+<a name="848"><span class="lineNum">     848 </span><span class="lineCov">        429 :             if(!nut_Poly_init(&amp;tmp, tmps[3].len) || !nut_Poly_copy(&amp;tmp, tmps + 3)){</span></a>
 <a name="849"><span class="lineNum">     849 </span><span class="lineNoCov">          0 :                 return false;</span></a>
 <a name="850"><span class="lineNum">     850 </span>            :             }</a>
 <a name="851"><span class="lineNum">     851 </span>            :         }</a>
-<a name="852"><span class="lineNum">     852 </span><span class="lineCov">       2197 :         if(!roots_polyn_modn_rec(roots, n, tmps)){</span></a>
+<a name="852"><span class="lineNum">     852 </span><span class="lineCov">       2125 :         if(!roots_polyn_modn_rec(roots, n, tmps)){</span></a>
 <a name="853"><span class="lineNum">     853 </span>            :             return false;</a>
 <a name="854"><span class="lineNum">     854 </span>            :         }</a>
-<a name="855"><span class="lineNum">     855 </span><span class="lineCov">       2197 :         if(!have_small_factor){</span></a>
-<a name="856"><span class="lineNum">     856 </span><span class="lineCov">        428 :             if(!nut_Poly_copy(tmps + 3, &amp;tmp)){</span></a>
+<a name="855"><span class="lineNum">     855 </span><span class="lineCov">       2125 :         if(!have_small_factor){</span></a>
+<a name="856"><span class="lineNum">     856 </span><span class="lineCov">        429 :             if(!nut_Poly_copy(tmps + 3, &amp;tmp)){</span></a>
 <a name="857"><span class="lineNum">     857 </span>            :                 return false;</a>
 <a name="858"><span class="lineNum">     858 </span>            :             }</a>
-<a name="859"><span class="lineNum">     859 </span><span class="lineCov">        428 :             nut_Poly_destroy(&amp;tmp);</span></a>
+<a name="859"><span class="lineNum">     859 </span><span class="lineCov">        429 :             nut_Poly_destroy(&amp;tmp);</span></a>
 <a name="860"><span class="lineNum">     860 </span>            :         }</a>
-<a name="861"><span class="lineNum">     861 </span><span class="lineCov">       2197 :         tmp = tmps[3];</span></a>
-<a name="862"><span class="lineNum">     862 </span><span class="lineCov">       2197 :         tmps[3] = tmps[1];</span></a>
-<a name="863"><span class="lineNum">     863 </span><span class="lineCov">       2197 :         tmps[1] = tmp;</span></a>
+<a name="861"><span class="lineNum">     861 </span><span class="lineCov">       2125 :         tmp = tmps[3];</span></a>
+<a name="862"><span class="lineNum">     862 </span><span class="lineCov">       2125 :         tmps[3] = tmps[1];</span></a>
+<a name="863"><span class="lineNum">     863 </span><span class="lineCov">       2125 :         tmps[1] = tmp;</span></a>
 <a name="864"><span class="lineNum">     864 </span>            :     }</a>
 <a name="865"><span class="lineNum">     865 </span>            : }</a>
 <a name="866"><span class="lineNum">     866 </span>            : </a>
@@ -948,7 +948,7 @@
 <a name="873"><span class="lineNum">     873 </span><span class="lineCov">       5000 :     if(tmps[1].len == 1){</span></a>
 <a name="874"><span class="lineNum">     874 </span>            :         return true;</a>
 <a name="875"><span class="lineNum">     875 </span>            :     }</a>
-<a name="876"><span class="lineNum">     876 </span><span class="lineCov">        535 :     return nut_Roots_ensure_cap(roots, tmps[1].len - 1) &amp;&amp; roots_polyn_modn_rec(roots, n, tmps);</span></a>
+<a name="876"><span class="lineNum">     876 </span><span class="lineCov">        510 :     return nut_Roots_ensure_cap(roots, tmps[1].len - 1) &amp;&amp; roots_polyn_modn_rec(roots, n, tmps);</span></a>
 <a name="877"><span class="lineNum">     877 </span>            : }</a>
 <a name="878"><span class="lineNum">     878 </span>            : </a>
 <a name="879"><span class="lineNum">     879 </span><span class="lineCov">       5000 : bool nut_Poly_roots_modn_tmptmp(const nut_Poly *restrict f, int64_t n, nut_Roots *restrict roots){</span></a>

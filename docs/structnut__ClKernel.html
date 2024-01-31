@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Number Theory Utils: nut_Diri Struct Reference</title>
+<title>Number Theory Utils: nut_ClKernel Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,7 +89,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('structnut__Diri.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structnut__ClKernel.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -111,37 +111,30 @@ $(document).ready(function(){initNavTree('structnut__Diri.html',''); initResizab
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">nut_Diri Struct Reference</div>  </div>
+<div class="title">nut_ClKernel Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Wrapper to hold values of some multiplicative function.  
- <a href="structnut__Diri.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="dirichlet_8h_source.html">dirichlet.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a3291254ae36583ffff2d7cff02a6cdf2"><td class="memItemLeft" align="right" valign="top"><a id="a3291254ae36583ffff2d7cff02a6cdf2"></a>
-int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>x</b></td></tr>
-<tr class="separator:a3291254ae36583ffff2d7cff02a6cdf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02eb8b8c303ace46bf7f74fa50a35d4c"><td class="memItemLeft" align="right" valign="top"><a id="a02eb8b8c303ace46bf7f74fa50a35d4c"></a>
-int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>y</b></td></tr>
-<tr class="separator:a02eb8b8c303ace46bf7f74fa50a35d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bcdd840417e71cae0008c27113ed051"><td class="memItemLeft" align="right" valign="top"><a id="a0bcdd840417e71cae0008c27113ed051"></a>
-int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>yinv</b></td></tr>
-<tr class="separator:a0bcdd840417e71cae0008c27113ed051"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3c3acd4ed9d2f7eafea0b39a021cc3a"><td class="memItemLeft" align="right" valign="top"><a id="ac3c3acd4ed9d2f7eafea0b39a021cc3a"></a>
-int64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>buf</b></td></tr>
-<tr class="separator:ac3c3acd4ed9d2f7eafea0b39a021cc3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adae8552000497b419ec2a848bf5c5186"><td class="memItemLeft" align="right" valign="top"><a id="adae8552000497b419ec2a848bf5c5186"></a>
+cl_kernel&#160;</td><td class="memItemRight" valign="bottom"><b>kernel</b></td></tr>
+<tr class="separator:adae8552000497b419ec2a848bf5c5186"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea24e4b9c0cf402a5a7bb836a0834d6a"><td class="memItemLeft" align="right" valign="top"><a id="aea24e4b9c0cf402a5a7bb836a0834d6a"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>preferred_work_group_size_multiple</b></td></tr>
+<tr class="separator:aea24e4b9c0cf402a5a7bb836a0834d6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4664076b936ada08a287a028bff46cb2"><td class="memItemLeft" align="right" valign="top"><a id="a4664076b936ada08a287a028bff46cb2"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>work_group_size</b></td></tr>
+<tr class="separator:a4664076b936ada08a287a028bff46cb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2fe724b432399377e725ab93b042397"><td class="memItemLeft" align="right" valign="top"><a id="ac2fe724b432399377e725ab93b042397"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>work_item_sizes</b> []</td></tr>
+<tr class="separator:ac2fe724b432399377e725ab93b042397"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Wrapper to hold values of some multiplicative function. </p>
-<p>Stores all values f(n) for n up to (and including) y, then stores values f(x/n) for n less than x/y </p>
-
-<p class="definition">Definition at line <a class="el" href="dirichlet_8h_source.html#l00099">99</a> of file <a class="el" href="dirichlet_8h_source.html">dirichlet.h</a>.</p>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="cl_8h_source.html#l00030">30</a> of file <a class="el" href="cl_8h_source.html">cl.h</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>include/nut/<a class="el" href="dirichlet_8h_source.html">dirichlet.h</a></li>
+<li>include/nut/<a class="el" href="cl_8h_source.html">cl.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -149,7 +142,7 @@ int64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>buf</b></td></tr
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="structnut__Diri.html">nut_Diri</a></li>
+    <li class="navelem"><a class="el" href="structnut__ClKernel.html">nut_ClKernel</a></li>
     <li class="footer">Generated on Wed Jan 31 2024 21:24:41 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>

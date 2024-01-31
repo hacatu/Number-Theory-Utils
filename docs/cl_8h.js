@@ -1,5 +1,6 @@
 var cl_8h =
 [
+    [ "nut_ClKernel", "structnut__ClKernel.html", "structnut__ClKernel" ],
     [ "nut_ClMgr", "structnut__ClMgr.html", "structnut__ClMgr" ],
     [ "CL_TARGET_OPENCL_VERSION", "cl_8h.html#a5990dea19d4ccb046a3d81b311457add", null ],
     [ "NUT_CL_FLAG_DIE", "cl_8h.html#a649be233b3a28fad793418502085dc8e", null ],
