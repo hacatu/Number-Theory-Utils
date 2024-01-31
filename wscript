@@ -1,6 +1,6 @@
 from waflib.Build import BuildContext, CleanContext, InstallContext, UninstallContext
 from waflib.Context import Context
-import subprocess
+import subprocess, os
 
 def options(opt):
 	opt.load('compiler_c')
@@ -31,7 +31,20 @@ def configure(conf):
 		'-fno-strict-aliasing',
 		'-pthread'
 	]
+	if 'GITHUB_RUN_ID' in os.environ:
+		print('We seem to be running on github actions, applying compat kludges!')
+		CLANG = 'clang-15'
+		GCC = 'gcc-13'
+		XGCC = None
+		XAR = None
+	else:
+		CLANG = 'clang'
+		GCC = 'gcc'
+		XGCC = 'x86_64-w64-mingw32-gcc'
+		XAR = 'x86_64-w64-mingw32-ar'
 	conf.setenv('coverage')
+	conf.env.CC = GCC
+	conf.env.LD = GCC
 	conf.load('compiler_c')
 	conf.env.CFLAGS = mod_flags(base_cflags, [], [
 		'-ggdb3',
@@ -51,8 +64,8 @@ def configure(conf):
 	])
 
 	conf.setenv('debug')
-	conf.env.CC = 'clang'
-	conf.env.LD = 'clang'
+	conf.env.CC = CLANG
+	conf.env.LD = CLANG
 	conf.load('compiler_c')
 	conf.env.CFLAGS = mod_flags(base_cflags, [], [
 		'-ggdb3',
@@ -72,6 +85,8 @@ def configure(conf):
 	])
 
 	conf.setenv('release')
+	conf.env.CC = GCC
+	conf.env.LD = GCC
 	conf.load('compiler_c')
 	conf.env.CFLAGS = mod_flags(base_cflags, [], [
 		'-O3',
@@ -83,8 +98,8 @@ def configure(conf):
 	])
 
 	conf.setenv('valgrind')
-	conf.env.CC = 'clang'
-	conf.env.LD = 'clang'
+	conf.env.CC = CLANG
+	conf.env.LD = CLANG
 	conf.load('compiler_c')
 	conf.env.CFLAGS = mod_flags(base_cflags, [], [
 		'-g',
@@ -98,22 +113,25 @@ def configure(conf):
 		'-O1'
 	])
 
-	conf.setenv('windows')
-	conf.env.CC = 'x86_64-w64-mingw32-gcc'
-	conf.env.LD = 'x86_64-w64-mingw32-gcc'
-	conf.env.AR = 'x86_64-w64-mingw32-ar'
-	conf.load('compiler_c')
-	conf.env.CFLAGS = mod_flags(base_cflags, ['-pthread'], [
-		'-lwinpthread',
-		'-O3',
-		'-DNDEBUG'
-	])
-	conf.env.LDFLAGS = mod_flags(base_ldflags, ['-pthread'], [
-		'-flto',
-		'-lwinpthread',
-		'-static-libgcc',
-		'-static-libstdc++'
-	])
+	if XGCC is not None:
+		conf.setenv('windows')
+		conf.env.CC = XGCC
+		conf.env.LD = XGCC
+		conf.env.AR = XAR
+		conf.load('compiler_c')
+		conf.env.CFLAGS = mod_flags(base_cflags, ['-pthread'], [
+			'-lwinpthread',
+			'-O3',
+			'-DNDEBUG'
+		])
+		conf.env.LDFLAGS = mod_flags(base_ldflags, ['-pthread'], [
+			'-flto',
+			'-lwinpthread',
+			'-static-libgcc',
+			'-static-libstdc++'
+		])
+	else:
+		print("Skipping variant 'windows' on github actions")
 
 def build(ctx):
 	if not ctx.variant:
