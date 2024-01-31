@@ -98,8 +98,8 @@ def configure(conf):
 	])
 
 	conf.setenv('valgrind')
-	conf.env.CC = CLANG
-	conf.env.LD = CLANG
+	conf.env.CC = GCC
+	conf.env.LD = GCC
 	conf.load('compiler_c')
 	conf.env.CFLAGS = mod_flags(base_cflags, [], [
 		'-g',
