@@ -18,16 +18,24 @@ jobs:
     - name: Run Coverage and Doxygen
       run: |
         sudo apt-get update
-        sudo apt-get install -y lcov cpanminus doxygen libsdl2-dev valgrind clang-15 gcc-13 opencl-headers ocl-icd-opencl-dev libpocl2 mesa-opencl-icd
+        sudo apt-get install -y lcov cpanminus doxygen libsdl2-dev valgrind clang-15 llvm-15 gcc-13 opencl-headers ocl-icd-opencl-dev libpocl2 mesa-opencl-icd
         cpanm Cpanel::JSON::XS
-        echo "geninfo_gcov_tool = gcov-13" >> ~/.lcovrc
-        CC=clang-15 ./waf configure -v
-        CC=clang-15 ./waf build_debug test_debug
-        CC=gcc-13 ./waf configure -v
-        CC=gcc-13 ./waf build_valgrind test_valgrind
-        CC=gcc-13 ./waf build_coverage test_coverage
-        CC=clang-15 ./waf configure -v
-        CC=clang-15 ./waf build_release test_release
+        sudo update-alternatives \
+          --install /usr/bin/gcc gcc /usr/bin/gcc-13 100 \
+          --slave /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-13 \
+          --slave /usr/bin/gcc-ranlib gcc-ranlib /usr/bin/gcc-ranlib-13 \
+          --slave /usr/bin/gcov gcov /usr/bin/gcov-13
+        sudo update-alternatives \
+          --install /usr/bin/llvm-ar llvm-ar /usr/bin/llvm-ar-15 100 \
+          --slave /usr/bin/llvm-ranlib llvm-ranlib /usr/bin/llvm-ranlib-15 \
+          --slave /usr/bin/llvm-cov llvm-cov /usr/bin/llvm-cov-15
+        sudo update-alternatives \
+         --install /usr/bin/clang clang /usr/bin/clang-15 100
+        ./waf configure -v
+        ./waf build_debug test_debug
+        ./waf build_valgrind test_valgrind
+        ./waf build_coverage test_coverage
+        ./waf build_release test_release
         ./waf docs
         mv cov coverage.svg docs website/
     - uses: actions/upload-artifact@v3
