@@ -26,57 +26,56 @@ about 2<sup>30</sup> potentially can fail due to overflow.
 
 ## Building
 
-This library uses variant makefiles for each build type.  To build the release variant, simply run `make`
-in the project root directory.  The resulting files will be in `build/release/lib` and `build/release/bin`,
-or you can run `sudo make install` after `make` finishes.
+This library uses [Waf](https://waf.io) as the build system.
+To build the release variant, simply run `./waf configure build_release` in the project root directory.
+The resulting files will be in `build/release` and `build/release/bin`,
+or you can run `sudo ./waf install_release` after building.
 
-To build a different variant, change the `$(BUILD_ROOT)` variable from `build/release` to `build/debug`
-or some other value, for instance `make BUILD_ROOT=build/release`.  You can check what variants exist
-by looking at the subdirectories of `build`, and you can create your own by copying and modifying `build/debug`.
+The general usage of Waf is `./waf subcommand_1 subcommand_2 ...`, where each subcommand is either user defined/modified
+or builtin, and many subcommands can be specified.
+Additionally, environment variables can be changed as needed normally by doing `CC=clang-13 ./waf ...` or similar.
 
-The currently extant variants are
-- `build/coverage`: debug variant, includes address sanitizer and some ub sanitizers.  builds using `gcc`.  default `make` target: `coverage`
-- `build/debug`: debug variant, includes memory sanitizer and most ub sanitizers.  builds using `clang`.  default `make` target: `test`
-- `build/release`: release variant, no sanitizers.  builds using `gcc` with `-O3`.  default `make` target: `all`
-- `build/valgrind`: debug variant, no sanitizers.  builds using `clang` with `-O1`.  default `make` target: `test`.  passes `-g` to `test.py` to invoke the valgrind wrapper
+The main subcommands to be aware of are
+- `configure`: set up Waf, must be run before most other commands
+- `build_<variant>`: build the indicated variant.  Results are stored in `build/<variant>`.  The currently extant variants are:
+  - `coverage`: debug variant, includes address sanitizer, some ub sanitizers, and coverage collection.  builds using `gcc`
+  - `debug`: debug variant, includes memory sanitizer and most ub sanitizers.  builds using `clang`
+  - `release`: release variant, no sanitizers.  builds using `gcc` with `-O3`
+  - `valgrind`: debug variant, no sanitizers.  builds using `clang` with `-O1`
+  - `windows`: release variant, no sanitizers.  builds using `x86_64-w64-mingw32-gcc`
+- `clean_<variant>`: delete build files
+- `install_<variant>`: copy headers, built libraries, and build binaries (but not test binaries) to the system.  Typically requires `sudo`.  Consider running without `sudo` first to ensure it's doing what you want.
+- `uninstall_<variant>`: remove installed files.  Typically requires `sudo`.  Consider running without `sudo` first to ensure it's doing what you want.
+- `test_<variant>`: run tests (invoke `tests/test.py`).  This is a special rule, it will always run tests, unlike `build_*` which only builds outputs if their inputs have changed.  Requires `build_<variant>` to have been run successfully first.
+  - For the `coverage` variant, `geninfo` and `genhtml` are automatically invoked after tests succeed.
+- `distclean`: delete the whole build directory (build files for all variants)
+- `docs`: run `doxygen` to create the documentation.  Similar to `test_<variant>` this always executes, but it is not tied to a variant.
 
-The files in a variant build directory are arranged as follows: `Makefile` is the makefile, variants
-probably won't have to modify this much aside from removing coverage information; `cflags.txt`,
-`ldflags.txt`, and `makedeps_cflags.txt` contain configuration flags that should be passed to the compiler
-and linker.  Flag files are used to consolidate compiler flags, reduce how often the makefile needs to be
-tweaked, and clean up build logs.
+To introduce new variants, look in `wscript` and add an appropriate section in `configure` as well as the `for` loop at the end of the file.
 
-Based on the source files in `include` and `src`, together with the configuration in a variant build directory,
-output files are produced in the following subdirectories of `$(BUILD_ROOT)`: `bin` for executables, `bin/test`
-for test executables, `lib` for static and dynamic libraries, `obj` for object files and dependency files,
-`notes` for coverage information, `log` for test logs, and `cov` for human readable coverage reports.
+Waf depends on two main files: `waf`, the compressed python script comprising Waf itself, and `wscript`, the main user config.
+These are somewhat analagous to the systemwide `make` executable and the `Makefile`.
+Waf is intended to be distributed with the project, with a separate copy in each project.
 
 Executables, static libraries, and test executables are automatically created based on the contents of `src`:
-every C file or directory in `src/bin` is turned into its own executable in `$(BUILD_ROOT)/bin`, every C file
-or directory in `src/lib` is turned into its own static library in `$(BUILD_ROOT)/lib`, and every C file or
-directory in `src/test` is turned into its own test executable in `$(BUILD_ROOT)/bin/test`.
+every C file or directory in `src/bin` is turned into its own executable in `$build/<variant>/bin`, every C file
+or directory in `src/lib` is turned into its own static library in `build/<variant>`, and every C file or
+directory in `src/test` is turned into its own test executable in `build/<variant>`.
 
-`make clean` should remove all output files in all variant build directories, as well as all generated
-documentation.
+`./waf distclean` will not remove `cov` and `docs`, the directories generated by `test_coverage` and `docs` respectively;
+these can be removed with `rm -rf cov docs`.
 
-Finally, `make docs` generates the documentation in the `docs` directory.  Like `make clean`, this is not
-tied to a build variant and even if you specify one the same thing will happen.
-
-`make debug_makefile` simply exists to facillitate printing make variables, don't worry about it.
-
-Only Linux is properly supported.  To build, only `gcc`, `ar`, and `make` are strictly required, but `lcov`
-and `doxygen` are required for coverage and documentation, and `python`, `clang`, and `valgrind` are required
-for testing.
-
-If running as root in an automated environment, you will need to either pass `ALLOW_ROOT=1` as an option to
-`make`, or pipe `yes` into `make` to auto accept the safety prompt for running as root.
+Only Linux is properly supported.  To build, only (`gcc` and `ar` or `clang`) and `python` are strictly required, but `lcov`
+and `doxygen` are required for coverage and documentation, `valgrind` is required for testing, and it's recommended to have both `gcc` and `clang`.
+Cross compiling for windows requires `x86_64-w64-mingw32-gcc` and `libwinpthread` and isn't fully supported.  WSL or similar may be better for windows users.
 
 ## Linking
-Once the library has been built, it can be linked with C programs by adding the flags `-Lbuild/debug -lnut`
-or `-L$(BUILD_ROOT) -lnut` to use a different variant build.  You can also install
-it to your system libraries by doing `sudo make BUILD_ROOT=build/release install`.
-This will place the libraries in `/usr/lib/nut/` and the headers in `/usr/include/nut/`.
+Once the library has been built, it can be linked with C programs by adding the flags `-Lbuild/release -lnut` (
+or `-Lbuild/<variant> -lnut` for a different variant).
+You can also install it to your system libraries by doing `sudo ./waf install_release`.
+This will place the libraries in `/usr/local/lib/`, the headers in `/usr/local/include/nut/`, and non-test binaries in `/usr/local/bin/`.
 Then the `-L` flag can be omitted and the library can be linked with simply `-lnut`.
+Having the release variant installed systemwide and linking manually against the debug variant if some need arises is probably most convenient.
 
 ## Examples
 

@@ -26,7 +26,7 @@ def runNoRedTest(test_path, test_argv, log_name):
 		if subprocess.call(["grep", "-qF",  "== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: ", valgrind_log_name]) != 0:
 			print("\033[1;31mtest.py: valgrind reported error in test\033[0m", file=sys.stderr)
 			status = False
-			shutil.copy(valgrind_log_name, os.path.join(args.cfg_dir, f"{vg_iota}.valgrind.log"))
+			shutil.copy(valgrind_log_name, args.cfg_dir / f"{vg_iota}.valgrind.log")
 			vg_iota += 1
 		os.remove(valgrind_log_name)
 	os.remove(log_name)
@@ -47,7 +47,7 @@ def runLogDiffTests(test_path, i, test_argv, log_name):
 	os.close(pipe_in)
 	tee.wait()
 	os.close(pipe_out)
-	expected_log_name = os.path.join(args.cfg_dir, f"{test_name}.{i}.log")
+	expected_log_name = args.cfg_dir / f"{test_name}.{i}.log"
 	status = True
 	if child.returncode != 0:
 		print("\033[1;31mtest.py: nonzero exit code from test\033[0m", file=sys.stderr)
@@ -67,26 +67,28 @@ def runLogDiffTests(test_path, i, test_argv, log_name):
 
 if __name__ == "__main__":
 	arg_parser = argparse.ArgumentParser(description="Automatically run tests stored in a json file")
-	arg_parser.add_argument("cfg_dir", help="directory containing tests.json and expected output logs if used")
-	arg_parser.add_argument("bin_dir", help="directory containing test binaries")
+	#arg_parser.add_argument("cfg_dir", help="directory containing tests.json and expected output logs if used")
+	#arg_parser.add_argument("bin_dir", help="directory containing test binaries")
 	arg_parser.add_argument("-g", "--valgrind", action="store_true", help="run tests under valgrind")
+	arg_parser.add_argument("-v", "--variant", help="what variant to test (debug, release, coverage, valgrind, etc)", required=True)
 	args = arg_parser.parse_args()
-	log_name = os.path.join(args.cfg_dir, "tmp.log")
-	valgrind_log_name = os.path.join(args.cfg_dir, "tmp.valgrind.log")
+	args.cfg_dir = Path(__file__).resolve().parent
+	args.bin_dir = Path("build") / args.variant
+	log_name = args.cfg_dir / "tmp.log"
+	valgrind_log_name = args.cfg_dir / "tmp.valgrind.log"
 	vg_iota = 0
-	curr_variant = Path().absolute().name
 
-	with open(os.path.join(args.cfg_dir, "tests.json"), "r") as test_json:
+	with open(args.cfg_dir / "tests.json", "r") as test_json:
 		test_cfg = json.load(test_json)
 
 	passed = 0
 	tested = 0
 	for test_name, test_spec in test_cfg.items():
 		run_on_builds = test_spec.get("run_on_builds", None)
-		if run_on_builds is not None and curr_variant not in run_on_builds:
+		if run_on_builds is not None and args.variant not in run_on_builds:
 			continue
 		no_red_tests = test_spec.get("no_red_tests", ())
-		test_path = os.path.join(args.bin_dir, test_name)
+		test_path = args.bin_dir / test_name
 		for i, test_argv in enumerate(no_red_tests):
 			print(f"\033[1;34mtest.py: running \"{test_name}\" no_red_tests.{i}\033[0m", file=sys.stderr)
 			if runNoRedTest(test_path, test_argv, log_name):

@@ -1,9 +1,0 @@
--Llib
--lnut
--lm
--lOpenCL
--g
--fno-eliminate-unused-debug-types
--O1
--pthread
-

@@ -55,4 +55,8 @@ gprof.txt
 test/tmp.log
 test/*.valgrind.log
 build/*.vsman
+.waf*
+build/*
+.lock-waf*
+cov/
 

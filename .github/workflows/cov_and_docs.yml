@@ -18,20 +18,16 @@ jobs:
     - name: Run Coverage and Doxygen
       run: |
         sudo apt-get update
-        sudo apt-get install -y lcov doxygen libsdl2-dev valgrind clang-15 gcc-13 opencl-headers ocl-icd-opencl-dev libpocl2 mesa-opencl-icd
+        sudo apt-get install -y lcov cpanminus doxygen libsdl2-dev valgrind clang-15 gcc-13 opencl-headers ocl-icd-opencl-dev libpocl2 mesa-opencl-icd
+        cpanm Cpanel::JSON::XS
         echo "geninfo_gcov_tool = gcov-13" >> ~/.lcovrc
-        make BUILD_ROOT=build/debug CC=clang-15 LD=clang-15
-        make BUILD_ROOT=build/valgrind CC=gcc-13 LD=gcc-13
-        make BUILD_ROOT=build/coverage CC=gcc-13 LD=gcc-13
-        make BUILD_ROOT=build/release CC=clang-15 LD=clang-15 test
-        grep -qF "$(printf '\e[1;32mtest.py suite passed all tests!\e[0m')" build/debug/log/test*.log
-        grep -qF "$(printf '\e[1;32mtest.py suite passed all tests!\e[0m')" build/valgrind/log/test*.log
-        grep -qF "$(printf '\e[1;32mtest.py suite passed all tests!\e[0m')" build/coverage/log/test*.log
-        grep -qF "$(printf '\e[1;32mtest.py suite passed all tests!\e[0m')" build/release/log/test*.log
-        make docs
-        mv build/coverage/cov website/
-        mv build/coverage/coverage.svg website/
-        mv docs website/
+        ./waf configure
+        ./waf build_debug test_debug
+        ./waf build_valgrind test_valgrind
+        ./waf build_coverage test_coverage
+        ./waf build_release test_release
+        ./waf docs
+        mv cov coverage.svg docs website/
     - uses: actions/upload-artifact@v3
       if: failure()
       with:
