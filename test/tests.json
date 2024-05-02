@@ -1,10 +1,16 @@
 {
+	"test_faulhaber_mat":{
+		"no_red_tests": [[]]
+	},
 	"test_dirichlet_cl":{
 		"no_red_tests": [[]],
 		"run_on_builds": ["opencl"]
 	},
 	"test_dirichlet_powerful": {
 		"no_red_tests": [["219"]]
+	},
+	"test_dirichlet_nk": {
+		"no_red_tests": [[]]
 	},
 	"test_sieve_primes": {
 		"no_red_tests": [[]]
