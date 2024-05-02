@@ -386,7 +386,7 @@ bool nut_Poly_quotrem_modn(nut_Poly *restrict q, nut_Poly *restrict r, const nut
 		//finish the column by dividing the sum by the leading coefficient of the divisor
 		//for monic divisors (aka most of the time) a will simply be 1 so we may optimize this
 		q->coeffs[k] = nut_i64_mod(q->coeffs[k]*a, n);
-		//subtract the adjusted column sum times the some of the divisor coefficients from the
+		//subtract the adjusted column sum times the sum of the divisor coefficients from the
 		//remainder coefficients.  the remainder coefficients were initialized to the last r->len
 		//dividend coefficients.  we start q->len - k columns after the current column we just finished.
 		//if k == 0 we should go from coefficient 0 in the remainder to coefficient r->len - 1
