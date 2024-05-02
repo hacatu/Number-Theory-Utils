@@ -1,8 +1,7 @@
 #include <stddef.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <inttypes.h>
-#include <math.h>
 #include <stdio.h>
 
 #include <nut/debug.h>
@@ -12,12 +11,13 @@
 #include <nut/dirichlet_powerful.h>
 #include <nut/sieves.h>
 
-static bool PfIt_init(nut_PfIt *self, uint64_t max, uint64_t modulus){
+static bool PfIt_init(nut_PfIt *self, uint64_t max, uint64_t modulus, uint64_t small_primes){
 	if(!max){
 		*self = (nut_PfIt){};
 		return true;
 	}
-	self->cap = 64 - __builtin_clzll(max);// floor(log_2(max))
+	self->small_primes = small_primes;
+	self->cap = 63 - __builtin_clzll(max);// floor(log_2(max))
 	self->rt_max = nut_u64_nth_root(max, 2);
 	if(!(self->entries = malloc(self->cap*sizeof(*self->entries)))){
 		return false;
@@ -33,27 +33,90 @@ static bool PfIt_init(nut_PfIt *self, uint64_t max, uint64_t modulus){
 	return true;
 }
 
-bool nut_PfIt_init_fn(nut_PfIt *self, uint64_t max, uint64_t modulus, int64_t (*h_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m)){
-	if(!PfIt_init(self, max, modulus)){
+bool nut_PfIt_init_fn(nut_PfIt *self, uint64_t max, uint64_t modulus, uint64_t small_primes, int64_t (*h_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m)){
+	if(!PfIt_init(self, max, modulus, small_primes)){
 		return false;
 	}
-	self->use_table = false;
+	self->h_kind = NUT_DIRI_H_FN;
 	self->h_fn = h_fn;
 	return true;
 }
 
-bool nut_PfIt_init_hvals(nut_PfIt *restrict self, uint64_t max, uint64_t modulus, const int64_t *restrict h_vals){
-	if(!PfIt_init(self, max, modulus)){
+bool nut_PfIt_init_hvals(nut_PfIt *restrict self, uint64_t max, uint64_t modulus, uint64_t small_primes, const int64_t *restrict h_vals){
+	if(!PfIt_init(self, max, modulus, small_primes)){
 		return false;
 	}
-	self->use_table = true;
+	self->h_kind = NUT_DIRI_H_VALS;
 	self->h_vals = h_vals;
+	return true;
+}
+
+bool nut_PfIt_init_hseqs(nut_PfIt *restrict self, uint64_t max, uint64_t modulus, uint64_t small_primes,
+	int64_t (*f_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m), int64_t (*g_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m)
+){
+	if(!PfIt_init(self, max, modulus, small_primes)){
+		return false;
+	}
+	uint64_t values_cap = 3*self->num_primes;
+	self->h_kind = NUT_DIRI_H_SEQS;
+	self->h_seqs.offsets = malloc(self->num_primes*sizeof(uint64_t));
+	self->h_seqs.values = malloc(values_cap*sizeof(int64_t));
+	if(!self->h_seqs.offsets || !self->h_seqs.values){
+		nut_PfIt_destroy(self);
+		return false;
+	}
+	uint64_t base_offset = 0;
+	uint64_t curr_max_pow = 63 - __builtin_clzll(max);
+	int64_t *f_series [[gnu::cleanup(cleanup_free)]] = malloc((curr_max_pow + 1)*sizeof(int64_t));
+	int64_t *g_series [[gnu::cleanup(cleanup_free)]] = malloc((curr_max_pow + 1)*sizeof(int64_t));
+	int64_t *h_series [[gnu::cleanup(cleanup_free)]] = malloc((curr_max_pow + 1)*sizeof(int64_t));
+	if(!f_series || !g_series || !h_series){
+		nut_PfIt_destroy(self);
+		return false;
+	}
+	f_series[0] = g_series[0] = 1;
+	uint64_t curr_max_prime = 2;
+	for(uint64_t i = 0; i < self->num_primes; ++i){
+		uint64_t p = self->primes[i];
+		// ensure that p^curr_max_pow is still <= max
+		while(curr_max_pow > 2 && p > curr_max_prime){
+			// this must be a while loop because for very small primes like 2 it's possible for the max power to drop more than 1
+			// also when the max power is 2 we don't need to check anymore since we've only gathered the primes up to sqrt(max)
+			--curr_max_pow;
+			curr_max_prime = nut_u64_nth_root(max, curr_max_pow);
+		}
+		// ensure that the values table is large enough
+		uint64_t min_pow = i >= self->small_primes ? 2 : 1;
+		if(base_offset + curr_max_pow - min_pow >= values_cap){
+			uint64_t new_cap = base_offset + 2*(self->num_primes - i);
+			int64_t *tmp = realloc(self->h_seqs.values, new_cap*sizeof(int64_t));
+			if(!tmp){
+				nut_PfIt_destroy(self);
+				return false;
+			}
+			self->h_seqs.values = tmp;
+			values_cap = new_cap;
+		}
+		for(uint64_t pp = 1, e = 1; e <= curr_max_pow; ++e){
+			pp *= p;
+			f_series[e] = f_fn(p, pp, e, modulus);
+			g_series[e] = g_fn(p, pp, e, modulus);
+		}
+		nut_series_div(curr_max_pow + 1, modulus, h_series, f_series, g_series);
+		self->h_seqs.offsets[i] = base_offset;
+		memcpy(self->h_seqs.values + base_offset, h_series + min_pow, (curr_max_pow + 1 - min_pow)*sizeof(int64_t));
+		base_offset += curr_max_pow + 1 - min_pow;
+	}
 	return true;
 }
 
 void nut_PfIt_destroy(nut_PfIt *self){
 	free(self->entries);
 	free(self->primes);
+	if(self->h_kind == NUT_DIRI_H_SEQS){
+		free(self->h_seqs.offsets);
+		free(self->h_seqs.values);
+	}
 	*self = (nut_PfIt){};
 }
 
@@ -88,18 +151,29 @@ bool nut_PfIt_next(nut_PfIt *restrict self, nut_PfStackEnt *restrict out){
 			return true;
 		}
 		uint64_t p = self->primes[out->i];
-		if(p*p > self->max/out->n){
-			return true;
+		uint64_t min_pow = out->i >= self->small_primes ? 2 : 1;
+		if(min_pow == 2){
+			if(p*p > self->max/out->n){
+				return true;
+			}
+		}else{
+			if(p > self->max/out->n){
+				return true;
+			}
 		}
 		if(!nut_PfStack_push(self, &(nut_PfStackEnt){.n=out->n, .hn=out->hn, .i= out->i + 1})){
 			return false;
 		}
-		for(uint64_t pp = p, e = 2; !__builtin_mul_overflow(pp, p, &pp) && pp <= self->max/out->n; ++e){
+		for(uint64_t pp = min_pow == 2 ? p : 1, e = min_pow; !__builtin_mul_overflow(pp, p, &pp) && pp <= self->max/out->n; ++e){
 			int64_t v = out->hn;
-			if(self->use_table){
+			if(self->h_kind == NUT_DIRI_H_VALS){
 				v *= self->h_vals[e];
-			}else{
+			}else if(self->h_kind == NUT_DIRI_H_FN){
 				v *= self->h_fn(p, pp, e, self->modulus);
+			}else if(self->h_kind == NUT_DIRI_H_SEQS){
+				v *= self->h_seqs.values[self->h_seqs.offsets[out->i] + e - min_pow];
+			}else{
+				return false;
 			}
 			if(self->modulus){
 				v = nut_i64_mod(v, self->modulus);
@@ -127,7 +201,7 @@ bool nut_Diri_sum_adjusted(int64_t *restrict out, const nut_Diri *restrict g_tbl
 	nut_PfStackEnt ent;
 	while(nut_PfIt_next(pf_it, &ent)){
 		int64_t Gn;
-		if(ent.n > (uint64_t)g_tbl->yinv){
+		if(ent.n >= (uint64_t)g_tbl->yinv){
 			Gn = g_dense[g_tbl->x/ent.n];
 		}else{
 			Gn = nut_Diri_get_sparse(g_tbl, ent.n);

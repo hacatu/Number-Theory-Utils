@@ -74,11 +74,6 @@
 /// Then (f3(.)(b))_p(z) = (1 + bz + b^2z^3 + b^3z^7), so overall
 /// (h3,b)_p(z) = (1 + bz + b^2z^3 + b^3z^7)(1 - z)^b
 
-
-#include <inttypes.h>
-#include <stdlib.h>
-#include <stdio.h>
-
 #include <nut/modular_math.h>
 #include <nut/dirichlet.h>
 
@@ -92,27 +87,38 @@ typedef struct{
 /// Iterator to find all powerful numbers and evaluate a function h at them
 /// See { @link NUT_PfIt_INIT}, { @link nut_PfIt_destroy}, { @link nut_PfIt_next}
 typedef struct{
-	uint64_t len, cap, max, rt_max, *primes, num_primes, modulus;
+	uint64_t len, cap, max, rt_max, *primes, num_primes, modulus, small_primes;
 	nut_PfStackEnt *entries;
-	bool use_table;
+	int h_kind;
 	union{
 		int64_t (*h_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m);
 		const int64_t *h_vals;
+		struct{
+			uint64_t *offsets;
+			int64_t *values;
+		} h_seqs;
 	};
 } nut_PfIt;
 
 /// Set up a powerful iterator that uses a callback function to compute h
-NUT_ATTR_NONNULL(1, 4)
+NUT_ATTR_NONNULL(1, 5)
 NUT_ATTR_ACCESS(write_only, 1)
-bool nut_PfIt_init_fn(nut_PfIt *self, uint64_t max, uint64_t modulus, int64_t (*h_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m));
+bool nut_PfIt_init_fn(nut_PfIt *self, uint64_t max, uint64_t modulus, uint64_t small_primes, int64_t (*h_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m));
 
 /// Set up a powerful iterator that uses a table of values for h (when h(p^e) depends only on e)
-NUT_ATTR_NONNULL(1, 4)
+NUT_ATTR_NONNULL(1, 5)
 NUT_ATTR_ACCESS(write_only, 1)
-bool nut_PfIt_init_hvals(nut_PfIt *restrict self, uint64_t max, uint64_t modulus, const int64_t *restrict h_vals);
+bool nut_PfIt_init_hvals(nut_PfIt *restrict self, uint64_t max, uint64_t modulus, uint64_t small_primes, const int64_t *restrict h_vals);
+
+/// Set up a powerful iterator that automatically computes h values given f and g (when a closed form for h is not known)
+NUT_ATTR_NONNULL(1, 5, 6)
+NUT_ATTR_ACCESS(write_only, 1)
+bool nut_PfIt_init_hseqs(nut_PfIt *restrict self, uint64_t max, uint64_t modulus, uint64_t small_primes,
+	int64_t (*f_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m), int64_t (*g_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m)
+);
 
 /// Macro to automatically set up a powerful iterator using either { @link nut_PfIt_init_fn } or { @link nut_PfIt_init_hvals } depending on the type of h
-#define NUT_PfIt_INIT(self, max, modulus, h) _Generic((h), int64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t): nut_PfIt_init_fn, int64_t*: nut_PfIt_init_hvals)((self), (max), (modulus), (h))
+#define NUT_PfIt_INIT(self, max, modulus, small_primes, h) _Generic((h), int64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t): nut_PfIt_init_fn, int64_t*: nut_PfIt_init_hvals)((self), (max), (modulus), (small_primes), (h))
 
 /// Delete backing arrays for a powerful number iterator
 NUT_ATTR_NONNULL(1)
@@ -169,4 +175,8 @@ NUT_ATTR_ACCESS(read_write, 3)
 NUT_ATTR_ACCESS(read_only, 4)
 NUT_ATTR_ACCESS(read_only, 5)
 void nut_series_div(uint64_t n, int64_t m, int64_t h[restrict static n], int64_t f[restrict static n], int64_t g[restrict static n]);
+
+#define NUT_DIRI_H_FN 0
+#define NUT_DIRI_H_VALS 1
+#define NUT_DIRI_H_SEQS 2
 
