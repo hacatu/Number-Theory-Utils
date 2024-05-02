@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os, subprocess, sys, json, argparse, shutil
+import os, subprocess, sys, json, argparse, shutil, re
 from pathlib import Path
 
 def runNoRedTest(test_path, test_argv, log_name):
@@ -7,8 +7,10 @@ def runNoRedTest(test_path, test_argv, log_name):
 	pipe_out, pipe_in = os.pipe()
 	if args.valgrind:
 		popen_args = ["valgrind", "--leak-check=full", "--track-origins=yes", f"--log-file={valgrind_log_name}", test_path] + test_argv
-	else:
+	elif args.disable_aslr is not True:
 		popen_args = [test_path] + test_argv
+	else:
+		popen_args = ["setarch", "-R", test_path] + test_argv
 	child = subprocess.Popen(popen_args, stdout=pipe_in, stderr=pipe_in)
 	tee = subprocess.Popen(["tee", log_name], stdin=pipe_out)
 	child.wait()
@@ -39,8 +41,10 @@ def runLogDiffTests(test_path, i, test_argv, log_name):
 	pipe_out, pipe_in = os.pipe()
 	if args.valgrind:
 		popen_args = ["valgrind", "--leak-check=full", "--track-origins=yes", f"--log-file={valgrind_log_name}", test_path] + test_argv
-	else:
+	elif args.disable_aslr is not True:
 		popen_args = [test_path] + test_argv
+	else:
+		popen_args = ["setarch", "-R", test_path] + test_argv
 	child = subprocess.Popen(popen_args, stdout=pipe_in, stderr=pipe_in)
 	tee = subprocess.Popen(["tee", log_name], stdin=pipe_out)
 	child.wait()
@@ -65,18 +69,35 @@ def runLogDiffTests(test_path, i, test_argv, log_name):
 		print("\033[1;32mtest.py: test passed\033[0m", file=sys.stderr)
 	return status
 
+def checkEnvironment(args):
+	output = subprocess.check_output(['clang', '--version']).decode('utf-8')
+	version_str = re.compile(r"clang\s+version\s+(\S+)").match(output).group(1)
+	version = tuple(map(int, version_str.split('.')))
+	output = subprocess.check_output(['sudo', 'sysctl', '-b', 'vm.mmap_rnd_bits'])
+	aslr_bits = int(output)
+	if version < (18, 1, 0) and aslr_bits > 28:
+		args.disable_aslr = True
+
 if __name__ == "__main__":
 	arg_parser = argparse.ArgumentParser(description="Automatically run tests stored in a json file")
 	#arg_parser.add_argument("cfg_dir", help="directory containing tests.json and expected output logs if used")
 	#arg_parser.add_argument("bin_dir", help="directory containing test binaries")
 	arg_parser.add_argument("-g", "--valgrind", action="store_true", help="run tests under valgrind")
 	arg_parser.add_argument("-v", "--variant", help="what variant to test (debug, release, coverage, valgrind, etc)", required=True)
+	arg_parser.add_argument("-r", "--disable_aslr", action="store_true", help="force disable aslr to work around a bug in some sanitizers on some platforms")
 	args = arg_parser.parse_args()
 	args.cfg_dir = Path(__file__).resolve().parent
 	args.bin_dir = Path("build") / args.variant
 	log_name = args.cfg_dir / "tmp.log"
 	valgrind_log_name = args.cfg_dir / "tmp.valgrind.log"
 	vg_iota = 0
+
+	if args.variant == 'debug':
+		if args.disable_aslr is not True:
+			print(f"\033[1;34mtest.py: checking if ASLR must be randomized for tests\nThis requires checking system info with sudo\nIf this isn't acceptable, specify '--disable_aslr' manually\033[0m")
+			checkEnvironment(args)
+		if args.disable_aslr is True:
+			print(f"\033[1;34mtest.py: ASLR will be disabled for tests\033[0m")
 
 	with open(args.cfg_dir / "tests.json", "r") as test_json:
 		test_cfg = json.load(test_json)

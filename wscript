@@ -49,6 +49,7 @@ def configure(conf):
 	conf.env.CFLAGS = mod_flags(base_cflags, [], [
 		'-ggdb3',
 		'-pg',
+		'-fPIE',
 		'-fno-eliminate-unused-debug-types',
 		'--coverage',
 		'-fsanitize=address,object-size,vla-bound',
@@ -58,9 +59,11 @@ def configure(conf):
 	conf.env.LDFLAGS = mod_flags(base_ldflags, [], [
 		'-ggdb3',
 		'-pg',
+		'-pie',
 		'-fno-eliminate-unused-debug-types',
 		'--coverage',
-		'-fsanitize=address,object-size,vla-bound'
+		'-fsanitize=address,object-size,vla-bound',
+		'-O1'
 	])
 
 	conf.setenv('debug')
@@ -69,6 +72,7 @@ def configure(conf):
 	conf.load('compiler_c')
 	conf.env.CFLAGS = mod_flags(base_cflags, [], [
 		'-ggdb3',
+		'-fPIE',
 		'-fno-eliminate-unused-debug-types',
 		'-fno-omit-frame-pointer',
 		'-fno-optimize-sibling-calls',
@@ -77,11 +81,11 @@ def configure(conf):
 	])
 	conf.env.LDFLAGS = mod_flags(base_ldflags, [], [
 		'-ggdb3',
+		'-pie',
 		'-fno-eliminate-unused-debug-types',
 		'-fno-omit-frame-pointer',
 		'-fno-optimize-sibling-calls',
 		'-fsanitize=memory,bool,builtin,bounds,enum,function,integer,nonnull-attribute,nullability,pointer-overflow,returns-nonnull-attribute,shift,unsigned-shift-base,unreachable,vla-bound',
-		'-O1'
 	])
 
 	conf.setenv('release')
@@ -219,7 +223,7 @@ def build(ctx):
 		)
 	
 	header_dir = ctx.path.find_dir('include')
-	ctx.install_files('${PREFIX}/include', header_dir.ant_glob('**/*.h'), relative_trick=True)
+	ctx.install_files('${PREFIX}', header_dir.ant_glob('**/*.h'), relative_trick=True)
 
 def test(ctx):
 	if not ctx.variant:
@@ -233,7 +237,7 @@ def test(ctx):
 		ctx.fatal('tests failed')
 	if ctx.variant == 'coverage':
 		ctx.exec_command('geninfo build/coverage/src/lib/nut')
-		ctx.exec_command('find build/coverage/src/lib/nut -name "*.info" | xargs genhtml --num-spaces 4 --css-file resources/lcov.css --html-prolog resources/lcov_prolog.html -o cov | grep -oP "(?<=lines\\.{6,6}: )\\d+\\.\d+" | xargs ./cov_shield.py > coverage.svg')
+		ctx.exec_command('find build/coverage/src/lib/nut -name "*.info" | xargs genhtml --num-spaces 4 --css-file resources/lcov.css --html-prolog resources/lcov_prolog.html -o cov | grep -oP "(?<=lines\\.{6,6}: )\\d+\\.\\d+" | xargs ./cov_shield.py > coverage.svg')
 
 def docs(ctx):
 	ctx.exec_command('doxygen doxygen.conf')
