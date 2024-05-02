@@ -140,26 +140,39 @@ Data Structures</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Entry type for <a class="el" href="structnut__PfIt.html">nut_PfIt</a>.  <a href="structnut__PfStackEnt.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__PfIt.html">nut_PfIt</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterator to find all powerful numbers and evaluate a function h at them See <a class="el" href="dirichlet__powerful_8h.html#a150182cb7259ac915dd58b10dec687dc">NUT_PfIt_INIT</a>, <a class="el" href="dirichlet__powerful_8h.html#a7c6f8806178cc935e541e82279c8d424">nut_PfIt_destroy</a>, <a class="el" href="dirichlet__powerful_8h.html#ac10e34c391364d1114342736d9f573e1">nut_PfIt_next</a>.  <a href="structnut__PfIt.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterator to find all powerful numbers and evaluate a function h at them See <a class="el" href="dirichlet__powerful_8h.html#abe32d9b712125b4c651b3defabd6e260">NUT_PfIt_INIT</a>, <a class="el" href="dirichlet__powerful_8h.html#a7c6f8806178cc935e541e82279c8d424">nut_PfIt_destroy</a>, <a class="el" href="dirichlet__powerful_8h.html#ac10e34c391364d1114342736d9f573e1">nut_PfIt_next</a>.  <a href="structnut__PfIt.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a150182cb7259ac915dd58b10dec687dc"><td class="memItemLeft" align="right" valign="top"><a id="a150182cb7259ac915dd58b10dec687dc"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#a150182cb7259ac915dd58b10dec687dc">NUT_PfIt_INIT</a>(self,  max,  modulus,  h)&#160;&#160;&#160;_Generic((h), int64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t): <a class="el" href="dirichlet__powerful_8h.html#a3d0fb8570869db5d315edd0446e42bea">nut_PfIt_init_fn</a>, int64_t*: <a class="el" href="dirichlet__powerful_8h.html#ab662f10fa79426a40f0e7366ef660471">nut_PfIt_init_hvals</a>)((self), (max), (modulus), (h))</td></tr>
-<tr class="memdesc:a150182cb7259ac915dd58b10dec687dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to automatically set up a powerful iterator using either <a class="el" href="dirichlet__powerful_8h.html#a3d0fb8570869db5d315edd0446e42bea">nut_PfIt_init_fn</a> or <a class="el" href="dirichlet__powerful_8h.html#ab662f10fa79426a40f0e7366ef660471">nut_PfIt_init_hvals</a> depending on the type of h. <br /></td></tr>
-<tr class="separator:a150182cb7259ac915dd58b10dec687dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe32d9b712125b4c651b3defabd6e260"><td class="memItemLeft" align="right" valign="top"><a id="abe32d9b712125b4c651b3defabd6e260"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#abe32d9b712125b4c651b3defabd6e260">NUT_PfIt_INIT</a>(self,  max,  modulus,  small_primes,  h)&#160;&#160;&#160;_Generic((h), int64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t): <a class="el" href="dirichlet__powerful_8h.html#ac43f8a128498d01aea3e3a3cd25f8fc3">nut_PfIt_init_fn</a>, int64_t*: <a class="el" href="dirichlet__powerful_8h.html#a068acdfbca1bf517c4e33328452851a3">nut_PfIt_init_hvals</a>)((self), (max), (modulus), (small_primes), (h))</td></tr>
+<tr class="memdesc:abe32d9b712125b4c651b3defabd6e260"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to automatically set up a powerful iterator using either <a class="el" href="dirichlet__powerful_8h.html#ac43f8a128498d01aea3e3a3cd25f8fc3">nut_PfIt_init_fn</a> or <a class="el" href="dirichlet__powerful_8h.html#a068acdfbca1bf517c4e33328452851a3">nut_PfIt_init_hvals</a> depending on the type of h. <br /></td></tr>
+<tr class="separator:abe32d9b712125b4c651b3defabd6e260"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa0087a172a4abca1c7ddccf6c4c6a4d"><td class="memItemLeft" align="right" valign="top"><a id="aaa0087a172a4abca1c7ddccf6c4c6a4d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>NUT_DIRI_H_FN</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:aaa0087a172a4abca1c7ddccf6c4c6a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e09adce4a1390828953f8bd706d5d0d"><td class="memItemLeft" align="right" valign="top"><a id="a4e09adce4a1390828953f8bd706d5d0d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>NUT_DIRI_H_VALS</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a4e09adce4a1390828953f8bd706d5d0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af027eda59cca0a581bcce4f67fd89c1e"><td class="memItemLeft" align="right" valign="top"><a id="af027eda59cca0a581bcce4f67fd89c1e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>NUT_DIRI_H_SEQS</b>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:af027eda59cca0a581bcce4f67fd89c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3d0fb8570869db5d315edd0446e42bea"><td class="memItemLeft" align="right" valign="top"><a id="a3d0fb8570869db5d315edd0446e42bea"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#a3d0fb8570869db5d315edd0446e42bea">nut_PfIt_init_fn</a> (<a class="el" href="structnut__PfIt.html">nut_PfIt</a> *self, uint64_t max, uint64_t modulus, int64_t(*h_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m))</td></tr>
-<tr class="memdesc:a3d0fb8570869db5d315edd0446e42bea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up a powerful iterator that uses a callback function to compute h. <br /></td></tr>
-<tr class="separator:a3d0fb8570869db5d315edd0446e42bea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab662f10fa79426a40f0e7366ef660471"><td class="memItemLeft" align="right" valign="top"><a id="ab662f10fa79426a40f0e7366ef660471"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#ab662f10fa79426a40f0e7366ef660471">nut_PfIt_init_hvals</a> (<a class="el" href="structnut__PfIt.html">nut_PfIt</a> *restrict self, uint64_t max, uint64_t modulus, const int64_t *restrict h_vals)</td></tr>
-<tr class="memdesc:ab662f10fa79426a40f0e7366ef660471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up a powerful iterator that uses a table of values for h (when h(p^e) depends only on e) <br /></td></tr>
-<tr class="separator:ab662f10fa79426a40f0e7366ef660471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac43f8a128498d01aea3e3a3cd25f8fc3"><td class="memItemLeft" align="right" valign="top"><a id="ac43f8a128498d01aea3e3a3cd25f8fc3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#ac43f8a128498d01aea3e3a3cd25f8fc3">nut_PfIt_init_fn</a> (<a class="el" href="structnut__PfIt.html">nut_PfIt</a> *self, uint64_t max, uint64_t modulus, uint64_t small_primes, int64_t(*h_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m))</td></tr>
+<tr class="memdesc:ac43f8a128498d01aea3e3a3cd25f8fc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up a powerful iterator that uses a callback function to compute h. <br /></td></tr>
+<tr class="separator:ac43f8a128498d01aea3e3a3cd25f8fc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a068acdfbca1bf517c4e33328452851a3"><td class="memItemLeft" align="right" valign="top"><a id="a068acdfbca1bf517c4e33328452851a3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#a068acdfbca1bf517c4e33328452851a3">nut_PfIt_init_hvals</a> (<a class="el" href="structnut__PfIt.html">nut_PfIt</a> *restrict self, uint64_t max, uint64_t modulus, uint64_t small_primes, const int64_t *restrict h_vals)</td></tr>
+<tr class="memdesc:a068acdfbca1bf517c4e33328452851a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up a powerful iterator that uses a table of values for h (when h(p^e) depends only on e) <br /></td></tr>
+<tr class="separator:a068acdfbca1bf517c4e33328452851a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecab2749d91f730486dd3d6aa81ce3df"><td class="memItemLeft" align="right" valign="top"><a id="aecab2749d91f730486dd3d6aa81ce3df"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#aecab2749d91f730486dd3d6aa81ce3df">nut_PfIt_init_hseqs</a> (<a class="el" href="structnut__PfIt.html">nut_PfIt</a> *restrict self, uint64_t max, uint64_t modulus, uint64_t small_primes, int64_t(*f_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m), int64_t(*g_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m))</td></tr>
+<tr class="memdesc:aecab2749d91f730486dd3d6aa81ce3df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up a powerful iterator that automatically computes h values given f and g (when a closed form for h is not known) <br /></td></tr>
+<tr class="separator:aecab2749d91f730486dd3d6aa81ce3df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c6f8806178cc935e541e82279c8d424"><td class="memItemLeft" align="right" valign="top"><a id="a7c6f8806178cc935e541e82279c8d424"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#a7c6f8806178cc935e541e82279c8d424">nut_PfIt_destroy</a> (<a class="el" href="structnut__PfIt.html">nut_PfIt</a> *self)</td></tr>
 <tr class="memdesc:a7c6f8806178cc935e541e82279c8d424"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete backing arrays for a powerful number iterator. <br /></td></tr>
@@ -176,7 +189,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 <tr class="memdesc:ac10e34c391364d1114342736d9f573e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the next entry from a powerful number iterator This entry will have out-&gt;n set to a powerful number and out-&gt;hn set to the value of h evaluated at that n, where h is the function defined at iterator creation time.  <a href="dirichlet__powerful_8h.html#ac10e34c391364d1114342736d9f573e1">More...</a><br /></td></tr>
 <tr class="separator:ac10e34c391364d1114342736d9f573e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0955257f1f62a3f9ead64f4610d8c618"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#a0955257f1f62a3f9ead64f4610d8c618">nut_Diri_sum_adjusted</a> (int64_t *restrict out, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict g_tbl, <a class="el" href="structnut__PfIt.html">nut_PfIt</a> *pf_it)</td></tr>
-<tr class="memdesc:a0955257f1f62a3f9ead64f4610d8c618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the sum of f = g &lt;*&gt; h (from 1 up to g_tbl-&gt;x), where f(p) = g(p) The modulus used to reduce the answer should be passed in when constructing pf_it, <a class="el" href="dirichlet__powerful_8h.html#a150182cb7259ac915dd58b10dec687dc">NUT_PfIt_INIT</a>.  <a href="dirichlet__powerful_8h.html#a0955257f1f62a3f9ead64f4610d8c618">More...</a><br /></td></tr>
+<tr class="memdesc:a0955257f1f62a3f9ead64f4610d8c618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the sum of f = g &lt;*&gt; h (from 1 up to g_tbl-&gt;x), where f(p) = g(p) The modulus used to reduce the answer should be passed in when constructing pf_it, <a class="el" href="dirichlet__powerful_8h.html#abe32d9b712125b4c651b3defabd6e260">NUT_PfIt_INIT</a>.  <a href="dirichlet__powerful_8h.html#a0955257f1f62a3f9ead64f4610d8c618">More...</a><br /></td></tr>
 <tr class="separator:a0955257f1f62a3f9ead64f4610d8c618"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae208f6364581328a25c55fbbd6d4d7d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet__powerful_8h.html#ae208f6364581328a25c55fbbd6d4d7d1">nut_series_div</a> (uint64_t n, int64_t m, int64_t h[restrict static n], int64_t f[restrict static n], int64_t g[restrict static n])</td></tr>
 <tr class="memdesc:ae208f6364581328a25c55fbbd6d4d7d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the series quotient h = f / g for two (finite) power series In other words, h will be such that f = g * h (under power series multiplication, not Dirichlet convolution) Similar to polynomial division but cannot have a remainder.  <a href="dirichlet__powerful_8h.html#ae208f6364581328a25c55fbbd6d4d7d1">More...</a><br /></td></tr>
@@ -246,7 +259,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
       </table>
 </div><div class="memdoc">
 
-<p>Compute the sum of f = g &lt;*&gt; h (from 1 up to g_tbl-&gt;x), where f(p) = g(p) The modulus used to reduce the answer should be passed in when constructing pf_it, <a class="el" href="dirichlet__powerful_8h.html#a150182cb7259ac915dd58b10dec687dc">NUT_PfIt_INIT</a>. </p>
+<p>Compute the sum of f = g &lt;*&gt; h (from 1 up to g_tbl-&gt;x), where f(p) = g(p) The modulus used to reduce the answer should be passed in when constructing pf_it, <a class="el" href="dirichlet__powerful_8h.html#abe32d9b712125b4c651b3defabd6e260">NUT_PfIt_INIT</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">out</td><td>store the result </td></tr>
@@ -324,7 +337,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="dirichlet__powerful_8h.html">dirichlet_powerful.h</a></li>
-    <li class="footer">Generated on Wed Jan 31 2024 21:24:40 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Thu May 2 2024 17:09:45 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

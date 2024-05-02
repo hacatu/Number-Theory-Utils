@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Number Theory Utils: nut_Roots Struct Reference</title>
+<title>Number Theory Utils: nut_i64_Matrix Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,7 +89,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('structnut__Roots.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structnut__i64__Matrix.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -111,55 +111,27 @@ $(document).ready(function(){initNavTree('structnut__Roots.html',''); initResiza
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">nut_Roots Struct Reference</div>  </div>
+<div class="title">nut_i64_Matrix Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>The roots of a polynomial over a finite field, ignoring multiplicity.  
- <a href="structnut__Roots.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="polynomial_8h_source.html">polynomial.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a52b50bc7b374bb528cdae1b4477b69c1"><td class="memItemLeft" align="right" valign="top"><a id="a52b50bc7b374bb528cdae1b4477b69c1"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__Roots.html#a52b50bc7b374bb528cdae1b4477b69c1">len</a></td></tr>
-<tr class="memdesc:a52b50bc7b374bb528cdae1b4477b69c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of roots, can be 0 if there are none. <br /></td></tr>
-<tr class="separator:a52b50bc7b374bb528cdae1b4477b69c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c4fc3262be2a3850f653b9688e1a400"><td class="memItemLeft" align="right" valign="top"><a id="a8c4fc3262be2a3850f653b9688e1a400"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__Roots.html#a8c4fc3262be2a3850f653b9688e1a400">cap</a></td></tr>
-<tr class="memdesc:a8c4fc3262be2a3850f653b9688e1a400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of roots the roots buffer can currently store. <br /></td></tr>
-<tr class="separator:a8c4fc3262be2a3850f653b9688e1a400"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4938a9a6f1cb009c71930447a417b467"><td class="memItemLeft" align="right" valign="top">int64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnut__Roots.html#a4938a9a6f1cb009c71930447a417b467">roots</a></td></tr>
-<tr class="memdesc:a4938a9a6f1cb009c71930447a417b467"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of roots.  <a href="structnut__Roots.html#a4938a9a6f1cb009c71930447a417b467">More...</a><br /></td></tr>
-<tr class="separator:a4938a9a6f1cb009c71930447a417b467"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a909724e8ebda459132a33026ed2e17a1"><td class="memItemLeft" align="right" valign="top"><a id="a909724e8ebda459132a33026ed2e17a1"></a>
+int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>rows</b></td></tr>
+<tr class="separator:a909724e8ebda459132a33026ed2e17a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5edc5422a74d05e6f260369df4c6085"><td class="memItemLeft" align="right" valign="top"><a id="aa5edc5422a74d05e6f260369df4c6085"></a>
+int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>cols</b></td></tr>
+<tr class="separator:aa5edc5422a74d05e6f260369df4c6085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28fefcfb06fc02abd7e65703b41a5c30"><td class="memItemLeft" align="right" valign="top"><a id="a28fefcfb06fc02abd7e65703b41a5c30"></a>
+int64_t *&#160;</td><td class="memItemRight" valign="bottom"><b>buf</b></td></tr>
+<tr class="separator:a28fefcfb06fc02abd7e65703b41a5c30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The roots of a polynomial over a finite field, ignoring multiplicity. </p>
-
-<p class="definition">Definition at line <a class="el" href="polynomial_8h_source.html#l00038">38</a> of file <a class="el" href="polynomial_8h_source.html">polynomial.h</a>.</p>
-</div><h2 class="groupheader">Field Documentation</h2>
-<a id="a4938a9a6f1cb009c71930447a417b467"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4938a9a6f1cb009c71930447a417b467">&#9670;&nbsp;</a></span>roots</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int64_t* nut_Roots::roots</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Array of roots. </p>
-<p>Should be managed by <a class="el" href="polynomial_8h.html#ac64995d45deb2bc583b4d70cbce1d5c2">nut_Roots_init</a>, <a class="el" href="polynomial_8h.html#acfa2292bfc27186033c1c65930250f55">nut_Roots_destroy</a>, and <a class="el" href="polynomial_8h.html#a88451f2c0e548ddb7ce1f0bbe49e3fa0">nut_Roots_ensure_cap</a>. </p>
-
-<p class="definition">Definition at line <a class="el" href="polynomial_8h_source.html#l00045">45</a> of file <a class="el" href="polynomial_8h_source.html">polynomial.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>include/nut/<a class="el" href="polynomial_8h_source.html">polynomial.h</a></li>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="matrix_8h_source.html#l00017">17</a> of file <a class="el" href="matrix_8h_source.html">matrix.h</a>.</p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/nut/<a class="el" href="matrix_8h_source.html">matrix.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -167,7 +139,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="structnut__Roots.html">nut_Roots</a></li>
+    <li class="navelem"><a class="el" href="structnut__i64__Matrix.html">nut_i64_Matrix</a></li>
     <li class="footer">Generated on Thu May 2 2024 17:09:45 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>

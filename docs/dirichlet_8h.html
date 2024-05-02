@@ -186,6 +186,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 <tr class="memitem:aaa27d52f1bde28bec89dbe3ee2eb1c11"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#aaa27d52f1bde28bec89dbe3ee2eb1c11">nut_Diri_compute_dk</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, uint64_t k, int64_t m, <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict f_tbl, <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict g_tbl)</td></tr>
 <tr class="memdesc:aaa27d52f1bde28bec89dbe3ee2eb1c11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the kth generalized divisor function dk(n) dk(n) = da(n) &lt;*&gt; db(n) whenever a + b = k.  <a href="dirichlet_8h.html#aaa27d52f1bde28bec89dbe3ee2eb1c11">More...</a><br /></td></tr>
 <tr class="separator:aaa27d52f1bde28bec89dbe3ee2eb1c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbd2807d0e18d42c365be9f634633f00"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#adbd2807d0e18d42c365be9f634633f00">nut_Diri_compute_Nk</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, uint64_t k, int64_t m)</td></tr>
+<tr class="memdesc:adbd2807d0e18d42c365be9f634633f00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the kth power function N^k(n) N^k(n) = n^k, so we can find the sums using <a href="https://en.wikipedia.org/wiki/Faulhaber%27s_formula">https://en.wikipedia.org/wiki/Faulhaber%27s_formula</a> (we actually do this by taking a lower triangular matrix of pascal's triangle and inverting it) This is one of the core components needed to compute the Dirichlet sum table for f where f(p) is a polynomial, the other one being <a href="https://en.wikipedia.org/wiki/Jordan%27s_totient_function">https://en.wikipedia.org/wiki/Jordan%27s_totient_function</a>.  <a href="dirichlet_8h.html#adbd2807d0e18d42c365be9f634633f00">More...</a><br /></td></tr>
+<tr class="separator:adbd2807d0e18d42c365be9f634633f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc3257dcff1b06c34b128c156572a4dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#abc3257dcff1b06c34b128c156572a4dd">nut_Diri_compute_conv_u</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, int64_t m, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict f_tbl)</td></tr>
 <tr class="memdesc:abc3257dcff1b06c34b128c156572a4dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f See <a class="el" href="dirichlet_8h.html#ac129473cb990ee5563de30608d75d253">nut_Diri_compute_conv</a> for details, this is just that function but with several specializations due to u being very simple.  <a href="dirichlet_8h.html#abc3257dcff1b06c34b128c156572a4dd">More...</a><br /></td></tr>
 <tr class="separator:abc3257dcff1b06c34b128c156572a4dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,6 +198,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 <tr class="memitem:ac129473cb990ee5563de30608d75d253"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#ac129473cb990ee5563de30608d75d253">nut_Diri_compute_conv</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, int64_t m, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *f_tbl, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *g_tbl)</td></tr>
 <tr class="memdesc:ac129473cb990ee5563de30608d75d253"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands self must have been initialized using <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl must be set and match This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1)) If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then try to use a specialized function from this library and use that instead.  <a href="dirichlet_8h.html#ac129473cb990ee5563de30608d75d253">More...</a><br /></td></tr>
 <tr class="separator:ac129473cb990ee5563de30608d75d253"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa888abb382e18f4b8a1cc645434d9c03"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#aa888abb382e18f4b8a1cc645434d9c03">nut_Diri_convdiv</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, int64_t m, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict f_tbl, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict g_tbl)</td></tr>
+<tr class="memdesc:aa888abb382e18f4b8a1cc645434d9c03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for h such that f = g &lt;*&gt; h, aka h = f &lt;/&gt; g where the division is in terms of dirichlet convolution self must have been initialized using <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl must be set and match This is the inverse of &lt;*&gt;, in the sense that if h = f &lt;/&gt; g, then h &lt;*&gt; g = f.  <a href="dirichlet_8h.html#aa888abb382e18f4b8a1cc645434d9c03">More...</a><br /></td></tr>
+<tr class="separator:aa888abb382e18f4b8a1cc645434d9c03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a2db407b902fdb86d740d579e445223c8"></a>
@@ -643,6 +649,50 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 
 </div>
 </div>
+<a id="adbd2807d0e18d42c365be9f634633f00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbd2807d0e18d42c365be9f634633f00">&#9670;&nbsp;</a></span>nut_Diri_compute_Nk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_Diri_compute_Nk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the value table for the kth power function N^k(n) N^k(n) = n^k, so we can find the sums using <a href="https://en.wikipedia.org/wiki/Faulhaber%27s_formula">https://en.wikipedia.org/wiki/Faulhaber%27s_formula</a> (we actually do this by taking a lower triangular matrix of pascal's triangle and inverting it) This is one of the core components needed to compute the Dirichlet sum table for f where f(p) is a polynomial, the other one being <a href="https://en.wikipedia.org/wiki/Jordan%27s_totient_function">https://en.wikipedia.org/wiki/Jordan%27s_totient_function</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, and take the bounds from. Must be initialized </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">k</td><td>the power of the power function to compute </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>modulus to reduce the result by, or 0 to skip reducing </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="abc3257dcff1b06c34b128c156572a4dd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abc3257dcff1b06c34b128c156572a4dd">&#9670;&nbsp;</a></span>nut_Diri_compute_conv_u()</h2>
 
@@ -772,10 +822,61 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 <p>Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands self must have been initialized using <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl must be set and match This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1)) If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then try to use a specialized function from this library and use that instead. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistend with the inputs </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistent with the inputs </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>modulus to reduce results by, or 0 to skip reducing </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">f_tbl</td><td>table for the first operand (dirichlet convolution is commutative, so order doesn't matter) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">g_tbl</td><td>table for the second operand </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa888abb382e18f4b8a1cc645434d9c03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa888abb382e18f4b8a1cc645434d9c03">&#9670;&nbsp;</a></span>nut_Diri_convdiv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_Diri_convdiv </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>f_tbl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>g_tbl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the value table for h such that f = g &lt;*&gt; h, aka h = f &lt;/&gt; g where the division is in terms of dirichlet convolution self must have been initialized using <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl must be set and match This is the inverse of &lt;*&gt;, in the sense that if h = f &lt;/&gt; g, then h &lt;*&gt; g = f. </p>
+<p>In fact, this function is essentially implemented by solving this for H(v) and applying the dirichlet hyperbola method (see the code comments for details). Unlike the <code>compute_conv_*</code> family of functions, this needs to allocate space for scratch work, which can cause it to fail if there is not enough memory. About 16*(self-&gt;y + 1) bytes will be allocated. Currently there are not specialized functions for dividing by simple standard functions. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, initialized by <a class="el" href="dirichlet_8h.html#a4f69060eec4fdf127316bd2998e356d4">nut_Diri_init</a>. self-&gt;y, self-&gt;x, and self-&gt;yinv must be set ant consistent with the inputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>modulus to reduce results by, or 0 to skip reducing </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">f_tbl</td><td>table for the first operand (the "numerator" aka "dividend" in the "division") </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">g_tbl</td><td>the table for the second operand (the "denominator" aka "divisor" in the "division") </td></tr>
   </table>
   </dd>
 </dl>
@@ -789,7 +890,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="dirichlet_8h.html">dirichlet.h</a></li>
-    <li class="footer">Generated on Wed Jan 31 2024 21:24:40 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Thu May 2 2024 17:09:45 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

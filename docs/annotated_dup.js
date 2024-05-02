@@ -5,6 +5,7 @@ var annotated_dup =
     [ "nut_Diri", "structnut__Diri.html", "structnut__Diri" ],
     [ "nut_FactorConf", "structnut__FactorConf.html", "structnut__FactorConf" ],
     [ "nut_Factors", "structnut__Factors.html", "structnut__Factors" ],
+    [ "nut_i64_Matrix", "structnut__i64__Matrix.html", "structnut__i64__Matrix" ],
     [ "nut_PfIt", "structnut__PfIt.html", "structnut__PfIt" ],
     [ "nut_PfStackEnt", "structnut__PfStackEnt.html", "structnut__PfStackEnt" ],
     [ "nut_Poly", "structnut__Poly.html", "structnut__Poly" ],

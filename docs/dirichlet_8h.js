@@ -13,7 +13,9 @@ var dirichlet_8h =
     [ "nut_Diri_compute_N", "dirichlet_8h.html#aef3a0c29121da13a74cec34c49d77d4b", null ],
     [ "nut_Diri_compute_mertens", "dirichlet_8h.html#a1de369be5cae92e31d9f073144b6645d", null ],
     [ "nut_Diri_compute_dk", "dirichlet_8h.html#aaa27d52f1bde28bec89dbe3ee2eb1c11", null ],
+    [ "nut_Diri_compute_Nk", "dirichlet_8h.html#adbd2807d0e18d42c365be9f634633f00", null ],
     [ "nut_Diri_compute_conv_u", "dirichlet_8h.html#abc3257dcff1b06c34b128c156572a4dd", null ],
     [ "nut_Diri_compute_conv_N", "dirichlet_8h.html#a54146e9f9dea0bbee06a22395833093a", null ],
-    [ "nut_Diri_compute_conv", "dirichlet_8h.html#ac129473cb990ee5563de30608d75d253", null ]
+    [ "nut_Diri_compute_conv", "dirichlet_8h.html#ac129473cb990ee5563de30608d75d253", null ],
+    [ "nut_Diri_convdiv", "dirichlet_8h.html#aa888abb382e18f4b8a1cc645434d9c03", null ]
 ];

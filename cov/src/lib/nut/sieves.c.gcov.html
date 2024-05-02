@@ -50,7 +50,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-01-31 21:24:21</td>
+            <td class="headerValue">2024-05-02 17:09:26</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">26</td>
@@ -121,8 +121,8 @@
 <a name="46"><span class="lineNum">      46 </span>            :     return 15;</a>
 <a name="47"><span class="lineNum">      47 </span>            : }</a>
 <a name="48"><span class="lineNum">      48 </span>            : </a>
-<a name="49"><span class="lineNum">      49 </span><span class="lineCov">        184 : uint64_t nut_max_primes_le(uint64_t max){</span></a>
-<a name="50"><span class="lineNum">      50 </span><span class="lineCov">        184 :     return 1.25506*max/log(max);</span></a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">        192 : uint64_t nut_max_primes_le(uint64_t max){</span></a>
+<a name="50"><span class="lineNum">      50 </span><span class="lineCov">        192 :     return 1.25506*max/log(max);</span></a>
 <a name="51"><span class="lineNum">      51 </span>            : }</a>
 <a name="52"><span class="lineNum">      52 </span>            : </a>
 <a name="53"><span class="lineNum">      53 </span><span class="lineCov">          1 : void *nut_sieve_factorizations(uint64_t max, uint64_t *_w){</span></a>
@@ -859,23 +859,23 @@
 <a name="784"><span class="lineNum">     784 </span><span class="lineCov">     999971 :     return pi_table[q-1] + __builtin_popcount(mask&amp;~buf[q]);</span></a>
 <a name="785"><span class="lineNum">     785 </span>            : }</a>
 <a name="786"><span class="lineNum">     786 </span>            : </a>
-<a name="787"><span class="lineNum">     787 </span><span class="lineCov">         19 : static uint64_t *copy_small_primes(uint64_t max, uint64_t *_num_primes){</span></a>
-<a name="788"><span class="lineNum">     788 </span><span class="lineCov">         19 :     uint64_t n = 0;</span></a>
-<a name="789"><span class="lineNum">     789 </span><span class="lineCov">        133 :     while(n &lt; 25 &amp;&amp; nut_small_primes[n] &lt;= max){</span></a>
-<a name="790"><span class="lineNum">     790 </span><span class="lineCov">        114 :         ++n;</span></a>
+<a name="787"><span class="lineNum">     787 </span><span class="lineCov">         21 : static uint64_t *copy_small_primes(uint64_t max, uint64_t *_num_primes){</span></a>
+<a name="788"><span class="lineNum">     788 </span><span class="lineCov">         21 :     uint64_t n = 0;</span></a>
+<a name="789"><span class="lineNum">     789 </span><span class="lineCov">        139 :     while(n &lt; 25 &amp;&amp; nut_small_primes[n] &lt;= max){</span></a>
+<a name="790"><span class="lineNum">     790 </span><span class="lineCov">        118 :         ++n;</span></a>
 <a name="791"><span class="lineNum">     791 </span>            :     }</a>
-<a name="792"><span class="lineNum">     792 </span><span class="lineCov">         19 :     uint64_t *primes = malloc(n*sizeof(uint64_t));</span></a>
-<a name="793"><span class="lineNum">     793 </span><span class="lineCov">         19 :     if(!primes){</span></a>
+<a name="792"><span class="lineNum">     792 </span><span class="lineCov">         21 :     uint64_t *primes = malloc(n*sizeof(uint64_t));</span></a>
+<a name="793"><span class="lineNum">     793 </span><span class="lineCov">         21 :     if(!primes){</span></a>
 <a name="794"><span class="lineNum">     794 </span>            :         return NULL;</a>
 <a name="795"><span class="lineNum">     795 </span>            :     }</a>
-<a name="796"><span class="lineNum">     796 </span><span class="lineCov">         19 :     memcpy(primes, nut_small_primes, n*sizeof(uint64_t));</span></a>
-<a name="797"><span class="lineNum">     797 </span><span class="lineCov">         19 :     *_num_primes = n;</span></a>
-<a name="798"><span class="lineNum">     798 </span><span class="lineCov">         19 :     return primes;</span></a>
+<a name="796"><span class="lineNum">     796 </span><span class="lineCov">         21 :     memcpy(primes, nut_small_primes, n*sizeof(uint64_t));</span></a>
+<a name="797"><span class="lineNum">     797 </span><span class="lineCov">         21 :     *_num_primes = n;</span></a>
+<a name="798"><span class="lineNum">     798 </span><span class="lineCov">         21 :     return primes;</span></a>
 <a name="799"><span class="lineNum">     799 </span>            : }</a>
 <a name="800"><span class="lineNum">     800 </span>            : </a>
-<a name="801"><span class="lineNum">     801 </span><span class="lineCov">         20 : uint64_t *nut_sieve_primes(uint64_t max, uint64_t *_num_primes){</span></a>
-<a name="802"><span class="lineNum">     802 </span><span class="lineCov">         20 :     if(max &lt;= 100){</span></a>
-<a name="803"><span class="lineNum">     803 </span><span class="lineCov">         19 :         return copy_small_primes(max, _num_primes);</span></a>
+<a name="801"><span class="lineNum">     801 </span><span class="lineCov">         22 : uint64_t *nut_sieve_primes(uint64_t max, uint64_t *_num_primes){</span></a>
+<a name="802"><span class="lineNum">     802 </span><span class="lineCov">         22 :     if(max &lt;= 100){</span></a>
+<a name="803"><span class="lineNum">     803 </span><span class="lineCov">         21 :         return copy_small_primes(max, _num_primes);</span></a>
 <a name="804"><span class="lineNum">     804 </span>            :     }</a>
 <a name="805"><span class="lineNum">     805 </span><span class="lineCov">          1 :     uint64_t *primes = malloc((size_t)nut_max_primes_le(max)*sizeof(uint64_t));</span></a>
 <a name="806"><span class="lineNum">     806 </span><span class="lineCov">          1 :     if(!primes){</span></a>

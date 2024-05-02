@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('structnut__PfIt.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 
-<p>Iterator to find all powerful numbers and evaluate a function h at them See <a class="el" href="dirichlet__powerful_8h.html#a150182cb7259ac915dd58b10dec687dc">NUT_PfIt_INIT</a>, <a class="el" href="dirichlet__powerful_8h.html#a7c6f8806178cc935e541e82279c8d424">nut_PfIt_destroy</a>, <a class="el" href="dirichlet__powerful_8h.html#ac10e34c391364d1114342736d9f573e1">nut_PfIt_next</a>.  
+<p>Iterator to find all powerful numbers and evaluate a function h at them See <a class="el" href="dirichlet__powerful_8h.html#abe32d9b712125b4c651b3defabd6e260">NUT_PfIt_INIT</a>, <a class="el" href="dirichlet__powerful_8h.html#a7c6f8806178cc935e541e82279c8d424">nut_PfIt_destroy</a>, <a class="el" href="dirichlet__powerful_8h.html#ac10e34c391364d1114342736d9f573e1">nut_PfIt_next</a>.  
  <a href="structnut__PfIt.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="dirichlet__powerful_8h_source.html">dirichlet_powerful.h</a>&gt;</code></p>
@@ -143,12 +143,15 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>num_primes</b></t
 <tr class="memitem:ace738a8a3a5376fbcab4231e20b6ac2f"><td class="memItemLeft" align="right" valign="top"><a id="ace738a8a3a5376fbcab4231e20b6ac2f"></a>
 uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>modulus</b></td></tr>
 <tr class="separator:ace738a8a3a5376fbcab4231e20b6ac2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d163f675f2cb294819e6ac9d7a49d2c"><td class="memItemLeft" align="right" valign="top"><a id="a5d163f675f2cb294819e6ac9d7a49d2c"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>small_primes</b></td></tr>
+<tr class="separator:a5d163f675f2cb294819e6ac9d7a49d2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab484f1b8bcf279ff3f255384a64efdf7"><td class="memItemLeft" align="right" valign="top"><a id="ab484f1b8bcf279ff3f255384a64efdf7"></a>
 <a class="el" href="structnut__PfStackEnt.html">nut_PfStackEnt</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>entries</b></td></tr>
 <tr class="separator:ab484f1b8bcf279ff3f255384a64efdf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14c7a52c3e7ed821b5e67e6663a651fa"><td class="memItemLeft" align="right" valign="top"><a id="a14c7a52c3e7ed821b5e67e6663a651fa"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>use_table</b></td></tr>
-<tr class="separator:a14c7a52c3e7ed821b5e67e6663a651fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a701588d4894e5a2a3bf293239fa593a5"><td class="memItemLeft" align="right" valign="top"><a id="a701588d4894e5a2a3bf293239fa593a5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>h_kind</b></td></tr>
+<tr class="separator:a701588d4894e5a2a3bf293239fa593a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a513a9ff61fed073427a1a908a5d9994e"><td class="memItemLeft" ><a id="a513a9ff61fed073427a1a908a5d9994e"></a>
 union {</td></tr>
 <tr class="memitem:a50cb9bea083caeb6319e58e18d8b9be0"><td class="memItemLeft" >
@@ -158,13 +161,23 @@ union {</td></tr>
 <tr class="memitem:aeca27aed221625390ff25375fab1d68c"><td class="memItemLeft" >
 &#160;&#160;&#160;const int64_t *&#160;&#160;&#160;<b>h_vals</b></td></tr>
 <tr class="separator:aeca27aed221625390ff25375fab1d68c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a647c0d08f12fa3c45a00ce1b0f4e9689"><td class="memItemLeft" >
+&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:a7f98ebc5f0e01af7a65c32be7aa6ff00"><td class="memItemLeft" >
+&#160;&#160;&#160;&#160;&#160;&#160;uint64_t *&#160;&#160;&#160;<b>offsets</b></td></tr>
+<tr class="separator:a7f98ebc5f0e01af7a65c32be7aa6ff00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8825f5ecd0c817c08444bbedd078a28b"><td class="memItemLeft" >
+&#160;&#160;&#160;&#160;&#160;&#160;int64_t *&#160;&#160;&#160;<b>values</b></td></tr>
+<tr class="separator:a8825f5ecd0c817c08444bbedd078a28b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a647c0d08f12fa3c45a00ce1b0f4e9689"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<b>h_seqs</b></td></tr>
+<tr class="separator:a647c0d08f12fa3c45a00ce1b0f4e9689"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a513a9ff61fed073427a1a908a5d9994e"><td class="memItemLeft" valign="top">};&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:a513a9ff61fed073427a1a908a5d9994e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Iterator to find all powerful numbers and evaluate a function h at them See <a class="el" href="dirichlet__powerful_8h.html#a150182cb7259ac915dd58b10dec687dc">NUT_PfIt_INIT</a>, <a class="el" href="dirichlet__powerful_8h.html#a7c6f8806178cc935e541e82279c8d424">nut_PfIt_destroy</a>, <a class="el" href="dirichlet__powerful_8h.html#ac10e34c391364d1114342736d9f573e1">nut_PfIt_next</a>. </p>
+<div class="textblock"><p>Iterator to find all powerful numbers and evaluate a function h at them See <a class="el" href="dirichlet__powerful_8h.html#abe32d9b712125b4c651b3defabd6e260">NUT_PfIt_INIT</a>, <a class="el" href="dirichlet__powerful_8h.html#a7c6f8806178cc935e541e82279c8d424">nut_PfIt_destroy</a>, <a class="el" href="dirichlet__powerful_8h.html#ac10e34c391364d1114342736d9f573e1">nut_PfIt_next</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="dirichlet__powerful_8h_source.html#l00094">94</a> of file <a class="el" href="dirichlet__powerful_8h_source.html">dirichlet_powerful.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dirichlet__powerful_8h_source.html#l00089">89</a> of file <a class="el" href="dirichlet__powerful_8h_source.html">dirichlet_powerful.h</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/nut/<a class="el" href="dirichlet__powerful_8h_source.html">dirichlet_powerful.h</a></li>
 </ul>
@@ -175,7 +188,7 @@ union {</td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structnut__PfIt.html">nut_PfIt</a></li>
-    <li class="footer">Generated on Wed Jan 31 2024 21:24:41 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Thu May 2 2024 17:09:45 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>
