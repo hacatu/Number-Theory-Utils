@@ -85,9 +85,6 @@
 /// When we want to compute only H(x), this is fine, but when we want to repeatedly compute the table of values of H(x/n) for integral values of n,
 /// it is often better to make A larger than B, eg A = x**(2/3) and B = x**(1/3).
 
-#include <inttypes.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <stdbool.h>
 #include <assert.h>
 
@@ -250,6 +247,16 @@ void nut_Diri_compute_mertens(nut_Diri *restrict self, int64_t m, const uint8_t 
 /// Will still have scratch data stored on return
 bool nut_Diri_compute_dk(nut_Diri *restrict self, uint64_t k, int64_t m, nut_Diri *restrict f_tbl, nut_Diri *restrict g_tbl);
 
+/// Compute the value table for the kth power function N^k(n)
+/// N^k(n) = n^k, so we can find the sums using https://en.wikipedia.org/wiki/Faulhaber%27s_formula
+/// (we actually do this by taking a lower triangular matrix of pascal's triangle and inverting it)
+/// This is one of the core components needed to compute the Dirichlet sum table for f where f(p) is a polynomial,
+/// the other one being https://en.wikipedia.org/wiki/Jordan%27s_totient_function
+/// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
+/// @param [in] k: the power of the power function to compute
+/// @param [in] m: modulus to reduce the result by, or 0 to skip reducing
+bool nut_Diri_compute_Nk(nut_Diri *restrict self, uint64_t k, int64_t m);
+
 /// Compute the value table for h = f <*> u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f
 /// See { @link nut_Diri_compute_conv } for details, this is just that function but with several specializations due to u being very simple.
 /// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init}.
@@ -279,7 +286,7 @@ bool nut_Diri_compute_conv_N(nut_Diri *restrict self, int64_t m, const nut_Diri 
 /// If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then
 /// try to use a specialized function from this library and use that instead.
 /// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init}.
-/// self->y, self->x, and self->yinv must be set and consistend with the inputs
+/// self->y, self->x, and self->yinv must be set and consistent with the inputs
 /// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] f_tbl: table for the first operand (dirichlet convolution is commutative, so order doesn't matter)
 /// @param [in] g_tbl: table for the second operand
@@ -288,4 +295,20 @@ NUT_ATTR_ACCESS(read_write, 1)
 NUT_ATTR_ACCESS(read_only, 3)
 NUT_ATTR_ACCESS(read_only, 4)
 bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f_tbl, const nut_Diri *g_tbl);
+
+
+/// Compute the value table for h such that f = g <*> h, aka h = f </> g where the division is in terms of dirichlet convolution
+/// self must have been initialized using { @link nut_Diri_init }, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl
+/// must be set and match
+/// This is the inverse of <*>, in the sense that if h = f </> g, then h <*> g = f.  In fact, this function is essentially
+/// implemented by solving this for H(v) and applying the dirichlet hyperbola method (see the code comments for details).
+/// Unlike the `compute_conv_*` family of functions, this needs to allocate space for scratch work, which can cause it to fail if
+/// there is not enough memory.  About 16*(self->y + 1) bytes will be allocated.
+/// Currently there are not specialized functions for dividing by simple standard functions.
+/// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init }.
+/// self->y, self->x, and self->yinv must be set ant consistent with the inputs
+/// @param [in] m: modulus to reduce results by, or 0 to skip reducing
+/// @param [in] f_tbl: table for the first operand (the "numerator" aka "dividend" in the "division")
+/// @param [in] g_tbl: the table for the second operand (the "denominator" aka "divisor" in the "division")
+bool nut_Diri_convdiv(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl, const nut_Diri *restrict g_tbl);
 

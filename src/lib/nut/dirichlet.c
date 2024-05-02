@@ -1,10 +1,7 @@
-#include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
-#include <inttypes.h>
-#include <math.h>
-#include <stdio.h>
 
+#include <nut/matrix.h>
 #include <nut/modular_math.h>
 #include <nut/factorization.h>
 #include <nut/dirichlet.h>
@@ -274,8 +271,8 @@ bool nut_Diri_init(nut_Diri *self, int64_t x, int64_t y){
 	if(y < ymin){
 		y = ymin;
 	}
-	int64_t yinv = x/y;
-	if(!(self->buf = malloc((y + yinv + 2)*sizeof(int64_t)))){
+	int64_t yinv = x/y + 1;
+	if(!(self->buf = malloc((y + yinv)*sizeof(int64_t)))){
 		return false;
 	}
 	self->x = x;
@@ -290,13 +287,13 @@ void nut_Diri_destroy(nut_Diri *self){
 }
 
 void nut_Diri_copy(nut_Diri *restrict dest, const nut_Diri *restrict src){
-	memcpy(dest->buf, src->buf, (src->y + src->yinv + 1)*sizeof(int64_t));
+	memcpy(dest->buf, src->buf, (src->y + src->yinv)*sizeof(int64_t));
 }
 
 void nut_Diri_compute_I(nut_Diri *self){
 	memset(self->buf, 0, (self->y + 1)*sizeof(int64_t));
 	self->buf[1] = 1;
-	for(int64_t i = 1; i <= self->yinv; ++i){
+	for(int64_t i = 1; i < self->yinv; ++i){
 		self->buf[self->y + i] = 1;
 	}
 }
@@ -305,7 +302,7 @@ void nut_Diri_compute_u(nut_Diri *self, int64_t m){
 	for(int64_t i = 0; i <= self->y; ++i){
 		self->buf[i] = 1;
 	}
-	for(int64_t i = 1; i <= self->yinv; ++i){
+	for(int64_t i = 1; i < self->yinv; ++i){
 		int64_t term = self->x/i;
 		self->buf[self->y + i] = m ? nut_i64_mod(term, m) : term;
 	}
@@ -313,13 +310,59 @@ void nut_Diri_compute_u(nut_Diri *self, int64_t m){
 
 void nut_Diri_compute_N(nut_Diri *self, int64_t m){
 	for(int64_t i = 0; i <= self->y; ++i){
-		self->buf[i] = m ? i%m : m;
+		self->buf[i] = m ? i%m : i;
 	}
-	for(int64_t i = 1; i <= self->yinv; ++i){
+	for(int64_t i = 1; i < self->yinv; ++i){
 		int64_t v = self->x/i;
 		int64_t term = (v&1) ? v*((v + 1) >> 1) : (v + 1)*(v >> 1);
 		self->buf[self->y + i] = m ? term%m : term;
 	}
+}
+
+bool nut_Diri_compute_Nk(nut_Diri *restrict self, uint64_t k, int64_t m){
+	nut_i64_Matrix pascal_mat, faulhaber_mat;
+	int64_t *vand_vec [[gnu::cleanup(cleanup_free)]] = malloc((k + 1)*sizeof(int64_t));
+	if(!vand_vec){
+		return false;
+	}
+	if(!nut_i64_Matrix_init(&pascal_mat, k + 1, k + 1)){
+		return false;
+	}
+	if(!nut_i64_Matrix_init(&faulhaber_mat, k + 1, k + 1)){
+		nut_i64_Matrix_destroy(&pascal_mat);
+		return false;
+	}
+	nut_i64_Matrix_fill_short_pascal(&pascal_mat);
+	int64_t denom = nut_i64_Matrix_invert_ltr(&pascal_mat, &faulhaber_mat);
+	nut_i64_Matrix_destroy(&pascal_mat);
+	if(m){
+		int64_t tmp;
+		if(nut_i64_egcd(denom, m, &tmp, NULL) != 1){
+			nut_i64_Matrix_destroy(&faulhaber_mat);
+			return false;
+		}
+		denom = tmp;
+	}
+	for(int64_t i = 0; i <= self->y; ++i){
+		self->buf[i] = m ? nut_u64_powmod(i, k, m) : nut_u64_pow(i, k);
+	}
+	for(int64_t i = 1; i < self->yinv; ++i){
+		int64_t v = self->x/i;
+		nut_i64_Matrix_fill_vandemond_vec(v + 1, k + 1, m, vand_vec);
+		int64_t tot = 0;
+		for(uint64_t j = 0; j < k + 1; ++j){
+			int64_t a = faulhaber_mat.buf[(k + 1)*k + j]*vand_vec[j];
+			tot = m ? (tot + a)%m : tot + a;
+		}
+		if(m){
+			tot = tot*denom%m; // denom was inverted before
+		}else{
+			tot /= denom;
+		}
+		self->buf[self->y + i] = tot;
+	}
+	nut_i64_Matrix_destroy(&faulhaber_mat);
+	return true;
 }
 
 void nut_Diri_compute_mertens(nut_Diri *restrict self, int64_t m, const uint8_t mobius[restrict static self->y/4 + 1]){
@@ -331,7 +374,7 @@ void nut_Diri_compute_mertens(nut_Diri *restrict self, int64_t m, const uint8_t 
 		}
 		nut_Diri_set_dense(self, i, acc += v);
 	}
-	for(int64_t i = self->yinv; i; --i){
+	for(int64_t i = self->yinv - 1; i; --i){
 		int64_t v = self->x/i;
 		int64_t M = 1;
 		int64_t vr = nut_u64_nth_root(v, 2);
@@ -344,7 +387,7 @@ void nut_Diri_compute_mertens(nut_Diri *restrict self, int64_t m, const uint8_t 
 			}
 		}
 		for(int64_t j = 2, term; j <= vr; ++j){
-			if(i*j > self->yinv){
+			if(i*j >= self->yinv){
 				term = nut_Diri_get_dense(self, v/j);
 			}else{
 				term = nut_Diri_get_sparse(self, i*j);
@@ -433,7 +476,7 @@ bool nut_Diri_compute_conv_u(nut_Diri *restrict self, int64_t m, const nut_Diri 
 		int64_t term = self->buf[i-1] + f_tbl->buf[i];
 		self->buf[i] = m ? nut_i64_mod(term, m) : term;
 	}
-	for(int64_t i = 1; i <= self->yinv; ++i){
+	for(int64_t i = 1; i < self->yinv; ++i){
 		int64_t v = self->x/i;
 		int64_t vr = nut_u64_nth_root(v, 2);// TODO: v is close to the previous v, so only one newton step should be needed here
 		int64_t h = 0;
@@ -476,7 +519,7 @@ bool nut_Diri_compute_conv_N(nut_Diri *restrict self, int64_t m, const nut_Diri 
 		int64_t term = self->buf[i-1] + f_tbl->buf[i];
 		self->buf[i] = m ? nut_i64_mod(term, m) : term;
 	}
-	for(int64_t i = 1; i <= self->yinv; ++i){
+	for(int64_t i = 1; i < self->yinv; ++i){
 		int64_t v = self->x/i;
 		int64_t vr = nut_u64_nth_root(v, 2);
 		int64_t h = 0;
@@ -518,7 +561,7 @@ bool nut_Diri_compute_conv_N(nut_Diri *restrict self, int64_t m, const nut_Diri 
 }
 
 bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f_tbl, const nut_Diri *g_tbl){
-	if(self->y != f_tbl->y || self->x != f_tbl->x){
+	if(self->y != f_tbl->y || self->x != f_tbl->x || self->y != g_tbl->y || self->x != g_tbl->x){
 		return false;
 	}
 	// use the dense part of self to temporarily store the sums of f for small n up to y
@@ -527,7 +570,7 @@ bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f
 		int64_t term = self->buf[i-1] + f_tbl->buf[i];
 		self->buf[i] = m ? nut_i64_mod(term, m) : term;
 	}
-	for(int64_t i = 1; i <= self->yinv; ++i){
+	for(int64_t i = 1; i < self->yinv; ++i){
 		int64_t v = self->x/i;
 		int64_t vr = nut_u64_nth_root(v, 2);
 		int64_t h = 0;
@@ -547,9 +590,9 @@ bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f
 	}
 	// use the dense part of self to temporarily store the sums of g for small n up to y
 	// simultaniously, apply the adjustments to the h values.
-	// H(x/j) has an adjustment of F(i)V(i) where i = sqrt(x/j)
+	// H(x/j) has an adjustment of F(i)G(i) where i = sqrt(x/j)
 	// so for every i = sqrt(x/j) value, we need to adjust all H(x/j) values
-	// for j in the range (x/(i + 1)**2, x/i**2] && [1, yinv]
+	// for j in the range (x/(i + 1)**2, x/i**2] && [1, yinv)
 	// So we can ignore some small i values where this intersection is empty, that is, yinv <= x/(i + 1)**2
 	// (i + 1)**2 <= x/yinv <=> i + 1 <= sqrt(x/yinv)
 	// that is, for i <= sqrt(x/yinv) - 1, there are no corresponding j to adjust
@@ -566,11 +609,11 @@ bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f
 			G = nut_i64_mod(G, m);
 		}
 		self->buf[i] = G;
-		int64_t j_ub = self->x/(i*i);
+		int64_t j_ub = self->x/(i*i) + 1;
 		if(j_ub > self->yinv){
 			j_ub = self->yinv;
 		}
-		for(int64_t j = self->x/((i + 1)*(i + 1)) + 1; j <= j_ub; ++j){
+		for(int64_t j = self->x/((i + 1)*(i + 1)) + 1; j < j_ub; ++j){
 			int64_t h = nut_Diri_get_sparse(self, j);
 			if(m){
 				h = nut_i64_mod(h - F*G, m);
@@ -580,7 +623,7 @@ bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f
 			nut_Diri_set_sparse(self, j, h);
 		}
 	}
-	for(int64_t i = 1; i <= self->yinv; ++i){
+	for(int64_t i = 1; i < self->yinv; ++i){
 		int64_t v = self->x/i;
 		int64_t vr = nut_u64_nth_root(v, 2);
 		int64_t h = nut_Diri_get_sparse(self, i);
@@ -599,5 +642,85 @@ bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f
 		nut_Diri_set_sparse(self, i, h);
 	}
 	return nut_euler_sieve_conv(self->y, m, f_tbl->buf, g_tbl->buf, self->buf);
+}
+
+bool nut_Diri_convdiv(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl, const nut_Diri *restrict g_tbl){
+	// Here we want to find the diri table for h where f = g <*> h.  We recall the hyperbola formula again:
+	// F(v) = sum(n = 1 ... vr, g(n)H(v/n)) + sum(n = 1 ... vr, G(v/n)h(n)) - G(vr)H(vr)
+	// We can split out the n = 1 term from the first sum and rearrange to get
+	// H(v) = F(v) + G(vr)H(vr) - sum(n = 2 ... vr, g(n)H(v/n)) - sum(n = 1 ... vr, G(v/n)h(n))
+	// Now we want to be able to evaluate the H(v) values from smallest v to largest.
+	// In the Diri_compute_conv* functions, the two sums and the correction term all depend only on the input functions,
+	// so we can store partial sums of the input functions for low "dense" values in the dense part of the output.
+	// Here, that isn't possible, due to the dependence of H(v) on smaller H(v).  So we must use a temporary array.
+	if(self->y != f_tbl->y || self->x != f_tbl->x || self->y != g_tbl->y || self->x != g_tbl->x){
+		return false;
+	}
+	int64_t *H_dense [[gnu::cleanup(cleanup_free)]] = malloc((self->y + 1)*sizeof(int64_t));
+	int64_t *G_dense [[gnu::cleanup(cleanup_free)]] = malloc((self->y + 1)*sizeof(int64_t));
+	if(!H_dense || !G_dense){
+		return false;
+	}
+	memset(self->buf, 0, (self->y + 1)*sizeof(int64_t));
+	H_dense[0] = G_dense[0] = 0;
+	// First, we "sieve" the values of h into the dense part of the output
+	for(int64_t i = 1; i <= self->y; ++i){
+		int64_t term = self->buf[i] + f_tbl->buf[i];
+		self->buf[i] = m ? nut_i64_mod(term, m) : term;
+		if(!self->buf[i]){
+			continue;
+		}
+		for(int64_t j = 2; j <= self->y/i; ++j){
+			int64_t term = self->buf[i*j] - self->buf[i]*g_tbl->buf[j];
+			self->buf[i*j] = m ? nut_i64_mod(term, m) : term;
+		}
+	}
+	// Now, accumulate the sums of dense h values into H_dense
+	for(int64_t i = 1; i <= self->y; ++i){
+		int64_t term = self->buf[i] + H_dense[i - 1];
+		H_dense[i] = m ? nut_i64_mod(term, m) : term;
+	}
+	// And accumulate the sums of dense g values into G_dense
+	for(int64_t i = 1; i <= self->y; ++i){
+		int64_t term = g_tbl->buf[i] + G_dense[i - 1];
+		G_dense[i] = m ? nut_i64_mod(term, m) : term;
+	}
+	// Now we populate the sparse H values using the formula
+	// H(v) = F(v) + G(vr)H(vr) - sum(n = 2 ... vr, g(n)H(v/n)) - sum(n = 1 ... vr, G(v/n)h(n))
+	// We will do the sums first for each v, because when doing a modulus, subtraction is more expensive than addition
+	// This requires H(v/2), ..., H(vr) to have been computed before, which we can accomplish by computing
+	// H in terms of increasing values of v...
+	// So i is decreasing in this loop...
+	for(int64_t i = self->yinv - 1; i >= 1; --i){
+		// so that v will be increasing here
+		int64_t v = self->x/i;
+		int64_t vr = nut_u64_nth_root(v, 2);
+		int64_t H = 0; // H starts at 0 because we add the sums first
+		if(1 <= vr){ // do the extra term of G(v/n)h(n) where n = 1
+			// Because i < self->yinv, v >= self->y by definition of self->yinv,
+			// So it is only possible for v to be <= self->y at most once (if it equals self->y when i is self->yinv - 1).
+			// But if self->y == self->yinv - 1, we store both h(self->y) in the dense part and H(self->yinv - 1) in the sparse part.
+			// Therefore, the value we want always exists in the sparse part here
+			assert(v >= self->y);
+			H = nut_Diri_get_sparse(g_tbl, i);
+		}
+		for(int64_t n = 2, gH_term, Gh_term; n <= vr; ++n){
+			if(v/n <= self->y){
+				gH_term = nut_Diri_get_dense(g_tbl, n)*H_dense[v/n];
+				Gh_term = nut_Diri_get_dense(self, n)*G_dense[v/n];
+			}else{
+				gH_term = nut_Diri_get_dense(g_tbl, n)*nut_Diri_get_sparse(self, i*n);
+				Gh_term = nut_Diri_get_dense(self, n)*nut_Diri_get_sparse(g_tbl, i*n);
+			}
+			H = m ? nut_i64_mod(H + gH_term%m + Gh_term%m, m) : H + gH_term + Gh_term;
+		}
+		// Now H consists of all the sums, so we have to take it and subtract it from F(v) + G(vr)H(vr)
+		int64_t term = G_dense[vr]*H_dense[vr];
+		assert(v >= self->y); // see above comment about i < self->yinv
+		term = m ? nut_Diri_get_sparse(f_tbl, i) + term%m : nut_Diri_get_sparse(f_tbl, i) + term;
+		H = m ? nut_i64_mod(term - H, m) : term - H;
+		nut_Diri_set_sparse(self, i, H);
+	}
+	return true;
 }
 

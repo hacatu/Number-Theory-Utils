@@ -191,7 +191,7 @@ static void test_compute_conv_diri(){
 			break;
 		}
 	}
-	for(int64_t i = dk_table.yinv; i; --i){
+	for(int64_t i = dk_table.yinv - 1; i; --i){
 		if(nut_Diri_get_sparse(&dk_table, i) != nut_Diri_get_sparse(&dkp_table, i)){
 			fprintf(stderr, "\e[1;31mMismatch at sparse %"PRIi64"\e[0m\n", i);
 			break;
