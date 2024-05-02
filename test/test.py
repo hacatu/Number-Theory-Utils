@@ -71,8 +71,12 @@ def runLogDiffTests(test_path, i, test_argv, log_name):
 
 def checkEnvironment(args):
 	output = subprocess.check_output(['clang', '--version']).decode('utf-8')
-	version_str = re.compile(r"clang\s+version\s+(\S+)").match(output).group(1)
-	version = tuple(map(int, version_str.split('.')))
+	version_str = re.compile(r"clang\s+version\s+(\S+)").match(output)
+	if version_str is None:
+		print("'clang --version' returned unexpected string", output)
+		version = (15,) # gha version
+	else:
+		version = tuple(map(int, version_str.group(1).split('.')))
 	output = subprocess.check_output(['sudo', 'sysctl', '-b', 'vm.mmap_rnd_bits'])
 	aslr_bits = int(output)
 	if version < (18, 1, 0) and aslr_bits > 28:
