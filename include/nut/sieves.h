@@ -15,7 +15,6 @@
 
 #include <inttypes.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 #include <nut/modular_math.h>
 #include <nut/factorization.h>
@@ -148,6 +147,14 @@ NUT_ATTR_NONNULL(2)
 NUT_ATTR_MALLOC
 NUT_ATTR_ACCESS(write_only, 2)
 void *nut_sieve_factors(uint64_t max, uint64_t *_w);
+
+/// Compute the number of distinct prime divisors of every number in the range from 0 to max.
+/// The divisors for 0 and 1 are not actually computed.
+/// @param [in] max: inclusive upper bound of sieving range in which to find distinct prime divisor counts of all numbers
+/// @return a pointer to an array of distinct prime divisor counts for all numbers not exceeding max,
+/// or NULL on allocation failure
+NUT_ATTR_MALLOC
+uint8_t *nut_sieve_omega(uint64_t max);
 
 /// Compute the largest prime factor of every number in the range from 0 to max.
 /// Compared to {@link nut_sieve_factors}, this uses up to 30 times less memory, so if

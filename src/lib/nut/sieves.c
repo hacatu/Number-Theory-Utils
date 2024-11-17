@@ -115,6 +115,25 @@ void *nut_sieve_factors(uint64_t max, uint64_t *_w){
 	return buf;
 }
 
+uint8_t *nut_sieve_omega(uint64_t max){
+	uint8_t *buf = calloc(max + 1, sizeof(uint8_t));
+	if(!buf){
+		return NULL;
+	}
+	for(uint64_t n = 2; n <= max && n; ++n){
+		if(buf[n]){
+			continue;
+		}
+		for(uint64_t m = n; m <= max;){
+			buf[m]++;
+			if(__builtin_add_overflow(m, n, &m)){
+				break;
+			}
+		}
+	}
+	return buf;
+}
+
 uint64_t *nut_sieve_largest_factors(uint64_t max){
 	uint64_t *buf = calloc(max + 1, sizeof(uint64_t));
 	if(!buf){
