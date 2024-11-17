@@ -148,6 +148,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a1f740df1f2b3c5981ffd388f7b755549"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ac5dad36b30fdd76ddce141ee49748d98">NUT_ATTR_MALLOC</a> void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a1f740df1f2b3c5981ffd388f7b755549">nut_sieve_factors</a> (uint64_t max, uint64_t *_w)</td></tr>
 <tr class="memdesc:a1f740df1f2b3c5981ffd388f7b755549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the unique prime factors of every number in the range from 0 to max.  <a href="sieves_8h.html#a1f740df1f2b3c5981ffd388f7b755549">More...</a><br /></td></tr>
 <tr class="separator:a1f740df1f2b3c5981ffd388f7b755549"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6f584808c03e64c4ca53d03622b777d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ac5dad36b30fdd76ddce141ee49748d98">NUT_ATTR_MALLOC</a> uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#aa6f584808c03e64c4ca53d03622b777d">nut_sieve_omega</a> (uint64_t max)</td></tr>
+<tr class="memdesc:aa6f584808c03e64c4ca53d03622b777d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the number of distinct prime divisors of every number in the range from 0 to max.  <a href="sieves_8h.html#aa6f584808c03e64c4ca53d03622b777d">More...</a><br /></td></tr>
+<tr class="separator:aa6f584808c03e64c4ca53d03622b777d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09ee1bd653d38fe65de1e49ba6c249a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ac5dad36b30fdd76ddce141ee49748d98">NUT_ATTR_MALLOC</a> uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a09ee1bd653d38fe65de1e49ba6c249a4">nut_sieve_largest_factors</a> (uint64_t max)</td></tr>
 <tr class="memdesc:a09ee1bd653d38fe65de1e49ba6c249a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the largest prime factor of every number in the range from 0 to max.  <a href="sieves_8h.html#a09ee1bd653d38fe65de1e49ba6c249a4">More...</a><br /></td></tr>
 <tr class="separator:a09ee1bd653d38fe65de1e49ba6c249a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -418,6 +421,33 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a pointer to an array of <a class="el" href="structnut__u64__Pitcharr.html" title="A fixed capacity array.">nut_u64_Pitcharr</a> structs containing lists of unique prime factors for all numbers not exceeding max, or NULL on allocation failure </dd></dl>
+
+</div>
+</div>
+<a id="aa6f584808c03e64c4ca53d03622b777d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6f584808c03e64c4ca53d03622b777d">&#9670;&nbsp;</a></span>nut_sieve_omega()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="modular__math_8h.html#ac5dad36b30fdd76ddce141ee49748d98">NUT_ATTR_MALLOC</a> uint8_t* nut_sieve_omega </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>max</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the number of distinct prime divisors of every number in the range from 0 to max. </p>
+<p>The divisors for 0 and 1 are not actually computed. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of sieving range in which to find distinct prime divisor counts of all numbers </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pointer to an array of distinct prime divisor counts for all numbers not exceeding max, or NULL on allocation failure </dd></dl>
 
 </div>
 </div>
@@ -969,7 +999,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="sieves_8h.html">sieves.h</a></li>
-    <li class="footer">Generated on Thu May 2 2024 17:09:45 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Sun Nov 17 2024 18:42:00 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>
