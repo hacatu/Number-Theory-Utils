@@ -184,9 +184,10 @@ var searchData=
   ['nut_5fu64_5fmodinv_5f2t_195',['nut_u64_modinv_2t',['../modular__math_8h.html#ae5fa714c4123955c11cb2b445557e195',1,'modular_math.h']]],
   ['nut_5fu64_5fnext_5fprime_5fge_196',['nut_u64_next_prime_ge',['../factorization_8h.html#af100b74caf393425a7070f2acc1a1ec2',1,'factorization.h']]],
   ['nut_5fu64_5fnth_5froot_197',['nut_u64_nth_root',['../factorization_8h.html#a83b70a4d4fb8c7f9fa524c70a67afc38',1,'factorization.h']]],
-  ['nut_5fu64_5fpitcharr_198',['nut_u64_Pitcharr',['../structnut__u64__Pitcharr.html',1,'']]],
-  ['nut_5fu64_5fpow_199',['nut_u64_pow',['../modular__math_8h.html#a8486f980b8b82e8601d17d544dafdabd',1,'modular_math.h']]],
-  ['nut_5fu64_5fpowmod_200',['nut_u64_powmod',['../modular__math_8h.html#a44d5452dae69f99581e05c205203094b',1,'modular_math.h']]],
-  ['nut_5fu64_5fprand_201',['nut_u64_prand',['../modular__math_8h.html#af1e00650d932c91ab94953afc47e28a3',1,'modular_math.h']]],
-  ['nut_5fu64_5frand_202',['nut_u64_rand',['../modular__math_8h.html#a0a826b9cca04021df02e1d6405cd2df0',1,'modular_math.h']]]
+  ['nut_5fu64_5forder_5fmod_198',['nut_u64_order_mod',['../factorization_8h.html#a4c1288a321143ef024ed17be50d74d22',1,'factorization.h']]],
+  ['nut_5fu64_5fpitcharr_199',['nut_u64_Pitcharr',['../structnut__u64__Pitcharr.html',1,'']]],
+  ['nut_5fu64_5fpow_200',['nut_u64_pow',['../modular__math_8h.html#a8486f980b8b82e8601d17d544dafdabd',1,'modular_math.h']]],
+  ['nut_5fu64_5fpowmod_201',['nut_u64_powmod',['../modular__math_8h.html#a44d5452dae69f99581e05c205203094b',1,'modular_math.h']]],
+  ['nut_5fu64_5fprand_202',['nut_u64_prand',['../modular__math_8h.html#af1e00650d932c91ab94953afc47e28a3',1,'modular_math.h']]],
+  ['nut_5fu64_5frand_203',['nut_u64_rand',['../modular__math_8h.html#a0a826b9cca04021df02e1d6405cd2df0',1,'modular_math.h']]]
 ];

@@ -193,6 +193,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a0ac931c6a62bec58d63ee6043878315d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ab14d56052242c417a7a8ee522570da9d">NUT_ATTR_PURE</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a0ac931c6a62bec58d63ee6043878315d">nut_Factor_carmichael</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *factors)</td></tr>
 <tr class="memdesc:a0ac931c6a62bec58d63ee6043878315d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find Carmichael's Lambda function, the smallest exponent m so a^m = 1 for all 0 &lt; a &lt; n.  <a href="factorization_8h.html#a0ac931c6a62bec58d63ee6043878315d">More...</a><br /></td></tr>
 <tr class="separator:a0ac931c6a62bec58d63ee6043878315d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c1288a321143ef024ed17be50d74d22"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a4c1288a321143ef024ed17be50d74d22">nut_u64_order_mod</a> (uint64_t a, uint64_t n, uint64_t cn, <a class="el" href="structnut__Factors.html">nut_Factors</a> *cn_factors)</td></tr>
+<tr class="memdesc:a4c1288a321143ef024ed17be50d74d22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the multiplicative order of a mod n, the smallest exponent m so a^m = 1.  <a href="factorization_8h.html#a4c1288a321143ef024ed17be50d74d22">More...</a><br /></td></tr>
+<tr class="separator:a4c1288a321143ef024ed17be50d74d22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c8e843ae366d9d94ce0bff300657199"><td class="memItemLeft" align="right" valign="top"><a id="a0c8e843ae366d9d94ce0bff300657199"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="factorization_8h.html#a0c8e843ae366d9d94ce0bff300657199">nut_Factor_forall_divs_tmptmp</a> (const <a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict factors, int(*f)(const <a class="el" href="structnut__Factors.html">nut_Factors</a> *, uint64_t, void *), void *restrict data)</td></tr>
 <tr class="memdesc:a0c8e843ae366d9d94ce0bff300657199"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call <a class="el" href="">forall_divisors</a> with temporarily allocated dfactors and pfactors structs. <br /></td></tr>
@@ -273,7 +276,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 <p>Currently unused. </p>
 <p>How many trial divisions to do before performing randomized prime tests (Miller Rabin). For 64 bit numbers, we can easily make Miller Rabin deterministic in 7 tests, whereas up to 40 would be used to check a large number. BSW and ECPP are also important for checking large primes, because BSW and Miller Rabin together can provide a higher primality confidence faster, whereas ECPP is much slower but provides an easily verifiable proof. </p>
 
-<p class="definition">Definition at line <a class="el" href="factorization_8h_source.html#l00034">34</a> of file <a class="el" href="factorization_8h_source.html">factorization.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="factorization_8h_source.html#l00033">33</a> of file <a class="el" href="factorization_8h_source.html">factorization.h</a>.</p>
 
 </div>
 </div>
@@ -629,6 +632,57 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>lambda(n) </dd></dl>
+
+</div>
+</div>
+<a id="a4c1288a321143ef024ed17be50d74d22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c1288a321143ef024ed17be50d74d22">&#9670;&nbsp;</a></span>nut_u64_order_mod()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t nut_u64_order_mod </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>cn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnut__Factors.html">nut_Factors</a> *&#160;</td>
+          <td class="paramname"><em>cn_factors</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Find the multiplicative order of a mod n, the smallest exponent m so a^m = 1. </p>
+<p>Always divides carmichael(n). order(a mod xy) = lcm(order(a mod x), order(a mod y)) when x and y are coprime, so to find the order of a mod a range of numbers, it might be most efficient to find order(a mod p^k) for every prime power, and then use the lcm to find it for composite numbers. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>the element to find the order of </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>the modulus </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cn</td><td>the carmichael function of n. Both this and its factorization are needed, which improves efficiency when calling it for many numbers in a range, but if only a single number is needed, you will need to call some other functions to get that data, see below </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">cn_factors</td><td>the factorization of the carmichael function of the modulus, lambda(n). THIS BUFFER IS MODIFIED, if you need to use the factorization for something else, make sure to copy it first (<a class="el" href="factorization_8h.html#a0fbd6f1b89d78911f4d773481812efcc">nut_Factors_copy</a>). This can be computed either by factoring n (<a class="el" href="factorization_8h.html#a17d2d8452d2f53bfe6be95d2d8cd21bb">nut_u64_factor_heuristic</a>) and using <a class="el" href="factorization_8h.html#a0ac931c6a62bec58d63ee6043878315d">nut_Factor_carmichael</a>, or by sieving the factorization for all n (<a class="el" href="sieves_8h.html#a91d158bff7c9a25bf87ebfb8a0c55ecb">nut_sieve_carmichael</a>) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1368,7 +1422,7 @@ const <a class="el" href="structnut__FactorConf.html">nut_FactorConf</a>&#160;</
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="factorization_8h.html">factorization.h</a></li>
-    <li class="footer">Generated on Sun Nov 17 2024 18:42:00 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Nov 19 2024 00:29:41 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

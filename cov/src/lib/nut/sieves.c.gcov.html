@@ -50,7 +50,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-11-17 18:41:40</td>
+            <td class="headerValue">2024-11-19 00:29:22</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">27</td>
@@ -209,18 +209,18 @@
 <a name="134"><span class="lineNum">     134 </span>            :     return buf;</a>
 <a name="135"><span class="lineNum">     135 </span>            : }</a>
 <a name="136"><span class="lineNum">     136 </span>            : </a>
-<a name="137"><span class="lineNum">     137 </span><span class="lineCov">          3 : uint64_t *nut_sieve_largest_factors(uint64_t max){</span></a>
-<a name="138"><span class="lineNum">     138 </span><span class="lineCov">          3 :     uint64_t *buf = calloc(max + 1, sizeof(uint64_t));</span></a>
-<a name="139"><span class="lineNum">     139 </span><span class="lineCov">          3 :     if(!buf){</span></a>
+<a name="137"><span class="lineNum">     137 </span><span class="lineCov">          4 : uint64_t *nut_sieve_largest_factors(uint64_t max){</span></a>
+<a name="138"><span class="lineNum">     138 </span><span class="lineCov">          4 :     uint64_t *buf = calloc(max + 1, sizeof(uint64_t));</span></a>
+<a name="139"><span class="lineNum">     139 </span><span class="lineCov">          4 :     if(!buf){</span></a>
 <a name="140"><span class="lineNum">     140 </span>            :         return NULL;</a>
 <a name="141"><span class="lineNum">     141 </span>            :     }</a>
-<a name="142"><span class="lineNum">     142 </span><span class="lineCov">    1001219 :     for(uint64_t n = 2; n &lt;= max &amp;&amp; n; ++n){</span></a>
-<a name="143"><span class="lineNum">     143 </span><span class="lineCov">    1001216 :         if(buf[n]){</span></a>
-<a name="144"><span class="lineNum">     144 </span><span class="lineCov">     922503 :             continue;</span></a>
+<a name="142"><span class="lineNum">     142 </span><span class="lineCov">    1011219 :     for(uint64_t n = 2; n &lt;= max &amp;&amp; n; ++n){</span></a>
+<a name="143"><span class="lineNum">     143 </span><span class="lineCov">    1011215 :         if(buf[n]){</span></a>
+<a name="144"><span class="lineNum">     144 </span><span class="lineCov">     931273 :             continue;</span></a>
 <a name="145"><span class="lineNum">     145 </span>            :         }</a>
-<a name="146"><span class="lineNum">     146 </span><span class="lineCov">    2934956 :         for(uint64_t m = n; m &lt;= max;){</span></a>
-<a name="147"><span class="lineNum">     147 </span><span class="lineCov">    2856243 :             buf[m] = n;</span></a>
-<a name="148"><span class="lineNum">     148 </span><span class="lineCov">    2856243 :             if(__builtin_add_overflow(m, n, &amp;m)){</span></a>
+<a name="146"><span class="lineNum">     146 </span><span class="lineCov">    2960485 :         for(uint64_t m = n; m &lt;= max;){</span></a>
+<a name="147"><span class="lineNum">     147 </span><span class="lineCov">    2880543 :             buf[m] = n;</span></a>
+<a name="148"><span class="lineNum">     148 </span><span class="lineCov">    2880543 :             if(__builtin_add_overflow(m, n, &amp;m)){</span></a>
 <a name="149"><span class="lineNum">     149 </span>            :                 break;</a>
 <a name="150"><span class="lineNum">     150 </span>            :             }</a>
 <a name="151"><span class="lineNum">     151 </span>            :         }</a>
@@ -228,20 +228,20 @@
 <a name="153"><span class="lineNum">     153 </span>            :     return buf;</a>
 <a name="154"><span class="lineNum">     154 </span>            : }</a>
 <a name="155"><span class="lineNum">     155 </span>            : </a>
-<a name="156"><span class="lineNum">     156 </span><span class="lineCov">    1001215 : void nut_fill_factors_from_largest(nut_Factors *restrict out, uint64_t n, const uint64_t largest_factors[restrict static n + 1]){</span></a>
-<a name="157"><span class="lineNum">     157 </span><span class="lineCov">    1001215 :     out-&gt;num_primes = 0;</span></a>
-<a name="158"><span class="lineNum">     158 </span><span class="lineCov">    4631271 :     for(uint64_t p = largest_factors[n], k = 1; p;){</span></a>
-<a name="159"><span class="lineNum">     159 </span><span class="lineCov">    3630056 :         n /= p;</span></a>
-<a name="160"><span class="lineNum">     160 </span><span class="lineCov">    3630056 :         uint64_t q = largest_factors[n];</span></a>
-<a name="161"><span class="lineNum">     161 </span><span class="lineCov">    3630056 :         if(p == q){</span></a>
-<a name="162"><span class="lineNum">     162 </span><span class="lineCov">     773815 :             ++k;</span></a>
+<a name="156"><span class="lineNum">     156 </span><span class="lineCov">    1005214 : void nut_fill_factors_from_largest(nut_Factors *restrict out, uint64_t n, const uint64_t largest_factors[restrict static n + 1]){</span></a>
+<a name="157"><span class="lineNum">     157 </span><span class="lineCov">    1005214 :     out-&gt;num_primes = 0;</span></a>
+<a name="158"><span class="lineNum">     158 </span><span class="lineCov">    4653843 :     for(uint64_t p = largest_factors[n], k = 1; p;){</span></a>
+<a name="159"><span class="lineNum">     159 </span><span class="lineCov">    3648629 :         n /= p;</span></a>
+<a name="160"><span class="lineNum">     160 </span><span class="lineCov">    3648629 :         uint64_t q = largest_factors[n];</span></a>
+<a name="161"><span class="lineNum">     161 </span><span class="lineCov">    3648629 :         if(p == q){</span></a>
+<a name="162"><span class="lineNum">     162 </span><span class="lineCov">     779955 :             ++k;</span></a>
 <a name="163"><span class="lineNum">     163 </span>            :         }else{</a>
-<a name="164"><span class="lineNum">     164 </span><span class="lineCov">    2856241 :             nut_Factor_append(out, p, k);</span></a>
-<a name="165"><span class="lineNum">     165 </span><span class="lineCov">    2856241 :             p = q;</span></a>
-<a name="166"><span class="lineNum">     166 </span><span class="lineCov">    2856241 :             k = 1;</span></a>
+<a name="164"><span class="lineNum">     164 </span><span class="lineCov">    2868674 :             nut_Factor_append(out, p, k);</span></a>
+<a name="165"><span class="lineNum">     165 </span><span class="lineCov">    2868674 :             p = q;</span></a>
+<a name="166"><span class="lineNum">     166 </span><span class="lineCov">    2868674 :             k = 1;</span></a>
 <a name="167"><span class="lineNum">     167 </span>            :         }</a>
 <a name="168"><span class="lineNum">     168 </span>            :     }</a>
-<a name="169"><span class="lineNum">     169 </span><span class="lineCov">    1001215 : }</span></a>
+<a name="169"><span class="lineNum">     169 </span><span class="lineCov">    1005214 : }</span></a>
 <a name="170"><span class="lineNum">     170 </span>            : </a>
 <a name="171"><span class="lineNum">     171 </span><span class="lineCov">          1 : uint64_t nut_get_factors_pitch(uint64_t w){</span></a>
 <a name="172"><span class="lineNum">     172 </span><span class="lineCov">          1 :     return offsetof(nut_u64_Pitcharr, elems) + w*sizeof(uint64_t);</span></a>
@@ -446,33 +446,33 @@
 <a name="371"><span class="lineNum">     371 </span>            :     return buf;</a>
 <a name="372"><span class="lineNum">     372 </span>            : }</a>
 <a name="373"><span class="lineNum">     373 </span>            : </a>
-<a name="374"><span class="lineNum">     374 </span><span class="lineCov">          1 : uint64_t *nut_sieve_carmichael(uint64_t max){</span></a>
-<a name="375"><span class="lineNum">     375 </span><span class="lineCov">          1 :     uint64_t *buf = malloc((max + 1)*sizeof(uint64_t));</span></a>
-<a name="376"><span class="lineNum">     376 </span><span class="lineCov">          1 :     if(!buf){</span></a>
+<a name="374"><span class="lineNum">     374 </span><span class="lineCov">          2 : uint64_t *nut_sieve_carmichael(uint64_t max){</span></a>
+<a name="375"><span class="lineNum">     375 </span><span class="lineCov">          2 :     uint64_t *buf = malloc((max + 1)*sizeof(uint64_t));</span></a>
+<a name="376"><span class="lineNum">     376 </span><span class="lineCov">          2 :     if(!buf){</span></a>
 <a name="377"><span class="lineNum">     377 </span>            :         return NULL;</a>
 <a name="378"><span class="lineNum">     378 </span>            :     }</a>
-<a name="379"><span class="lineNum">     379 </span><span class="lineCov">    1000001 :     for(uint64_t i = 1; i &lt;= max &amp;&amp; i; ++i){</span></a>
-<a name="380"><span class="lineNum">     380 </span><span class="lineCov">    1000000 :         buf[i] = 1;</span></a>
+<a name="379"><span class="lineNum">     379 </span><span class="lineCov">    1010002 :     for(uint64_t i = 1; i &lt;= max &amp;&amp; i; ++i){</span></a>
+<a name="380"><span class="lineNum">     380 </span><span class="lineCov">    1010000 :         buf[i] = 1;</span></a>
 <a name="381"><span class="lineNum">     381 </span>            :     }</a>
-<a name="382"><span class="lineNum">     382 </span><span class="lineCov">    1000000 :     for(uint64_t n = 2; n &lt;= max &amp;&amp; n; ++n){//TODO: optimize loop</span></a>
-<a name="383"><span class="lineNum">     383 </span><span class="lineCov">     999999 :         if(buf[n] != 1){</span></a>
-<a name="384"><span class="lineNum">     384 </span><span class="lineCov">     921501 :             continue;</span></a>
+<a name="382"><span class="lineNum">     382 </span><span class="lineCov">    1010000 :     for(uint64_t n = 2; n &lt;= max &amp;&amp; n; ++n){//TODO: optimize loop</span></a>
+<a name="383"><span class="lineNum">     383 </span><span class="lineCov">    1009998 :         if(buf[n] != 1){</span></a>
+<a name="384"><span class="lineNum">     384 </span><span class="lineCov">     930271 :             continue;</span></a>
 <a name="385"><span class="lineNum">     385 </span>            :         }</a>
-<a name="386"><span class="lineNum">     386 </span><span class="lineCov">    2932206 :         for(uint64_t m = n; m &lt;= max;){</span></a>
-<a name="387"><span class="lineNum">     387 </span><span class="lineCov">    2853708 :             uint64_t a = n*n;</span></a>
-<a name="388"><span class="lineNum">     388 </span><span class="lineCov">    3626619 :             while(m%a == 0){</span></a>
-<a name="389"><span class="lineNum">     389 </span><span class="lineCov">     772911 :                 a *= n;</span></a>
+<a name="386"><span class="lineNum">     386 </span><span class="lineCov">    2957735 :         for(uint64_t m = n; m &lt;= max;){</span></a>
+<a name="387"><span class="lineNum">     387 </span><span class="lineCov">    2878008 :             uint64_t a = n*n;</span></a>
+<a name="388"><span class="lineNum">     388 </span><span class="lineCov">    3658604 :             while(m%a == 0){</span></a>
+<a name="389"><span class="lineNum">     389 </span><span class="lineCov">     780596 :                 a *= n;</span></a>
 <a name="390"><span class="lineNum">     390 </span>            :             }</a>
-<a name="391"><span class="lineNum">     391 </span><span class="lineCov">    2853708 :             if(n == 2){</span></a>
-<a name="392"><span class="lineNum">     392 </span><span class="lineCov">     500000 :                 if(a &gt; 8){</span></a>
-<a name="393"><span class="lineNum">     393 </span><span class="lineCov">     125000 :                     buf[m] = a &gt;&gt; 3;</span></a>
+<a name="391"><span class="lineNum">     391 </span><span class="lineCov">    2878008 :             if(n == 2){</span></a>
+<a name="392"><span class="lineNum">     392 </span><span class="lineCov">     505000 :                 if(a &gt; 8){</span></a>
+<a name="393"><span class="lineNum">     393 </span><span class="lineCov">     126250 :                     buf[m] = a &gt;&gt; 3;</span></a>
 <a name="394"><span class="lineNum">     394 </span>            :                 }else{</a>
-<a name="395"><span class="lineNum">     395 </span><span class="lineCov">     375000 :                     buf[m] = a &gt;&gt; 2;</span></a>
+<a name="395"><span class="lineNum">     395 </span><span class="lineCov">     378750 :                     buf[m] = a &gt;&gt; 2;</span></a>
 <a name="396"><span class="lineNum">     396 </span>            :                 }</a>
 <a name="397"><span class="lineNum">     397 </span>            :             }else{</a>
-<a name="398"><span class="lineNum">     398 </span><span class="lineCov">    2353708 :                 buf[m] = nut_i64_lcm(buf[m], a/n - a/n/n);</span></a>
+<a name="398"><span class="lineNum">     398 </span><span class="lineCov">    2373008 :                 buf[m] = nut_i64_lcm(buf[m], a/n - a/n/n);</span></a>
 <a name="399"><span class="lineNum">     399 </span>            :             }</a>
-<a name="400"><span class="lineNum">     400 </span><span class="lineCov">    2853708 :             if(__builtin_add_overflow(m, n, &amp;m)){</span></a>
+<a name="400"><span class="lineNum">     400 </span><span class="lineCov">    2878008 :             if(__builtin_add_overflow(m, n, &amp;m)){</span></a>
 <a name="401"><span class="lineNum">     401 </span>            :                 break;</a>
 <a name="402"><span class="lineNum">     402 </span>            :             }</a>
 <a name="403"><span class="lineNum">     403 </span>            :         }</a>

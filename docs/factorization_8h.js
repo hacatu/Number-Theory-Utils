@@ -17,6 +17,7 @@ var factorization_8h =
     [ "nut_Factor_ipow", "factorization_8h.html#a19a1f32d8d7197c9f60113616f10a5c2", null ],
     [ "nut_Factor_phi", "factorization_8h.html#a9abda9091fb2fcf758f069bf8a674412", null ],
     [ "nut_Factor_carmichael", "factorization_8h.html#a0ac931c6a62bec58d63ee6043878315d", null ],
+    [ "nut_u64_order_mod", "factorization_8h.html#a4c1288a321143ef024ed17be50d74d22", null ],
     [ "nut_Factor_forall_divs_tmptmp", "factorization_8h.html#a0c8e843ae366d9d94ce0bff300657199", null ],
     [ "nut_Factor_forall_divs", "factorization_8h.html#a92121419128c9016b2c012ec6fdf4aec", null ],
     [ "nut_Factor_forall_divs_le_tmptmp", "factorization_8h.html#a8bcaa51dc194ca6075de84c5b5de29be", null ],
