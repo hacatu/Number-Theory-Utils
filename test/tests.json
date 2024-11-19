@@ -60,6 +60,9 @@
 	"test_factor_sieves": {
 		"no_red_tests": [[]]
 	},
+	"test_modular_order": {
+		"no_red_tests": [[]]
+	},
 	"test_perfect_powers": {
 		"no_red_tests": [[]]
 	}

@@ -13,7 +13,6 @@
 /// around 2^31.  a bignum-enabled version may be created to handle this)
 
 #include <inttypes.h>
-#include <stdlib.h>
 #include <stdio.h>
 
 #include <nut/modular_math.h>
@@ -164,6 +163,27 @@ NUT_ATTR_PURE
 NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_only, 1)
 uint64_t nut_Factor_carmichael(const nut_Factors *factors);
+
+/// Find the multiplicative order of a mod n, the smallest exponent m so a^m = 1.
+/// Always divides carmichael(n).
+/// order(a mod xy) = lcm(order(a mod x), order(a mod y)) when x and y are coprime,
+/// so to find the order of a mod a range of numbers, it might be most efficient to
+/// find order(a mod p^k) for every prime power, and then use the lcm to find it for
+/// composite numbers.
+/// @param [in] a: the element to find the order of
+/// @param [in] n: the modulus
+/// @param [in] cn: the carmichael function of n.  Both this and its factorization are needed,
+/// which improves efficiency when calling it for many numbers in a range, but if only a single
+/// number is needed, you will need to call some other functions to get that data, see below
+/// @param [in, out] cn_factors: the factorization of the carmichael function of the modulus,
+/// lambda(n). THIS BUFFER IS MODIFIED, if you need to use the factorization for something else,
+/// make sure to copy it first ({ @link nut_Factors_copy }).
+/// This can be computed either by factoring n ({ @link nut_u64_factor_heuristic })
+/// and using { @link nut_Factor_carmichael }, or by sieving the factorization for all n
+/// ({ @link nut_sieve_carmichael })
+NUT_ATTR_NONNULL(4)
+NUT_ATTR_ACCESS(read_write, 4)
+uint64_t nut_u64_order_mod(uint64_t a, uint64_t n, uint64_t cn, nut_Factors *cn_factors);
 
 /// Call { @link forall_divisors} with temporarily allocated dfactors and pfactors structs.
 NUT_ATTR_NONNULL(1, 2)

@@ -136,6 +136,20 @@ uint64_t nut_Factor_carmichael(const nut_Factors *factors){
 	return s;
 }
 
+uint64_t nut_u64_order_mod(uint64_t a, uint64_t n, uint64_t cn, nut_Factors *cn_factors){
+	for(uint64_t i = 0; i < cn_factors->num_primes; ++i){
+		while(cn_factors->factors[i].power){
+			cn /= cn_factors->factors[i].prime;
+			if(nut_u64_powmod(a, cn, n) != 1){
+				cn *= cn_factors->factors[i].prime;
+				break;
+			}
+			cn_factors->factors[i].power--;
+		}
+	}
+	return cn;
+}
+
 int nut_Factor_forall_divs_tmptmp(const nut_Factors *restrict factors, int (*f)(const nut_Factors*, uint64_t, void*), void *restrict data){
 	nut_Factors *dfactors [[gnu::cleanup(cleanup_free)]] = nut_Factors_copy(factors);
 	nut_Factors *pfactors [[gnu::cleanup(cleanup_free)]] = nut_Factors_copy(factors);
