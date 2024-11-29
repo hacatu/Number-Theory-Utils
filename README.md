@@ -33,7 +33,11 @@ or you can run `sudo ./waf install_release` after building.
 
 The general usage of Waf is `./waf subcommand_1 subcommand_2 ...`, where each subcommand is either user defined/modified
 or builtin, and many subcommands can be specified.
-Additionally, environment variables can be changed as needed normally by doing `CC=clang-13 ./waf ...` or similar.
+
+If you need to change the compiler or other environment variables, you can try setting them,
+but `CC` and some others get overridden, so you will have to modify `wscript`.
+
+In `wscript.configure`, find the `if/elif/else` block that defines `GCC`, `CLANG`, `XGCC`, and `XAR`, and change `GCC` and `CLANG` to both be the compiler you want.
 
 The main subcommands to be aware of are
 - `configure`: set up Waf, must be run before most other commands

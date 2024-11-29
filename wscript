@@ -37,6 +37,12 @@ def configure(conf):
 		GCC = 'gcc-13'
 		XGCC = None
 		XAR = None
+	elif 'TERMUX_VERSION' in os.environ:
+		print('We seem to be running on termux, applying compat kludges!')
+		CLANG = 'clang'
+		GCC = 'clang'
+		XGCC = None
+		XAR = None
 	else:
 		CLANG = 'clang'
 		GCC = 'gcc'

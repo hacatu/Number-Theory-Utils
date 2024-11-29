@@ -1,9 +1,26 @@
 #include <stddef.h>
-#if __has_include(<sys/random.h>)
+#if __has_include(<linux/version.h>)
+#include <linux/version.h>
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,17,0)
+#if __has_include(<gnu/libc-version.h>)
+#include <gnu/libc-version.h>
 #include <sys/random.h>
+#if (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 25) || __GLIBC__ > 2
+#define _NUT_RAND_USE_GETRANDOM
+#else
+#include <sys/syscall.h>
+#include <unistd.h>
+#define _NUT_RAND_USE_SYSCALL
+#endif
+#else
+#include <stdio.h>
+#define _NUT_RAND_USE_URANDOM
+#endif
+#endif
 #elifdef __MINGW32__
 #define _CRT_RAND_S
 #include <stdlib.h>
+#define _NUT_RAND_USE_RAND_S
 #endif
 #include <string.h>
 
@@ -73,8 +90,14 @@ uint64_t nut_u64_binom_next(uint64_t n, uint64_t k, uint64_t prev){
 	return prev*(n - k + 1)/k;
 }
 
-#if __has_include(<sys/random.h>)
+#if defined(_NUT_RAND_USE_GETRANDOM) || defined(_NUT_RAND_USE_SYSCALL) || defined(_NUT_RAND_USE_URANDOM)
 uint64_t nut_u64_rand(uint64_t a, uint64_t b){
+#ifdef _NUT_RAND_USE_URANDOM
+	__thread FILE *urandom = NULL;
+	if(!urandom){
+		fopen("/dev/urandom", "rb");
+	}
+#endif
 	uint64_t l = b - a, r = 0, bytes = (71 - __builtin_clzll(l))/8;
 	uint64_t ub;
 	if(bytes == 8){
@@ -87,12 +110,20 @@ uint64_t nut_u64_rand(uint64_t a, uint64_t b){
 	do{
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-result"
+#ifdef _NUT_RAND_USE_GETRANDOM
 		getrandom(&r, bytes, 0);
+#elifdef _NUT_RAND_USE_SYSCALL
+		syscall(SYS_getrandom, &r, bytes, 0);
+#else
+		fread(&r, 8, 1, urandom);
+#endif
 #pragma GCC diagnostic pop
 	}while(ub && r >= ub);
 	return r%l + a;
 }
-#elifdef __MINGW32__
+#endif
+
+#if defined(_NUT_RAND_USE_RAND_S)
 uint64_t nut_u64_rand(uint64_t a, uint64_t b){
 	uint64_t l = b - a, r = 0;
 	uint64_t ub;
