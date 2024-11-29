@@ -121,7 +121,9 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <h1><a class="anchor" id="autotoc_md1"></a>
 Building</h1>
 <p>This library uses <a href="https://waf.io">Waf</a> as the build system. To build the release variant, simply run <code>./waf configure build_release</code> in the project root directory. The resulting files will be in <code>build/release</code> and <code>build/release/bin</code>, or you can run <code>sudo ./waf install_release</code> after building.</p>
-<p>The general usage of Waf is <code>./waf subcommand_1 subcommand_2 ...</code>, where each subcommand is either user defined/modified or builtin, and many subcommands can be specified. Additionally, environment variables can be changed as needed normally by doing <code>CC=clang-13 ./waf ...</code> or similar.</p>
+<p>The general usage of Waf is <code>./waf subcommand_1 subcommand_2 ...</code>, where each subcommand is either user defined/modified or builtin, and many subcommands can be specified.</p>
+<p>If you need to change the compiler or other environment variables, you can try setting them, but <code>CC</code> and some others get overridden, so you will have to modify <code>wscript</code>.</p>
+<p>In <code>wscript.configure</code>, find the <code>if/elif/else</code> block that defines <code>GCC</code>, <code>CLANG</code>, <code>XGCC</code>, and <code>XAR</code>, and change <code>GCC</code> and <code>CLANG</code> to both be the compiler you want.</p>
 <p>The main subcommands to be aware of are</p><ul>
 <li><code>configure</code>: set up Waf, must be run before most other commands</li>
 <li><code>build_&lt;variant&gt;</code>: build the indicated variant. Results are stored in <code>build/&lt;variant&gt;</code>. The currently extant variants are:<ul>
@@ -273,7 +275,7 @@ Factor a polynomial mod some primes</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Nov 19 2024 00:29:41 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Nov 29 2024 21:20:36 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>
