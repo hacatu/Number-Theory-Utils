@@ -101,16 +101,37 @@ typedef struct{
 } nut_PfIt;
 
 /// Set up a powerful iterator that uses a callback function to compute h
+/// @param max: inclusive upper bound of range to generate powerful numbers in
+/// @param modulus: modulus to reduce all h values by, or 0 to not reduce.  This is also passed through to the callback.
+/// @param small_primes: Almost always 0.  The number of consecutive primes starting at 2 for which f(p) must be adjusted in addition to f(p^2) and higher powers.
+/// @param h_fn: Callback to compute h at a prime power.  Arguments are p: prime, pp: prime power (p^e), e: exponent on prime, m: modulus.
+/// h_fn can ignore its modulus if only generators with a fixed modulus will be created, and in general the modulus should be a compile time constant for best performance,
+/// but this is not strictly necessary.  h_fn also often will not need all of its arguments, but pp is provided to allow p^e to not be recomputed.
+/// @return true on success, false on allocation failure
 NUT_ATTR_NONNULL(1, 5)
 NUT_ATTR_ACCESS(write_only, 1)
 bool nut_PfIt_init_fn(nut_PfIt *self, uint64_t max, uint64_t modulus, uint64_t small_primes, int64_t (*h_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m));
 
 /// Set up a powerful iterator that uses a table of values for h (when h(p^e) depends only on e)
+/// @param max: inclusive upper bound of range to generate powerful numbers in
+/// @param modulus: modulus to reduce all h values by, or 0 to not reduce.  This is also passed through to the callback.
+/// @param small_primes: Almost always 0.  The number of consecutive primes starting at 2 for which f(p) must be adjusted in addition to f(p^2) and higher powers.
+/// @param h_vals: Table of values of h(p^e), indexed by e, since it does not depend on p.  h_vals should be reduced mod modulus, and small_primes should be 0
+/// @return true on success, false on allocation failure
 NUT_ATTR_NONNULL(1, 5)
 NUT_ATTR_ACCESS(write_only, 1)
 bool nut_PfIt_init_hvals(nut_PfIt *restrict self, uint64_t max, uint64_t modulus, uint64_t small_primes, const int64_t *restrict h_vals);
 
 /// Set up a powerful iterator that automatically computes h values given f and g (when a closed form for h is not known)
+/// Using one of the other `PfIt` constructors is preferred whenever possible.  This will try to do series division per prime to find h values.
+/// @param max: inclusive upper bound of range to generate powerful numbers in
+/// @param modulus: modulus to reduce all h values by, or 0 to not reduce.  This is also passed through to the callback.
+/// @param small_primes: Almost always 0.  The number of consecutive primes starting at 2 for which f(p) must be adjusted in addition to f(p^2) and higher powers.
+/// @param f_fn: Callback to compute f at a prime power.  Arguments are p: prime, pp: prime power (p^e), e: exponent on prime, m: modulus.  See { @link nut_PfIt_init_fn }
+/// for more info
+/// @param g_fn: Callback to compute g at a prime power.  Arguments are p: prime, pp: prime power (p^e), e: exponent on prime, m: modulus.  See { @link nut_PfIt_init_fn }
+/// for more info
+/// @return true on success, false on allocation failure
 NUT_ATTR_NONNULL(1, 5, 6)
 NUT_ATTR_ACCESS(write_only, 1)
 bool nut_PfIt_init_hseqs(nut_PfIt *restrict self, uint64_t max, uint64_t modulus, uint64_t small_primes,
@@ -118,6 +139,12 @@ bool nut_PfIt_init_hseqs(nut_PfIt *restrict self, uint64_t max, uint64_t modulus
 );
 
 /// Macro to automatically set up a powerful iterator using either { @link nut_PfIt_init_fn } or { @link nut_PfIt_init_hvals } depending on the type of h
+/// Will not call { @link nut_PfIt_init_hseqs }
+/// @param max: inclusive upper bound of range to generate powerful numbers in
+/// @param modulus: modulus to reduce all h values by, or 0 to not reduce.  This is also passed through to the callback.
+/// @param small_primes: Almost always 0.  The number of consecutive primes starting at 2 for which f(p) must be adjusted in addition to f(p^2) and higher powers.
+/// @param h: Either a function `int64_t (*h_fn)(uint64_t p, uint64_t pp, uint64_t e, uint64_t m)` or a table `const int64_t *restrict h_vals`.
+/// @return true on success, false on allocation failure
 #define NUT_PfIt_INIT(self, max, modulus, small_primes, h) _Generic((h), int64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t): nut_PfIt_init_fn, int64_t*: nut_PfIt_init_hvals)((self), (max), (modulus), (small_primes), (h))
 
 /// Delete backing arrays for a powerful number iterator
@@ -151,7 +178,8 @@ NUT_ATTR_ACCESS(write_only, 2)
 bool nut_PfIt_next(nut_PfIt *restrict self, nut_PfStackEnt *restrict out);
 
 /// Compute the sum of f = g <*> h (from 1 up to g_tbl->x), where f(p) = g(p)
-/// The modulus used to reduce the answer should be passed in when constructing pf_it, { @link NUT_PfIt_INIT}
+/// The modulus used to reduce the answer should be passed in when constructing pf_it, { @link NUT_PfIt_INIT }
+/// If g is u, use { @link nut_Diri_sum_u_adjusted }
 /// @param [out] out: store the result
 /// @param [in] g_tbl: table of values/sums for g, a simple function that's equal to f at primes
 /// @param [in, out] pf_it: iterator that generates all powerful numbers n together with the value of h, hn, at each
@@ -161,6 +189,16 @@ NUT_ATTR_ACCESS(write_only, 1)
 NUT_ATTR_ACCESS(read_only, 2)
 NUT_ATTR_ACCESS(read_write, 3)
 bool nut_Diri_sum_adjusted(int64_t *restrict out, const nut_Diri *restrict g_tbl, nut_PfIt *pf_it);
+
+/// Compute the sum of f = u <*> h (from 1 up to pf_it->max), where f(p) = g(p)
+/// The modulus used to reduce the answer should be passed in when constructing pf_it, { @link NUT_PfIt_INIT}
+/// @param [out] out: store the result
+/// @param [in, out] pf_it: iterator that generates all powerful numbers n together with the value of h, hn, at each
+/// @return true on success, false on allocation failure
+NUT_ATTR_NONNULL(1, 2)
+NUT_ATTR_ACCESS(write_only, 1)
+NUT_ATTR_ACCESS(read_write, 2)
+bool nut_Diri_sum_u_adjusted(int64_t *restrict out, nut_PfIt *pf_it);
 
 /// Compute the series quotient h = f / g for two (finite) power series
 /// In other words, h will be such that f = g * h (under power series multiplication, not Dirichlet convolution)

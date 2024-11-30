@@ -215,6 +215,21 @@ bool nut_Diri_sum_adjusted(int64_t *restrict out, const nut_Diri *restrict g_tbl
 	return true;
 }
 
+bool nut_Diri_sum_u_adjusted(int64_t *restrict out, nut_PfIt *pf_it){
+	int64_t m = pf_it->modulus;
+	int64_t res = 0;
+	uint64_t max = pf_it->max;
+	nut_PfStackEnt ent;
+	while(nut_PfIt_next(pf_it, &ent)){
+		res += ent.hn*(max/ent.n);
+		if(m){
+			res = nut_i64_mod(res, m);
+		}
+	}
+	*out = res;
+	return true;
+}
+
 void nut_series_div(uint64_t n, int64_t m, int64_t h[restrict static n], int64_t f[restrict static n], int64_t g[restrict static n]){
 	for(uint64_t e = 0; e < n; ++e){
 		int64_t term = f[e];
