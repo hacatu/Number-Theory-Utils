@@ -14,5 +14,6 @@ var dirichlet__powerful_8h =
     [ "nut_PfStack_pop", "dirichlet__powerful_8h.html#affb590378a2c53e3322a0edf92c3f8c1", null ],
     [ "nut_PfIt_next", "dirichlet__powerful_8h.html#ac10e34c391364d1114342736d9f573e1", null ],
     [ "nut_Diri_sum_adjusted", "dirichlet__powerful_8h.html#a0955257f1f62a3f9ead64f4610d8c618", null ],
+    [ "nut_Diri_sum_u_adjusted", "dirichlet__powerful_8h.html#af29ff2ae35d7b09406f4e28f5edffad4", null ],
     [ "nut_series_div", "dirichlet__powerful_8h.html#ae208f6364581328a25c55fbbd6d4d7d1", null ]
 ];
