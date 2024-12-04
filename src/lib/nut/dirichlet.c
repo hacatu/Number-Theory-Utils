@@ -466,6 +466,59 @@ bool nut_Diri_compute_dk(nut_Diri *restrict self, uint64_t k, int64_t m, nut_Dir
 	return true;
 }
 
+bool nut_Diri_compute_J(nut_Diri *restrict self, uint64_t p){
+	int64_t *partial_sums [[gnu::cleanup(cleanup_free)]] = malloc(p*sizeof(int64_t));
+	uint64_t *is_qr [[gnu::cleanup(cleanup_free)]] = nut_u64_make_jacobi_tbl(p, partial_sums);
+	if(!partial_sums || !is_qr){
+		return false;
+	}
+	for(uint64_t r = 0; r < p; ++r){
+		int64_t v = nut_u64_jacobi_tbl_get(r, p, is_qr);
+		for(int64_t i = r; i <= self->y; i += p){
+			self->buf[i] = v;
+		}
+	}
+	for(int64_t i = 1; i < self->yinv; ++i){
+		int64_t r = self->x/i%p;
+		self->buf[self->y + i] = partial_sums[r];
+	}
+	return true;
+}
+
+bool nut_Diri_compute_pi(nut_Diri *restrict self){
+	self->buf[0] = 0;
+	for(int64_t i = 1; i <= self->y; ++i){
+		self->buf[i] = i - 1;
+	}
+	for(int64_t i = 1; i < self->yinv; ++i){
+		int64_t term = self->x/i;
+		self->buf[self->y + i] = term - 1;
+	}
+	for(int64_t p = 2; p <= self->y; ++p){
+		int64_t c = self->buf[p - 1];
+		if(self->buf[p] == c){
+			continue;
+		}
+		for(int64_t i = 1; i < self->yinv; ++i){
+			int64_t v = self->x/i;
+			if(v < p*p){
+				goto CONTINUE_PRIMELOOP;
+			}
+			int64_t j = v/p;
+			int64_t m = j <= self->y ? self->buf[j] : self->buf[self->y + self->x/j];
+			self->buf[self->y + i] -= m - c;
+		}
+		for(int64_t v = self->y; v >= 0; --v){
+			if(v < p*p){
+				break;
+			}
+			self->buf[v] -= (self->buf[v/p] - c);
+		}
+		CONTINUE_PRIMELOOP:;
+	}
+	return true;
+}
+
 bool nut_Diri_compute_conv_u(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl){
 	if(self->y != f_tbl->y || self->x != f_tbl->x){
 		return false;

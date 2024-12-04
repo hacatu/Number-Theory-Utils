@@ -245,6 +245,8 @@ void nut_Diri_compute_mertens(nut_Diri *restrict self, int64_t m, const uint8_t 
 /// @param [in] m: modulus to reduce the result by, or 0 to skip reducing
 /// @param [in, out] f_tbl, g_tbl: temporary tables for scratch work, initialized by { @link nut_Diri_init}, fields y, x, and yinv must be set
 /// Will still have scratch data stored on return
+NUT_ATTR_NONNULL(1, 4, 5)
+NUT_ATTR_ACCESS(read_write, 1, 4, 5)
 bool nut_Diri_compute_dk(nut_Diri *restrict self, uint64_t k, int64_t m, nut_Diri *restrict f_tbl, nut_Diri *restrict g_tbl);
 
 /// Compute the value table for the kth power function N^k(n)
@@ -255,7 +257,27 @@ bool nut_Diri_compute_dk(nut_Diri *restrict self, uint64_t k, int64_t m, nut_Dir
 /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
 /// @param [in] k: the power of the power function to compute
 /// @param [in] m: modulus to reduce the result by, or 0 to skip reducing
+NUT_ATTR_NONNULL(1)
+NUT_ATTR_ACCESS(read_write, 1)
 bool nut_Diri_compute_Nk(nut_Diri *restrict self, uint64_t k, int64_t m);
+
+/// Compute the value table for the Jacobi symbol jacobi(n/p)
+/// Currently, p MUST be and odd prime
+/// This is 1 if n is a quadratic residue (perfect square) mod p, -1 if it is not, or 0 if n is a multiple of p
+/// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
+/// @param [in] p: prime modulus for jacobi symbol
+NUT_ATTR_NONNULL(1)
+NUT_ATTR_ACCESS(read_write, 1)
+bool nut_Diri_compute_J(nut_Diri *restrict self, uint64_t p);
+
+/// Compute the value table for the prime counting function, aka prime pi
+/// The indicator function for primes is effectively multiplicative,
+/// and the prime counting function is its sum.  But also, Lucy Hedgehog's prime counting
+/// algorithm essentially uses Dirichlet tables already, hence its inclusion in this part of the library
+/// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
+NUT_ATTR_NONNULL(1)
+NUT_ATTR_ACCESS(read_write, 1)
+bool nut_Diri_compute_pi(nut_Diri *restrict self);
 
 /// Compute the value table for h = f <*> u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f
 /// See { @link nut_Diri_compute_conv } for details, this is just that function but with several specializations due to u being very simple.
@@ -310,5 +332,7 @@ bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f
 /// @param [in] m: modulus to reduce results by, or 0 to skip reducing
 /// @param [in] f_tbl: table for the first operand (the "numerator" aka "dividend" in the "division")
 /// @param [in] g_tbl: the table for the second operand (the "denominator" aka "divisor" in the "division")
+NUT_ATTR_NONNULL(1, 3, 4)
+NUT_ATTR_ACCESS(read_write, 1, 3, 4)
 bool nut_Diri_convdiv(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl, const nut_Diri *restrict g_tbl);
 

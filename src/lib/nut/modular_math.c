@@ -23,7 +23,7 @@
 #define _NUT_RAND_USE_RAND_S
 #endif
 #include <string.h>
-
+#include <nut/debug.h>
 #include <nut/modular_math.h>
 
 uint64_t nut_u64_pow(uint64_t b, uint64_t e){
@@ -252,6 +252,9 @@ uint64_t nut_u64_binom_next_mod_2t(uint64_t n, uint64_t k, uint64_t t, uint64_t 
 }
 
 int64_t nut_i64_jacobi(int64_t n, int64_t k){
+	if(n%k == 0){
+		return 0;
+	}
 	int64_t j = 1;
 	while(1){
 		int64_t s = __builtin_ctzll(n);
@@ -269,6 +272,36 @@ int64_t nut_i64_jacobi(int64_t n, int64_t k){
 		n = k%q;
 		k = q;
 	}
+}
+
+uint64_t *nut_u64_make_jacobi_tbl(uint64_t p, int64_t partial_sums[restrict static p]){
+	uint64_t *is_qr = calloc((p + 63)/64, sizeof(uint64_t));
+	if(!is_qr){
+		return NULL;
+	}
+	for(uint64_t n = 1, nn = 1; n <= p/2; ++n){
+		is_qr[nn/64] |= 1ull << (nn%64);
+		nn += 2*n + 1;
+		if(nn >= p){
+			nn -= p;
+		}
+	}
+	partial_sums[0] = 0;
+	int64_t acc = 0;
+	for(uint64_t n = 1; n < p; ++n){
+		bool qr = is_qr[n/64] & (1ull << (n%64));
+		acc += qr ? 1 : -1;
+		partial_sums[n] = acc;
+	}
+	return is_qr;
+}
+
+int64_t nut_u64_jacobi_tbl_get(uint64_t n, uint64_t p, const uint64_t is_qr[restrict static (p + 63)/64]){
+	uint64_t r = n%p;
+	if(!r){
+		return 0;
+	}
+	return (is_qr[r/64] & (1ull << (r%64))) ? 1 : -1;
 }
 
 int64_t nut_i64_rand_nr(int64_t p){

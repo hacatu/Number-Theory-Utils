@@ -1,8 +1,11 @@
 {
-	"test_faulhaber_mat":{
+	"test_dirichlet_pi": {
 		"no_red_tests": [[]]
 	},
-	"test_dirichlet_cl":{
+	"test_faulhaber_mat": {
+		"no_red_tests": [[]]
+	},
+	"test_dirichlet_cl": {
 		"no_red_tests": [[]],
 		"run_on_builds": ["opencl"]
 	},

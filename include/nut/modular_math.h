@@ -13,8 +13,6 @@
 /// around 2^31.  a bignum-enabled version may be created to handle this)
 
 #include <inttypes.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <assert.h>
 
 /// Pretty name for signed 128 bit integer.
@@ -232,6 +230,26 @@ uint64_t nut_u64_binom_next_mod_2t(uint64_t n, uint64_t k, uint64_t t, uint64_t 
 /// @return Jacobi symbol (0 if k | n, +1 if n is a quadratic residue mod an odd number of prime divisors of k (with multiplicity), -1 otherwise)
 NUT_ATTR_CONST
 int64_t nut_i64_jacobi(int64_t n, int64_t k);
+
+/// Compute the Jacobi symbol for all numbers mod a prime.
+/// Currently the modulus must be a prime
+/// @param [in] p: prime to compute all jacobi(r/p) modulo
+/// @param [out] partial_sums: buffer to store sums jacobi(0/p) + ... + jacobi(r/p)
+/// @return bit array `is_qr` where the bit for positive r is 0 if r is a nonresidue (jacobi symbol -1), or
+/// 1 if r is a residue (jacobi symbol 1).  If r is zero, then its jacobi symbol is 0.
+/// { @link nut_u64_jacobi_tbl_get } handles this automatically
+NUT_ATTR_MALLOC
+NUT_ATTR_NONNULL(2)
+NUT_ATTR_ACCESS(write_only, 2)
+uint64_t *nut_u64_make_jacobi_tbl(uint64_t p, int64_t partial_sums[restrict static p]);
+
+/// Convenience function to get the jacobi symbol for n from a table
+/// The table should come from { @link nut_u64_make_jacobi_tbl }
+/// @param [in] n: residue to find jacobi symbol for, does not need to be reduced
+/// @param [in] p: prime that the table was computed for
+/// @param [in] is_qr: table from { @link nut_u64_make_jacobi_symbol }
+/// @return the jacobi symbol for jacobi(n/p)
+int64_t nut_u64_jacobi_tbl_get(uint64_t n, uint64_t p, const uint64_t is_qr[restrict static (p + 63)/64]);
 
 /// Compute a random number mod a prime that is not a quadratic residue.
 ///
