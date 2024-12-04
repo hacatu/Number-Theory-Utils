@@ -189,6 +189,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 <tr class="memitem:adbd2807d0e18d42c365be9f634633f00"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#adbd2807d0e18d42c365be9f634633f00">nut_Diri_compute_Nk</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, uint64_t k, int64_t m)</td></tr>
 <tr class="memdesc:adbd2807d0e18d42c365be9f634633f00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the kth power function N^k(n) N^k(n) = n^k, so we can find the sums using <a href="https://en.wikipedia.org/wiki/Faulhaber%27s_formula">https://en.wikipedia.org/wiki/Faulhaber%27s_formula</a> (we actually do this by taking a lower triangular matrix of pascal's triangle and inverting it) This is one of the core components needed to compute the Dirichlet sum table for f where f(p) is a polynomial, the other one being <a href="https://en.wikipedia.org/wiki/Jordan%27s_totient_function">https://en.wikipedia.org/wiki/Jordan%27s_totient_function</a>.  <a href="dirichlet_8h.html#adbd2807d0e18d42c365be9f634633f00">More...</a><br /></td></tr>
 <tr class="separator:adbd2807d0e18d42c365be9f634633f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad08e9184bf4f75f28500e28c035964b3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#ad08e9184bf4f75f28500e28c035964b3">nut_Diri_compute_J</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, uint64_t p)</td></tr>
+<tr class="memdesc:ad08e9184bf4f75f28500e28c035964b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the Jacobi symbol jacobi(n/p) Currently, p MUST be and odd prime This is 1 if n is a quadratic residue (perfect square) mod p, -1 if it is not, or 0 if n is a multiple of p.  <a href="dirichlet_8h.html#ad08e9184bf4f75f28500e28c035964b3">More...</a><br /></td></tr>
+<tr class="separator:ad08e9184bf4f75f28500e28c035964b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a980a09e9e56f72eedef07a9c20fb2856"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a980a09e9e56f72eedef07a9c20fb2856">nut_Diri_compute_pi</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self)</td></tr>
+<tr class="memdesc:a980a09e9e56f72eedef07a9c20fb2856"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the prime counting function, aka prime pi The indicator function for primes is effectively multiplicative, and the prime counting function is its sum.  <a href="dirichlet_8h.html#a980a09e9e56f72eedef07a9c20fb2856">More...</a><br /></td></tr>
+<tr class="separator:a980a09e9e56f72eedef07a9c20fb2856"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc3257dcff1b06c34b128c156572a4dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#abc3257dcff1b06c34b128c156572a4dd">nut_Diri_compute_conv_u</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, int64_t m, const <a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict f_tbl)</td></tr>
 <tr class="memdesc:abc3257dcff1b06c34b128c156572a4dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f See <a class="el" href="dirichlet_8h.html#ac129473cb990ee5563de30608d75d253">nut_Diri_compute_conv</a> for details, this is just that function but with several specializations due to u being very simple.  <a href="dirichlet_8h.html#abc3257dcff1b06c34b128c156572a4dd">More...</a><br /></td></tr>
 <tr class="separator:abc3257dcff1b06c34b128c156572a4dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -693,6 +699,69 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 
 </div>
 </div>
+<a id="ad08e9184bf4f75f28500e28c035964b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad08e9184bf4f75f28500e28c035964b3">&#9670;&nbsp;</a></span>nut_Diri_compute_J()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_Diri_compute_J </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the value table for the Jacobi symbol jacobi(n/p) Currently, p MUST be and odd prime This is 1 if n is a quadratic residue (perfect square) mod p, -1 if it is not, or 0 if n is a multiple of p. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, and take the bounds from. Must be initialized </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>prime modulus for jacobi symbol </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a980a09e9e56f72eedef07a9c20fb2856"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a980a09e9e56f72eedef07a9c20fb2856">&#9670;&nbsp;</a></span>nut_Diri_compute_pi()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_Diri_compute_pi </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the value table for the prime counting function, aka prime pi The indicator function for primes is effectively multiplicative, and the prime counting function is its sum. </p>
+<p>But also, Lucy Hedgehog's prime counting algorithm essentially uses Dirichlet tables already, hence its inclusion in this part of the library </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, and take the bounds from. Must be initialized </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="abc3257dcff1b06c34b128c156572a4dd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abc3257dcff1b06c34b128c156572a4dd">&#9670;&nbsp;</a></span>nut_Diri_compute_conv_u()</h2>
 
@@ -890,7 +959,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="diri
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="dirichlet_8h.html">dirichlet.h</a></li>
-    <li class="footer">Generated on Sat Nov 30 2024 02:45:30 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Dec 4 2024 09:06:18 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

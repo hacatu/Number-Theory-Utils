@@ -235,6 +235,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a934e38bdacf035d2eef4efc9e35da2d5"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a934e38bdacf035d2eef4efc9e35da2d5">nut_i64_jacobi</a> (int64_t n, int64_t k)</td></tr>
 <tr class="memdesc:a934e38bdacf035d2eef4efc9e35da2d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobi symbol of n mod k.  <a href="modular__math_8h.html#a934e38bdacf035d2eef4efc9e35da2d5">More...</a><br /></td></tr>
 <tr class="separator:a934e38bdacf035d2eef4efc9e35da2d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af672641731fde4f66555d6451f5b33ed"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#af672641731fde4f66555d6451f5b33ed">nut_u64_make_jacobi_tbl</a> (uint64_t p, int64_t partial_sums[restrict static p])</td></tr>
+<tr class="memdesc:af672641731fde4f66555d6451f5b33ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobi symbol for all numbers mod a prime.  <a href="modular__math_8h.html#af672641731fde4f66555d6451f5b33ed">More...</a><br /></td></tr>
+<tr class="separator:af672641731fde4f66555d6451f5b33ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a172e46dd409fe4bccf649d9543252834"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a172e46dd409fe4bccf649d9543252834">nut_u64_jacobi_tbl_get</a> (uint64_t n, uint64_t p, const uint64_t is_qr[restrict static(p+63)/64])</td></tr>
+<tr class="memdesc:a172e46dd409fe4bccf649d9543252834"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to get the jacobi symbol for n from a table The table should come from <a class="el" href="modular__math_8h.html#af672641731fde4f66555d6451f5b33ed">nut_u64_make_jacobi_tbl</a>.  <a href="modular__math_8h.html#a172e46dd409fe4bccf649d9543252834">More...</a><br /></td></tr>
+<tr class="separator:a172e46dd409fe4bccf649d9543252834"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ea912c9c389a530c1c41002d340f718"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modular__math_8h.html#a1ea912c9c389a530c1c41002d340f718">nut_i64_rand_nr_mod</a> (int64_t p)</td></tr>
 <tr class="memdesc:a1ea912c9c389a530c1c41002d340f718"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a random number mod a prime that is not a quadratic residue.  <a href="modular__math_8h.html#a1ea912c9c389a530c1c41002d340f718">More...</a><br /></td></tr>
 <tr class="separator:a1ea912c9c389a530c1c41002d340f718"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -294,7 +300,7 @@ Functions</h2></td></tr>
 <p>Pretty name for signed 128 bit integer. </p>
 <p>GCC implements 128 bit arithmetic in terms of 64 bit arithmetic. </p>
 
-<p class="definition">Definition at line <a class="el" href="modular__math_8h_source.html#l00022">22</a> of file <a class="el" href="modular__math_8h_source.html">modular_math.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="modular__math_8h_source.html#l00020">20</a> of file <a class="el" href="modular__math_8h_source.html">modular_math.h</a>.</p>
 
 </div>
 </div>
@@ -313,7 +319,7 @@ Functions</h2></td></tr>
 <p>Pretty name for unsigned 128 bit integer. </p>
 <p>GCC implements 128 bit arithmetic in terms of 64 bit arithmetic. </p>
 
-<p class="definition">Definition at line <a class="el" href="modular__math_8h_source.html#l00025">25</a> of file <a class="el" href="modular__math_8h_source.html">modular_math.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="modular__math_8h_source.html#l00023">23</a> of file <a class="el" href="modular__math_8h_source.html">modular_math.h</a>.</p>
 
 </div>
 </div>
@@ -974,6 +980,89 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="af672641731fde4f66555d6451f5b33ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af672641731fde4f66555d6451f5b33ed">&#9670;&nbsp;</a></span>nut_u64_make_jacobi_tbl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t* nut_u64_make_jacobi_tbl </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>partial_sums</em>[restrict static p]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the Jacobi symbol for all numbers mod a prime. </p>
+<p>Currently the modulus must be a prime </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>prime to compute all jacobi(r/p) modulo </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">partial_sums</td><td>buffer to store sums jacobi(0/p) + ... + jacobi(r/p) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bit array <code>is_qr</code> where the bit for positive r is 0 if r is a nonresidue (jacobi symbol -1), or 1 if r is a residue (jacobi symbol 1). If r is zero, then its jacobi symbol is 0. <a class="el" href="modular__math_8h.html#a172e46dd409fe4bccf649d9543252834">nut_u64_jacobi_tbl_get</a> handles this automatically </dd></dl>
+
+</div>
+</div>
+<a id="a172e46dd409fe4bccf649d9543252834"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a172e46dd409fe4bccf649d9543252834">&#9670;&nbsp;</a></span>nut_u64_jacobi_tbl_get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t nut_u64_jacobi_tbl_get </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint64_t&#160;</td>
+          <td class="paramname"><em>is_qr</em>[restrict static(p+63)/64]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience function to get the jacobi symbol for n from a table The table should come from <a class="el" href="modular__math_8h.html#af672641731fde4f66555d6451f5b33ed">nut_u64_make_jacobi_tbl</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>residue to find jacobi symbol for, does not need to be reduced </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>prime that the table was computed for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">is_qr</td><td>table from <a class="el" href="">nut_u64_make_jacobi_symbol</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the jacobi symbol for jacobi(n/p) </dd></dl>
+
+</div>
+</div>
 <a id="a1ea912c9c389a530c1c41002d340f718"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1ea912c9c389a530c1c41002d340f718">&#9670;&nbsp;</a></span>nut_i64_rand_nr_mod()</h2>
 
@@ -1500,7 +1589,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="modular__math_8h.html">modular_math.h</a></li>
-    <li class="footer">Generated on Sat Nov 30 2024 02:45:30 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Dec 4 2024 09:06:18 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1 </li>
   </ul>
 </div>
 </body>

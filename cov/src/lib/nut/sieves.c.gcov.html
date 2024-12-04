@@ -50,7 +50,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-11-30 02:45:11</td>
+            <td class="headerValue">2024-12-04 09:05:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">27</td>
@@ -543,270 +543,270 @@
 <a name="468"><span class="lineNum">     468 </span>            :     return buf;</a>
 <a name="469"><span class="lineNum">     469 </span>            : }</a>
 <a name="470"><span class="lineNum">     470 </span>            : </a>
-<a name="471"><span class="lineNum">     471 </span><span class="lineCov">        336 : static void mark_is_composite(uint8_t *is_composite, uint64_t q, uint64_t r, uint64_t q_ub){</span></a>
+<a name="471"><span class="lineNum">     471 </span><span class="lineCov">        504 : static void mark_is_composite(uint8_t *is_composite, uint64_t q, uint64_t r, uint64_t q_ub){</span></a>
 <a name="472"><span class="lineNum">     472 </span>            :     /* We need to find the first multiple of the prime 30*q + r which could possibly be prime and is at least the prime squared.</a>
 <a name="473"><span class="lineNum">     473 </span>            :      * Since the prime squared is still coprime to the wheel size, we start at the prime squared.</a>
 <a name="474"><span class="lineNum">     474 </span>            :      * (30*q + r)**2 = 30*30*q**2 + 30*2*q*r + r**2 = 30*(30*q**2 + 2*q*r) + r**2</a>
 <a name="475"><span class="lineNum">     475 </span>            :      */</a>
-<a name="476"><span class="lineNum">     476 </span><span class="lineCov">        336 :     uint64_t mq;</span></a>
-<a name="477"><span class="lineNum">     477 </span><span class="lineCov">        336 :     switch(r){</span></a>
-<a name="478"><span class="lineNum">     478 </span><span class="lineCov">         36 :         case 1:</span></a>
-<a name="479"><span class="lineNum">     479 </span><span class="lineCov">         36 :             mq = q*(30*q + 2) + 0;// mr = 1</span></a>
-<a name="480"><span class="lineNum">     480 </span><span class="lineCov">       5624 :             for(; mq + 28*q + 0 &lt; q_ub; mq += 30*q + 1){</span></a>
-<a name="481"><span class="lineNum">     481 </span><span class="lineCov">       5588 :                 is_composite[mq] |= 0x1;// mr = 1</span></a>
-<a name="482"><span class="lineNum">     482 </span><span class="lineCov">       5588 :                 is_composite[mq + 6*q + 0] |= 0x2;// mr = 7</span></a>
-<a name="483"><span class="lineNum">     483 </span><span class="lineCov">       5588 :                 is_composite[mq + 10*q + 0] |= 0x4;// mr = 11</span></a>
-<a name="484"><span class="lineNum">     484 </span><span class="lineCov">       5588 :                 is_composite[mq + 12*q + 0] |= 0x8;// mr = 13</span></a>
-<a name="485"><span class="lineNum">     485 </span><span class="lineCov">       5588 :                 is_composite[mq + 16*q + 0] |= 0x10;// mr = 17</span></a>
-<a name="486"><span class="lineNum">     486 </span><span class="lineCov">       5588 :                 is_composite[mq + 18*q + 0] |= 0x20;// mr = 19</span></a>
-<a name="487"><span class="lineNum">     487 </span><span class="lineCov">       5588 :                 is_composite[mq + 22*q + 0] |= 0x40;// mr = 23</span></a>
-<a name="488"><span class="lineNum">     488 </span><span class="lineCov">       5588 :                 is_composite[mq + 28*q + 0] |= 0x80;// mr = 29</span></a>
+<a name="476"><span class="lineNum">     476 </span><span class="lineCov">        504 :     uint64_t mq;</span></a>
+<a name="477"><span class="lineNum">     477 </span><span class="lineCov">        504 :     switch(r){</span></a>
+<a name="478"><span class="lineNum">     478 </span><span class="lineCov">         54 :         case 1:</span></a>
+<a name="479"><span class="lineNum">     479 </span><span class="lineCov">         54 :             mq = q*(30*q + 2) + 0;// mr = 1</span></a>
+<a name="480"><span class="lineNum">     480 </span><span class="lineCov">       8436 :             for(; mq + 28*q + 0 &lt; q_ub; mq += 30*q + 1){</span></a>
+<a name="481"><span class="lineNum">     481 </span><span class="lineCov">       8382 :                 is_composite[mq] |= 0x1;// mr = 1</span></a>
+<a name="482"><span class="lineNum">     482 </span><span class="lineCov">       8382 :                 is_composite[mq + 6*q + 0] |= 0x2;// mr = 7</span></a>
+<a name="483"><span class="lineNum">     483 </span><span class="lineCov">       8382 :                 is_composite[mq + 10*q + 0] |= 0x4;// mr = 11</span></a>
+<a name="484"><span class="lineNum">     484 </span><span class="lineCov">       8382 :                 is_composite[mq + 12*q + 0] |= 0x8;// mr = 13</span></a>
+<a name="485"><span class="lineNum">     485 </span><span class="lineCov">       8382 :                 is_composite[mq + 16*q + 0] |= 0x10;// mr = 17</span></a>
+<a name="486"><span class="lineNum">     486 </span><span class="lineCov">       8382 :                 is_composite[mq + 18*q + 0] |= 0x20;// mr = 19</span></a>
+<a name="487"><span class="lineNum">     487 </span><span class="lineCov">       8382 :                 is_composite[mq + 22*q + 0] |= 0x40;// mr = 23</span></a>
+<a name="488"><span class="lineNum">     488 </span><span class="lineCov">       8382 :                 is_composite[mq + 28*q + 0] |= 0x80;// mr = 29</span></a>
 <a name="489"><span class="lineNum">     489 </span>            :             }</a>
-<a name="490"><span class="lineNum">     490 </span><span class="lineCov">         36 :             if(mq &gt;= q_ub){break;}</span></a>
-<a name="491"><span class="lineNum">     491 </span><span class="lineCov">         32 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
-<a name="492"><span class="lineNum">     492 </span><span class="lineCov">         32 :             if((mq += 6*q + 0) &gt;= q_ub){break;}</span></a>
-<a name="493"><span class="lineNum">     493 </span><span class="lineCov">         26 :             is_composite[mq] |= 0x2;// mr = 7</span></a>
-<a name="494"><span class="lineNum">     494 </span><span class="lineCov">         26 :             if((mq += 4*q + 0) &gt;= q_ub){break;}</span></a>
-<a name="495"><span class="lineNum">     495 </span><span class="lineCov">         20 :             is_composite[mq] |= 0x4;// mr = 11</span></a>
-<a name="496"><span class="lineNum">     496 </span><span class="lineCov">         20 :             if((mq += 2*q + 0) &gt;= q_ub){break;}</span></a>
-<a name="497"><span class="lineNum">     497 </span><span class="lineCov">         14 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
-<a name="498"><span class="lineNum">     498 </span><span class="lineCov">         14 :             if((mq += 4*q + 0) &gt;= q_ub){break;}</span></a>
-<a name="499"><span class="lineNum">     499 </span><span class="lineCov">         10 :             is_composite[mq] |= 0x10;// mr = 17</span></a>
-<a name="500"><span class="lineNum">     500 </span><span class="lineCov">         10 :             if((mq += 2*q + 0) &gt;= q_ub){break;}</span></a>
-<a name="501"><span class="lineNum">     501 </span><span class="lineCov">          8 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
-<a name="502"><span class="lineNum">     502 </span><span class="lineCov">          8 :             if((mq += 4*q + 0) &gt;= q_ub){break;}</span></a>
-<a name="503"><span class="lineNum">     503 </span><span class="lineCov">          2 :             is_composite[mq] |= 0x40;// mr = 23</span></a>
-<a name="504"><span class="lineNum">     504 </span><span class="lineCov">          2 :             mq += 6*q + 0; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
-<a name="505"><span class="lineNum">     505 </span><span class="lineCov">         48 :         case 7:</span></a>
-<a name="506"><span class="lineNum">     506 </span><span class="lineCov">         48 :             mq = q*(30*q + 14) + 1;// mr = 19</span></a>
-<a name="507"><span class="lineNum">     507 </span><span class="lineCov">      15454 :             for(; mq + 24*q + 6 &lt; q_ub; mq += 30*q + 7){</span></a>
-<a name="508"><span class="lineNum">     508 </span><span class="lineCov">      15406 :                 is_composite[mq] |= 0x20;// mr = 19</span></a>
-<a name="509"><span class="lineNum">     509 </span><span class="lineCov">      15406 :                 is_composite[mq + 4*q + 1] |= 0x10;// mr = 17</span></a>
-<a name="510"><span class="lineNum">     510 </span><span class="lineCov">      15406 :                 is_composite[mq + 6*q + 2] |= 0x1;// mr = 1</span></a>
-<a name="511"><span class="lineNum">     511 </span><span class="lineCov">      15406 :                 is_composite[mq + 10*q + 2] |= 0x80;// mr = 29</span></a>
-<a name="512"><span class="lineNum">     512 </span><span class="lineCov">      15406 :                 is_composite[mq + 12*q + 3] |= 0x8;// mr = 13</span></a>
-<a name="513"><span class="lineNum">     513 </span><span class="lineCov">      15406 :                 is_composite[mq + 16*q + 4] |= 0x4;// mr = 11</span></a>
-<a name="514"><span class="lineNum">     514 </span><span class="lineCov">      15406 :                 is_composite[mq + 22*q + 5] |= 0x40;// mr = 23</span></a>
-<a name="515"><span class="lineNum">     515 </span><span class="lineCov">      15406 :                 is_composite[mq + 24*q + 6] |= 0x2;// mr = 7</span></a>
+<a name="490"><span class="lineNum">     490 </span><span class="lineCov">         54 :             if(mq &gt;= q_ub){break;}</span></a>
+<a name="491"><span class="lineNum">     491 </span><span class="lineCov">         48 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
+<a name="492"><span class="lineNum">     492 </span><span class="lineCov">         48 :             if((mq += 6*q + 0) &gt;= q_ub){break;}</span></a>
+<a name="493"><span class="lineNum">     493 </span><span class="lineCov">         39 :             is_composite[mq] |= 0x2;// mr = 7</span></a>
+<a name="494"><span class="lineNum">     494 </span><span class="lineCov">         39 :             if((mq += 4*q + 0) &gt;= q_ub){break;}</span></a>
+<a name="495"><span class="lineNum">     495 </span><span class="lineCov">         30 :             is_composite[mq] |= 0x4;// mr = 11</span></a>
+<a name="496"><span class="lineNum">     496 </span><span class="lineCov">         30 :             if((mq += 2*q + 0) &gt;= q_ub){break;}</span></a>
+<a name="497"><span class="lineNum">     497 </span><span class="lineCov">         21 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
+<a name="498"><span class="lineNum">     498 </span><span class="lineCov">         21 :             if((mq += 4*q + 0) &gt;= q_ub){break;}</span></a>
+<a name="499"><span class="lineNum">     499 </span><span class="lineCov">         15 :             is_composite[mq] |= 0x10;// mr = 17</span></a>
+<a name="500"><span class="lineNum">     500 </span><span class="lineCov">         15 :             if((mq += 2*q + 0) &gt;= q_ub){break;}</span></a>
+<a name="501"><span class="lineNum">     501 </span><span class="lineCov">         12 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
+<a name="502"><span class="lineNum">     502 </span><span class="lineCov">         12 :             if((mq += 4*q + 0) &gt;= q_ub){break;}</span></a>
+<a name="503"><span class="lineNum">     503 </span><span class="lineCov">          3 :             is_composite[mq] |= 0x40;// mr = 23</span></a>
+<a name="504"><span class="lineNum">     504 </span><span class="lineCov">          3 :             mq += 6*q + 0; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
+<a name="505"><span class="lineNum">     505 </span><span class="lineCov">         72 :         case 7:</span></a>
+<a name="506"><span class="lineNum">     506 </span><span class="lineCov">         72 :             mq = q*(30*q + 14) + 1;// mr = 19</span></a>
+<a name="507"><span class="lineNum">     507 </span><span class="lineCov">      23181 :             for(; mq + 24*q + 6 &lt; q_ub; mq += 30*q + 7){</span></a>
+<a name="508"><span class="lineNum">     508 </span><span class="lineCov">      23109 :                 is_composite[mq] |= 0x20;// mr = 19</span></a>
+<a name="509"><span class="lineNum">     509 </span><span class="lineCov">      23109 :                 is_composite[mq + 4*q + 1] |= 0x10;// mr = 17</span></a>
+<a name="510"><span class="lineNum">     510 </span><span class="lineCov">      23109 :                 is_composite[mq + 6*q + 2] |= 0x1;// mr = 1</span></a>
+<a name="511"><span class="lineNum">     511 </span><span class="lineCov">      23109 :                 is_composite[mq + 10*q + 2] |= 0x80;// mr = 29</span></a>
+<a name="512"><span class="lineNum">     512 </span><span class="lineCov">      23109 :                 is_composite[mq + 12*q + 3] |= 0x8;// mr = 13</span></a>
+<a name="513"><span class="lineNum">     513 </span><span class="lineCov">      23109 :                 is_composite[mq + 16*q + 4] |= 0x4;// mr = 11</span></a>
+<a name="514"><span class="lineNum">     514 </span><span class="lineCov">      23109 :                 is_composite[mq + 22*q + 5] |= 0x40;// mr = 23</span></a>
+<a name="515"><span class="lineNum">     515 </span><span class="lineCov">      23109 :                 is_composite[mq + 24*q + 6] |= 0x2;// mr = 7</span></a>
 <a name="516"><span class="lineNum">     516 </span>            :             }</a>
-<a name="517"><span class="lineNum">     517 </span><span class="lineCov">         48 :             if(mq &gt;= q_ub){break;}</span></a>
-<a name="518"><span class="lineNum">     518 </span><span class="lineCov">         46 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
-<a name="519"><span class="lineNum">     519 </span><span class="lineCov">         46 :             if((mq += 4*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="520"><span class="lineNum">     520 </span><span class="lineCov">         40 :             is_composite[mq] |= 0x10;// mr = 17</span></a>
-<a name="521"><span class="lineNum">     521 </span><span class="lineCov">         40 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="522"><span class="lineNum">     522 </span><span class="lineCov">         40 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
-<a name="523"><span class="lineNum">     523 </span><span class="lineCov">         40 :             if((mq += 4*q + 0) &gt;= q_ub){break;}</span></a>
-<a name="524"><span class="lineNum">     524 </span><span class="lineCov">         30 :             is_composite[mq] |= 0x80;// mr = 29</span></a>
-<a name="525"><span class="lineNum">     525 </span><span class="lineCov">         30 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="526"><span class="lineNum">     526 </span><span class="lineCov">         26 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
-<a name="527"><span class="lineNum">     527 </span><span class="lineCov">         26 :             if((mq += 4*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="528"><span class="lineNum">     528 </span><span class="lineCov">         22 :             is_composite[mq] |= 0x4;// mr = 11</span></a>
-<a name="529"><span class="lineNum">     529 </span><span class="lineCov">         22 :             if((mq += 6*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="530"><span class="lineNum">     530 </span><span class="lineCov">          4 :             is_composite[mq] |= 0x40;// mr = 23</span></a>
-<a name="531"><span class="lineNum">     531 </span><span class="lineCov">          4 :             mq += 2*q + 1; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
-<a name="532"><span class="lineNum">     532 </span><span class="lineCov">         44 :         case 11:</span></a>
-<a name="533"><span class="lineNum">     533 </span><span class="lineCov">         44 :             mq = q*(30*q + 22) + 4;// mr = 1</span></a>
-<a name="534"><span class="lineNum">     534 </span><span class="lineCov">      11588 :             for(; mq + 26*q + 9 &lt; q_ub; mq += 30*q + 11){</span></a>
-<a name="535"><span class="lineNum">     535 </span><span class="lineCov">      11544 :                 is_composite[mq] |= 0x1;// mr = 1</span></a>
-<a name="536"><span class="lineNum">     536 </span><span class="lineCov">      11544 :                 is_composite[mq + 2*q + 0] |= 0x40;// mr = 23</span></a>
-<a name="537"><span class="lineNum">     537 </span><span class="lineCov">      11544 :                 is_composite[mq + 6*q + 2] |= 0x2;// mr = 7</span></a>
-<a name="538"><span class="lineNum">     538 </span><span class="lineCov">      11544 :                 is_composite[mq + 8*q + 2] |= 0x80;// mr = 29</span></a>
-<a name="539"><span class="lineNum">     539 </span><span class="lineCov">      11544 :                 is_composite[mq + 12*q + 4] |= 0x8;// mr = 13</span></a>
-<a name="540"><span class="lineNum">     540 </span><span class="lineCov">      11544 :                 is_composite[mq + 18*q + 6] |= 0x20;// mr = 19</span></a>
-<a name="541"><span class="lineNum">     541 </span><span class="lineCov">      11544 :                 is_composite[mq + 20*q + 7] |= 0x4;// mr = 11</span></a>
-<a name="542"><span class="lineNum">     542 </span><span class="lineCov">      11544 :                 is_composite[mq + 26*q + 9] |= 0x10;// mr = 17</span></a>
+<a name="517"><span class="lineNum">     517 </span><span class="lineCov">         72 :             if(mq &gt;= q_ub){break;}</span></a>
+<a name="518"><span class="lineNum">     518 </span><span class="lineCov">         69 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
+<a name="519"><span class="lineNum">     519 </span><span class="lineCov">         69 :             if((mq += 4*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="520"><span class="lineNum">     520 </span><span class="lineCov">         60 :             is_composite[mq] |= 0x10;// mr = 17</span></a>
+<a name="521"><span class="lineNum">     521 </span><span class="lineCov">         60 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="522"><span class="lineNum">     522 </span><span class="lineCov">         60 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
+<a name="523"><span class="lineNum">     523 </span><span class="lineCov">         60 :             if((mq += 4*q + 0) &gt;= q_ub){break;}</span></a>
+<a name="524"><span class="lineNum">     524 </span><span class="lineCov">         45 :             is_composite[mq] |= 0x80;// mr = 29</span></a>
+<a name="525"><span class="lineNum">     525 </span><span class="lineCov">         45 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="526"><span class="lineNum">     526 </span><span class="lineCov">         39 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
+<a name="527"><span class="lineNum">     527 </span><span class="lineCov">         39 :             if((mq += 4*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="528"><span class="lineNum">     528 </span><span class="lineCov">         33 :             is_composite[mq] |= 0x4;// mr = 11</span></a>
+<a name="529"><span class="lineNum">     529 </span><span class="lineCov">         33 :             if((mq += 6*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="530"><span class="lineNum">     530 </span><span class="lineCov">          6 :             is_composite[mq] |= 0x40;// mr = 23</span></a>
+<a name="531"><span class="lineNum">     531 </span><span class="lineCov">          6 :             mq += 2*q + 1; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
+<a name="532"><span class="lineNum">     532 </span><span class="lineCov">         66 :         case 11:</span></a>
+<a name="533"><span class="lineNum">     533 </span><span class="lineCov">         66 :             mq = q*(30*q + 22) + 4;// mr = 1</span></a>
+<a name="534"><span class="lineNum">     534 </span><span class="lineCov">      17382 :             for(; mq + 26*q + 9 &lt; q_ub; mq += 30*q + 11){</span></a>
+<a name="535"><span class="lineNum">     535 </span><span class="lineCov">      17316 :                 is_composite[mq] |= 0x1;// mr = 1</span></a>
+<a name="536"><span class="lineNum">     536 </span><span class="lineCov">      17316 :                 is_composite[mq + 2*q + 0] |= 0x40;// mr = 23</span></a>
+<a name="537"><span class="lineNum">     537 </span><span class="lineCov">      17316 :                 is_composite[mq + 6*q + 2] |= 0x2;// mr = 7</span></a>
+<a name="538"><span class="lineNum">     538 </span><span class="lineCov">      17316 :                 is_composite[mq + 8*q + 2] |= 0x80;// mr = 29</span></a>
+<a name="539"><span class="lineNum">     539 </span><span class="lineCov">      17316 :                 is_composite[mq + 12*q + 4] |= 0x8;// mr = 13</span></a>
+<a name="540"><span class="lineNum">     540 </span><span class="lineCov">      17316 :                 is_composite[mq + 18*q + 6] |= 0x20;// mr = 19</span></a>
+<a name="541"><span class="lineNum">     541 </span><span class="lineCov">      17316 :                 is_composite[mq + 20*q + 7] |= 0x4;// mr = 11</span></a>
+<a name="542"><span class="lineNum">     542 </span><span class="lineCov">      17316 :                 is_composite[mq + 26*q + 9] |= 0x10;// mr = 17</span></a>
 <a name="543"><span class="lineNum">     543 </span>            :             }</a>
-<a name="544"><span class="lineNum">     544 </span><span class="lineCov">         44 :             if(mq &gt;= q_ub){break;}</span></a>
-<a name="545"><span class="lineNum">     545 </span><span class="lineCov">         36 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
-<a name="546"><span class="lineNum">     546 </span><span class="lineCov">         36 :             if((mq += 2*q + 0) &gt;= q_ub){break;}</span></a>
-<a name="547"><span class="lineNum">     547 </span><span class="lineCov">         34 :             is_composite[mq] |= 0x40;// mr = 23</span></a>
-<a name="548"><span class="lineNum">     548 </span><span class="lineCov">         34 :             if((mq += 4*q + 2) &gt;= q_ub){break;}</span></a>
-<a name="549"><span class="lineNum">     549 </span><span class="lineCov">         26 :             is_composite[mq] |= 0x2;// mr = 7</span></a>
-<a name="550"><span class="lineNum">     550 </span><span class="lineCov">         26 :             if((mq += 2*q + 0) &gt;= q_ub){break;}</span></a>
-<a name="551"><span class="lineNum">     551 </span><span class="lineCov">         20 :             is_composite[mq] |= 0x80;// mr = 29</span></a>
-<a name="552"><span class="lineNum">     552 </span><span class="lineCov">         20 :             if((mq += 4*q + 2) &gt;= q_ub){break;}</span></a>
-<a name="553"><span class="lineNum">     553 </span><span class="lineCov">         20 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
-<a name="554"><span class="lineNum">     554 </span><span class="lineCov">         20 :             if((mq += 6*q + 2) &gt;= q_ub){break;}</span></a>
-<a name="555"><span class="lineNum">     555 </span><span class="lineCov">         12 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
-<a name="556"><span class="lineNum">     556 </span><span class="lineCov">         12 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="557"><span class="lineNum">     557 </span><span class="lineCov">          6 :             is_composite[mq] |= 0x4;// mr = 11</span></a>
-<a name="558"><span class="lineNum">     558 </span><span class="lineCov">          6 :             mq += 6*q + 2; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
-<a name="559"><span class="lineNum">     559 </span><span class="lineCov">         40 :         case 13:</span></a>
-<a name="560"><span class="lineNum">     560 </span><span class="lineCov">         40 :             mq = q*(30*q + 26) + 5;// mr = 19</span></a>
-<a name="561"><span class="lineNum">     561 </span><span class="lineCov">      10450 :             for(; mq + 28*q + 12 &lt; q_ub; mq += 30*q + 13){</span></a>
-<a name="562"><span class="lineNum">     562 </span><span class="lineCov">      10410 :                 is_composite[mq] |= 0x20;// mr = 19</span></a>
-<a name="563"><span class="lineNum">     563 </span><span class="lineCov">      10410 :                 is_composite[mq + 4*q + 2] |= 0x4;// mr = 11</span></a>
-<a name="564"><span class="lineNum">     564 </span><span class="lineCov">      10410 :                 is_composite[mq + 6*q + 3] |= 0x2;// mr = 7</span></a>
-<a name="565"><span class="lineNum">     565 </span><span class="lineCov">      10410 :                 is_composite[mq + 10*q + 4] |= 0x80;// mr = 29</span></a>
-<a name="566"><span class="lineNum">     566 </span><span class="lineCov">      10410 :                 is_composite[mq + 16*q + 7] |= 0x10;// mr = 17</span></a>
-<a name="567"><span class="lineNum">     567 </span><span class="lineCov">      10410 :                 is_composite[mq + 18*q + 8] |= 0x8;// mr = 13</span></a>
-<a name="568"><span class="lineNum">     568 </span><span class="lineCov">      10410 :                 is_composite[mq + 24*q + 11] |= 0x1;// mr = 1</span></a>
-<a name="569"><span class="lineNum">     569 </span><span class="lineCov">      10410 :                 is_composite[mq + 28*q + 12] |= 0x40;// mr = 23</span></a>
+<a name="544"><span class="lineNum">     544 </span><span class="lineCov">         66 :             if(mq &gt;= q_ub){break;}</span></a>
+<a name="545"><span class="lineNum">     545 </span><span class="lineCov">         54 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
+<a name="546"><span class="lineNum">     546 </span><span class="lineCov">         54 :             if((mq += 2*q + 0) &gt;= q_ub){break;}</span></a>
+<a name="547"><span class="lineNum">     547 </span><span class="lineCov">         51 :             is_composite[mq] |= 0x40;// mr = 23</span></a>
+<a name="548"><span class="lineNum">     548 </span><span class="lineCov">         51 :             if((mq += 4*q + 2) &gt;= q_ub){break;}</span></a>
+<a name="549"><span class="lineNum">     549 </span><span class="lineCov">         39 :             is_composite[mq] |= 0x2;// mr = 7</span></a>
+<a name="550"><span class="lineNum">     550 </span><span class="lineCov">         39 :             if((mq += 2*q + 0) &gt;= q_ub){break;}</span></a>
+<a name="551"><span class="lineNum">     551 </span><span class="lineCov">         30 :             is_composite[mq] |= 0x80;// mr = 29</span></a>
+<a name="552"><span class="lineNum">     552 </span><span class="lineCov">         30 :             if((mq += 4*q + 2) &gt;= q_ub){break;}</span></a>
+<a name="553"><span class="lineNum">     553 </span><span class="lineCov">         30 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
+<a name="554"><span class="lineNum">     554 </span><span class="lineCov">         30 :             if((mq += 6*q + 2) &gt;= q_ub){break;}</span></a>
+<a name="555"><span class="lineNum">     555 </span><span class="lineCov">         18 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
+<a name="556"><span class="lineNum">     556 </span><span class="lineCov">         18 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="557"><span class="lineNum">     557 </span><span class="lineCov">          9 :             is_composite[mq] |= 0x4;// mr = 11</span></a>
+<a name="558"><span class="lineNum">     558 </span><span class="lineCov">          9 :             mq += 6*q + 2; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
+<a name="559"><span class="lineNum">     559 </span><span class="lineCov">         60 :         case 13:</span></a>
+<a name="560"><span class="lineNum">     560 </span><span class="lineCov">         60 :             mq = q*(30*q + 26) + 5;// mr = 19</span></a>
+<a name="561"><span class="lineNum">     561 </span><span class="lineCov">      15675 :             for(; mq + 28*q + 12 &lt; q_ub; mq += 30*q + 13){</span></a>
+<a name="562"><span class="lineNum">     562 </span><span class="lineCov">      15615 :                 is_composite[mq] |= 0x20;// mr = 19</span></a>
+<a name="563"><span class="lineNum">     563 </span><span class="lineCov">      15615 :                 is_composite[mq + 4*q + 2] |= 0x4;// mr = 11</span></a>
+<a name="564"><span class="lineNum">     564 </span><span class="lineCov">      15615 :                 is_composite[mq + 6*q + 3] |= 0x2;// mr = 7</span></a>
+<a name="565"><span class="lineNum">     565 </span><span class="lineCov">      15615 :                 is_composite[mq + 10*q + 4] |= 0x80;// mr = 29</span></a>
+<a name="566"><span class="lineNum">     566 </span><span class="lineCov">      15615 :                 is_composite[mq + 16*q + 7] |= 0x10;// mr = 17</span></a>
+<a name="567"><span class="lineNum">     567 </span><span class="lineCov">      15615 :                 is_composite[mq + 18*q + 8] |= 0x8;// mr = 13</span></a>
+<a name="568"><span class="lineNum">     568 </span><span class="lineCov">      15615 :                 is_composite[mq + 24*q + 11] |= 0x1;// mr = 1</span></a>
+<a name="569"><span class="lineNum">     569 </span><span class="lineCov">      15615 :                 is_composite[mq + 28*q + 12] |= 0x40;// mr = 23</span></a>
 <a name="570"><span class="lineNum">     570 </span>            :             }</a>
-<a name="571"><span class="lineNum">     571 </span><span class="lineCov">         40 :             if(mq &gt;= q_ub){break;}</span></a>
-<a name="572"><span class="lineNum">     572 </span><span class="lineCov">         36 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
-<a name="573"><span class="lineNum">     573 </span><span class="lineCov">         36 :             if((mq += 4*q + 2) &gt;= q_ub){break;}</span></a>
-<a name="574"><span class="lineNum">     574 </span><span class="lineCov">         24 :             is_composite[mq] |= 0x4;// mr = 11</span></a>
-<a name="575"><span class="lineNum">     575 </span><span class="lineCov">         24 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="576"><span class="lineNum">     576 </span><span class="lineCov">         20 :             is_composite[mq] |= 0x2;// mr = 7</span></a>
-<a name="577"><span class="lineNum">     577 </span><span class="lineCov">         20 :             if((mq += 4*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="578"><span class="lineNum">     578 </span><span class="lineCov">         14 :             is_composite[mq] |= 0x80;// mr = 29</span></a>
-<a name="579"><span class="lineNum">     579 </span><span class="lineCov">         14 :             if((mq += 6*q + 3) &gt;= q_ub){break;}</span></a>
-<a name="580"><span class="lineNum">     580 </span><span class="lineCov">         10 :             is_composite[mq] |= 0x10;// mr = 17</span></a>
-<a name="581"><span class="lineNum">     581 </span><span class="lineCov">         10 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="582"><span class="lineNum">     582 </span><span class="lineCov">          6 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
-<a name="583"><span class="lineNum">     583 </span><span class="lineCov">          6 :             if((mq += 6*q + 3) &gt;= q_ub){break;}</span></a>
+<a name="571"><span class="lineNum">     571 </span><span class="lineCov">         60 :             if(mq &gt;= q_ub){break;}</span></a>
+<a name="572"><span class="lineNum">     572 </span><span class="lineCov">         54 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
+<a name="573"><span class="lineNum">     573 </span><span class="lineCov">         54 :             if((mq += 4*q + 2) &gt;= q_ub){break;}</span></a>
+<a name="574"><span class="lineNum">     574 </span><span class="lineCov">         36 :             is_composite[mq] |= 0x4;// mr = 11</span></a>
+<a name="575"><span class="lineNum">     575 </span><span class="lineCov">         36 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="576"><span class="lineNum">     576 </span><span class="lineCov">         30 :             is_composite[mq] |= 0x2;// mr = 7</span></a>
+<a name="577"><span class="lineNum">     577 </span><span class="lineCov">         30 :             if((mq += 4*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="578"><span class="lineNum">     578 </span><span class="lineCov">         21 :             is_composite[mq] |= 0x80;// mr = 29</span></a>
+<a name="579"><span class="lineNum">     579 </span><span class="lineCov">         21 :             if((mq += 6*q + 3) &gt;= q_ub){break;}</span></a>
+<a name="580"><span class="lineNum">     580 </span><span class="lineCov">         15 :             is_composite[mq] |= 0x10;// mr = 17</span></a>
+<a name="581"><span class="lineNum">     581 </span><span class="lineCov">         15 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="582"><span class="lineNum">     582 </span><span class="lineCov">          9 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
+<a name="583"><span class="lineNum">     583 </span><span class="lineCov">          9 :             if((mq += 6*q + 3) &gt;= q_ub){break;}</span></a>
 <a name="584"><span class="lineNum">     584 </span><span class="lineNoCov">          0 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
 <a name="585"><span class="lineNum">     585 </span><span class="lineNoCov">          0 :             mq += 4*q + 1; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
-<a name="586"><span class="lineNum">     586 </span><span class="lineCov">         44 :         case 17:</span></a>
-<a name="587"><span class="lineNum">     587 </span><span class="lineCov">         44 :             mq = q*(30*q + 34) + 9;// mr = 19</span></a>
-<a name="588"><span class="lineNum">     588 </span><span class="lineCov">       8600 :             for(; mq + 26*q + 15 &lt; q_ub; mq += 30*q + 17){</span></a>
-<a name="589"><span class="lineNum">     589 </span><span class="lineCov">       8556 :                 is_composite[mq] |= 0x20;// mr = 19</span></a>
-<a name="590"><span class="lineNum">     590 </span><span class="lineCov">       8556 :                 is_composite[mq + 2*q + 1] |= 0x40;// mr = 23</span></a>
-<a name="591"><span class="lineNum">     591 </span><span class="lineCov">       8556 :                 is_composite[mq + 6*q + 4] |= 0x1;// mr = 1</span></a>
-<a name="592"><span class="lineNum">     592 </span><span class="lineCov">       8556 :                 is_composite[mq + 12*q + 7] |= 0x8;// mr = 13</span></a>
-<a name="593"><span class="lineNum">     593 </span><span class="lineCov">       8556 :                 is_composite[mq + 14*q + 8] |= 0x10;// mr = 17</span></a>
-<a name="594"><span class="lineNum">     594 </span><span class="lineCov">       8556 :                 is_composite[mq + 20*q + 11] |= 0x80;// mr = 29</span></a>
-<a name="595"><span class="lineNum">     595 </span><span class="lineCov">       8556 :                 is_composite[mq + 24*q + 14] |= 0x2;// mr = 7</span></a>
-<a name="596"><span class="lineNum">     596 </span><span class="lineCov">       8556 :                 is_composite[mq + 26*q + 15] |= 0x4;// mr = 11</span></a>
+<a name="586"><span class="lineNum">     586 </span><span class="lineCov">         66 :         case 17:</span></a>
+<a name="587"><span class="lineNum">     587 </span><span class="lineCov">         66 :             mq = q*(30*q + 34) + 9;// mr = 19</span></a>
+<a name="588"><span class="lineNum">     588 </span><span class="lineCov">      12900 :             for(; mq + 26*q + 15 &lt; q_ub; mq += 30*q + 17){</span></a>
+<a name="589"><span class="lineNum">     589 </span><span class="lineCov">      12834 :                 is_composite[mq] |= 0x20;// mr = 19</span></a>
+<a name="590"><span class="lineNum">     590 </span><span class="lineCov">      12834 :                 is_composite[mq + 2*q + 1] |= 0x40;// mr = 23</span></a>
+<a name="591"><span class="lineNum">     591 </span><span class="lineCov">      12834 :                 is_composite[mq + 6*q + 4] |= 0x1;// mr = 1</span></a>
+<a name="592"><span class="lineNum">     592 </span><span class="lineCov">      12834 :                 is_composite[mq + 12*q + 7] |= 0x8;// mr = 13</span></a>
+<a name="593"><span class="lineNum">     593 </span><span class="lineCov">      12834 :                 is_composite[mq + 14*q + 8] |= 0x10;// mr = 17</span></a>
+<a name="594"><span class="lineNum">     594 </span><span class="lineCov">      12834 :                 is_composite[mq + 20*q + 11] |= 0x80;// mr = 29</span></a>
+<a name="595"><span class="lineNum">     595 </span><span class="lineCov">      12834 :                 is_composite[mq + 24*q + 14] |= 0x2;// mr = 7</span></a>
+<a name="596"><span class="lineNum">     596 </span><span class="lineCov">      12834 :                 is_composite[mq + 26*q + 15] |= 0x4;// mr = 11</span></a>
 <a name="597"><span class="lineNum">     597 </span>            :             }</a>
-<a name="598"><span class="lineNum">     598 </span><span class="lineCov">         44 :             if(mq &gt;= q_ub){break;}</span></a>
-<a name="599"><span class="lineNum">     599 </span><span class="lineCov">         40 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
-<a name="600"><span class="lineNum">     600 </span><span class="lineCov">         40 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="601"><span class="lineNum">     601 </span><span class="lineCov">         36 :             is_composite[mq] |= 0x40;// mr = 23</span></a>
-<a name="602"><span class="lineNum">     602 </span><span class="lineCov">         36 :             if((mq += 4*q + 3) &gt;= q_ub){break;}</span></a>
-<a name="603"><span class="lineNum">     603 </span><span class="lineCov">         34 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
-<a name="604"><span class="lineNum">     604 </span><span class="lineCov">         34 :             if((mq += 6*q + 3) &gt;= q_ub){break;}</span></a>
-<a name="605"><span class="lineNum">     605 </span><span class="lineCov">         22 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
-<a name="606"><span class="lineNum">     606 </span><span class="lineCov">         22 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="607"><span class="lineNum">     607 </span><span class="lineCov">         20 :             is_composite[mq] |= 0x10;// mr = 17</span></a>
-<a name="608"><span class="lineNum">     608 </span><span class="lineCov">         20 :             if((mq += 6*q + 3) &gt;= q_ub){break;}</span></a>
-<a name="609"><span class="lineNum">     609 </span><span class="lineCov">         10 :             is_composite[mq] |= 0x80;// mr = 29</span></a>
-<a name="610"><span class="lineNum">     610 </span><span class="lineCov">         10 :             if((mq += 4*q + 3) &gt;= q_ub){break;}</span></a>
-<a name="611"><span class="lineNum">     611 </span><span class="lineCov">          2 :             is_composite[mq] |= 0x2;// mr = 7</span></a>
-<a name="612"><span class="lineNum">     612 </span><span class="lineCov">          2 :             mq += 2*q + 1; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
-<a name="613"><span class="lineNum">     613 </span><span class="lineCov">         38 :         case 19:</span></a>
-<a name="614"><span class="lineNum">     614 </span><span class="lineCov">         38 :             mq = q*(30*q + 38) + 12;// mr = 1</span></a>
-<a name="615"><span class="lineNum">     615 </span><span class="lineCov">       6962 :             for(; mq + 28*q + 17 &lt; q_ub; mq += 30*q + 19){</span></a>
-<a name="616"><span class="lineNum">     616 </span><span class="lineCov">       6924 :                 is_composite[mq] |= 0x1;// mr = 1</span></a>
-<a name="617"><span class="lineNum">     617 </span><span class="lineCov">       6924 :                 is_composite[mq + 4*q + 2] |= 0x10;// mr = 17</span></a>
-<a name="618"><span class="lineNum">     618 </span><span class="lineCov">       6924 :                 is_composite[mq + 10*q + 6] |= 0x4;// mr = 11</span></a>
-<a name="619"><span class="lineNum">     619 </span><span class="lineCov">       6924 :                 is_composite[mq + 12*q + 7] |= 0x20;// mr = 19</span></a>
-<a name="620"><span class="lineNum">     620 </span><span class="lineCov">       6924 :                 is_composite[mq + 18*q + 11] |= 0x8;// mr = 13</span></a>
-<a name="621"><span class="lineNum">     621 </span><span class="lineCov">       6924 :                 is_composite[mq + 22*q + 13] |= 0x80;// mr = 29</span></a>
-<a name="622"><span class="lineNum">     622 </span><span class="lineCov">       6924 :                 is_composite[mq + 24*q + 15] |= 0x2;// mr = 7</span></a>
-<a name="623"><span class="lineNum">     623 </span><span class="lineCov">       6924 :                 is_composite[mq + 28*q + 17] |= 0x40;// mr = 23</span></a>
+<a name="598"><span class="lineNum">     598 </span><span class="lineCov">         66 :             if(mq &gt;= q_ub){break;}</span></a>
+<a name="599"><span class="lineNum">     599 </span><span class="lineCov">         60 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
+<a name="600"><span class="lineNum">     600 </span><span class="lineCov">         60 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="601"><span class="lineNum">     601 </span><span class="lineCov">         54 :             is_composite[mq] |= 0x40;// mr = 23</span></a>
+<a name="602"><span class="lineNum">     602 </span><span class="lineCov">         54 :             if((mq += 4*q + 3) &gt;= q_ub){break;}</span></a>
+<a name="603"><span class="lineNum">     603 </span><span class="lineCov">         51 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
+<a name="604"><span class="lineNum">     604 </span><span class="lineCov">         51 :             if((mq += 6*q + 3) &gt;= q_ub){break;}</span></a>
+<a name="605"><span class="lineNum">     605 </span><span class="lineCov">         33 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
+<a name="606"><span class="lineNum">     606 </span><span class="lineCov">         33 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="607"><span class="lineNum">     607 </span><span class="lineCov">         30 :             is_composite[mq] |= 0x10;// mr = 17</span></a>
+<a name="608"><span class="lineNum">     608 </span><span class="lineCov">         30 :             if((mq += 6*q + 3) &gt;= q_ub){break;}</span></a>
+<a name="609"><span class="lineNum">     609 </span><span class="lineCov">         15 :             is_composite[mq] |= 0x80;// mr = 29</span></a>
+<a name="610"><span class="lineNum">     610 </span><span class="lineCov">         15 :             if((mq += 4*q + 3) &gt;= q_ub){break;}</span></a>
+<a name="611"><span class="lineNum">     611 </span><span class="lineCov">          3 :             is_composite[mq] |= 0x2;// mr = 7</span></a>
+<a name="612"><span class="lineNum">     612 </span><span class="lineCov">          3 :             mq += 2*q + 1; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
+<a name="613"><span class="lineNum">     613 </span><span class="lineCov">         57 :         case 19:</span></a>
+<a name="614"><span class="lineNum">     614 </span><span class="lineCov">         57 :             mq = q*(30*q + 38) + 12;// mr = 1</span></a>
+<a name="615"><span class="lineNum">     615 </span><span class="lineCov">      10443 :             for(; mq + 28*q + 17 &lt; q_ub; mq += 30*q + 19){</span></a>
+<a name="616"><span class="lineNum">     616 </span><span class="lineCov">      10386 :                 is_composite[mq] |= 0x1;// mr = 1</span></a>
+<a name="617"><span class="lineNum">     617 </span><span class="lineCov">      10386 :                 is_composite[mq + 4*q + 2] |= 0x10;// mr = 17</span></a>
+<a name="618"><span class="lineNum">     618 </span><span class="lineCov">      10386 :                 is_composite[mq + 10*q + 6] |= 0x4;// mr = 11</span></a>
+<a name="619"><span class="lineNum">     619 </span><span class="lineCov">      10386 :                 is_composite[mq + 12*q + 7] |= 0x20;// mr = 19</span></a>
+<a name="620"><span class="lineNum">     620 </span><span class="lineCov">      10386 :                 is_composite[mq + 18*q + 11] |= 0x8;// mr = 13</span></a>
+<a name="621"><span class="lineNum">     621 </span><span class="lineCov">      10386 :                 is_composite[mq + 22*q + 13] |= 0x80;// mr = 29</span></a>
+<a name="622"><span class="lineNum">     622 </span><span class="lineCov">      10386 :                 is_composite[mq + 24*q + 15] |= 0x2;// mr = 7</span></a>
+<a name="623"><span class="lineNum">     623 </span><span class="lineCov">      10386 :                 is_composite[mq + 28*q + 17] |= 0x40;// mr = 23</span></a>
 <a name="624"><span class="lineNum">     624 </span>            :             }</a>
-<a name="625"><span class="lineNum">     625 </span><span class="lineCov">         38 :             if(mq &gt;= q_ub){break;}</span></a>
-<a name="626"><span class="lineNum">     626 </span><span class="lineCov">         36 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
-<a name="627"><span class="lineNum">     627 </span><span class="lineCov">         36 :             if((mq += 4*q + 2) &gt;= q_ub){break;}</span></a>
-<a name="628"><span class="lineNum">     628 </span><span class="lineCov">         36 :             is_composite[mq] |= 0x10;// mr = 17</span></a>
-<a name="629"><span class="lineNum">     629 </span><span class="lineCov">         36 :             if((mq += 6*q + 4) &gt;= q_ub){break;}</span></a>
-<a name="630"><span class="lineNum">     630 </span><span class="lineCov">         20 :             is_composite[mq] |= 0x4;// mr = 11</span></a>
-<a name="631"><span class="lineNum">     631 </span><span class="lineCov">         20 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="632"><span class="lineNum">     632 </span><span class="lineCov">         18 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
-<a name="633"><span class="lineNum">     633 </span><span class="lineCov">         18 :             if((mq += 6*q + 4) &gt;= q_ub){break;}</span></a>
-<a name="634"><span class="lineNum">     634 </span><span class="lineCov">         14 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
-<a name="635"><span class="lineNum">     635 </span><span class="lineCov">         14 :             if((mq += 4*q + 2) &gt;= q_ub){break;}</span></a>
-<a name="636"><span class="lineNum">     636 </span><span class="lineCov">         10 :             is_composite[mq] |= 0x80;// mr = 29</span></a>
-<a name="637"><span class="lineNum">     637 </span><span class="lineCov">         10 :             if((mq += 2*q + 2) &gt;= q_ub){break;}</span></a>
-<a name="638"><span class="lineNum">     638 </span><span class="lineCov">          8 :             is_composite[mq] |= 0x2;// mr = 7</span></a>
-<a name="639"><span class="lineNum">     639 </span><span class="lineCov">          8 :             mq += 4*q + 2; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
-<a name="640"><span class="lineNum">     640 </span><span class="lineCov">         44 :         case 23:</span></a>
-<a name="641"><span class="lineNum">     641 </span><span class="lineCov">         44 :             mq = q*(30*q + 46) + 17;// mr = 19</span></a>
-<a name="642"><span class="lineNum">     642 </span><span class="lineCov">       7552 :             for(; mq + 26*q + 20 &lt; q_ub; mq += 30*q + 23){</span></a>
-<a name="643"><span class="lineNum">     643 </span><span class="lineCov">       7508 :                 is_composite[mq] |= 0x20;// mr = 19</span></a>
-<a name="644"><span class="lineNum">     644 </span><span class="lineCov">       7508 :                 is_composite[mq + 6*q + 5] |= 0x2;// mr = 7</span></a>
-<a name="645"><span class="lineNum">     645 </span><span class="lineCov">       7508 :                 is_composite[mq + 8*q + 6] |= 0x40;// mr = 23</span></a>
-<a name="646"><span class="lineNum">     646 </span><span class="lineCov">       7508 :                 is_composite[mq + 14*q + 11] |= 0x4;// mr = 11</span></a>
-<a name="647"><span class="lineNum">     647 </span><span class="lineCov">       7508 :                 is_composite[mq + 18*q + 14] |= 0x8;// mr = 13</span></a>
-<a name="648"><span class="lineNum">     648 </span><span class="lineCov">       7508 :                 is_composite[mq + 20*q + 15] |= 0x80;// mr = 29</span></a>
-<a name="649"><span class="lineNum">     649 </span><span class="lineCov">       7508 :                 is_composite[mq + 24*q + 19] |= 0x1;// mr = 1</span></a>
-<a name="650"><span class="lineNum">     650 </span><span class="lineCov">       7508 :                 is_composite[mq + 26*q + 20] |= 0x10;// mr = 17</span></a>
+<a name="625"><span class="lineNum">     625 </span><span class="lineCov">         57 :             if(mq &gt;= q_ub){break;}</span></a>
+<a name="626"><span class="lineNum">     626 </span><span class="lineCov">         54 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
+<a name="627"><span class="lineNum">     627 </span><span class="lineCov">         54 :             if((mq += 4*q + 2) &gt;= q_ub){break;}</span></a>
+<a name="628"><span class="lineNum">     628 </span><span class="lineCov">         54 :             is_composite[mq] |= 0x10;// mr = 17</span></a>
+<a name="629"><span class="lineNum">     629 </span><span class="lineCov">         54 :             if((mq += 6*q + 4) &gt;= q_ub){break;}</span></a>
+<a name="630"><span class="lineNum">     630 </span><span class="lineCov">         30 :             is_composite[mq] |= 0x4;// mr = 11</span></a>
+<a name="631"><span class="lineNum">     631 </span><span class="lineCov">         30 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="632"><span class="lineNum">     632 </span><span class="lineCov">         27 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
+<a name="633"><span class="lineNum">     633 </span><span class="lineCov">         27 :             if((mq += 6*q + 4) &gt;= q_ub){break;}</span></a>
+<a name="634"><span class="lineNum">     634 </span><span class="lineCov">         21 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
+<a name="635"><span class="lineNum">     635 </span><span class="lineCov">         21 :             if((mq += 4*q + 2) &gt;= q_ub){break;}</span></a>
+<a name="636"><span class="lineNum">     636 </span><span class="lineCov">         15 :             is_composite[mq] |= 0x80;// mr = 29</span></a>
+<a name="637"><span class="lineNum">     637 </span><span class="lineCov">         15 :             if((mq += 2*q + 2) &gt;= q_ub){break;}</span></a>
+<a name="638"><span class="lineNum">     638 </span><span class="lineCov">         12 :             is_composite[mq] |= 0x2;// mr = 7</span></a>
+<a name="639"><span class="lineNum">     639 </span><span class="lineCov">         12 :             mq += 4*q + 2; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
+<a name="640"><span class="lineNum">     640 </span><span class="lineCov">         66 :         case 23:</span></a>
+<a name="641"><span class="lineNum">     641 </span><span class="lineCov">         66 :             mq = q*(30*q + 46) + 17;// mr = 19</span></a>
+<a name="642"><span class="lineNum">     642 </span><span class="lineCov">      11328 :             for(; mq + 26*q + 20 &lt; q_ub; mq += 30*q + 23){</span></a>
+<a name="643"><span class="lineNum">     643 </span><span class="lineCov">      11262 :                 is_composite[mq] |= 0x20;// mr = 19</span></a>
+<a name="644"><span class="lineNum">     644 </span><span class="lineCov">      11262 :                 is_composite[mq + 6*q + 5] |= 0x2;// mr = 7</span></a>
+<a name="645"><span class="lineNum">     645 </span><span class="lineCov">      11262 :                 is_composite[mq + 8*q + 6] |= 0x40;// mr = 23</span></a>
+<a name="646"><span class="lineNum">     646 </span><span class="lineCov">      11262 :                 is_composite[mq + 14*q + 11] |= 0x4;// mr = 11</span></a>
+<a name="647"><span class="lineNum">     647 </span><span class="lineCov">      11262 :                 is_composite[mq + 18*q + 14] |= 0x8;// mr = 13</span></a>
+<a name="648"><span class="lineNum">     648 </span><span class="lineCov">      11262 :                 is_composite[mq + 20*q + 15] |= 0x80;// mr = 29</span></a>
+<a name="649"><span class="lineNum">     649 </span><span class="lineCov">      11262 :                 is_composite[mq + 24*q + 19] |= 0x1;// mr = 1</span></a>
+<a name="650"><span class="lineNum">     650 </span><span class="lineCov">      11262 :                 is_composite[mq + 26*q + 20] |= 0x10;// mr = 17</span></a>
 <a name="651"><span class="lineNum">     651 </span>            :             }</a>
-<a name="652"><span class="lineNum">     652 </span><span class="lineCov">         44 :             if(mq &gt;= q_ub){break;}</span></a>
-<a name="653"><span class="lineNum">     653 </span><span class="lineCov">         38 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
-<a name="654"><span class="lineNum">     654 </span><span class="lineCov">         38 :             if((mq += 6*q + 5) &gt;= q_ub){break;}</span></a>
-<a name="655"><span class="lineNum">     655 </span><span class="lineCov">         28 :             is_composite[mq] |= 0x2;// mr = 7</span></a>
-<a name="656"><span class="lineNum">     656 </span><span class="lineCov">         28 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="657"><span class="lineNum">     657 </span><span class="lineCov">         24 :             is_composite[mq] |= 0x40;// mr = 23</span></a>
-<a name="658"><span class="lineNum">     658 </span><span class="lineCov">         24 :             if((mq += 6*q + 5) &gt;= q_ub){break;}</span></a>
-<a name="659"><span class="lineNum">     659 </span><span class="lineCov">         12 :             is_composite[mq] |= 0x4;// mr = 11</span></a>
-<a name="660"><span class="lineNum">     660 </span><span class="lineCov">         12 :             if((mq += 4*q + 3) &gt;= q_ub){break;}</span></a>
-<a name="661"><span class="lineNum">     661 </span><span class="lineCov">          6 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
-<a name="662"><span class="lineNum">     662 </span><span class="lineCov">          6 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="663"><span class="lineNum">     663 </span><span class="lineCov">          4 :             is_composite[mq] |= 0x80;// mr = 29</span></a>
-<a name="664"><span class="lineNum">     664 </span><span class="lineCov">          4 :             if((mq += 4*q + 4) &gt;= q_ub){break;}</span></a>
-<a name="665"><span class="lineNum">     665 </span><span class="lineCov">          4 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
-<a name="666"><span class="lineNum">     666 </span><span class="lineCov">          4 :             mq += 2*q + 1; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
-<a name="667"><span class="lineNum">     667 </span><span class="lineCov">         42 :         case 29:</span></a>
-<a name="668"><span class="lineNum">     668 </span><span class="lineCov">         42 :             mq = q*(30*q + 58) + 28;// mr = 1</span></a>
-<a name="669"><span class="lineNum">     669 </span><span class="lineCov">       6558 :             for(; mq + 24*q + 23 &lt; q_ub; mq += 30*q + 29){</span></a>
-<a name="670"><span class="lineNum">     670 </span><span class="lineCov">       6516 :                 is_composite[mq] |= 0x1;// mr = 1</span></a>
-<a name="671"><span class="lineNum">     671 </span><span class="lineCov">       6516 :                 is_composite[mq + 2*q + 1] |= 0x80;// mr = 29</span></a>
-<a name="672"><span class="lineNum">     672 </span><span class="lineCov">       6516 :                 is_composite[mq + 8*q + 7] |= 0x40;// mr = 23</span></a>
-<a name="673"><span class="lineNum">     673 </span><span class="lineCov">       6516 :                 is_composite[mq + 12*q + 11] |= 0x20;// mr = 19</span></a>
-<a name="674"><span class="lineNum">     674 </span><span class="lineCov">       6516 :                 is_composite[mq + 14*q + 13] |= 0x10;// mr = 17</span></a>
-<a name="675"><span class="lineNum">     675 </span><span class="lineCov">       6516 :                 is_composite[mq + 18*q + 17] |= 0x8;// mr = 13</span></a>
-<a name="676"><span class="lineNum">     676 </span><span class="lineCov">       6516 :                 is_composite[mq + 20*q + 19] |= 0x4;// mr = 11</span></a>
-<a name="677"><span class="lineNum">     677 </span><span class="lineCov">       6516 :                 is_composite[mq + 24*q + 23] |= 0x2;// mr = 7</span></a>
+<a name="652"><span class="lineNum">     652 </span><span class="lineCov">         66 :             if(mq &gt;= q_ub){break;}</span></a>
+<a name="653"><span class="lineNum">     653 </span><span class="lineCov">         57 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
+<a name="654"><span class="lineNum">     654 </span><span class="lineCov">         57 :             if((mq += 6*q + 5) &gt;= q_ub){break;}</span></a>
+<a name="655"><span class="lineNum">     655 </span><span class="lineCov">         42 :             is_composite[mq] |= 0x2;// mr = 7</span></a>
+<a name="656"><span class="lineNum">     656 </span><span class="lineCov">         42 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="657"><span class="lineNum">     657 </span><span class="lineCov">         36 :             is_composite[mq] |= 0x40;// mr = 23</span></a>
+<a name="658"><span class="lineNum">     658 </span><span class="lineCov">         36 :             if((mq += 6*q + 5) &gt;= q_ub){break;}</span></a>
+<a name="659"><span class="lineNum">     659 </span><span class="lineCov">         18 :             is_composite[mq] |= 0x4;// mr = 11</span></a>
+<a name="660"><span class="lineNum">     660 </span><span class="lineCov">         18 :             if((mq += 4*q + 3) &gt;= q_ub){break;}</span></a>
+<a name="661"><span class="lineNum">     661 </span><span class="lineCov">          9 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
+<a name="662"><span class="lineNum">     662 </span><span class="lineCov">          9 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="663"><span class="lineNum">     663 </span><span class="lineCov">          6 :             is_composite[mq] |= 0x80;// mr = 29</span></a>
+<a name="664"><span class="lineNum">     664 </span><span class="lineCov">          6 :             if((mq += 4*q + 4) &gt;= q_ub){break;}</span></a>
+<a name="665"><span class="lineNum">     665 </span><span class="lineCov">          6 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
+<a name="666"><span class="lineNum">     666 </span><span class="lineCov">          6 :             mq += 2*q + 1; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
+<a name="667"><span class="lineNum">     667 </span><span class="lineCov">         63 :         case 29:</span></a>
+<a name="668"><span class="lineNum">     668 </span><span class="lineCov">         63 :             mq = q*(30*q + 58) + 28;// mr = 1</span></a>
+<a name="669"><span class="lineNum">     669 </span><span class="lineCov">       9837 :             for(; mq + 24*q + 23 &lt; q_ub; mq += 30*q + 29){</span></a>
+<a name="670"><span class="lineNum">     670 </span><span class="lineCov">       9774 :                 is_composite[mq] |= 0x1;// mr = 1</span></a>
+<a name="671"><span class="lineNum">     671 </span><span class="lineCov">       9774 :                 is_composite[mq + 2*q + 1] |= 0x80;// mr = 29</span></a>
+<a name="672"><span class="lineNum">     672 </span><span class="lineCov">       9774 :                 is_composite[mq + 8*q + 7] |= 0x40;// mr = 23</span></a>
+<a name="673"><span class="lineNum">     673 </span><span class="lineCov">       9774 :                 is_composite[mq + 12*q + 11] |= 0x20;// mr = 19</span></a>
+<a name="674"><span class="lineNum">     674 </span><span class="lineCov">       9774 :                 is_composite[mq + 14*q + 13] |= 0x10;// mr = 17</span></a>
+<a name="675"><span class="lineNum">     675 </span><span class="lineCov">       9774 :                 is_composite[mq + 18*q + 17] |= 0x8;// mr = 13</span></a>
+<a name="676"><span class="lineNum">     676 </span><span class="lineCov">       9774 :                 is_composite[mq + 20*q + 19] |= 0x4;// mr = 11</span></a>
+<a name="677"><span class="lineNum">     677 </span><span class="lineCov">       9774 :                 is_composite[mq + 24*q + 23] |= 0x2;// mr = 7</span></a>
 <a name="678"><span class="lineNum">     678 </span>            :             }</a>
-<a name="679"><span class="lineNum">     679 </span><span class="lineCov">         42 :             if(mq &gt;= q_ub){break;}</span></a>
-<a name="680"><span class="lineNum">     680 </span><span class="lineCov">         34 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
-<a name="681"><span class="lineNum">     681 </span><span class="lineCov">         34 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
-<a name="682"><span class="lineNum">     682 </span><span class="lineCov">         32 :             is_composite[mq] |= 0x80;// mr = 29</span></a>
-<a name="683"><span class="lineNum">     683 </span><span class="lineCov">         32 :             if((mq += 6*q + 6) &gt;= q_ub){break;}</span></a>
-<a name="684"><span class="lineNum">     684 </span><span class="lineCov">         28 :             is_composite[mq] |= 0x40;// mr = 23</span></a>
-<a name="685"><span class="lineNum">     685 </span><span class="lineCov">         28 :             if((mq += 4*q + 4) &gt;= q_ub){break;}</span></a>
-<a name="686"><span class="lineNum">     686 </span><span class="lineCov">         24 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
-<a name="687"><span class="lineNum">     687 </span><span class="lineCov">         24 :             if((mq += 2*q + 2) &gt;= q_ub){break;}</span></a>
-<a name="688"><span class="lineNum">     688 </span><span class="lineCov">         24 :             is_composite[mq] |= 0x10;// mr = 17</span></a>
-<a name="689"><span class="lineNum">     689 </span><span class="lineCov">         24 :             if((mq += 4*q + 4) &gt;= q_ub){break;}</span></a>
-<a name="690"><span class="lineNum">     690 </span><span class="lineCov">         14 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
-<a name="691"><span class="lineNum">     691 </span><span class="lineCov">         14 :             if((mq += 2*q + 2) &gt;= q_ub){break;}</span></a>
-<a name="692"><span class="lineNum">     692 </span><span class="lineCov">          8 :             is_composite[mq] |= 0x4;// mr = 11</span></a>
-<a name="693"><span class="lineNum">     693 </span><span class="lineCov">          8 :             mq += 4*q + 4; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
+<a name="679"><span class="lineNum">     679 </span><span class="lineCov">         63 :             if(mq &gt;= q_ub){break;}</span></a>
+<a name="680"><span class="lineNum">     680 </span><span class="lineCov">         51 :             is_composite[mq] |= 0x1;// mr = 1</span></a>
+<a name="681"><span class="lineNum">     681 </span><span class="lineCov">         51 :             if((mq += 2*q + 1) &gt;= q_ub){break;}</span></a>
+<a name="682"><span class="lineNum">     682 </span><span class="lineCov">         48 :             is_composite[mq] |= 0x80;// mr = 29</span></a>
+<a name="683"><span class="lineNum">     683 </span><span class="lineCov">         48 :             if((mq += 6*q + 6) &gt;= q_ub){break;}</span></a>
+<a name="684"><span class="lineNum">     684 </span><span class="lineCov">         42 :             is_composite[mq] |= 0x40;// mr = 23</span></a>
+<a name="685"><span class="lineNum">     685 </span><span class="lineCov">         42 :             if((mq += 4*q + 4) &gt;= q_ub){break;}</span></a>
+<a name="686"><span class="lineNum">     686 </span><span class="lineCov">         36 :             is_composite[mq] |= 0x20;// mr = 19</span></a>
+<a name="687"><span class="lineNum">     687 </span><span class="lineCov">         36 :             if((mq += 2*q + 2) &gt;= q_ub){break;}</span></a>
+<a name="688"><span class="lineNum">     688 </span><span class="lineCov">         36 :             is_composite[mq] |= 0x10;// mr = 17</span></a>
+<a name="689"><span class="lineNum">     689 </span><span class="lineCov">         36 :             if((mq += 4*q + 4) &gt;= q_ub){break;}</span></a>
+<a name="690"><span class="lineNum">     690 </span><span class="lineCov">         21 :             is_composite[mq] |= 0x8;// mr = 13</span></a>
+<a name="691"><span class="lineNum">     691 </span><span class="lineCov">         21 :             if((mq += 2*q + 2) &gt;= q_ub){break;}</span></a>
+<a name="692"><span class="lineNum">     692 </span><span class="lineCov">         12 :             is_composite[mq] |= 0x4;// mr = 11</span></a>
+<a name="693"><span class="lineNum">     693 </span><span class="lineCov">         12 :             mq += 4*q + 4; break; // If we get here, we have mq &gt;= q_ub by the fact that we made it out of the for loop</span></a>
 <a name="694"><span class="lineNum">     694 </span><span class="lineNoCov">          0 :         default:</span></a>
 <a name="695"><span class="lineNum">     695 </span><span class="lineNoCov">          0 :             __builtin_unreachable();</span></a>
 <a name="696"><span class="lineNum">     696 </span>            :     }</a>
-<a name="697"><span class="lineNum">     697 </span><span class="lineCov">        336 : }</span></a>
+<a name="697"><span class="lineNum">     697 </span><span class="lineCov">        504 : }</span></a>
 <a name="698"><span class="lineNum">     698 </span>            : </a>
-<a name="699"><span class="lineNum">     699 </span><span class="lineCov">          2 : uint8_t *nut_sieve_is_composite(uint64_t max){</span></a>
-<a name="700"><span class="lineNum">     700 </span><span class="lineCov">          2 :     uint64_t is_composite_len = max/30 + 1;</span></a>
-<a name="701"><span class="lineNum">     701 </span><span class="lineCov">          2 :     uint8_t *is_composite = calloc(is_composite_len, sizeof(uint64_t));</span></a>
-<a name="702"><span class="lineNum">     702 </span><span class="lineCov">          2 :     if(!is_composite){</span></a>
+<a name="699"><span class="lineNum">     699 </span><span class="lineCov">          3 : uint8_t *nut_sieve_is_composite(uint64_t max){</span></a>
+<a name="700"><span class="lineNum">     700 </span><span class="lineCov">          3 :     uint64_t is_composite_len = max/30 + 1;</span></a>
+<a name="701"><span class="lineNum">     701 </span><span class="lineCov">          3 :     uint8_t *is_composite = calloc(is_composite_len, sizeof(uint64_t));</span></a>
+<a name="702"><span class="lineNum">     702 </span><span class="lineCov">          3 :     if(!is_composite){</span></a>
 <a name="703"><span class="lineNum">     703 </span>            :         return NULL;</a>
 <a name="704"><span class="lineNum">     704 </span>            :     }</a>
-<a name="705"><span class="lineNum">     705 </span><span class="lineCov">          2 :     uint64_t q_ub = is_composite_len;</span></a>
-<a name="706"><span class="lineNum">     706 </span><span class="lineCov">          2 :     uint64_t p_max = nut_u64_nth_root(max, 2);</span></a>
-<a name="707"><span class="lineNum">     707 </span><span class="lineCov">          2 :     uint64_t q_max = (p_max - 1)/30;</span></a>
-<a name="708"><span class="lineNum">     708 </span><span class="lineCov">          2 :     uint64_t q = 0, r = 7;</span></a>
-<a name="709"><span class="lineNum">     709 </span><span class="lineCov">         70 :     while(q &lt;= q_max){</span></a>
-<a name="710"><span class="lineNum">     710 </span><span class="lineCov">         68 :         uint8_t flags = is_composite[q];</span></a>
-<a name="711"><span class="lineNum">     711 </span><span class="lineCov">         68 :         switch(r){</span></a>
-<a name="712"><span class="lineNum">     712 </span><span class="lineCov">         66 :             case 1:</span></a>
-<a name="713"><span class="lineNum">     713 </span><span class="lineCov">         66 :                 if(!(flags &amp; 0x1)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
-<a name="714"><span class="lineNum">     714 </span><span class="lineCov">         68 :                 r = 7; [[fallthrough]];</span></a>
-<a name="715"><span class="lineNum">     715 </span><span class="lineCov">         68 :             case 7:</span></a>
-<a name="716"><span class="lineNum">     716 </span><span class="lineCov">         68 :                 if(!(flags &amp; 0x2)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
-<a name="717"><span class="lineNum">     717 </span><span class="lineCov">         68 :                 r = 11; [[fallthrough]];</span></a>
-<a name="718"><span class="lineNum">     718 </span><span class="lineCov">         68 :             case 11:</span></a>
-<a name="719"><span class="lineNum">     719 </span><span class="lineCov">         68 :                 if(!(flags &amp; 0x4)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
-<a name="720"><span class="lineNum">     720 </span><span class="lineCov">         68 :                 r = 13; [[fallthrough]];</span></a>
-<a name="721"><span class="lineNum">     721 </span><span class="lineCov">         68 :             case 13:</span></a>
-<a name="722"><span class="lineNum">     722 </span><span class="lineCov">         68 :                 if(!(flags &amp; 0x8)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
-<a name="723"><span class="lineNum">     723 </span><span class="lineCov">         68 :                 r = 17; [[fallthrough]];</span></a>
-<a name="724"><span class="lineNum">     724 </span><span class="lineCov">         68 :             case 17:</span></a>
-<a name="725"><span class="lineNum">     725 </span><span class="lineCov">         68 :                 if(!(flags &amp; 0x10)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
-<a name="726"><span class="lineNum">     726 </span><span class="lineCov">         68 :                 r = 19; [[fallthrough]];</span></a>
-<a name="727"><span class="lineNum">     727 </span><span class="lineCov">         68 :             case 19:</span></a>
-<a name="728"><span class="lineNum">     728 </span><span class="lineCov">         68 :                 if(!(flags &amp; 0x20)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
-<a name="729"><span class="lineNum">     729 </span><span class="lineCov">         68 :                 r = 23; [[fallthrough]];</span></a>
-<a name="730"><span class="lineNum">     730 </span><span class="lineCov">         68 :             case 23:</span></a>
-<a name="731"><span class="lineNum">     731 </span><span class="lineCov">         68 :                 if(!(flags &amp; 0x40)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
-<a name="732"><span class="lineNum">     732 </span><span class="lineCov">         68 :                 r = 29; [[fallthrough]];</span></a>
-<a name="733"><span class="lineNum">     733 </span><span class="lineCov">         68 :             case 29:</span></a>
-<a name="734"><span class="lineNum">     734 </span><span class="lineCov">         68 :                 if(!(flags &amp; 0x80)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
+<a name="705"><span class="lineNum">     705 </span><span class="lineCov">          3 :     uint64_t q_ub = is_composite_len;</span></a>
+<a name="706"><span class="lineNum">     706 </span><span class="lineCov">          3 :     uint64_t p_max = nut_u64_nth_root(max, 2);</span></a>
+<a name="707"><span class="lineNum">     707 </span><span class="lineCov">          3 :     uint64_t q_max = (p_max - 1)/30;</span></a>
+<a name="708"><span class="lineNum">     708 </span><span class="lineCov">          3 :     uint64_t q = 0, r = 7;</span></a>
+<a name="709"><span class="lineNum">     709 </span><span class="lineCov">        105 :     while(q &lt;= q_max){</span></a>
+<a name="710"><span class="lineNum">     710 </span><span class="lineCov">        102 :         uint8_t flags = is_composite[q];</span></a>
+<a name="711"><span class="lineNum">     711 </span><span class="lineCov">        102 :         switch(r){</span></a>
+<a name="712"><span class="lineNum">     712 </span><span class="lineCov">         99 :             case 1:</span></a>
+<a name="713"><span class="lineNum">     713 </span><span class="lineCov">         99 :                 if(!(flags &amp; 0x1)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
+<a name="714"><span class="lineNum">     714 </span><span class="lineCov">        102 :                 r = 7; [[fallthrough]];</span></a>
+<a name="715"><span class="lineNum">     715 </span><span class="lineCov">        102 :             case 7:</span></a>
+<a name="716"><span class="lineNum">     716 </span><span class="lineCov">        102 :                 if(!(flags &amp; 0x2)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
+<a name="717"><span class="lineNum">     717 </span><span class="lineCov">        102 :                 r = 11; [[fallthrough]];</span></a>
+<a name="718"><span class="lineNum">     718 </span><span class="lineCov">        102 :             case 11:</span></a>
+<a name="719"><span class="lineNum">     719 </span><span class="lineCov">        102 :                 if(!(flags &amp; 0x4)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
+<a name="720"><span class="lineNum">     720 </span><span class="lineCov">        102 :                 r = 13; [[fallthrough]];</span></a>
+<a name="721"><span class="lineNum">     721 </span><span class="lineCov">        102 :             case 13:</span></a>
+<a name="722"><span class="lineNum">     722 </span><span class="lineCov">        102 :                 if(!(flags &amp; 0x8)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
+<a name="723"><span class="lineNum">     723 </span><span class="lineCov">        102 :                 r = 17; [[fallthrough]];</span></a>
+<a name="724"><span class="lineNum">     724 </span><span class="lineCov">        102 :             case 17:</span></a>
+<a name="725"><span class="lineNum">     725 </span><span class="lineCov">        102 :                 if(!(flags &amp; 0x10)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
+<a name="726"><span class="lineNum">     726 </span><span class="lineCov">        102 :                 r = 19; [[fallthrough]];</span></a>
+<a name="727"><span class="lineNum">     727 </span><span class="lineCov">        102 :             case 19:</span></a>
+<a name="728"><span class="lineNum">     728 </span><span class="lineCov">        102 :                 if(!(flags &amp; 0x20)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
+<a name="729"><span class="lineNum">     729 </span><span class="lineCov">        102 :                 r = 23; [[fallthrough]];</span></a>
+<a name="730"><span class="lineNum">     730 </span><span class="lineCov">        102 :             case 23:</span></a>
+<a name="731"><span class="lineNum">     731 </span><span class="lineCov">        102 :                 if(!(flags &amp; 0x40)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
+<a name="732"><span class="lineNum">     732 </span><span class="lineCov">        102 :                 r = 29; [[fallthrough]];</span></a>
+<a name="733"><span class="lineNum">     733 </span><span class="lineCov">        102 :             case 29:</span></a>
+<a name="734"><span class="lineNum">     734 </span><span class="lineCov">        102 :                 if(!(flags &amp; 0x80)){mark_is_composite(is_composite, q, r, q_ub);}</span></a>
 <a name="735"><span class="lineNum">     735 </span>            :                 r = 1;</a>
 <a name="736"><span class="lineNum">     736 </span>            :                 ++q;</a>
 <a name="737"><span class="lineNum">     737 </span>            :                 break;</a>
@@ -836,7 +836,7 @@
 <a name="761"><span class="lineNum">     761 </span>            :     }</a>
 <a name="762"><span class="lineNum">     762 </span>            : }</a>
 <a name="763"><span class="lineNum">     763 </span>            : </a>
-<a name="764"><span class="lineNum">     764 </span><span class="lineCov">          1 : uint64_t *nut_compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1]){</span></a>
+<a name="764"><span class="lineNum">     764 </span><span class="lineCov">          2 : uint64_t *nut_compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1]){</span></a>
 <a name="765"><span class="lineNum">     765 </span>            :     /* buf[i] tells us the primality of 30*i + 1, 30*i + 7, 30*i + 11, ..., 30*i + 29.</a>
 <a name="766"><span class="lineNum">     766 </span>            :      * Thus, we want res[i] to tell us the number of prime numbers from 1 up to 30*(i + 1)</a>
 <a name="767"><span class="lineNum">     767 </span>            :      * and so in general res[i] = popcount(buf[i]) + res[i - 1].</a>
@@ -845,37 +845,37 @@
 <a name="770"><span class="lineNum">     770 </span>            :      * The -1 is because since res[0] is the number of primes up to 30, for arguments i &lt; 30 we have to</a>
 <a name="771"><span class="lineNum">     771 </span>            :      * special case their lookup, so the domain essentially starts at 30.</a>
 <a name="772"><span class="lineNum">     772 </span>            :      */</a>
-<a name="773"><span class="lineNum">     773 </span><span class="lineCov">          1 :     uint64_t res_len = max/30;</span></a>
-<a name="774"><span class="lineNum">     774 </span><span class="lineCov">          1 :     uint64_t *res = calloc(res_len, sizeof(uint64_t));</span></a>
-<a name="775"><span class="lineNum">     775 </span><span class="lineCov">          1 :     if(!res){</span></a>
+<a name="773"><span class="lineNum">     773 </span><span class="lineCov">          2 :     uint64_t res_len = max/30;</span></a>
+<a name="774"><span class="lineNum">     774 </span><span class="lineCov">          2 :     uint64_t *res = calloc(res_len, sizeof(uint64_t));</span></a>
+<a name="775"><span class="lineNum">     775 </span><span class="lineCov">          2 :     if(!res){</span></a>
 <a name="776"><span class="lineNum">     776 </span>            :         return NULL;</a>
 <a name="777"><span class="lineNum">     777 </span>            :     }</a>
-<a name="778"><span class="lineNum">     778 </span><span class="lineCov">          1 :     res[0] = 10;</span></a>
-<a name="779"><span class="lineNum">     779 </span><span class="lineCov">      33333 :     for(uint64_t i = 1, acc = 10; i &lt; res_len; ++i){</span></a>
-<a name="780"><span class="lineNum">     780 </span><span class="lineCov">      33332 :         res[i] = acc += __builtin_popcount(0xFF&amp;~buf[i]);</span></a>
+<a name="778"><span class="lineNum">     778 </span><span class="lineCov">          2 :     res[0] = 10;</span></a>
+<a name="779"><span class="lineNum">     779 </span><span class="lineCov">      66666 :     for(uint64_t i = 1, acc = 10; i &lt; res_len; ++i){</span></a>
+<a name="780"><span class="lineNum">     780 </span><span class="lineCov">      66664 :         res[i] = acc += __builtin_popcount(0xFF&amp;~buf[i]);</span></a>
 <a name="781"><span class="lineNum">     781 </span>            :     }</a>
 <a name="782"><span class="lineNum">     782 </span>            :     return res;</a>
 <a name="783"><span class="lineNum">     783 </span>            : }</a>
 <a name="784"><span class="lineNum">     784 </span>            : </a>
-<a name="785"><span class="lineNum">     785 </span><span class="lineCov">    1000000 : uint64_t nut_compute_pi_from_tables(uint64_t n, const uint64_t pi_table[restrict static n/30], const uint8_t buf[restrict static n/30 + 1]){</span></a>
-<a name="786"><span class="lineNum">     786 </span><span class="lineCov">    1000000 :     if(n &lt; 30){</span></a>
+<a name="785"><span class="lineNum">     785 </span><span class="lineCov">    1002000 : uint64_t nut_compute_pi_from_tables(uint64_t n, const uint64_t pi_table[restrict static n/30], const uint8_t buf[restrict static n/30 + 1]){</span></a>
+<a name="786"><span class="lineNum">     786 </span><span class="lineCov">    1002000 :     if(n &lt; 30){</span></a>
 <a name="787"><span class="lineNum">     787 </span>            :         uint64_t res;</a>
-<a name="788"><span class="lineNum">     788 </span><span class="lineCov">        200 :         for(res = 0; nut_small_primes[res] &lt;= n; ++res);</span></a>
+<a name="788"><span class="lineNum">     788 </span><span class="lineCov">        400 :         for(res = 0; nut_small_primes[res] &lt;= n; ++res);</span></a>
 <a name="789"><span class="lineNum">     789 </span>            :         return res;</a>
 <a name="790"><span class="lineNum">     790 </span>            :     }</a>
-<a name="791"><span class="lineNum">     791 </span><span class="lineCov">     999971 :     uint64_t q = n/30;</span></a>
-<a name="792"><span class="lineNum">     792 </span><span class="lineCov">     999971 :     uint64_t r = n%30;</span></a>
-<a name="793"><span class="lineNum">     793 </span><span class="lineCov">     999971 :     uint8_t mask;</span></a>
-<a name="794"><span class="lineNum">     794 </span><span class="lineCov">     999971 :     if(!r){mask = 0x00;}</span></a>
-<a name="795"><span class="lineNum">     795 </span><span class="lineCov">     966638 :     else if(r &lt; 7){mask = 0x01;}</span></a>
-<a name="796"><span class="lineNum">     796 </span><span class="lineCov">     766640 :     else if(r &lt; 11){mask = 0x03;}</span></a>
-<a name="797"><span class="lineNum">     797 </span><span class="lineCov">     633308 :     else if(r &lt; 13){mask = 0x07;}</span></a>
-<a name="798"><span class="lineNum">     798 </span><span class="lineCov">     566644 :     else if(r &lt; 17){mask = 0x0f;}</span></a>
-<a name="799"><span class="lineNum">     799 </span><span class="lineCov">     433316 :     else if(r &lt; 19){mask = 0x1f;}</span></a>
-<a name="800"><span class="lineNum">     800 </span><span class="lineCov">     366652 :     else if(r &lt; 23){mask = 0x3f;}</span></a>
-<a name="801"><span class="lineNum">     801 </span><span class="lineCov">     233324 :     else if(r &lt; 29){mask = 0x7f;}</span></a>
-<a name="802"><span class="lineNum">     802 </span><span class="lineCov">      33332 :     else{mask = 0xff;}</span></a>
-<a name="803"><span class="lineNum">     803 </span><span class="lineCov">     999971 :     return pi_table[q-1] + __builtin_popcount(mask&amp;~buf[q]);</span></a>
+<a name="791"><span class="lineNum">     791 </span><span class="lineCov">    1001942 :     uint64_t q = n/30;</span></a>
+<a name="792"><span class="lineNum">     792 </span><span class="lineCov">    1001942 :     uint64_t r = n%30;</span></a>
+<a name="793"><span class="lineNum">     793 </span><span class="lineCov">    1001942 :     uint8_t mask;</span></a>
+<a name="794"><span class="lineNum">     794 </span><span class="lineCov">    1001942 :     if(!r){mask = 0x00;}</span></a>
+<a name="795"><span class="lineNum">     795 </span><span class="lineCov">     968545 :     else if(r &lt; 7){mask = 0x01;}</span></a>
+<a name="796"><span class="lineNum">     796 </span><span class="lineCov">     768148 :     else if(r &lt; 11){mask = 0x03;}</span></a>
+<a name="797"><span class="lineNum">     797 </span><span class="lineCov">     634545 :     else if(r &lt; 13){mask = 0x07;}</span></a>
+<a name="798"><span class="lineNum">     798 </span><span class="lineCov">     567752 :     else if(r &lt; 17){mask = 0x0f;}</span></a>
+<a name="799"><span class="lineNum">     799 </span><span class="lineCov">     434161 :     else if(r &lt; 19){mask = 0x1f;}</span></a>
+<a name="800"><span class="lineNum">     800 </span><span class="lineCov">     367355 :     else if(r &lt; 23){mask = 0x3f;}</span></a>
+<a name="801"><span class="lineNum">     801 </span><span class="lineCov">     233767 :     else if(r &lt; 29){mask = 0x7f;}</span></a>
+<a name="802"><span class="lineNum">     802 </span><span class="lineCov">      33391 :     else{mask = 0xff;}</span></a>
+<a name="803"><span class="lineNum">     803 </span><span class="lineCov">    1001942 :     return pi_table[q-1] + __builtin_popcount(mask&amp;~buf[q]);</span></a>
 <a name="804"><span class="lineNum">     804 </span>            : }</a>
 <a name="805"><span class="lineNum">     805 </span>            : </a>
 <a name="806"><span class="lineNum">     806 </span><span class="lineCov">         21 : static uint64_t *copy_small_primes(uint64_t max, uint64_t *_num_primes){</span></a>
