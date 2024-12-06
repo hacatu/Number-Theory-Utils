@@ -379,27 +379,26 @@ uint64_t *nut_sieve_carmichael(uint64_t max){
 	for(uint64_t i = 1; i <= max && i; ++i){
 		buf[i] = 1;
 	}
-	for(uint64_t n = 2; n <= max && n; ++n){//TODO: optimize loop
+	uint64_t t = 4, b = 1;
+	while((t >> 1) <= max){
+		for(uint64_t m = t >> 1; m <= max; m += t){
+			buf[m] = b;
+		}
+		t <<= 1;
+		if(t != 16){
+			b <<= 1;
+		}
+	}
+	for(uint64_t n = 1; !__builtin_add_overflow(n, 2, &n) && n <= max;){//TODO: optimize loop
 		if(buf[n] != 1){
 			continue;
 		}
-		for(uint64_t m = n; m <= max;){
-			uint64_t a = n*n;
-			while(m%a == 0){
+		for(uint64_t k = 1, m = n; k <= max/n; ++k, m += n){
+			uint64_t a = n - 1;
+			for(uint64_t j = k; j%n == 0; j /= n){
 				a *= n;
 			}
-			if(n == 2){
-				if(a > 8){
-					buf[m] = a >> 3;
-				}else{
-					buf[m] = a >> 2;
-				}
-			}else{
-				buf[m] = nut_i64_lcm(buf[m], a/n - a/n/n);
-			}
-			if(__builtin_add_overflow(m, n, &m)){
-				break;
-			}
+			buf[m] = nut_i64_lcm(buf[m], a);
 		}
 	}
 	return buf;
