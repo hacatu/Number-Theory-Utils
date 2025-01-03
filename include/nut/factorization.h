@@ -263,6 +263,13 @@ NUT_ATTR_ACCESS(read_write, 1)
 NUT_ATTR_ACCESS(read_only, 2)
 void nut_Factor_combine(nut_Factors *restrict factors, const nut_Factors *restrict factors2, uint64_t k);
 
+/// Get the factorization of the quotient of two factorizations.
+///
+/// Both inputs must be sorted, and dfactors must be the factorization of a divisor of factors.
+/// @param [out] out: allocated factorization struct to store the result, must not alias.
+/// @param [in] factors, dfactors: factorization of the dividend and divisor.
+void nut_Factor_divide(nut_Factors *restrict out, const nut_Factors *restrict factors, const nut_Factors *restrict dfactors);
+
 /// Check if n is prime using a deterministic Miller-Rabin test.
 /// 7 partictular bases are used so that no composite number will falsely be reported as prime for the entire 64-bit range
 /// @param [in] n: number to check for primality

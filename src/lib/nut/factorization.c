@@ -106,7 +106,9 @@ uint64_t nut_Factor_phi(const nut_Factors *factors){
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
 		uint64_t p = factors->factors[i].prime;
 		uint64_t a = factors->factors[i].power;
-		s *= (nut_u64_pow(p, a - 1))*(p - 1);
+		if(a){
+			s *= (nut_u64_pow(p, a - 1))*(p - 1);
+		}
 	}
 	return s;
 }
@@ -273,6 +275,24 @@ void nut_Factor_combine(nut_Factors *restrict factors, const nut_Factors *restri
 	factors->num_primes = i3;
 }
 
+void nut_Factor_divide(nut_Factors *restrict out, const nut_Factors *restrict factors, const nut_Factors *restrict dfactors){
+	uint64_t i = 0, i2 = 0, i3 = 0;
+	while(i < factors->num_primes && i2 < dfactors->num_primes){
+		if(factors->factors[i].prime < dfactors->factors[i2].prime){
+			out->factors[i3++] = factors->factors[i++];
+		}else if(factors->factors[i].power > dfactors->factors[i2].power){
+			out->factors[i3].prime = factors->factors[i].prime;
+			out->factors[i3++].power = factors->factors[i++].power - dfactors->factors[i2++].power;
+		}else{
+			++i, ++i2;
+		}
+	}
+	while(i < factors->num_primes){
+		out->factors[i3++] = factors->factors[i++];
+	}
+	out->num_primes = i3;
+}
+
 int nut_Factor_fprint(FILE *restrict file, const nut_Factors *restrict factors){
 	int res = 0;
 	for(uint64_t i = 0; i < factors->num_primes; ++i){
@@ -305,7 +325,7 @@ bool nut_u64_is_prime_dmr(uint64_t n){
 		return n == 2;
 	}
 	--n;
-	s = __builtin_ctz(n);
+	s = __builtin_ctzll(n);
 	d = n>>s;
 	++n;
 	for(uint64_t i = 0, a, x; i < DMR_PRIMES_C; ++i){
@@ -634,16 +654,27 @@ static inline int ecg_double(int64_t n, int64_t a, int64_t x, int64_t y, bool is
 		return 1;
 	}
 	int64_t s, dy, dx;
-	dy = nut_i64_mod(3*x*x + a, n);
+	dy = (3*(int128_t)x*x + a)%n;
+	if(dy < 0){
+		dy += n;
+	}
 	dx = nut_i64_mod(2*y, n);
 	int64_t d = nut_i64_egcd(dx, n, &s, NULL);
 	if(d != 1){
 		*_xr = d;
 		return -1;
 	}
-	s = s*dy%n;
-	*_xr = nut_i64_mod(s*s - 2*x, n);
-	*_yr = nut_i64_mod(y + s*(*_xr - x), n);
+	s = (int128_t)s*dy%n;
+	int64_t xr = ((int128_t)s*s - 2*x)%n;
+	if(xr < 0){
+		xr += n;
+	}
+	*_xr = xr;
+	int64_t yr = (y + (int128_t)s*(xr - x))%n;
+	if(yr < 0){
+		yr += n;
+	}
+	*_yr = yr;
 	return 0;
 }
 
@@ -669,7 +700,10 @@ static inline int ecg_add(int64_t n, int64_t a, int64_t xp, int64_t yp, bool is_
 	}else if(yp != yq || yp == 0){
 		return 1;
 	}else{
-		dy = nut_i64_mod(3*xp*xp + a, n);
+		dy = (3*(int128_t)xp*xp + a)%n;
+		if(dy < 0){
+			dy += n;
+		}
 		dx = nut_i64_mod(2*yp, n);
 	}
 	int64_t d = nut_i64_egcd(dx, n, &s, NULL);
@@ -677,9 +711,17 @@ static inline int ecg_add(int64_t n, int64_t a, int64_t xp, int64_t yp, bool is_
 		*_xr = d;
 		return -1;
 	}
-	s = s*dy%n;
-	*_xr = nut_i64_mod(s*s - xp - xq, n);
-	*_yr = nut_i64_mod(yp + s*(*_xr - xp), n);
+	s = (int128_t)s*dy%n;
+	int64_t xr = ((int128_t)s*s - xp - xq)%n;
+	if(xr < 0){
+		xr += n;
+	}
+	*_xr = xr;
+	int64_t yr = (yp + (int128_t)s*(xr + xp))%n;
+	if(yr < 0){
+		yr += n;
+	}
+	*_yr = yr;
 	return 0;
 }
 
@@ -732,11 +774,14 @@ int64_t nut_u64_factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int6
 	if(d != 1){
 		return d;
 	}
-	int64_t b = (x*x + a)%n;
-	b = nut_i64_mod(y*y - x*b, n);
-	d = a*a%n;
-	d = 4*a*d%n;
-	d = nut_i64_egcd(d + 27*(b*b%n), n, NULL, NULL);//ensure the rhs of the elliptic curve does not have a repeated zero, leading to a cusp
+	int64_t b = ((int128_t)x*x + a)%n;
+	b = ((int128_t)y*y - (int128_t)x*b)%n;
+	if(b < 0){
+		b += n;
+	}
+	d = (int128_t)a*a%n;
+	d = 4*(int128_t)a*d%n;
+	d = nut_i64_egcd(d + 27*((int128_t)b*b%n), n, NULL, NULL);//ensure the rhs of the elliptic curve does not have a repeated zero, leading to a cusp
 	if(d != 1){
 		return d;
 	}
