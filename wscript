@@ -94,6 +94,23 @@ def configure(conf):
 		'-fsanitize=memory,bool,builtin,bounds,enum,function,integer,nonnull-attribute,nullability,pointer-overflow,returns-nonnull-attribute,shift,unsigned-shift-base,unreachable,vla-bound',
 	])
 
+	conf.setenv('checked')
+	conf.env.CC = CLANG
+	conf.env.LD = CLANG
+	conf.load('compiler_c')
+	conf.env.CFLAGS = mod_flags(base_cflags, [], [
+		'-ggdb3',
+		'-O3',
+		'-DNDEBUG',
+		'-fsanitize=bounds,integer,pointer-overflow,shift,unsigned-shift-base,vla-bound'
+	])
+	conf.env.LDFLAGS = mod_flags(base_ldflags, [], [
+		'-ggdb3',
+		'-O3',
+		'-fsanitize=bounds,integer,pointer-overflow,shift,unsigned-shift-base,vla-bound',
+		'-flto'
+	])
+
 	conf.setenv('release')
 	conf.env.CC = GCC
 	conf.env.LD = GCC
@@ -188,7 +205,7 @@ def build(ctx):
 			source = 'src/test/' + source_file.name,
 			target = test_name,
 			includes = ['include'],
-			lib = ['m', 'OpenCL'],
+			lib = ['m', 'OpenCL', 'primesieve'],
 			install_path = None,
 			use = stlibs
 		)
@@ -252,7 +269,7 @@ class TestContext(Context):
 	cmd = 'test'
 	fun = 'test'
 
-for x in 'coverage debug release valgrind windows'.split():
+for x in 'coverage debug release checked valgrind windows'.split():
 	for y in (BuildContext, CleanContext, InstallContext, UninstallContext, TestContext):
 		name = y.__name__.replace('Context','').lower()
 		class tmp(y):
