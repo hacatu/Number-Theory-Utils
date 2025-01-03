@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['pollard_5fmax_209',['pollard_max',['../structnut__FactorConf.html#a467689ec7f9f9118a8f128a9aeaf5b04',1,'nut_FactorConf']]],
-  ['pollard_5fstride_210',['pollard_stride',['../structnut__FactorConf.html#a05d3b17c3e6a25ca26b778064d2231fe',1,'nut_FactorConf']]],
-  ['polynomial_2eh_211',['polynomial.h',['../polynomial_8h.html',1,'']]]
+  ['len_0',['len',['../structnut__Poly.html#a9e21e120f8234c52f4b3059d613357e7',1,'nut_Poly::len'],['../structnut__Roots.html#a52b50bc7b374bb528cdae1b4477b69c1',1,'nut_Roots::len']]],
+  ['lenstra_5fbfac_1',['lenstra_bfac',['../structnut__FactorConf.html#a6d1d1b2f0ffe8760c2186b3b3c515fa9',1,'nut_FactorConf']]],
+  ['lenstra_5fmax_2',['lenstra_max',['../structnut__FactorConf.html#a03a74ba961477004fd07cca592318954',1,'nut_FactorConf']]],
+  ['linking_3',['Linking',['../index.html#autotoc_md2',1,'']]]
 ];

@@ -25,15 +25,7 @@
 var NAVTREE =
 [
   [ "Number Theory Utils", "index.html", [
-    [ "Number Theory Utils (NUT)", "index.html", [
-      [ "Building", "index.html#autotoc_md1", null ],
-      [ "Linking", "index.html#autotoc_md2", null ],
-      [ "Examples", "index.html#autotoc_md3", [
-        [ "Solve a quadratic equation mod some primes", "index.html#autotoc_md4", null ],
-        [ "Factor some numbers", "index.html#autotoc_md5", null ],
-        [ "Factor a polynomial mod some primes", "index.html#autotoc_md6", null ]
-      ] ]
-    ] ],
+    [ "Number Theory Utils (NUT)", "index.html", "index" ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
@@ -58,7 +50,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"structnut__ClMgr.html#aa4af0ec24157c4812fbea7885d7a3d89"
+"structnut__Poly.html#a9e21e120f8234c52f4b3059d613357e7"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

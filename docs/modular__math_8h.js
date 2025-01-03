@@ -1,6 +1,6 @@
 var modular__math_8h =
 [
-    [ "nut_u64_Pitcharr", "structnut__u64__Pitcharr.html", "structnut__u64__Pitcharr" ],
+    [ "nut_u64_Pitcharr", "structnut__u64__Pitcharr.html", null ],
     [ "NUT_ATTR_ACCESS", "modular__math_8h.html#a7479a653e2f5c148b3d4b5b7243e7702", null ],
     [ "NUT_ATTR_NO_SAN", "modular__math_8h.html#a632cb8a1d14576952485acf64494b800", null ],
     [ "NUT_ATTR_CONST", "modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29", null ],
@@ -28,7 +28,7 @@ var modular__math_8h =
     [ "nut_i64_lcm", "modular__math_8h.html#a768119748174f941b8154a1894320961", null ],
     [ "nut_u64_binom_next_mod_2t", "modular__math_8h.html#a7caf7927a4df7886403b19fc2d8f6e86", null ],
     [ "nut_i64_jacobi", "modular__math_8h.html#a934e38bdacf035d2eef4efc9e35da2d5", null ],
-    [ "nut_u64_make_jacobi_tbl", "modular__math_8h.html#af672641731fde4f66555d6451f5b33ed", null ],
+    [ "nut_u64_make_jacobi_tbl", "modular__math_8h.html#a5911ad80cced1fc8e51c81c52ad0f54b", null ],
     [ "nut_u64_jacobi_tbl_get", "modular__math_8h.html#a172e46dd409fe4bccf649d9543252834", null ],
     [ "nut_i64_rand_nr_mod", "modular__math_8h.html#a1ea912c9c389a530c1c41002d340f718", null ],
     [ "nut_i64_sqrt_shanks", "modular__math_8h.html#aef1c72a0459316ba22fc28ab1cb778ed", null ],
