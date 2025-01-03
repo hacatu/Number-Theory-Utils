@@ -320,49 +320,66 @@ void nut_Diri_compute_N(nut_Diri *self, int64_t m){
 }
 
 bool nut_Diri_compute_Nk(nut_Diri *restrict self, uint64_t k, int64_t m){
-	nut_i64_Matrix pascal_mat, faulhaber_mat;
-	int64_t *vand_vec [[gnu::cleanup(cleanup_free)]] = malloc((k + 1)*sizeof(int64_t));
-	if(!vand_vec){
-		return false;
-	}
-	if(!nut_i64_Matrix_init(&pascal_mat, k + 1, k + 1)){
-		return false;
-	}
-	if(!nut_i64_Matrix_init(&faulhaber_mat, k + 1, k + 1)){
-		nut_i64_Matrix_destroy(&pascal_mat);
-		return false;
-	}
-	nut_i64_Matrix_fill_short_pascal(&pascal_mat);
-	int64_t denom = nut_i64_Matrix_invert_ltr(&pascal_mat, &faulhaber_mat);
-	nut_i64_Matrix_destroy(&pascal_mat);
-	if(m){
-		int64_t tmp;
-		if(nut_i64_egcd(denom, m, &tmp, NULL) != 1){
-			nut_i64_Matrix_destroy(&faulhaber_mat);
+	if(!m){
+		nut_i64_Matrix pascal_mat [[gnu::cleanup(nut_i64_Matrix_destroy)]] = {}, faulhaber_mat [[gnu::cleanup(nut_i64_Matrix_destroy)]] = {};
+		int64_t *vand_vec [[gnu::cleanup(cleanup_free)]] = malloc((k + 1)*sizeof(int64_t));
+		if(!vand_vec){
 			return false;
 		}
-		denom = tmp;
-	}
-	for(int64_t i = 0; i <= self->y; ++i){
-		self->buf[i] = m ? nut_u64_powmod(i, k, m) : nut_u64_pow(i, k);
-	}
-	for(int64_t i = 1; i < self->yinv; ++i){
-		int64_t v = self->x/i;
-		nut_i64_Matrix_fill_vandemond_vec(v + 1, k + 1, m, vand_vec);
-		int64_t tot = 0;
-		for(uint64_t j = 0; j < k + 1; ++j){
-			int64_t a = faulhaber_mat.buf[(k + 1)*k + j]*vand_vec[j];
-			tot = m ? (tot + a)%m : tot + a;
+		if(!nut_i64_Matrix_init(&pascal_mat, k + 1, k + 1)){
+			return false;
 		}
-		if(m){
-			tot = tot*denom%m; // denom was inverted before
-		}else{
+		if(!nut_i64_Matrix_init(&faulhaber_mat, k + 1, k + 1)){
+			return false;
+		}
+		nut_i64_Matrix_fill_short_pascal(&pascal_mat);
+		int64_t denom = nut_i64_Matrix_invert_ltr(&pascal_mat, &faulhaber_mat);
+		for(int64_t i = 0; i <= self->y; ++i){
+			self->buf[i] = nut_u64_pow(i, k);
+		}
+		for(int64_t i = 1; i < self->yinv; ++i){
+			int64_t v = self->x/i;
+			nut_i64_Matrix_fill_vandemond_vec(v + 1, k + 1, m, vand_vec);
+			int64_t tot = 0;
+			for(uint64_t j = 0; j < k + 1; ++j){
+				int64_t a = faulhaber_mat.buf[(k + 1)*k + j]*vand_vec[j];
+				tot = tot + a;
+			}
 			tot /= denom;
+			self->buf[self->y + i] = tot;
 		}
-		self->buf[self->y + i] = tot;
+		return true;
+	}else{
+		nut_u64_ModMatrix pascal_mat [[gnu::cleanup(nut_u64_ModMatrix_destroy)]] = {}, faulhaber_mat [[gnu::cleanup(nut_u64_ModMatrix_destroy)]] = {};
+		uint64_t *vand_vec [[gnu::cleanup(cleanup_free)]] = malloc((k + 1)*sizeof(uint64_t));
+		if(!vand_vec){
+			return false;
+		}
+		if(!nut_u64_ModMatrix_init(&pascal_mat, k + 1, k + 1, m)){
+			return false;
+		}
+		if(!nut_u64_ModMatrix_init(&faulhaber_mat, k + 1, k + 1, m)){
+			return false;
+		}
+		nut_u64_ModMatrix_fill_short_pascal(&pascal_mat);
+		if(!nut_u64_ModMatrix_invert_ltr(&pascal_mat, &faulhaber_mat)){
+			return false;
+		}
+		for(int64_t i = 0; i <= self->y; ++i){
+			self->buf[i] = nut_u64_powmod(i, k, m);
+		}
+		for(int64_t i = 1; i < self->yinv; ++i){
+			int64_t v = self->x/i;
+			nut_u64_Matrix_fill_vandemond_vec((v + 1)%m, k + 1, m, vand_vec);
+			int64_t tot = 0;
+			for(uint64_t j = 0; j < k + 1; ++j){
+				uint64_t a = faulhaber_mat.buf[(k + 1)*k + j]*vand_vec[j];
+				tot = (tot + a)%m;
+			}
+			self->buf[self->y + i] = tot;
+		}
+		return true;
 	}
-	nut_i64_Matrix_destroy(&faulhaber_mat);
-	return true;
 }
 
 void nut_Diri_compute_mertens(nut_Diri *restrict self, int64_t m, const uint8_t mobius[restrict static self->y/4 + 1]){
@@ -591,11 +608,13 @@ bool nut_Diri_compute_conv_N(nut_Diri *restrict self, int64_t m, const nut_Diri 
 				h += term;
 			}
 			term = nut_Diri_get_dense(f_tbl, n);
-			int64_t Gvn = ((v/n)&1) ? (v/n)*((v/n + 1) >> 1) : ((v/n) >> 1)*(v/n + 1);
+			int64_t k = v/n;
 			if(m){
+				int64_t Gvn = (k&1) ? k%m*(((k + 1)>>1)%m) : (k>>1)%m*((k + 1)%m);
 				Gvn %= m;
 				h = nut_i64_mod(h + term*Gvn, m);
 			}else{
+				int64_t Gvn = (k&1) ? k*((k + 1)>>1) : (k>>1)*(k + 1);
 				h += term*Gvn;
 			}
 		}
