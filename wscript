@@ -205,7 +205,7 @@ def build(ctx):
 			source = 'src/test/' + source_file.name,
 			target = test_name,
 			includes = ['include'],
-			lib = ['m', 'OpenCL', 'primesieve'],
+			lib = ['m', 'OpenCL'],
 			install_path = None,
 			use = stlibs
 		)
