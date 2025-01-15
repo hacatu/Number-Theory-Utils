@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"structnut__Poly.html":[1,0,8],
+"structnut__Poly.html#a79d9b72fbeeadbeaf7e60e1cfe397dd0":[1,0,8,1],
 "structnut__Poly.html#a9e21e120f8234c52f4b3059d613357e7":[1,0,8,0],
 "structnut__Poly.html#aded3d1a8eb3c0ed745fc732eabc9c8d1":[1,0,8,2],
 "structnut__Roots.html":[1,0,9],

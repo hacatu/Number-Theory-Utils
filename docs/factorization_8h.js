@@ -14,6 +14,7 @@ var factorization_8h =
     [ "nut_Factor_divsum", "factorization_8h.html#addc45f8dffe0fdb32ebbcb7510b700bd", null ],
     [ "nut_Factor_divpowsum", "factorization_8h.html#abbb9a53990f1ee3ca4ce9e430d93826f", null ],
     [ "nut_Factor_divtupcount", "factorization_8h.html#a7099c574cebc270affcc2fef5cab6b80", null ],
+    [ "nut_Factor_circle_latte", "factorization_8h.html#a80d6739f0f03172afe7d2cbf159803cd", null ],
     [ "nut_Factor_ipow", "factorization_8h.html#a19a1f32d8d7197c9f60113616f10a5c2", null ],
     [ "nut_Factor_phi", "factorization_8h.html#a9abda9091fb2fcf758f069bf8a674412", null ],
     [ "nut_Factor_carmichael", "factorization_8h.html#a0ac931c6a62bec58d63ee6043878315d", null ],

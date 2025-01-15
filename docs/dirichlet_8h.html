@@ -144,6 +144,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a2db407b902fdb86d740d579e445223c8" id="r_a2db407b902fdb86d740d579e445223c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a2db407b902fdb86d740d579e445223c8">nut_dirichlet_D</a> (uint64_t max, uint64_t m)</td></tr>
 <tr class="memdesc:a2db407b902fdb86d740d579e445223c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the sum of the divisor count function d from 1 to max.  <br /></td></tr>
 <tr class="separator:a2db407b902fdb86d740d579e445223c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca98e32fc962f9f5afe9d73266df65a6" id="r_aca98e32fc962f9f5afe9d73266df65a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#aca98e32fc962f9f5afe9d73266df65a6">nut_dirichlet_Sigma</a> (uint64_t max, uint64_t m)</td></tr>
+<tr class="memdesc:aca98e32fc962f9f5afe9d73266df65a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the sum of the divisor sum function sigma from 1 to max.  <br /></td></tr>
+<tr class="separator:aca98e32fc962f9f5afe9d73266df65a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff2f0dc86d8486a52cc05f57a42ec453" id="r_aff2f0dc86d8486a52cc05f57a42ec453"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#aff2f0dc86d8486a52cc05f57a42ec453">nut_euler_sieve_conv_u</a> (int64_t n, int64_t m, const int64_t f_vals[static n+1], int64_t f_conv_u_vals[restrict static n+1])</td></tr>
 <tr class="memdesc:aff2f0dc86d8486a52cc05f57a42ec453"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a table of values of a multiplicative function f, compute (f &lt;*&gt; u)(x) for all x from 1 to n See <code><a class="el" href="dirichlet_8h.html#aff2f0dc86d8486a52cc05f57a42ec453">nut_euler_sieve_conv_u</a></code> for more info}.  <br /></td></tr>
 <tr class="separator:aff2f0dc86d8486a52cc05f57a42ec453"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -237,6 +240,44 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Diri_destroy</b> 
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the sum d(1) + ... + d(max) </dd></dl>
+
+</div>
+</div>
+<a id="aca98e32fc962f9f5afe9d73266df65a6" name="aca98e32fc962f9f5afe9d73266df65a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca98e32fc962f9f5afe9d73266df65a6">&#9670;&#160;</a></span>nut_dirichlet_Sigma()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> uint64_t nut_dirichlet_Sigma </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the sum of the divisor sum function sigma from 1 to max. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of range to compute sum for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>modulus to reduce result by, or 0 to skip reducing </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the sum sigma(1) + ... + sigma(max) </dd></dl>
 
 </div>
 </div>
@@ -952,7 +993,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Diri_destroy</b> 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="dirichlet_8h.html">dirichlet.h</a></li>
-    <li class="footer">Generated on Fri Jan 3 2025 21:05:55 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Jan 15 2025 01:26:44 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8 </li>
   </ul>
 </div>
 </body>

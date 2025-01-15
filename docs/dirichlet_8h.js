@@ -2,6 +2,7 @@ var dirichlet_8h =
 [
     [ "nut_Diri", "structnut__Diri.html", null ],
     [ "nut_dirichlet_D", "dirichlet_8h.html#a2db407b902fdb86d740d579e445223c8", null ],
+    [ "nut_dirichlet_Sigma", "dirichlet_8h.html#aca98e32fc962f9f5afe9d73266df65a6", null ],
     [ "nut_euler_sieve_conv_u", "dirichlet_8h.html#aff2f0dc86d8486a52cc05f57a42ec453", null ],
     [ "nut_euler_sieve_conv_N", "dirichlet_8h.html#a74180d3515220729cf659328a49154c9", null ],
     [ "nut_euler_sieve_conv", "dirichlet_8h.html#a52f9358d979df1a3063c09cfbe19d93d", null ],
