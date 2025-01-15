@@ -91,11 +91,13 @@ uint64_t nut_u64_binom_next(uint64_t n, uint64_t k, uint64_t prev){
 }
 
 #if defined(_NUT_RAND_USE_GETRANDOM) || defined(_NUT_RAND_USE_SYSCALL) || defined(_NUT_RAND_USE_URANDOM)
+#ifdef _NUT_RAND_USE_URANDOM
+__thread FILE *nut_urandom = NULL;
+#endif
 uint64_t nut_u64_rand(uint64_t a, uint64_t b){
 #ifdef _NUT_RAND_USE_URANDOM
-	__thread FILE *urandom = NULL;
-	if(!urandom){
-		fopen("/dev/urandom", "rb");
+	if(!nut_urandom){
+		nut_urandom = fopen("/dev/urandom", "rb");
 	}
 #endif
 	uint64_t l = b - a, r = 0, bytes = (71 - __builtin_clzll(l))/8;
@@ -115,7 +117,7 @@ uint64_t nut_u64_rand(uint64_t a, uint64_t b){
 #elifdef _NUT_RAND_USE_SYSCALL
 		syscall(SYS_getrandom, &r, bytes, 0);
 #else
-		fread(&r, 8, 1, urandom);
+		fread(&r, 8, 1, nut_urandom);
 #endif
 #pragma GCC diagnostic pop
 	}while(ub && r >= ub);
