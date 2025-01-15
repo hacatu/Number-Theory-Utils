@@ -140,6 +140,15 @@ uint64_t nut_Factor_divpowsum(const nut_Factors *factors, uint64_t power);
 NUT_ATTR_PURE
 uint64_t nut_Factor_divtupcount(const nut_Factors *factors, uint64_t k, uint64_t modulus);
 
+/// Find the number of signed lattice points on a circle whose squared radius has a given factorization,
+/// that is, the number of signed lattice solutions to a^2 + b^2 = k, given k's factorization.
+///
+/// By symmetry, the number of nonnegative lattice solutions is pretty much 1/4th this, except that if k
+/// is a perfect square it will be that + 1, since both (sqrt(k), 0) and (0, sqrt(k)) are nonnegative
+/// Clasically, this is the number of divisors of k which are congruent to 1 mod 4, minus the number
+/// of divisors which are congruent to 3 mod 4.
+uint64_t nut_Factor_circle_latte(const nut_Factors *factors);
+
 /// Raise a factorization to a power, ie multiply all exponents by a constant.
 /// @param [in,out] factors: factorization to raise to a power
 /// @param [in] power: power to raise the factorization to

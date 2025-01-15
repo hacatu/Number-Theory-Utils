@@ -14,7 +14,26 @@ uint64_t nut_dirichlet_D(uint64_t max, uint64_t m){
 		uint64_t term = max/n;
 		res = m ? (res + term)%m : res + term;
 	}
-	return 2*res - y*y;
+	return m ? (2*res + m - (y*y)%m)%m : 2*res - y*y;
+}
+
+uint64_t nut_dirichlet_Sigma(uint64_t max, uint64_t m){
+	uint64_t y = nut_u64_nth_root(max, 2);
+	uint64_t res = 0;
+	for(uint64_t n = 1; n <= y; ++n){
+		uint64_t k = max/n;
+		if(m){
+			k %= m;
+		}
+		uint64_t term = (k&1) ? k*((k + 1)>>1) : (k>>1)*(k + 1);
+		res = m ? (res + n*k + term)%m : res + n*k + term;
+	}
+	if(m){
+		uint64_t cross = (y&1) ? y*y%m*((y + 1)>>1)%m : (y + 1)*(y>>1)%m*y%m;
+		return (res + m - cross)%m;
+	}else{
+		return res - (y*y*(y + 1)>>1);
+	}
 }
 
 static inline bool is_composite_unpacked(uint64_t n, const uint8_t buf[static n/8 + 1]){

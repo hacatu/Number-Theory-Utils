@@ -106,6 +106,13 @@ typedef struct{
 NUT_ATTR_CONST
 uint64_t nut_dirichlet_D(uint64_t max, uint64_t m);
 
+/// Compute the sum of the divisor sum function sigma from 1 to max.
+/// @param [in] max: inclusive upper bound of range to compute sum for
+/// @param [in] m: modulus to reduce result by, or 0 to skip reducing
+/// @return the sum sigma(1) + ... + sigma(max)
+NUT_ATTR_CONST
+uint64_t nut_dirichlet_Sigma(uint64_t max, uint64_t m);
+
 /// Given a table of values of a multiplicative function f, compute (f <*> u)(x) for all x from 1 to n
 /// See { @link nut_euler_sieve_conv_u} for more info}
 /// @param [in] n: inclusive upper bound of range to compute f <*> u over

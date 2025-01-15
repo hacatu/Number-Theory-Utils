@@ -1,5 +1,6 @@
 #include <stddef.h>
 #include <inttypes.h>
+#include <stdint.h>
 #include <string.h>
 
 #include <nut/modular_math.h>
@@ -93,6 +94,24 @@ uint64_t nut_Factor_divtupcount(const nut_Factors *factors, uint64_t k, uint64_t
 		}
 	}
 	return res;
+}
+
+uint64_t nut_Factor_circle_latte(const nut_Factors *factors){
+	uint64_t c1c1_d0 = 1;
+	uint64_t c3c1_d0 = 1;
+	uint64_t c3c3_d0 = 0;
+	for(uint64_t i = 0; i < factors->num_primes; ++i){
+		uint64_t p = factors->factors[i].prime;
+		uint64_t a = factors->factors[i].power;
+		if((p&3) == 1){
+			c1c1_d0 *= a + 1;
+		}else if((p&3) == 3){
+			uint64_t tmp = c3c1_d0*(a/2 + 1) + c3c3_d0*(a - a/2);
+			c3c3_d0 = c3c1_d0*(a - a/2) + c3c3_d0*(a/2 + 1);
+			c3c1_d0 = tmp;
+		}
+	}
+	return 4*c1c1_d0*(c3c1_d0 - c3c3_d0);
 }
 
 void nut_Factor_ipow(nut_Factors *factors, uint64_t power){
