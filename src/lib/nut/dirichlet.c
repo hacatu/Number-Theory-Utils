@@ -256,7 +256,8 @@ bool nut_euler_sieve_conv(int64_t n, int64_t modulus, const int64_t f_vals[stati
 					int64_t A = p;
 					while(A < ppow){
 						if(modulus){
-							c = nut_i64_mod(c + f_vals[A]*g_vals[ppow] + f_vals[ppow]*g_vals[A], modulus);
+							c = nut_i64_mod(c + f_vals[A]*g_vals[ppow], modulus);
+							c = nut_i64_mod(c + f_vals[ppow]*g_vals[A], modulus);
 						}else{
 							c += f_vals[A]*g_vals[ppow] + f_vals[ppow]*g_vals[A];
 						}
@@ -333,6 +334,9 @@ void nut_Diri_compute_N(nut_Diri *self, int64_t m){
 	}
 	for(int64_t i = 1; i < self->yinv; ++i){
 		int64_t v = self->x/i;
+		if(m){
+			v %= m;
+		}
 		int64_t term = (v&1) ? v*((v + 1) >> 1) : (v + 1)*(v >> 1);
 		self->buf[self->y + i] = m ? term%m : term;
 	}
@@ -580,11 +584,11 @@ bool nut_Diri_compute_conv_u(nut_Diri *restrict self, int64_t m, const nut_Diri 
 			}else{
 				h += term;
 			}
-			term = nut_Diri_get_dense(f_tbl, n)*(v/n);
 			if(m){
+				term = (v/n)%m*nut_Diri_get_dense(f_tbl, n);
 				h = nut_i64_mod(h + term, m);
 			}else{
-				h += term;
+				h += nut_Diri_get_dense(f_tbl, n)*(v/n);
 			}
 		}
 		int64_t term = nut_Diri_get_dense(self, vr)*vr;
