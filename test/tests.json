@@ -1,4 +1,7 @@
 {
+	"test_segsieve_factorization": {
+		"no_red_tests": [[]]
+	},
 	"test_dirichlet_pi": {
 		"no_red_tests": [[]]
 	},
