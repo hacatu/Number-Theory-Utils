@@ -1,5 +1,14 @@
 var NAVTREEINDEX1 =
 {
+"structnut__FactorConf.html":[1,0,3],
+"structnut__FactorConf.html#a03a74ba961477004fd07cca592318954":[1,0,3,2],
+"structnut__FactorConf.html#a05d3b17c3e6a25ca26b778064d2231fe":[1,0,3,1],
+"structnut__FactorConf.html#a20f149624a1319ad52b8f24505061520":[1,0,3,4],
+"structnut__FactorConf.html#a467689ec7f9f9118a8f128a9aeaf5b04":[1,0,3,0],
+"structnut__FactorConf.html#a6d1d1b2f0ffe8760c2186b3b3c515fa9":[1,0,3,3],
+"structnut__Factors.html":[1,0,4],
+"structnut__PfIt.html":[1,0,6],
+"structnut__PfStackEnt.html":[1,0,7],
 "structnut__Poly.html":[1,0,8],
 "structnut__Poly.html#a79d9b72fbeeadbeaf7e60e1cfe397dd0":[1,0,8,1],
 "structnut__Poly.html#a9e21e120f8234c52f4b3059d613357e7":[1,0,8,0],
@@ -8,7 +17,8 @@ var NAVTREEINDEX1 =
 "structnut__Roots.html#a4938a9a6f1cb009c71930447a417b467":[1,0,9,2],
 "structnut__Roots.html#a52b50bc7b374bb528cdae1b4477b69c1":[1,0,9,0],
 "structnut__Roots.html#a8c4fc3262be2a3850f653b9688e1a400":[1,0,9,1],
+"structnut__Segsieve.html":[1,0,10],
 "structnut__i64__Matrix.html":[1,0,5],
-"structnut__u64__ModMatrix.html":[1,0,10],
-"structnut__u64__Pitcharr.html":[1,0,11]
+"structnut__u64__ModMatrix.html":[1,0,11],
+"structnut__u64__Pitcharr.html":[1,0,12]
 };

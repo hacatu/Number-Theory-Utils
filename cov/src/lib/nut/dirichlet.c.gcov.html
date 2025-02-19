@@ -44,13 +44,13 @@
             <td class="headerValue">unnamed</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryMed">83.3&nbsp;%</td>
-            <td class="headerCovTableEntry">478</td>
+            <td class="headerCovTableEntryMed">82.7&nbsp;%</td>
+            <td class="headerCovTableEntry">481</td>
             <td class="headerCovTableEntry">398</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-01-15 01:26:23</td>
+            <td class="headerValue">2025-02-19 05:26:49</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">81.8&nbsp;%</td>
@@ -331,565 +331,569 @@
 <span id="L256"><span class="lineNum">     256</span>              :                     int64_t A = p;</span>
 <span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">         768 :                     while(A &lt; ppow){</span></span>
 <span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">         206 :                         if(modulus){</span></span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">         170 :                             c = nut_i64_mod(c + f_vals[A]*g_vals[ppow] + f_vals[ppow]*g_vals[A], modulus);</span></span>
-<span id="L260"><span class="lineNum">     260</span>              :                         }else{</span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">          36 :                             c += f_vals[A]*g_vals[ppow] + f_vals[ppow]*g_vals[A];</span></span>
-<span id="L262"><span class="lineNum">     262</span>              :                         }</span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">         206 :                         A *= p;</span></span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">         206 :                         ppow /= p;</span></span>
-<span id="L265"><span class="lineNum">     265</span>              :                     }</span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">         562 :                     if(A == ppow){</span></span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">         375 :                         if(modulus){</span></span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">         340 :                             c = nut_i64_mod(c + f_vals[A]*g_vals[A], modulus);</span></span>
-<span id="L269"><span class="lineNum">     269</span>              :                         }else{</span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">          35 :                             c += f_vals[A]*g_vals[A];</span></span>
-<span id="L271"><span class="lineNum">     271</span>              :                         }</span>
-<span id="L272"><span class="lineNum">     272</span>              :                     }</span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">         562 :                     f_conv_vals[m] = c;</span></span>
-<span id="L274"><span class="lineNum">     274</span>              :                 }</span>
-<span id="L275"><span class="lineNum">     275</span>              :                 break;</span>
-<span id="L276"><span class="lineNum">     276</span>              :             }// otherwise, i and p are coprime, so (f &lt;*&gt; u)(i*p) = (f &lt;*&gt; u)(i)*(f &lt;*&gt; u)(p)</span>
-<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">        1035 :             int64_t term = f_conv_vals[i]*f_conv_vals[p];</span></span>
-<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">        1035 :             f_conv_vals[m] = modulus ? nut_i64_mod(term, modulus) : term;</span></span>
-<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        1035 :             smallest_ppow[m] = p;</span></span>
-<span id="L280"><span class="lineNum">     280</span>              :         }</span>
-<span id="L281"><span class="lineNum">     281</span>              :     }</span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">         178 :     free(smallest_ppow);</span></span>
-<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">         178 :     free(primes);</span></span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">         178 :     free(is_c_buf);</span></span>
-<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">         178 :     return true;</span></span>
-<span id="L286"><span class="lineNum">     286</span>              : }</span>
-<span id="L287"><span class="lineNum">     287</span>              : </span>
-<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">          25 : bool nut_Diri_init(nut_Diri *self, int64_t x, int64_t y){</span></span>
-<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">          25 :     int64_t ymin = nut_u64_nth_root(x, 2);</span></span>
-<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">          25 :     if(y &lt; ymin){</span></span>
-<span id="L291"><span class="lineNum">     291</span>              :         y = ymin;</span>
-<span id="L292"><span class="lineNum">     292</span>              :     }</span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">          25 :     int64_t yinv = x/y + 1;</span></span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">          25 :     if(!(self-&gt;buf = malloc((y + yinv)*sizeof(int64_t)))){</span></span>
-<span id="L295"><span class="lineNum">     295</span>              :         return false;</span>
-<span id="L296"><span class="lineNum">     296</span>              :     }</span>
-<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">          25 :     self-&gt;x = x;</span></span>
-<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">          25 :     self-&gt;y = y;</span></span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">          25 :     self-&gt;yinv = yinv;</span></span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">          25 :     return true;</span></span>
-<span id="L301"><span class="lineNum">     301</span>              : }</span>
-<span id="L302"><span class="lineNum">     302</span>              : </span>
-<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">          25 : void nut_Diri_destroy(nut_Diri *self){</span></span>
-<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">          25 :     free(self-&gt;buf);</span></span>
-<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">          25 :     *self = (nut_Diri){};</span></span>
-<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">          25 : }</span></span>
-<span id="L307"><span class="lineNum">     307</span>              : </span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">          35 : void nut_Diri_copy(nut_Diri *restrict dest, const nut_Diri *restrict src){</span></span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">          35 :     memcpy(dest-&gt;buf, src-&gt;buf, (src-&gt;y + src-&gt;yinv)*sizeof(int64_t));</span></span>
-<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">          35 : }</span></span>
-<span id="L311"><span class="lineNum">     311</span>              : </span>
-<span id="L312"><span class="lineNum">     312</span> <span class="tlaUNC tlaBgUNC">           0 : void nut_Diri_compute_I(nut_Diri *self){</span></span>
-<span id="L313"><span class="lineNum">     313</span> <span class="tlaUNC">           0 :     memset(self-&gt;buf, 0, (self-&gt;y + 1)*sizeof(int64_t));</span></span>
-<span id="L314"><span class="lineNum">     314</span> <span class="tlaUNC">           0 :     self-&gt;buf[1] = 1;</span></span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaUNC">           0 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaUNC">           0 :         self-&gt;buf[self-&gt;y + i] = 1;</span></span>
-<span id="L317"><span class="lineNum">     317</span>              :     }</span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L319"><span class="lineNum">     319</span>              : </span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC tlaBgGNC">          25 : void nut_Diri_compute_u(nut_Diri *self, int64_t m){</span></span>
-<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">         439 :     for(int64_t i = 0; i &lt;= self-&gt;y; ++i){</span></span>
-<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">         414 :         self-&gt;buf[i] = 1;</span></span>
-<span id="L323"><span class="lineNum">     323</span>              :     }</span>
-<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">         436 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">         411 :         int64_t term = self-&gt;x/i;</span></span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">         411 :         self-&gt;buf[self-&gt;y + i] = m ? nut_i64_mod(term, m) : term;</span></span>
-<span id="L327"><span class="lineNum">     327</span>              :     }</span>
-<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">          25 : }</span></span>
-<span id="L329"><span class="lineNum">     329</span>              : </span>
-<span id="L330"><span class="lineNum">     330</span> <span class="tlaUNC tlaBgUNC">           0 : void nut_Diri_compute_N(nut_Diri *self, int64_t m){</span></span>
-<span id="L331"><span class="lineNum">     331</span> <span class="tlaUNC">           0 :     for(int64_t i = 0; i &lt;= self-&gt;y; ++i){</span></span>
-<span id="L332"><span class="lineNum">     332</span> <span class="tlaUNC">           0 :         self-&gt;buf[i] = m ? i%m : i;</span></span>
-<span id="L333"><span class="lineNum">     333</span>              :     }</span>
-<span id="L334"><span class="lineNum">     334</span> <span class="tlaUNC">           0 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaUNC">           0 :         int64_t v = self-&gt;x/i;</span></span>
-<span id="L336"><span class="lineNum">     336</span> <span class="tlaUNC">           0 :         int64_t term = (v&amp;1) ? v*((v + 1) &gt;&gt; 1) : (v + 1)*(v &gt;&gt; 1);</span></span>
-<span id="L337"><span class="lineNum">     337</span> <span class="tlaUNC">           0 :         self-&gt;buf[self-&gt;y + i] = m ? term%m : term;</span></span>
-<span id="L338"><span class="lineNum">     338</span>              :     }</span>
-<span id="L339"><span class="lineNum">     339</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L340"><span class="lineNum">     340</span>              : </span>
-<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC tlaBgGNC">           4 : bool nut_Diri_compute_Nk(nut_Diri *restrict self, uint64_t k, int64_t m){</span></span>
-<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">           4 :     if(!m){</span></span>
-<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">           2 :         nut_i64_Matrix pascal_mat [[gnu::cleanup(nut_i64_Matrix_destroy)]] = {}, faulhaber_mat [[gnu::cleanup(nut_i64_Matrix_destroy)]] = {};</span></span>
-<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">           2 :         int64_t *vand_vec [[gnu::cleanup(cleanup_free)]] = malloc((k + 1)*sizeof(int64_t));</span></span>
-<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">           1 :         if(!vand_vec){</span></span>
-<span id="L346"><span class="lineNum">     346</span>              :             return false;</span>
-<span id="L347"><span class="lineNum">     347</span>              :         }</span>
-<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">           1 :         if(!nut_i64_Matrix_init(&amp;pascal_mat, k + 1, k + 1)){</span></span>
-<span id="L349"><span class="lineNum">     349</span>              :             return false;</span>
-<span id="L350"><span class="lineNum">     350</span>              :         }</span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">           1 :         if(!nut_i64_Matrix_init(&amp;faulhaber_mat, k + 1, k + 1)){</span></span>
-<span id="L352"><span class="lineNum">     352</span>              :             return false;</span>
-<span id="L353"><span class="lineNum">     353</span>              :         }</span>
-<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">           1 :         nut_i64_Matrix_fill_short_pascal(&amp;pascal_mat);</span></span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">           1 :         int64_t denom = nut_i64_Matrix_invert_ltr(&amp;pascal_mat, &amp;faulhaber_mat);</span></span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">          33 :         for(int64_t i = 0; i &lt;= self-&gt;y; ++i){</span></span>
-<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">          32 :             self-&gt;buf[i] = nut_u64_pow(i, k);</span></span>
-<span id="L358"><span class="lineNum">     358</span>              :         }</span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">          33 :         for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
-<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">          32 :             int64_t v = self-&gt;x/i;</span></span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">          32 :             nut_i64_Matrix_fill_vandemond_vec(v + 1, k + 1, m, vand_vec);</span></span>
-<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">          32 :             int64_t tot = 0;</span></span>
-<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">         192 :             for(uint64_t j = 0; j &lt; k + 1; ++j){</span></span>
-<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">         160 :                 int64_t a = faulhaber_mat.buf[(k + 1)*k + j]*vand_vec[j];</span></span>
-<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">         160 :                 tot = tot + a;</span></span>
-<span id="L366"><span class="lineNum">     366</span>              :             }</span>
-<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">          32 :             tot /= denom;</span></span>
-<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">          32 :             self-&gt;buf[self-&gt;y + i] = tot;</span></span>
-<span id="L369"><span class="lineNum">     369</span>              :         }</span>
-<span id="L370"><span class="lineNum">     370</span>              :         return true;</span>
-<span id="L371"><span class="lineNum">     371</span>              :     }else{</span>
-<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">           6 :         nut_u64_ModMatrix pascal_mat [[gnu::cleanup(nut_u64_ModMatrix_destroy)]] = {}, faulhaber_mat [[gnu::cleanup(nut_u64_ModMatrix_destroy)]] = {};</span></span>
-<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">           6 :         uint64_t *vand_vec [[gnu::cleanup(cleanup_free)]] = malloc((k + 1)*sizeof(uint64_t));</span></span>
-<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">           3 :         if(!vand_vec){</span></span>
-<span id="L375"><span class="lineNum">     375</span>              :             return false;</span>
-<span id="L376"><span class="lineNum">     376</span>              :         }</span>
-<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">           3 :         if(!nut_u64_ModMatrix_init(&amp;pascal_mat, k + 1, k + 1, m)){</span></span>
-<span id="L378"><span class="lineNum">     378</span>              :             return false;</span>
-<span id="L379"><span class="lineNum">     379</span>              :         }</span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">           3 :         if(!nut_u64_ModMatrix_init(&amp;faulhaber_mat, k + 1, k + 1, m)){</span></span>
-<span id="L381"><span class="lineNum">     381</span>              :             return false;</span>
-<span id="L382"><span class="lineNum">     382</span>              :         }</span>
-<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">           3 :         nut_u64_ModMatrix_fill_short_pascal(&amp;pascal_mat);</span></span>
-<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">           3 :         if(!nut_u64_ModMatrix_invert_ltr(&amp;pascal_mat, &amp;faulhaber_mat)){</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">         170 :                             c = nut_i64_mod(c + f_vals[A]*g_vals[ppow], modulus);</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">         170 :                             c = nut_i64_mod(c + f_vals[ppow]*g_vals[A], modulus);</span></span>
+<span id="L261"><span class="lineNum">     261</span>              :                         }else{</span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">          36 :                             c += f_vals[A]*g_vals[ppow] + f_vals[ppow]*g_vals[A];</span></span>
+<span id="L263"><span class="lineNum">     263</span>              :                         }</span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">         206 :                         A *= p;</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">         206 :                         ppow /= p;</span></span>
+<span id="L266"><span class="lineNum">     266</span>              :                     }</span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">         562 :                     if(A == ppow){</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">         375 :                         if(modulus){</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">         340 :                             c = nut_i64_mod(c + f_vals[A]*g_vals[A], modulus);</span></span>
+<span id="L270"><span class="lineNum">     270</span>              :                         }else{</span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">          35 :                             c += f_vals[A]*g_vals[A];</span></span>
+<span id="L272"><span class="lineNum">     272</span>              :                         }</span>
+<span id="L273"><span class="lineNum">     273</span>              :                     }</span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">         562 :                     f_conv_vals[m] = c;</span></span>
+<span id="L275"><span class="lineNum">     275</span>              :                 }</span>
+<span id="L276"><span class="lineNum">     276</span>              :                 break;</span>
+<span id="L277"><span class="lineNum">     277</span>              :             }// otherwise, i and p are coprime, so (f &lt;*&gt; u)(i*p) = (f &lt;*&gt; u)(i)*(f &lt;*&gt; u)(p)</span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">        1035 :             int64_t term = f_conv_vals[i]*f_conv_vals[p];</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        1035 :             f_conv_vals[m] = modulus ? nut_i64_mod(term, modulus) : term;</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">        1035 :             smallest_ppow[m] = p;</span></span>
+<span id="L281"><span class="lineNum">     281</span>              :         }</span>
+<span id="L282"><span class="lineNum">     282</span>              :     }</span>
+<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">         178 :     free(smallest_ppow);</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">         178 :     free(primes);</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">         178 :     free(is_c_buf);</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">         178 :     return true;</span></span>
+<span id="L287"><span class="lineNum">     287</span>              : }</span>
+<span id="L288"><span class="lineNum">     288</span>              : </span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">          25 : bool nut_Diri_init(nut_Diri *self, int64_t x, int64_t y){</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">          25 :     int64_t ymin = nut_u64_nth_root(x, 2);</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">          25 :     if(y &lt; ymin){</span></span>
+<span id="L292"><span class="lineNum">     292</span>              :         y = ymin;</span>
+<span id="L293"><span class="lineNum">     293</span>              :     }</span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">          25 :     int64_t yinv = x/y + 1;</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">          25 :     if(!(self-&gt;buf = malloc((y + yinv)*sizeof(int64_t)))){</span></span>
+<span id="L296"><span class="lineNum">     296</span>              :         return false;</span>
+<span id="L297"><span class="lineNum">     297</span>              :     }</span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">          25 :     self-&gt;x = x;</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">          25 :     self-&gt;y = y;</span></span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">          25 :     self-&gt;yinv = yinv;</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">          25 :     return true;</span></span>
+<span id="L302"><span class="lineNum">     302</span>              : }</span>
+<span id="L303"><span class="lineNum">     303</span>              : </span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">          25 : void nut_Diri_destroy(nut_Diri *self){</span></span>
+<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">          25 :     free(self-&gt;buf);</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">          25 :     *self = (nut_Diri){};</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">          25 : }</span></span>
+<span id="L308"><span class="lineNum">     308</span>              : </span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">          35 : void nut_Diri_copy(nut_Diri *restrict dest, const nut_Diri *restrict src){</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">          35 :     memcpy(dest-&gt;buf, src-&gt;buf, (src-&gt;y + src-&gt;yinv)*sizeof(int64_t));</span></span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">          35 : }</span></span>
+<span id="L312"><span class="lineNum">     312</span>              : </span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaUNC tlaBgUNC">           0 : void nut_Diri_compute_I(nut_Diri *self){</span></span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaUNC">           0 :     memset(self-&gt;buf, 0, (self-&gt;y + 1)*sizeof(int64_t));</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaUNC">           0 :     self-&gt;buf[1] = 1;</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaUNC">           0 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaUNC">           0 :         self-&gt;buf[self-&gt;y + i] = 1;</span></span>
+<span id="L318"><span class="lineNum">     318</span>              :     }</span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L320"><span class="lineNum">     320</span>              : </span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC tlaBgGNC">          25 : void nut_Diri_compute_u(nut_Diri *self, int64_t m){</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">         439 :     for(int64_t i = 0; i &lt;= self-&gt;y; ++i){</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">         414 :         self-&gt;buf[i] = 1;</span></span>
+<span id="L324"><span class="lineNum">     324</span>              :     }</span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">         436 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">         411 :         int64_t term = self-&gt;x/i;</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">         411 :         self-&gt;buf[self-&gt;y + i] = m ? nut_i64_mod(term, m) : term;</span></span>
+<span id="L328"><span class="lineNum">     328</span>              :     }</span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">          25 : }</span></span>
+<span id="L330"><span class="lineNum">     330</span>              : </span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaUNC tlaBgUNC">           0 : void nut_Diri_compute_N(nut_Diri *self, int64_t m){</span></span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaUNC">           0 :     for(int64_t i = 0; i &lt;= self-&gt;y; ++i){</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaUNC">           0 :         self-&gt;buf[i] = m ? i%m : i;</span></span>
+<span id="L334"><span class="lineNum">     334</span>              :     }</span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaUNC">           0 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
+<span id="L336"><span class="lineNum">     336</span> <span class="tlaUNC">           0 :         int64_t v = self-&gt;x/i;</span></span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaUNC">           0 :         if(m){</span></span>
+<span id="L338"><span class="lineNum">     338</span> <span class="tlaUNC">           0 :             v %= m;</span></span>
+<span id="L339"><span class="lineNum">     339</span>              :         }</span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaUNC">           0 :         int64_t term = (v&amp;1) ? v*((v + 1) &gt;&gt; 1) : (v + 1)*(v &gt;&gt; 1);</span></span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaUNC">           0 :         self-&gt;buf[self-&gt;y + i] = m ? term%m : term;</span></span>
+<span id="L342"><span class="lineNum">     342</span>              :     }</span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L344"><span class="lineNum">     344</span>              : </span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC tlaBgGNC">           4 : bool nut_Diri_compute_Nk(nut_Diri *restrict self, uint64_t k, int64_t m){</span></span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">           4 :     if(!m){</span></span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">           2 :         nut_i64_Matrix pascal_mat [[gnu::cleanup(nut_i64_Matrix_destroy)]] = {}, faulhaber_mat [[gnu::cleanup(nut_i64_Matrix_destroy)]] = {};</span></span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">           2 :         int64_t *vand_vec [[gnu::cleanup(cleanup_free)]] = malloc((k + 1)*sizeof(int64_t));</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">           1 :         if(!vand_vec){</span></span>
+<span id="L350"><span class="lineNum">     350</span>              :             return false;</span>
+<span id="L351"><span class="lineNum">     351</span>              :         }</span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">           1 :         if(!nut_i64_Matrix_init(&amp;pascal_mat, k + 1, k + 1)){</span></span>
+<span id="L353"><span class="lineNum">     353</span>              :             return false;</span>
+<span id="L354"><span class="lineNum">     354</span>              :         }</span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">           1 :         if(!nut_i64_Matrix_init(&amp;faulhaber_mat, k + 1, k + 1)){</span></span>
+<span id="L356"><span class="lineNum">     356</span>              :             return false;</span>
+<span id="L357"><span class="lineNum">     357</span>              :         }</span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">           1 :         nut_i64_Matrix_fill_short_pascal(&amp;pascal_mat);</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">           1 :         int64_t denom = nut_i64_Matrix_invert_ltr(&amp;pascal_mat, &amp;faulhaber_mat);</span></span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">          33 :         for(int64_t i = 0; i &lt;= self-&gt;y; ++i){</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">          32 :             self-&gt;buf[i] = nut_u64_pow(i, k);</span></span>
+<span id="L362"><span class="lineNum">     362</span>              :         }</span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">          33 :         for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">          32 :             int64_t v = self-&gt;x/i;</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">          32 :             nut_i64_Matrix_fill_vandemond_vec(v + 1, k + 1, m, vand_vec);</span></span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">          32 :             int64_t tot = 0;</span></span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">         192 :             for(uint64_t j = 0; j &lt; k + 1; ++j){</span></span>
+<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">         160 :                 int64_t a = faulhaber_mat.buf[(k + 1)*k + j]*vand_vec[j];</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">         160 :                 tot = tot + a;</span></span>
+<span id="L370"><span class="lineNum">     370</span>              :             }</span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">          32 :             tot /= denom;</span></span>
+<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">          32 :             self-&gt;buf[self-&gt;y + i] = tot;</span></span>
+<span id="L373"><span class="lineNum">     373</span>              :         }</span>
+<span id="L374"><span class="lineNum">     374</span>              :         return true;</span>
+<span id="L375"><span class="lineNum">     375</span>              :     }else{</span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">           6 :         nut_u64_ModMatrix pascal_mat [[gnu::cleanup(nut_u64_ModMatrix_destroy)]] = {}, faulhaber_mat [[gnu::cleanup(nut_u64_ModMatrix_destroy)]] = {};</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">           6 :         uint64_t *vand_vec [[gnu::cleanup(cleanup_free)]] = malloc((k + 1)*sizeof(uint64_t));</span></span>
+<span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">           3 :         if(!vand_vec){</span></span>
+<span id="L379"><span class="lineNum">     379</span>              :             return false;</span>
+<span id="L380"><span class="lineNum">     380</span>              :         }</span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">           3 :         if(!nut_u64_ModMatrix_init(&amp;pascal_mat, k + 1, k + 1, m)){</span></span>
+<span id="L382"><span class="lineNum">     382</span>              :             return false;</span>
+<span id="L383"><span class="lineNum">     383</span>              :         }</span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">           3 :         if(!nut_u64_ModMatrix_init(&amp;faulhaber_mat, k + 1, k + 1, m)){</span></span>
 <span id="L385"><span class="lineNum">     385</span>              :             return false;</span>
 <span id="L386"><span class="lineNum">     386</span>              :         }</span>
-<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">          36 :         for(int64_t i = 0; i &lt;= self-&gt;y; ++i){</span></span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">          33 :             self-&gt;buf[i] = nut_u64_powmod(i, k, m);</span></span>
-<span id="L389"><span class="lineNum">     389</span>              :         }</span>
-<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">          33 :         for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
-<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">          30 :             int64_t v = self-&gt;x/i;</span></span>
-<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">          30 :             nut_u64_Matrix_fill_vandemond_vec((v + 1)%m, k + 1, m, vand_vec);</span></span>
-<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">          30 :             int64_t tot = 0;</span></span>
-<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">         200 :             for(uint64_t j = 0; j &lt; k + 1; ++j){</span></span>
-<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">         170 :                 uint64_t a = faulhaber_mat.buf[(k + 1)*k + j]*vand_vec[j];</span></span>
-<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">         170 :                 tot = (tot + a)%m;</span></span>
-<span id="L397"><span class="lineNum">     397</span>              :             }</span>
-<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">          30 :             self-&gt;buf[self-&gt;y + i] = tot;</span></span>
-<span id="L399"><span class="lineNum">     399</span>              :         }</span>
-<span id="L400"><span class="lineNum">     400</span>              :         return true;</span>
-<span id="L401"><span class="lineNum">     401</span>              :     }</span>
-<span id="L402"><span class="lineNum">     402</span>              : }</span>
-<span id="L403"><span class="lineNum">     403</span>              : </span>
-<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">           2 : void nut_Diri_compute_mertens(nut_Diri *restrict self, int64_t m, const uint8_t mobius[restrict static self-&gt;y/4 + 1]){</span></span>
-<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">           2 :     nut_Diri_set_dense(self, 0, 0);</span></span>
-<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">           2 :     nut_Diri_set_dense(self, 1, 1);</span></span>
-<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">     1160428 :     for(int64_t i = 2, acc = 1, v; i &lt;= self-&gt;y; ++i){</span></span>
-<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">     1160426 :         if((v = nut_Bitfield2_arr_get(mobius, i)) == 3){</span></span>
-<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">      352703 :             v = -1;</span></span>
-<span id="L410"><span class="lineNum">     410</span>              :         }</span>
-<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">     1160426 :         nut_Diri_set_dense(self, i, acc += v);</span></span>
-<span id="L412"><span class="lineNum">     412</span>              :     }</span>
-<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">        8651 :     for(int64_t i = self-&gt;yinv - 1; i; --i){</span></span>
-<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">        8649 :         int64_t v = self-&gt;x/i;</span></span>
-<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">        8649 :         int64_t M = 1;</span></span>
-<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">        8649 :         int64_t vr = nut_u64_nth_root(v, 2);</span></span>
-<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">    18424698 :         for(int64_t j = 1; j &lt;= vr; ++j){</span></span>
-<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">    18416049 :             int64_t term = (nut_Diri_get_dense(self, j) - nut_Diri_get_dense(self, j - 1))*(v/j);</span></span>
-<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">    18416049 :             if(m){</span></span>
-<span id="L420"><span class="lineNum">     420</span> <span class="tlaUNC tlaBgUNC">           0 :                 M = nut_i64_mod(M - term, m);</span></span>
-<span id="L421"><span class="lineNum">     421</span>              :             }else{</span>
-<span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC tlaBgGNC">    18416049 :                 M -= term;</span></span>
-<span id="L423"><span class="lineNum">     423</span>              :             }</span>
-<span id="L424"><span class="lineNum">     424</span>              :         }</span>
-<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">    18416049 :         for(int64_t j = 2, term; j &lt;= vr; ++j){</span></span>
-<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">    18407400 :             if(i*j &gt;= self-&gt;yinv){</span></span>
-<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">    18336517 :                 term = nut_Diri_get_dense(self, v/j);</span></span>
-<span id="L428"><span class="lineNum">     428</span>              :             }else{</span>
-<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">       70883 :                 term = nut_Diri_get_sparse(self, i*j);</span></span>
-<span id="L430"><span class="lineNum">     430</span>              :             }</span>
-<span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">    18407400 :             if(m){</span></span>
-<span id="L432"><span class="lineNum">     432</span> <span class="tlaUNC tlaBgUNC">           0 :                 M = nut_i64_mod(M - term, m);</span></span>
-<span id="L433"><span class="lineNum">     433</span>              :             }else{</span>
-<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC tlaBgGNC">    18407400 :                 M -= term;</span></span>
-<span id="L435"><span class="lineNum">     435</span>              :             }</span>
-<span id="L436"><span class="lineNum">     436</span>              :         }</span>
-<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">        8649 :         int64_t term;</span></span>
-<span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC">        8649 :         if(vr &lt;= self-&gt;y){</span></span>
-<span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">        8649 :             term = nut_Diri_get_dense(self, vr)*vr;</span></span>
-<span id="L440"><span class="lineNum">     440</span>              :         }else{</span>
-<span id="L441"><span class="lineNum">     441</span> <span class="tlaUNC tlaBgUNC">           0 :             term = nut_Diri_get_sparse(self, self-&gt;x/vr)*vr;</span></span>
-<span id="L442"><span class="lineNum">     442</span>              :         }</span>
-<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC tlaBgGNC">        8649 :         if(m){</span></span>
-<span id="L444"><span class="lineNum">     444</span> <span class="tlaUNC tlaBgUNC">           0 :             M = nut_i64_mod(M + term, m);</span></span>
-<span id="L445"><span class="lineNum">     445</span>              :         }else{</span>
-<span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC tlaBgGNC">        8649 :             M += term;</span></span>
-<span id="L447"><span class="lineNum">     447</span>              :         }</span>
-<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">        8649 :         nut_Diri_set_sparse(self, i, M);</span></span>
-<span id="L449"><span class="lineNum">     449</span>              :     }</span>
-<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">     1160428 :     for(int64_t i = 2, v; i &lt;= self-&gt;y; ++i){</span></span>
-<span id="L451"><span class="lineNum">     451</span> <span class="tlaGNC">     1160426 :         if((v = nut_Bitfield2_arr_get(mobius, i)) == 3){</span></span>
-<span id="L452"><span class="lineNum">     452</span> <span class="tlaGNC">      352703 :             v = -1;</span></span>
-<span id="L453"><span class="lineNum">     453</span>              :         }</span>
-<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC">     1160426 :         nut_Diri_set_dense(self, i, v);</span></span>
-<span id="L455"><span class="lineNum">     455</span>              :     }</span>
-<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">           2 : }</span></span>
-<span id="L457"><span class="lineNum">     457</span>              : </span>
-<span id="L458"><span class="lineNum">     458</span> <span class="tlaGNC">          20 : bool nut_Diri_compute_dk(nut_Diri *restrict self, uint64_t k, int64_t m, nut_Diri *restrict f_tbl, nut_Diri *restrict g_tbl){</span></span>
-<span id="L459"><span class="lineNum">     459</span> <span class="tlaGNC">          20 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;y != g_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x || self-&gt;x != g_tbl-&gt;x){</span></span>
-<span id="L460"><span class="lineNum">     460</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
-<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC tlaBgGNC">          20 :     }else if(!k){</span></span>
-<span id="L462"><span class="lineNum">     462</span> <span class="tlaUNC tlaBgUNC">           0 :         nut_Diri_compute_I(self);</span></span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC tlaBgGNC">          20 :     }else if(k == 1){</span></span>
-<span id="L465"><span class="lineNum">     465</span> <span class="tlaUNC tlaBgUNC">           0 :         nut_Diri_compute_u(self, m);</span></span>
-<span id="L466"><span class="lineNum">     466</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L467"><span class="lineNum">     467</span>              :     }</span>
-<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC tlaBgGNC">          20 :     nut_Diri_compute_u(f_tbl, m);</span></span>
-<span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC">          20 :     nut_Diri *t = self, *s = f_tbl, *r = g_tbl;</span></span>
-<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC">          20 :     while(k%2 == 0){</span></span>
-<span id="L471"><span class="lineNum">     471</span> <span class="tlaUNC tlaBgUNC">           0 :         if(!nut_Diri_compute_conv(t, m, s, s)){</span></span>
-<span id="L472"><span class="lineNum">     472</span>              :             return false;</span>
-<span id="L473"><span class="lineNum">     473</span>              :         }else{</span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaUNC">           0 :             void *tmp = t;</span></span>
-<span id="L475"><span class="lineNum">     475</span> <span class="tlaUNC">           0 :             t = s;</span></span>
-<span id="L476"><span class="lineNum">     476</span> <span class="tlaUNC">           0 :             s = tmp;</span></span>
-<span id="L477"><span class="lineNum">     477</span>              :         }//s = s*s</span>
-<span id="L478"><span class="lineNum">     478</span> <span class="tlaUNC">           0 :         k &gt;&gt;= 1;</span></span>
-<span id="L479"><span class="lineNum">     479</span>              :     }</span>
-<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC tlaBgGNC">          20 :     nut_Diri_copy(r, s);</span></span>
-<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">         131 :     while((k &gt;&gt;= 1)){</span></span>
-<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">         111 :         if(!nut_Diri_compute_conv(t, m, s, s)){</span></span>
-<span id="L483"><span class="lineNum">     483</span>              :             return false;</span>
-<span id="L484"><span class="lineNum">     484</span>              :         }else{</span>
-<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC">         111 :             void *tmp = t;</span></span>
-<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">         111 :             t = s;</span></span>
-<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">         111 :             s = tmp;</span></span>
-<span id="L488"><span class="lineNum">     488</span>              :         }//s = s*s</span>
-<span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">         111 :         if(k%2){</span></span>
-<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">          62 :             if(!nut_Diri_compute_conv(t, m, r, s)){</span></span>
-<span id="L491"><span class="lineNum">     491</span>              :                 return false;</span>
-<span id="L492"><span class="lineNum">     492</span>              :             }else{</span>
-<span id="L493"><span class="lineNum">     493</span>              :                 void *tmp = t;</span>
-<span id="L494"><span class="lineNum">     494</span>              :                 t = r;</span>
-<span id="L495"><span class="lineNum">     495</span>              :                 r = tmp;</span>
-<span id="L496"><span class="lineNum">     496</span>              :             }//r = r*s</span>
-<span id="L497"><span class="lineNum">     497</span>              :         }</span>
-<span id="L498"><span class="lineNum">     498</span>              :     }</span>
-<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">          20 :     if(r != self){</span></span>
-<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">          13 :         nut_Diri_copy(self, r);</span></span>
-<span id="L501"><span class="lineNum">     501</span>              :     }</span>
-<span id="L502"><span class="lineNum">     502</span>              :     return true;</span>
-<span id="L503"><span class="lineNum">     503</span>              : }</span>
-<span id="L504"><span class="lineNum">     504</span>              : </span>
-<span id="L505"><span class="lineNum">     505</span> <span class="tlaUNC tlaBgUNC">           0 : bool nut_Diri_compute_J(nut_Diri *restrict self, uint64_t p){</span></span>
-<span id="L506"><span class="lineNum">     506</span> <span class="tlaUNC">           0 :     int64_t *partial_sums [[gnu::cleanup(cleanup_free)]] = malloc(p*sizeof(int64_t));</span></span>
-<span id="L507"><span class="lineNum">     507</span> <span class="tlaUNC">           0 :     uint64_t *is_qr [[gnu::cleanup(cleanup_free)]] = nut_u64_make_jacobi_tbl(p, partial_sums);</span></span>
-<span id="L508"><span class="lineNum">     508</span> <span class="tlaUNC">           0 :     if(!partial_sums || !is_qr){</span></span>
-<span id="L509"><span class="lineNum">     509</span>              :         return false;</span>
-<span id="L510"><span class="lineNum">     510</span>              :     }</span>
-<span id="L511"><span class="lineNum">     511</span> <span class="tlaUNC">           0 :     for(uint64_t r = 0; r &lt; p; ++r){</span></span>
-<span id="L512"><span class="lineNum">     512</span> <span class="tlaUNC">           0 :         int64_t v = nut_u64_jacobi_tbl_get(r, p, is_qr);</span></span>
-<span id="L513"><span class="lineNum">     513</span> <span class="tlaUNC">           0 :         for(int64_t i = r; i &lt;= self-&gt;y; i += p){</span></span>
-<span id="L514"><span class="lineNum">     514</span> <span class="tlaUNC">           0 :             self-&gt;buf[i] = v;</span></span>
-<span id="L515"><span class="lineNum">     515</span>              :         }</span>
-<span id="L516"><span class="lineNum">     516</span>              :     }</span>
-<span id="L517"><span class="lineNum">     517</span> <span class="tlaUNC">           0 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
-<span id="L518"><span class="lineNum">     518</span> <span class="tlaUNC">           0 :         int64_t r = self-&gt;x/i%p;</span></span>
-<span id="L519"><span class="lineNum">     519</span> <span class="tlaUNC">           0 :         self-&gt;buf[self-&gt;y + i] = partial_sums[r];</span></span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">           3 :         nut_u64_ModMatrix_fill_short_pascal(&amp;pascal_mat);</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">           3 :         if(!nut_u64_ModMatrix_invert_ltr(&amp;pascal_mat, &amp;faulhaber_mat)){</span></span>
+<span id="L389"><span class="lineNum">     389</span>              :             return false;</span>
+<span id="L390"><span class="lineNum">     390</span>              :         }</span>
+<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">          36 :         for(int64_t i = 0; i &lt;= self-&gt;y; ++i){</span></span>
+<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">          33 :             self-&gt;buf[i] = nut_u64_powmod(i, k, m);</span></span>
+<span id="L393"><span class="lineNum">     393</span>              :         }</span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">          33 :         for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
+<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">          30 :             int64_t v = self-&gt;x/i;</span></span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">          30 :             nut_u64_Matrix_fill_vandemond_vec((v + 1)%m, k + 1, m, vand_vec);</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">          30 :             int64_t tot = 0;</span></span>
+<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">         200 :             for(uint64_t j = 0; j &lt; k + 1; ++j){</span></span>
+<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">         170 :                 uint64_t a = faulhaber_mat.buf[(k + 1)*k + j]*vand_vec[j];</span></span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">         170 :                 tot = (tot + a)%m;</span></span>
+<span id="L401"><span class="lineNum">     401</span>              :             }</span>
+<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">          30 :             self-&gt;buf[self-&gt;y + i] = tot;</span></span>
+<span id="L403"><span class="lineNum">     403</span>              :         }</span>
+<span id="L404"><span class="lineNum">     404</span>              :         return true;</span>
+<span id="L405"><span class="lineNum">     405</span>              :     }</span>
+<span id="L406"><span class="lineNum">     406</span>              : }</span>
+<span id="L407"><span class="lineNum">     407</span>              : </span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">           2 : void nut_Diri_compute_mertens(nut_Diri *restrict self, int64_t m, const uint8_t mobius[restrict static self-&gt;y/4 + 1]){</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">           2 :     nut_Diri_set_dense(self, 0, 0);</span></span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">           2 :     nut_Diri_set_dense(self, 1, 1);</span></span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">     1160428 :     for(int64_t i = 2, acc = 1, v; i &lt;= self-&gt;y; ++i){</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">     1160426 :         if((v = nut_Bitfield2_arr_get(mobius, i)) == 3){</span></span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">      352703 :             v = -1;</span></span>
+<span id="L414"><span class="lineNum">     414</span>              :         }</span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">     1160426 :         nut_Diri_set_dense(self, i, acc += v);</span></span>
+<span id="L416"><span class="lineNum">     416</span>              :     }</span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">        8651 :     for(int64_t i = self-&gt;yinv - 1; i; --i){</span></span>
+<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">        8649 :         int64_t v = self-&gt;x/i;</span></span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">        8649 :         int64_t M = 1;</span></span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">        8649 :         int64_t vr = nut_u64_nth_root(v, 2);</span></span>
+<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">    18424698 :         for(int64_t j = 1; j &lt;= vr; ++j){</span></span>
+<span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">    18416049 :             int64_t term = (nut_Diri_get_dense(self, j) - nut_Diri_get_dense(self, j - 1))*(v/j);</span></span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">    18416049 :             if(m){</span></span>
+<span id="L424"><span class="lineNum">     424</span> <span class="tlaUNC tlaBgUNC">           0 :                 M = nut_i64_mod(M - term, m);</span></span>
+<span id="L425"><span class="lineNum">     425</span>              :             }else{</span>
+<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC tlaBgGNC">    18416049 :                 M -= term;</span></span>
+<span id="L427"><span class="lineNum">     427</span>              :             }</span>
+<span id="L428"><span class="lineNum">     428</span>              :         }</span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">    18416049 :         for(int64_t j = 2, term; j &lt;= vr; ++j){</span></span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">    18407400 :             if(i*j &gt;= self-&gt;yinv){</span></span>
+<span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">    18336517 :                 term = nut_Diri_get_dense(self, v/j);</span></span>
+<span id="L432"><span class="lineNum">     432</span>              :             }else{</span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">       70883 :                 term = nut_Diri_get_sparse(self, i*j);</span></span>
+<span id="L434"><span class="lineNum">     434</span>              :             }</span>
+<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">    18407400 :             if(m){</span></span>
+<span id="L436"><span class="lineNum">     436</span> <span class="tlaUNC tlaBgUNC">           0 :                 M = nut_i64_mod(M - term, m);</span></span>
+<span id="L437"><span class="lineNum">     437</span>              :             }else{</span>
+<span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC tlaBgGNC">    18407400 :                 M -= term;</span></span>
+<span id="L439"><span class="lineNum">     439</span>              :             }</span>
+<span id="L440"><span class="lineNum">     440</span>              :         }</span>
+<span id="L441"><span class="lineNum">     441</span> <span class="tlaGNC">        8649 :         int64_t term;</span></span>
+<span id="L442"><span class="lineNum">     442</span> <span class="tlaGNC">        8649 :         if(vr &lt;= self-&gt;y){</span></span>
+<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">        8649 :             term = nut_Diri_get_dense(self, vr)*vr;</span></span>
+<span id="L444"><span class="lineNum">     444</span>              :         }else{</span>
+<span id="L445"><span class="lineNum">     445</span> <span class="tlaUNC tlaBgUNC">           0 :             term = nut_Diri_get_sparse(self, self-&gt;x/vr)*vr;</span></span>
+<span id="L446"><span class="lineNum">     446</span>              :         }</span>
+<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC tlaBgGNC">        8649 :         if(m){</span></span>
+<span id="L448"><span class="lineNum">     448</span> <span class="tlaUNC tlaBgUNC">           0 :             M = nut_i64_mod(M + term, m);</span></span>
+<span id="L449"><span class="lineNum">     449</span>              :         }else{</span>
+<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC tlaBgGNC">        8649 :             M += term;</span></span>
+<span id="L451"><span class="lineNum">     451</span>              :         }</span>
+<span id="L452"><span class="lineNum">     452</span> <span class="tlaGNC">        8649 :         nut_Diri_set_sparse(self, i, M);</span></span>
+<span id="L453"><span class="lineNum">     453</span>              :     }</span>
+<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC">     1160428 :     for(int64_t i = 2, v; i &lt;= self-&gt;y; ++i){</span></span>
+<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">     1160426 :         if((v = nut_Bitfield2_arr_get(mobius, i)) == 3){</span></span>
+<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">      352703 :             v = -1;</span></span>
+<span id="L457"><span class="lineNum">     457</span>              :         }</span>
+<span id="L458"><span class="lineNum">     458</span> <span class="tlaGNC">     1160426 :         nut_Diri_set_dense(self, i, v);</span></span>
+<span id="L459"><span class="lineNum">     459</span>              :     }</span>
+<span id="L460"><span class="lineNum">     460</span> <span class="tlaGNC">           2 : }</span></span>
+<span id="L461"><span class="lineNum">     461</span>              : </span>
+<span id="L462"><span class="lineNum">     462</span> <span class="tlaGNC">          20 : bool nut_Diri_compute_dk(nut_Diri *restrict self, uint64_t k, int64_t m, nut_Diri *restrict f_tbl, nut_Diri *restrict g_tbl){</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">          20 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;y != g_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x || self-&gt;x != g_tbl-&gt;x){</span></span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC tlaBgGNC">          20 :     }else if(!k){</span></span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaUNC tlaBgUNC">           0 :         nut_Diri_compute_I(self);</span></span>
+<span id="L467"><span class="lineNum">     467</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC tlaBgGNC">          20 :     }else if(k == 1){</span></span>
+<span id="L469"><span class="lineNum">     469</span> <span class="tlaUNC tlaBgUNC">           0 :         nut_Diri_compute_u(self, m);</span></span>
+<span id="L470"><span class="lineNum">     470</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L471"><span class="lineNum">     471</span>              :     }</span>
+<span id="L472"><span class="lineNum">     472</span> <span class="tlaGNC tlaBgGNC">          20 :     nut_Diri_compute_u(f_tbl, m);</span></span>
+<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">          20 :     nut_Diri *t = self, *s = f_tbl, *r = g_tbl;</span></span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">          20 :     while(k%2 == 0){</span></span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaUNC tlaBgUNC">           0 :         if(!nut_Diri_compute_conv(t, m, s, s)){</span></span>
+<span id="L476"><span class="lineNum">     476</span>              :             return false;</span>
+<span id="L477"><span class="lineNum">     477</span>              :         }else{</span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaUNC">           0 :             void *tmp = t;</span></span>
+<span id="L479"><span class="lineNum">     479</span> <span class="tlaUNC">           0 :             t = s;</span></span>
+<span id="L480"><span class="lineNum">     480</span> <span class="tlaUNC">           0 :             s = tmp;</span></span>
+<span id="L481"><span class="lineNum">     481</span>              :         }//s = s*s</span>
+<span id="L482"><span class="lineNum">     482</span> <span class="tlaUNC">           0 :         k &gt;&gt;= 1;</span></span>
+<span id="L483"><span class="lineNum">     483</span>              :     }</span>
+<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC tlaBgGNC">          20 :     nut_Diri_copy(r, s);</span></span>
+<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC">         131 :     while((k &gt;&gt;= 1)){</span></span>
+<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">         111 :         if(!nut_Diri_compute_conv(t, m, s, s)){</span></span>
+<span id="L487"><span class="lineNum">     487</span>              :             return false;</span>
+<span id="L488"><span class="lineNum">     488</span>              :         }else{</span>
+<span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">         111 :             void *tmp = t;</span></span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">         111 :             t = s;</span></span>
+<span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">         111 :             s = tmp;</span></span>
+<span id="L492"><span class="lineNum">     492</span>              :         }//s = s*s</span>
+<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">         111 :         if(k%2){</span></span>
+<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">          62 :             if(!nut_Diri_compute_conv(t, m, r, s)){</span></span>
+<span id="L495"><span class="lineNum">     495</span>              :                 return false;</span>
+<span id="L496"><span class="lineNum">     496</span>              :             }else{</span>
+<span id="L497"><span class="lineNum">     497</span>              :                 void *tmp = t;</span>
+<span id="L498"><span class="lineNum">     498</span>              :                 t = r;</span>
+<span id="L499"><span class="lineNum">     499</span>              :                 r = tmp;</span>
+<span id="L500"><span class="lineNum">     500</span>              :             }//r = r*s</span>
+<span id="L501"><span class="lineNum">     501</span>              :         }</span>
+<span id="L502"><span class="lineNum">     502</span>              :     }</span>
+<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">          20 :     if(r != self){</span></span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">          13 :         nut_Diri_copy(self, r);</span></span>
+<span id="L505"><span class="lineNum">     505</span>              :     }</span>
+<span id="L506"><span class="lineNum">     506</span>              :     return true;</span>
+<span id="L507"><span class="lineNum">     507</span>              : }</span>
+<span id="L508"><span class="lineNum">     508</span>              : </span>
+<span id="L509"><span class="lineNum">     509</span> <span class="tlaUNC tlaBgUNC">           0 : bool nut_Diri_compute_J(nut_Diri *restrict self, uint64_t p){</span></span>
+<span id="L510"><span class="lineNum">     510</span> <span class="tlaUNC">           0 :     int64_t *partial_sums [[gnu::cleanup(cleanup_free)]] = malloc(p*sizeof(int64_t));</span></span>
+<span id="L511"><span class="lineNum">     511</span> <span class="tlaUNC">           0 :     uint64_t *is_qr [[gnu::cleanup(cleanup_free)]] = nut_u64_make_jacobi_tbl(p, partial_sums);</span></span>
+<span id="L512"><span class="lineNum">     512</span> <span class="tlaUNC">           0 :     if(!partial_sums || !is_qr){</span></span>
+<span id="L513"><span class="lineNum">     513</span>              :         return false;</span>
+<span id="L514"><span class="lineNum">     514</span>              :     }</span>
+<span id="L515"><span class="lineNum">     515</span> <span class="tlaUNC">           0 :     for(uint64_t r = 0; r &lt; p; ++r){</span></span>
+<span id="L516"><span class="lineNum">     516</span> <span class="tlaUNC">           0 :         int64_t v = nut_u64_jacobi_tbl_get(r, p, is_qr);</span></span>
+<span id="L517"><span class="lineNum">     517</span> <span class="tlaUNC">           0 :         for(int64_t i = r; i &lt;= self-&gt;y; i += p){</span></span>
+<span id="L518"><span class="lineNum">     518</span> <span class="tlaUNC">           0 :             self-&gt;buf[i] = v;</span></span>
+<span id="L519"><span class="lineNum">     519</span>              :         }</span>
 <span id="L520"><span class="lineNum">     520</span>              :     }</span>
-<span id="L521"><span class="lineNum">     521</span>              :     return true;</span>
-<span id="L522"><span class="lineNum">     522</span>              : }</span>
-<span id="L523"><span class="lineNum">     523</span>              : </span>
-<span id="L524"><span class="lineNum">     524</span> <span class="tlaGNC tlaBgGNC">           1 : bool nut_Diri_compute_pi(nut_Diri *restrict self){</span></span>
-<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">           1 :     self-&gt;buf[0] = 0;</span></span>
-<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">        1001 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></span>
-<span id="L527"><span class="lineNum">     527</span> <span class="tlaGNC">        1000 :         self-&gt;buf[i] = i - 1;</span></span>
-<span id="L528"><span class="lineNum">     528</span>              :     }</span>
-<span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC">        1001 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
-<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">        1000 :         int64_t term = self-&gt;x/i;</span></span>
-<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">        1000 :         self-&gt;buf[self-&gt;y + i] = term - 1;</span></span>
+<span id="L521"><span class="lineNum">     521</span> <span class="tlaUNC">           0 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaUNC">           0 :         int64_t r = self-&gt;x/i%p;</span></span>
+<span id="L523"><span class="lineNum">     523</span> <span class="tlaUNC">           0 :         self-&gt;buf[self-&gt;y + i] = partial_sums[r];</span></span>
+<span id="L524"><span class="lineNum">     524</span>              :     }</span>
+<span id="L525"><span class="lineNum">     525</span>              :     return true;</span>
+<span id="L526"><span class="lineNum">     526</span>              : }</span>
+<span id="L527"><span class="lineNum">     527</span>              : </span>
+<span id="L528"><span class="lineNum">     528</span> <span class="tlaGNC tlaBgGNC">           1 : bool nut_Diri_compute_pi(nut_Diri *restrict self){</span></span>
+<span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC">           1 :     self-&gt;buf[0] = 0;</span></span>
+<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">        1001 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></span>
+<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">        1000 :         self-&gt;buf[i] = i - 1;</span></span>
 <span id="L532"><span class="lineNum">     532</span>              :     }</span>
-<span id="L533"><span class="lineNum">     533</span> <span class="tlaGNC">        1000 :     for(int64_t p = 2; p &lt;= self-&gt;y; ++p){</span></span>
-<span id="L534"><span class="lineNum">     534</span> <span class="tlaGNC">         999 :         int64_t c = self-&gt;buf[p - 1];</span></span>
-<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">         999 :         if(self-&gt;buf[p] == c){</span></span>
-<span id="L536"><span class="lineNum">     536</span> <span class="tlaGNC">         831 :             continue;</span></span>
-<span id="L537"><span class="lineNum">     537</span>              :         }</span>
-<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">       17167 :         for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
-<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">       17156 :             int64_t v = self-&gt;x/i;</span></span>
-<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC">       17156 :             if(v &lt; p*p){</span></span>
-<span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC">         157 :                 goto CONTINUE_PRIMELOOP;</span></span>
-<span id="L542"><span class="lineNum">     542</span>              :             }</span>
-<span id="L543"><span class="lineNum">     543</span> <span class="tlaGNC">       16999 :             int64_t j = v/p;</span></span>
-<span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC">       16999 :             int64_t m = j &lt;= self-&gt;y ? self-&gt;buf[j] : self-&gt;buf[self-&gt;y + self-&gt;x/j];</span></span>
-<span id="L545"><span class="lineNum">     545</span> <span class="tlaGNC">       16999 :             self-&gt;buf[self-&gt;y + i] -= m - c;</span></span>
-<span id="L546"><span class="lineNum">     546</span>              :         }</span>
-<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">        7664 :         for(int64_t v = self-&gt;y; v &gt;= 0; --v){</span></span>
-<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">        7664 :             if(v &lt; p*p){</span></span>
-<span id="L549"><span class="lineNum">     549</span>              :                 break;</span>
-<span id="L550"><span class="lineNum">     550</span>              :             }</span>
-<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">        7653 :             self-&gt;buf[v] -= (self-&gt;buf[v/p] - c);</span></span>
-<span id="L552"><span class="lineNum">     552</span>              :         }</span>
-<span id="L553"><span class="lineNum">     553</span> <span class="tlaGNC">         999 :         CONTINUE_PRIMELOOP:;</span></span>
-<span id="L554"><span class="lineNum">     554</span>              :     }</span>
-<span id="L555"><span class="lineNum">     555</span> <span class="tlaGNC">           1 :     return true;</span></span>
-<span id="L556"><span class="lineNum">     556</span>              : }</span>
-<span id="L557"><span class="lineNum">     557</span>              : </span>
-<span id="L558"><span class="lineNum">     558</span> <span class="tlaGNC">          10 : bool nut_Diri_compute_conv_u(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl){</span></span>
-<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">          10 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x){</span></span>
-<span id="L560"><span class="lineNum">     560</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
-<span id="L561"><span class="lineNum">     561</span>              :     }</span>
-<span id="L562"><span class="lineNum">     562</span>              :     // use the dense part of self to temporarily store the sums of f for small n up to y</span>
-<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC tlaBgGNC">          10 :     self-&gt;buf[0] = 0;</span></span>
-<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">         299 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></span>
-<span id="L565"><span class="lineNum">     565</span> <span class="tlaGNC">         289 :         int64_t term = self-&gt;buf[i-1] + f_tbl-&gt;buf[i];</span></span>
-<span id="L566"><span class="lineNum">     566</span> <span class="tlaGNC">         289 :         self-&gt;buf[i] = m ? nut_i64_mod(term, m) : term;</span></span>
-<span id="L567"><span class="lineNum">     567</span>              :     }</span>
-<span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC">         308 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
-<span id="L569"><span class="lineNum">     569</span> <span class="tlaGNC">         298 :         int64_t v = self-&gt;x/i;</span></span>
-<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">         298 :         int64_t vr = nut_u64_nth_root(v, 2);// TODO: v is close to the previous v, so only one newton step should be needed here</span></span>
-<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC">         298 :         int64_t h = 0;</span></span>
-<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">        3027 :         for(int64_t n = 1, term; n &lt;= vr; ++n){</span></span>
-<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">        2729 :             if(v/n &lt;= self-&gt;y){</span></span>
-<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">        1689 :                 term = nut_Diri_get_dense(self, v/n);</span></span>
-<span id="L575"><span class="lineNum">     575</span>              :             }else{</span>
-<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">        1040 :                 term = nut_Diri_get_sparse(f_tbl, i*n);</span></span>
-<span id="L577"><span class="lineNum">     577</span>              :             }</span>
-<span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">        2729 :             if(m){</span></span>
-<span id="L579"><span class="lineNum">     579</span> <span class="tlaUNC tlaBgUNC">           0 :                 h = nut_i64_mod(h + term, m);</span></span>
-<span id="L580"><span class="lineNum">     580</span>              :             }else{</span>
-<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC tlaBgGNC">        2729 :                 h += term;</span></span>
-<span id="L582"><span class="lineNum">     582</span>              :             }</span>
-<span id="L583"><span class="lineNum">     583</span> <span class="tlaGNC">        2729 :             term = nut_Diri_get_dense(f_tbl, n)*(v/n);</span></span>
-<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">        2729 :             if(m){</span></span>
-<span id="L585"><span class="lineNum">     585</span> <span class="tlaUNC tlaBgUNC">           0 :                 h = nut_i64_mod(h + term, m);</span></span>
-<span id="L586"><span class="lineNum">     586</span>              :             }else{</span>
-<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC tlaBgGNC">        2729 :                 h += term;</span></span>
-<span id="L588"><span class="lineNum">     588</span>              :             }</span>
-<span id="L589"><span class="lineNum">     589</span>              :         }</span>
-<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">         298 :         int64_t term = nut_Diri_get_dense(self, vr)*vr;</span></span>
-<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">         298 :         if(m){</span></span>
-<span id="L592"><span class="lineNum">     592</span> <span class="tlaUNC tlaBgUNC">           0 :             h = nut_i64_mod(h - term, m);</span></span>
-<span id="L593"><span class="lineNum">     593</span>              :         }else{</span>
-<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC tlaBgGNC">         298 :             h -= term;</span></span>
-<span id="L595"><span class="lineNum">     595</span>              :         }</span>
-<span id="L596"><span class="lineNum">     596</span> <span class="tlaGNC">         298 :         nut_Diri_set_sparse(self, i, h);</span></span>
-<span id="L597"><span class="lineNum">     597</span>              :     }</span>
-<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC">          10 :     return nut_euler_sieve_conv_u(self-&gt;y, m, f_tbl-&gt;buf, self-&gt;buf);</span></span>
-<span id="L599"><span class="lineNum">     599</span>              : }</span>
-<span id="L600"><span class="lineNum">     600</span>              : </span>
-<span id="L601"><span class="lineNum">     601</span> <span class="tlaGNC">           1 : bool nut_Diri_compute_conv_N(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl){</span></span>
-<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">           1 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x){</span></span>
-<span id="L603"><span class="lineNum">     603</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
-<span id="L604"><span class="lineNum">     604</span>              :     }</span>
-<span id="L605"><span class="lineNum">     605</span>              :     // use the dense part of self to temporarily store the sums of f for small n up to y</span>
-<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC tlaBgGNC">           1 :     self-&gt;buf[0] = 0;</span></span>
-<span id="L607"><span class="lineNum">     607</span> <span class="tlaGNC">          32 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></span>
-<span id="L608"><span class="lineNum">     608</span> <span class="tlaGNC">          31 :         int64_t term = self-&gt;buf[i-1] + f_tbl-&gt;buf[i];</span></span>
-<span id="L609"><span class="lineNum">     609</span> <span class="tlaGNC">          31 :         self-&gt;buf[i] = m ? nut_i64_mod(term, m) : term;</span></span>
-<span id="L610"><span class="lineNum">     610</span>              :     }</span>
-<span id="L611"><span class="lineNum">     611</span> <span class="tlaGNC">          33 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
-<span id="L612"><span class="lineNum">     612</span> <span class="tlaGNC">          32 :         int64_t v = self-&gt;x/i;</span></span>
-<span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC">          32 :         int64_t vr = nut_u64_nth_root(v, 2);</span></span>
-<span id="L614"><span class="lineNum">     614</span> <span class="tlaGNC">          32 :         int64_t h = 0;</span></span>
-<span id="L615"><span class="lineNum">     615</span>              :         // by hyperbola formula:</span>
-<span id="L616"><span class="lineNum">     616</span>              :         // (f &lt;*&gt; N)(v) = sum(n = 1 ... vr, f(n)*(v/n)*((v/n) + 1)/2) + sum(n = 1 ... vr, F(v/n)*n) - F(vr)*vr*(vr + 1)/2</span>
-<span id="L617"><span class="lineNum">     617</span>              :         // both sums are folded together into the following loop</span>
-<span id="L618"><span class="lineNum">     618</span> <span class="tlaGNC">         330 :         for(int64_t n = 1, term; n &lt;= vr; ++n){</span></span>
-<span id="L619"><span class="lineNum">     619</span> <span class="tlaGNC">         298 :             if(v/n &lt;= self-&gt;y){</span></span>
-<span id="L620"><span class="lineNum">     620</span> <span class="tlaGNC">         185 :                 term = nut_Diri_get_dense(self, v/n)*n;</span></span>
-<span id="L621"><span class="lineNum">     621</span>              :             }else{</span>
-<span id="L622"><span class="lineNum">     622</span> <span class="tlaGNC">         113 :                 term = nut_Diri_get_sparse(f_tbl, i*n)*n;</span></span>
-<span id="L623"><span class="lineNum">     623</span>              :             }</span>
-<span id="L624"><span class="lineNum">     624</span> <span class="tlaGNC">         298 :             if(m){</span></span>
-<span id="L625"><span class="lineNum">     625</span> <span class="tlaUNC tlaBgUNC">           0 :                 h = nut_i64_mod(h + term, m);</span></span>
-<span id="L626"><span class="lineNum">     626</span>              :             }else{</span>
-<span id="L627"><span class="lineNum">     627</span> <span class="tlaGNC tlaBgGNC">         298 :                 h += term;</span></span>
-<span id="L628"><span class="lineNum">     628</span>              :             }</span>
-<span id="L629"><span class="lineNum">     629</span> <span class="tlaGNC">         298 :             term = nut_Diri_get_dense(f_tbl, n);</span></span>
-<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">         298 :             int64_t k = v/n;</span></span>
-<span id="L631"><span class="lineNum">     631</span> <span class="tlaGNC">         298 :             if(m){</span></span>
-<span id="L632"><span class="lineNum">     632</span> <span class="tlaUNC tlaBgUNC">           0 :                 int64_t Gvn = (k&amp;1) ? k%m*(((k + 1)&gt;&gt;1)%m) : (k&gt;&gt;1)%m*((k + 1)%m);</span></span>
-<span id="L633"><span class="lineNum">     633</span> <span class="tlaUNC">           0 :                 Gvn %= m;</span></span>
-<span id="L634"><span class="lineNum">     634</span> <span class="tlaUNC">           0 :                 h = nut_i64_mod(h + term*Gvn, m);</span></span>
-<span id="L635"><span class="lineNum">     635</span>              :             }else{</span>
-<span id="L636"><span class="lineNum">     636</span> <span class="tlaGNC tlaBgGNC">         298 :                 int64_t Gvn = (k&amp;1) ? k*((k + 1)&gt;&gt;1) : (k&gt;&gt;1)*(k + 1);</span></span>
-<span id="L637"><span class="lineNum">     637</span> <span class="tlaGNC">         298 :                 h += term*Gvn;</span></span>
-<span id="L638"><span class="lineNum">     638</span>              :             }</span>
-<span id="L639"><span class="lineNum">     639</span>              :         }</span>
-<span id="L640"><span class="lineNum">     640</span>              :         // finally we apply the corrective term (remove double counted values)</span>
-<span id="L641"><span class="lineNum">     641</span> <span class="tlaGNC">          32 :         int64_t term = nut_Diri_get_dense(self, vr);</span></span>
-<span id="L642"><span class="lineNum">     642</span> <span class="tlaGNC">          32 :         int64_t Gvr = (vr&amp;1) ? vr*((vr + 1) &gt;&gt; 1) : (vr &gt;&gt; 1)*(vr + 1);</span></span>
-<span id="L643"><span class="lineNum">     643</span> <span class="tlaGNC">          32 :         if(m){</span></span>
-<span id="L644"><span class="lineNum">     644</span> <span class="tlaUNC tlaBgUNC">           0 :             Gvr %= m;</span></span>
-<span id="L645"><span class="lineNum">     645</span> <span class="tlaUNC">           0 :             h = nut_i64_mod(h - term*Gvr, m);</span></span>
-<span id="L646"><span class="lineNum">     646</span>              :         }else{</span>
-<span id="L647"><span class="lineNum">     647</span> <span class="tlaGNC tlaBgGNC">          32 :             h -= term*Gvr;</span></span>
-<span id="L648"><span class="lineNum">     648</span>              :         }</span>
-<span id="L649"><span class="lineNum">     649</span> <span class="tlaGNC">          32 :         nut_Diri_set_sparse(self, i, h);</span></span>
-<span id="L650"><span class="lineNum">     650</span>              :     }</span>
-<span id="L651"><span class="lineNum">     651</span> <span class="tlaGNC">           1 :     return nut_euler_sieve_conv_N(self-&gt;y, m, f_tbl-&gt;buf, self-&gt;buf);</span></span>
-<span id="L652"><span class="lineNum">     652</span>              : }</span>
-<span id="L653"><span class="lineNum">     653</span>              : </span>
-<span id="L654"><span class="lineNum">     654</span> <span class="tlaGNC">         177 : bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f_tbl, const nut_Diri *g_tbl){</span></span>
-<span id="L655"><span class="lineNum">     655</span> <span class="tlaGNC">         177 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x || self-&gt;y != g_tbl-&gt;y || self-&gt;x != g_tbl-&gt;x){</span></span>
-<span id="L656"><span class="lineNum">     656</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
-<span id="L657"><span class="lineNum">     657</span>              :     }</span>
-<span id="L658"><span class="lineNum">     658</span>              :     // use the dense part of self to temporarily store the sums of f for small n up to y</span>
-<span id="L659"><span class="lineNum">     659</span> <span class="tlaGNC tlaBgGNC">         177 :     self-&gt;buf[0] = 0;</span></span>
-<span id="L660"><span class="lineNum">     660</span> <span class="tlaGNC">        2661 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></span>
-<span id="L661"><span class="lineNum">     661</span> <span class="tlaGNC">        2484 :         int64_t term = self-&gt;buf[i-1] + f_tbl-&gt;buf[i];</span></span>
-<span id="L662"><span class="lineNum">     662</span> <span class="tlaGNC">        2484 :         self-&gt;buf[i] = m ? nut_i64_mod(term, m) : term;</span></span>
-<span id="L663"><span class="lineNum">     663</span>              :     }</span>
-<span id="L664"><span class="lineNum">     664</span> <span class="tlaGNC">        2831 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
-<span id="L665"><span class="lineNum">     665</span> <span class="tlaGNC">        2654 :         int64_t v = self-&gt;x/i;</span></span>
-<span id="L666"><span class="lineNum">     666</span> <span class="tlaGNC">        2654 :         int64_t vr = nut_u64_nth_root(v, 2);</span></span>
-<span id="L667"><span class="lineNum">     667</span> <span class="tlaGNC">        2654 :         int64_t h = 0;</span></span>
-<span id="L668"><span class="lineNum">     668</span> <span class="tlaGNC">       18195 :         for(int64_t n = 1, term; n &lt;= vr; ++n){</span></span>
-<span id="L669"><span class="lineNum">     669</span> <span class="tlaGNC">       15541 :             if(v/n &lt;= self-&gt;y){</span></span>
-<span id="L670"><span class="lineNum">     670</span> <span class="tlaGNC">        8266 :                 term = nut_Diri_get_dense(self, v/n)*nut_Diri_get_dense(g_tbl, n);</span></span>
-<span id="L671"><span class="lineNum">     671</span>              :             }else{</span>
-<span id="L672"><span class="lineNum">     672</span> <span class="tlaGNC">        7275 :                 term = nut_Diri_get_sparse(f_tbl, i*n)*nut_Diri_get_dense(g_tbl, n);</span></span>
-<span id="L673"><span class="lineNum">     673</span>              :             }</span>
-<span id="L674"><span class="lineNum">     674</span> <span class="tlaGNC">       15541 :             if(m){</span></span>
-<span id="L675"><span class="lineNum">     675</span> <span class="tlaGNC">       14710 :                 h = nut_i64_mod(h + term, m);</span></span>
-<span id="L676"><span class="lineNum">     676</span>              :             }else{</span>
-<span id="L677"><span class="lineNum">     677</span> <span class="tlaGNC">         831 :                 h += term;</span></span>
-<span id="L678"><span class="lineNum">     678</span>              :             }</span>
-<span id="L679"><span class="lineNum">     679</span>              :         }</span>
-<span id="L680"><span class="lineNum">     680</span> <span class="tlaGNC">        2654 :         nut_Diri_set_sparse(self, i, h);</span></span>
-<span id="L681"><span class="lineNum">     681</span>              :     }</span>
-<span id="L682"><span class="lineNum">     682</span>              :     // use the dense part of self to temporarily store the sums of g for small n up to y</span>
-<span id="L683"><span class="lineNum">     683</span>              :     // simultaniously, apply the adjustments to the h values.</span>
-<span id="L684"><span class="lineNum">     684</span>              :     // H(x/j) has an adjustment of F(i)G(i) where i = sqrt(x/j)</span>
-<span id="L685"><span class="lineNum">     685</span>              :     // so for every i = sqrt(x/j) value, we need to adjust all H(x/j) values</span>
-<span id="L686"><span class="lineNum">     686</span>              :     // for j in the range (x/(i + 1)**2, x/i**2] &amp;&amp; [1, yinv)</span>
-<span id="L687"><span class="lineNum">     687</span>              :     // So we can ignore some small i values where this intersection is empty, that is, yinv &lt;= x/(i + 1)**2</span>
-<span id="L688"><span class="lineNum">     688</span>              :     // (i + 1)**2 &lt;= x/yinv &lt;=&gt; i + 1 &lt;= sqrt(x/yinv)</span>
-<span id="L689"><span class="lineNum">     689</span>              :     // that is, for i &lt;= sqrt(x/yinv) - 1, there are no corresponding j to adjust</span>
-<span id="L690"><span class="lineNum">     690</span>              :     // note that x/yinv = y and i &lt;= sqrt(y) - 1 &lt;=&gt; i &lt; sqrt(y)</span>
-<span id="L691"><span class="lineNum">     691</span> <span class="tlaGNC">         177 :     int64_t i_ub = nut_u64_nth_root(self-&gt;y, 2);</span></span>
-<span id="L692"><span class="lineNum">     692</span> <span class="tlaGNC">         535 :     for(int64_t i = 1; i &lt; i_ub; ++i){</span></span>
-<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC">         358 :         int64_t term = self-&gt;buf[i-1] + g_tbl-&gt;buf[i];</span></span>
-<span id="L694"><span class="lineNum">     694</span> <span class="tlaGNC">         358 :         self-&gt;buf[i] = m ? nut_i64_mod(term, m) : term;</span></span>
-<span id="L695"><span class="lineNum">     695</span>              :     }</span>
-<span id="L696"><span class="lineNum">     696</span> <span class="tlaGNC">        2303 :     for(int64_t i = i_ub; i &lt;= self-&gt;y; ++i){</span></span>
-<span id="L697"><span class="lineNum">     697</span> <span class="tlaGNC">        2126 :         int64_t F = self-&gt;buf[i];</span></span>
-<span id="L698"><span class="lineNum">     698</span> <span class="tlaGNC">        2126 :         int64_t G = self-&gt;buf[i-1] + g_tbl-&gt;buf[i];</span></span>
-<span id="L699"><span class="lineNum">     699</span> <span class="tlaGNC">        2126 :         if(m){</span></span>
-<span id="L700"><span class="lineNum">     700</span> <span class="tlaGNC">        2032 :             G = nut_i64_mod(G, m);</span></span>
-<span id="L701"><span class="lineNum">     701</span>              :         }</span>
-<span id="L702"><span class="lineNum">     702</span> <span class="tlaGNC">        2126 :         self-&gt;buf[i] = G;</span></span>
-<span id="L703"><span class="lineNum">     703</span> <span class="tlaGNC">        2126 :         int64_t j_ub = self-&gt;x/(i*i) + 1;</span></span>
-<span id="L704"><span class="lineNum">     704</span> <span class="tlaGNC">        2126 :         if(j_ub &gt; self-&gt;yinv){</span></span>
-<span id="L705"><span class="lineNum">     705</span> <span class="tlaGNC">         177 :             j_ub = self-&gt;yinv;</span></span>
-<span id="L706"><span class="lineNum">     706</span>              :         }</span>
-<span id="L707"><span class="lineNum">     707</span> <span class="tlaGNC">        4780 :         for(int64_t j = self-&gt;x/((i + 1)*(i + 1)) + 1; j &lt; j_ub; ++j){</span></span>
-<span id="L708"><span class="lineNum">     708</span> <span class="tlaGNC">        2654 :             int64_t h = nut_Diri_get_sparse(self, j);</span></span>
-<span id="L709"><span class="lineNum">     709</span> <span class="tlaGNC">        2654 :             if(m){</span></span>
-<span id="L710"><span class="lineNum">     710</span> <span class="tlaGNC">        2540 :                 h = nut_i64_mod(h - F*G, m);</span></span>
-<span id="L711"><span class="lineNum">     711</span>              :             }else{</span>
-<span id="L712"><span class="lineNum">     712</span> <span class="tlaGNC">         114 :                 h -= F*G;</span></span>
-<span id="L713"><span class="lineNum">     713</span>              :             }</span>
-<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">        2654 :             nut_Diri_set_sparse(self, j, h);</span></span>
-<span id="L715"><span class="lineNum">     715</span>              :         }</span>
-<span id="L716"><span class="lineNum">     716</span>              :     }</span>
-<span id="L717"><span class="lineNum">     717</span> <span class="tlaGNC">        2831 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
-<span id="L718"><span class="lineNum">     718</span> <span class="tlaGNC">        2654 :         int64_t v = self-&gt;x/i;</span></span>
-<span id="L719"><span class="lineNum">     719</span> <span class="tlaGNC">        2654 :         int64_t vr = nut_u64_nth_root(v, 2);</span></span>
-<span id="L720"><span class="lineNum">     720</span> <span class="tlaGNC">        2654 :         int64_t h = nut_Diri_get_sparse(self, i);</span></span>
-<span id="L721"><span class="lineNum">     721</span> <span class="tlaGNC">       18195 :         for(int64_t n = 1, term; n &lt;= vr; ++n){</span></span>
-<span id="L722"><span class="lineNum">     722</span> <span class="tlaGNC">       15541 :             if(v/n &lt;= self-&gt;y){</span></span>
-<span id="L723"><span class="lineNum">     723</span> <span class="tlaGNC">        8266 :                 term = nut_Diri_get_dense(f_tbl, n)*nut_Diri_get_dense(self, v/n);</span></span>
-<span id="L724"><span class="lineNum">     724</span>              :             }else{</span>
-<span id="L725"><span class="lineNum">     725</span> <span class="tlaGNC">        7275 :                 term = nut_Diri_get_dense(f_tbl, n)*nut_Diri_get_sparse(g_tbl, i*n);</span></span>
-<span id="L726"><span class="lineNum">     726</span>              :             }</span>
-<span id="L727"><span class="lineNum">     727</span> <span class="tlaGNC">       15541 :             if(m){</span></span>
-<span id="L728"><span class="lineNum">     728</span> <span class="tlaGNC">       14710 :                 h = nut_i64_mod(h + term, m);</span></span>
-<span id="L729"><span class="lineNum">     729</span>              :             }else{</span>
-<span id="L730"><span class="lineNum">     730</span> <span class="tlaGNC">         831 :                 h += term;</span></span>
-<span id="L731"><span class="lineNum">     731</span>              :             }</span>
-<span id="L732"><span class="lineNum">     732</span>              :         }</span>
-<span id="L733"><span class="lineNum">     733</span> <span class="tlaGNC">        2654 :         nut_Diri_set_sparse(self, i, h);</span></span>
-<span id="L734"><span class="lineNum">     734</span>              :     }</span>
-<span id="L735"><span class="lineNum">     735</span> <span class="tlaGNC">         177 :     return nut_euler_sieve_conv(self-&gt;y, m, f_tbl-&gt;buf, g_tbl-&gt;buf, self-&gt;buf);</span></span>
-<span id="L736"><span class="lineNum">     736</span>              : }</span>
-<span id="L737"><span class="lineNum">     737</span>              : </span>
-<span id="L738"><span class="lineNum">     738</span> <span class="tlaGNC">           2 : bool nut_Diri_convdiv(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl, const nut_Diri *restrict g_tbl){</span></span>
-<span id="L739"><span class="lineNum">     739</span>              :     // Here we want to find the diri table for h where f = g &lt;*&gt; h.  We recall the hyperbola formula again:</span>
-<span id="L740"><span class="lineNum">     740</span>              :     // F(v) = sum(n = 1 ... vr, g(n)H(v/n)) + sum(n = 1 ... vr, G(v/n)h(n)) - G(vr)H(vr)</span>
-<span id="L741"><span class="lineNum">     741</span>              :     // We can split out the n = 1 term from the first sum and rearrange to get</span>
-<span id="L742"><span class="lineNum">     742</span>              :     // H(v) = F(v) + G(vr)H(vr) - sum(n = 2 ... vr, g(n)H(v/n)) - sum(n = 1 ... vr, G(v/n)h(n))</span>
-<span id="L743"><span class="lineNum">     743</span>              :     // Now we want to be able to evaluate the H(v) values from smallest v to largest.</span>
-<span id="L744"><span class="lineNum">     744</span>              :     // In the Diri_compute_conv* functions, the two sums and the correction term all depend only on the input functions,</span>
-<span id="L745"><span class="lineNum">     745</span>              :     // so we can store partial sums of the input functions for low &quot;dense&quot; values in the dense part of the output.</span>
-<span id="L746"><span class="lineNum">     746</span>              :     // Here, that isn't possible, due to the dependence of H(v) on smaller H(v).  So we must use a temporary array.</span>
-<span id="L747"><span class="lineNum">     747</span> <span class="tlaGNC">           2 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x || self-&gt;y != g_tbl-&gt;y || self-&gt;x != g_tbl-&gt;x){</span></span>
-<span id="L748"><span class="lineNum">     748</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
-<span id="L749"><span class="lineNum">     749</span>              :     }</span>
-<span id="L750"><span class="lineNum">     750</span> <span class="tlaGNC tlaBgGNC">           4 :     int64_t *H_dense [[gnu::cleanup(cleanup_free)]] = malloc((self-&gt;y + 1)*sizeof(int64_t));</span></span>
-<span id="L751"><span class="lineNum">     751</span> <span class="tlaGNC">           4 :     int64_t *G_dense [[gnu::cleanup(cleanup_free)]] = malloc((self-&gt;y + 1)*sizeof(int64_t));</span></span>
-<span id="L752"><span class="lineNum">     752</span> <span class="tlaGNC">           2 :     if(!H_dense || !G_dense){</span></span>
-<span id="L753"><span class="lineNum">     753</span>              :         return false;</span>
-<span id="L754"><span class="lineNum">     754</span>              :     }</span>
-<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">           2 :     memset(self-&gt;buf, 0, (self-&gt;y + 1)*sizeof(int64_t));</span></span>
-<span id="L756"><span class="lineNum">     756</span> <span class="tlaGNC">           2 :     H_dense[0] = G_dense[0] = 0;</span></span>
-<span id="L757"><span class="lineNum">     757</span>              :     // First, we &quot;sieve&quot; the values of h into the dense part of the output</span>
-<span id="L758"><span class="lineNum">     758</span> <span class="tlaGNC">          22 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></span>
-<span id="L759"><span class="lineNum">     759</span> <span class="tlaGNC">          20 :         int64_t term = self-&gt;buf[i] + f_tbl-&gt;buf[i];</span></span>
-<span id="L760"><span class="lineNum">     760</span> <span class="tlaGNC">          20 :         self-&gt;buf[i] = m ? nut_i64_mod(term, m) : term;</span></span>
-<span id="L761"><span class="lineNum">     761</span> <span class="tlaGNC">          20 :         if(!self-&gt;buf[i]){</span></span>
-<span id="L762"><span class="lineNum">     762</span> <span class="tlaUNC tlaBgUNC">           0 :             continue;</span></span>
-<span id="L763"><span class="lineNum">     763</span>              :         }</span>
-<span id="L764"><span class="lineNum">     764</span> <span class="tlaGNC tlaBgGNC">          54 :         for(int64_t j = 2; j &lt;= self-&gt;y/i; ++j){</span></span>
-<span id="L765"><span class="lineNum">     765</span> <span class="tlaGNC">          34 :             int64_t term = self-&gt;buf[i*j] - self-&gt;buf[i]*g_tbl-&gt;buf[j];</span></span>
-<span id="L766"><span class="lineNum">     766</span> <span class="tlaGNC">          34 :             self-&gt;buf[i*j] = m ? nut_i64_mod(term, m) : term;</span></span>
+<span id="L533"><span class="lineNum">     533</span> <span class="tlaGNC">        1001 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
+<span id="L534"><span class="lineNum">     534</span> <span class="tlaGNC">        1000 :         int64_t term = self-&gt;x/i;</span></span>
+<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">        1000 :         self-&gt;buf[self-&gt;y + i] = term - 1;</span></span>
+<span id="L536"><span class="lineNum">     536</span>              :     }</span>
+<span id="L537"><span class="lineNum">     537</span> <span class="tlaGNC">        1000 :     for(int64_t p = 2; p &lt;= self-&gt;y; ++p){</span></span>
+<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">         999 :         int64_t c = self-&gt;buf[p - 1];</span></span>
+<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">         999 :         if(self-&gt;buf[p] == c){</span></span>
+<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC">         831 :             continue;</span></span>
+<span id="L541"><span class="lineNum">     541</span>              :         }</span>
+<span id="L542"><span class="lineNum">     542</span> <span class="tlaGNC">       17167 :         for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
+<span id="L543"><span class="lineNum">     543</span> <span class="tlaGNC">       17156 :             int64_t v = self-&gt;x/i;</span></span>
+<span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC">       17156 :             if(v &lt; p*p){</span></span>
+<span id="L545"><span class="lineNum">     545</span> <span class="tlaGNC">         157 :                 goto CONTINUE_PRIMELOOP;</span></span>
+<span id="L546"><span class="lineNum">     546</span>              :             }</span>
+<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">       16999 :             int64_t j = v/p;</span></span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">       16999 :             int64_t m = j &lt;= self-&gt;y ? self-&gt;buf[j] : self-&gt;buf[self-&gt;y + self-&gt;x/j];</span></span>
+<span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC">       16999 :             self-&gt;buf[self-&gt;y + i] -= m - c;</span></span>
+<span id="L550"><span class="lineNum">     550</span>              :         }</span>
+<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">        7664 :         for(int64_t v = self-&gt;y; v &gt;= 0; --v){</span></span>
+<span id="L552"><span class="lineNum">     552</span> <span class="tlaGNC">        7664 :             if(v &lt; p*p){</span></span>
+<span id="L553"><span class="lineNum">     553</span>              :                 break;</span>
+<span id="L554"><span class="lineNum">     554</span>              :             }</span>
+<span id="L555"><span class="lineNum">     555</span> <span class="tlaGNC">        7653 :             self-&gt;buf[v] -= (self-&gt;buf[v/p] - c);</span></span>
+<span id="L556"><span class="lineNum">     556</span>              :         }</span>
+<span id="L557"><span class="lineNum">     557</span> <span class="tlaGNC">         999 :         CONTINUE_PRIMELOOP:;</span></span>
+<span id="L558"><span class="lineNum">     558</span>              :     }</span>
+<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">           1 :     return true;</span></span>
+<span id="L560"><span class="lineNum">     560</span>              : }</span>
+<span id="L561"><span class="lineNum">     561</span>              : </span>
+<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC">          10 : bool nut_Diri_compute_conv_u(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl){</span></span>
+<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">          10 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x){</span></span>
+<span id="L564"><span class="lineNum">     564</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
+<span id="L565"><span class="lineNum">     565</span>              :     }</span>
+<span id="L566"><span class="lineNum">     566</span>              :     // use the dense part of self to temporarily store the sums of f for small n up to y</span>
+<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC tlaBgGNC">          10 :     self-&gt;buf[0] = 0;</span></span>
+<span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC">         299 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></span>
+<span id="L569"><span class="lineNum">     569</span> <span class="tlaGNC">         289 :         int64_t term = self-&gt;buf[i-1] + f_tbl-&gt;buf[i];</span></span>
+<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">         289 :         self-&gt;buf[i] = m ? nut_i64_mod(term, m) : term;</span></span>
+<span id="L571"><span class="lineNum">     571</span>              :     }</span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">         308 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
+<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">         298 :         int64_t v = self-&gt;x/i;</span></span>
+<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">         298 :         int64_t vr = nut_u64_nth_root(v, 2);// TODO: v is close to the previous v, so only one newton step should be needed here</span></span>
+<span id="L575"><span class="lineNum">     575</span> <span class="tlaGNC">         298 :         int64_t h = 0;</span></span>
+<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">        3027 :         for(int64_t n = 1, term; n &lt;= vr; ++n){</span></span>
+<span id="L577"><span class="lineNum">     577</span> <span class="tlaGNC">        2729 :             if(v/n &lt;= self-&gt;y){</span></span>
+<span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">        1689 :                 term = nut_Diri_get_dense(self, v/n);</span></span>
+<span id="L579"><span class="lineNum">     579</span>              :             }else{</span>
+<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC">        1040 :                 term = nut_Diri_get_sparse(f_tbl, i*n);</span></span>
+<span id="L581"><span class="lineNum">     581</span>              :             }</span>
+<span id="L582"><span class="lineNum">     582</span> <span class="tlaGNC">        2729 :             if(m){</span></span>
+<span id="L583"><span class="lineNum">     583</span> <span class="tlaUNC tlaBgUNC">           0 :                 h = nut_i64_mod(h + term, m);</span></span>
+<span id="L584"><span class="lineNum">     584</span>              :             }else{</span>
+<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC tlaBgGNC">        2729 :                 h += term;</span></span>
+<span id="L586"><span class="lineNum">     586</span>              :             }</span>
+<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">        2729 :             if(m){</span></span>
+<span id="L588"><span class="lineNum">     588</span> <span class="tlaUNC tlaBgUNC">           0 :                 term = (v/n)%m*nut_Diri_get_dense(f_tbl, n);</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaUNC">           0 :                 h = nut_i64_mod(h + term, m);</span></span>
+<span id="L590"><span class="lineNum">     590</span>              :             }else{</span>
+<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC tlaBgGNC">        2729 :                 h += nut_Diri_get_dense(f_tbl, n)*(v/n);</span></span>
+<span id="L592"><span class="lineNum">     592</span>              :             }</span>
+<span id="L593"><span class="lineNum">     593</span>              :         }</span>
+<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">         298 :         int64_t term = nut_Diri_get_dense(self, vr)*vr;</span></span>
+<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">         298 :         if(m){</span></span>
+<span id="L596"><span class="lineNum">     596</span> <span class="tlaUNC tlaBgUNC">           0 :             h = nut_i64_mod(h - term, m);</span></span>
+<span id="L597"><span class="lineNum">     597</span>              :         }else{</span>
+<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC tlaBgGNC">         298 :             h -= term;</span></span>
+<span id="L599"><span class="lineNum">     599</span>              :         }</span>
+<span id="L600"><span class="lineNum">     600</span> <span class="tlaGNC">         298 :         nut_Diri_set_sparse(self, i, h);</span></span>
+<span id="L601"><span class="lineNum">     601</span>              :     }</span>
+<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">          10 :     return nut_euler_sieve_conv_u(self-&gt;y, m, f_tbl-&gt;buf, self-&gt;buf);</span></span>
+<span id="L603"><span class="lineNum">     603</span>              : }</span>
+<span id="L604"><span class="lineNum">     604</span>              : </span>
+<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">           1 : bool nut_Diri_compute_conv_N(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl){</span></span>
+<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">           1 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x){</span></span>
+<span id="L607"><span class="lineNum">     607</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
+<span id="L608"><span class="lineNum">     608</span>              :     }</span>
+<span id="L609"><span class="lineNum">     609</span>              :     // use the dense part of self to temporarily store the sums of f for small n up to y</span>
+<span id="L610"><span class="lineNum">     610</span> <span class="tlaGNC tlaBgGNC">           1 :     self-&gt;buf[0] = 0;</span></span>
+<span id="L611"><span class="lineNum">     611</span> <span class="tlaGNC">          32 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></span>
+<span id="L612"><span class="lineNum">     612</span> <span class="tlaGNC">          31 :         int64_t term = self-&gt;buf[i-1] + f_tbl-&gt;buf[i];</span></span>
+<span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC">          31 :         self-&gt;buf[i] = m ? nut_i64_mod(term, m) : term;</span></span>
+<span id="L614"><span class="lineNum">     614</span>              :     }</span>
+<span id="L615"><span class="lineNum">     615</span> <span class="tlaGNC">          33 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
+<span id="L616"><span class="lineNum">     616</span> <span class="tlaGNC">          32 :         int64_t v = self-&gt;x/i;</span></span>
+<span id="L617"><span class="lineNum">     617</span> <span class="tlaGNC">          32 :         int64_t vr = nut_u64_nth_root(v, 2);</span></span>
+<span id="L618"><span class="lineNum">     618</span> <span class="tlaGNC">          32 :         int64_t h = 0;</span></span>
+<span id="L619"><span class="lineNum">     619</span>              :         // by hyperbola formula:</span>
+<span id="L620"><span class="lineNum">     620</span>              :         // (f &lt;*&gt; N)(v) = sum(n = 1 ... vr, f(n)*(v/n)*((v/n) + 1)/2) + sum(n = 1 ... vr, F(v/n)*n) - F(vr)*vr*(vr + 1)/2</span>
+<span id="L621"><span class="lineNum">     621</span>              :         // both sums are folded together into the following loop</span>
+<span id="L622"><span class="lineNum">     622</span> <span class="tlaGNC">         330 :         for(int64_t n = 1, term; n &lt;= vr; ++n){</span></span>
+<span id="L623"><span class="lineNum">     623</span> <span class="tlaGNC">         298 :             if(v/n &lt;= self-&gt;y){</span></span>
+<span id="L624"><span class="lineNum">     624</span> <span class="tlaGNC">         185 :                 term = nut_Diri_get_dense(self, v/n)*n;</span></span>
+<span id="L625"><span class="lineNum">     625</span>              :             }else{</span>
+<span id="L626"><span class="lineNum">     626</span> <span class="tlaGNC">         113 :                 term = nut_Diri_get_sparse(f_tbl, i*n)*n;</span></span>
+<span id="L627"><span class="lineNum">     627</span>              :             }</span>
+<span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">         298 :             if(m){</span></span>
+<span id="L629"><span class="lineNum">     629</span> <span class="tlaUNC tlaBgUNC">           0 :                 h = nut_i64_mod(h + term, m);</span></span>
+<span id="L630"><span class="lineNum">     630</span>              :             }else{</span>
+<span id="L631"><span class="lineNum">     631</span> <span class="tlaGNC tlaBgGNC">         298 :                 h += term;</span></span>
+<span id="L632"><span class="lineNum">     632</span>              :             }</span>
+<span id="L633"><span class="lineNum">     633</span> <span class="tlaGNC">         298 :             term = nut_Diri_get_dense(f_tbl, n);</span></span>
+<span id="L634"><span class="lineNum">     634</span> <span class="tlaGNC">         298 :             int64_t k = v/n;</span></span>
+<span id="L635"><span class="lineNum">     635</span> <span class="tlaGNC">         298 :             if(m){</span></span>
+<span id="L636"><span class="lineNum">     636</span> <span class="tlaUNC tlaBgUNC">           0 :                 int64_t Gvn = (k&amp;1) ? k%m*(((k + 1)&gt;&gt;1)%m) : (k&gt;&gt;1)%m*((k + 1)%m);</span></span>
+<span id="L637"><span class="lineNum">     637</span> <span class="tlaUNC">           0 :                 Gvn %= m;</span></span>
+<span id="L638"><span class="lineNum">     638</span> <span class="tlaUNC">           0 :                 h = nut_i64_mod(h + term*Gvn, m);</span></span>
+<span id="L639"><span class="lineNum">     639</span>              :             }else{</span>
+<span id="L640"><span class="lineNum">     640</span> <span class="tlaGNC tlaBgGNC">         298 :                 int64_t Gvn = (k&amp;1) ? k*((k + 1)&gt;&gt;1) : (k&gt;&gt;1)*(k + 1);</span></span>
+<span id="L641"><span class="lineNum">     641</span> <span class="tlaGNC">         298 :                 h += term*Gvn;</span></span>
+<span id="L642"><span class="lineNum">     642</span>              :             }</span>
+<span id="L643"><span class="lineNum">     643</span>              :         }</span>
+<span id="L644"><span class="lineNum">     644</span>              :         // finally we apply the corrective term (remove double counted values)</span>
+<span id="L645"><span class="lineNum">     645</span> <span class="tlaGNC">          32 :         int64_t term = nut_Diri_get_dense(self, vr);</span></span>
+<span id="L646"><span class="lineNum">     646</span> <span class="tlaGNC">          32 :         int64_t Gvr = (vr&amp;1) ? vr*((vr + 1) &gt;&gt; 1) : (vr &gt;&gt; 1)*(vr + 1);</span></span>
+<span id="L647"><span class="lineNum">     647</span> <span class="tlaGNC">          32 :         if(m){</span></span>
+<span id="L648"><span class="lineNum">     648</span> <span class="tlaUNC tlaBgUNC">           0 :             Gvr %= m;</span></span>
+<span id="L649"><span class="lineNum">     649</span> <span class="tlaUNC">           0 :             h = nut_i64_mod(h - term*Gvr, m);</span></span>
+<span id="L650"><span class="lineNum">     650</span>              :         }else{</span>
+<span id="L651"><span class="lineNum">     651</span> <span class="tlaGNC tlaBgGNC">          32 :             h -= term*Gvr;</span></span>
+<span id="L652"><span class="lineNum">     652</span>              :         }</span>
+<span id="L653"><span class="lineNum">     653</span> <span class="tlaGNC">          32 :         nut_Diri_set_sparse(self, i, h);</span></span>
+<span id="L654"><span class="lineNum">     654</span>              :     }</span>
+<span id="L655"><span class="lineNum">     655</span> <span class="tlaGNC">           1 :     return nut_euler_sieve_conv_N(self-&gt;y, m, f_tbl-&gt;buf, self-&gt;buf);</span></span>
+<span id="L656"><span class="lineNum">     656</span>              : }</span>
+<span id="L657"><span class="lineNum">     657</span>              : </span>
+<span id="L658"><span class="lineNum">     658</span> <span class="tlaGNC">         177 : bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f_tbl, const nut_Diri *g_tbl){</span></span>
+<span id="L659"><span class="lineNum">     659</span> <span class="tlaGNC">         177 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x || self-&gt;y != g_tbl-&gt;y || self-&gt;x != g_tbl-&gt;x){</span></span>
+<span id="L660"><span class="lineNum">     660</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
+<span id="L661"><span class="lineNum">     661</span>              :     }</span>
+<span id="L662"><span class="lineNum">     662</span>              :     // use the dense part of self to temporarily store the sums of f for small n up to y</span>
+<span id="L663"><span class="lineNum">     663</span> <span class="tlaGNC tlaBgGNC">         177 :     self-&gt;buf[0] = 0;</span></span>
+<span id="L664"><span class="lineNum">     664</span> <span class="tlaGNC">        2661 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></span>
+<span id="L665"><span class="lineNum">     665</span> <span class="tlaGNC">        2484 :         int64_t term = self-&gt;buf[i-1] + f_tbl-&gt;buf[i];</span></span>
+<span id="L666"><span class="lineNum">     666</span> <span class="tlaGNC">        2484 :         self-&gt;buf[i] = m ? nut_i64_mod(term, m) : term;</span></span>
+<span id="L667"><span class="lineNum">     667</span>              :     }</span>
+<span id="L668"><span class="lineNum">     668</span> <span class="tlaGNC">        2831 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
+<span id="L669"><span class="lineNum">     669</span> <span class="tlaGNC">        2654 :         int64_t v = self-&gt;x/i;</span></span>
+<span id="L670"><span class="lineNum">     670</span> <span class="tlaGNC">        2654 :         int64_t vr = nut_u64_nth_root(v, 2);</span></span>
+<span id="L671"><span class="lineNum">     671</span> <span class="tlaGNC">        2654 :         int64_t h = 0;</span></span>
+<span id="L672"><span class="lineNum">     672</span> <span class="tlaGNC">       18195 :         for(int64_t n = 1, term; n &lt;= vr; ++n){</span></span>
+<span id="L673"><span class="lineNum">     673</span> <span class="tlaGNC">       15541 :             if(v/n &lt;= self-&gt;y){</span></span>
+<span id="L674"><span class="lineNum">     674</span> <span class="tlaGNC">        8266 :                 term = nut_Diri_get_dense(self, v/n)*nut_Diri_get_dense(g_tbl, n);</span></span>
+<span id="L675"><span class="lineNum">     675</span>              :             }else{</span>
+<span id="L676"><span class="lineNum">     676</span> <span class="tlaGNC">        7275 :                 term = nut_Diri_get_sparse(f_tbl, i*n)*nut_Diri_get_dense(g_tbl, n);</span></span>
+<span id="L677"><span class="lineNum">     677</span>              :             }</span>
+<span id="L678"><span class="lineNum">     678</span> <span class="tlaGNC">       15541 :             if(m){</span></span>
+<span id="L679"><span class="lineNum">     679</span> <span class="tlaGNC">       14710 :                 h = nut_i64_mod(h + term, m);</span></span>
+<span id="L680"><span class="lineNum">     680</span>              :             }else{</span>
+<span id="L681"><span class="lineNum">     681</span> <span class="tlaGNC">         831 :                 h += term;</span></span>
+<span id="L682"><span class="lineNum">     682</span>              :             }</span>
+<span id="L683"><span class="lineNum">     683</span>              :         }</span>
+<span id="L684"><span class="lineNum">     684</span> <span class="tlaGNC">        2654 :         nut_Diri_set_sparse(self, i, h);</span></span>
+<span id="L685"><span class="lineNum">     685</span>              :     }</span>
+<span id="L686"><span class="lineNum">     686</span>              :     // use the dense part of self to temporarily store the sums of g for small n up to y</span>
+<span id="L687"><span class="lineNum">     687</span>              :     // simultaniously, apply the adjustments to the h values.</span>
+<span id="L688"><span class="lineNum">     688</span>              :     // H(x/j) has an adjustment of F(i)G(i) where i = sqrt(x/j)</span>
+<span id="L689"><span class="lineNum">     689</span>              :     // so for every i = sqrt(x/j) value, we need to adjust all H(x/j) values</span>
+<span id="L690"><span class="lineNum">     690</span>              :     // for j in the range (x/(i + 1)**2, x/i**2] &amp;&amp; [1, yinv)</span>
+<span id="L691"><span class="lineNum">     691</span>              :     // So we can ignore some small i values where this intersection is empty, that is, yinv &lt;= x/(i + 1)**2</span>
+<span id="L692"><span class="lineNum">     692</span>              :     // (i + 1)**2 &lt;= x/yinv &lt;=&gt; i + 1 &lt;= sqrt(x/yinv)</span>
+<span id="L693"><span class="lineNum">     693</span>              :     // that is, for i &lt;= sqrt(x/yinv) - 1, there are no corresponding j to adjust</span>
+<span id="L694"><span class="lineNum">     694</span>              :     // note that x/yinv = y and i &lt;= sqrt(y) - 1 &lt;=&gt; i &lt; sqrt(y)</span>
+<span id="L695"><span class="lineNum">     695</span> <span class="tlaGNC">         177 :     int64_t i_ub = nut_u64_nth_root(self-&gt;y, 2);</span></span>
+<span id="L696"><span class="lineNum">     696</span> <span class="tlaGNC">         535 :     for(int64_t i = 1; i &lt; i_ub; ++i){</span></span>
+<span id="L697"><span class="lineNum">     697</span> <span class="tlaGNC">         358 :         int64_t term = self-&gt;buf[i-1] + g_tbl-&gt;buf[i];</span></span>
+<span id="L698"><span class="lineNum">     698</span> <span class="tlaGNC">         358 :         self-&gt;buf[i] = m ? nut_i64_mod(term, m) : term;</span></span>
+<span id="L699"><span class="lineNum">     699</span>              :     }</span>
+<span id="L700"><span class="lineNum">     700</span> <span class="tlaGNC">        2303 :     for(int64_t i = i_ub; i &lt;= self-&gt;y; ++i){</span></span>
+<span id="L701"><span class="lineNum">     701</span> <span class="tlaGNC">        2126 :         int64_t F = self-&gt;buf[i];</span></span>
+<span id="L702"><span class="lineNum">     702</span> <span class="tlaGNC">        2126 :         int64_t G = self-&gt;buf[i-1] + g_tbl-&gt;buf[i];</span></span>
+<span id="L703"><span class="lineNum">     703</span> <span class="tlaGNC">        2126 :         if(m){</span></span>
+<span id="L704"><span class="lineNum">     704</span> <span class="tlaGNC">        2032 :             G = nut_i64_mod(G, m);</span></span>
+<span id="L705"><span class="lineNum">     705</span>              :         }</span>
+<span id="L706"><span class="lineNum">     706</span> <span class="tlaGNC">        2126 :         self-&gt;buf[i] = G;</span></span>
+<span id="L707"><span class="lineNum">     707</span> <span class="tlaGNC">        2126 :         int64_t j_ub = self-&gt;x/(i*i) + 1;</span></span>
+<span id="L708"><span class="lineNum">     708</span> <span class="tlaGNC">        2126 :         if(j_ub &gt; self-&gt;yinv){</span></span>
+<span id="L709"><span class="lineNum">     709</span> <span class="tlaGNC">         177 :             j_ub = self-&gt;yinv;</span></span>
+<span id="L710"><span class="lineNum">     710</span>              :         }</span>
+<span id="L711"><span class="lineNum">     711</span> <span class="tlaGNC">        4780 :         for(int64_t j = self-&gt;x/((i + 1)*(i + 1)) + 1; j &lt; j_ub; ++j){</span></span>
+<span id="L712"><span class="lineNum">     712</span> <span class="tlaGNC">        2654 :             int64_t h = nut_Diri_get_sparse(self, j);</span></span>
+<span id="L713"><span class="lineNum">     713</span> <span class="tlaGNC">        2654 :             if(m){</span></span>
+<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">        2540 :                 h = nut_i64_mod(h - F*G, m);</span></span>
+<span id="L715"><span class="lineNum">     715</span>              :             }else{</span>
+<span id="L716"><span class="lineNum">     716</span> <span class="tlaGNC">         114 :                 h -= F*G;</span></span>
+<span id="L717"><span class="lineNum">     717</span>              :             }</span>
+<span id="L718"><span class="lineNum">     718</span> <span class="tlaGNC">        2654 :             nut_Diri_set_sparse(self, j, h);</span></span>
+<span id="L719"><span class="lineNum">     719</span>              :         }</span>
+<span id="L720"><span class="lineNum">     720</span>              :     }</span>
+<span id="L721"><span class="lineNum">     721</span> <span class="tlaGNC">        2831 :     for(int64_t i = 1; i &lt; self-&gt;yinv; ++i){</span></span>
+<span id="L722"><span class="lineNum">     722</span> <span class="tlaGNC">        2654 :         int64_t v = self-&gt;x/i;</span></span>
+<span id="L723"><span class="lineNum">     723</span> <span class="tlaGNC">        2654 :         int64_t vr = nut_u64_nth_root(v, 2);</span></span>
+<span id="L724"><span class="lineNum">     724</span> <span class="tlaGNC">        2654 :         int64_t h = nut_Diri_get_sparse(self, i);</span></span>
+<span id="L725"><span class="lineNum">     725</span> <span class="tlaGNC">       18195 :         for(int64_t n = 1, term; n &lt;= vr; ++n){</span></span>
+<span id="L726"><span class="lineNum">     726</span> <span class="tlaGNC">       15541 :             if(v/n &lt;= self-&gt;y){</span></span>
+<span id="L727"><span class="lineNum">     727</span> <span class="tlaGNC">        8266 :                 term = nut_Diri_get_dense(f_tbl, n)*nut_Diri_get_dense(self, v/n);</span></span>
+<span id="L728"><span class="lineNum">     728</span>              :             }else{</span>
+<span id="L729"><span class="lineNum">     729</span> <span class="tlaGNC">        7275 :                 term = nut_Diri_get_dense(f_tbl, n)*nut_Diri_get_sparse(g_tbl, i*n);</span></span>
+<span id="L730"><span class="lineNum">     730</span>              :             }</span>
+<span id="L731"><span class="lineNum">     731</span> <span class="tlaGNC">       15541 :             if(m){</span></span>
+<span id="L732"><span class="lineNum">     732</span> <span class="tlaGNC">       14710 :                 h = nut_i64_mod(h + term, m);</span></span>
+<span id="L733"><span class="lineNum">     733</span>              :             }else{</span>
+<span id="L734"><span class="lineNum">     734</span> <span class="tlaGNC">         831 :                 h += term;</span></span>
+<span id="L735"><span class="lineNum">     735</span>              :             }</span>
+<span id="L736"><span class="lineNum">     736</span>              :         }</span>
+<span id="L737"><span class="lineNum">     737</span> <span class="tlaGNC">        2654 :         nut_Diri_set_sparse(self, i, h);</span></span>
+<span id="L738"><span class="lineNum">     738</span>              :     }</span>
+<span id="L739"><span class="lineNum">     739</span> <span class="tlaGNC">         177 :     return nut_euler_sieve_conv(self-&gt;y, m, f_tbl-&gt;buf, g_tbl-&gt;buf, self-&gt;buf);</span></span>
+<span id="L740"><span class="lineNum">     740</span>              : }</span>
+<span id="L741"><span class="lineNum">     741</span>              : </span>
+<span id="L742"><span class="lineNum">     742</span> <span class="tlaGNC">           2 : bool nut_Diri_convdiv(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl, const nut_Diri *restrict g_tbl){</span></span>
+<span id="L743"><span class="lineNum">     743</span>              :     // Here we want to find the diri table for h where f = g &lt;*&gt; h.  We recall the hyperbola formula again:</span>
+<span id="L744"><span class="lineNum">     744</span>              :     // F(v) = sum(n = 1 ... vr, g(n)H(v/n)) + sum(n = 1 ... vr, G(v/n)h(n)) - G(vr)H(vr)</span>
+<span id="L745"><span class="lineNum">     745</span>              :     // We can split out the n = 1 term from the first sum and rearrange to get</span>
+<span id="L746"><span class="lineNum">     746</span>              :     // H(v) = F(v) + G(vr)H(vr) - sum(n = 2 ... vr, g(n)H(v/n)) - sum(n = 1 ... vr, G(v/n)h(n))</span>
+<span id="L747"><span class="lineNum">     747</span>              :     // Now we want to be able to evaluate the H(v) values from smallest v to largest.</span>
+<span id="L748"><span class="lineNum">     748</span>              :     // In the Diri_compute_conv* functions, the two sums and the correction term all depend only on the input functions,</span>
+<span id="L749"><span class="lineNum">     749</span>              :     // so we can store partial sums of the input functions for low &quot;dense&quot; values in the dense part of the output.</span>
+<span id="L750"><span class="lineNum">     750</span>              :     // Here, that isn't possible, due to the dependence of H(v) on smaller H(v).  So we must use a temporary array.</span>
+<span id="L751"><span class="lineNum">     751</span> <span class="tlaGNC">           2 :     if(self-&gt;y != f_tbl-&gt;y || self-&gt;x != f_tbl-&gt;x || self-&gt;y != g_tbl-&gt;y || self-&gt;x != g_tbl-&gt;x){</span></span>
+<span id="L752"><span class="lineNum">     752</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
+<span id="L753"><span class="lineNum">     753</span>              :     }</span>
+<span id="L754"><span class="lineNum">     754</span> <span class="tlaGNC tlaBgGNC">           4 :     int64_t *H_dense [[gnu::cleanup(cleanup_free)]] = malloc((self-&gt;y + 1)*sizeof(int64_t));</span></span>
+<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">           4 :     int64_t *G_dense [[gnu::cleanup(cleanup_free)]] = malloc((self-&gt;y + 1)*sizeof(int64_t));</span></span>
+<span id="L756"><span class="lineNum">     756</span> <span class="tlaGNC">           2 :     if(!H_dense || !G_dense){</span></span>
+<span id="L757"><span class="lineNum">     757</span>              :         return false;</span>
+<span id="L758"><span class="lineNum">     758</span>              :     }</span>
+<span id="L759"><span class="lineNum">     759</span> <span class="tlaGNC">           2 :     memset(self-&gt;buf, 0, (self-&gt;y + 1)*sizeof(int64_t));</span></span>
+<span id="L760"><span class="lineNum">     760</span> <span class="tlaGNC">           2 :     H_dense[0] = G_dense[0] = 0;</span></span>
+<span id="L761"><span class="lineNum">     761</span>              :     // First, we &quot;sieve&quot; the values of h into the dense part of the output</span>
+<span id="L762"><span class="lineNum">     762</span> <span class="tlaGNC">          22 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></span>
+<span id="L763"><span class="lineNum">     763</span> <span class="tlaGNC">          20 :         int64_t term = self-&gt;buf[i] + f_tbl-&gt;buf[i];</span></span>
+<span id="L764"><span class="lineNum">     764</span> <span class="tlaGNC">          20 :         self-&gt;buf[i] = m ? nut_i64_mod(term, m) : term;</span></span>
+<span id="L765"><span class="lineNum">     765</span> <span class="tlaGNC">          20 :         if(!self-&gt;buf[i]){</span></span>
+<span id="L766"><span class="lineNum">     766</span> <span class="tlaUNC tlaBgUNC">           0 :             continue;</span></span>
 <span id="L767"><span class="lineNum">     767</span>              :         }</span>
-<span id="L768"><span class="lineNum">     768</span>              :     }</span>
-<span id="L769"><span class="lineNum">     769</span>              :     // Now, accumulate the sums of dense h values into H_dense</span>
-<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">          22 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></span>
-<span id="L771"><span class="lineNum">     771</span> <span class="tlaGNC">          20 :         int64_t term = self-&gt;buf[i] + H_dense[i - 1];</span></span>
-<span id="L772"><span class="lineNum">     772</span> <span class="tlaGNC">          20 :         H_dense[i] = m ? nut_i64_mod(term, m) : term;</span></span>
-<span id="L773"><span class="lineNum">     773</span>              :     }</span>
-<span id="L774"><span class="lineNum">     774</span>              :     // And accumulate the sums of dense g values into G_dense</span>
-<span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">          22 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></span>
-<span id="L776"><span class="lineNum">     776</span> <span class="tlaGNC">          20 :         int64_t term = g_tbl-&gt;buf[i] + G_dense[i - 1];</span></span>
-<span id="L777"><span class="lineNum">     777</span> <span class="tlaGNC">          20 :         G_dense[i] = m ? nut_i64_mod(term, m) : term;</span></span>
-<span id="L778"><span class="lineNum">     778</span>              :     }</span>
-<span id="L779"><span class="lineNum">     779</span>              :     // Now we populate the sparse H values using the formula</span>
-<span id="L780"><span class="lineNum">     780</span>              :     // H(v) = F(v) + G(vr)H(vr) - sum(n = 2 ... vr, g(n)H(v/n)) - sum(n = 1 ... vr, G(v/n)h(n))</span>
-<span id="L781"><span class="lineNum">     781</span>              :     // We will do the sums first for each v, because when doing a modulus, subtraction is more expensive than addition</span>
-<span id="L782"><span class="lineNum">     782</span>              :     // This requires H(v/2), ..., H(vr) to have been computed before, which we can accomplish by computing</span>
-<span id="L783"><span class="lineNum">     783</span>              :     // H in terms of increasing values of v...</span>
-<span id="L784"><span class="lineNum">     784</span>              :     // So i is decreasing in this loop...</span>
-<span id="L785"><span class="lineNum">     785</span> <span class="tlaGNC">          22 :     for(int64_t i = self-&gt;yinv - 1; i &gt;= 1; --i){</span></span>
-<span id="L786"><span class="lineNum">     786</span>              :         // so that v will be increasing here</span>
-<span id="L787"><span class="lineNum">     787</span> <span class="tlaGNC">          20 :         int64_t v = self-&gt;x/i;</span></span>
-<span id="L788"><span class="lineNum">     788</span> <span class="tlaGNC">          20 :         int64_t vr = nut_u64_nth_root(v, 2);</span></span>
-<span id="L789"><span class="lineNum">     789</span> <span class="tlaGNC">          20 :         int64_t H = 0; // H starts at 0 because we add the sums first</span></span>
-<span id="L790"><span class="lineNum">     790</span> <span class="tlaGNC">          20 :         if(1 &lt;= vr){ // do the extra term of G(v/n)h(n) where n = 1</span></span>
-<span id="L791"><span class="lineNum">     791</span>              :             // Because i &lt; self-&gt;yinv, v &gt;= self-&gt;y by definition of self-&gt;yinv,</span>
-<span id="L792"><span class="lineNum">     792</span>              :             // So it is only possible for v to be &lt;= self-&gt;y at most once (if it equals self-&gt;y when i is self-&gt;yinv - 1).</span>
-<span id="L793"><span class="lineNum">     793</span>              :             // But if self-&gt;y == self-&gt;yinv - 1, we store both h(self-&gt;y) in the dense part and H(self-&gt;yinv - 1) in the sparse part.</span>
-<span id="L794"><span class="lineNum">     794</span>              :             // Therefore, the value we want always exists in the sparse part here</span>
-<span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC">          20 :             assert(v &gt;= self-&gt;y);</span></span>
-<span id="L796"><span class="lineNum">     796</span> <span class="tlaGNC">          20 :             H = nut_Diri_get_sparse(g_tbl, i);</span></span>
-<span id="L797"><span class="lineNum">     797</span>              :         }</span>
-<span id="L798"><span class="lineNum">     798</span> <span class="tlaGNC">          94 :         for(int64_t n = 2, gH_term, Gh_term; n &lt;= vr; ++n){</span></span>
-<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">          74 :             if(v/n &lt;= self-&gt;y){</span></span>
-<span id="L800"><span class="lineNum">     800</span> <span class="tlaGNC">          46 :                 gH_term = nut_Diri_get_dense(g_tbl, n)*H_dense[v/n];</span></span>
-<span id="L801"><span class="lineNum">     801</span> <span class="tlaGNC">          46 :                 Gh_term = nut_Diri_get_dense(self, n)*G_dense[v/n];</span></span>
-<span id="L802"><span class="lineNum">     802</span>              :             }else{</span>
-<span id="L803"><span class="lineNum">     803</span> <span class="tlaGNC">          28 :                 gH_term = nut_Diri_get_dense(g_tbl, n)*nut_Diri_get_sparse(self, i*n);</span></span>
-<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC">          28 :                 Gh_term = nut_Diri_get_dense(self, n)*nut_Diri_get_sparse(g_tbl, i*n);</span></span>
-<span id="L805"><span class="lineNum">     805</span>              :             }</span>
-<span id="L806"><span class="lineNum">     806</span> <span class="tlaGNC">          74 :             H = m ? nut_i64_mod(H + gH_term%m + Gh_term%m, m) : H + gH_term + Gh_term;</span></span>
-<span id="L807"><span class="lineNum">     807</span>              :         }</span>
-<span id="L808"><span class="lineNum">     808</span>              :         // Now H consists of all the sums, so we have to take it and subtract it from F(v) + G(vr)H(vr)</span>
-<span id="L809"><span class="lineNum">     809</span> <span class="tlaGNC">          20 :         int64_t term = G_dense[vr]*H_dense[vr];</span></span>
-<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC">          20 :         assert(v &gt;= self-&gt;y); // see above comment about i &lt; self-&gt;yinv</span></span>
-<span id="L811"><span class="lineNum">     811</span> <span class="tlaGNC">          20 :         term = m ? nut_Diri_get_sparse(f_tbl, i) + term%m : nut_Diri_get_sparse(f_tbl, i) + term;</span></span>
-<span id="L812"><span class="lineNum">     812</span> <span class="tlaGNC">          20 :         H = m ? nut_i64_mod(term - H, m) : term - H;</span></span>
-<span id="L813"><span class="lineNum">     813</span> <span class="tlaGNC">          20 :         nut_Diri_set_sparse(self, i, H);</span></span>
-<span id="L814"><span class="lineNum">     814</span>              :     }</span>
-<span id="L815"><span class="lineNum">     815</span>              :     return true;</span>
-<span id="L816"><span class="lineNum">     816</span>              : }</span>
-<span id="L817"><span class="lineNum">     817</span>              : </span>
+<span id="L768"><span class="lineNum">     768</span> <span class="tlaGNC tlaBgGNC">          54 :         for(int64_t j = 2; j &lt;= self-&gt;y/i; ++j){</span></span>
+<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC">          34 :             int64_t term = self-&gt;buf[i*j] - self-&gt;buf[i]*g_tbl-&gt;buf[j];</span></span>
+<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">          34 :             self-&gt;buf[i*j] = m ? nut_i64_mod(term, m) : term;</span></span>
+<span id="L771"><span class="lineNum">     771</span>              :         }</span>
+<span id="L772"><span class="lineNum">     772</span>              :     }</span>
+<span id="L773"><span class="lineNum">     773</span>              :     // Now, accumulate the sums of dense h values into H_dense</span>
+<span id="L774"><span class="lineNum">     774</span> <span class="tlaGNC">          22 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></span>
+<span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">          20 :         int64_t term = self-&gt;buf[i] + H_dense[i - 1];</span></span>
+<span id="L776"><span class="lineNum">     776</span> <span class="tlaGNC">          20 :         H_dense[i] = m ? nut_i64_mod(term, m) : term;</span></span>
+<span id="L777"><span class="lineNum">     777</span>              :     }</span>
+<span id="L778"><span class="lineNum">     778</span>              :     // And accumulate the sums of dense g values into G_dense</span>
+<span id="L779"><span class="lineNum">     779</span> <span class="tlaGNC">          22 :     for(int64_t i = 1; i &lt;= self-&gt;y; ++i){</span></span>
+<span id="L780"><span class="lineNum">     780</span> <span class="tlaGNC">          20 :         int64_t term = g_tbl-&gt;buf[i] + G_dense[i - 1];</span></span>
+<span id="L781"><span class="lineNum">     781</span> <span class="tlaGNC">          20 :         G_dense[i] = m ? nut_i64_mod(term, m) : term;</span></span>
+<span id="L782"><span class="lineNum">     782</span>              :     }</span>
+<span id="L783"><span class="lineNum">     783</span>              :     // Now we populate the sparse H values using the formula</span>
+<span id="L784"><span class="lineNum">     784</span>              :     // H(v) = F(v) + G(vr)H(vr) - sum(n = 2 ... vr, g(n)H(v/n)) - sum(n = 1 ... vr, G(v/n)h(n))</span>
+<span id="L785"><span class="lineNum">     785</span>              :     // We will do the sums first for each v, because when doing a modulus, subtraction is more expensive than addition</span>
+<span id="L786"><span class="lineNum">     786</span>              :     // This requires H(v/2), ..., H(vr) to have been computed before, which we can accomplish by computing</span>
+<span id="L787"><span class="lineNum">     787</span>              :     // H in terms of increasing values of v...</span>
+<span id="L788"><span class="lineNum">     788</span>              :     // So i is decreasing in this loop...</span>
+<span id="L789"><span class="lineNum">     789</span> <span class="tlaGNC">          22 :     for(int64_t i = self-&gt;yinv - 1; i &gt;= 1; --i){</span></span>
+<span id="L790"><span class="lineNum">     790</span>              :         // so that v will be increasing here</span>
+<span id="L791"><span class="lineNum">     791</span> <span class="tlaGNC">          20 :         int64_t v = self-&gt;x/i;</span></span>
+<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">          20 :         int64_t vr = nut_u64_nth_root(v, 2);</span></span>
+<span id="L793"><span class="lineNum">     793</span> <span class="tlaGNC">          20 :         int64_t H = 0; // H starts at 0 because we add the sums first</span></span>
+<span id="L794"><span class="lineNum">     794</span> <span class="tlaGNC">          20 :         if(1 &lt;= vr){ // do the extra term of G(v/n)h(n) where n = 1</span></span>
+<span id="L795"><span class="lineNum">     795</span>              :             // Because i &lt; self-&gt;yinv, v &gt;= self-&gt;y by definition of self-&gt;yinv,</span>
+<span id="L796"><span class="lineNum">     796</span>              :             // So it is only possible for v to be &lt;= self-&gt;y at most once (if it equals self-&gt;y when i is self-&gt;yinv - 1).</span>
+<span id="L797"><span class="lineNum">     797</span>              :             // But if self-&gt;y == self-&gt;yinv - 1, we store both h(self-&gt;y) in the dense part and H(self-&gt;yinv - 1) in the sparse part.</span>
+<span id="L798"><span class="lineNum">     798</span>              :             // Therefore, the value we want always exists in the sparse part here</span>
+<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">          20 :             assert(v &gt;= self-&gt;y);</span></span>
+<span id="L800"><span class="lineNum">     800</span> <span class="tlaGNC">          20 :             H = nut_Diri_get_sparse(g_tbl, i);</span></span>
+<span id="L801"><span class="lineNum">     801</span>              :         }</span>
+<span id="L802"><span class="lineNum">     802</span> <span class="tlaGNC">          94 :         for(int64_t n = 2, gH_term, Gh_term; n &lt;= vr; ++n){</span></span>
+<span id="L803"><span class="lineNum">     803</span> <span class="tlaGNC">          74 :             if(v/n &lt;= self-&gt;y){</span></span>
+<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC">          46 :                 gH_term = nut_Diri_get_dense(g_tbl, n)*H_dense[v/n];</span></span>
+<span id="L805"><span class="lineNum">     805</span> <span class="tlaGNC">          46 :                 Gh_term = nut_Diri_get_dense(self, n)*G_dense[v/n];</span></span>
+<span id="L806"><span class="lineNum">     806</span>              :             }else{</span>
+<span id="L807"><span class="lineNum">     807</span> <span class="tlaGNC">          28 :                 gH_term = nut_Diri_get_dense(g_tbl, n)*nut_Diri_get_sparse(self, i*n);</span></span>
+<span id="L808"><span class="lineNum">     808</span> <span class="tlaGNC">          28 :                 Gh_term = nut_Diri_get_dense(self, n)*nut_Diri_get_sparse(g_tbl, i*n);</span></span>
+<span id="L809"><span class="lineNum">     809</span>              :             }</span>
+<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC">          74 :             H = m ? nut_i64_mod(H + gH_term%m + Gh_term%m, m) : H + gH_term + Gh_term;</span></span>
+<span id="L811"><span class="lineNum">     811</span>              :         }</span>
+<span id="L812"><span class="lineNum">     812</span>              :         // Now H consists of all the sums, so we have to take it and subtract it from F(v) + G(vr)H(vr)</span>
+<span id="L813"><span class="lineNum">     813</span> <span class="tlaGNC">          20 :         int64_t term = G_dense[vr]*H_dense[vr];</span></span>
+<span id="L814"><span class="lineNum">     814</span> <span class="tlaGNC">          20 :         assert(v &gt;= self-&gt;y); // see above comment about i &lt; self-&gt;yinv</span></span>
+<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">          20 :         term = m ? nut_Diri_get_sparse(f_tbl, i) + term%m : nut_Diri_get_sparse(f_tbl, i) + term;</span></span>
+<span id="L816"><span class="lineNum">     816</span> <span class="tlaGNC">          20 :         H = m ? nut_i64_mod(term - H, m) : term - H;</span></span>
+<span id="L817"><span class="lineNum">     817</span> <span class="tlaGNC">          20 :         nut_Diri_set_sparse(self, i, H);</span></span>
+<span id="L818"><span class="lineNum">     818</span>              :     }</span>
+<span id="L819"><span class="lineNum">     819</span>              :     return true;</span>
+<span id="L820"><span class="lineNum">     820</span>              : }</span>
+<span id="L821"><span class="lineNum">     821</span>              : </span>
         </pre>
               </td>
             </tr>

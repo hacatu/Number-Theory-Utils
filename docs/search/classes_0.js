@@ -10,6 +10,7 @@ var searchData=
   ['nut_5fpfstackent_7',['nut_PfStackEnt',['../structnut__PfStackEnt.html',1,'']]],
   ['nut_5fpoly_8',['nut_Poly',['../structnut__Poly.html',1,'']]],
   ['nut_5froots_9',['nut_Roots',['../structnut__Roots.html',1,'']]],
-  ['nut_5fu64_5fmodmatrix_10',['nut_u64_ModMatrix',['../structnut__u64__ModMatrix.html',1,'']]],
-  ['nut_5fu64_5fpitcharr_11',['nut_u64_Pitcharr',['../structnut__u64__Pitcharr.html',1,'']]]
+  ['nut_5fsegsieve_10',['nut_Segsieve',['../structnut__Segsieve.html',1,'']]],
+  ['nut_5fu64_5fmodmatrix_11',['nut_u64_ModMatrix',['../structnut__u64__ModMatrix.html',1,'']]],
+  ['nut_5fu64_5fpitcharr_12',['nut_u64_Pitcharr',['../structnut__u64__Pitcharr.html',1,'']]]
 ];

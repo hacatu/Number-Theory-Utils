@@ -10,6 +10,7 @@ var annotated_dup =
     [ "nut_PfStackEnt", "structnut__PfStackEnt.html", null ],
     [ "nut_Poly", "structnut__Poly.html", "structnut__Poly" ],
     [ "nut_Roots", "structnut__Roots.html", "structnut__Roots" ],
+    [ "nut_Segsieve", "structnut__Segsieve.html", null ],
     [ "nut_u64_ModMatrix", "structnut__u64__ModMatrix.html", null ],
     [ "nut_u64_Pitcharr", "structnut__u64__Pitcharr.html", null ]
 ];
