@@ -102,6 +102,7 @@ def configure(conf):
 		'-ggdb3',
 		'-O3',
 		'-DNDEBUG',
+		'-march=native',
 		'-fsanitize=bounds,integer,pointer-overflow,shift,unsigned-shift-base,vla-bound'
 	])
 	conf.env.LDFLAGS = mod_flags(base_ldflags, [], [
@@ -117,7 +118,8 @@ def configure(conf):
 	conf.load('compiler_c')
 	conf.env.CFLAGS = mod_flags(base_cflags, [], [
 		'-O3',
-		'-DNDEBUG'
+		'-DNDEBUG',
+		'-march=native'
 	])
 	conf.env.LDFLAGS = mod_flags(base_ldflags, [], [
 		'-O3',
