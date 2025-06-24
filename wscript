@@ -151,7 +151,7 @@ def configure(conf):
 		conf.env.CFLAGS = mod_flags(base_cflags, ['-pthread'], [
 			'-lwinpthread',
 			'-O3',
-			'-DNDEBUG'
+			'-DNDEBUG',
 		])
 		conf.env.LDFLAGS = mod_flags(base_ldflags, ['-pthread'], [
 			'-flto',

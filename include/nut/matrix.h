@@ -8,9 +8,7 @@
 /// License, v. 2.0. If a copy of the MPL was not distributed with this
 /// file, You can obtain one at http://mozilla.org/MPL/2.0/.
 /// @section DESCRIPTION
-/// Functions for dealing with modular arithmetic on
-/// 64 bit integers (not suitable for large integers which may overflow,
-/// around 2^31.  a bignum-enabled version may be created to handle this)
+/// Functions for dealing with integer matricies
 
 #include <nut/debug.h>
 
