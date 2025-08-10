@@ -157,6 +157,7 @@ bool nut_cl_setup(nut_ClMgr *mgr, int flags){
 	if(verbose){
 		fprintf(stderr, "\e[1;33mFound %u platform%s:\e[0m\n", mgr->num_platforms, mgr->num_platforms == 1 ? "" : "s");
 	}
+	bool found_gpu = false;
 	for(size_t i = 0; i < mgr->num_platforms; ++i){
 		mgr->err = clGetPlatformInfo(mgr->platform_ids[i], CL_PLATFORM_PROFILE, 1024, name_buf, NULL);
 		if(!nut_cl_check_err(mgr, "OpenCL failed to get next platform profile", "")){
@@ -172,36 +173,53 @@ bool nut_cl_setup(nut_ClMgr *mgr, int flags){
 		if(verbose){
 			fprintf(stderr, "%zu: CL_PLATFORM_VERSION: %s\n", i, name_buf);
 		}
-	}
-	if(verbose){
-		fprintf(stderr, "----------\n");
-	}
-	
-	mgr->err = clGetDeviceIDs(mgr->platform_ids[0], CL_DEVICE_TYPE_GPU, 0, NULL, &mgr->num_devices);
-	if(!nut_cl_check_err(mgr, "OpenCL failed to get num device ids", "")){
-		return false;
-	}
-	mgr->device_ids = malloc(mgr->num_devices*sizeof(cl_device_id));
-	if(!mgr->device_ids){
-		mgr->err = CL_OUT_OF_HOST_MEMORY;
-		nut_cl_check_err(mgr, "Could not allocate device_ids buffer", "");
-		return false;
-	}
-	mgr->err = clGetDeviceIDs(mgr->platform_ids[0], CL_DEVICE_TYPE_GPU, mgr->num_devices, mgr->device_ids, NULL);
-	if(!nut_cl_check_err(mgr, "OpenCL failed to get num device ids", "")){
-		return false;
-	}
-	if(verbose){
-		fprintf(stderr, "\e[1;33mFound %u device%s:\e[0m\n", mgr->num_devices, mgr->num_devices == 1 ? "" : "s");
-	}
-	for(size_t i = 0; i < mgr->num_devices; ++i){
-		mgr->err = clGetDeviceInfo(mgr->device_ids[i], CL_DEVICE_NAME, 1024, name_buf, NULL);
-		if(!nut_cl_check_err(mgr, "OpenCL failed to get next device name", "")){
+		
+		if(found_gpu){
+			if(verbose){
+				fprintf(stderr, "%zu: (skipping GPU search since we already found one)\n", i);
+			}
+			continue;
+		}
+		mgr->err = clGetDeviceIDs(mgr->platform_ids[i], CL_DEVICE_TYPE_GPU, 0, NULL, &mgr->num_devices);
+		if(mgr->err == CL_DEVICE_NOT_FOUND){
+			if(verbose){
+				fprintf(stderr, "%zu: (no GPU found for this platform)\n", i);
+			}
+			continue;
+		}
+		if(!nut_cl_check_err(mgr, "OpenCL failed to get num device ids", "")){
 			return false;
 		}
 		if(verbose){
-			fprintf(stderr, "%zu: CL_DEVICE_NAME: %s\n", i, name_buf);
+			fprintf(stderr, "%zu: Found %u GPUs:\n", i, mgr->num_devices);
 		}
+		found_gpu = true;
+		mgr->device_ids = malloc(mgr->num_devices*sizeof(cl_device_id));
+		if(!mgr->device_ids){
+			mgr->err = CL_OUT_OF_HOST_MEMORY;
+			nut_cl_check_err(mgr, "Could not allocate device_ids buffer", "");
+			return false;
+		}
+		mgr->err = clGetDeviceIDs(mgr->platform_ids[i], CL_DEVICE_TYPE_GPU, mgr->num_devices, mgr->device_ids, NULL);
+		if(!nut_cl_check_err(mgr, "OpenCL failed to get device ids", "")){
+			return false;
+		}
+		if(verbose){
+			fprintf(stderr, "\e[1;33mFound %u device%s:\e[0m\n", mgr->num_devices, mgr->num_devices == 1 ? "" : "s");
+		}
+		for(size_t i = 0; i < mgr->num_devices; ++i){
+			mgr->err = clGetDeviceInfo(mgr->device_ids[i], CL_DEVICE_NAME, 1024, name_buf, NULL);
+			if(!nut_cl_check_err(mgr, "OpenCL failed to get next device name", "")){
+				return false;
+			}
+			if(verbose){
+				fprintf(stderr, "%zu: CL_DEVICE_NAME: %s\n", i, name_buf);
+			}
+		}
+		if(verbose){
+			fprintf(stderr, "----------\n");
+		}
+
 	}
 	if(verbose){
 		fprintf(stderr, "----------\n");
