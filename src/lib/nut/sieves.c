@@ -153,11 +153,60 @@ uint64_t *nut_sieve_largest_factors(uint64_t max){
 	return buf;
 }
 
+uint32_t *nut_sieve_smallest_factors(uint64_t max){
+	uint32_t *buf = calloc(max + 1, sizeof(uint32_t));
+	if(!buf){
+		return NULL;
+	}
+	uint64_t rmax = nut_u64_nth_root(max, 2);
+	for(uint64_t n = 2; n <= rmax; ++n){
+		if(buf[n]){
+			continue;
+		}
+		for(uint64_t m = n; m <= max;){
+			if(buf[m] == 0 || buf[m] > n){
+				buf[m] = n;
+			}
+			if(__builtin_add_overflow(m, n, &m)){
+				break;
+			}
+		}
+		buf[n] = 1; // this means the first store in the above loop is dead
+	}
+	for(uint64_t n = rmax + 1; n <= max; ++n){
+		if(!buf[n]){
+			buf[n] = 1;
+		}
+	}
+	return buf;
+}
+
 void nut_fill_factors_from_largest(nut_Factors *restrict out, uint64_t n, const uint64_t largest_factors[restrict static n + 1]){
 	out->num_primes = 0;
 	for(uint64_t p = largest_factors[n], k = 1; p;){
 		n /= p;
 		uint64_t q = largest_factors[n];
+		if(p == q){
+			++k;
+		}else{
+			nut_Factor_append(out, p, k);
+			p = q;
+			k = 1;
+		}
+	}
+}
+
+void nut_fill_factors_from_smallest(nut_Factors *restrict out, uint64_t n, const uint32_t smallest_factors[restrict static n + 1]){
+	out->num_primes = 0;
+	for(uint64_t p = smallest_factors[n], k = 1; p;){
+		if(p == 1){
+			p = n;
+		}
+		n /= p;
+		uint64_t q = smallest_factors[n];
+		if(q == 1){
+			q = n;
+		}
 		if(p == q){
 			++k;
 		}else{
