@@ -1,3 +1,4 @@
+#include "nut/debug.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -520,6 +521,33 @@ bool nut_Diri_compute_J(nut_Diri *restrict self, uint64_t p){
 	}
 	for(int64_t i = 1; i < self->yinv; ++i){
 		int64_t r = self->x/i%p;
+		self->buf[self->y + i] = partial_sums[r];
+	}
+	return true;
+}
+
+bool nut_Diri_compute_Chi_balanced(nut_Diri *restrict self, uint64_t n, int64_t m, const int64_t period_tbl[restrict static n]){
+	int64_t *partial_sums [[gnu::cleanup(cleanup_free)]] = malloc(n*sizeof(int64_t));
+	if(!partial_sums){
+		return false;
+	}
+	int64_t acc = period_tbl[0];
+	partial_sums[0] = acc;
+	for(uint64_t r = 1; r < n; ++r){
+		acc += period_tbl[r];
+		if(acc >= m){
+			acc -= m;
+		}
+		partial_sums[r] = acc;
+	}
+	for(uint64_t r = 0; r < n; ++r){
+		int64_t v = period_tbl[r];
+		for(int64_t i = r; i <= self->y; i += n){
+			self->buf[i] = v;
+		}
+	}
+	for(int64_t i = 1; i < self->yinv; ++i){
+		int64_t r = self->x/i%n;
 		self->buf[self->y + i] = partial_sums[r];
 	}
 	return true;

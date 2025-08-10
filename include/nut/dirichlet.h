@@ -277,6 +277,17 @@ NUT_ATTR_NONNULL(1)
 NUT_ATTR_ACCESS(read_write, 1)
 bool nut_Diri_compute_J(nut_Diri *restrict self, uint64_t p);
 
+/// Compute the value table for a given Dirichlet Character Chi, whose total is 0
+/// A dirichlet character is some n-periodic function Chi(x) which is
+/// - completely multiplicative (Chi(ab) = Chi(a)Chi(b))
+/// - 0 if x is not coprime to n
+/// And here, we also require that the sum of Chi(x) over its period is 0, so it is trivial to sum
+/// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized
+/// @param [in] n: period of the dirichlet character
+/// @param [in] m: modulus to reduce the result by, or 0 to skip reducing.  Note that the input values must already be reduced
+/// @param [in] period_tbl: table of values of Chi(x) for 0 <= x < n.  These values should be reduced mod m and sum to 0 mod m, or if m is 0, some of these values should be 0
+bool nut_Diri_compute_Chi_balanced(nut_Diri *restrict self, uint64_t n, int64_t m, const int64_t period_tbl[restrict static n]);
+
 /// Compute the value table for the prime counting function, aka prime pi
 /// The indicator function for primes is effectively multiplicative,
 /// and the prime counting function is its sum.  But also, Lucy Hedgehog's prime counting
