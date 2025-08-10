@@ -1,5 +1,8 @@
 var NAVTREEINDEX1 =
 {
+"structnut__ClKernel.html":[1,0,0],
+"structnut__ClMgr.html":[1,0,1],
+"structnut__Diri.html":[1,0,2],
 "structnut__FactorConf.html":[1,0,3],
 "structnut__FactorConf.html#a03a74ba961477004fd07cca592318954":[1,0,3,2],
 "structnut__FactorConf.html#a05d3b17c3e6a25ca26b778064d2231fe":[1,0,3,1],

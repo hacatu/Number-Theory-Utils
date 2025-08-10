@@ -50,7 +50,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-02-19 05:26:49</td>
+            <td class="headerValue">2025-08-10 23:27:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -352,28 +352,28 @@
 <span id="L277"><span class="lineNum">     277</span>              : NUT_ATTR_ACCESS(read_write, 1)</span>
 <span id="L278"><span class="lineNum">     278</span>              : bool nut_Diri_compute_J(nut_Diri *restrict self, uint64_t p);</span>
 <span id="L279"><span class="lineNum">     279</span>              : </span>
-<span id="L280"><span class="lineNum">     280</span>              : /// Compute the value table for the prime counting function, aka prime pi</span>
-<span id="L281"><span class="lineNum">     281</span>              : /// The indicator function for primes is effectively multiplicative,</span>
-<span id="L282"><span class="lineNum">     282</span>              : /// and the prime counting function is its sum.  But also, Lucy Hedgehog's prime counting</span>
-<span id="L283"><span class="lineNum">     283</span>              : /// algorithm essentially uses Dirichlet tables already, hence its inclusion in this part of the library</span>
-<span id="L284"><span class="lineNum">     284</span>              : /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized</span>
-<span id="L285"><span class="lineNum">     285</span>              : NUT_ATTR_NONNULL(1)</span>
-<span id="L286"><span class="lineNum">     286</span>              : NUT_ATTR_ACCESS(read_write, 1)</span>
-<span id="L287"><span class="lineNum">     287</span>              : bool nut_Diri_compute_pi(nut_Diri *restrict self);</span>
-<span id="L288"><span class="lineNum">     288</span>              : </span>
-<span id="L289"><span class="lineNum">     289</span>              : /// Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f</span>
-<span id="L290"><span class="lineNum">     290</span>              : /// See { @link nut_Diri_compute_conv } for details, this is just that function but with several specializations due to u being very simple.</span>
-<span id="L291"><span class="lineNum">     291</span>              : /// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init}.</span>
-<span id="L292"><span class="lineNum">     292</span>              : /// self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistent with the inputs</span>
-<span id="L293"><span class="lineNum">     293</span>              : /// @param [in] m: modulus to reduce results by, or 0 to skip reducing</span>
-<span id="L294"><span class="lineNum">     294</span>              : /// @param [in] f_tbl: table for the first operand</span>
-<span id="L295"><span class="lineNum">     295</span>              : NUT_ATTR_NONNULL(1, 3)</span>
-<span id="L296"><span class="lineNum">     296</span>              : NUT_ATTR_ACCESS(read_write, 1)</span>
-<span id="L297"><span class="lineNum">     297</span>              : NUT_ATTR_ACCESS(read_only, 3)</span>
-<span id="L298"><span class="lineNum">     298</span>              : bool nut_Diri_compute_conv_u(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl);</span>
+<span id="L280"><span class="lineNum">     280</span>              : /// Compute the value table for a given Dirichlet Character Chi, whose total is 0</span>
+<span id="L281"><span class="lineNum">     281</span>              : /// A dirichlet character is some n-periodic function Chi(x) which is</span>
+<span id="L282"><span class="lineNum">     282</span>              : /// - completely multiplicative (Chi(ab) = Chi(a)Chi(b))</span>
+<span id="L283"><span class="lineNum">     283</span>              : /// - 0 if x is not coprime to n</span>
+<span id="L284"><span class="lineNum">     284</span>              : /// And here, we also require that the sum of Chi(x) over its period is 0, so it is trivial to sum</span>
+<span id="L285"><span class="lineNum">     285</span>              : /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized</span>
+<span id="L286"><span class="lineNum">     286</span>              : /// @param [in] n: period of the dirichlet character</span>
+<span id="L287"><span class="lineNum">     287</span>              : /// @param [in] m: modulus to reduce the result by, or 0 to skip reducing.  Note that the input values must already be reduced</span>
+<span id="L288"><span class="lineNum">     288</span>              : /// @param [in] period_tbl: table of values of Chi(x) for 0 &lt;= x &lt; n.  These values should be reduced mod m and sum to 0 mod m, or if m is 0, some of these values should be 0</span>
+<span id="L289"><span class="lineNum">     289</span>              : bool nut_Diri_compute_Chi_balanced(nut_Diri *restrict self, uint64_t n, int64_t m, const int64_t period_tbl[restrict static n]);</span>
+<span id="L290"><span class="lineNum">     290</span>              : </span>
+<span id="L291"><span class="lineNum">     291</span>              : /// Compute the value table for the prime counting function, aka prime pi</span>
+<span id="L292"><span class="lineNum">     292</span>              : /// The indicator function for primes is effectively multiplicative,</span>
+<span id="L293"><span class="lineNum">     293</span>              : /// and the prime counting function is its sum.  But also, Lucy Hedgehog's prime counting</span>
+<span id="L294"><span class="lineNum">     294</span>              : /// algorithm essentially uses Dirichlet tables already, hence its inclusion in this part of the library</span>
+<span id="L295"><span class="lineNum">     295</span>              : /// @param [in, out] self: the table to store the result in, and take the bounds from.  Must be initialized</span>
+<span id="L296"><span class="lineNum">     296</span>              : NUT_ATTR_NONNULL(1)</span>
+<span id="L297"><span class="lineNum">     297</span>              : NUT_ATTR_ACCESS(read_write, 1)</span>
+<span id="L298"><span class="lineNum">     298</span>              : bool nut_Diri_compute_pi(nut_Diri *restrict self);</span>
 <span id="L299"><span class="lineNum">     299</span>              : </span>
-<span id="L300"><span class="lineNum">     300</span>              : /// Compute the value table for h = f &lt;*&gt; N, the dirichlet convolution of f and N (the identity function N(n) = n), given the value table for f</span>
-<span id="L301"><span class="lineNum">     301</span>              : /// See { @link nut_Diri_compute_conv } for details, this is just that function but with several specializations due to N being very simple.</span>
+<span id="L300"><span class="lineNum">     300</span>              : /// Compute the value table for h = f &lt;*&gt; u, the dirichlet convolution of f and u (the unit function u(n) = 1), given the value table for f</span>
+<span id="L301"><span class="lineNum">     301</span>              : /// See { @link nut_Diri_compute_conv } for details, this is just that function but with several specializations due to u being very simple.</span>
 <span id="L302"><span class="lineNum">     302</span>              : /// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init}.</span>
 <span id="L303"><span class="lineNum">     303</span>              : /// self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistent with the inputs</span>
 <span id="L304"><span class="lineNum">     304</span>              : /// @param [in] m: modulus to reduce results by, or 0 to skip reducing</span>
@@ -381,43 +381,54 @@
 <span id="L306"><span class="lineNum">     306</span>              : NUT_ATTR_NONNULL(1, 3)</span>
 <span id="L307"><span class="lineNum">     307</span>              : NUT_ATTR_ACCESS(read_write, 1)</span>
 <span id="L308"><span class="lineNum">     308</span>              : NUT_ATTR_ACCESS(read_only, 3)</span>
-<span id="L309"><span class="lineNum">     309</span>              : bool nut_Diri_compute_conv_N(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl);</span>
+<span id="L309"><span class="lineNum">     309</span>              : bool nut_Diri_compute_conv_u(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl);</span>
 <span id="L310"><span class="lineNum">     310</span>              : </span>
-<span id="L311"><span class="lineNum">     311</span>              : /// Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands</span>
-<span id="L312"><span class="lineNum">     312</span>              : /// self must have been initialized using { @link nut_Diri_init}, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl</span>
-<span id="L313"><span class="lineNum">     313</span>              : /// must be set and match</span>
-<span id="L314"><span class="lineNum">     314</span>              : /// This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1))</span>
-<span id="L315"><span class="lineNum">     315</span>              : /// If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then</span>
-<span id="L316"><span class="lineNum">     316</span>              : /// try to use a specialized function from this library and use that instead.</span>
-<span id="L317"><span class="lineNum">     317</span>              : /// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init}.</span>
-<span id="L318"><span class="lineNum">     318</span>              : /// self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistent with the inputs</span>
-<span id="L319"><span class="lineNum">     319</span>              : /// @param [in] m: modulus to reduce results by, or 0 to skip reducing</span>
-<span id="L320"><span class="lineNum">     320</span>              : /// @param [in] f_tbl: table for the first operand (dirichlet convolution is commutative, so order doesn't matter)</span>
-<span id="L321"><span class="lineNum">     321</span>              : /// @param [in] g_tbl: table for the second operand</span>
-<span id="L322"><span class="lineNum">     322</span>              : NUT_ATTR_NONNULL(1, 3, 4)</span>
-<span id="L323"><span class="lineNum">     323</span>              : NUT_ATTR_ACCESS(read_write, 1)</span>
-<span id="L324"><span class="lineNum">     324</span>              : NUT_ATTR_ACCESS(read_only, 3)</span>
-<span id="L325"><span class="lineNum">     325</span>              : NUT_ATTR_ACCESS(read_only, 4)</span>
-<span id="L326"><span class="lineNum">     326</span>              : bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f_tbl, const nut_Diri *g_tbl);</span>
-<span id="L327"><span class="lineNum">     327</span>              : </span>
-<span id="L328"><span class="lineNum">     328</span>              : </span>
-<span id="L329"><span class="lineNum">     329</span>              : /// Compute the value table for h such that f = g &lt;*&gt; h, aka h = f &lt;/&gt; g where the division is in terms of dirichlet convolution</span>
-<span id="L330"><span class="lineNum">     330</span>              : /// self must have been initialized using { @link nut_Diri_init }, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl</span>
-<span id="L331"><span class="lineNum">     331</span>              : /// must be set and match</span>
-<span id="L332"><span class="lineNum">     332</span>              : /// This is the inverse of &lt;*&gt;, in the sense that if h = f &lt;/&gt; g, then h &lt;*&gt; g = f.  In fact, this function is essentially</span>
-<span id="L333"><span class="lineNum">     333</span>              : /// implemented by solving this for H(v) and applying the dirichlet hyperbola method (see the code comments for details).</span>
-<span id="L334"><span class="lineNum">     334</span>              : /// Unlike the `compute_conv_*` family of functions, this needs to allocate space for scratch work, which can cause it to fail if</span>
-<span id="L335"><span class="lineNum">     335</span>              : /// there is not enough memory.  About 16*(self-&gt;y + 1) bytes will be allocated.</span>
-<span id="L336"><span class="lineNum">     336</span>              : /// Currently there are not specialized functions for dividing by simple standard functions.</span>
-<span id="L337"><span class="lineNum">     337</span>              : /// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init }.</span>
-<span id="L338"><span class="lineNum">     338</span>              : /// self-&gt;y, self-&gt;x, and self-&gt;yinv must be set ant consistent with the inputs</span>
-<span id="L339"><span class="lineNum">     339</span>              : /// @param [in] m: modulus to reduce results by, or 0 to skip reducing</span>
-<span id="L340"><span class="lineNum">     340</span>              : /// @param [in] f_tbl: table for the first operand (the &quot;numerator&quot; aka &quot;dividend&quot; in the &quot;division&quot;)</span>
-<span id="L341"><span class="lineNum">     341</span>              : /// @param [in] g_tbl: the table for the second operand (the &quot;denominator&quot; aka &quot;divisor&quot; in the &quot;division&quot;)</span>
-<span id="L342"><span class="lineNum">     342</span>              : NUT_ATTR_NONNULL(1, 3, 4)</span>
-<span id="L343"><span class="lineNum">     343</span>              : NUT_ATTR_ACCESS(read_write, 1, 3, 4)</span>
-<span id="L344"><span class="lineNum">     344</span>              : bool nut_Diri_convdiv(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl, const nut_Diri *restrict g_tbl);</span>
-<span id="L345"><span class="lineNum">     345</span>              : </span>
+<span id="L311"><span class="lineNum">     311</span>              : /// Compute the value table for h = f &lt;*&gt; N, the dirichlet convolution of f and N (the identity function N(n) = n), given the value table for f</span>
+<span id="L312"><span class="lineNum">     312</span>              : /// See { @link nut_Diri_compute_conv } for details, this is just that function but with several specializations due to N being very simple.</span>
+<span id="L313"><span class="lineNum">     313</span>              : /// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init}.</span>
+<span id="L314"><span class="lineNum">     314</span>              : /// self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistent with the inputs</span>
+<span id="L315"><span class="lineNum">     315</span>              : /// @param [in] m: modulus to reduce results by, or 0 to skip reducing</span>
+<span id="L316"><span class="lineNum">     316</span>              : /// @param [in] f_tbl: table for the first operand</span>
+<span id="L317"><span class="lineNum">     317</span>              : NUT_ATTR_NONNULL(1, 3)</span>
+<span id="L318"><span class="lineNum">     318</span>              : NUT_ATTR_ACCESS(read_write, 1)</span>
+<span id="L319"><span class="lineNum">     319</span>              : NUT_ATTR_ACCESS(read_only, 3)</span>
+<span id="L320"><span class="lineNum">     320</span>              : bool nut_Diri_compute_conv_N(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl);</span>
+<span id="L321"><span class="lineNum">     321</span>              : </span>
+<span id="L322"><span class="lineNum">     322</span>              : /// Compute the value table for h = f &lt;*&gt; g, the dirichlet convolution of f and g, given value tables for the operands</span>
+<span id="L323"><span class="lineNum">     323</span>              : /// self must have been initialized using { @link nut_Diri_init}, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl</span>
+<span id="L324"><span class="lineNum">     324</span>              : /// must be set and match</span>
+<span id="L325"><span class="lineNum">     325</span>              : /// This uses a sieve to compute h(1) through h(y), then uses dirichlet's hyperbola formula to compute H(x/1) through H(x/(yinv-1))</span>
+<span id="L326"><span class="lineNum">     326</span>              : /// If one of the operands is a simple standard multiplicative function like the unit function u or the mobius function mu, then</span>
+<span id="L327"><span class="lineNum">     327</span>              : /// try to use a specialized function from this library and use that instead.</span>
+<span id="L328"><span class="lineNum">     328</span>              : /// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init}.</span>
+<span id="L329"><span class="lineNum">     329</span>              : /// self-&gt;y, self-&gt;x, and self-&gt;yinv must be set and consistent with the inputs</span>
+<span id="L330"><span class="lineNum">     330</span>              : /// @param [in] m: modulus to reduce results by, or 0 to skip reducing</span>
+<span id="L331"><span class="lineNum">     331</span>              : /// @param [in] f_tbl: table for the first operand (dirichlet convolution is commutative, so order doesn't matter)</span>
+<span id="L332"><span class="lineNum">     332</span>              : /// @param [in] g_tbl: table for the second operand</span>
+<span id="L333"><span class="lineNum">     333</span>              : NUT_ATTR_NONNULL(1, 3, 4)</span>
+<span id="L334"><span class="lineNum">     334</span>              : NUT_ATTR_ACCESS(read_write, 1)</span>
+<span id="L335"><span class="lineNum">     335</span>              : NUT_ATTR_ACCESS(read_only, 3)</span>
+<span id="L336"><span class="lineNum">     336</span>              : NUT_ATTR_ACCESS(read_only, 4)</span>
+<span id="L337"><span class="lineNum">     337</span>              : bool nut_Diri_compute_conv(nut_Diri *restrict self, int64_t m, const nut_Diri *f_tbl, const nut_Diri *g_tbl);</span>
+<span id="L338"><span class="lineNum">     338</span>              : </span>
+<span id="L339"><span class="lineNum">     339</span>              : </span>
+<span id="L340"><span class="lineNum">     340</span>              : /// Compute the value table for h such that f = g &lt;*&gt; h, aka h = f &lt;/&gt; g where the division is in terms of dirichlet convolution</span>
+<span id="L341"><span class="lineNum">     341</span>              : /// self must have been initialized using { @link nut_Diri_init }, and in particular the lengths and cutoffs for self, f_tbl, and g_tbl</span>
+<span id="L342"><span class="lineNum">     342</span>              : /// must be set and match</span>
+<span id="L343"><span class="lineNum">     343</span>              : /// This is the inverse of &lt;*&gt;, in the sense that if h = f &lt;/&gt; g, then h &lt;*&gt; g = f.  In fact, this function is essentially</span>
+<span id="L344"><span class="lineNum">     344</span>              : /// implemented by solving this for H(v) and applying the dirichlet hyperbola method (see the code comments for details).</span>
+<span id="L345"><span class="lineNum">     345</span>              : /// Unlike the `compute_conv_*` family of functions, this needs to allocate space for scratch work, which can cause it to fail if</span>
+<span id="L346"><span class="lineNum">     346</span>              : /// there is not enough memory.  About 16*(self-&gt;y + 1) bytes will be allocated.</span>
+<span id="L347"><span class="lineNum">     347</span>              : /// Currently there are not specialized functions for dividing by simple standard functions.</span>
+<span id="L348"><span class="lineNum">     348</span>              : /// @param [in, out] self: the table to store the result in, initialized by { @link nut_Diri_init }.</span>
+<span id="L349"><span class="lineNum">     349</span>              : /// self-&gt;y, self-&gt;x, and self-&gt;yinv must be set ant consistent with the inputs</span>
+<span id="L350"><span class="lineNum">     350</span>              : /// @param [in] m: modulus to reduce results by, or 0 to skip reducing</span>
+<span id="L351"><span class="lineNum">     351</span>              : /// @param [in] f_tbl: table for the first operand (the &quot;numerator&quot; aka &quot;dividend&quot; in the &quot;division&quot;)</span>
+<span id="L352"><span class="lineNum">     352</span>              : /// @param [in] g_tbl: the table for the second operand (the &quot;denominator&quot; aka &quot;divisor&quot; in the &quot;division&quot;)</span>
+<span id="L353"><span class="lineNum">     353</span>              : NUT_ATTR_NONNULL(1, 3, 4)</span>
+<span id="L354"><span class="lineNum">     354</span>              : NUT_ATTR_ACCESS(read_write, 1, 3, 4)</span>
+<span id="L355"><span class="lineNum">     355</span>              : bool nut_Diri_convdiv(nut_Diri *restrict self, int64_t m, const nut_Diri *restrict f_tbl, const nut_Diri *restrict g_tbl);</span>
+<span id="L356"><span class="lineNum">     356</span>              : </span>
         </pre>
               </td>
             </tr>

@@ -44,13 +44,13 @@
             <td class="headerValue">unnamed</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">73.8&nbsp;%</td>
+            <td class="headerCovTableEntryLo">74.5&nbsp;%</td>
             <td class="headerCovTableEntry">557</td>
-            <td class="headerCovTableEntry">411</td>
+            <td class="headerCovTableEntry">415</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-02-19 05:26:49</td>
+            <td class="headerValue">2025-08-10 23:27:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">88.2&nbsp;%</td>
@@ -82,9 +82,9 @@
 <span id="L7"><span class="lineNum">       7</span>              : #include &lt;nut/factorization.h&gt;</span>
 <span id="L8"><span class="lineNum">       8</span>              : #include &lt;nut/debug.h&gt;</span>
 <span id="L9"><span class="lineNum">       9</span>              : </span>
-<span id="L10"><span class="lineNum">      10</span> <span class="tlaGNC tlaBgGNC">       11413 : nut_Factors *nut_make_Factors_w(uint64_t max_primes){</span></span>
-<span id="L11"><span class="lineNum">      11</span> <span class="tlaGNC">       11413 :     static const nut_Factors dummy;</span></span>
-<span id="L12"><span class="lineNum">      12</span> <span class="tlaGNC">       11413 :     return calloc(1, sizeof(nut_Factors) + sizeof(dummy.factors[0])*max_primes);</span></span>
+<span id="L10"><span class="lineNum">      10</span> <span class="tlaGNC tlaBgGNC">       11417 : nut_Factors *nut_make_Factors_w(uint64_t max_primes){</span></span>
+<span id="L11"><span class="lineNum">      11</span> <span class="tlaGNC">       11417 :     static const nut_Factors dummy;</span></span>
+<span id="L12"><span class="lineNum">      12</span> <span class="tlaGNC">       11417 :     return calloc(1, sizeof(nut_Factors) + sizeof(dummy.factors[0])*max_primes);</span></span>
 <span id="L13"><span class="lineNum">      13</span>              : }</span>
 <span id="L14"><span class="lineNum">      14</span>              : </span>
 <span id="L15"><span class="lineNum">      15</span> <span class="tlaGNC">           2 : nut_Factors *nut_make_Factors_ub(uint64_t n, uint64_t num_primes, const uint64_t primes[static num_primes]){</span></span>
@@ -107,12 +107,12 @@
 <span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">       10000 :     return ret;</span></span>
 <span id="L33"><span class="lineNum">      33</span>              : }</span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">     3004499 : uint64_t nut_Factors_prod(const nut_Factors *factors){</span></span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">     3004499 :     uint64_t r = 1;</span></span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">    11924188 :     for(uint64_t i = 0; i &lt; factors-&gt;num_primes; ++i){</span></span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">     8919689 :         r *= nut_u64_pow(factors-&gt;factors[i].prime, factors-&gt;factors[i].power);</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">     3005500 : uint64_t nut_Factors_prod(const nut_Factors *factors){</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">     3005500 :     uint64_t r = 1;</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">    11927228 :     for(uint64_t i = 0; i &lt; factors-&gt;num_primes; ++i){</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">     8921728 :         r *= nut_u64_pow(factors-&gt;factors[i].prime, factors-&gt;factors[i].power);</span></span>
 <span id="L39"><span class="lineNum">      39</span>              :     }</span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">     3004499 :     return r;</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">     3005500 :     return r;</span></span>
 <span id="L41"><span class="lineNum">      41</span>              : }</span>
 <span id="L42"><span class="lineNum">      42</span>              : </span>
 <span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">     1000000 : uint64_t nut_Factor_divcount(const nut_Factors *factors){</span></span>
@@ -190,8 +190,8 @@
 <span id="L115"><span class="lineNum">     115</span>              : }</span>
 <span id="L116"><span class="lineNum">     116</span>              : </span>
 <span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC tlaBgGNC">         500 : void nut_Factor_ipow(nut_Factors *factors, uint64_t power){</span></span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">        2174 :     for(uint64_t i = 0; i &lt; factors-&gt;num_primes; ++i){</span></span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">        1674 :         factors-&gt;factors[i].power *= power;</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">        2129 :     for(uint64_t i = 0; i &lt; factors-&gt;num_primes; ++i){</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">        1629 :         factors-&gt;factors[i].power *= power;</span></span>
 <span id="L120"><span class="lineNum">     120</span>              :     }</span>
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">         500 : }</span></span>
 <span id="L122"><span class="lineNum">     122</span>              : </span>
@@ -290,79 +290,79 @@
 <span id="L215"><span class="lineNum">     215</span>              : </span>
 <span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">        1000 : int nut_Factor_forall_divs_le(const nut_Factors *restrict factors, uint64_t d_max, int (*f)(const nut_Factors*, uint64_t, void*), void *restrict data, nut_Factors *restrict dfactors, nut_Factors *restrict pfactors){</span></span>
 <span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">        1000 :     dfactors-&gt;num_primes = factors-&gt;num_primes;</span></span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">        3409 :     for(uint64_t i = 0; i &lt; factors-&gt;num_primes; ++i){</span></span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">        2409 :         dfactors-&gt;factors[i].prime = factors-&gt;factors[i].prime;</span></span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        2409 :         dfactors-&gt;factors[i].power = 0;</span></span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">        2409 :         pfactors-&gt;factors[i].prime = 1;</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">        3424 :     for(uint64_t i = 0; i &lt; factors-&gt;num_primes; ++i){</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">        2424 :         dfactors-&gt;factors[i].prime = factors-&gt;factors[i].prime;</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        2424 :         dfactors-&gt;factors[i].power = 0;</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">        2424 :         pfactors-&gt;factors[i].prime = 1;</span></span>
 <span id="L222"><span class="lineNum">     222</span>              :     }</span>
 <span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">        1000 :     uint64_t d = 1;</span></span>
 <span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">        1000 :     if(d_max &lt;= 1){</span></span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">           1 :         return d_max &amp;&amp; f(dfactors, d, data);</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">           2 :         return d_max &amp;&amp; f(dfactors, d, data);</span></span>
 <span id="L226"><span class="lineNum">     226</span>              :     }</span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        7632 :     while(1){</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">        7632 :         if(f(dfactors, d, data)){</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        7648 :     while(1){</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">        7648 :         if(f(dfactors, d, data)){</span></span>
 <span id="L229"><span class="lineNum">     229</span>              :             return 1;</span>
 <span id="L230"><span class="lineNum">     230</span>              :         }</span>
 <span id="L231"><span class="lineNum">     231</span>              :         uint64_t i;</span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">       12989 :         for(i = 0; i &lt; factors-&gt;num_primes; ++i){</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">       11990 :             if(dfactors-&gt;factors[i].power &lt; factors-&gt;factors[i].power){</span></span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        7739 :                 ++dfactors-&gt;factors[i].power;</span></span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        7739 :                 pfactors-&gt;factors[i].prime *= dfactors-&gt;factors[i].prime;</span></span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">        7739 :                 d *= dfactors-&gt;factors[i].prime;</span></span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">        7739 :                 if(d &lt;= d_max){</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">       13028 :         for(i = 0; i &lt; factors-&gt;num_primes; ++i){</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">       12030 :             if(dfactors-&gt;factors[i].power &lt; factors-&gt;factors[i].power){</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        7744 :                 ++dfactors-&gt;factors[i].power;</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        7744 :                 pfactors-&gt;factors[i].prime *= dfactors-&gt;factors[i].prime;</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">        7744 :                 d *= dfactors-&gt;factors[i].prime;</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">        7744 :                 if(d &lt;= d_max){</span></span>
 <span id="L238"><span class="lineNum">     238</span>              :                     break;</span>
 <span id="L239"><span class="lineNum">     239</span>              :                 }</span>
 <span id="L240"><span class="lineNum">     240</span>              :             }</span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">        5357 :             dfactors-&gt;factors[i].power = 0;</span></span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">        5357 :             d /= pfactors-&gt;factors[i].prime;</span></span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">        5357 :             pfactors-&gt;factors[i].prime = 1;</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">        5380 :             dfactors-&gt;factors[i].power = 0;</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">        5380 :             d /= pfactors-&gt;factors[i].prime;</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">        5380 :             pfactors-&gt;factors[i].prime = 1;</span></span>
 <span id="L244"><span class="lineNum">     244</span>              :         }</span>
-<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">        7632 :         if(i == factors-&gt;num_primes){</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">        7648 :         if(i == factors-&gt;num_primes){</span></span>
 <span id="L246"><span class="lineNum">     246</span>              :             return 0;</span>
 <span id="L247"><span class="lineNum">     247</span>              :         }</span>
 <span id="L248"><span class="lineNum">     248</span>              :     }</span>
 <span id="L249"><span class="lineNum">     249</span>              : }</span>
 <span id="L250"><span class="lineNum">     250</span>              : </span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">     2871563 : void nut_Factor_append(nut_Factors *factors, uint64_t m, uint64_t k){</span></span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">     2877225 :     for(uint64_t i = 0;; ++i){</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">     2877225 :         if(i == factors-&gt;num_primes){</span></span>
-<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">     1007989 :             factors-&gt;factors[i].prime = m;</span></span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">     1007989 :             factors-&gt;factors[i].power = k;</span></span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">     1007989 :             ++factors-&gt;num_primes;</span></span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">     1007989 :             break;</span></span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">     1869236 :         }else if(factors-&gt;factors[i].prime == m){</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">     2873708 : void nut_Factor_append(nut_Factors *factors, uint64_t m, uint64_t k){</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">     2880803 :     for(uint64_t i = 0;; ++i){</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">     2880803 :         if(i == factors-&gt;num_primes){</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">     1010119 :             factors-&gt;factors[i].prime = m;</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">     1010119 :             factors-&gt;factors[i].power = k;</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">     1010119 :             ++factors-&gt;num_primes;</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">     1010119 :             break;</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">     1870684 :         }else if(factors-&gt;factors[i].prime == m){</span></span>
 <span id="L259"><span class="lineNum">     259</span> <span class="tlaUNC tlaBgUNC">           0 :             factors-&gt;factors[i].power += k;</span></span>
 <span id="L260"><span class="lineNum">     260</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC tlaBgGNC">     1869236 :         }else if(factors-&gt;factors[i].prime &gt; m){</span></span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">     1863574 :             memmove(factors-&gt;factors + i + 1, factors-&gt;factors + i, (factors-&gt;num_primes - i)*sizeof(*factors-&gt;factors));</span></span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">     1863574 :             ++factors-&gt;num_primes;</span></span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">     1863574 :             factors-&gt;factors[i].prime = m;</span></span>
-<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">     1863574 :             factors-&gt;factors[i].power = k;</span></span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">     1863574 :             break;</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC tlaBgGNC">     1870684 :         }else if(factors-&gt;factors[i].prime &gt; m){</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">     1863589 :             memmove(factors-&gt;factors + i + 1, factors-&gt;factors + i, (factors-&gt;num_primes - i)*sizeof(*factors-&gt;factors));</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">     1863589 :             ++factors-&gt;num_primes;</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">     1863589 :             factors-&gt;factors[i].prime = m;</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">     1863589 :             factors-&gt;factors[i].power = k;</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">     1863589 :             break;</span></span>
 <span id="L267"><span class="lineNum">     267</span>              :         }</span>
 <span id="L268"><span class="lineNum">     268</span>              :     }</span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">     2871563 : }</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">     2873708 : }</span></span>
 <span id="L270"><span class="lineNum">     270</span>              : </span>
 <span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">         502 : void nut_Factor_combine(nut_Factors *restrict factors, const nut_Factors *restrict factors2, uint64_t k){</span></span>
 <span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">         502 :     nut_Factors *factors3 [[gnu::cleanup(cleanup_free)]] = nut_make_Factors_w(factors-&gt;num_primes + factors2-&gt;num_primes);</span></span>
 <span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">         502 :     uint64_t i = 0, i2 = 0, i3 = 0;</span></span>
-<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">        3080 :     while(i &lt; factors-&gt;num_primes &amp;&amp; i2 &lt; factors2-&gt;num_primes){</span></span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">        2578 :         if(factors-&gt;factors[i].prime &lt; factors2-&gt;factors[i2].prime){</span></span>
-<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">        1156 :             factors3-&gt;factors[i3++] = factors-&gt;factors[i++];</span></span>
-<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">        1422 :         }else if(factors-&gt;factors[i].prime &gt; factors2-&gt;factors[i2].prime){</span></span>
-<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">        1193 :             factors3-&gt;factors[i3].prime = factors2-&gt;factors[i2].prime;</span></span>
-<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        1193 :             factors3-&gt;factors[i3++].power = factors2-&gt;factors[i2++].power*k;</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">        3044 :     while(i &lt; factors-&gt;num_primes &amp;&amp; i2 &lt; factors2-&gt;num_primes){</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">        2542 :         if(factors-&gt;factors[i].prime &lt; factors2-&gt;factors[i2].prime){</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">        1186 :             factors3-&gt;factors[i3++] = factors-&gt;factors[i++];</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">        1356 :         }else if(factors-&gt;factors[i].prime &gt; factors2-&gt;factors[i2].prime){</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">        1124 :             factors3-&gt;factors[i3].prime = factors2-&gt;factors[i2].prime;</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        1124 :             factors3-&gt;factors[i3++].power = factors2-&gt;factors[i2++].power*k;</span></span>
 <span id="L280"><span class="lineNum">     280</span>              :         }else{</span>
-<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">         229 :             factors3-&gt;factors[i3].prime = factors-&gt;factors[i].prime;</span></span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">         229 :             factors3-&gt;factors[i3++].power = factors-&gt;factors[i++].power + factors2-&gt;factors[i2++].power*k;</span></span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">         232 :             factors3-&gt;factors[i3].prime = factors-&gt;factors[i].prime;</span></span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">         232 :             factors3-&gt;factors[i3++].power = factors-&gt;factors[i++].power + factors2-&gt;factors[i2++].power*k;</span></span>
 <span id="L283"><span class="lineNum">     283</span>              :         }</span>
 <span id="L284"><span class="lineNum">     284</span>              :     }</span>
-<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">         766 :     while(i &lt; factors-&gt;num_primes){</span></span>
-<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">         264 :         factors3-&gt;factors[i3++] = factors-&gt;factors[i++];</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">         753 :     while(i &lt; factors-&gt;num_primes){</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">         251 :         factors3-&gt;factors[i3++] = factors-&gt;factors[i++];</span></span>
 <span id="L287"><span class="lineNum">     287</span>              :     }</span>
-<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">         758 :     while(i2 &lt; factors2-&gt;num_primes){</span></span>
-<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">         256 :         factors3-&gt;factors[i3].prime = factors2-&gt;factors[i2].prime;</span></span>
-<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">         256 :         factors3-&gt;factors[i3++].power = factors2-&gt;factors[i2++].power*k;</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">         779 :     while(i2 &lt; factors2-&gt;num_primes){</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">         277 :         factors3-&gt;factors[i3].prime = factors2-&gt;factors[i2].prime;</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">         277 :         factors3-&gt;factors[i3++].power = factors2-&gt;factors[i2++].power*k;</span></span>
 <span id="L291"><span class="lineNum">     291</span>              :     }</span>
 <span id="L292"><span class="lineNum">     292</span>              :     //TODO: elide copying initial factors from factors to factors3 and back to factors</span>
 <span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">         502 :     memcpy(factors-&gt;factors, factors3-&gt;factors, i3*sizeof(*factors-&gt;factors));</span></span>
@@ -408,40 +408,40 @@
 <span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">          24 :     return res;</span></span>
 <span id="L334"><span class="lineNum">     334</span>              : }</span>
 <span id="L335"><span class="lineNum">     335</span>              : </span>
-<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">    28379813 : bool nut_u64_is_prime_dmr(uint64_t n){</span></span>
+<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">    28394727 : bool nut_u64_is_prime_dmr(uint64_t n){</span></span>
 <span id="L337"><span class="lineNum">     337</span>              :     //static const uint64_t DMR_PRIMES[7] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};//sufficient for 64 bit numbers</span>
 <span id="L338"><span class="lineNum">     338</span>              :     //had to disable 7 base check because the last base is too large to be squared under 64 bit multiplication</span>
-<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">    28379813 :     static const uint64_t DMR_PRIMES[12] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};//sufficient for 64 bit numbers</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">    28394727 :     static const uint64_t DMR_PRIMES[12] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};//sufficient for 64 bit numbers</span></span>
 <span id="L340"><span class="lineNum">     340</span>              :     //static const uint64_t DMR_PRIMES_C = 7;</span>
-<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">    28379813 :     static const uint64_t DMR_PRIMES_C = 12;</span></span>
-<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">    28379813 :     uint64_t s, d;//s, d | 2^s*d = n - 1</span></span>
-<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">    28379813 :     if(n%2 == 0){</span></span>
-<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">    11153551 :         return n == 2;</span></span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">    28394727 :     static const uint64_t DMR_PRIMES_C = 12;</span></span>
+<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">    28394727 :     uint64_t s, d;//s, d | 2^s*d = n - 1</span></span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">    28394727 :     if(n%2 == 0){</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">    11161181 :         return n == 2;</span></span>
 <span id="L345"><span class="lineNum">     345</span>              :     }</span>
-<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">    17226262 :     --n;</span></span>
-<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">    17226262 :     s = __builtin_ctzll(n);</span></span>
-<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">    17226262 :     d = n&gt;&gt;s;</span></span>
-<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">    17226262 :     ++n;</span></span>
-<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">    88378195 :     for(uint64_t i = 0, a, x; i &lt; DMR_PRIMES_C; ++i){</span></span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">    83427278 :         a = DMR_PRIMES[i];</span></span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">    83427278 :         if(a &gt;= n){</span></span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">    17233546 :     --n;</span></span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">    17233546 :     s = __builtin_ctzll(n);</span></span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">    17233546 :     d = n&gt;&gt;s;</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">    17233546 :     ++n;</span></span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">    88386131 :     for(uint64_t i = 0, a, x; i &lt; DMR_PRIMES_C; ++i){</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">    83435142 :         a = DMR_PRIMES[i];</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">    83435142 :         if(a &gt;= n){</span></span>
 <span id="L353"><span class="lineNum">     353</span>              :             break;</span>
 <span id="L354"><span class="lineNum">     354</span>              :         }</span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">    80145717 :         x = nut_u64_powmod(a, d, n);</span></span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">    80145717 :         if(x == 1 || x == n - 1){</span></span>
-<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">    46857616 :             goto CONTINUE_WITNESSLOOP;</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">    80153674 :         x = nut_u64_powmod(a, d, n);</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">    80153674 :         if(x == 1 || x == n - 1){</span></span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">    46858691 :             goto CONTINUE_WITNESSLOOP;</span></span>
 <span id="L358"><span class="lineNum">     358</span>              :         }</span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">    62255370 :         for(a = 0; a &lt; s - 1; ++a){</span></span>
-<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">    53261845 :             x = nut_u64_powmod(x, 2, n);</span></span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">    53261845 :             if(x == 1){</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">    62276328 :         for(a = 0; a &lt; s - 1; ++a){</span></span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">    53275499 :             x = nut_u64_powmod(x, 2, n);</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">    53275499 :             if(x == 1){</span></span>
 <span id="L362"><span class="lineNum">     362</span>              :                 return 0;</span>
 <span id="L363"><span class="lineNum">     363</span>              :             }</span>
-<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">    53261586 :             if(x == n - 1){</span></span>
-<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">    24294317 :                 goto CONTINUE_WITNESSLOOP;</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">    53275239 :             if(x == n - 1){</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">    24293894 :                 goto CONTINUE_WITNESSLOOP;</span></span>
 <span id="L366"><span class="lineNum">     366</span>              :             }</span>
 <span id="L367"><span class="lineNum">     367</span>              :         }</span>
 <span id="L368"><span class="lineNum">     368</span>              :         return false;</span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">    71151933 :         CONTINUE_WITNESSLOOP:;</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">    71152585 :         CONTINUE_WITNESSLOOP:;</span></span>
 <span id="L370"><span class="lineNum">     370</span>              :     }</span>
 <span id="L371"><span class="lineNum">     371</span>              :     return true;</span>
 <span id="L372"><span class="lineNum">     372</span>              : }</span>
@@ -534,25 +534,25 @@
 <span id="L459"><span class="lineNum">     459</span>              : NUT_ATTR_NO_SAN(&quot;vla-bound&quot;)</span>
 <span id="L460"><span class="lineNum">     460</span> <span class="tlaGNC tlaBgGNC">        3004 : uint64_t nut_u64_factor_trial_div(uint64_t n, uint64_t num_primes, const uint64_t primes[restrict static num_primes], nut_Factors *restrict factors){</span></span>
 <span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC">        3004 :     factors-&gt;num_primes = 0;</span></span>
-<span id="L462"><span class="lineNum">     462</span> <span class="tlaGNC">       60939 :     for(uint64_t i = 0; i &lt; num_primes; ++i){</span></span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">       59018 :         uint64_t p = primes[i];</span></span>
-<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">       59018 :         if(n%p == 0){</span></span>
-<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">        5128 :             uint64_t j = factors-&gt;num_primes++;</span></span>
-<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">        5128 :             factors-&gt;factors[j].prime = p;</span></span>
-<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC">        5128 :             factors-&gt;factors[j].power = 1;</span></span>
-<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">        5128 :             n /= p;</span></span>
-<span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC">        7407 :             while(n%p == 0){</span></span>
-<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC">        2279 :                 ++factors-&gt;factors[j].power;</span></span>
-<span id="L471"><span class="lineNum">     471</span> <span class="tlaGNC">        2279 :                 n /= p;</span></span>
+<span id="L462"><span class="lineNum">     462</span> <span class="tlaGNC">       61095 :     for(uint64_t i = 0; i &lt; num_primes; ++i){</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">       59161 :         uint64_t p = primes[i];</span></span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">       59161 :         if(n%p == 0){</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">        5059 :             uint64_t j = factors-&gt;num_primes++;</span></span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">        5059 :             factors-&gt;factors[j].prime = p;</span></span>
+<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC">        5059 :             factors-&gt;factors[j].power = 1;</span></span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">        5059 :             n /= p;</span></span>
+<span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC">        7358 :             while(n%p == 0){</span></span>
+<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC">        2299 :                 ++factors-&gt;factors[j].power;</span></span>
+<span id="L471"><span class="lineNum">     471</span> <span class="tlaGNC">        2299 :                 n /= p;</span></span>
 <span id="L472"><span class="lineNum">     472</span>              :             }</span>
 <span id="L473"><span class="lineNum">     473</span>              :         }</span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">       59018 :         if(p*p &gt; n){</span></span>
-<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">        1083 :             if(n &gt; 1){</span></span>
-<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC">        1035 :                 uint64_t j = factors-&gt;num_primes++;</span></span>
-<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">        1035 :                 factors-&gt;factors[j].prime = n;</span></span>
-<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">        1035 :                 factors-&gt;factors[j].power = 1;</span></span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">       59161 :         if(p*p &gt; n){</span></span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">        1070 :             if(n &gt; 1){</span></span>
+<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC">        1024 :                 uint64_t j = factors-&gt;num_primes++;</span></span>
+<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">        1024 :                 factors-&gt;factors[j].prime = n;</span></span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">        1024 :                 factors-&gt;factors[j].power = 1;</span></span>
 <span id="L479"><span class="lineNum">     479</span>              :             }</span>
-<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">        1083 :             return 1;</span></span>
+<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">        1070 :             return 1;</span></span>
 <span id="L481"><span class="lineNum">     481</span>              :         }</span>
 <span id="L482"><span class="lineNum">     482</span>              :     }</span>
 <span id="L483"><span class="lineNum">     483</span>              :     return n;</span>
@@ -564,29 +564,29 @@
 <span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">        3004 :     if(n == 1){</span></span>
 <span id="L490"><span class="lineNum">     490</span>              :         return 1;</span>
 <span id="L491"><span class="lineNum">     491</span>              :     }</span>
-<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">        1921 :     uint64_t exponent = 1;</span></span>
-<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">        1921 :     nut_u64_is_perfect_power(n, 9, &amp;n, &amp;exponent);</span></span>
-<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">        1921 :     if(nut_u64_is_prime_dmr(n)){//TODO: get a better primality test and possibly run it later (ie after some pollard-rho)</span></span>
-<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">        1020 :         nut_Factor_append(factors, n, exponent);</span></span>
-<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">        1020 :         return 1;</span></span>
+<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">        1934 :     uint64_t exponent = 1;</span></span>
+<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">        1934 :     nut_u64_is_perfect_power(n, 9, &amp;n, &amp;exponent);</span></span>
+<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">        1934 :     if(nut_u64_is_prime_dmr(n)){//TODO: get a better primality test and possibly run it later (ie after some pollard-rho)</span></span>
+<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">        1029 :         nut_Factor_append(factors, n, exponent);</span></span>
+<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">        1029 :         return 1;</span></span>
 <span id="L497"><span class="lineNum">     497</span>              :     }</span>
-<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">         901 :     uint64_t smoothness = 101*101;</span></span>
-<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">        1802 :     nut_Factors *factors2 [[gnu::cleanup(cleanup_free)]] = nut_make_Factors_w(NUT_MAX_PRIMES_64);</span></span>
-<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">         972 :     uint64_t m;</span></span>
-<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">         972 :     while(1){</span></span>
-<span id="L502"><span class="lineNum">     502</span> <span class="tlaGNC">         972 :         if(n &lt;= conf-&gt;pollard_max){//TODO: allow iteration count based stopping of pollard-rho brent so we can get small factors of big numbers that way?</span></span>
-<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">          33 :             do{</span></span>
-<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">          33 :                 uint64_t x = nut_u64_prand(0, n);</span></span>
-<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">          33 :                 m = nut_u64_factor1_pollard_rho_brent(n, x, conf-&gt;pollard_stride);</span></span>
-<span id="L506"><span class="lineNum">     506</span> <span class="tlaGNC">          33 :             }while(m == n);</span></span>
-<span id="L507"><span class="lineNum">     507</span> <span class="tlaGNC">          31 :             uint64_t k = 1;</span></span>
-<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">          31 :             n /= m;</span></span>
-<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">          31 :             while(n%m == 0){</span></span>
+<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">         905 :     uint64_t smoothness = 101*101;</span></span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">        1810 :     nut_Factors *factors2 [[gnu::cleanup(cleanup_free)]] = nut_make_Factors_w(NUT_MAX_PRIMES_64);</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">         976 :     uint64_t m;</span></span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">         976 :     while(1){</span></span>
+<span id="L502"><span class="lineNum">     502</span> <span class="tlaGNC">         976 :         if(n &lt;= conf-&gt;pollard_max){//TODO: allow iteration count based stopping of pollard-rho brent so we can get small factors of big numbers that way?</span></span>
+<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">          32 :             do{</span></span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">          32 :                 uint64_t x = nut_u64_prand(0, n);</span></span>
+<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">          32 :                 m = nut_u64_factor1_pollard_rho_brent(n, x, conf-&gt;pollard_stride);</span></span>
+<span id="L506"><span class="lineNum">     506</span> <span class="tlaGNC">          32 :             }while(m == n);</span></span>
+<span id="L507"><span class="lineNum">     507</span> <span class="tlaGNC">          29 :             uint64_t k = 1;</span></span>
+<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">          29 :             n /= m;</span></span>
+<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">          29 :             while(n%m == 0){</span></span>
 <span id="L510"><span class="lineNum">     510</span> <span class="tlaUNC tlaBgUNC">           0 :                 k += 1;</span></span>
 <span id="L511"><span class="lineNum">     511</span> <span class="tlaUNC">           0 :                 n /= m;</span></span>
 <span id="L512"><span class="lineNum">     512</span>              :             }</span>
-<span id="L513"><span class="lineNum">     513</span> <span class="tlaGNC tlaBgGNC">          31 :             if(m &lt; smoothness || nut_u64_is_prime_dmr(m)){</span></span>
-<span id="L514"><span class="lineNum">     514</span> <span class="tlaGNC">          31 :                 nut_Factor_append(factors, m, k*exponent);</span></span>
+<span id="L513"><span class="lineNum">     513</span> <span class="tlaGNC tlaBgGNC">          29 :             if(m &lt; smoothness || nut_u64_is_prime_dmr(m)){</span></span>
+<span id="L514"><span class="lineNum">     514</span> <span class="tlaGNC">          29 :                 nut_Factor_append(factors, m, k*exponent);</span></span>
 <span id="L515"><span class="lineNum">     515</span>              :             }else{</span>
 <span id="L516"><span class="lineNum">     516</span> <span class="tlaUNC tlaBgUNC">           0 :                 factors2-&gt;num_primes = 0;</span></span>
 <span id="L517"><span class="lineNum">     517</span> <span class="tlaUNC">           0 :                 m = nut_u64_factor_heuristic(m, 0, primes, conf, factors2);</span></span>
@@ -595,28 +595,28 @@
 <span id="L520"><span class="lineNum">     520</span>              :                 }</span>
 <span id="L521"><span class="lineNum">     521</span> <span class="tlaUNC">           0 :                 nut_Factor_combine(factors, factors2, k*exponent);</span></span>
 <span id="L522"><span class="lineNum">     522</span>              :             }</span>
-<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC tlaBgGNC">          31 :             if(n == 1){</span></span>
+<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC tlaBgGNC">          29 :             if(n == 1){</span></span>
 <span id="L524"><span class="lineNum">     524</span>              :                 return 1;</span>
 <span id="L525"><span class="lineNum">     525</span>              :             }</span>
-<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">          31 :             if(n &lt; smoothness || nut_u64_is_prime_dmr(n)){</span></span>
-<span id="L527"><span class="lineNum">     527</span> <span class="tlaGNC">          31 :                 nut_Factor_append(factors, n, exponent);</span></span>
-<span id="L528"><span class="lineNum">     528</span> <span class="tlaGNC">          31 :                 return 1;</span></span>
+<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">          29 :             if(n &lt; smoothness || nut_u64_is_prime_dmr(n)){</span></span>
+<span id="L527"><span class="lineNum">     527</span> <span class="tlaGNC">          29 :                 nut_Factor_append(factors, n, exponent);</span></span>
+<span id="L528"><span class="lineNum">     528</span> <span class="tlaGNC">          29 :                 return 1;</span></span>
 <span id="L529"><span class="lineNum">     529</span>              :             }</span>
-<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">         941 :         }else if(n &lt;= conf-&gt;lenstra_max){</span></span>
-<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">       21235 :             do{</span></span>
-<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">       21235 :                 uint64_t x = nut_u64_prand(0, n);</span></span>
-<span id="L533"><span class="lineNum">     533</span> <span class="tlaGNC">       21235 :                 uint64_t y = nut_u64_prand(0, n);</span></span>
-<span id="L534"><span class="lineNum">     534</span> <span class="tlaGNC">       21235 :                 uint64_t a = nut_u64_prand(0, n);</span></span>
-<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">       21235 :                 m = nut_u64_factor1_lenstra(n, x, y, a, conf-&gt;lenstra_bfac);</span></span>
-<span id="L536"><span class="lineNum">     536</span> <span class="tlaGNC">       21235 :             }while(m == n);</span></span>
-<span id="L537"><span class="lineNum">     537</span> <span class="tlaGNC">         941 :             uint64_t k = 1;</span></span>
-<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">         941 :             n /= m;</span></span>
-<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">         946 :             while(n%m == 0){</span></span>
-<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC">           5 :                 k += 1;</span></span>
-<span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC">           5 :                 n /= m;</span></span>
+<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">         947 :         }else if(n &lt;= conf-&gt;lenstra_max){</span></span>
+<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">       25466 :             do{</span></span>
+<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">       25466 :                 uint64_t x = nut_u64_prand(0, n);</span></span>
+<span id="L533"><span class="lineNum">     533</span> <span class="tlaGNC">       25466 :                 uint64_t y = nut_u64_prand(0, n);</span></span>
+<span id="L534"><span class="lineNum">     534</span> <span class="tlaGNC">       25466 :                 uint64_t a = nut_u64_prand(0, n);</span></span>
+<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">       25466 :                 m = nut_u64_factor1_lenstra(n, x, y, a, conf-&gt;lenstra_bfac);</span></span>
+<span id="L536"><span class="lineNum">     536</span> <span class="tlaGNC">       25466 :             }while(m == n);</span></span>
+<span id="L537"><span class="lineNum">     537</span> <span class="tlaGNC">         947 :             uint64_t k = 1;</span></span>
+<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">         947 :             n /= m;</span></span>
+<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">         949 :             while(n%m == 0){</span></span>
+<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC">           2 :                 k += 1;</span></span>
+<span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC">           2 :                 n /= m;</span></span>
 <span id="L542"><span class="lineNum">     542</span>              :             }</span>
-<span id="L543"><span class="lineNum">     543</span> <span class="tlaGNC">         941 :             if(m &lt; smoothness || nut_u64_is_prime_dmr(m)){</span></span>
-<span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC">         939 :                 nut_Factor_append(factors, m, k*exponent);</span></span>
+<span id="L543"><span class="lineNum">     543</span> <span class="tlaGNC">         947 :             if(m &lt; smoothness || nut_u64_is_prime_dmr(m)){</span></span>
+<span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC">         945 :                 nut_Factor_append(factors, m, k*exponent);</span></span>
 <span id="L545"><span class="lineNum">     545</span>              :             }else{</span>
 <span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">           2 :                 factors2-&gt;num_primes = 0;</span></span>
 <span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">           2 :                 m = nut_u64_factor_heuristic(m, 0, primes, conf, factors2);</span></span>
@@ -625,12 +625,12 @@
 <span id="L550"><span class="lineNum">     550</span>              :                 }</span>
 <span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">           2 :                 nut_Factor_combine(factors, factors2, k*exponent);</span></span>
 <span id="L552"><span class="lineNum">     552</span>              :             }</span>
-<span id="L553"><span class="lineNum">     553</span> <span class="tlaGNC">         941 :             if(n == 1){</span></span>
+<span id="L553"><span class="lineNum">     553</span> <span class="tlaGNC">         947 :             if(n == 1){</span></span>
 <span id="L554"><span class="lineNum">     554</span>              :                 return 1;</span>
 <span id="L555"><span class="lineNum">     555</span>              :             }</span>
-<span id="L556"><span class="lineNum">     556</span> <span class="tlaGNC">         939 :             if(n &lt; smoothness || nut_u64_is_prime_dmr(n)){</span></span>
-<span id="L557"><span class="lineNum">     557</span> <span class="tlaGNC">         868 :                 nut_Factor_append(factors, n, exponent);</span></span>
-<span id="L558"><span class="lineNum">     558</span> <span class="tlaGNC">         868 :                 return 1;</span></span>
+<span id="L556"><span class="lineNum">     556</span> <span class="tlaGNC">         947 :             if(n &lt; smoothness || nut_u64_is_prime_dmr(n)){</span></span>
+<span id="L557"><span class="lineNum">     557</span> <span class="tlaGNC">         876 :                 nut_Factor_append(factors, n, exponent);</span></span>
+<span id="L558"><span class="lineNum">     558</span> <span class="tlaGNC">         876 :                 return 1;</span></span>
 <span id="L559"><span class="lineNum">     559</span>              :             }</span>
 <span id="L560"><span class="lineNum">     560</span>              :         }else{//TODO: implement quadratic sieve and number field sieve</span>
 <span id="L561"><span class="lineNum">     561</span>              :             return n;</span>
@@ -638,15 +638,15 @@
 <span id="L563"><span class="lineNum">     563</span>              :     }</span>
 <span id="L564"><span class="lineNum">     564</span>              : }</span>
 <span id="L565"><span class="lineNum">     565</span>              : </span>
-<span id="L566"><span class="lineNum">     566</span> <span class="tlaGNC">   100258931 : uint64_t nut_u64_nth_root(uint64_t a, uint64_t n){</span></span>
-<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">   100258931 :     if(a &lt; 2){</span></span>
+<span id="L566"><span class="lineNum">     566</span> <span class="tlaGNC">   100258985 : uint64_t nut_u64_nth_root(uint64_t a, uint64_t n){</span></span>
+<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">   100258985 :     if(a &lt; 2){</span></span>
 <span id="L568"><span class="lineNum">     568</span>              :         return a;</span>
 <span id="L569"><span class="lineNum">     569</span>              :     }</span>
-<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">   100258930 :     uint64_t x;</span></span>
-<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC">   100258930 :     if(n &lt; 13){</span></span>
-<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">    51988392 :         uint64_t floor_log_2_a = 63 - __builtin_clzll(a);</span></span>
-<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">    51988392 :         x = 1ull &lt;&lt; (floor_log_2_a/n);</span></span>
-<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">    51988392 :         if(x == 1){</span></span>
+<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">   100258984 :     uint64_t x;</span></span>
+<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC">   100258984 :     if(n &lt; 13){</span></span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">    51988446 :         uint64_t floor_log_2_a = 63 - __builtin_clzll(a);</span></span>
+<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">    51988446 :         x = 1ull &lt;&lt; (floor_log_2_a/n);</span></span>
+<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">    51988446 :         if(x == 1){</span></span>
 <span id="L575"><span class="lineNum">     575</span>              :             return 1;</span>
 <span id="L576"><span class="lineNum">     576</span>              :         }</span>
 <span id="L577"><span class="lineNum">     577</span>              :     }else for(x = 1;; ++x){</span>
@@ -655,46 +655,46 @@
 <span id="L580"><span class="lineNum">     580</span>              :             return x;</span>
 <span id="L581"><span class="lineNum">     581</span>              :         }</span>
 <span id="L582"><span class="lineNum">     582</span>              :     }</span>
-<span id="L583"><span class="lineNum">     583</span> <span class="tlaGNC">   448623634 :     for(uint64_t i = 0;; ++i){</span></span>
-<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">   500583775 :         uint128_t x_pow = nut_u128_pow(x, n - 1);</span></span>
-<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC">   500583775 :         uint64_t x_next = ((n - 1)*x_pow*x + a)/(n*x_pow);</span></span>
-<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">   500583775 :         if(i &gt; 1 &amp;&amp; x_next &gt;= x){</span></span>
+<span id="L583"><span class="lineNum">     583</span> <span class="tlaGNC">   448624112 :     for(uint64_t i = 0;; ++i){</span></span>
+<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">   500584307 :         uint128_t x_pow = nut_u128_pow(x, n - 1);</span></span>
+<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC">   500584307 :         uint64_t x_next = ((n - 1)*x_pow*x + a)/(n*x_pow);</span></span>
+<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">   500584307 :         if(i &gt; 1 &amp;&amp; x_next &gt;= x){</span></span>
 <span id="L587"><span class="lineNum">     587</span>              :             return x;</span>
 <span id="L588"><span class="lineNum">     588</span>              :         }</span>
-<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">   448623634 :         x = x_next;</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">   448624112 :         x = x_next;</span></span>
 <span id="L590"><span class="lineNum">     590</span>              :     }</span>
 <span id="L591"><span class="lineNum">     591</span>              : }</span>
 <span id="L592"><span class="lineNum">     592</span>              : </span>
-<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">     9437667 : bool nut_u64_is_perfect_power(uint64_t a, uint64_t max, uint64_t *restrict _base, uint64_t *restrict _exp){</span></span>
-<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">     9437667 :     if(a &lt; 2){</span></span>
+<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">     9437680 : bool nut_u64_is_perfect_power(uint64_t a, uint64_t max, uint64_t *restrict _base, uint64_t *restrict _exp){</span></span>
+<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">     9437680 :     if(a &lt; 2){</span></span>
 <span id="L595"><span class="lineNum">     595</span>              :         return false;</span>
 <span id="L596"><span class="lineNum">     596</span>              :     }</span>
 <span id="L597"><span class="lineNum">     597</span>              :     /// the maximum exponent ever for a uint64 is 63, but if the exponent is composite we can find it in stages,</span>
 <span id="L598"><span class="lineNum">     598</span>              :     /// so the maximum exponent we will ever have to take is 61.</span>
 <span id="L599"><span class="lineNum">     599</span>              :     uint64_t x = 1;</span>
-<span id="L600"><span class="lineNum">     600</span> <span class="tlaGNC">   104887590 :     for(uint64_t i = 0; i &lt; 18; ++i){</span></span>
-<span id="L601"><span class="lineNum">     601</span> <span class="tlaGNC">   104887590 :         uint64_t p = nut_small_primes[i];</span></span>
-<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">   104887590 :         if(p &gt; max){</span></span>
+<span id="L600"><span class="lineNum">     600</span> <span class="tlaGNC">   104887657 :     for(uint64_t i = 0; i &lt; 18; ++i){</span></span>
+<span id="L601"><span class="lineNum">     601</span> <span class="tlaGNC">   104887657 :         uint64_t p = nut_small_primes[i];</span></span>
+<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">   104887657 :         if(p &gt; max){</span></span>
 <span id="L603"><span class="lineNum">     603</span>              :             break;</span>
 <span id="L604"><span class="lineNum">     604</span>              :         }</span>
-<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">   100243333 :         while(1){</span></span>
-<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">   100243333 :             uint64_t r = nut_u64_nth_root(a, p);</span></span>
-<span id="L607"><span class="lineNum">     607</span> <span class="tlaGNC">   100243333 :             if(nut_u64_pow(r, p) != a){</span></span>
+<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">   100243386 :         while(1){</span></span>
+<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">   100243386 :             uint64_t r = nut_u64_nth_root(a, p);</span></span>
+<span id="L607"><span class="lineNum">     607</span> <span class="tlaGNC">   100243386 :             if(nut_u64_pow(r, p) != a){</span></span>
 <span id="L608"><span class="lineNum">     608</span>              :                 break;</span>
 <span id="L609"><span class="lineNum">     609</span>              :             }</span>
-<span id="L610"><span class="lineNum">     610</span> <span class="tlaGNC">     4793410 :             x *= p;</span></span>
-<span id="L611"><span class="lineNum">     611</span> <span class="tlaGNC">     4793410 :             a = r;</span></span>
-<span id="L612"><span class="lineNum">     612</span> <span class="tlaGNC">     4793410 :             max /= p;</span></span>
-<span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC">     4793410 :             if(p &gt; max){</span></span>
+<span id="L610"><span class="lineNum">     610</span> <span class="tlaGNC">     4793409 :             x *= p;</span></span>
+<span id="L611"><span class="lineNum">     611</span> <span class="tlaGNC">     4793409 :             a = r;</span></span>
+<span id="L612"><span class="lineNum">     612</span> <span class="tlaGNC">     4793409 :             max /= p;</span></span>
+<span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC">     4793409 :             if(p &gt; max){</span></span>
 <span id="L614"><span class="lineNum">     614</span> <span class="tlaGNC">         499 :                 goto OUTPUT_RESULT;</span></span>
 <span id="L615"><span class="lineNum">     615</span>              :             }</span>
 <span id="L616"><span class="lineNum">     616</span>              :         }</span>
 <span id="L617"><span class="lineNum">     617</span>              :     }</span>
-<span id="L618"><span class="lineNum">     618</span> <span class="tlaGNC">     9437168 :     OUTPUT_RESULT:;</span></span>
-<span id="L619"><span class="lineNum">     619</span> <span class="tlaGNC">     9437667 :     if(x != 1){</span></span>
-<span id="L620"><span class="lineNum">     620</span> <span class="tlaGNC">     4721354 :         *_base = a;</span></span>
-<span id="L621"><span class="lineNum">     621</span> <span class="tlaGNC">     4721354 :         *_exp = x;</span></span>
-<span id="L622"><span class="lineNum">     622</span> <span class="tlaGNC">     4721354 :         return true;</span></span>
+<span id="L618"><span class="lineNum">     618</span> <span class="tlaGNC">     9437181 :     OUTPUT_RESULT:;</span></span>
+<span id="L619"><span class="lineNum">     619</span> <span class="tlaGNC">     9437680 :     if(x != 1){</span></span>
+<span id="L620"><span class="lineNum">     620</span> <span class="tlaGNC">     4721353 :         *_base = a;</span></span>
+<span id="L621"><span class="lineNum">     621</span> <span class="tlaGNC">     4721353 :         *_exp = x;</span></span>
+<span id="L622"><span class="lineNum">     622</span> <span class="tlaGNC">     4721353 :         return true;</span></span>
 <span id="L623"><span class="lineNum">     623</span>              :     }</span>
 <span id="L624"><span class="lineNum">     624</span>              :     return false;</span>
 <span id="L625"><span class="lineNum">     625</span>              : }</span>
@@ -710,151 +710,151 @@
 <span id="L635"><span class="lineNum">     635</span> <span class="tlaGNC">         267 :     return d;</span></span>
 <span id="L636"><span class="lineNum">     636</span>              : }</span>
 <span id="L637"><span class="lineNum">     637</span>              : </span>
-<span id="L638"><span class="lineNum">     638</span> <span class="tlaGNC">          33 : uint64_t nut_u64_factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m){</span></span>
-<span id="L639"><span class="lineNum">     639</span> <span class="tlaGNC">          33 :     uint64_t y = x, ys = x;</span></span>
-<span id="L640"><span class="lineNum">     640</span> <span class="tlaGNC">          33 :     uint64_t d = 1;//gcd of n and the difference of the terms in the sequence</span></span>
-<span id="L641"><span class="lineNum">     641</span> <span class="tlaGNC">          33 :     uint64_t r = 1;//power of two in brent's algorithm</span></span>
-<span id="L642"><span class="lineNum">     642</span> <span class="tlaGNC">          33 :     uint64_t q = 1;//product of all differences so far, allowing us to process m at a time when checking for a nontrival factor d</span></span>
-<span id="L643"><span class="lineNum">     643</span> <span class="tlaGNC">         152 :     while(d == 1){</span></span>
-<span id="L644"><span class="lineNum">     644</span> <span class="tlaGNC">         546 :         x = y;</span></span>
-<span id="L645"><span class="lineNum">     645</span> <span class="tlaGNC">         546 :         for(uint64_t i = 0; i &lt; r; ++i){</span></span>
-<span id="L646"><span class="lineNum">     646</span> <span class="tlaGNC">         427 :             y = (y*y + 1)%n;</span></span>
+<span id="L638"><span class="lineNum">     638</span> <span class="tlaGNC">          32 : uint64_t nut_u64_factor1_pollard_rho_brent(uint64_t n, uint64_t x, uint64_t m){</span></span>
+<span id="L639"><span class="lineNum">     639</span> <span class="tlaGNC">          32 :     uint64_t y = x, ys = x;</span></span>
+<span id="L640"><span class="lineNum">     640</span> <span class="tlaGNC">          32 :     uint64_t d = 1;//gcd of n and the difference of the terms in the sequence</span></span>
+<span id="L641"><span class="lineNum">     641</span> <span class="tlaGNC">          32 :     uint64_t r = 1;//power of two in brent's algorithm</span></span>
+<span id="L642"><span class="lineNum">     642</span> <span class="tlaGNC">          32 :     uint64_t q = 1;//product of all differences so far, allowing us to process m at a time when checking for a nontrival factor d</span></span>
+<span id="L643"><span class="lineNum">     643</span> <span class="tlaGNC">         148 :     while(d == 1){</span></span>
+<span id="L644"><span class="lineNum">     644</span> <span class="tlaGNC">         556 :         x = y;</span></span>
+<span id="L645"><span class="lineNum">     645</span> <span class="tlaGNC">         556 :         for(uint64_t i = 0; i &lt; r; ++i){</span></span>
+<span id="L646"><span class="lineNum">     646</span> <span class="tlaGNC">         440 :             y = (y*y + 1)%n;</span></span>
 <span id="L647"><span class="lineNum">     647</span>              :         }</span>
-<span id="L648"><span class="lineNum">     648</span> <span class="tlaGNC">         238 :         for(uint64_t k = 0; k &lt; r &amp;&amp; d == 1; k += m){</span></span>
-<span id="L649"><span class="lineNum">     649</span> <span class="tlaGNC">         528 :             ys = y;</span></span>
-<span id="L650"><span class="lineNum">     650</span> <span class="tlaGNC">         528 :             for(uint64_t i = 0; i &lt; m &amp;&amp; i &lt; r - k; ++i){</span></span>
-<span id="L651"><span class="lineNum">     651</span> <span class="tlaGNC">         409 :                 y = (y*y + 1)%n;</span></span>
-<span id="L652"><span class="lineNum">     652</span> <span class="tlaGNC">         409 :                 q = q*(x &gt; y ? x - y : y - x)%n;</span></span>
+<span id="L648"><span class="lineNum">     648</span> <span class="tlaGNC">         232 :         for(uint64_t k = 0; k &lt; r &amp;&amp; d == 1; k += m){</span></span>
+<span id="L649"><span class="lineNum">     649</span> <span class="tlaGNC">         532 :             ys = y;</span></span>
+<span id="L650"><span class="lineNum">     650</span> <span class="tlaGNC">         532 :             for(uint64_t i = 0; i &lt; m &amp;&amp; i &lt; r - k; ++i){</span></span>
+<span id="L651"><span class="lineNum">     651</span> <span class="tlaGNC">         416 :                 y = (y*y + 1)%n;</span></span>
+<span id="L652"><span class="lineNum">     652</span> <span class="tlaGNC">         416 :                 q = q*(x &gt; y ? x - y : y - x)%n;</span></span>
 <span id="L653"><span class="lineNum">     653</span>              :             }</span>
-<span id="L654"><span class="lineNum">     654</span> <span class="tlaGNC">         119 :             d = nut_i64_egcd(q, n, NULL, NULL);</span></span>
+<span id="L654"><span class="lineNum">     654</span> <span class="tlaGNC">         116 :             d = nut_i64_egcd(q, n, NULL, NULL);</span></span>
 <span id="L655"><span class="lineNum">     655</span>              :         }</span>
-<span id="L656"><span class="lineNum">     656</span> <span class="tlaGNC">         119 :         r *= 2;</span></span>
+<span id="L656"><span class="lineNum">     656</span> <span class="tlaGNC">         116 :         r *= 2;</span></span>
 <span id="L657"><span class="lineNum">     657</span>              :     }</span>
-<span id="L658"><span class="lineNum">     658</span> <span class="tlaGNC">          33 :     if(d == n){</span></span>
-<span id="L659"><span class="lineNum">     659</span> <span class="tlaGNC">          40 :         do{</span></span>
-<span id="L660"><span class="lineNum">     660</span> <span class="tlaGNC">          40 :             ys = (ys*ys + 1)%n;</span></span>
-<span id="L661"><span class="lineNum">     661</span> <span class="tlaGNC">          40 :             d = nut_i64_egcd(x &gt; ys ? x - ys : ys - x, n, NULL, NULL);</span></span>
-<span id="L662"><span class="lineNum">     662</span> <span class="tlaGNC">          40 :         }while(d == 1);</span></span>
+<span id="L658"><span class="lineNum">     658</span> <span class="tlaGNC">          32 :     if(d == n){</span></span>
+<span id="L659"><span class="lineNum">     659</span> <span class="tlaGNC">          28 :         do{</span></span>
+<span id="L660"><span class="lineNum">     660</span> <span class="tlaGNC">          28 :             ys = (ys*ys + 1)%n;</span></span>
+<span id="L661"><span class="lineNum">     661</span> <span class="tlaGNC">          28 :             d = nut_i64_egcd(x &gt; ys ? x - ys : ys - x, n, NULL, NULL);</span></span>
+<span id="L662"><span class="lineNum">     662</span> <span class="tlaGNC">          28 :         }while(d == 1);</span></span>
 <span id="L663"><span class="lineNum">     663</span>              :     }</span>
-<span id="L664"><span class="lineNum">     664</span> <span class="tlaGNC">          33 :     return d;</span></span>
+<span id="L664"><span class="lineNum">     664</span> <span class="tlaGNC">          32 :     return d;</span></span>
 <span id="L665"><span class="lineNum">     665</span>              : }</span>
 <span id="L666"><span class="lineNum">     666</span>              : </span>
 <span id="L667"><span class="lineNum">     667</span>              : //convenience function to double a point on an elliptic curve.  _xr and _yr are out params</span>
 <span id="L668"><span class="lineNum">     668</span>              : //returns 0 for an ordinary point, 1 for identity, and -1 if a nontrivial factor was found and placed in _xr</span>
 <span id="L669"><span class="lineNum">     669</span>              : [[gnu::nonnull(6, 7)]]</span>
 <span id="L670"><span class="lineNum">     670</span>              : NUT_ATTR_ACCESS(write_only, 6) NUT_ATTR_ACCESS(write_only, 7)</span>
-<span id="L671"><span class="lineNum">     671</span> <span class="tlaGNC">      395450 : static inline int ecg_double(int64_t n, int64_t a, int64_t x, int64_t y, bool is_id, int64_t *restrict _xr, int64_t *restrict _yr){</span></span>
-<span id="L672"><span class="lineNum">     672</span> <span class="tlaGNC">      395450 :     if(is_id || y == 0){</span></span>
+<span id="L671"><span class="lineNum">     671</span> <span class="tlaGNC">      476405 : static inline int ecg_double(int64_t n, int64_t a, int64_t x, int64_t y, bool is_id, int64_t *restrict _xr, int64_t *restrict _yr){</span></span>
+<span id="L672"><span class="lineNum">     672</span> <span class="tlaGNC">      476405 :     if(is_id || y == 0){</span></span>
 <span id="L673"><span class="lineNum">     673</span>              :         return 1;</span>
 <span id="L674"><span class="lineNum">     674</span>              :     }</span>
-<span id="L675"><span class="lineNum">     675</span> <span class="tlaGNC">      395450 :     int64_t s, dy, dx;</span></span>
-<span id="L676"><span class="lineNum">     676</span> <span class="tlaGNC">      395450 :     dy = (3*(int128_t)x*x + a)%n;</span></span>
-<span id="L677"><span class="lineNum">     677</span> <span class="tlaGNC">      395450 :     if(dy &lt; 0){</span></span>
+<span id="L675"><span class="lineNum">     675</span> <span class="tlaGNC">      476405 :     int64_t s, dy, dx;</span></span>
+<span id="L676"><span class="lineNum">     676</span> <span class="tlaGNC">      476405 :     dy = (3*(int128_t)x*x + a)%n;</span></span>
+<span id="L677"><span class="lineNum">     677</span> <span class="tlaGNC">      476405 :     if(dy &lt; 0){</span></span>
 <span id="L678"><span class="lineNum">     678</span> <span class="tlaUNC tlaBgUNC">           0 :         dy += n;</span></span>
 <span id="L679"><span class="lineNum">     679</span>              :     }</span>
-<span id="L680"><span class="lineNum">     680</span> <span class="tlaGNC tlaBgGNC">      395450 :     dx = nut_i64_mod(2*y, n);</span></span>
-<span id="L681"><span class="lineNum">     681</span> <span class="tlaGNC">      395450 :     int64_t d = nut_i64_egcd(dx, n, &amp;s, NULL);</span></span>
-<span id="L682"><span class="lineNum">     682</span> <span class="tlaGNC">      395450 :     if(d != 1){</span></span>
-<span id="L683"><span class="lineNum">     683</span> <span class="tlaGNC">         350 :         *_xr = d;</span></span>
-<span id="L684"><span class="lineNum">     684</span> <span class="tlaGNC">         350 :         return -1;</span></span>
+<span id="L680"><span class="lineNum">     680</span> <span class="tlaGNC tlaBgGNC">      476405 :     dx = nut_i64_mod(2*y, n);</span></span>
+<span id="L681"><span class="lineNum">     681</span> <span class="tlaGNC">      476405 :     int64_t d = nut_i64_egcd(dx, n, &amp;s, NULL);</span></span>
+<span id="L682"><span class="lineNum">     682</span> <span class="tlaGNC">      476405 :     if(d != 1){</span></span>
+<span id="L683"><span class="lineNum">     683</span> <span class="tlaGNC">         380 :         *_xr = d;</span></span>
+<span id="L684"><span class="lineNum">     684</span> <span class="tlaGNC">         380 :         return -1;</span></span>
 <span id="L685"><span class="lineNum">     685</span>              :     }</span>
-<span id="L686"><span class="lineNum">     686</span> <span class="tlaGNC">      395100 :     s = (int128_t)s*dy%n;</span></span>
-<span id="L687"><span class="lineNum">     687</span> <span class="tlaGNC">      395100 :     int64_t xr = ((int128_t)s*s - 2*x)%n;</span></span>
-<span id="L688"><span class="lineNum">     688</span> <span class="tlaGNC">      395100 :     if(xr &lt; 0){</span></span>
-<span id="L689"><span class="lineNum">     689</span> <span class="tlaGNC">          78 :         xr += n;</span></span>
+<span id="L686"><span class="lineNum">     686</span> <span class="tlaGNC">      476025 :     s = (int128_t)s*dy%n;</span></span>
+<span id="L687"><span class="lineNum">     687</span> <span class="tlaGNC">      476025 :     int64_t xr = ((int128_t)s*s - 2*x)%n;</span></span>
+<span id="L688"><span class="lineNum">     688</span> <span class="tlaGNC">      476025 :     if(xr &lt; 0){</span></span>
+<span id="L689"><span class="lineNum">     689</span> <span class="tlaGNC">          72 :         xr += n;</span></span>
 <span id="L690"><span class="lineNum">     690</span>              :     }</span>
-<span id="L691"><span class="lineNum">     691</span> <span class="tlaGNC">      395100 :     *_xr = xr;</span></span>
-<span id="L692"><span class="lineNum">     692</span> <span class="tlaGNC">      395100 :     int64_t yr = (y + (int128_t)s*(xr - x))%n;</span></span>
-<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC">      395100 :     if(yr &lt; 0){</span></span>
-<span id="L694"><span class="lineNum">     694</span> <span class="tlaGNC">      197390 :         yr += n;</span></span>
+<span id="L691"><span class="lineNum">     691</span> <span class="tlaGNC">      476025 :     *_xr = xr;</span></span>
+<span id="L692"><span class="lineNum">     692</span> <span class="tlaGNC">      476025 :     int64_t yr = (y + (int128_t)s*(xr - x))%n;</span></span>
+<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC">      476025 :     if(yr &lt; 0){</span></span>
+<span id="L694"><span class="lineNum">     694</span> <span class="tlaGNC">      238150 :         yr += n;</span></span>
 <span id="L695"><span class="lineNum">     695</span>              :     }</span>
-<span id="L696"><span class="lineNum">     696</span> <span class="tlaGNC">      395100 :     *_yr = yr;</span></span>
-<span id="L697"><span class="lineNum">     697</span> <span class="tlaGNC">      395100 :     return 0;</span></span>
+<span id="L696"><span class="lineNum">     696</span> <span class="tlaGNC">      476025 :     *_yr = yr;</span></span>
+<span id="L697"><span class="lineNum">     697</span> <span class="tlaGNC">      476025 :     return 0;</span></span>
 <span id="L698"><span class="lineNum">     698</span>              : }</span>
 <span id="L699"><span class="lineNum">     699</span>              : </span>
 <span id="L700"><span class="lineNum">     700</span>              : //convenience function to add two points on an elliptic curve.  _xr and _yr are out params</span>
 <span id="L701"><span class="lineNum">     701</span>              : //returns 0 for an ordinary point, 1 for identity, and -1 if a nontrivial factor was found and placed in _xr</span>
 <span id="L702"><span class="lineNum">     702</span>              : [[gnu::nonnull(9, 10)]]</span>
 <span id="L703"><span class="lineNum">     703</span>              : NUT_ATTR_ACCESS(write_only, 9) NUT_ATTR_ACCESS(write_only, 10)</span>
-<span id="L704"><span class="lineNum">     704</span> <span class="tlaGNC">      145615 : static inline int ecg_add(int64_t n, int64_t a, int64_t xp, int64_t yp, bool is_id_p, int64_t xq, int64_t yq, bool is_id_q, int64_t *_xr, int64_t *_yr){</span></span>
-<span id="L705"><span class="lineNum">     705</span> <span class="tlaGNC">      145615 :     if(is_id_p){</span></span>
+<span id="L704"><span class="lineNum">     704</span> <span class="tlaGNC">      175449 : static inline int ecg_add(int64_t n, int64_t a, int64_t xp, int64_t yp, bool is_id_p, int64_t xq, int64_t yq, bool is_id_q, int64_t *_xr, int64_t *_yr){</span></span>
+<span id="L705"><span class="lineNum">     705</span> <span class="tlaGNC">      175449 :     if(is_id_p){</span></span>
 <span id="L706"><span class="lineNum">     706</span> <span class="tlaUNC tlaBgUNC">           0 :         if(is_id_q){</span></span>
 <span id="L707"><span class="lineNum">     707</span>              :             return 1;</span>
 <span id="L708"><span class="lineNum">     708</span>              :         }</span>
 <span id="L709"><span class="lineNum">     709</span> <span class="tlaUNC">           0 :         *_xr = xq, *_yr = yq;</span></span>
 <span id="L710"><span class="lineNum">     710</span> <span class="tlaUNC">           0 :         return 0;</span></span>
-<span id="L711"><span class="lineNum">     711</span> <span class="tlaGNC tlaBgGNC">      145615 :     }else if(is_id_q){</span></span>
+<span id="L711"><span class="lineNum">     711</span> <span class="tlaGNC tlaBgGNC">      175449 :     }else if(is_id_q){</span></span>
 <span id="L712"><span class="lineNum">     712</span> <span class="tlaUNC tlaBgUNC">           0 :         *_xr = xp, *_yr = yp;</span></span>
 <span id="L713"><span class="lineNum">     713</span> <span class="tlaUNC">           0 :         return 0;</span></span>
 <span id="L714"><span class="lineNum">     714</span>              :     }</span>
-<span id="L715"><span class="lineNum">     715</span> <span class="tlaGNC tlaBgGNC">      145615 :     int64_t s, dy, dx;</span></span>
-<span id="L716"><span class="lineNum">     716</span> <span class="tlaGNC">      145615 :     if(xp != xq){</span></span>
-<span id="L717"><span class="lineNum">     717</span> <span class="tlaGNC">      145615 :         dy = nut_i64_mod(yp - yq, n);</span></span>
-<span id="L718"><span class="lineNum">     718</span> <span class="tlaGNC">      145615 :         dx = nut_i64_mod(xp - xq, n);</span></span>
-<span id="L719"><span class="lineNum">     719</span> <span class="tlaUNC tlaBgUNC">           0 :     }else if(yp != yq || yp == 0){</span></span>
+<span id="L715"><span class="lineNum">     715</span> <span class="tlaGNC tlaBgGNC">      175449 :     int64_t s, dy, dx;</span></span>
+<span id="L716"><span class="lineNum">     716</span> <span class="tlaGNC">      175449 :     if(xp != xq){</span></span>
+<span id="L717"><span class="lineNum">     717</span> <span class="tlaGNC">      175448 :         dy = nut_i64_mod(yp - yq, n);</span></span>
+<span id="L718"><span class="lineNum">     718</span> <span class="tlaGNC">      175448 :         dx = nut_i64_mod(xp - xq, n);</span></span>
+<span id="L719"><span class="lineNum">     719</span> <span class="tlaGNC">           1 :     }else if(yp != yq || yp == 0){</span></span>
 <span id="L720"><span class="lineNum">     720</span>              :         return 1;</span>
 <span id="L721"><span class="lineNum">     721</span>              :     }else{</span>
-<span id="L722"><span class="lineNum">     722</span> <span class="tlaUNC">           0 :         dy = (3*(int128_t)xp*xp + a)%n;</span></span>
-<span id="L723"><span class="lineNum">     723</span> <span class="tlaUNC">           0 :         if(dy &lt; 0){</span></span>
-<span id="L724"><span class="lineNum">     724</span> <span class="tlaUNC">           0 :             dy += n;</span></span>
+<span id="L722"><span class="lineNum">     722</span> <span class="tlaGNC">           1 :         dy = (3*(int128_t)xp*xp + a)%n;</span></span>
+<span id="L723"><span class="lineNum">     723</span> <span class="tlaGNC">           1 :         if(dy &lt; 0){</span></span>
+<span id="L724"><span class="lineNum">     724</span> <span class="tlaUNC tlaBgUNC">           0 :             dy += n;</span></span>
 <span id="L725"><span class="lineNum">     725</span>              :         }</span>
-<span id="L726"><span class="lineNum">     726</span> <span class="tlaUNC">           0 :         dx = nut_i64_mod(2*yp, n);</span></span>
+<span id="L726"><span class="lineNum">     726</span> <span class="tlaGNC tlaBgGNC">           1 :         dx = nut_i64_mod(2*yp, n);</span></span>
 <span id="L727"><span class="lineNum">     727</span>              :     }</span>
-<span id="L728"><span class="lineNum">     728</span> <span class="tlaGNC tlaBgGNC">      145615 :     int64_t d = nut_i64_egcd(dx, n, &amp;s, NULL);</span></span>
-<span id="L729"><span class="lineNum">     729</span> <span class="tlaGNC">      145615 :     if(d != 1){</span></span>
-<span id="L730"><span class="lineNum">     730</span> <span class="tlaGNC">         568 :         *_xr = d;</span></span>
-<span id="L731"><span class="lineNum">     731</span> <span class="tlaGNC">         568 :         return -1;</span></span>
+<span id="L728"><span class="lineNum">     728</span> <span class="tlaGNC">      175449 :     int64_t d = nut_i64_egcd(dx, n, &amp;s, NULL);</span></span>
+<span id="L729"><span class="lineNum">     729</span> <span class="tlaGNC">      175449 :     if(d != 1){</span></span>
+<span id="L730"><span class="lineNum">     730</span> <span class="tlaGNC">         545 :         *_xr = d;</span></span>
+<span id="L731"><span class="lineNum">     731</span> <span class="tlaGNC">         545 :         return -1;</span></span>
 <span id="L732"><span class="lineNum">     732</span>              :     }</span>
-<span id="L733"><span class="lineNum">     733</span> <span class="tlaGNC">      145047 :     s = (int128_t)s*dy%n;</span></span>
-<span id="L734"><span class="lineNum">     734</span> <span class="tlaGNC">      145047 :     int64_t xr = ((int128_t)s*s - xp - xq)%n;</span></span>
-<span id="L735"><span class="lineNum">     735</span> <span class="tlaGNC">      145047 :     if(xr &lt; 0){</span></span>
-<span id="L736"><span class="lineNum">     736</span> <span class="tlaGNC">          24 :         xr += n;</span></span>
+<span id="L733"><span class="lineNum">     733</span> <span class="tlaGNC">      174904 :     s = (int128_t)s*dy%n;</span></span>
+<span id="L734"><span class="lineNum">     734</span> <span class="tlaGNC">      174904 :     int64_t xr = ((int128_t)s*s - xp - xq)%n;</span></span>
+<span id="L735"><span class="lineNum">     735</span> <span class="tlaGNC">      174904 :     if(xr &lt; 0){</span></span>
+<span id="L736"><span class="lineNum">     736</span> <span class="tlaGNC">          28 :         xr += n;</span></span>
 <span id="L737"><span class="lineNum">     737</span>              :     }</span>
-<span id="L738"><span class="lineNum">     738</span> <span class="tlaGNC">      145047 :     *_xr = xr;</span></span>
-<span id="L739"><span class="lineNum">     739</span> <span class="tlaGNC">      145047 :     int64_t yr = (yp + (int128_t)s*(xr + xp))%n;</span></span>
-<span id="L740"><span class="lineNum">     740</span> <span class="tlaGNC">      145047 :     if(yr &lt; 0){</span></span>
-<span id="L741"><span class="lineNum">     741</span> <span class="tlaGNC">       72753 :         yr += n;</span></span>
+<span id="L738"><span class="lineNum">     738</span> <span class="tlaGNC">      174904 :     *_xr = xr;</span></span>
+<span id="L739"><span class="lineNum">     739</span> <span class="tlaGNC">      174904 :     int64_t yr = (yp + (int128_t)s*(xr + xp))%n;</span></span>
+<span id="L740"><span class="lineNum">     740</span> <span class="tlaGNC">      174904 :     if(yr &lt; 0){</span></span>
+<span id="L741"><span class="lineNum">     741</span> <span class="tlaGNC">       87176 :         yr += n;</span></span>
 <span id="L742"><span class="lineNum">     742</span>              :     }</span>
-<span id="L743"><span class="lineNum">     743</span> <span class="tlaGNC">      145047 :     *_yr = yr;</span></span>
-<span id="L744"><span class="lineNum">     744</span> <span class="tlaGNC">      145047 :     return 0;</span></span>
+<span id="L743"><span class="lineNum">     743</span> <span class="tlaGNC">      174904 :     *_yr = yr;</span></span>
+<span id="L744"><span class="lineNum">     744</span> <span class="tlaGNC">      174904 :     return 0;</span></span>
 <span id="L745"><span class="lineNum">     745</span>              : }</span>
 <span id="L746"><span class="lineNum">     746</span>              : </span>
 <span id="L747"><span class="lineNum">     747</span>              : //convenience function to add k copies of a point on an elliptic curve together.  _xr and _yr are out params</span>
 <span id="L748"><span class="lineNum">     748</span>              : //returns 0 for an ordinary point, 1 for identity, and -1 if a nontrivial factor was found and placed in _xr</span>
 <span id="L749"><span class="lineNum">     749</span>              : [[gnu::nonnull(7, 8)]]</span>
 <span id="L750"><span class="lineNum">     750</span>              : NUT_ATTR_ACCESS(write_only, 7) NUT_ATTR_ACCESS(write_only, 8)</span>
-<span id="L751"><span class="lineNum">     751</span> <span class="tlaGNC">      188128 : static inline int ecg_scale(int64_t n, int64_t a, int64_t x, int64_t y, bool is_id, int64_t k, int64_t *_xr, int64_t *_yr){</span></span>
-<span id="L752"><span class="lineNum">     752</span> <span class="tlaGNC">      188128 :     if(is_id || !k){</span></span>
+<span id="L751"><span class="lineNum">     751</span> <span class="tlaGNC">      226465 : static inline int ecg_scale(int64_t n, int64_t a, int64_t x, int64_t y, bool is_id, int64_t k, int64_t *_xr, int64_t *_yr){</span></span>
+<span id="L752"><span class="lineNum">     752</span> <span class="tlaGNC">      226465 :     if(is_id || !k){</span></span>
 <span id="L753"><span class="lineNum">     753</span>              :         return 1;</span>
 <span id="L754"><span class="lineNum">     754</span>              :     }</span>
-<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">      188128 :     int is_id_r = 0, is_id_s = 0;</span></span>
-<span id="L756"><span class="lineNum">     756</span> <span class="tlaGNC">      188128 :     int64_t xs = x, ys = y;</span></span>
-<span id="L757"><span class="lineNum">     757</span> <span class="tlaGNC">      354863 :     while(!(k&amp;1)){</span></span>
-<span id="L758"><span class="lineNum">     758</span> <span class="tlaGNC">      166895 :         is_id_s = ecg_double(n, a, xs, ys, is_id_s, &amp;xs, &amp;ys);</span></span>
-<span id="L759"><span class="lineNum">     759</span> <span class="tlaGNC">      166895 :         if(is_id_s == -1){</span></span>
-<span id="L760"><span class="lineNum">     760</span> <span class="tlaGNC">         160 :             *_xr = xs;</span></span>
-<span id="L761"><span class="lineNum">     761</span> <span class="tlaGNC">         160 :             return -1;</span></span>
-<span id="L762"><span class="lineNum">     762</span> <span class="tlaGNC">      166735 :         }else if(is_id_s == 1){</span></span>
+<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">      226465 :     int is_id_r = 0, is_id_s = 0;</span></span>
+<span id="L756"><span class="lineNum">     756</span> <span class="tlaGNC">      226465 :     int64_t xs = x, ys = y;</span></span>
+<span id="L757"><span class="lineNum">     757</span> <span class="tlaGNC">      427268 :     while(!(k&amp;1)){</span></span>
+<span id="L758"><span class="lineNum">     758</span> <span class="tlaGNC">      200965 :         is_id_s = ecg_double(n, a, xs, ys, is_id_s, &amp;xs, &amp;ys);</span></span>
+<span id="L759"><span class="lineNum">     759</span> <span class="tlaGNC">      200965 :         if(is_id_s == -1){</span></span>
+<span id="L760"><span class="lineNum">     760</span> <span class="tlaGNC">         162 :             *_xr = xs;</span></span>
+<span id="L761"><span class="lineNum">     761</span> <span class="tlaGNC">         162 :             return -1;</span></span>
+<span id="L762"><span class="lineNum">     762</span> <span class="tlaGNC">      200803 :         }else if(is_id_s == 1){</span></span>
 <span id="L763"><span class="lineNum">     763</span>              :             return 1;</span>
 <span id="L764"><span class="lineNum">     764</span>              :         }</span>
-<span id="L765"><span class="lineNum">     765</span> <span class="tlaGNC">      166735 :         k &gt;&gt;= 1;</span></span>
+<span id="L765"><span class="lineNum">     765</span> <span class="tlaGNC">      200803 :         k &gt;&gt;= 1;</span></span>
 <span id="L766"><span class="lineNum">     766</span>              :     }</span>
-<span id="L767"><span class="lineNum">     767</span> <span class="tlaGNC">      187968 :     *_xr = xs, *_yr = ys;</span></span>
-<span id="L768"><span class="lineNum">     768</span> <span class="tlaGNC">      187968 :     is_id_r = is_id_s;</span></span>
-<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC">      415765 :     while(1){</span></span>
-<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">      415765 :         k &gt;&gt;= 1;</span></span>
-<span id="L771"><span class="lineNum">     771</span> <span class="tlaGNC">      415765 :         if(!k){</span></span>
+<span id="L767"><span class="lineNum">     767</span> <span class="tlaGNC">      226303 :     *_xr = xs, *_yr = ys;</span></span>
+<span id="L768"><span class="lineNum">     768</span> <span class="tlaGNC">      226303 :     is_id_r = is_id_s;</span></span>
+<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC">      500980 :     while(1){</span></span>
+<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">      500980 :         k &gt;&gt;= 1;</span></span>
+<span id="L771"><span class="lineNum">     771</span> <span class="tlaGNC">      500980 :         if(!k){</span></span>
 <span id="L772"><span class="lineNum">     772</span>              :             return is_id_r;</span>
 <span id="L773"><span class="lineNum">     773</span>              :         }</span>
-<span id="L774"><span class="lineNum">     774</span> <span class="tlaGNC">      228555 :         is_id_s = ecg_double(n, a, xs, ys, is_id_s, &amp;xs, &amp;ys);</span></span>
-<span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">      228555 :         if(is_id_s == -1){</span></span>
-<span id="L776"><span class="lineNum">     776</span> <span class="tlaGNC">         190 :             *_xr = xs;</span></span>
-<span id="L777"><span class="lineNum">     777</span> <span class="tlaGNC">         190 :             return -1;</span></span>
-<span id="L778"><span class="lineNum">     778</span> <span class="tlaGNC">      228365 :         }else if(is_id_s == 1){</span></span>
+<span id="L774"><span class="lineNum">     774</span> <span class="tlaGNC">      275440 :         is_id_s = ecg_double(n, a, xs, ys, is_id_s, &amp;xs, &amp;ys);</span></span>
+<span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">      275440 :         if(is_id_s == -1){</span></span>
+<span id="L776"><span class="lineNum">     776</span> <span class="tlaGNC">         218 :             *_xr = xs;</span></span>
+<span id="L777"><span class="lineNum">     777</span> <span class="tlaGNC">         218 :             return -1;</span></span>
+<span id="L778"><span class="lineNum">     778</span> <span class="tlaGNC">      275222 :         }else if(is_id_s == 1){</span></span>
 <span id="L779"><span class="lineNum">     779</span>              :             return is_id_r;</span>
-<span id="L780"><span class="lineNum">     780</span> <span class="tlaGNC">      228365 :         }else if(k&amp;1){</span></span>
-<span id="L781"><span class="lineNum">     781</span> <span class="tlaGNC">      145615 :             is_id_r = ecg_add(n, a, xs, ys, is_id_s, *_xr, *_yr, is_id_r, _xr, _yr);</span></span>
-<span id="L782"><span class="lineNum">     782</span> <span class="tlaGNC">      145615 :             if(is_id_r == -1){</span></span>
+<span id="L780"><span class="lineNum">     780</span> <span class="tlaGNC">      275222 :         }else if(k&amp;1){</span></span>
+<span id="L781"><span class="lineNum">     781</span> <span class="tlaGNC">      175449 :             is_id_r = ecg_add(n, a, xs, ys, is_id_s, *_xr, *_yr, is_id_r, _xr, _yr);</span></span>
+<span id="L782"><span class="lineNum">     782</span> <span class="tlaGNC">      175449 :             if(is_id_r == -1){</span></span>
 <span id="L783"><span class="lineNum">     783</span>              :                 return -1;</span>
 <span id="L784"><span class="lineNum">     784</span>              :             }</span>
 <span id="L785"><span class="lineNum">     785</span>              :         }</span>
@@ -863,28 +863,28 @@
 <span id="L788"><span class="lineNum">     788</span>              : </span>
 <span id="L789"><span class="lineNum">     789</span>              : //TODO: this whole function needs to be rewritten to use projective montgomery curves instead of affine wierstrass curves</span>
 <span id="L790"><span class="lineNum">     790</span>              : //TODO: consider adding brent's second stage for fun</span>
-<span id="L791"><span class="lineNum">     791</span> <span class="tlaGNC">       21235 : int64_t nut_u64_factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B){</span></span>
-<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">       21235 :     int64_t d = nut_i64_egcd(n, 6, NULL, NULL);//ensure Z/nZ doesn't have a field of characteristic 2 or 3 as a subgroup</span></span>
-<span id="L793"><span class="lineNum">     793</span> <span class="tlaGNC">       21235 :     if(d != 1){</span></span>
+<span id="L791"><span class="lineNum">     791</span> <span class="tlaGNC">       25466 : int64_t nut_u64_factor1_lenstra(int64_t n, int64_t x, int64_t y, int64_t a, int64_t B){</span></span>
+<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">       25466 :     int64_t d = nut_i64_egcd(n, 6, NULL, NULL);//ensure Z/nZ doesn't have a field of characteristic 2 or 3 as a subgroup</span></span>
+<span id="L793"><span class="lineNum">     793</span> <span class="tlaGNC">       25466 :     if(d != 1){</span></span>
 <span id="L794"><span class="lineNum">     794</span>              :         return d;</span>
 <span id="L795"><span class="lineNum">     795</span>              :     }</span>
-<span id="L796"><span class="lineNum">     796</span> <span class="tlaGNC">       21235 :     int64_t b = ((int128_t)x*x + a)%n;</span></span>
-<span id="L797"><span class="lineNum">     797</span> <span class="tlaGNC">       21235 :     b = ((int128_t)y*y - (int128_t)x*b)%n;</span></span>
-<span id="L798"><span class="lineNum">     798</span> <span class="tlaGNC">       21235 :     if(b &lt; 0){</span></span>
-<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">        9401 :         b += n;</span></span>
+<span id="L796"><span class="lineNum">     796</span> <span class="tlaGNC">       25466 :     int64_t b = ((int128_t)x*x + a)%n;</span></span>
+<span id="L797"><span class="lineNum">     797</span> <span class="tlaGNC">       25466 :     b = ((int128_t)y*y - (int128_t)x*b)%n;</span></span>
+<span id="L798"><span class="lineNum">     798</span> <span class="tlaGNC">       25466 :     if(b &lt; 0){</span></span>
+<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">       11446 :         b += n;</span></span>
 <span id="L800"><span class="lineNum">     800</span>              :     }</span>
-<span id="L801"><span class="lineNum">     801</span> <span class="tlaGNC">       21235 :     d = (int128_t)a*a%n;</span></span>
-<span id="L802"><span class="lineNum">     802</span> <span class="tlaGNC">       21235 :     d = 4*(int128_t)a*d%n;</span></span>
-<span id="L803"><span class="lineNum">     803</span> <span class="tlaGNC">       21235 :     d = nut_i64_egcd(d + 27*((int128_t)b*b%n), n, NULL, NULL);//ensure the rhs of the elliptic curve does not have a repeated zero, leading to a cusp</span></span>
-<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC">       21235 :     if(d != 1){</span></span>
+<span id="L801"><span class="lineNum">     801</span> <span class="tlaGNC">       25466 :     d = (int128_t)a*a%n;</span></span>
+<span id="L802"><span class="lineNum">     802</span> <span class="tlaGNC">       25466 :     d = 4*(int128_t)a*d%n;</span></span>
+<span id="L803"><span class="lineNum">     803</span> <span class="tlaGNC">       25466 :     d = nut_i64_egcd(d + 27*((int128_t)b*b%n), n, NULL, NULL);//ensure the rhs of the elliptic curve does not have a repeated zero, leading to a cusp</span></span>
+<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC">       25466 :     if(d != 1){</span></span>
 <span id="L805"><span class="lineNum">     805</span>              :         return d;</span>
 <span id="L806"><span class="lineNum">     806</span>              :     }</span>
 <span id="L807"><span class="lineNum">     807</span>              :     int is_id = 0;</span>
-<span id="L808"><span class="lineNum">     808</span> <span class="tlaGNC">      208422 :     for(int64_t k = 2; k &lt;= B; ++k){</span></span>
-<span id="L809"><span class="lineNum">     809</span> <span class="tlaGNC">      188128 :         is_id = ecg_scale(n, a, x, y, is_id, k, &amp;x, &amp;y);</span></span>
-<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC">      188128 :         if(is_id == -1){</span></span>
-<span id="L811"><span class="lineNum">     811</span> <span class="tlaGNC">         918 :             return x;</span></span>
-<span id="L812"><span class="lineNum">     812</span> <span class="tlaGNC">      187210 :         }else if(is_id == 1){</span></span>
+<span id="L808"><span class="lineNum">     808</span> <span class="tlaGNC">      250984 :     for(int64_t k = 2; k &lt;= B; ++k){</span></span>
+<span id="L809"><span class="lineNum">     809</span> <span class="tlaGNC">      226465 :         is_id = ecg_scale(n, a, x, y, is_id, k, &amp;x, &amp;y);</span></span>
+<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC">      226465 :         if(is_id == -1){</span></span>
+<span id="L811"><span class="lineNum">     811</span> <span class="tlaGNC">         925 :             return x;</span></span>
+<span id="L812"><span class="lineNum">     812</span> <span class="tlaGNC">      225540 :         }else if(is_id == 1){</span></span>
 <span id="L813"><span class="lineNum">     813</span>              :             return n;</span>
 <span id="L814"><span class="lineNum">     814</span>              :         }</span>
 <span id="L815"><span class="lineNum">     815</span>              :     }</span>

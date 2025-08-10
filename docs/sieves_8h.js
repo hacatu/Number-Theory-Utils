@@ -9,6 +9,8 @@ var sieves_8h =
     [ "nut_sieve_omega", "sieves_8h.html#a01311aca981633d4df24381aa8bf3c8b", null ],
     [ "nut_sieve_largest_factors", "sieves_8h.html#aa490c2b787ed9b19fb625dffaa8fca4f", null ],
     [ "nut_fill_factors_from_largest", "sieves_8h.html#ab7b97b3bb9a75fc40a32f293d56a17ba", null ],
+    [ "nut_sieve_smallest_factors", "sieves_8h.html#aec8d0ac683511e7401a7c946f2f96e0e", null ],
+    [ "nut_fill_factors_from_smallest", "sieves_8h.html#af7f6e86c0fe1d869fd29d311e9247385", null ],
     [ "nut_get_factors_pitch", "sieves_8h.html#a72e7870b123862d9093f9c72cc6ef0f2", null ],
     [ "nut_sieve_sigma_0", "sieves_8h.html#aa29125c12fbd7e34298fdeaed3fd6e99", null ],
     [ "nut_sieve_sigma_1", "sieves_8h.html#a7eab8cc1acac3941b7f1a1d3840477d1", null ],

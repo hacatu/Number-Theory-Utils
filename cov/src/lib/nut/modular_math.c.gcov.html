@@ -50,7 +50,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-02-19 05:26:49</td>
+            <td class="headerValue">2025-08-10 23:27:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">59.4&nbsp;%</td>
@@ -101,52 +101,52 @@
 <span id="L26"><span class="lineNum">      26</span>              : #include &lt;nut/debug.h&gt;</span>
 <span id="L27"><span class="lineNum">      27</span>              : #include &lt;nut/modular_math.h&gt;</span>
 <span id="L28"><span class="lineNum">      28</span>              : </span>
-<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC tlaBgGNC">   133365673 : uint64_t nut_u64_pow(uint64_t b, uint64_t e){</span></span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">   133365673 :     if(!e){</span></span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC tlaBgGNC">   133367523 : uint64_t nut_u64_pow(uint64_t b, uint64_t e){</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">   133367523 :     if(!e){</span></span>
 <span id="L31"><span class="lineNum">      31</span>              :         return 1;</span>
 <span id="L32"><span class="lineNum">      32</span>              :     }</span>
 <span id="L33"><span class="lineNum">      33</span>              :     uint64_t r = 1;</span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">   723872089 :     while(1){</span></span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">   426342221 :         if(e&amp;1){</span></span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">   305967279 :             r = r*b;</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">   723875055 :     while(1){</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">   426344629 :         if(e&amp;1){</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">   305969305 :             r = r*b;</span></span>
 <span id="L37"><span class="lineNum">      37</span>              :         }</span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">   426342221 :         if(!(e &gt;&gt;= 1)){</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">   426344629 :         if(!(e &gt;&gt;= 1)){</span></span>
 <span id="L39"><span class="lineNum">      39</span>              :             return r;</span>
 <span id="L40"><span class="lineNum">      40</span>              :         }</span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">   297529868 :         b *= b;</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">   297530426 :         b *= b;</span></span>
 <span id="L42"><span class="lineNum">      42</span>              :     }</span>
 <span id="L43"><span class="lineNum">      43</span>              : }</span>
 <span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">   592252352 : uint128_t nut_u128_pow(uint128_t b, uint64_t e){</span></span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">   592252352 :     if(!e){</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">   592252884 : uint128_t nut_u128_pow(uint128_t b, uint64_t e){</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">   592252884 :     if(!e){</span></span>
 <span id="L47"><span class="lineNum">      47</span>              :         return 1;</span>
 <span id="L48"><span class="lineNum">      48</span>              :     }</span>
 <span id="L49"><span class="lineNum">      49</span>              :     uint128_t r = 1;</span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">  3496098464 :     while(1){</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">  2044175408 :         if(e&amp;1){</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">  1142282309 :             r = r*b;</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">  3496100544 :     while(1){</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">  2044176714 :         if(e&amp;1){</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">  1142283068 :             r = r*b;</span></span>
 <span id="L53"><span class="lineNum">      53</span>              :         }</span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">  2044175408 :         if(!(e &gt;&gt;= 1)){</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">  2044176714 :         if(!(e &gt;&gt;= 1)){</span></span>
 <span id="L55"><span class="lineNum">      55</span>              :             return r;</span>
 <span id="L56"><span class="lineNum">      56</span>              :         }</span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">  1451923056 :         b *= b;</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">  1451923830 :         b *= b;</span></span>
 <span id="L58"><span class="lineNum">      58</span>              :     }</span>
 <span id="L59"><span class="lineNum">      59</span>              : }</span>
 <span id="L60"><span class="lineNum">      60</span>              : </span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">   134278138 : uint64_t nut_u64_powmod(uint64_t b, uint64_t e, uint64_t n){</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">   134278138 :     if(!e){</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">   134298754 : uint64_t nut_u64_powmod(uint64_t b, uint64_t e, uint64_t n){</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">   134298754 :     if(!e){</span></span>
 <span id="L63"><span class="lineNum">      63</span>              :         return 1;</span>
 <span id="L64"><span class="lineNum">      64</span>              :     }</span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">   134278138 :     uint64_t r = 1;</span></span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">   134278138 :     b %= n;</span></span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">  2226393640 :     while(1){</span></span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">  1180335889 :         if(e&amp;1){</span></span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">   659252996 :             r = (uint128_t)r*b%n;</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">   134298754 :     uint64_t r = 1;</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">   134298754 :     b %= n;</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">  2226740208 :     while(1){</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">  1180519481 :         if(e&amp;1){</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">   659262297 :             r = (uint128_t)r*b%n;</span></span>
 <span id="L70"><span class="lineNum">      70</span>              :         }</span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">  1180335889 :         if(!(e &gt;&gt;= 1)){</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">  1180519481 :         if(!(e &gt;&gt;= 1)){</span></span>
 <span id="L72"><span class="lineNum">      72</span>              :             return r;</span>
 <span id="L73"><span class="lineNum">      73</span>              :         }</span>
-<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">  1046057751 :         b = (uint128_t)b*b%n;</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">  1046220727 :         b = (uint128_t)b*b%n;</span></span>
 <span id="L75"><span class="lineNum">      75</span>              :     }</span>
 <span id="L76"><span class="lineNum">      76</span>              : }</span>
 <span id="L77"><span class="lineNum">      77</span>              : </span>
@@ -169,34 +169,34 @@
 <span id="L94"><span class="lineNum">      94</span>              : #ifdef _NUT_RAND_USE_URANDOM</span>
 <span id="L95"><span class="lineNum">      95</span>              : __thread FILE *nut_urandom = NULL;</span>
 <span id="L96"><span class="lineNum">      96</span>              : #endif</span>
-<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">     1511409 : uint64_t nut_u64_rand(uint64_t a, uint64_t b){</span></span>
+<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">     1523898 : uint64_t nut_u64_rand(uint64_t a, uint64_t b){</span></span>
 <span id="L98"><span class="lineNum">      98</span>              : #ifdef _NUT_RAND_USE_URANDOM</span>
 <span id="L99"><span class="lineNum">      99</span>              :     if(!nut_urandom){</span>
 <span id="L100"><span class="lineNum">     100</span>              :         nut_urandom = fopen(&quot;/dev/urandom&quot;, &quot;rb&quot;);</span>
 <span id="L101"><span class="lineNum">     101</span>              :     }</span>
 <span id="L102"><span class="lineNum">     102</span>              : #endif</span>
-<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">     1511409 :     uint64_t l = b - a, r = 0, bytes = (71 - __builtin_clzll(l))/8;</span></span>
-<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">     1511409 :     uint64_t ub;</span></span>
-<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">     1511409 :     if(bytes == 8){</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">     1523898 :     uint64_t l = b - a, r = 0, bytes = (71 - __builtin_clzll(l))/8;</span></span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">     1523898 :     uint64_t ub;</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">     1523898 :     if(bytes == 8){</span></span>
 <span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">        1000 :         ub = ~0ull%l + 1;</span></span>
-<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">     1511409 :         ub = (ub == l) ? 0 : -ub;</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">     1523898 :         ub = (ub == l) ? 0 : -ub;</span></span>
 <span id="L108"><span class="lineNum">     108</span>              :     }else{</span>
-<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">     1510409 :         ub = 1ull &lt;&lt; (bytes*8);</span></span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">     1510409 :         ub -= ub%l;</span></span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">     1522898 :         ub = 1ull &lt;&lt; (bytes*8);</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">     1522898 :         ub -= ub%l;</span></span>
 <span id="L111"><span class="lineNum">     111</span>              :     }</span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">     1534163 :     do{</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">     1546002 :     do{</span></span>
 <span id="L113"><span class="lineNum">     113</span>              : #pragma GCC diagnostic push</span>
 <span id="L114"><span class="lineNum">     114</span>              : #pragma GCC diagnostic ignored &quot;-Wunused-result&quot;</span>
 <span id="L115"><span class="lineNum">     115</span>              : #ifdef _NUT_RAND_USE_GETRANDOM</span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">     1534163 :         getrandom(&amp;r, bytes, 0);</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">     1546002 :         getrandom(&amp;r, bytes, 0);</span></span>
 <span id="L117"><span class="lineNum">     117</span>              : #elifdef _NUT_RAND_USE_SYSCALL</span>
 <span id="L118"><span class="lineNum">     118</span>              :         syscall(SYS_getrandom, &amp;r, bytes, 0);</span>
 <span id="L119"><span class="lineNum">     119</span>              : #else</span>
 <span id="L120"><span class="lineNum">     120</span>              :         fread(&amp;r, 8, 1, nut_urandom);</span>
 <span id="L121"><span class="lineNum">     121</span>              : #endif</span>
 <span id="L122"><span class="lineNum">     122</span>              : #pragma GCC diagnostic pop</span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">     1534163 :     }while(ub &amp;&amp; r &gt;= ub);</span></span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">     1511409 :     return r%l + a;</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">     1546002 :     }while(ub &amp;&amp; r &gt;= ub);</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">     1523898 :     return r%l + a;</span></span>
 <span id="L125"><span class="lineNum">     125</span>              : }</span>
 <span id="L126"><span class="lineNum">     126</span>              : #endif</span>
 <span id="L127"><span class="lineNum">     127</span>              : </span>
@@ -222,33 +222,33 @@
 <span id="L147"><span class="lineNum">     147</span>              : }</span>
 <span id="L148"><span class="lineNum">     148</span>              : #endif</span>
 <span id="L149"><span class="lineNum">     149</span>              : </span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">      104738 : uint64_t nut_u64_prand(uint64_t a, uint64_t b){</span></span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">      104738 :     return nut_u64_rand(a, b);//TODO: test if this is a bottleneck, we don't need calls to this function to be secure</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">      117430 : uint64_t nut_u64_prand(uint64_t a, uint64_t b){</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">      117430 :     return nut_u64_rand(a, b);//TODO: test if this is a bottleneck, we don't need calls to this function to be secure</span></span>
 <span id="L152"><span class="lineNum">     152</span>              : }</span>
 <span id="L153"><span class="lineNum">     153</span>              : </span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">     5015289 : int64_t nut_i64_egcd(int64_t a, int64_t b, int64_t *restrict _t, int64_t *restrict _s){</span></span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">     5015289 :     int64_t r0 = b, r1 = a;</span></span>
-<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">     5015289 :     int64_t s0 = 1, s1 = 0;</span></span>
-<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">     5015289 :     int64_t t0 = 0, t1 = 1;</span></span>
-<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">    23923103 :     while(r1){</span></span>
-<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">    18907814 :         int64_t q = r0/r1, t;</span></span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">    18907814 :         t = r1;</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">    18907814 :         r1 = r0 - q*r1;</span></span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">    18907814 :         r0 = t;</span></span>
-<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">    18907814 :         t = s1;</span></span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">    18907814 :         s1 = s0 - q*s1;</span></span>
-<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">    18907814 :         s0 = t;</span></span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">    18907814 :         t = t1;</span></span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">    18907814 :         t1 = t0 - q*t1;</span></span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">    18907814 :         t0 = t;</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">     5129321 : int64_t nut_i64_egcd(int64_t a, int64_t b, int64_t *restrict _t, int64_t *restrict _s){</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">     5129321 :     int64_t r0 = b, r1 = a;</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">     5129321 :     int64_t s0 = 1, s1 = 0;</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">     5129321 :     int64_t t0 = 0, t1 = 1;</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">    25862116 :     while(r1){</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">    20732795 :         int64_t q = r0/r1, t;</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">    20732795 :         t = r1;</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">    20732795 :         r1 = r0 - q*r1;</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">    20732795 :         r0 = t;</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">    20732795 :         t = s1;</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">    20732795 :         s1 = s0 - q*s1;</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">    20732795 :         s0 = t;</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">    20732795 :         t = t1;</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">    20732795 :         t1 = t0 - q*t1;</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">    20732795 :         t0 = t;</span></span>
 <span id="L169"><span class="lineNum">     169</span>              :     }</span>
-<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">     5015289 :     if(_t){</span></span>
-<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">      728661 :         *_t = t0;</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">     5129321 :     if(_t){</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">      834246 :         *_t = t0;</span></span>
 <span id="L172"><span class="lineNum">     172</span>              :     }</span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">     5015289 :     if(_s){</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">     5129321 :     if(_s){</span></span>
 <span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">          15 :         *_s = s0;</span></span>
 <span id="L175"><span class="lineNum">     175</span>              :     }</span>
-<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">     5015289 :     return r0;</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">     5129321 :     return r0;</span></span>
 <span id="L177"><span class="lineNum">     177</span>              : }</span>
 <span id="L178"><span class="lineNum">     178</span>              : </span>
 <span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">          17 : int64_t nut_i64_modinv(int64_t a, int64_t b){</span></span>
@@ -288,12 +288,12 @@
 <span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">     1985500 :     return t &lt; 64 ? x&amp;((1ull &lt;&lt; t) - 1) : x;</span></span>
 <span id="L214"><span class="lineNum">     214</span>              : }</span>
 <span id="L215"><span class="lineNum">     215</span>              : </span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">   737846655 : int64_t nut_i64_mod(int64_t a, int64_t n){</span></span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">   737846655 :     int64_t r = a%n;</span></span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">   737846655 :     if(r &lt; 0){</span></span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">     1873217 :         r += n;</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">   741671244 : int64_t nut_i64_mod(int64_t a, int64_t n){</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">   741671244 :     int64_t r = a%n;</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">   741671244 :     if(r &lt; 0){</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">     1861653 :         r += n;</span></span>
 <span id="L220"><span class="lineNum">     220</span>              :     }</span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">   737846655 :     return r;</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">   741671244 :     return r;</span></span>
 <span id="L222"><span class="lineNum">     222</span>              : }</span>
 <span id="L223"><span class="lineNum">     223</span>              : </span>
 <span id="L224"><span class="lineNum">     224</span> <span class="tlaUNC tlaBgUNC">           0 : int64_t nut_i64_crt(int64_t a, int64_t p, int64_t b, int64_t q){</span></span>
@@ -328,26 +328,26 @@
 <span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">     1921500 :     return (*p2 &lt;&lt; *v2) &amp; mask;</span></span>
 <span id="L254"><span class="lineNum">     254</span>              : }</span>
 <span id="L255"><span class="lineNum">     255</span>              : </span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">     1244974 : int64_t nut_i64_jacobi(int64_t n, int64_t k){</span></span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">     1244974 :     if(n%k == 0){</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">     1245898 : int64_t nut_i64_jacobi(int64_t n, int64_t k){</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">     1245898 :     if(n%k == 0){</span></span>
 <span id="L258"><span class="lineNum">     258</span>              :         return 0;</span>
 <span id="L259"><span class="lineNum">     259</span>              :     }</span>
 <span id="L260"><span class="lineNum">     260</span>              :     int64_t j = 1;</span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">    10037372 :     while(1){</span></span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">     5641173 :         int64_t s = __builtin_ctzll(n);</span></span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">     5641173 :         int64_t q = n &gt;&gt; s;</span></span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">     5641173 :         if((s&amp;1) &amp;&amp; ((k&amp;7) == 3 || ((k&amp;7) == 5))){</span></span>
-<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">     1374630 :             j = -j;</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">    10058454 :     while(1){</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">     5652176 :         int64_t s = __builtin_ctzll(n);</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">     5652176 :         int64_t q = n &gt;&gt; s;</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">     5652176 :         if((s&amp;1) &amp;&amp; ((k&amp;7) == 3 || ((k&amp;7) == 5))){</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">     1376282 :             j = -j;</span></span>
 <span id="L266"><span class="lineNum">     266</span>              :         }</span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">     5641173 :         if(q == 1){</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">     5652176 :         if(q == 1){</span></span>
 <span id="L268"><span class="lineNum">     268</span>              :             return j;</span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">     4396199 :         }else if(q == k - 1){</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">     4406278 :         }else if(q == k - 1){</span></span>
 <span id="L270"><span class="lineNum">     270</span> <span class="tlaUNC tlaBgUNC">           0 :             return (k&amp;3)==1 ? j : -j;</span></span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC tlaBgGNC">     4396199 :         }else if((q&amp;2) &amp;&amp; (k&amp;2)){</span></span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">     1307274 :             j = -j;</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC tlaBgGNC">     4406278 :         }else if((q&amp;2) &amp;&amp; (k&amp;2)){</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">     1308803 :             j = -j;</span></span>
 <span id="L273"><span class="lineNum">     273</span>              :         }</span>
-<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">     4396199 :         n = k%q;</span></span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">     4396199 :         k = q;</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">     4406278 :         n = k%q;</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">     4406278 :         k = q;</span></span>
 <span id="L276"><span class="lineNum">     276</span>              :     }</span>
 <span id="L277"><span class="lineNum">     277</span>              : }</span>
 <span id="L278"><span class="lineNum">     278</span>              : </span>
@@ -381,86 +381,86 @@
 <span id="L306"><span class="lineNum">     306</span> <span class="tlaUNC">           0 :     return (is_qr[r/64] &amp; (1ull &lt;&lt; (r%64))) ? 1 : -1;</span></span>
 <span id="L307"><span class="lineNum">     307</span>              : }</span>
 <span id="L308"><span class="lineNum">     308</span>              : </span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC tlaBgGNC">      122829 : int64_t nut_i64_rand_nr(int64_t p){</span></span>
-<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">      244962 :     while(1){</span></span>
-<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">      244962 :         int64_t z = nut_u64_rand(2, p);</span></span>
-<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">      244962 :         if(nut_i64_jacobi(z, p) == -1){</span></span>
-<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">      122829 :             return z;</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC tlaBgGNC">      122671 : int64_t nut_i64_rand_nr(int64_t p){</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">      245886 :     while(1){</span></span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">      245886 :         int64_t z = nut_u64_rand(2, p);</span></span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">      245886 :         if(nut_i64_jacobi(z, p) == -1){</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">      122671 :             return z;</span></span>
 <span id="L314"><span class="lineNum">     314</span>              :         }</span>
 <span id="L315"><span class="lineNum">     315</span>              :     }</span>
 <span id="L316"><span class="lineNum">     316</span>              : }</span>
 <span id="L317"><span class="lineNum">     317</span>              : </span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">      122829 : int64_t nut_i64_sqrt_shanks(int64_t n, int64_t p){</span></span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">      122829 :     int64_t s = __builtin_ctzll(p-1);</span></span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">      122829 :     int64_t q = p &gt;&gt; s;//p-1 = q*2^s</span></span>
-<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">      122829 :     int64_t z = nut_i64_rand_nr(p);</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">      122671 : int64_t nut_i64_sqrt_shanks(int64_t n, int64_t p){</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">      122671 :     int64_t s = __builtin_ctzll(p-1);</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">      122671 :     int64_t q = p &gt;&gt; s;//p-1 = q*2^s</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">      122671 :     int64_t z = nut_i64_rand_nr(p);</span></span>
 <span id="L322"><span class="lineNum">     322</span>              :     //printf(&quot;trying \&quot;nonresidue\&quot; %&quot;PRIu64&quot;\n&quot;, z);</span>
-<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">      122829 :     int64_t m = s;</span></span>
-<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">      122829 :     int64_t c = nut_u64_powmod(z, q, p);</span></span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">      122829 :     int64_t t = nut_u64_powmod(n, q, p);</span></span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">      122829 :     int64_t r = nut_u64_powmod(n, (q + 1) &gt;&gt; 1, p);</span></span>
-<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">      307121 :     while(t != 1){</span></span>
-<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">      184292 :         int64_t i = 1;</span></span>
-<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">      430984 :         for(int64_t s = (int128_t)t*t%p; s != 1; s = (int128_t)s*s%p, ++i);</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">      122671 :     int64_t m = s;</span></span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">      122671 :     int64_t c = nut_u64_powmod(z, q, p);</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">      122671 :     int64_t t = nut_u64_powmod(n, q, p);</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">      122671 :     int64_t r = nut_u64_powmod(n, (q + 1) &gt;&gt; 1, p);</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">      306770 :     while(t != 1){</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">      184099 :         int64_t i = 1;</span></span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">      429878 :         for(int64_t s = (int128_t)t*t%p; s != 1; s = (int128_t)s*s%p, ++i);</span></span>
 <span id="L330"><span class="lineNum">     330</span>              :         int64_t b = c;</span>
-<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">      266149 :         for(int64_t j = 0; j &lt; m - i - 1; ++j){</span></span>
-<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">       81857 :             b = (int128_t)b*b%p;</span></span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">      265438 :         for(int64_t j = 0; j &lt; m - i - 1; ++j){</span></span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">       81339 :             b = (int128_t)b*b%p;</span></span>
 <span id="L333"><span class="lineNum">     333</span>              :         }</span>
-<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">      184292 :         m = i;</span></span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">      184292 :         c = (int128_t)b*b%p;</span></span>
-<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">      184292 :         t = (int128_t)t*c%p;</span></span>
-<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">      184292 :         r = (int128_t)r*b%p;</span></span>
+<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">      184099 :         m = i;</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">      184099 :         c = (int128_t)b*b%p;</span></span>
+<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">      184099 :         t = (int128_t)t*c%p;</span></span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">      184099 :         r = (int128_t)r*b%p;</span></span>
 <span id="L338"><span class="lineNum">     338</span>              :     }</span>
-<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">      122829 :     return r;</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">      122671 :     return r;</span></span>
 <span id="L340"><span class="lineNum">     340</span>              : }</span>
 <span id="L341"><span class="lineNum">     341</span>              : </span>
-<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">           6 : int64_t nut_i64_sqrt_cipolla(int64_t n, int64_t p){</span></span>
+<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">           3 : int64_t nut_i64_sqrt_cipolla(int64_t n, int64_t p){</span></span>
 <span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">          12 :     int64_t a, w;</span></span>
 <span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">          12 :     do{</span></span>
 <span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">          12 :         a = nut_u64_rand(2, p);</span></span>
 <span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">          12 :         w = nut_i64_mod((int128_t)a*a%p - n, p);</span></span>
 <span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">          12 :     }while(nut_i64_jacobi(w, p) != -1);</span></span>
-<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">           6 :     int64_t u_s = a, w_s = 1;</span></span>
-<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">           6 :     int64_t u_r = 1, w_r = 0;</span></span>
-<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">         162 :     for(int64_t k = (p + 1) &gt;&gt; 1; k; k &gt;&gt;= 1){</span></span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">         156 :         if(k&amp;1){</span></span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">          39 :             int64_t _w_r = (int128_t)u_r*w_s%p;</span></span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">          39 :             _w_r = (_w_r + (int128_t)w_r*u_s)%p;</span></span>
-<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">          39 :             u_r = (int128_t)u_r*u_s%p;</span></span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">          39 :             w_r = (int128_t)w_r*w_s%p;</span></span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">          39 :             w_r = (int128_t)w_r*w%p;</span></span>
-<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">          39 :             u_r = ((int128_t)u_r + w_r)%p;</span></span>
-<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">          39 :             w_r = _w_r;</span></span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">           3 :     int64_t u_s = a, w_s = 1;</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">           3 :     int64_t u_r = 1, w_r = 0;</span></span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">          84 :     for(int64_t k = (p + 1) &gt;&gt; 1; k; k &gt;&gt;= 1){</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">          81 :         if(k&amp;1){</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">          25 :             int64_t _w_r = (int128_t)u_r*w_s%p;</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">          25 :             _w_r = (_w_r + (int128_t)w_r*u_s)%p;</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">          25 :             u_r = (int128_t)u_r*u_s%p;</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">          25 :             w_r = (int128_t)w_r*w_s%p;</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">          25 :             w_r = (int128_t)w_r*w%p;</span></span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">          25 :             u_r = ((int128_t)u_r + w_r)%p;</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">          25 :             w_r = _w_r;</span></span>
 <span id="L359"><span class="lineNum">     359</span>              :         }</span>
-<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">         156 :         int64_t _w_s = (int128_t)2*u_s*w_s%p;</span></span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">         156 :         u_s = (int128_t)u_s*u_s%p;</span></span>
-<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">         156 :         w_s = (int128_t)w_s*w_s%p;</span></span>
-<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">         156 :         w_s = (int128_t)w*w_s%p;</span></span>
-<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">         156 :         u_s = ((int128_t)u_s + w_s)%p;</span></span>
-<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">         156 :         w_s = _w_s;</span></span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">          81 :         int64_t _w_s = (int128_t)2*u_s*w_s%p;</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">          81 :         u_s = (int128_t)u_s*u_s%p;</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">          81 :         w_s = (int128_t)w_s*w_s%p;</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">          81 :         w_s = (int128_t)w*w_s%p;</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">          81 :         u_s = ((int128_t)u_s + w_s)%p;</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">          81 :         w_s = _w_s;</span></span>
 <span id="L366"><span class="lineNum">     366</span>              :     }</span>
-<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">           6 :     return u_r;</span></span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">           3 :     return u_r;</span></span>
 <span id="L368"><span class="lineNum">     368</span>              : }</span>
 <span id="L369"><span class="lineNum">     369</span>              : </span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">      491239 : int64_t nut_i64_sqrt_mod(int64_t n, int64_t p){</span></span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">      491239 :     int64_t r;</span></span>
-<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">      491239 :     if((p&amp;3) == 3){</span></span>
-<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">      245263 :         r = nut_u64_powmod(n, (p + 1) &gt;&gt; 2, p);</span></span>
-<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">      245976 :     }else if((p&amp;7) == 5){</span></span>
-<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">      123141 :         r = nut_u64_powmod(n, (p + 3) &gt;&gt; 3, p);</span></span>
-<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">      123141 :         if(r*r%p != n){</span></span>
-<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">       61565 :             r = (int128_t)r*nut_u64_powmod(2, (p - 1) &gt;&gt; 2, p)%p;</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">      490853 : int64_t nut_i64_sqrt_mod(int64_t n, int64_t p){</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">      490853 :     int64_t r;</span></span>
+<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">      490853 :     if((p&amp;3) == 3){</span></span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">      245593 :         r = nut_u64_powmod(n, (p + 1) &gt;&gt; 2, p);</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">      245260 :     }else if((p&amp;7) == 5){</span></span>
+<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">      122586 :         r = nut_u64_powmod(n, (p + 3) &gt;&gt; 3, p);</span></span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">      122586 :         if(r*r%p != n){</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">       61269 :             r = (int128_t)r*nut_u64_powmod(2, (p - 1) &gt;&gt; 2, p)%p;</span></span>
 <span id="L378"><span class="lineNum">     378</span>              :         }//can add 9 mod 16 case</span>
 <span id="L379"><span class="lineNum">     379</span>              :     }else{</span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">      122835 :         int64_t m = 64 - __builtin_clzll(p);</span></span>
-<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">      122835 :         int64_t s = __builtin_ctzll(p - 1);</span></span>
-<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">      122835 :         if(8*m + 20 &gt;= s*(s - 1)){</span></span>
-<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">      122829 :             r = nut_i64_sqrt_shanks(n, p);</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">      122674 :         int64_t m = 64 - __builtin_clzll(p);</span></span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">      122674 :         int64_t s = __builtin_ctzll(p - 1);</span></span>
+<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">      122674 :         if(8*m + 20 &gt;= s*(s - 1)){</span></span>
+<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">      122671 :             r = nut_i64_sqrt_shanks(n, p);</span></span>
 <span id="L384"><span class="lineNum">     384</span>              :         }else{</span>
-<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">           6 :             r = nut_i64_sqrt_cipolla(n, p);</span></span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">           3 :             r = nut_i64_sqrt_cipolla(n, p);</span></span>
 <span id="L386"><span class="lineNum">     386</span>              :         }</span>
 <span id="L387"><span class="lineNum">     387</span>              :     }</span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">      491239 :     return r;</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">      490853 :     return r;</span></span>
 <span id="L389"><span class="lineNum">     389</span>              : }</span>
 <span id="L390"><span class="lineNum">     390</span>              : </span>
 <span id="L391"><span class="lineNum">     391</span>              : </span>

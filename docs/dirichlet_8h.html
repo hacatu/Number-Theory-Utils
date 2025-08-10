@@ -188,6 +188,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Diri_destroy</b> 
 <tr class="memitem:ad08e9184bf4f75f28500e28c035964b3" id="r_ad08e9184bf4f75f28500e28c035964b3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#ad08e9184bf4f75f28500e28c035964b3">nut_Diri_compute_J</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, uint64_t p)</td></tr>
 <tr class="memdesc:ad08e9184bf4f75f28500e28c035964b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the Jacobi symbol jacobi(n/p) Currently, p MUST be and odd prime This is 1 if n is a quadratic residue (perfect square) mod p, -1 if it is not, or 0 if n is a multiple of p.  <br /></td></tr>
 <tr class="separator:ad08e9184bf4f75f28500e28c035964b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e1a7afd399bc6b35950c414f6709b73" id="r_a5e1a7afd399bc6b35950c414f6709b73"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a5e1a7afd399bc6b35950c414f6709b73">nut_Diri_compute_Chi_balanced</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self, uint64_t n, int64_t m, const int64_t period_tbl[restrict static n])</td></tr>
+<tr class="memdesc:a5e1a7afd399bc6b35950c414f6709b73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for a given Dirichlet Character Chi, whose total is 0 A dirichlet character is some n-periodic function Chi(x) which is.  <br /></td></tr>
+<tr class="separator:a5e1a7afd399bc6b35950c414f6709b73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a980a09e9e56f72eedef07a9c20fb2856" id="r_a980a09e9e56f72eedef07a9c20fb2856"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dirichlet_8h.html#a980a09e9e56f72eedef07a9c20fb2856">nut_Diri_compute_pi</a> (<a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict self)</td></tr>
 <tr class="memdesc:a980a09e9e56f72eedef07a9c20fb2856"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the value table for the prime counting function, aka prime pi The indicator function for primes is effectively multiplicative, and the prime counting function is its sum.  <br /></td></tr>
 <tr class="separator:a980a09e9e56f72eedef07a9c20fb2856"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -770,6 +773,61 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Diri_destroy</b> 
 
 </div>
 </div>
+<a id="a5e1a7afd399bc6b35950c414f6709b73" name="a5e1a7afd399bc6b35950c414f6709b73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e1a7afd399bc6b35950c414f6709b73">&#9670;&#160;</a></span>nut_Diri_compute_Chi_balanced()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nut_Diri_compute_Chi_balanced </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnut__Diri.html">nut_Diri</a> *restrict&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int64_t&#160;</td>
+          <td class="paramname"><em>period_tbl</em>[restrict static n]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the value table for a given Dirichlet Character Chi, whose total is 0 A dirichlet character is some n-periodic function Chi(x) which is. </p>
+<ul>
+<li>completely multiplicative (Chi(ab) = Chi(a)Chi(b))</li>
+<li>0 if x is not coprime to n And here, we also require that the sum of Chi(x) over its period is 0, so it is trivial to sum <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">self</td><td>the table to store the result in, and take the bounds from. Must be initialized </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>period of the dirichlet character </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>modulus to reduce the result by, or 0 to skip reducing. Note that the input values must already be reduced </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">period_tbl</td><td>table of values of Chi(x) for 0 &lt;= x &lt; n. These values should be reduced mod m and sum to 0 mod m, or if m is 0, some of these values should be 0 </td></tr>
+  </table>
+  </dd>
+</dl>
+</li>
+</ul>
+
+</div>
+</div>
 <a id="a980a09e9e56f72eedef07a9c20fb2856" name="a980a09e9e56f72eedef07a9c20fb2856"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a980a09e9e56f72eedef07a9c20fb2856">&#9670;&#160;</a></span>nut_Diri_compute_pi()</h2>
 
@@ -993,7 +1051,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nut_Diri_destroy</b> 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="dirichlet_8h.html">dirichlet.h</a></li>
-    <li class="footer">Generated on Wed Feb 19 2025 05:27:10 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Aug 10 2025 23:27:42 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8 </li>
   </ul>
 </div>
 </body>

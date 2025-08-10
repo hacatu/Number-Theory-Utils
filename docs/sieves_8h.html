@@ -150,6 +150,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ab7b97b3bb9a75fc40a32f293d56a17ba" id="r_ab7b97b3bb9a75fc40a32f293d56a17ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#ab7b97b3bb9a75fc40a32f293d56a17ba">nut_fill_factors_from_largest</a> (<a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict out, uint64_t n, const uint64_t largest_factors[restrict static n+1])</td></tr>
 <tr class="memdesc:ab7b97b3bb9a75fc40a32f293d56a17ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use a table of largest prime factors to get the factorization of a number.  <br /></td></tr>
 <tr class="separator:ab7b97b3bb9a75fc40a32f293d56a17ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec8d0ac683511e7401a7c946f2f96e0e" id="r_aec8d0ac683511e7401a7c946f2f96e0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#ac5dad36b30fdd76ddce141ee49748d98">NUT_ATTR_MALLOC</a> uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#aec8d0ac683511e7401a7c946f2f96e0e">nut_sieve_smallest_factors</a> (uint64_t max)</td></tr>
+<tr class="memdesc:aec8d0ac683511e7401a7c946f2f96e0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the smallest prime factor of every number in the range from 0 to max, or 1 for primes Compared to <code><a class="el" href="sieves_8h.html#a84e6559fb5c1e9898b6ed5eee8237d7e">nut_sieve_factors</a></code>, this uses up to 60 times less memory, so if the range is very large, most numbers will never actually have their factorizations accessed, or the factorizations will only be accessed about once, this function should be preferred.  <br /></td></tr>
+<tr class="separator:aec8d0ac683511e7401a7c946f2f96e0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7f6e86c0fe1d869fd29d311e9247385" id="r_af7f6e86c0fe1d869fd29d311e9247385"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#af7f6e86c0fe1d869fd29d311e9247385">nut_fill_factors_from_smallest</a> (<a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict out, uint64_t n, const uint32_t smallest_factors[restrict static n+1])</td></tr>
+<tr class="memdesc:af7f6e86c0fe1d869fd29d311e9247385"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use a table of smallest prime factors to get the factorization of a number.  <br /></td></tr>
+<tr class="separator:af7f6e86c0fe1d869fd29d311e9247385"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72e7870b123862d9093f9c72cc6ef0f2" id="r_a72e7870b123862d9093f9c72cc6ef0f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modular__math_8h.html#abe429016b65e7ca254c5d49c178ade29">NUT_ATTR_CONST</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sieves_8h.html#a72e7870b123862d9093f9c72cc6ef0f2">nut_get_factors_pitch</a> (uint64_t w)</td></tr>
 <tr class="memdesc:a72e7870b123862d9093f9c72cc6ef0f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pitch for a pitched array of <code><a class="el" href="structnut__u64__Pitcharr.html">nut_u64_Pitcharr</a></code> factor lists.  <br /></td></tr>
 <tr class="separator:a72e7870b123862d9093f9c72cc6ef0f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -506,9 +512,80 @@ Functions</h2></td></tr>
 <p>Use a table of largest prime factors to get the factorization of a number. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">out</td><td>Factors struct to store result in. MUST be allocated already, use <code><a class="el" href="">init_factors_t_ub</a></code> or <code><a class="el" href="sieves_8h.html#a8a864de0211893024920e684b8086cc9">nut_max_prime_divs</a></code> and <code><a class="el" href="factorization_8h.html#ad0635e91e99cb719380638dac1c0fcea">nut_make_Factors_w</a></code> if needed. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out</td><td>Factors struct to store result in. MUST be allocated already, use <code><a class="el" href="factorization_8h.html#a94370beb417039db63c4c6ac4cf057d5">nut_make_Factors_ub</a></code> or <code><a class="el" href="sieves_8h.html#a8a864de0211893024920e684b8086cc9">nut_max_prime_divs</a></code> and <code><a class="el" href="factorization_8h.html#ad0635e91e99cb719380638dac1c0fcea">nut_make_Factors_w</a></code> if needed. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>the number to get the factorization of </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">largest_factors</td><td>table of largest factors, from <code><a class="el" href="sieves_8h.html#aa490c2b787ed9b19fb625dffaa8fca4f">nut_sieve_largest_factors</a></code> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aec8d0ac683511e7401a7c946f2f96e0e" name="aec8d0ac683511e7401a7c946f2f96e0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec8d0ac683511e7401a7c946f2f96e0e">&#9670;&#160;</a></span>nut_sieve_smallest_factors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="modular__math_8h.html#ac5dad36b30fdd76ddce141ee49748d98">NUT_ATTR_MALLOC</a> uint32_t * nut_sieve_smallest_factors </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>max</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the smallest prime factor of every number in the range from 0 to max, or 1 for primes Compared to <code><a class="el" href="sieves_8h.html#a84e6559fb5c1e9898b6ed5eee8237d7e">nut_sieve_factors</a></code>, this uses up to 60 times less memory, so if the range is very large, most numbers will never actually have their factorizations accessed, or the factorizations will only be accessed about once, this function should be preferred. </p>
+<p>The factors of 0 and 1 are not actually computed, their entries in the returned array will be 0. You can use the resulting table as it is, or convert it to a factorization using <code><a class="el" href="sieves_8h.html#af7f6e86c0fe1d869fd29d311e9247385">nut_fill_factors_from_smallest</a></code>. This function is able to store factors as 32 bit integers instead of 64, since the smallest prime factor of a composite number is at most its square root. This is why we store 1 for primes instead of themselves </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">max</td><td>inclusive upper bound of sieving range in which to find smallest prime factors of all numbers </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pointer to an array of smallest prime factors for all numbers not exceeding max, or NULL on allocation failure. </dd></dl>
+
+</div>
+</div>
+<a id="af7f6e86c0fe1d869fd29d311e9247385" name="af7f6e86c0fe1d869fd29d311e9247385"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7f6e86c0fe1d869fd29d311e9247385">&#9670;&#160;</a></span>nut_fill_factors_from_smallest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nut_fill_factors_from_smallest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnut__Factors.html">nut_Factors</a> *restrict&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>smallest_factors</em>[restrict static n+1]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Use a table of smallest prime factors to get the factorization of a number. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">out</td><td>Factors struct to store result in. MUST be allocated already, use <code><a class="el" href="factorization_8h.html#a94370beb417039db63c4c6ac4cf057d5">nut_make_Factors_ub</a></code> or <code><a class="el" href="sieves_8h.html#a8a864de0211893024920e684b8086cc9">nut_max_prime_divs</a></code> and <code><a class="el" href="factorization_8h.html#ad0635e91e99cb719380638dac1c0fcea">nut_make_Factors_w</a></code> if needed. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>the number to get the factorization of </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">smallest_factors</td><td>table of smallest factors, from <code><a class="el" href="sieves_8h.html#aec8d0ac683511e7401a7c946f2f96e0e">nut_sieve_smallest_factors</a></code> </td></tr>
   </table>
   </dd>
 </dl>
@@ -992,7 +1069,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073faa820624379b5730e5b4f5cb1c42.html">nut</a></li><li class="navelem"><a class="el" href="sieves_8h.html">sieves.h</a></li>
-    <li class="footer">Generated on Wed Feb 19 2025 05:27:10 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Aug 10 2025 23:27:42 for Number Theory Utils by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8 </li>
   </ul>
 </div>
 </body>
