@@ -243,7 +243,7 @@ uint32_t *nut_sieve_smallest_factors_wheel6(uint64_t max){
 		}
 		buf[2*qn + 1] = 1;
 	}
-	for(; idx <= max; ++idx){
+	for(; idx <= max_idx; ++idx){
 		if(!buf[idx]){
 			buf[idx] = 1;
 		}
@@ -287,7 +287,7 @@ void nut_fill_factors_from_smallest(nut_Factors *restrict out, uint64_t n, const
 	}
 }
 
-void nut_fill_factors_from_smallest_wheel6(nut_Factors *restrict out, uint64_t n, const uint32_t *restrict smallest_factors){
+void nut_fill_factors_from_smallest_wheel6(nut_Factors *restrict out, uint64_t n, const uint32_t smallest_factors[restrict static n/3 + 1]){
 	out->num_primes = 0;
 	uint64_t t = __builtin_ctzll(n);
 	if(t){

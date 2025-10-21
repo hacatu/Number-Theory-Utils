@@ -43,5 +43,7 @@ int main(){
 	}else{
 		fprintf(stderr, "\e[1;31mFAILED\e[0m\n");
 	}
+	free(smallest_factors_w6);
+	smallest_factors_w6 = nut_sieve_smallest_factors_wheel6(389394135);
 }
 
