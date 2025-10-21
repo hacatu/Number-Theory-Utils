@@ -202,6 +202,30 @@ NUT_ATTR_ACCESS(read_write, 1)
 NUT_ATTR_ACCESS(read_only, 3)
 void nut_fill_factors_from_smallest(nut_Factors *restrict out, uint64_t n, const uint32_t smallest_factors[restrict static n + 1]);
 
+/// Compute the smallest prime factor of every number coprime to 6 in the range from 0 to max, or 1 for primes
+/// Compared to {@link nut_sieve_factors}, this uses up to 180 times less memory, so if
+/// the range is very large, most numbers will never actually have their factorizations
+/// accessed, or the factorizations will only be accessed about once, this function
+/// should be preferred.  The factors of 1 are not actually computed, its entry in
+/// the returned array will be 0.  You can use the resulting table as it is, or convert it to
+/// a factorization using {@link nut_fill_factors_from_smallest_wheel6}.
+/// This function is able to store factors as 32 bit integers instead of 64, since the smallest prime factor of a
+/// composite number is at most its square root.  This is why we store 1 for primes instead of themselves
+/// @param [in] max: inclusive upper bound of sieving range in which to find smallest prime factors of all numbers
+/// @return a pointer to an array of smallest prime factors for all numbers not exceeding max, or NULL on allocation failure.
+NUT_ATTR_MALLOC
+uint32_t *nut_sieve_smallest_factors_wheel6(uint64_t max);
+
+/// Use a table of smallest prime factors for a wheel of 6 to get the factorization of a number
+/// @param [out] out: Factors struct to store result in.  MUST be allocated already, use {@link nut_make_Factors_ub} or
+/// {@link nut_max_prime_divs} and {@link nut_make_Factors_w} if needed.
+/// @param [in] n: the number to get the factorization of
+/// @param [in] smallest_factors: table of smallest factors, from {@link nut_sieve_smallest_factors}
+NUT_ATTR_NONNULL(1, 3)
+NUT_ATTR_ACCESS(read_write, 1)
+NUT_ATTR_ACCESS(read_only, 3)
+void nut_fill_factors_from_smallest_wheel6(nut_Factors *restrict out, uint64_t n, const uint32_t smallest_factors[restrict static n/3 + 1]);
+
 /// Get the pitch for a pitched array of {@link nut_u64_Pitcharr} factor lists.
 /// This is simply offsetof(nut_u64_Pitcharr, elems) + *_w*sizeof(uint64_t).
 /// @param [in] w: The maximal number of unique prime divisors of any potential index of the pitched array.

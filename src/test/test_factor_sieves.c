@@ -11,6 +11,7 @@ int main(){
 	uint64_t w = nut_max_prime_divs(1000);
 	uint64_t *largest_factors [[gnu::cleanup(cleanup_free)]] = nut_sieve_largest_factors(1000);
 	uint32_t *smallest_factors [[gnu::cleanup(cleanup_free)]] = nut_sieve_smallest_factors(1000);
+	uint32_t *smallest_factors_w6 [[gnu::cleanup(cleanup_free)]] = nut_sieve_smallest_factors_wheel6(1000);
 	uint8_t *pdiv_counts [[gnu::cleanup(cleanup_free)]] = nut_sieve_omega(1000);
 	nut_Factors *factors [[gnu::cleanup(cleanup_free)]] = nut_make_Factors_w(w);
 	bool passed = true;
@@ -22,6 +23,12 @@ int main(){
 			break;
 		}
 		nut_fill_factors_from_smallest(factors, i, smallest_factors);
+		if(nut_Factors_prod(factors) != i){
+			fprintf(stderr, "\e[1;31mFactorization from sfs for %"PRIu64" doesn't match!\e[0m\n", i);
+			passed = false;
+			break;
+		}
+		nut_fill_factors_from_smallest_wheel6(factors, i, smallest_factors_w6);
 		if(nut_Factors_prod(factors) != i){
 			fprintf(stderr, "\e[1;31mFactorization from sfs for %"PRIu64" doesn't match!\e[0m\n", i);
 			passed = false;

@@ -181,6 +181,76 @@ uint32_t *nut_sieve_smallest_factors(uint64_t max){
 	return buf;
 }
 
+uint32_t *nut_sieve_smallest_factors_wheel6(uint64_t max){
+	uint64_t r = max%6;
+	switch(r){
+		case 0: max -= 1; r = 5; break;
+		case 2 ... 4: max -= (r-1); r = 1;
+	}
+	uint64_t qmax = max/6;
+	uint64_t max_idx = 2*qmax + (r == 5);
+	uint32_t *buf = calloc(max_idx + 1, sizeof(uint32_t));
+	if(!buf){
+		return NULL;
+	}
+	uint64_t rmax = nut_u64_nth_root(max, 2);
+	// 6*qn + 1 <= rmax
+	uint64_t idx = 0;
+	for(uint64_t qn = 0; qn <= (rmax - 1)/6; ++qn){
+		idx += 1;
+		uint64_t p = 6*qn + 1;
+		if(buf[2*qn] == 0 && qn){ // we need to skip p = 1 and composites
+			// 6*qk + 1 <= max/p
+			for(uint64_t qk = 0; qk <= (max/p - 1)/6; ++qk){
+				/* (6*qn + rn)*(6*qk + rk)
+				6*((6*qn + rn)*qk + qn*rk) + rn*rk
+				*/
+				uint64_t idx = 2*(p*qk + qn);
+				if(buf[idx] == 0 || buf[idx] > p){
+					buf[idx] = p;
+				}
+				// 6*qk + 5 <= max/p
+				if(qk <= (max/p - 5)/6){
+					uint64_t idx = 2*(p*qk + 5*qn) + 1;
+					if(buf[idx] == 0 || buf[idx] > p){
+						buf[idx] = p;
+					}
+				}
+			}
+		}
+		idx += 1;
+		if(qn){
+		}
+		buf[2*qn] = 1;
+		if(buf[2*qn + 1]){
+			continue;
+		}
+		p += 4;
+		if(p > rmax){
+			break;
+		}
+		for(uint64_t qk = 0; qk <= (max/p - 1)/6; ++qk){
+			uint64_t idx = 2*(p*qk + qn) + 1;
+			if(buf[idx] == 0 || buf[idx] > p){
+				buf[idx] = p;
+			}
+			if(qk <= (max/p - 5)/6){
+				uint64_t idx = 2*(p*qk + 5*qn + 4);
+				if(buf[idx] == 0 || buf[idx] > p){
+					buf[idx] = p;
+				}
+			}
+		}
+		buf[2*qn + 1] = 1;
+	}
+	for(; idx <= max; ++idx){
+		if(!buf[idx]){
+			buf[idx] = 1;
+		}
+	}
+	return buf;
+}
+
 void nut_fill_factors_from_largest(nut_Factors *restrict out, uint64_t n, const uint64_t largest_factors[restrict static n + 1]){
 	out->num_primes = 0;
 	for(uint64_t p = largest_factors[n], k = 1; p;){
@@ -214,6 +284,36 @@ void nut_fill_factors_from_smallest(nut_Factors *restrict out, uint64_t n, const
 			p = q;
 			k = 1;
 		}
+	}
+}
+
+void nut_fill_factors_from_smallest_wheel6(nut_Factors *restrict out, uint64_t n, const uint32_t *restrict smallest_factors){
+	out->num_primes = 0;
+	uint64_t t = __builtin_ctzll(n);
+	if(t){
+		nut_Factor_append(out, 2, t);
+		n >>= t;
+	}
+	t = 0;
+	while(n%3 == 0){
+		++t;
+		n /= 3;
+	}
+	if(t){
+		nut_Factor_append(out, 3, t);
+	}
+	while(n != 1){
+		uint64_t p = smallest_factors[n/3];
+		if(p == 1){
+			nut_Factor_append(out, n, 1);
+			break;
+		}
+		t = 0;
+		while(n%p == 0){
+			n /= p;
+			t += 1;
+		}
+		nut_Factor_append(out, p, t);
 	}
 }
 
