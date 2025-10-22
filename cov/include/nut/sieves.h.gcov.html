@@ -50,7 +50,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-08-10 23:27:20</td>
+            <td class="headerValue">2025-10-22 01:14:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -193,222 +193,252 @@
 <span id="L118"><span class="lineNum">     118</span>              : /// @param [out] _w: store w, the maximum number of unique prime divisors of a number not exceeding max</span>
 <span id="L119"><span class="lineNum">     119</span>              : /// @return a pointer to an array of factors_t structs containing the factorization of all numbers not exceeding max,</span>
 <span id="L120"><span class="lineNum">     120</span>              : /// or NULL on allocation failure</span>
-<span id="L121"><span class="lineNum">     121</span>              : NUT_ATTR_NONNULL(2)</span>
-<span id="L122"><span class="lineNum">     122</span>              : NUT_ATTR_MALLOC</span>
-<span id="L123"><span class="lineNum">     123</span>              : NUT_ATTR_ACCESS(write_only, 2)</span>
-<span id="L124"><span class="lineNum">     124</span>              : void *nut_sieve_factorizations(uint64_t max, uint64_t *_w);</span>
-<span id="L125"><span class="lineNum">     125</span>              : </span>
-<span id="L126"><span class="lineNum">     126</span>              : /// Get the pitch for a pitched array of factorization structs with w unique prime divisors.</span>
-<span id="L127"><span class="lineNum">     127</span>              : /// This is simply offsetof(factors_t, factors) + w*sizeof(dummy-&gt;factors[0]),</span>
-<span id="L128"><span class="lineNum">     128</span>              : /// where dummy is an expression with type factors_t.</span>
-<span id="L129"><span class="lineNum">     129</span>              : /// @param [in] w: The maximal number of unique prime divisors of any potential index of the pitched array.</span>
-<span id="L130"><span class="lineNum">     130</span>              : /// Should be obtained from {@link nut_sieve_factorizations}, {@link max_prime_divisors}, etc.</span>
-<span id="L131"><span class="lineNum">     131</span>              : /// @return The pitch of a pitched array of factorization structs whose flexible length members all have w</span>
-<span id="L132"><span class="lineNum">     132</span>              : /// elements.</span>
-<span id="L133"><span class="lineNum">     133</span>              : NUT_ATTR_CONST</span>
-<span id="L134"><span class="lineNum">     134</span>              : uint64_t nut_get_factorizations_pitch(uint64_t w);</span>
-<span id="L135"><span class="lineNum">     135</span>              : </span>
-<span id="L136"><span class="lineNum">     136</span>              : /// Compute the unique prime factors of every number in the range from 0 to max.</span>
-<span id="L137"><span class="lineNum">     137</span>              : /// The factors for 0 and 1 are not actually computed.  The result is stored in</span>
-<span id="L138"><span class="lineNum">     138</span>              : /// an array of nut_u64_Pitcharr structs with capacity w, where w is the maximum number of unique</span>
-<span id="L139"><span class="lineNum">     139</span>              : /// prime divisors of a number not exceeding max.  The pitch of the result may be obtained with</span>
-<span id="L140"><span class="lineNum">     140</span>              : /// {@link get_factors_pitch}.</span>
-<span id="L141"><span class="lineNum">     141</span>              : /// {@link nut_Pitcharr_get} should be used to handle the returned value.</span>
-<span id="L142"><span class="lineNum">     142</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find unique prime factors of all numbers</span>
-<span id="L143"><span class="lineNum">     143</span>              : /// @param [out] _w: maximum numer of unique prime divisors of a number not exceeding max</span>
-<span id="L144"><span class="lineNum">     144</span>              : /// @return a pointer to an array of nut_u64_Pitcharr structs containing lists of unique prime factors for all numbers not exceeding max,</span>
-<span id="L145"><span class="lineNum">     145</span>              : /// or NULL on allocation failure</span>
-<span id="L146"><span class="lineNum">     146</span>              : NUT_ATTR_NONNULL(2)</span>
-<span id="L147"><span class="lineNum">     147</span>              : NUT_ATTR_MALLOC</span>
-<span id="L148"><span class="lineNum">     148</span>              : NUT_ATTR_ACCESS(write_only, 2)</span>
-<span id="L149"><span class="lineNum">     149</span>              : void *nut_sieve_factors(uint64_t max, uint64_t *_w);</span>
-<span id="L150"><span class="lineNum">     150</span>              : </span>
-<span id="L151"><span class="lineNum">     151</span>              : /// Compute the number of distinct prime divisors of every number in the range from 0 to max.</span>
-<span id="L152"><span class="lineNum">     152</span>              : /// The divisors for 0 and 1 are not actually computed.</span>
-<span id="L153"><span class="lineNum">     153</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find distinct prime divisor counts of all numbers</span>
-<span id="L154"><span class="lineNum">     154</span>              : /// @return a pointer to an array of distinct prime divisor counts for all numbers not exceeding max,</span>
-<span id="L155"><span class="lineNum">     155</span>              : /// or NULL on allocation failure</span>
-<span id="L156"><span class="lineNum">     156</span>              : NUT_ATTR_MALLOC</span>
-<span id="L157"><span class="lineNum">     157</span>              : uint8_t *nut_sieve_omega(uint64_t max);</span>
-<span id="L158"><span class="lineNum">     158</span>              : </span>
-<span id="L159"><span class="lineNum">     159</span>              : /// Compute the largest prime factor of every number in the range from 0 to max.</span>
-<span id="L160"><span class="lineNum">     160</span>              : /// Compared to {@link nut_sieve_factors}, this uses up to 30 times less memory, so if</span>
-<span id="L161"><span class="lineNum">     161</span>              : /// the range is very large, most numbers will never actually have their factorizations</span>
-<span id="L162"><span class="lineNum">     162</span>              : /// accessed, or the factorizations will only be accessed about once, this function</span>
-<span id="L163"><span class="lineNum">     163</span>              : /// should be preferred.  The factors of 0 and 1 are not actually computed, their entries in</span>
-<span id="L164"><span class="lineNum">     164</span>              : /// the returned array will be 0.  You can use the resulting table as it is, or convert it to</span>
-<span id="L165"><span class="lineNum">     165</span>              : /// a factorization using {@link nut_fill_factors_from_largest}.</span>
-<span id="L166"><span class="lineNum">     166</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find largest prime factors of all numbers</span>
-<span id="L167"><span class="lineNum">     167</span>              : /// @return a pointer to an array of largest prime factors for all numbers not exceeding max, or NULL on allocation failure.</span>
-<span id="L168"><span class="lineNum">     168</span>              : NUT_ATTR_MALLOC</span>
-<span id="L169"><span class="lineNum">     169</span>              : uint64_t *nut_sieve_largest_factors(uint64_t max);</span>
-<span id="L170"><span class="lineNum">     170</span>              : </span>
-<span id="L171"><span class="lineNum">     171</span>              : /// Use a table of largest prime factors to get the factorization of a number</span>
-<span id="L172"><span class="lineNum">     172</span>              : /// @param [out] out: Factors struct to store result in.  MUST be allocated already, use {@link nut_make_Factors_ub} or</span>
-<span id="L173"><span class="lineNum">     173</span>              : /// {@link nut_max_prime_divs} and {@link nut_make_Factors_w} if needed.</span>
-<span id="L174"><span class="lineNum">     174</span>              : /// @param [in] n: the number to get the factorization of</span>
-<span id="L175"><span class="lineNum">     175</span>              : /// @param [in] largest_factors: table of largest factors, from {@link nut_sieve_largest_factors}</span>
-<span id="L176"><span class="lineNum">     176</span>              : NUT_ATTR_NONNULL(1, 3)</span>
-<span id="L177"><span class="lineNum">     177</span>              : NUT_ATTR_ACCESS(read_write, 1)</span>
-<span id="L178"><span class="lineNum">     178</span>              : NUT_ATTR_ACCESS(read_only, 3)</span>
-<span id="L179"><span class="lineNum">     179</span>              : void nut_fill_factors_from_largest(nut_Factors *restrict out, uint64_t n, const uint64_t largest_factors[restrict static n + 1]);</span>
-<span id="L180"><span class="lineNum">     180</span>              : </span>
-<span id="L181"><span class="lineNum">     181</span>              : /// Compute the smallest prime factor of every number in the range from 0 to max, or 1 for primes</span>
-<span id="L182"><span class="lineNum">     182</span>              : /// Compared to {@link nut_sieve_factors}, this uses up to 60 times less memory, so if</span>
-<span id="L183"><span class="lineNum">     183</span>              : /// the range is very large, most numbers will never actually have their factorizations</span>
-<span id="L184"><span class="lineNum">     184</span>              : /// accessed, or the factorizations will only be accessed about once, this function</span>
-<span id="L185"><span class="lineNum">     185</span>              : /// should be preferred.  The factors of 0 and 1 are not actually computed, their entries in</span>
-<span id="L186"><span class="lineNum">     186</span>              : /// the returned array will be 0.  You can use the resulting table as it is, or convert it to</span>
-<span id="L187"><span class="lineNum">     187</span>              : /// a factorization using {@link nut_fill_factors_from_smallest}.</span>
-<span id="L188"><span class="lineNum">     188</span>              : /// This function is able to store factors as 32 bit integers instead of 64, since the smallest prime factor of a</span>
-<span id="L189"><span class="lineNum">     189</span>              : /// composite number is at most its square root.  This is why we store 1 for primes instead of themselves</span>
-<span id="L190"><span class="lineNum">     190</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find smallest prime factors of all numbers</span>
-<span id="L191"><span class="lineNum">     191</span>              : /// @return a pointer to an array of smallest prime factors for all numbers not exceeding max, or NULL on allocation failure.</span>
-<span id="L192"><span class="lineNum">     192</span>              : NUT_ATTR_MALLOC</span>
-<span id="L193"><span class="lineNum">     193</span>              : uint32_t *nut_sieve_smallest_factors(uint64_t max);</span>
-<span id="L194"><span class="lineNum">     194</span>              : </span>
-<span id="L195"><span class="lineNum">     195</span>              : /// Use a table of smallest prime factors to get the factorization of a number</span>
-<span id="L196"><span class="lineNum">     196</span>              : /// @param [out] out: Factors struct to store result in.  MUST be allocated already, use {@link nut_make_Factors_ub} or</span>
-<span id="L197"><span class="lineNum">     197</span>              : /// {@link nut_max_prime_divs} and {@link nut_make_Factors_w} if needed.</span>
-<span id="L198"><span class="lineNum">     198</span>              : /// @param [in] n: the number to get the factorization of</span>
-<span id="L199"><span class="lineNum">     199</span>              : /// @param [in] smallest_factors: table of smallest factors, from {@link nut_sieve_smallest_factors}</span>
-<span id="L200"><span class="lineNum">     200</span>              : NUT_ATTR_NONNULL(1, 3)</span>
-<span id="L201"><span class="lineNum">     201</span>              : NUT_ATTR_ACCESS(read_write, 1)</span>
-<span id="L202"><span class="lineNum">     202</span>              : NUT_ATTR_ACCESS(read_only, 3)</span>
-<span id="L203"><span class="lineNum">     203</span>              : void nut_fill_factors_from_smallest(nut_Factors *restrict out, uint64_t n, const uint32_t smallest_factors[restrict static n + 1]);</span>
-<span id="L204"><span class="lineNum">     204</span>              : </span>
-<span id="L205"><span class="lineNum">     205</span>              : /// Get the pitch for a pitched array of {@link nut_u64_Pitcharr} factor lists.</span>
-<span id="L206"><span class="lineNum">     206</span>              : /// This is simply offsetof(nut_u64_Pitcharr, elems) + *_w*sizeof(uint64_t).</span>
-<span id="L207"><span class="lineNum">     207</span>              : /// @param [in] w: The maximal number of unique prime divisors of any potential index of the pitched array.</span>
-<span id="L208"><span class="lineNum">     208</span>              : /// Should be obtained from {@link nut_sieve_factors}, {@link max_prime_divisors}, etc.</span>
-<span id="L209"><span class="lineNum">     209</span>              : /// @return The pitch of a pitched array of factor list structs whose flexible length members all have w</span>
-<span id="L210"><span class="lineNum">     210</span>              : /// elements.</span>
-<span id="L211"><span class="lineNum">     211</span>              : NUT_ATTR_CONST</span>
-<span id="L212"><span class="lineNum">     212</span>              : uint64_t nut_get_factors_pitch(uint64_t w);</span>
-<span id="L213"><span class="lineNum">     213</span>              : </span>
-<span id="L214"><span class="lineNum">     214</span>              : /// Compute the number of divisors (including 1 and n) for every number n from 0 to max.</span>
-<span id="L215"><span class="lineNum">     215</span>              : /// The results for 0 and 1 are not actually computed.  This effectively computes {@link divisor_count} for</span>
-<span id="L216"><span class="lineNum">     216</span>              : /// all numbers in the range, but without needing to compute or store the factorizations intermediately</span>
-<span id="L217"><span class="lineNum">     217</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find divisor counts for all numbers</span>
-<span id="L218"><span class="lineNum">     218</span>              : /// @return an array of divisor counts for all numbers in the range, or NULL on allocation failure</span>
-<span id="L219"><span class="lineNum">     219</span>              : NUT_ATTR_MALLOC</span>
-<span id="L220"><span class="lineNum">     220</span>              : uint64_t *nut_sieve_sigma_0(uint64_t max);</span>
-<span id="L221"><span class="lineNum">     221</span>              : </span>
-<span id="L222"><span class="lineNum">     222</span>              : /// Compute the sum of divisors (including 1 and n) for every number n from 0 to max.</span>
-<span id="L223"><span class="lineNum">     223</span>              : /// The results for 0 and 1 are not actually computed.  This effectively computes {@link divisor_sum} for</span>
-<span id="L224"><span class="lineNum">     224</span>              : /// all numbers in the range, but without needing to compute or store the factorizations intermediately</span>
-<span id="L225"><span class="lineNum">     225</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find divisor sums for all numbers</span>
-<span id="L226"><span class="lineNum">     226</span>              : /// @return an array of divisor sums for all numbers in the range, or NULL on allocation failure</span>
-<span id="L227"><span class="lineNum">     227</span>              : NUT_ATTR_MALLOC</span>
-<span id="L228"><span class="lineNum">     228</span>              : uint64_t *nut_sieve_sigma_1(uint64_t max);</span>
-<span id="L229"><span class="lineNum">     229</span>              : </span>
-<span id="L230"><span class="lineNum">     230</span>              : /// Compute the sum of some power of divisors (including 1 and n) for every number n from 0 to max.</span>
-<span id="L231"><span class="lineNum">     231</span>              : /// The results for 0 and 1 are not actually computed.  This effectively computes {@link divisor_power_sum} for</span>
-<span id="L232"><span class="lineNum">     232</span>              : /// all numbers in the range, but without needing to compute or store the factorizations intermediately</span>
-<span id="L233"><span class="lineNum">     233</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find divisor power sums for all numbers</span>
-<span id="L234"><span class="lineNum">     234</span>              : /// @param [in] e: power of divisors for summing, eg 0 would produce divisor counts, 1 divisor sums, 2 sums of squares of divisors, etc</span>
-<span id="L235"><span class="lineNum">     235</span>              : /// @return an array of divisor power sums for all numbers in the range, or NULL on allocation failure</span>
-<span id="L236"><span class="lineNum">     236</span>              : NUT_ATTR_MALLOC</span>
-<span id="L237"><span class="lineNum">     237</span>              : uint64_t *nut_sieve_sigma_e(uint64_t max, uint64_t e);</span>
-<span id="L238"><span class="lineNum">     238</span>              : </span>
-<span id="L239"><span class="lineNum">     239</span>              : /// Compute the generalized divisor function dk(n) (number of k-tuples with product n) for every number n from 0 to max.</span>
-<span id="L240"><span class="lineNum">     240</span>              : /// The results for 0 and 1 are not actually computed.  This effectively computes {@link divisor_tuple_count}</span>
-<span id="L241"><span class="lineNum">     241</span>              : /// for all numbers in the range, but without needing to compute or store the factorizations intermediately.</span>
-<span id="L242"><span class="lineNum">     242</span>              : /// Note that dk is multiplicative so dk(mn) = dk(m)dk(n) when m and n are coprime, and dk(p^a) = binom(a + k, k) for prime powers.</span>
-<span id="L243"><span class="lineNum">     243</span>              : /// In other words, dk is exponential in k and this function will overflow if max^k is too large.</span>
-<span id="L244"><span class="lineNum">     244</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to compute generalized divisor function</span>
-<span id="L245"><span class="lineNum">     245</span>              : /// @param [in] k: number of factors per factorization, eg for a prime power p^a we get binom(a + k, k).</span>
-<span id="L246"><span class="lineNum">     246</span>              : /// @param [in] modulus: modulus to reduce results by, or zero to skip reducing</span>
-<span id="L247"><span class="lineNum">     247</span>              : /// @return an array of dk results, or NULL on allocation failure</span>
-<span id="L248"><span class="lineNum">     248</span>              : NUT_ATTR_MALLOC</span>
-<span id="L249"><span class="lineNum">     249</span>              : uint64_t *nut_sieve_dk(uint64_t max, uint64_t k, uint64_t modulus);</span>
-<span id="L250"><span class="lineNum">     250</span>              : </span>
-<span id="L251"><span class="lineNum">     251</span>              : /// Compute Euler's totient function for every number from 0 to max.</span>
-<span id="L252"><span class="lineNum">     252</span>              : /// The results for 0 and 1 are not actually computed.  This effectively computes {@link euler_phi} for</span>
-<span id="L253"><span class="lineNum">     253</span>              : /// all numbers in the range, but without needing to compute or store the factorizations intermediately</span>
-<span id="L254"><span class="lineNum">     254</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find totients for all numbers</span>
-<span id="L255"><span class="lineNum">     255</span>              : /// @return an array of totients for all numbers in the range, or NULL on allocation failure</span>
-<span id="L256"><span class="lineNum">     256</span>              : NUT_ATTR_MALLOC</span>
-<span id="L257"><span class="lineNum">     257</span>              : uint64_t *nut_sieve_phi(uint64_t max);</span>
-<span id="L258"><span class="lineNum">     258</span>              : </span>
-<span id="L259"><span class="lineNum">     259</span>              : /// Compute the Carmichael function for every number from 0 to max.</span>
-<span id="L260"><span class="lineNum">     260</span>              : /// The results for 0 and 1 are not actually computed.  This effectively computes {@link carmichael_lambda} for</span>
-<span id="L261"><span class="lineNum">     261</span>              : /// all numbers in the range, but without needing to compute or store the factorizations intermediately</span>
-<span id="L262"><span class="lineNum">     262</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to compute Carmichael for all numbers</span>
-<span id="L263"><span class="lineNum">     263</span>              : /// @return an array of Carmichael function outputs for all numbers in the range, or NULL on allocation failure</span>
-<span id="L264"><span class="lineNum">     264</span>              : NUT_ATTR_MALLOC</span>
-<span id="L265"><span class="lineNum">     265</span>              : uint64_t *nut_sieve_carmichael(uint64_t max);</span>
-<span id="L266"><span class="lineNum">     266</span>              : </span>
-<span id="L267"><span class="lineNum">     267</span>              : /// Compute the Mobius function for every number from 0 to max.</span>
-<span id="L268"><span class="lineNum">     268</span>              : /// The result is stored in an array of 2 bit integers, which should</span>
-<span id="L269"><span class="lineNum">     269</span>              : /// be accessed by {@link nut_Bitfield2_arr_get}.  That function will return 0 for 0,</span>
-<span id="L270"><span class="lineNum">     270</span>              : /// 1 for 1, and 3 for -1.  2 will not be stored anywhere in bounds in the resulting array.</span>
-<span id="L271"><span class="lineNum">     271</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to compute Mobius for all numbers</span>
-<span id="L272"><span class="lineNum">     272</span>              : /// @return a bitfield array of Mobius function outputs for all numbers in the range, with 3 instead of -1,</span>
-<span id="L273"><span class="lineNum">     273</span>              : /// or NULL on allocation failure</span>
-<span id="L274"><span class="lineNum">     274</span>              : NUT_ATTR_MALLOC</span>
-<span id="L275"><span class="lineNum">     275</span>              : uint8_t *nut_sieve_mobius(uint64_t max);</span>
-<span id="L276"><span class="lineNum">     276</span>              : </span>
-<span id="L277"><span class="lineNum">     277</span>              : /// Compute the Mertens function (sum of Mobius function) for every number from 0 to max.</span>
-<span id="L278"><span class="lineNum">     278</span>              : /// Note that this function is signed.</span>
-<span id="L279"><span class="lineNum">     279</span>              : /// @param [in] max: inclusive upper bound of range in which to compute Mertens for all numbers</span>
-<span id="L280"><span class="lineNum">     280</span>              : /// @param [in] mobius: bitfield array of Mobius function outputs (from {@link nut_sieve_mobius}).</span>
-<span id="L281"><span class="lineNum">     281</span>              : /// @return an array of Mertens function outputs for all numbers in the range, or NULL on allocation failure</span>
-<span id="L282"><span class="lineNum">     282</span>              : NUT_ATTR_MALLOC</span>
-<span id="L283"><span class="lineNum">     283</span>              : NUT_ATTR_NONNULL(2)</span>
-<span id="L284"><span class="lineNum">     284</span>              : NUT_ATTR_ACCESS(read_only, 2)</span>
-<span id="L285"><span class="lineNum">     285</span>              : int64_t *nut_compute_mertens_range(uint64_t max, const uint8_t mobius[static max/4 + 1]);</span>
-<span id="L286"><span class="lineNum">     286</span>              : </span>
-<span id="L287"><span class="lineNum">     287</span>              : /// Compute a bitarray of whether or not each number from 0 to max is composite.</span>
-<span id="L288"><span class="lineNum">     288</span>              : /// 1 is composite, and 0 is considered composite here.</span>
-<span id="L289"><span class="lineNum">     289</span>              : /// The result should be used with {@link nut_is_composite} since it is packed (only stores bitflags for numbers coprime to 30).</span>
-<span id="L290"><span class="lineNum">     290</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to check compositeness for all numbers</span>
-<span id="L291"><span class="lineNum">     291</span>              : /// @param [out] _num_primes: the number of primes in the range will be stored here.  May be NULL.</span>
-<span id="L292"><span class="lineNum">     292</span>              : /// @return a bitarray of whether or not each number in the range is composite, or NULL on allocation failure</span>
-<span id="L293"><span class="lineNum">     293</span>              : NUT_ATTR_MALLOC</span>
-<span id="L294"><span class="lineNum">     294</span>              : uint8_t *nut_sieve_is_composite(uint64_t max);</span>
-<span id="L295"><span class="lineNum">     295</span>              : </span>
-<span id="L296"><span class="lineNum">     296</span>              : /// Check if a number is composite using a packed bitarray from {@link nut_sieve_is_composite}</span>
-<span id="L297"><span class="lineNum">     297</span>              : /// @param [in] n: the number to check if composite</span>
-<span id="L298"><span class="lineNum">     298</span>              : /// @param [in] buf: packed bitarray from {@link nut_sieve_is_composite}</span>
-<span id="L299"><span class="lineNum">     299</span>              : /// @return true if n is composite, false if n is prime</span>
-<span id="L300"><span class="lineNum">     300</span>              : NUT_ATTR_PURE</span>
-<span id="L301"><span class="lineNum">     301</span>              : NUT_ATTR_NONNULL(2)</span>
-<span id="L302"><span class="lineNum">     302</span>              : NUT_ATTR_ACCESS(read_only, 2)</span>
-<span id="L303"><span class="lineNum">     303</span>              : bool nut_is_composite(uint64_t n, const uint8_t buf[static n/30 + 1]);</span>
-<span id="L304"><span class="lineNum">     304</span>              : </span>
-<span id="L305"><span class="lineNum">     305</span>              : /// Compute the pi (prime counting) function for every number from 0 to max.</span>
-<span id="L306"><span class="lineNum">     306</span>              : /// The result should be used with {@link nut_compute_pi_from_tables} since pi is only actually calculated at every 240th number</span>
-<span id="L307"><span class="lineNum">     307</span>              : /// since intermediate results can be computed with a single popcount on the packed buf bitarray.</span>
-<span id="L308"><span class="lineNum">     308</span>              : /// @param [in] max: inclusive upper bound of range to compute pi function</span>
-<span id="L309"><span class="lineNum">     309</span>              : /// @param [in] buf: packed bitarray from {@link nut_sieve_is_composite}</span>
-<span id="L310"><span class="lineNum">     310</span>              : /// @return an array of pi values at every 240th number (use {@link nut_compute_pi_from_tables})</span>
-<span id="L311"><span class="lineNum">     311</span>              : NUT_ATTR_NONNULL(2)</span>
+<span id="L121"><span class="lineNum">     121</span>              : [[deprecated(&quot;Replace with nut_sieve_smallest_factors_wheel6&quot;)]]</span>
+<span id="L122"><span class="lineNum">     122</span>              : NUT_ATTR_NONNULL(2)</span>
+<span id="L123"><span class="lineNum">     123</span>              : NUT_ATTR_MALLOC</span>
+<span id="L124"><span class="lineNum">     124</span>              : NUT_ATTR_ACCESS(write_only, 2)</span>
+<span id="L125"><span class="lineNum">     125</span>              : void *nut_sieve_factorizations(uint64_t max, uint64_t *_w);</span>
+<span id="L126"><span class="lineNum">     126</span>              : </span>
+<span id="L127"><span class="lineNum">     127</span>              : /// Get the pitch for a pitched array of factorization structs with w unique prime divisors.</span>
+<span id="L128"><span class="lineNum">     128</span>              : /// This is simply offsetof(factors_t, factors) + w*sizeof(dummy-&gt;factors[0]),</span>
+<span id="L129"><span class="lineNum">     129</span>              : /// where dummy is an expression with type factors_t.</span>
+<span id="L130"><span class="lineNum">     130</span>              : /// @param [in] w: The maximal number of unique prime divisors of any potential index of the pitched array.</span>
+<span id="L131"><span class="lineNum">     131</span>              : /// Should be obtained from {@link nut_sieve_factorizations}, {@link max_prime_divisors}, etc.</span>
+<span id="L132"><span class="lineNum">     132</span>              : /// @return The pitch of a pitched array of factorization structs whose flexible length members all have w</span>
+<span id="L133"><span class="lineNum">     133</span>              : /// elements.</span>
+<span id="L134"><span class="lineNum">     134</span>              : NUT_ATTR_CONST</span>
+<span id="L135"><span class="lineNum">     135</span>              : uint64_t nut_get_factorizations_pitch(uint64_t w);</span>
+<span id="L136"><span class="lineNum">     136</span>              : </span>
+<span id="L137"><span class="lineNum">     137</span>              : /// Compute the unique prime factors of every number in the range from 0 to max.</span>
+<span id="L138"><span class="lineNum">     138</span>              : /// The factors for 0 and 1 are not actually computed.  The result is stored in</span>
+<span id="L139"><span class="lineNum">     139</span>              : /// an array of nut_u64_Pitcharr structs with capacity w, where w is the maximum number of unique</span>
+<span id="L140"><span class="lineNum">     140</span>              : /// prime divisors of a number not exceeding max.  The pitch of the result may be obtained with</span>
+<span id="L141"><span class="lineNum">     141</span>              : /// {@link get_factors_pitch}.</span>
+<span id="L142"><span class="lineNum">     142</span>              : /// {@link nut_Pitcharr_get} should be used to handle the returned value.</span>
+<span id="L143"><span class="lineNum">     143</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find unique prime factors of all numbers</span>
+<span id="L144"><span class="lineNum">     144</span>              : /// @param [out] _w: maximum numer of unique prime divisors of a number not exceeding max</span>
+<span id="L145"><span class="lineNum">     145</span>              : /// @return a pointer to an array of nut_u64_Pitcharr structs containing lists of unique prime factors for all numbers not exceeding max,</span>
+<span id="L146"><span class="lineNum">     146</span>              : /// or NULL on allocation failure</span>
+<span id="L147"><span class="lineNum">     147</span>              : [[deprecated(&quot;Replace with nut_sieve_smallest_factors_wheel6&quot;)]]</span>
+<span id="L148"><span class="lineNum">     148</span>              : NUT_ATTR_NONNULL(2)</span>
+<span id="L149"><span class="lineNum">     149</span>              : NUT_ATTR_MALLOC</span>
+<span id="L150"><span class="lineNum">     150</span>              : NUT_ATTR_ACCESS(write_only, 2)</span>
+<span id="L151"><span class="lineNum">     151</span>              : void *nut_sieve_factors(uint64_t max, uint64_t *_w);</span>
+<span id="L152"><span class="lineNum">     152</span>              : </span>
+<span id="L153"><span class="lineNum">     153</span>              : /// Compute the number of distinct prime divisors of every number in the range from 0 to max.</span>
+<span id="L154"><span class="lineNum">     154</span>              : /// The divisors for 0 and 1 are not actually computed.</span>
+<span id="L155"><span class="lineNum">     155</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find distinct prime divisor counts of all numbers</span>
+<span id="L156"><span class="lineNum">     156</span>              : /// @return a pointer to an array of distinct prime divisor counts for all numbers not exceeding max,</span>
+<span id="L157"><span class="lineNum">     157</span>              : /// or NULL on allocation failure</span>
+<span id="L158"><span class="lineNum">     158</span>              : NUT_ATTR_MALLOC</span>
+<span id="L159"><span class="lineNum">     159</span>              : uint8_t *nut_sieve_omega(uint64_t max);</span>
+<span id="L160"><span class="lineNum">     160</span>              : </span>
+<span id="L161"><span class="lineNum">     161</span>              : /// Compute the largest prime factor of every number in the range from 0 to max.</span>
+<span id="L162"><span class="lineNum">     162</span>              : /// Compared to {@link nut_sieve_factors}, this uses up to 30 times less memory, so if</span>
+<span id="L163"><span class="lineNum">     163</span>              : /// the range is very large, most numbers will never actually have their factorizations</span>
+<span id="L164"><span class="lineNum">     164</span>              : /// accessed, or the factorizations will only be accessed about once, this function</span>
+<span id="L165"><span class="lineNum">     165</span>              : /// should be preferred.  The factors of 0 and 1 are not actually computed, their entries in</span>
+<span id="L166"><span class="lineNum">     166</span>              : /// the returned array will be 0.  You can use the resulting table as it is, or convert it to</span>
+<span id="L167"><span class="lineNum">     167</span>              : /// a factorization using {@link nut_fill_factors_from_largest}.</span>
+<span id="L168"><span class="lineNum">     168</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find largest prime factors of all numbers</span>
+<span id="L169"><span class="lineNum">     169</span>              : /// @return a pointer to an array of largest prime factors for all numbers not exceeding max, or NULL on allocation failure.</span>
+<span id="L170"><span class="lineNum">     170</span>              : [[deprecated(&quot;Replace with nut_sieve_smallest_factors_wheel6&quot;)]]</span>
+<span id="L171"><span class="lineNum">     171</span>              : NUT_ATTR_MALLOC</span>
+<span id="L172"><span class="lineNum">     172</span>              : uint64_t *nut_sieve_largest_factors(uint64_t max);</span>
+<span id="L173"><span class="lineNum">     173</span>              : </span>
+<span id="L174"><span class="lineNum">     174</span>              : /// Use a table of largest prime factors to get the factorization of a number</span>
+<span id="L175"><span class="lineNum">     175</span>              : /// @param [out] out: Factors struct to store result in.  MUST be allocated already, use {@link nut_make_Factors_ub} or</span>
+<span id="L176"><span class="lineNum">     176</span>              : /// {@link nut_max_prime_divs} and {@link nut_make_Factors_w} if needed.</span>
+<span id="L177"><span class="lineNum">     177</span>              : /// @param [in] n: the number to get the factorization of</span>
+<span id="L178"><span class="lineNum">     178</span>              : /// @param [in] largest_factors: table of largest factors, from {@link nut_sieve_largest_factors}</span>
+<span id="L179"><span class="lineNum">     179</span>              : [[deprecated(&quot;Replace with nut_fill_factors_from_smallest_wheel6&quot;)]]</span>
+<span id="L180"><span class="lineNum">     180</span>              : NUT_ATTR_NONNULL(1, 3)</span>
+<span id="L181"><span class="lineNum">     181</span>              : NUT_ATTR_ACCESS(read_write, 1)</span>
+<span id="L182"><span class="lineNum">     182</span>              : NUT_ATTR_ACCESS(read_only, 3)</span>
+<span id="L183"><span class="lineNum">     183</span>              : void nut_fill_factors_from_largest(nut_Factors *restrict out, uint64_t n, const uint64_t largest_factors[restrict static n + 1]);</span>
+<span id="L184"><span class="lineNum">     184</span>              : </span>
+<span id="L185"><span class="lineNum">     185</span>              : /// Compute the smallest prime factor of every number in the range from 0 to max, or 1 for primes</span>
+<span id="L186"><span class="lineNum">     186</span>              : /// Compared to {@link nut_sieve_factors}, this uses up to 60 times less memory, so if</span>
+<span id="L187"><span class="lineNum">     187</span>              : /// the range is very large, most numbers will never actually have their factorizations</span>
+<span id="L188"><span class="lineNum">     188</span>              : /// accessed, or the factorizations will only be accessed about once, this function</span>
+<span id="L189"><span class="lineNum">     189</span>              : /// should be preferred.  The factors of 0 and 1 are not actually computed, their entries in</span>
+<span id="L190"><span class="lineNum">     190</span>              : /// the returned array will be 0.  You can use the resulting table as it is, or convert it to</span>
+<span id="L191"><span class="lineNum">     191</span>              : /// a factorization using {@link nut_fill_factors_from_smallest}.</span>
+<span id="L192"><span class="lineNum">     192</span>              : /// This function is able to store factors as 32 bit integers instead of 64, since the smallest prime factor of a</span>
+<span id="L193"><span class="lineNum">     193</span>              : /// composite number is at most its square root.  This is why we store 1 for primes instead of themselves</span>
+<span id="L194"><span class="lineNum">     194</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find smallest prime factors of all numbers</span>
+<span id="L195"><span class="lineNum">     195</span>              : /// @return a pointer to an array of smallest prime factors for all numbers not exceeding max, or NULL on allocation failure.</span>
+<span id="L196"><span class="lineNum">     196</span>              : [[deprecated(&quot;Replace with nut_sieve_smallest_factors_wheel6&quot;)]]</span>
+<span id="L197"><span class="lineNum">     197</span>              : NUT_ATTR_MALLOC</span>
+<span id="L198"><span class="lineNum">     198</span>              : uint32_t *nut_sieve_smallest_factors(uint64_t max);</span>
+<span id="L199"><span class="lineNum">     199</span>              : </span>
+<span id="L200"><span class="lineNum">     200</span>              : /// Use a table of smallest prime factors to get the factorization of a number</span>
+<span id="L201"><span class="lineNum">     201</span>              : /// @param [out] out: Factors struct to store result in.  MUST be allocated already, use {@link nut_make_Factors_ub} or</span>
+<span id="L202"><span class="lineNum">     202</span>              : /// {@link nut_max_prime_divs} and {@link nut_make_Factors_w} if needed.</span>
+<span id="L203"><span class="lineNum">     203</span>              : /// @param [in] n: the number to get the factorization of</span>
+<span id="L204"><span class="lineNum">     204</span>              : /// @param [in] smallest_factors: table of smallest factors, from {@link nut_sieve_smallest_factors}</span>
+<span id="L205"><span class="lineNum">     205</span>              : [[deprecated(&quot;Replace with nut_fill_factors_from_smallest_wheel6&quot;)]]</span>
+<span id="L206"><span class="lineNum">     206</span>              : NUT_ATTR_NONNULL(1, 3)</span>
+<span id="L207"><span class="lineNum">     207</span>              : NUT_ATTR_ACCESS(read_write, 1)</span>
+<span id="L208"><span class="lineNum">     208</span>              : NUT_ATTR_ACCESS(read_only, 3)</span>
+<span id="L209"><span class="lineNum">     209</span>              : void nut_fill_factors_from_smallest(nut_Factors *restrict out, uint64_t n, const uint32_t smallest_factors[restrict static n + 1]);</span>
+<span id="L210"><span class="lineNum">     210</span>              : </span>
+<span id="L211"><span class="lineNum">     211</span>              : /// Compute the smallest prime factor of every number coprime to 6 in the range from 0 to max, or 1 for primes</span>
+<span id="L212"><span class="lineNum">     212</span>              : /// Compared to {@link nut_sieve_factors}, this uses up to 180 times less memory, so if</span>
+<span id="L213"><span class="lineNum">     213</span>              : /// the range is very large, most numbers will never actually have their factorizations</span>
+<span id="L214"><span class="lineNum">     214</span>              : /// accessed, or the factorizations will only be accessed about once, this function</span>
+<span id="L215"><span class="lineNum">     215</span>              : /// should be preferred.  The factors of 1 are not actually computed, its entry in</span>
+<span id="L216"><span class="lineNum">     216</span>              : /// the returned array will be 0.  You can use the resulting table as it is, or convert it to</span>
+<span id="L217"><span class="lineNum">     217</span>              : /// a factorization using {@link nut_fill_factors_from_smallest_wheel6}.</span>
+<span id="L218"><span class="lineNum">     218</span>              : /// This function is able to store factors as 32 bit integers instead of 64, since the smallest prime factor of a</span>
+<span id="L219"><span class="lineNum">     219</span>              : /// composite number is at most its square root.  This is why we store 1 for primes instead of themselves</span>
+<span id="L220"><span class="lineNum">     220</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find smallest prime factors of all numbers</span>
+<span id="L221"><span class="lineNum">     221</span>              : /// @return a pointer to an array of smallest prime factors for all numbers not exceeding max, or NULL on allocation failure.</span>
+<span id="L222"><span class="lineNum">     222</span>              : NUT_ATTR_MALLOC</span>
+<span id="L223"><span class="lineNum">     223</span>              : uint32_t *nut_sieve_smallest_factors_wheel6(uint64_t max);</span>
+<span id="L224"><span class="lineNum">     224</span>              : </span>
+<span id="L225"><span class="lineNum">     225</span>              : /// Use a table of smallest prime factors for a wheel of 6 to get the factorization of a number</span>
+<span id="L226"><span class="lineNum">     226</span>              : /// @param [out] out: Factors struct to store result in.  MUST be allocated already, use {@link nut_make_Factors_ub} or</span>
+<span id="L227"><span class="lineNum">     227</span>              : /// {@link nut_max_prime_divs} and {@link nut_make_Factors_w} if needed.</span>
+<span id="L228"><span class="lineNum">     228</span>              : /// @param [in] n: the number to get the factorization of</span>
+<span id="L229"><span class="lineNum">     229</span>              : /// @param [in] smallest_factors: table of smallest factors, from {@link nut_sieve_smallest_factors}</span>
+<span id="L230"><span class="lineNum">     230</span>              : NUT_ATTR_NONNULL(1, 3)</span>
+<span id="L231"><span class="lineNum">     231</span>              : NUT_ATTR_ACCESS(read_write, 1)</span>
+<span id="L232"><span class="lineNum">     232</span>              : NUT_ATTR_ACCESS(read_only, 3)</span>
+<span id="L233"><span class="lineNum">     233</span>              : void nut_fill_factors_from_smallest_wheel6(nut_Factors *restrict out, uint64_t n, const uint32_t smallest_factors[restrict static n/3 + 1]);</span>
+<span id="L234"><span class="lineNum">     234</span>              : </span>
+<span id="L235"><span class="lineNum">     235</span>              : /// Get the pitch for a pitched array of {@link nut_u64_Pitcharr} factor lists.</span>
+<span id="L236"><span class="lineNum">     236</span>              : /// This is simply offsetof(nut_u64_Pitcharr, elems) + *_w*sizeof(uint64_t).</span>
+<span id="L237"><span class="lineNum">     237</span>              : /// @param [in] w: The maximal number of unique prime divisors of any potential index of the pitched array.</span>
+<span id="L238"><span class="lineNum">     238</span>              : /// Should be obtained from {@link nut_sieve_factors}, {@link max_prime_divisors}, etc.</span>
+<span id="L239"><span class="lineNum">     239</span>              : /// @return The pitch of a pitched array of factor list structs whose flexible length members all have w</span>
+<span id="L240"><span class="lineNum">     240</span>              : /// elements.</span>
+<span id="L241"><span class="lineNum">     241</span>              : NUT_ATTR_CONST</span>
+<span id="L242"><span class="lineNum">     242</span>              : uint64_t nut_get_factors_pitch(uint64_t w);</span>
+<span id="L243"><span class="lineNum">     243</span>              : </span>
+<span id="L244"><span class="lineNum">     244</span>              : /// Compute the number of divisors (including 1 and n) for every number n from 0 to max.</span>
+<span id="L245"><span class="lineNum">     245</span>              : /// The results for 0 and 1 are not actually computed.  This effectively computes {@link divisor_count} for</span>
+<span id="L246"><span class="lineNum">     246</span>              : /// all numbers in the range, but without needing to compute or store the factorizations intermediately</span>
+<span id="L247"><span class="lineNum">     247</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find divisor counts for all numbers</span>
+<span id="L248"><span class="lineNum">     248</span>              : /// @return an array of divisor counts for all numbers in the range, or NULL on allocation failure</span>
+<span id="L249"><span class="lineNum">     249</span>              : NUT_ATTR_MALLOC</span>
+<span id="L250"><span class="lineNum">     250</span>              : uint64_t *nut_sieve_sigma_0(uint64_t max);</span>
+<span id="L251"><span class="lineNum">     251</span>              : </span>
+<span id="L252"><span class="lineNum">     252</span>              : /// Compute the sum of divisors (including 1 and n) for every number n from 0 to max.</span>
+<span id="L253"><span class="lineNum">     253</span>              : /// The results for 0 and 1 are not actually computed.  This effectively computes {@link divisor_sum} for</span>
+<span id="L254"><span class="lineNum">     254</span>              : /// all numbers in the range, but without needing to compute or store the factorizations intermediately</span>
+<span id="L255"><span class="lineNum">     255</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find divisor sums for all numbers</span>
+<span id="L256"><span class="lineNum">     256</span>              : /// @return an array of divisor sums for all numbers in the range, or NULL on allocation failure</span>
+<span id="L257"><span class="lineNum">     257</span>              : NUT_ATTR_MALLOC</span>
+<span id="L258"><span class="lineNum">     258</span>              : uint64_t *nut_sieve_sigma_1(uint64_t max);</span>
+<span id="L259"><span class="lineNum">     259</span>              : </span>
+<span id="L260"><span class="lineNum">     260</span>              : /// Compute the sum of some power of divisors (including 1 and n) for every number n from 0 to max.</span>
+<span id="L261"><span class="lineNum">     261</span>              : /// The results for 0 and 1 are not actually computed.  This effectively computes {@link divisor_power_sum} for</span>
+<span id="L262"><span class="lineNum">     262</span>              : /// all numbers in the range, but without needing to compute or store the factorizations intermediately</span>
+<span id="L263"><span class="lineNum">     263</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find divisor power sums for all numbers</span>
+<span id="L264"><span class="lineNum">     264</span>              : /// @param [in] e: power of divisors for summing, eg 0 would produce divisor counts, 1 divisor sums, 2 sums of squares of divisors, etc</span>
+<span id="L265"><span class="lineNum">     265</span>              : /// @return an array of divisor power sums for all numbers in the range, or NULL on allocation failure</span>
+<span id="L266"><span class="lineNum">     266</span>              : NUT_ATTR_MALLOC</span>
+<span id="L267"><span class="lineNum">     267</span>              : uint64_t *nut_sieve_sigma_e(uint64_t max, uint64_t e);</span>
+<span id="L268"><span class="lineNum">     268</span>              : </span>
+<span id="L269"><span class="lineNum">     269</span>              : /// Compute the generalized divisor function dk(n) (number of k-tuples with product n) for every number n from 0 to max.</span>
+<span id="L270"><span class="lineNum">     270</span>              : /// The results for 0 and 1 are not actually computed.  This effectively computes {@link divisor_tuple_count}</span>
+<span id="L271"><span class="lineNum">     271</span>              : /// for all numbers in the range, but without needing to compute or store the factorizations intermediately.</span>
+<span id="L272"><span class="lineNum">     272</span>              : /// Note that dk is multiplicative so dk(mn) = dk(m)dk(n) when m and n are coprime, and dk(p^a) = binom(a + k, k) for prime powers.</span>
+<span id="L273"><span class="lineNum">     273</span>              : /// In other words, dk is exponential in k and this function will overflow if max^k is too large.</span>
+<span id="L274"><span class="lineNum">     274</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to compute generalized divisor function</span>
+<span id="L275"><span class="lineNum">     275</span>              : /// @param [in] k: number of factors per factorization, eg for a prime power p^a we get binom(a + k, k).</span>
+<span id="L276"><span class="lineNum">     276</span>              : /// @param [in] modulus: modulus to reduce results by, or zero to skip reducing</span>
+<span id="L277"><span class="lineNum">     277</span>              : /// @return an array of dk results, or NULL on allocation failure</span>
+<span id="L278"><span class="lineNum">     278</span>              : NUT_ATTR_MALLOC</span>
+<span id="L279"><span class="lineNum">     279</span>              : uint64_t *nut_sieve_dk(uint64_t max, uint64_t k, uint64_t modulus);</span>
+<span id="L280"><span class="lineNum">     280</span>              : </span>
+<span id="L281"><span class="lineNum">     281</span>              : /// Compute Euler's totient function for every number from 0 to max.</span>
+<span id="L282"><span class="lineNum">     282</span>              : /// The results for 0 and 1 are not actually computed.  This effectively computes {@link euler_phi} for</span>
+<span id="L283"><span class="lineNum">     283</span>              : /// all numbers in the range, but without needing to compute or store the factorizations intermediately</span>
+<span id="L284"><span class="lineNum">     284</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to find totients for all numbers</span>
+<span id="L285"><span class="lineNum">     285</span>              : /// @return an array of totients for all numbers in the range, or NULL on allocation failure</span>
+<span id="L286"><span class="lineNum">     286</span>              : NUT_ATTR_MALLOC</span>
+<span id="L287"><span class="lineNum">     287</span>              : uint64_t *nut_sieve_phi(uint64_t max);</span>
+<span id="L288"><span class="lineNum">     288</span>              : </span>
+<span id="L289"><span class="lineNum">     289</span>              : /// Compute the Carmichael function for every number from 0 to max.</span>
+<span id="L290"><span class="lineNum">     290</span>              : /// The results for 0 and 1 are not actually computed.  This effectively computes {@link carmichael_lambda} for</span>
+<span id="L291"><span class="lineNum">     291</span>              : /// all numbers in the range, but without needing to compute or store the factorizations intermediately</span>
+<span id="L292"><span class="lineNum">     292</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to compute Carmichael for all numbers</span>
+<span id="L293"><span class="lineNum">     293</span>              : /// @return an array of Carmichael function outputs for all numbers in the range, or NULL on allocation failure</span>
+<span id="L294"><span class="lineNum">     294</span>              : NUT_ATTR_MALLOC</span>
+<span id="L295"><span class="lineNum">     295</span>              : uint64_t *nut_sieve_carmichael(uint64_t max);</span>
+<span id="L296"><span class="lineNum">     296</span>              : </span>
+<span id="L297"><span class="lineNum">     297</span>              : /// Compute the Mobius function for every number from 0 to max.</span>
+<span id="L298"><span class="lineNum">     298</span>              : /// The result is stored in an array of 2 bit integers, which should</span>
+<span id="L299"><span class="lineNum">     299</span>              : /// be accessed by {@link nut_Bitfield2_arr_get}.  That function will return 0 for 0,</span>
+<span id="L300"><span class="lineNum">     300</span>              : /// 1 for 1, and 3 for -1.  2 will not be stored anywhere in bounds in the resulting array.</span>
+<span id="L301"><span class="lineNum">     301</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to compute Mobius for all numbers</span>
+<span id="L302"><span class="lineNum">     302</span>              : /// @return a bitfield array of Mobius function outputs for all numbers in the range, with 3 instead of -1,</span>
+<span id="L303"><span class="lineNum">     303</span>              : /// or NULL on allocation failure</span>
+<span id="L304"><span class="lineNum">     304</span>              : NUT_ATTR_MALLOC</span>
+<span id="L305"><span class="lineNum">     305</span>              : uint8_t *nut_sieve_mobius(uint64_t max);</span>
+<span id="L306"><span class="lineNum">     306</span>              : </span>
+<span id="L307"><span class="lineNum">     307</span>              : /// Compute the Mertens function (sum of Mobius function) for every number from 0 to max.</span>
+<span id="L308"><span class="lineNum">     308</span>              : /// Note that this function is signed.</span>
+<span id="L309"><span class="lineNum">     309</span>              : /// @param [in] max: inclusive upper bound of range in which to compute Mertens for all numbers</span>
+<span id="L310"><span class="lineNum">     310</span>              : /// @param [in] mobius: bitfield array of Mobius function outputs (from {@link nut_sieve_mobius}).</span>
+<span id="L311"><span class="lineNum">     311</span>              : /// @return an array of Mertens function outputs for all numbers in the range, or NULL on allocation failure</span>
 <span id="L312"><span class="lineNum">     312</span>              : NUT_ATTR_MALLOC</span>
-<span id="L313"><span class="lineNum">     313</span>              : NUT_ATTR_ACCESS(read_only, 2)</span>
-<span id="L314"><span class="lineNum">     314</span>              : uint64_t *nut_compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1]);</span>
-<span id="L315"><span class="lineNum">     315</span>              : </span>
-<span id="L316"><span class="lineNum">     316</span>              : /// Get the value for the pi (prime counting) function for a particular number using precomputed tables.</span>
-<span id="L317"><span class="lineNum">     317</span>              : /// @param [in] n: the number to calculate pi for</span>
-<span id="L318"><span class="lineNum">     318</span>              : /// @param [in] pi_table: array of partial pi values from {@link nut_compute_pi_range}</span>
-<span id="L319"><span class="lineNum">     319</span>              : /// @param [in] buf: packed bitarray from {@link nut_sieve_is_composite}</span>
-<span id="L320"><span class="lineNum">     320</span>              : /// @return the number of primes &lt;= n</span>
-<span id="L321"><span class="lineNum">     321</span>              : NUT_ATTR_PURE</span>
-<span id="L322"><span class="lineNum">     322</span>              : NUT_ATTR_NONNULL(2, 3)</span>
-<span id="L323"><span class="lineNum">     323</span>              : NUT_ATTR_ACCESS(read_only, 2)</span>
-<span id="L324"><span class="lineNum">     324</span>              : NUT_ATTR_ACCESS(read_only, 3)</span>
-<span id="L325"><span class="lineNum">     325</span>              : NUT_ATTR_NO_SAN(&quot;vla-bound&quot;)</span>
-<span id="L326"><span class="lineNum">     326</span>              : uint64_t nut_compute_pi_from_tables(uint64_t n, const uint64_t pi_table[restrict static n/30], const uint8_t buf[restrict static n/30 + 1]);</span>
-<span id="L327"><span class="lineNum">     327</span>              : </span>
-<span id="L328"><span class="lineNum">     328</span>              : /// Compute an array of all primes from 0 to max.</span>
-<span id="L329"><span class="lineNum">     329</span>              : /// @param [in] max: inclusive upper bound of sieving range</span>
-<span id="L330"><span class="lineNum">     330</span>              : /// @param [out] _num_primes: how many primes were found in the range (this pointer cannot be null)</span>
-<span id="L331"><span class="lineNum">     331</span>              : /// @return an array of all primes from 0 to max, or NULL on allocation failure</span>
-<span id="L332"><span class="lineNum">     332</span>              : NUT_ATTR_MALLOC</span>
-<span id="L333"><span class="lineNum">     333</span>              : NUT_ATTR_NONNULL(2)</span>
-<span id="L334"><span class="lineNum">     334</span>              : NUT_ATTR_ACCESS(write_only, 2)</span>
-<span id="L335"><span class="lineNum">     335</span>              : uint64_t *nut_sieve_primes(uint64_t max, uint64_t *_num_primes);</span>
-<span id="L336"><span class="lineNum">     336</span>              : </span>
+<span id="L313"><span class="lineNum">     313</span>              : NUT_ATTR_NONNULL(2)</span>
+<span id="L314"><span class="lineNum">     314</span>              : NUT_ATTR_ACCESS(read_only, 2)</span>
+<span id="L315"><span class="lineNum">     315</span>              : int64_t *nut_compute_mertens_range(uint64_t max, const uint8_t mobius[static max/4 + 1]);</span>
+<span id="L316"><span class="lineNum">     316</span>              : </span>
+<span id="L317"><span class="lineNum">     317</span>              : /// Compute a bitarray of whether or not each number from 0 to max is composite.</span>
+<span id="L318"><span class="lineNum">     318</span>              : /// 1 is composite, and 0 is considered composite here.</span>
+<span id="L319"><span class="lineNum">     319</span>              : /// The result should be used with {@link nut_is_composite} since it is packed (only stores bitflags for numbers coprime to 30).</span>
+<span id="L320"><span class="lineNum">     320</span>              : /// @param [in] max: inclusive upper bound of sieving range in which to check compositeness for all numbers</span>
+<span id="L321"><span class="lineNum">     321</span>              : /// @param [out] _num_primes: the number of primes in the range will be stored here.  May be NULL.</span>
+<span id="L322"><span class="lineNum">     322</span>              : /// @return a bitarray of whether or not each number in the range is composite, or NULL on allocation failure</span>
+<span id="L323"><span class="lineNum">     323</span>              : NUT_ATTR_MALLOC</span>
+<span id="L324"><span class="lineNum">     324</span>              : uint8_t *nut_sieve_is_composite(uint64_t max);</span>
+<span id="L325"><span class="lineNum">     325</span>              : </span>
+<span id="L326"><span class="lineNum">     326</span>              : /// Check if a number is composite using a packed bitarray from {@link nut_sieve_is_composite}</span>
+<span id="L327"><span class="lineNum">     327</span>              : /// @param [in] n: the number to check if composite</span>
+<span id="L328"><span class="lineNum">     328</span>              : /// @param [in] buf: packed bitarray from {@link nut_sieve_is_composite}</span>
+<span id="L329"><span class="lineNum">     329</span>              : /// @return true if n is composite, false if n is prime</span>
+<span id="L330"><span class="lineNum">     330</span>              : NUT_ATTR_PURE</span>
+<span id="L331"><span class="lineNum">     331</span>              : NUT_ATTR_NONNULL(2)</span>
+<span id="L332"><span class="lineNum">     332</span>              : NUT_ATTR_ACCESS(read_only, 2)</span>
+<span id="L333"><span class="lineNum">     333</span>              : bool nut_is_composite(uint64_t n, const uint8_t buf[static n/30 + 1]);</span>
+<span id="L334"><span class="lineNum">     334</span>              : </span>
+<span id="L335"><span class="lineNum">     335</span>              : /// Compute the pi (prime counting) function for every number from 0 to max.</span>
+<span id="L336"><span class="lineNum">     336</span>              : /// The result should be used with {@link nut_compute_pi_from_tables} since pi is only actually calculated at every 240th number</span>
+<span id="L337"><span class="lineNum">     337</span>              : /// since intermediate results can be computed with a single popcount on the packed buf bitarray.</span>
+<span id="L338"><span class="lineNum">     338</span>              : /// @param [in] max: inclusive upper bound of range to compute pi function</span>
+<span id="L339"><span class="lineNum">     339</span>              : /// @param [in] buf: packed bitarray from {@link nut_sieve_is_composite}</span>
+<span id="L340"><span class="lineNum">     340</span>              : /// @return an array of pi values at every 240th number (use {@link nut_compute_pi_from_tables})</span>
+<span id="L341"><span class="lineNum">     341</span>              : NUT_ATTR_NONNULL(2)</span>
+<span id="L342"><span class="lineNum">     342</span>              : NUT_ATTR_MALLOC</span>
+<span id="L343"><span class="lineNum">     343</span>              : NUT_ATTR_ACCESS(read_only, 2)</span>
+<span id="L344"><span class="lineNum">     344</span>              : uint64_t *nut_compute_pi_range(uint64_t max, const uint8_t buf[static max/30 + 1]);</span>
+<span id="L345"><span class="lineNum">     345</span>              : </span>
+<span id="L346"><span class="lineNum">     346</span>              : /// Get the value for the pi (prime counting) function for a particular number using precomputed tables.</span>
+<span id="L347"><span class="lineNum">     347</span>              : /// @param [in] n: the number to calculate pi for</span>
+<span id="L348"><span class="lineNum">     348</span>              : /// @param [in] pi_table: array of partial pi values from {@link nut_compute_pi_range}</span>
+<span id="L349"><span class="lineNum">     349</span>              : /// @param [in] buf: packed bitarray from {@link nut_sieve_is_composite}</span>
+<span id="L350"><span class="lineNum">     350</span>              : /// @return the number of primes &lt;= n</span>
+<span id="L351"><span class="lineNum">     351</span>              : NUT_ATTR_PURE</span>
+<span id="L352"><span class="lineNum">     352</span>              : NUT_ATTR_NONNULL(2, 3)</span>
+<span id="L353"><span class="lineNum">     353</span>              : NUT_ATTR_ACCESS(read_only, 2)</span>
+<span id="L354"><span class="lineNum">     354</span>              : NUT_ATTR_ACCESS(read_only, 3)</span>
+<span id="L355"><span class="lineNum">     355</span>              : NUT_ATTR_NO_SAN(&quot;vla-bound&quot;)</span>
+<span id="L356"><span class="lineNum">     356</span>              : uint64_t nut_compute_pi_from_tables(uint64_t n, const uint64_t pi_table[restrict static n/30], const uint8_t buf[restrict static n/30 + 1]);</span>
+<span id="L357"><span class="lineNum">     357</span>              : </span>
+<span id="L358"><span class="lineNum">     358</span>              : /// Compute an array of all primes from 0 to max.</span>
+<span id="L359"><span class="lineNum">     359</span>              : /// @param [in] max: inclusive upper bound of sieving range</span>
+<span id="L360"><span class="lineNum">     360</span>              : /// @param [out] _num_primes: how many primes were found in the range (this pointer cannot be null)</span>
+<span id="L361"><span class="lineNum">     361</span>              : /// @return an array of all primes from 0 to max, or NULL on allocation failure</span>
+<span id="L362"><span class="lineNum">     362</span>              : NUT_ATTR_MALLOC</span>
+<span id="L363"><span class="lineNum">     363</span>              : NUT_ATTR_NONNULL(2)</span>
+<span id="L364"><span class="lineNum">     364</span>              : NUT_ATTR_ACCESS(write_only, 2)</span>
+<span id="L365"><span class="lineNum">     365</span>              : uint64_t *nut_sieve_primes(uint64_t max, uint64_t *_num_primes);</span>
+<span id="L366"><span class="lineNum">     366</span>              : </span>
         </pre>
               </td>
             </tr>
