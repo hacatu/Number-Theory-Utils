@@ -118,6 +118,7 @@ bool nut_u64_make_factorial_tbl(uint64_t k, uint64_t modulus, uint64_t bits, uin
 /// @param [out] _w: store w, the maximum number of unique prime divisors of a number not exceeding max
 /// @return a pointer to an array of factors_t structs containing the factorization of all numbers not exceeding max,
 /// or NULL on allocation failure
+[[deprecated("Replace with nut_sieve_smallest_factors_wheel6")]]
 NUT_ATTR_NONNULL(2)
 NUT_ATTR_MALLOC
 NUT_ATTR_ACCESS(write_only, 2)
@@ -143,6 +144,7 @@ uint64_t nut_get_factorizations_pitch(uint64_t w);
 /// @param [out] _w: maximum numer of unique prime divisors of a number not exceeding max
 /// @return a pointer to an array of nut_u64_Pitcharr structs containing lists of unique prime factors for all numbers not exceeding max,
 /// or NULL on allocation failure
+[[deprecated("Replace with nut_sieve_smallest_factors_wheel6")]]
 NUT_ATTR_NONNULL(2)
 NUT_ATTR_MALLOC
 NUT_ATTR_ACCESS(write_only, 2)
@@ -165,6 +167,7 @@ uint8_t *nut_sieve_omega(uint64_t max);
 /// a factorization using {@link nut_fill_factors_from_largest}.
 /// @param [in] max: inclusive upper bound of sieving range in which to find largest prime factors of all numbers
 /// @return a pointer to an array of largest prime factors for all numbers not exceeding max, or NULL on allocation failure.
+[[deprecated("Replace with nut_sieve_smallest_factors_wheel6")]]
 NUT_ATTR_MALLOC
 uint64_t *nut_sieve_largest_factors(uint64_t max);
 
@@ -173,6 +176,7 @@ uint64_t *nut_sieve_largest_factors(uint64_t max);
 /// {@link nut_max_prime_divs} and {@link nut_make_Factors_w} if needed.
 /// @param [in] n: the number to get the factorization of
 /// @param [in] largest_factors: table of largest factors, from {@link nut_sieve_largest_factors}
+[[deprecated("Replace with nut_fill_factors_from_smallest_wheel6")]]
 NUT_ATTR_NONNULL(1, 3)
 NUT_ATTR_ACCESS(read_write, 1)
 NUT_ATTR_ACCESS(read_only, 3)
@@ -189,6 +193,7 @@ void nut_fill_factors_from_largest(nut_Factors *restrict out, uint64_t n, const 
 /// composite number is at most its square root.  This is why we store 1 for primes instead of themselves
 /// @param [in] max: inclusive upper bound of sieving range in which to find smallest prime factors of all numbers
 /// @return a pointer to an array of smallest prime factors for all numbers not exceeding max, or NULL on allocation failure.
+[[deprecated("Replace with nut_sieve_smallest_factors_wheel6")]]
 NUT_ATTR_MALLOC
 uint32_t *nut_sieve_smallest_factors(uint64_t max);
 
@@ -197,6 +202,7 @@ uint32_t *nut_sieve_smallest_factors(uint64_t max);
 /// {@link nut_max_prime_divs} and {@link nut_make_Factors_w} if needed.
 /// @param [in] n: the number to get the factorization of
 /// @param [in] smallest_factors: table of smallest factors, from {@link nut_sieve_smallest_factors}
+[[deprecated("Replace with nut_fill_factors_from_smallest_wheel6")]]
 NUT_ATTR_NONNULL(1, 3)
 NUT_ATTR_ACCESS(read_write, 1)
 NUT_ATTR_ACCESS(read_only, 3)

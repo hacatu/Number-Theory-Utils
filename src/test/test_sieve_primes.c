@@ -12,6 +12,8 @@ static uint64_t w;
 static void *fzn_buf;
 size_t fzn_pitch;
 
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
 static void test_prime_sieve(){
 	uint64_t num_primes;
 	bool succeeded = true;

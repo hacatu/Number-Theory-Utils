@@ -163,7 +163,7 @@ uint32_t *nut_sieve_smallest_factors(uint64_t max){
 		if(buf[n]){
 			continue;
 		}
-		for(uint64_t m = n; m <= max;){
+		for(uint64_t m = n*n; m <= max;){
 			if(buf[m] == 0 || buf[m] > n){
 				buf[m] = n;
 			}
@@ -201,7 +201,7 @@ uint32_t *nut_sieve_smallest_factors_wheel6(uint64_t max){
 		uint64_t p = 6*qn + 1;
 		if(buf[2*qn] == 0 && qn){ // we need to skip p = 1 and composites
 			// 6*qk + 1 <= max/p
-			for(uint64_t qk = 0; qk <= (max/p - 1)/6; ++qk){
+			for(uint64_t qk = qn; qk <= (max/p - 1)/6; ++qk){
 				/* (6*qn + rn)*(6*qk + rk)
 				6*((6*qn + rn)*qk + qn*rk) + rn*rk
 				*/
@@ -229,10 +229,12 @@ uint32_t *nut_sieve_smallest_factors_wheel6(uint64_t max){
 		if(p > rmax){
 			break;
 		}
-		for(uint64_t qk = 0; qk <= (max/p - 1)/6; ++qk){
-			uint64_t idx = 2*(p*qk + qn) + 1;
-			if(buf[idx] == 0 || buf[idx] > p){
-				buf[idx] = p;
+		for(uint64_t qk = qn; qk <= (max/p - 1)/6; ++qk){
+			if(qk > qn){
+				uint64_t idx = 2*(p*qk + qn) + 1;
+				if(buf[idx] == 0 || buf[idx] > p){
+					buf[idx] = p;
+				}
 			}
 			if(qk <= (max/p - 5)/6){
 				uint64_t idx = 2*(p*qk + 5*qn + 4);

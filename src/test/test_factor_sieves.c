@@ -6,6 +6,8 @@
 #include <nut/sieves.h>
 #include <nut/debug.h>
 
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
 int main(){
 	fprintf(stderr, "\e[1;34mSieving Factorizations  up to 1000...\e[0m\n");
 	uint64_t w = nut_max_prime_divs(1000);

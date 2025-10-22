@@ -10,6 +10,8 @@
 #include <nut/modular_math.h>
 #include <nut/debug.h>
 
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
 static int dvisitor_find_order(const nut_Factors *dfactors, uint64_t d, void *_data){
 	uint64_t *data = _data;
 	if(d < data[1] && nut_u64_powmod(10, d, data[0]) == 1){

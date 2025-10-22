@@ -13,6 +13,8 @@
 #include <nut/factorization.h>
 #include <nut/polynomial.h>
 
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
 static int64_t h_powerfulpart(uint64_t p, uint64_t pp, uint64_t e, uint64_t m){
 	uint64_t res;
 	if(e < 2){
